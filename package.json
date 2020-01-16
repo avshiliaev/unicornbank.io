@@ -4,5 +4,11 @@
   "main": "index.js",
   "repository": "git@gitlab.com:lagerist_app/monorepo.git",
   "author": "a.v.shiliaev@gmail.com",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "graphql": "^14.5.8"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^1.11.2"
+  }
 }
