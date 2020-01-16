@@ -1,0 +1,8 @@
+{
+  "name": "lagerist",
+  "version": "0.0.1",
+  "main": "index.js",
+  "repository": "git@gitlab.com:lagerist_app/monorepo.git",
+  "author": "a.v.shiliaev@gmail.com",
+  "license": "MIT"
+}
