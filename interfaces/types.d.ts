@@ -1106,3 +1106,4 @@ export type WorkerRef = {
   tags?: Maybe<Array<Maybe<TagRef>>>,
   tasks?: Maybe<Array<Maybe<TaskRef>>>,
 };
+

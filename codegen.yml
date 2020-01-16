@@ -3,3 +3,4 @@ generates:
   ./interfaces/types.d.ts:
     plugins:
       - typescript
+      - typescript-operations
