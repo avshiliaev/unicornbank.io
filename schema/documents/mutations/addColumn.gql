@@ -1,0 +1,9 @@
+mutation addColumn($filter: ColumnFilter, $order: ColumnOrder, $first: Int, $offset: Int, $input: [AddColumnInput!]!){
+    addColumn(input: $input){
+        column(filter: $filter, order: $order, first: $first, offset: $offset){
+            id
+            title
+            taskIds
+        }
+    }
+}

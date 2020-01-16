@@ -1,0 +1,8 @@
+mutation updateTag($filter: TagFilter, $order: TagOrder, $first: Int, $offset: Int, $input: UpdateTagInput!){
+    updateTag(input: $input){
+        tag(filter: $filter, order: $order, first: $first, offset: $offset){
+            id
+            title
+        }
+    }
+}

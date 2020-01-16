@@ -1,0 +1,27 @@
+const fs = require('fs');
+const path = require('path');
+
+module.exports.addComment = fs.readFileSync(path.join(__dirname, 'addComment.gql'), 'utf8');
+module.exports.updateComment = fs.readFileSync(path.join(__dirname, 'updateComment.gql'), 'utf8');
+module.exports.deleteComment = fs.readFileSync(path.join(__dirname, 'deleteComment.gql'), 'utf8');
+module.exports.addTag = fs.readFileSync(path.join(__dirname, 'addTag.gql'), 'utf8');
+module.exports.updateTag = fs.readFileSync(path.join(__dirname, 'updateTag.gql'), 'utf8');
+module.exports.deleteTag = fs.readFileSync(path.join(__dirname, 'deleteTag.gql'), 'utf8');
+module.exports.addTask = fs.readFileSync(path.join(__dirname, 'addTask.gql'), 'utf8');
+module.exports.updateTask = fs.readFileSync(path.join(__dirname, 'updateTask.gql'), 'utf8');
+module.exports.deleteTask = fs.readFileSync(path.join(__dirname, 'deleteTask.gql'), 'utf8');
+module.exports.addColumn = fs.readFileSync(path.join(__dirname, 'addColumn.gql'), 'utf8');
+module.exports.updateColumn = fs.readFileSync(path.join(__dirname, 'updateColumn.gql'), 'utf8');
+module.exports.deleteColumn = fs.readFileSync(path.join(__dirname, 'deleteColumn.gql'), 'utf8');
+module.exports.addBoard = fs.readFileSync(path.join(__dirname, 'addBoard.gql'), 'utf8');
+module.exports.updateBoard = fs.readFileSync(path.join(__dirname, 'updateBoard.gql'), 'utf8');
+module.exports.deleteBoard = fs.readFileSync(path.join(__dirname, 'deleteBoard.gql'), 'utf8');
+module.exports.addWorker = fs.readFileSync(path.join(__dirname, 'addWorker.gql'), 'utf8');
+module.exports.updateWorker = fs.readFileSync(path.join(__dirname, 'updateWorker.gql'), 'utf8');
+module.exports.deleteWorker = fs.readFileSync(path.join(__dirname, 'deleteWorker.gql'), 'utf8');
+module.exports.addUser = fs.readFileSync(path.join(__dirname, 'addUser.gql'), 'utf8');
+module.exports.updateUser = fs.readFileSync(path.join(__dirname, 'updateUser.gql'), 'utf8');
+module.exports.deleteUser = fs.readFileSync(path.join(__dirname, 'deleteUser.gql'), 'utf8');
+module.exports.addProject = fs.readFileSync(path.join(__dirname, 'addProject.gql'), 'utf8');
+module.exports.updateProject = fs.readFileSync(path.join(__dirname, 'updateProject.gql'), 'utf8');
+module.exports.deleteProject = fs.readFileSync(path.join(__dirname, 'deleteProject.gql'), 'utf8');

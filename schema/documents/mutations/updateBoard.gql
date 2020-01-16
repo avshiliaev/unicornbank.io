@@ -1,0 +1,14 @@
+mutation updateBoard($filter: ColumnFilter, $order: ColumnOrder, $first: Int, $offset: Int, $filter1: BoardFilter, $order1: BoardOrder, $first1: Int, $offset1: Int, $input: UpdateBoardInput!){
+    updateBoard(input: $input){
+        board(filter: $filter1, order: $order1, first: $first1, offset: $offset1){
+            id
+            title
+            columns(filter: $filter, order: $order, first: $first, offset: $offset){
+                id
+                title
+                taskIds
+            }
+            order
+        }
+    }
+}

@@ -1,0 +1,5 @@
+mutation deleteWorker($filter: WorkerFilter!){
+    deleteWorker(filter: $filter){
+        msg
+    }
+}

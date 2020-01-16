@@ -1,0 +1,12 @@
+query getBoard($filter: ColumnFilter, $order: ColumnOrder, $first: Int, $offset: Int, $id: ID!){
+    getBoard(id: $id){
+        id
+        title
+        columns(filter: $filter, order: $order, first: $first, offset: $offset){
+            id
+            title
+            taskIds
+        }
+        order
+    }
+}
