@@ -1,22 +1,40 @@
 import {Injectable} from '@nestjs/common';
-import {Query, User} from '../../interfaces/types';
+import {request} from 'graphql-request';
 
+interface Movie {
+    releaseDate: string;
+    actors: any[];
+}
+
+interface Query {
+    Movie: Movie;
+}
+
+/**
+ * https://github.com/prisma-labs/graphql-request
+ */
 @Injectable()
 export class AppService {
 
-    getHello(): string {
-        /**
-         * RESPONSE FORMAT FOR A QUERY!
-         */
-        const user: User = {
-            username: 'username',
-            password: 'password',
-            location: 'loc',
+    async getHello() {
+        const endpoint = 'https://api.graph.cool/simple/v1/cixos23120m0n0173veiiwrjr';
+
+        const query = /* GraphQL */ `
+            query getMovie($title: String!) {
+              Movie(title: $title) {
+                releaseDate
+                actors {
+                  name
+                }
+              }
+            }
+          `;
+
+        const variables = {
+            title: 'Inception',
         };
-        const query: Query = {
-            getUser: user,
-        };
-        console.log(query);
-        return JSON.stringify(query);
+
+        const payload: Query = await request(endpoint, query, variables);
+        return `Number of actors: ${JSON.stringify(payload.Movie.actors.length)}`;
     }
 }
