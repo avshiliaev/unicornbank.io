@@ -1,0 +1,64 @@
+query getUser($filter: TagFilter, $order: TagOrder, $first: Int, $offset: Int, $filter1: TaskFilter, $order1: TaskOrder, $first1: Int, $offset1: Int, $filter2: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter3: WorkerFilter, $order3: WorkerOrder, $first3: Int, $offset3: Int, $filter4: CommentFilter, $order4: CommentOrder, $first4: Int, $offset4: Int, $filter5: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter6: UserFilter, $filter7: WorkerFilter, $order6: WorkerOrder, $first6: Int, $offset6: Int, $filter8: TaskFilter, $order7: TaskOrder, $first7: Int, $offset7: Int, $id: ID!){
+    getUser(id: $id){
+        id
+        username
+        password
+        location
+        roles(filter: $filter7, order: $order6, first: $first6, offset: $offset6){
+            id
+            name
+            availability
+            user(filter: $filter6){
+                id
+                username
+                password
+                location
+                roles(filter: $filter2, order: $order2, first: $first2, offset: $offset2){
+                    id
+                    name
+                    availability
+                    tags(filter: $filter, order: $order, first: $first, offset: $offset){
+                        id
+                        title
+                    }
+                    tasks(filter: $filter1, order: $order1, first: $first1, offset: $offset1){
+                        id
+                        title
+                        hours
+                        deadline
+                        content
+                        priority
+                        complete
+                    }
+                }
+                stars(filter: $filter5, order: $order5, first: $first5, offset: $offset5){
+                    id
+                    title
+                    hours
+                    deadline
+                    content
+                    priority
+                    complete
+                    likes(filter: $filter3, order: $order3, first: $first3, offset: $offset3){
+                        id
+                        name
+                        availability
+                    }
+                    comments(filter: $filter4, order: $order4, first: $first4, offset: $offset4){
+                        id
+                        content
+                    }
+                }
+            }
+        }
+        stars(filter: $filter8, order: $order7, first: $first7, offset: $offset7){
+            id
+            title
+            hours
+            deadline
+            content
+            priority
+            complete
+        }
+    }
+}

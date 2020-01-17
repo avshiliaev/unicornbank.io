@@ -1,0 +1,64 @@
+
+
+type Comment {
+    id: ID
+    worker: Worker
+    content: String!
+}
+
+type Tag {
+    id: ID
+    title: String!
+}
+
+type Task {
+    id: ID
+    title: String! @search(by: [hash])
+    hours: Int!
+    deadline: String!
+    content: String!
+    priority: Int!
+    complete: Boolean!
+    likes: [Worker]
+    comments: [Comment]
+}
+
+type Column {
+    id: ID
+    title: String!
+    taskIds: [String]
+}
+
+type Board {
+    id: ID
+    title: String!
+    columns: [Column]
+    order: [String]
+}
+
+type Worker {
+    id: ID
+    name: String! @search(by: [hash])
+    availability: Int!
+    user: User! @hasInverse(field: roles)
+    tags: [Tag]
+    tasks: [Task]
+}
+
+type User {
+    id: ID
+    username: String! @search(by: [hash])
+    password: String!
+    location: String!
+    roles: [Worker]
+    stars: [Task]
+}
+
+type Project {
+    id: ID
+    title: String! @search(by: [hash])
+    tags: [Tag]
+    tasks: [Task]
+    boards: [Board]
+    workers: [Worker]
+}
