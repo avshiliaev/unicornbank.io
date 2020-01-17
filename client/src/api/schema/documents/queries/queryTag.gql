@@ -1,0 +1,6 @@
+query queryTag($filter: TagFilter, $order: TagOrder, $first: Int, $offset: Int){
+    queryTag(filter: $filter, order: $order, first: $first, offset: $offset){
+        id
+        title
+    }
+}

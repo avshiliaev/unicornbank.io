@@ -1,0 +1,9 @@
+mutation updateColumn($filter: ColumnFilter, $order: ColumnOrder, $first: Int, $offset: Int, $input: UpdateColumnInput!){
+    updateColumn(input: $input){
+        column(filter: $filter, order: $order, first: $first, offset: $offset){
+            id
+            title
+            taskIds
+        }
+    }
+}

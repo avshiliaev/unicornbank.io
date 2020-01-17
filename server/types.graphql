@@ -13,7 +13,7 @@ type Tag {
 
 type Task {
     id: ID
-    title: String!
+    title: String! @search(by: [hash])
     hours: Int!
     deadline: String!
     content: String!
@@ -38,24 +38,25 @@ type Board {
 
 type Worker {
     id: ID
-    name: String!
+    name: String! @search(by: [hash])
     availability: Int!
-    user: User!
+    user: User! @hasInverse(field: roles)
     tags: [Tag]
     tasks: [Task]
 }
 
 type User {
     id: ID
-    username: String!
+    username: String! @search(by: [hash])
     password: String!
     location: String!
+    roles: [Worker]
     stars: [Task]
 }
 
 type Project {
     id: ID
-    title: String!
+    title: String! @search(by: [hash])
     tags: [Tag]
     tasks: [Task]
     boards: [Board]

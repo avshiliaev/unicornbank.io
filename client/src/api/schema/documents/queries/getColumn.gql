@@ -1,0 +1,7 @@
+query getColumn($id: ID!){
+    getColumn(id: $id){
+        id
+        title
+        taskIds
+    }
+}

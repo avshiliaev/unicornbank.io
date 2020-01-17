@@ -1,0 +1,52 @@
+mutation addUser($filter: TaskFilter, $order: TaskOrder, $first: Int, $offset: Int, $filter1: UserFilter, $filter2: TagFilter, $order1: TagOrder, $first1: Int, $offset1: Int, $filter3: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter4: CommentFilter, $order3: CommentOrder, $first3: Int, $offset3: Int, $filter5: TaskFilter, $order4: TaskOrder, $first4: Int, $offset4: Int, $filter6: WorkerFilter, $order5: WorkerOrder, $first5: Int, $offset5: Int, $filter7: UserFilter, $order6: UserOrder, $first6: Int, $offset6: Int, $input: [AddUserInput!]!){
+    addUser(input: $input){
+        user(filter: $filter7, order: $order6, first: $first6, offset: $offset6){
+            id
+            username
+            password
+            location
+            roles(filter: $filter6, order: $order5, first: $first5, offset: $offset5){
+                id
+                name
+                availability
+                user(filter: $filter1){
+                    id
+                    username
+                    password
+                    location
+                    stars(filter: $filter, order: $order, first: $first, offset: $offset){
+                        id
+                        title
+                        hours
+                        deadline
+                        content
+                        priority
+                        complete
+                    }
+                }
+                tags(filter: $filter2, order: $order1, first: $first1, offset: $offset1){
+                    id
+                    title
+                }
+                tasks(filter: $filter5, order: $order4, first: $first4, offset: $offset4){
+                    id
+                    title
+                    hours
+                    deadline
+                    content
+                    priority
+                    complete
+                    likes(filter: $filter3, order: $order2, first: $first2, offset: $offset2){
+                        id
+                        name
+                        availability
+                    }
+                    comments(filter: $filter4, order: $order3, first: $first3, offset: $offset3){
+                        id
+                        content
+                    }
+                }
+            }
+        }
+    }
+}

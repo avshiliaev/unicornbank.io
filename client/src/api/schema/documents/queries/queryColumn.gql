@@ -1,0 +1,7 @@
+query queryColumn($filter: ColumnFilter, $order: ColumnOrder, $first: Int, $offset: Int){
+    queryColumn(filter: $filter, order: $order, first: $first, offset: $offset){
+        id
+        title
+        taskIds
+    }
+}
