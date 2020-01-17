@@ -1131,3 +1131,2418 @@ export type WorkerRef = {
   tasks?: Maybe<Array<Maybe<TaskRef>>>,
 };
 
+export type AddBoardMutationVariables = {
+  filter?: Maybe<ColumnFilter>,
+  order?: Maybe<ColumnOrder>,
+  first?: Maybe<Scalars['Int']>,
+  offset?: Maybe<Scalars['Int']>,
+  filter1?: Maybe<BoardFilter>,
+  order1?: Maybe<BoardOrder>,
+  first1?: Maybe<Scalars['Int']>,
+  offset1?: Maybe<Scalars['Int']>,
+  input: Array<AddBoardInput>
+};
+
+
+export type AddBoardMutation = (
+  { __typename?: 'Mutation' }
+  & { addBoard: Maybe<(
+    { __typename?: 'AddBoardPayload' }
+    & { board: Maybe<Array<Maybe<(
+      { __typename?: 'Board' }
+      & Pick<Board, 'id' | 'title' | 'order'>
+      & { columns: Maybe<Array<Maybe<(
+        { __typename?: 'Column' }
+        & Pick<Column, 'id' | 'title' | 'taskIds'>
+      )>>> }
+    )>>> }
+  )> }
+);
+
+export type AddColumnMutationVariables = {
+  filter?: Maybe<ColumnFilter>,
+  order?: Maybe<ColumnOrder>,
+  first?: Maybe<Scalars['Int']>,
+  offset?: Maybe<Scalars['Int']>,
+  input: Array<AddColumnInput>
+};
+
+
+export type AddColumnMutation = (
+  { __typename?: 'Mutation' }
+  & { addColumn: Maybe<(
+    { __typename?: 'AddColumnPayload' }
+    & { column: Maybe<Array<Maybe<(
+      { __typename?: 'Column' }
+      & Pick<Column, 'id' | 'title' | 'taskIds'>
+    )>>> }
+  )> }
+);
+
+export type AddCommentMutationVariables = {
+  filter?: Maybe<WorkerFilter>,
+  order?: Maybe<WorkerOrder>,
+  first?: Maybe<Scalars['Int']>,
+  offset?: Maybe<Scalars['Int']>,
+  filter1?: Maybe<TaskFilter>,
+  order1?: Maybe<TaskOrder>,
+  first1?: Maybe<Scalars['Int']>,
+  offset1?: Maybe<Scalars['Int']>,
+  filter2?: Maybe<UserFilter>,
+  filter3?: Maybe<TagFilter>,
+  order2?: Maybe<TagOrder>,
+  first2?: Maybe<Scalars['Int']>,
+  offset2?: Maybe<Scalars['Int']>,
+  filter4?: Maybe<WorkerFilter>,
+  order3?: Maybe<WorkerOrder>,
+  first3?: Maybe<Scalars['Int']>,
+  offset3?: Maybe<Scalars['Int']>,
+  filter5?: Maybe<CommentFilter>,
+  order4?: Maybe<CommentOrder>,
+  first4?: Maybe<Scalars['Int']>,
+  offset4?: Maybe<Scalars['Int']>,
+  filter6?: Maybe<TaskFilter>,
+  order5?: Maybe<TaskOrder>,
+  first5?: Maybe<Scalars['Int']>,
+  offset5?: Maybe<Scalars['Int']>,
+  filter7?: Maybe<WorkerFilter>,
+  filter8?: Maybe<CommentFilter>,
+  order6?: Maybe<CommentOrder>,
+  first6?: Maybe<Scalars['Int']>,
+  offset6?: Maybe<Scalars['Int']>,
+  input: Array<AddCommentInput>
+};
+
+
+export type AddCommentMutation = (
+  { __typename?: 'Mutation' }
+  & { addComment: Maybe<(
+    { __typename?: 'AddCommentPayload' }
+    & { comment: Maybe<Array<Maybe<(
+      { __typename?: 'Comment' }
+      & Pick<Comment, 'id' | 'content'>
+      & { worker: Maybe<(
+        { __typename?: 'Worker' }
+        & Pick<Worker, 'id' | 'name' | 'availability'>
+        & { user: (
+          { __typename?: 'User' }
+          & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          & { roles: Maybe<Array<Maybe<(
+            { __typename?: 'Worker' }
+            & Pick<Worker, 'id' | 'name' | 'availability'>
+          )>>>, stars: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        ), tags: Maybe<Array<Maybe<(
+          { __typename?: 'Tag' }
+          & Pick<Tag, 'id' | 'title'>
+        )>>>, tasks: Maybe<Array<Maybe<(
+          { __typename?: 'Task' }
+          & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          & { likes: Maybe<Array<Maybe<(
+            { __typename?: 'Worker' }
+            & Pick<Worker, 'id' | 'name' | 'availability'>
+          )>>>, comments: Maybe<Array<Maybe<(
+            { __typename?: 'Comment' }
+            & Pick<Comment, 'id' | 'content'>
+          )>>> }
+        )>>> }
+      )> }
+    )>>> }
+  )> }
+);
+
+export type AddProjectMutationVariables = {
+  filter?: Maybe<TagFilter>,
+  order?: Maybe<TagOrder>,
+  first?: Maybe<Scalars['Int']>,
+  offset?: Maybe<Scalars['Int']>,
+  filter1?: Maybe<UserFilter>,
+  filter2?: Maybe<TagFilter>,
+  order1?: Maybe<TagOrder>,
+  first1?: Maybe<Scalars['Int']>,
+  offset1?: Maybe<Scalars['Int']>,
+  filter3?: Maybe<TaskFilter>,
+  order2?: Maybe<TaskOrder>,
+  first2?: Maybe<Scalars['Int']>,
+  offset2?: Maybe<Scalars['Int']>,
+  filter4?: Maybe<WorkerFilter>,
+  order3?: Maybe<WorkerOrder>,
+  first3?: Maybe<Scalars['Int']>,
+  offset3?: Maybe<Scalars['Int']>,
+  filter5?: Maybe<WorkerFilter>,
+  filter6?: Maybe<CommentFilter>,
+  order4?: Maybe<CommentOrder>,
+  first4?: Maybe<Scalars['Int']>,
+  offset4?: Maybe<Scalars['Int']>,
+  filter7?: Maybe<TaskFilter>,
+  order5?: Maybe<TaskOrder>,
+  first5?: Maybe<Scalars['Int']>,
+  offset5?: Maybe<Scalars['Int']>,
+  filter8?: Maybe<ColumnFilter>,
+  order6?: Maybe<ColumnOrder>,
+  first6?: Maybe<Scalars['Int']>,
+  offset6?: Maybe<Scalars['Int']>,
+  filter9?: Maybe<BoardFilter>,
+  order7?: Maybe<BoardOrder>,
+  first7?: Maybe<Scalars['Int']>,
+  offset7?: Maybe<Scalars['Int']>,
+  filter10?: Maybe<WorkerFilter>,
+  order8?: Maybe<WorkerOrder>,
+  first8?: Maybe<Scalars['Int']>,
+  offset8?: Maybe<Scalars['Int']>,
+  filter11?: Maybe<TaskFilter>,
+  order9?: Maybe<TaskOrder>,
+  first9?: Maybe<Scalars['Int']>,
+  offset9?: Maybe<Scalars['Int']>,
+  filter12?: Maybe<UserFilter>,
+  filter13?: Maybe<TagFilter>,
+  order10?: Maybe<TagOrder>,
+  first10?: Maybe<Scalars['Int']>,
+  offset10?: Maybe<Scalars['Int']>,
+  filter14?: Maybe<TaskFilter>,
+  order11?: Maybe<TaskOrder>,
+  first11?: Maybe<Scalars['Int']>,
+  offset11?: Maybe<Scalars['Int']>,
+  filter15?: Maybe<WorkerFilter>,
+  order12?: Maybe<WorkerOrder>,
+  first12?: Maybe<Scalars['Int']>,
+  offset12?: Maybe<Scalars['Int']>,
+  filter16?: Maybe<ProjectFilter>,
+  order13?: Maybe<ProjectOrder>,
+  first13?: Maybe<Scalars['Int']>,
+  offset13?: Maybe<Scalars['Int']>,
+  input: Array<AddProjectInput>
+};
+
+
+export type AddProjectMutation = (
+  { __typename?: 'Mutation' }
+  & { addProject: Maybe<(
+    { __typename?: 'AddProjectPayload' }
+    & { project: Maybe<Array<Maybe<(
+      { __typename?: 'Project' }
+      & Pick<Project, 'id' | 'title'>
+      & { tags: Maybe<Array<Maybe<(
+        { __typename?: 'Tag' }
+        & Pick<Tag, 'id' | 'title'>
+      )>>>, tasks: Maybe<Array<Maybe<(
+        { __typename?: 'Task' }
+        & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+        & { likes: Maybe<Array<Maybe<(
+          { __typename?: 'Worker' }
+          & Pick<Worker, 'id' | 'name' | 'availability'>
+          & { user: (
+            { __typename?: 'User' }
+            & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          ), tags: Maybe<Array<Maybe<(
+            { __typename?: 'Tag' }
+            & Pick<Tag, 'id' | 'title'>
+          )>>>, tasks: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        )>>>, comments: Maybe<Array<Maybe<(
+          { __typename?: 'Comment' }
+          & Pick<Comment, 'id' | 'content'>
+          & { worker: Maybe<(
+            { __typename?: 'Worker' }
+            & Pick<Worker, 'id' | 'name' | 'availability'>
+          )> }
+        )>>> }
+      )>>>, boards: Maybe<Array<Maybe<(
+        { __typename?: 'Board' }
+        & Pick<Board, 'id' | 'title' | 'order'>
+        & { columns: Maybe<Array<Maybe<(
+          { __typename?: 'Column' }
+          & Pick<Column, 'id' | 'title' | 'taskIds'>
+        )>>> }
+      )>>>, workers: Maybe<Array<Maybe<(
+        { __typename?: 'Worker' }
+        & Pick<Worker, 'id' | 'name' | 'availability'>
+        & { user: (
+          { __typename?: 'User' }
+          & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          & { roles: Maybe<Array<Maybe<(
+            { __typename?: 'Worker' }
+            & Pick<Worker, 'id' | 'name' | 'availability'>
+          )>>>, stars: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        ), tags: Maybe<Array<Maybe<(
+          { __typename?: 'Tag' }
+          & Pick<Tag, 'id' | 'title'>
+        )>>>, tasks: Maybe<Array<Maybe<(
+          { __typename?: 'Task' }
+          & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+        )>>> }
+      )>>> }
+    )>>> }
+  )> }
+);
+
+export type AddTagMutationVariables = {
+  filter?: Maybe<TagFilter>,
+  order?: Maybe<TagOrder>,
+  first?: Maybe<Scalars['Int']>,
+  offset?: Maybe<Scalars['Int']>,
+  input: Array<AddTagInput>
+};
+
+
+export type AddTagMutation = (
+  { __typename?: 'Mutation' }
+  & { addTag: Maybe<(
+    { __typename?: 'AddTagPayload' }
+    & { tag: Maybe<Array<Maybe<(
+      { __typename?: 'Tag' }
+      & Pick<Tag, 'id' | 'title'>
+    )>>> }
+  )> }
+);
+
+export type AddTaskMutationVariables = {
+  filter?: Maybe<WorkerFilter>,
+  order?: Maybe<WorkerOrder>,
+  first?: Maybe<Scalars['Int']>,
+  offset?: Maybe<Scalars['Int']>,
+  filter1?: Maybe<TaskFilter>,
+  order1?: Maybe<TaskOrder>,
+  first1?: Maybe<Scalars['Int']>,
+  offset1?: Maybe<Scalars['Int']>,
+  filter2?: Maybe<UserFilter>,
+  filter3?: Maybe<TagFilter>,
+  order2?: Maybe<TagOrder>,
+  first2?: Maybe<Scalars['Int']>,
+  offset2?: Maybe<Scalars['Int']>,
+  filter4?: Maybe<WorkerFilter>,
+  order3?: Maybe<WorkerOrder>,
+  first3?: Maybe<Scalars['Int']>,
+  offset3?: Maybe<Scalars['Int']>,
+  filter5?: Maybe<CommentFilter>,
+  order4?: Maybe<CommentOrder>,
+  first4?: Maybe<Scalars['Int']>,
+  offset4?: Maybe<Scalars['Int']>,
+  filter6?: Maybe<TaskFilter>,
+  order5?: Maybe<TaskOrder>,
+  first5?: Maybe<Scalars['Int']>,
+  offset5?: Maybe<Scalars['Int']>,
+  filter7?: Maybe<WorkerFilter>,
+  order6?: Maybe<WorkerOrder>,
+  first6?: Maybe<Scalars['Int']>,
+  offset6?: Maybe<Scalars['Int']>,
+  filter8?: Maybe<UserFilter>,
+  filter9?: Maybe<TagFilter>,
+  order7?: Maybe<TagOrder>,
+  first7?: Maybe<Scalars['Int']>,
+  offset7?: Maybe<Scalars['Int']>,
+  filter10?: Maybe<TaskFilter>,
+  order8?: Maybe<TaskOrder>,
+  first8?: Maybe<Scalars['Int']>,
+  offset8?: Maybe<Scalars['Int']>,
+  filter11?: Maybe<WorkerFilter>,
+  filter12?: Maybe<CommentFilter>,
+  order9?: Maybe<CommentOrder>,
+  first9?: Maybe<Scalars['Int']>,
+  offset9?: Maybe<Scalars['Int']>,
+  filter13?: Maybe<TaskFilter>,
+  order10?: Maybe<TaskOrder>,
+  first10?: Maybe<Scalars['Int']>,
+  offset10?: Maybe<Scalars['Int']>,
+  input: Array<AddTaskInput>
+};
+
+
+export type AddTaskMutation = (
+  { __typename?: 'Mutation' }
+  & { addTask: Maybe<(
+    { __typename?: 'AddTaskPayload' }
+    & { task: Maybe<Array<Maybe<(
+      { __typename?: 'Task' }
+      & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+      & { likes: Maybe<Array<Maybe<(
+        { __typename?: 'Worker' }
+        & Pick<Worker, 'id' | 'name' | 'availability'>
+        & { user: (
+          { __typename?: 'User' }
+          & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          & { roles: Maybe<Array<Maybe<(
+            { __typename?: 'Worker' }
+            & Pick<Worker, 'id' | 'name' | 'availability'>
+          )>>>, stars: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        ), tags: Maybe<Array<Maybe<(
+          { __typename?: 'Tag' }
+          & Pick<Tag, 'id' | 'title'>
+        )>>>, tasks: Maybe<Array<Maybe<(
+          { __typename?: 'Task' }
+          & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          & { likes: Maybe<Array<Maybe<(
+            { __typename?: 'Worker' }
+            & Pick<Worker, 'id' | 'name' | 'availability'>
+          )>>>, comments: Maybe<Array<Maybe<(
+            { __typename?: 'Comment' }
+            & Pick<Comment, 'id' | 'content'>
+          )>>> }
+        )>>> }
+      )>>>, comments: Maybe<Array<Maybe<(
+        { __typename?: 'Comment' }
+        & Pick<Comment, 'id' | 'content'>
+        & { worker: Maybe<(
+          { __typename?: 'Worker' }
+          & Pick<Worker, 'id' | 'name' | 'availability'>
+          & { user: (
+            { __typename?: 'User' }
+            & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          ), tags: Maybe<Array<Maybe<(
+            { __typename?: 'Tag' }
+            & Pick<Tag, 'id' | 'title'>
+          )>>>, tasks: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        )> }
+      )>>> }
+    )>>> }
+  )> }
+);
+
+export type AddUserMutationVariables = {
+  filter?: Maybe<TaskFilter>,
+  order?: Maybe<TaskOrder>,
+  first?: Maybe<Scalars['Int']>,
+  offset?: Maybe<Scalars['Int']>,
+  filter1?: Maybe<UserFilter>,
+  filter2?: Maybe<TagFilter>,
+  order1?: Maybe<TagOrder>,
+  first1?: Maybe<Scalars['Int']>,
+  offset1?: Maybe<Scalars['Int']>,
+  filter3?: Maybe<WorkerFilter>,
+  order2?: Maybe<WorkerOrder>,
+  first2?: Maybe<Scalars['Int']>,
+  offset2?: Maybe<Scalars['Int']>,
+  filter4?: Maybe<CommentFilter>,
+  order3?: Maybe<CommentOrder>,
+  first3?: Maybe<Scalars['Int']>,
+  offset3?: Maybe<Scalars['Int']>,
+  filter5?: Maybe<TaskFilter>,
+  order4?: Maybe<TaskOrder>,
+  first4?: Maybe<Scalars['Int']>,
+  offset4?: Maybe<Scalars['Int']>,
+  filter6?: Maybe<WorkerFilter>,
+  order5?: Maybe<WorkerOrder>,
+  first5?: Maybe<Scalars['Int']>,
+  offset5?: Maybe<Scalars['Int']>,
+  filter7?: Maybe<UserFilter>,
+  order6?: Maybe<UserOrder>,
+  first6?: Maybe<Scalars['Int']>,
+  offset6?: Maybe<Scalars['Int']>,
+  input: Array<AddUserInput>
+};
+
+
+export type AddUserMutation = (
+  { __typename?: 'Mutation' }
+  & { addUser: Maybe<(
+    { __typename?: 'AddUserPayload' }
+    & { user: Maybe<Array<Maybe<(
+      { __typename?: 'User' }
+      & Pick<User, 'id' | 'username' | 'password' | 'location'>
+      & { roles: Maybe<Array<Maybe<(
+        { __typename?: 'Worker' }
+        & Pick<Worker, 'id' | 'name' | 'availability'>
+        & { user: (
+          { __typename?: 'User' }
+          & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          & { stars: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        ), tags: Maybe<Array<Maybe<(
+          { __typename?: 'Tag' }
+          & Pick<Tag, 'id' | 'title'>
+        )>>>, tasks: Maybe<Array<Maybe<(
+          { __typename?: 'Task' }
+          & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          & { likes: Maybe<Array<Maybe<(
+            { __typename?: 'Worker' }
+            & Pick<Worker, 'id' | 'name' | 'availability'>
+          )>>>, comments: Maybe<Array<Maybe<(
+            { __typename?: 'Comment' }
+            & Pick<Comment, 'id' | 'content'>
+          )>>> }
+        )>>> }
+      )>>> }
+    )>>> }
+  )> }
+);
+
+export type AddWorkerMutationVariables = {
+  filter?: Maybe<UserFilter>,
+  filter1?: Maybe<TagFilter>,
+  order?: Maybe<TagOrder>,
+  first?: Maybe<Scalars['Int']>,
+  offset?: Maybe<Scalars['Int']>,
+  filter2?: Maybe<TaskFilter>,
+  order1?: Maybe<TaskOrder>,
+  first1?: Maybe<Scalars['Int']>,
+  offset1?: Maybe<Scalars['Int']>,
+  filter3?: Maybe<WorkerFilter>,
+  order2?: Maybe<WorkerOrder>,
+  first2?: Maybe<Scalars['Int']>,
+  offset2?: Maybe<Scalars['Int']>,
+  filter4?: Maybe<WorkerFilter>,
+  order3?: Maybe<WorkerOrder>,
+  first3?: Maybe<Scalars['Int']>,
+  offset3?: Maybe<Scalars['Int']>,
+  filter5?: Maybe<CommentFilter>,
+  order4?: Maybe<CommentOrder>,
+  first4?: Maybe<Scalars['Int']>,
+  offset4?: Maybe<Scalars['Int']>,
+  filter6?: Maybe<TaskFilter>,
+  order5?: Maybe<TaskOrder>,
+  first5?: Maybe<Scalars['Int']>,
+  offset5?: Maybe<Scalars['Int']>,
+  filter7?: Maybe<UserFilter>,
+  filter8?: Maybe<TagFilter>,
+  order6?: Maybe<TagOrder>,
+  first6?: Maybe<Scalars['Int']>,
+  offset6?: Maybe<Scalars['Int']>,
+  filter9?: Maybe<UserFilter>,
+  filter10?: Maybe<TagFilter>,
+  order7?: Maybe<TagOrder>,
+  first7?: Maybe<Scalars['Int']>,
+  offset7?: Maybe<Scalars['Int']>,
+  filter11?: Maybe<TaskFilter>,
+  order8?: Maybe<TaskOrder>,
+  first8?: Maybe<Scalars['Int']>,
+  offset8?: Maybe<Scalars['Int']>,
+  filter12?: Maybe<WorkerFilter>,
+  order9?: Maybe<WorkerOrder>,
+  first9?: Maybe<Scalars['Int']>,
+  offset9?: Maybe<Scalars['Int']>,
+  filter13?: Maybe<WorkerFilter>,
+  filter14?: Maybe<CommentFilter>,
+  order10?: Maybe<CommentOrder>,
+  first10?: Maybe<Scalars['Int']>,
+  offset10?: Maybe<Scalars['Int']>,
+  filter15?: Maybe<TaskFilter>,
+  order11?: Maybe<TaskOrder>,
+  first11?: Maybe<Scalars['Int']>,
+  offset11?: Maybe<Scalars['Int']>,
+  filter16?: Maybe<WorkerFilter>,
+  order12?: Maybe<WorkerOrder>,
+  first12?: Maybe<Scalars['Int']>,
+  offset12?: Maybe<Scalars['Int']>,
+  input: Array<AddWorkerInput>
+};
+
+
+export type AddWorkerMutation = (
+  { __typename?: 'Mutation' }
+  & { addWorker: Maybe<(
+    { __typename?: 'AddWorkerPayload' }
+    & { worker: Maybe<Array<Maybe<(
+      { __typename?: 'Worker' }
+      & Pick<Worker, 'id' | 'name' | 'availability'>
+      & { user: (
+        { __typename?: 'User' }
+        & Pick<User, 'id' | 'username' | 'password' | 'location'>
+        & { roles: Maybe<Array<Maybe<(
+          { __typename?: 'Worker' }
+          & Pick<Worker, 'id' | 'name' | 'availability'>
+          & { user: (
+            { __typename?: 'User' }
+            & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          ), tags: Maybe<Array<Maybe<(
+            { __typename?: 'Tag' }
+            & Pick<Tag, 'id' | 'title'>
+          )>>>, tasks: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        )>>>, stars: Maybe<Array<Maybe<(
+          { __typename?: 'Task' }
+          & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          & { likes: Maybe<Array<Maybe<(
+            { __typename?: 'Worker' }
+            & Pick<Worker, 'id' | 'name' | 'availability'>
+          )>>>, comments: Maybe<Array<Maybe<(
+            { __typename?: 'Comment' }
+            & Pick<Comment, 'id' | 'content'>
+          )>>> }
+        )>>> }
+      ), tags: Maybe<Array<Maybe<(
+        { __typename?: 'Tag' }
+        & Pick<Tag, 'id' | 'title'>
+      )>>>, tasks: Maybe<Array<Maybe<(
+        { __typename?: 'Task' }
+        & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+        & { likes: Maybe<Array<Maybe<(
+          { __typename?: 'Worker' }
+          & Pick<Worker, 'id' | 'name' | 'availability'>
+          & { user: (
+            { __typename?: 'User' }
+            & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          ), tags: Maybe<Array<Maybe<(
+            { __typename?: 'Tag' }
+            & Pick<Tag, 'id' | 'title'>
+          )>>>, tasks: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        )>>>, comments: Maybe<Array<Maybe<(
+          { __typename?: 'Comment' }
+          & Pick<Comment, 'id' | 'content'>
+          & { worker: Maybe<(
+            { __typename?: 'Worker' }
+            & Pick<Worker, 'id' | 'name' | 'availability'>
+          )> }
+        )>>> }
+      )>>> }
+    )>>> }
+  )> }
+);
+
+export type DeleteBoardMutationVariables = {
+  filter: BoardFilter
+};
+
+
+export type DeleteBoardMutation = (
+  { __typename?: 'Mutation' }
+  & { deleteBoard: Maybe<(
+    { __typename?: 'DeleteBoardPayload' }
+    & Pick<DeleteBoardPayload, 'msg'>
+  )> }
+);
+
+export type DeleteColumnMutationVariables = {
+  filter: ColumnFilter
+};
+
+
+export type DeleteColumnMutation = (
+  { __typename?: 'Mutation' }
+  & { deleteColumn: Maybe<(
+    { __typename?: 'DeleteColumnPayload' }
+    & Pick<DeleteColumnPayload, 'msg'>
+  )> }
+);
+
+export type DeleteCommentMutationVariables = {
+  filter: CommentFilter
+};
+
+
+export type DeleteCommentMutation = (
+  { __typename?: 'Mutation' }
+  & { deleteComment: Maybe<(
+    { __typename?: 'DeleteCommentPayload' }
+    & Pick<DeleteCommentPayload, 'msg'>
+  )> }
+);
+
+export type DeleteProjectMutationVariables = {
+  filter: ProjectFilter
+};
+
+
+export type DeleteProjectMutation = (
+  { __typename?: 'Mutation' }
+  & { deleteProject: Maybe<(
+    { __typename?: 'DeleteProjectPayload' }
+    & Pick<DeleteProjectPayload, 'msg'>
+  )> }
+);
+
+export type DeleteTagMutationVariables = {
+  filter: TagFilter
+};
+
+
+export type DeleteTagMutation = (
+  { __typename?: 'Mutation' }
+  & { deleteTag: Maybe<(
+    { __typename?: 'DeleteTagPayload' }
+    & Pick<DeleteTagPayload, 'msg'>
+  )> }
+);
+
+export type DeleteTaskMutationVariables = {
+  filter: TaskFilter
+};
+
+
+export type DeleteTaskMutation = (
+  { __typename?: 'Mutation' }
+  & { deleteTask: Maybe<(
+    { __typename?: 'DeleteTaskPayload' }
+    & Pick<DeleteTaskPayload, 'msg'>
+  )> }
+);
+
+export type DeleteUserMutationVariables = {
+  filter: UserFilter
+};
+
+
+export type DeleteUserMutation = (
+  { __typename?: 'Mutation' }
+  & { deleteUser: Maybe<(
+    { __typename?: 'DeleteUserPayload' }
+    & Pick<DeleteUserPayload, 'msg'>
+  )> }
+);
+
+export type DeleteWorkerMutationVariables = {
+  filter: WorkerFilter
+};
+
+
+export type DeleteWorkerMutation = (
+  { __typename?: 'Mutation' }
+  & { deleteWorker: Maybe<(
+    { __typename?: 'DeleteWorkerPayload' }
+    & Pick<DeleteWorkerPayload, 'msg'>
+  )> }
+);
+
+export type UpdateBoardMutationVariables = {
+  filter?: Maybe<ColumnFilter>,
+  order?: Maybe<ColumnOrder>,
+  first?: Maybe<Scalars['Int']>,
+  offset?: Maybe<Scalars['Int']>,
+  filter1?: Maybe<BoardFilter>,
+  order1?: Maybe<BoardOrder>,
+  first1?: Maybe<Scalars['Int']>,
+  offset1?: Maybe<Scalars['Int']>,
+  input: UpdateBoardInput
+};
+
+
+export type UpdateBoardMutation = (
+  { __typename?: 'Mutation' }
+  & { updateBoard: Maybe<(
+    { __typename?: 'UpdateBoardPayload' }
+    & { board: Maybe<Array<Maybe<(
+      { __typename?: 'Board' }
+      & Pick<Board, 'id' | 'title' | 'order'>
+      & { columns: Maybe<Array<Maybe<(
+        { __typename?: 'Column' }
+        & Pick<Column, 'id' | 'title' | 'taskIds'>
+      )>>> }
+    )>>> }
+  )> }
+);
+
+export type UpdateColumnMutationVariables = {
+  filter?: Maybe<ColumnFilter>,
+  order?: Maybe<ColumnOrder>,
+  first?: Maybe<Scalars['Int']>,
+  offset?: Maybe<Scalars['Int']>,
+  input: UpdateColumnInput
+};
+
+
+export type UpdateColumnMutation = (
+  { __typename?: 'Mutation' }
+  & { updateColumn: Maybe<(
+    { __typename?: 'UpdateColumnPayload' }
+    & { column: Maybe<Array<Maybe<(
+      { __typename?: 'Column' }
+      & Pick<Column, 'id' | 'title' | 'taskIds'>
+    )>>> }
+  )> }
+);
+
+export type UpdateCommentMutationVariables = {
+  filter?: Maybe<WorkerFilter>,
+  order?: Maybe<WorkerOrder>,
+  first?: Maybe<Scalars['Int']>,
+  offset?: Maybe<Scalars['Int']>,
+  filter1?: Maybe<TaskFilter>,
+  order1?: Maybe<TaskOrder>,
+  first1?: Maybe<Scalars['Int']>,
+  offset1?: Maybe<Scalars['Int']>,
+  filter2?: Maybe<UserFilter>,
+  filter3?: Maybe<TagFilter>,
+  order2?: Maybe<TagOrder>,
+  first2?: Maybe<Scalars['Int']>,
+  offset2?: Maybe<Scalars['Int']>,
+  filter4?: Maybe<WorkerFilter>,
+  order3?: Maybe<WorkerOrder>,
+  first3?: Maybe<Scalars['Int']>,
+  offset3?: Maybe<Scalars['Int']>,
+  filter5?: Maybe<CommentFilter>,
+  order4?: Maybe<CommentOrder>,
+  first4?: Maybe<Scalars['Int']>,
+  offset4?: Maybe<Scalars['Int']>,
+  filter6?: Maybe<TaskFilter>,
+  order5?: Maybe<TaskOrder>,
+  first5?: Maybe<Scalars['Int']>,
+  offset5?: Maybe<Scalars['Int']>,
+  filter7?: Maybe<WorkerFilter>,
+  filter8?: Maybe<CommentFilter>,
+  order6?: Maybe<CommentOrder>,
+  first6?: Maybe<Scalars['Int']>,
+  offset6?: Maybe<Scalars['Int']>,
+  input: UpdateCommentInput
+};
+
+
+export type UpdateCommentMutation = (
+  { __typename?: 'Mutation' }
+  & { updateComment: Maybe<(
+    { __typename?: 'UpdateCommentPayload' }
+    & { comment: Maybe<Array<Maybe<(
+      { __typename?: 'Comment' }
+      & Pick<Comment, 'id' | 'content'>
+      & { worker: Maybe<(
+        { __typename?: 'Worker' }
+        & Pick<Worker, 'id' | 'name' | 'availability'>
+        & { user: (
+          { __typename?: 'User' }
+          & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          & { roles: Maybe<Array<Maybe<(
+            { __typename?: 'Worker' }
+            & Pick<Worker, 'id' | 'name' | 'availability'>
+          )>>>, stars: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        ), tags: Maybe<Array<Maybe<(
+          { __typename?: 'Tag' }
+          & Pick<Tag, 'id' | 'title'>
+        )>>>, tasks: Maybe<Array<Maybe<(
+          { __typename?: 'Task' }
+          & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          & { likes: Maybe<Array<Maybe<(
+            { __typename?: 'Worker' }
+            & Pick<Worker, 'id' | 'name' | 'availability'>
+          )>>>, comments: Maybe<Array<Maybe<(
+            { __typename?: 'Comment' }
+            & Pick<Comment, 'id' | 'content'>
+          )>>> }
+        )>>> }
+      )> }
+    )>>> }
+  )> }
+);
+
+export type UpdateProjectMutationVariables = {
+  filter?: Maybe<TagFilter>,
+  order?: Maybe<TagOrder>,
+  first?: Maybe<Scalars['Int']>,
+  offset?: Maybe<Scalars['Int']>,
+  filter1?: Maybe<UserFilter>,
+  filter2?: Maybe<TagFilter>,
+  order1?: Maybe<TagOrder>,
+  first1?: Maybe<Scalars['Int']>,
+  offset1?: Maybe<Scalars['Int']>,
+  filter3?: Maybe<TaskFilter>,
+  order2?: Maybe<TaskOrder>,
+  first2?: Maybe<Scalars['Int']>,
+  offset2?: Maybe<Scalars['Int']>,
+  filter4?: Maybe<WorkerFilter>,
+  order3?: Maybe<WorkerOrder>,
+  first3?: Maybe<Scalars['Int']>,
+  offset3?: Maybe<Scalars['Int']>,
+  filter5?: Maybe<WorkerFilter>,
+  filter6?: Maybe<CommentFilter>,
+  order4?: Maybe<CommentOrder>,
+  first4?: Maybe<Scalars['Int']>,
+  offset4?: Maybe<Scalars['Int']>,
+  filter7?: Maybe<TaskFilter>,
+  order5?: Maybe<TaskOrder>,
+  first5?: Maybe<Scalars['Int']>,
+  offset5?: Maybe<Scalars['Int']>,
+  filter8?: Maybe<ColumnFilter>,
+  order6?: Maybe<ColumnOrder>,
+  first6?: Maybe<Scalars['Int']>,
+  offset6?: Maybe<Scalars['Int']>,
+  filter9?: Maybe<BoardFilter>,
+  order7?: Maybe<BoardOrder>,
+  first7?: Maybe<Scalars['Int']>,
+  offset7?: Maybe<Scalars['Int']>,
+  filter10?: Maybe<WorkerFilter>,
+  order8?: Maybe<WorkerOrder>,
+  first8?: Maybe<Scalars['Int']>,
+  offset8?: Maybe<Scalars['Int']>,
+  filter11?: Maybe<TaskFilter>,
+  order9?: Maybe<TaskOrder>,
+  first9?: Maybe<Scalars['Int']>,
+  offset9?: Maybe<Scalars['Int']>,
+  filter12?: Maybe<UserFilter>,
+  filter13?: Maybe<TagFilter>,
+  order10?: Maybe<TagOrder>,
+  first10?: Maybe<Scalars['Int']>,
+  offset10?: Maybe<Scalars['Int']>,
+  filter14?: Maybe<TaskFilter>,
+  order11?: Maybe<TaskOrder>,
+  first11?: Maybe<Scalars['Int']>,
+  offset11?: Maybe<Scalars['Int']>,
+  filter15?: Maybe<WorkerFilter>,
+  order12?: Maybe<WorkerOrder>,
+  first12?: Maybe<Scalars['Int']>,
+  offset12?: Maybe<Scalars['Int']>,
+  filter16?: Maybe<ProjectFilter>,
+  order13?: Maybe<ProjectOrder>,
+  first13?: Maybe<Scalars['Int']>,
+  offset13?: Maybe<Scalars['Int']>,
+  input: UpdateProjectInput
+};
+
+
+export type UpdateProjectMutation = (
+  { __typename?: 'Mutation' }
+  & { updateProject: Maybe<(
+    { __typename?: 'UpdateProjectPayload' }
+    & { project: Maybe<Array<Maybe<(
+      { __typename?: 'Project' }
+      & Pick<Project, 'id' | 'title'>
+      & { tags: Maybe<Array<Maybe<(
+        { __typename?: 'Tag' }
+        & Pick<Tag, 'id' | 'title'>
+      )>>>, tasks: Maybe<Array<Maybe<(
+        { __typename?: 'Task' }
+        & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+        & { likes: Maybe<Array<Maybe<(
+          { __typename?: 'Worker' }
+          & Pick<Worker, 'id' | 'name' | 'availability'>
+          & { user: (
+            { __typename?: 'User' }
+            & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          ), tags: Maybe<Array<Maybe<(
+            { __typename?: 'Tag' }
+            & Pick<Tag, 'id' | 'title'>
+          )>>>, tasks: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        )>>>, comments: Maybe<Array<Maybe<(
+          { __typename?: 'Comment' }
+          & Pick<Comment, 'id' | 'content'>
+          & { worker: Maybe<(
+            { __typename?: 'Worker' }
+            & Pick<Worker, 'id' | 'name' | 'availability'>
+          )> }
+        )>>> }
+      )>>>, boards: Maybe<Array<Maybe<(
+        { __typename?: 'Board' }
+        & Pick<Board, 'id' | 'title' | 'order'>
+        & { columns: Maybe<Array<Maybe<(
+          { __typename?: 'Column' }
+          & Pick<Column, 'id' | 'title' | 'taskIds'>
+        )>>> }
+      )>>>, workers: Maybe<Array<Maybe<(
+        { __typename?: 'Worker' }
+        & Pick<Worker, 'id' | 'name' | 'availability'>
+        & { user: (
+          { __typename?: 'User' }
+          & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          & { roles: Maybe<Array<Maybe<(
+            { __typename?: 'Worker' }
+            & Pick<Worker, 'id' | 'name' | 'availability'>
+          )>>>, stars: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        ), tags: Maybe<Array<Maybe<(
+          { __typename?: 'Tag' }
+          & Pick<Tag, 'id' | 'title'>
+        )>>>, tasks: Maybe<Array<Maybe<(
+          { __typename?: 'Task' }
+          & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+        )>>> }
+      )>>> }
+    )>>> }
+  )> }
+);
+
+export type UpdateTagMutationVariables = {
+  filter?: Maybe<TagFilter>,
+  order?: Maybe<TagOrder>,
+  first?: Maybe<Scalars['Int']>,
+  offset?: Maybe<Scalars['Int']>,
+  input: UpdateTagInput
+};
+
+
+export type UpdateTagMutation = (
+  { __typename?: 'Mutation' }
+  & { updateTag: Maybe<(
+    { __typename?: 'UpdateTagPayload' }
+    & { tag: Maybe<Array<Maybe<(
+      { __typename?: 'Tag' }
+      & Pick<Tag, 'id' | 'title'>
+    )>>> }
+  )> }
+);
+
+export type UpdateTaskMutationVariables = {
+  filter?: Maybe<WorkerFilter>,
+  order?: Maybe<WorkerOrder>,
+  first?: Maybe<Scalars['Int']>,
+  offset?: Maybe<Scalars['Int']>,
+  filter1?: Maybe<TaskFilter>,
+  order1?: Maybe<TaskOrder>,
+  first1?: Maybe<Scalars['Int']>,
+  offset1?: Maybe<Scalars['Int']>,
+  filter2?: Maybe<UserFilter>,
+  filter3?: Maybe<TagFilter>,
+  order2?: Maybe<TagOrder>,
+  first2?: Maybe<Scalars['Int']>,
+  offset2?: Maybe<Scalars['Int']>,
+  filter4?: Maybe<WorkerFilter>,
+  order3?: Maybe<WorkerOrder>,
+  first3?: Maybe<Scalars['Int']>,
+  offset3?: Maybe<Scalars['Int']>,
+  filter5?: Maybe<CommentFilter>,
+  order4?: Maybe<CommentOrder>,
+  first4?: Maybe<Scalars['Int']>,
+  offset4?: Maybe<Scalars['Int']>,
+  filter6?: Maybe<TaskFilter>,
+  order5?: Maybe<TaskOrder>,
+  first5?: Maybe<Scalars['Int']>,
+  offset5?: Maybe<Scalars['Int']>,
+  filter7?: Maybe<WorkerFilter>,
+  order6?: Maybe<WorkerOrder>,
+  first6?: Maybe<Scalars['Int']>,
+  offset6?: Maybe<Scalars['Int']>,
+  filter8?: Maybe<UserFilter>,
+  filter9?: Maybe<TagFilter>,
+  order7?: Maybe<TagOrder>,
+  first7?: Maybe<Scalars['Int']>,
+  offset7?: Maybe<Scalars['Int']>,
+  filter10?: Maybe<TaskFilter>,
+  order8?: Maybe<TaskOrder>,
+  first8?: Maybe<Scalars['Int']>,
+  offset8?: Maybe<Scalars['Int']>,
+  filter11?: Maybe<WorkerFilter>,
+  filter12?: Maybe<CommentFilter>,
+  order9?: Maybe<CommentOrder>,
+  first9?: Maybe<Scalars['Int']>,
+  offset9?: Maybe<Scalars['Int']>,
+  filter13?: Maybe<TaskFilter>,
+  order10?: Maybe<TaskOrder>,
+  first10?: Maybe<Scalars['Int']>,
+  offset10?: Maybe<Scalars['Int']>,
+  input: UpdateTaskInput
+};
+
+
+export type UpdateTaskMutation = (
+  { __typename?: 'Mutation' }
+  & { updateTask: Maybe<(
+    { __typename?: 'UpdateTaskPayload' }
+    & { task: Maybe<Array<Maybe<(
+      { __typename?: 'Task' }
+      & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+      & { likes: Maybe<Array<Maybe<(
+        { __typename?: 'Worker' }
+        & Pick<Worker, 'id' | 'name' | 'availability'>
+        & { user: (
+          { __typename?: 'User' }
+          & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          & { roles: Maybe<Array<Maybe<(
+            { __typename?: 'Worker' }
+            & Pick<Worker, 'id' | 'name' | 'availability'>
+          )>>>, stars: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        ), tags: Maybe<Array<Maybe<(
+          { __typename?: 'Tag' }
+          & Pick<Tag, 'id' | 'title'>
+        )>>>, tasks: Maybe<Array<Maybe<(
+          { __typename?: 'Task' }
+          & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          & { likes: Maybe<Array<Maybe<(
+            { __typename?: 'Worker' }
+            & Pick<Worker, 'id' | 'name' | 'availability'>
+          )>>>, comments: Maybe<Array<Maybe<(
+            { __typename?: 'Comment' }
+            & Pick<Comment, 'id' | 'content'>
+          )>>> }
+        )>>> }
+      )>>>, comments: Maybe<Array<Maybe<(
+        { __typename?: 'Comment' }
+        & Pick<Comment, 'id' | 'content'>
+        & { worker: Maybe<(
+          { __typename?: 'Worker' }
+          & Pick<Worker, 'id' | 'name' | 'availability'>
+          & { user: (
+            { __typename?: 'User' }
+            & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          ), tags: Maybe<Array<Maybe<(
+            { __typename?: 'Tag' }
+            & Pick<Tag, 'id' | 'title'>
+          )>>>, tasks: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        )> }
+      )>>> }
+    )>>> }
+  )> }
+);
+
+export type UpdateUserMutationVariables = {
+  filter?: Maybe<TaskFilter>,
+  order?: Maybe<TaskOrder>,
+  first?: Maybe<Scalars['Int']>,
+  offset?: Maybe<Scalars['Int']>,
+  filter1?: Maybe<UserFilter>,
+  filter2?: Maybe<TagFilter>,
+  order1?: Maybe<TagOrder>,
+  first1?: Maybe<Scalars['Int']>,
+  offset1?: Maybe<Scalars['Int']>,
+  filter3?: Maybe<WorkerFilter>,
+  order2?: Maybe<WorkerOrder>,
+  first2?: Maybe<Scalars['Int']>,
+  offset2?: Maybe<Scalars['Int']>,
+  filter4?: Maybe<CommentFilter>,
+  order3?: Maybe<CommentOrder>,
+  first3?: Maybe<Scalars['Int']>,
+  offset3?: Maybe<Scalars['Int']>,
+  filter5?: Maybe<TaskFilter>,
+  order4?: Maybe<TaskOrder>,
+  first4?: Maybe<Scalars['Int']>,
+  offset4?: Maybe<Scalars['Int']>,
+  filter6?: Maybe<WorkerFilter>,
+  order5?: Maybe<WorkerOrder>,
+  first5?: Maybe<Scalars['Int']>,
+  offset5?: Maybe<Scalars['Int']>,
+  filter7?: Maybe<UserFilter>,
+  order6?: Maybe<UserOrder>,
+  first6?: Maybe<Scalars['Int']>,
+  offset6?: Maybe<Scalars['Int']>,
+  input: UpdateUserInput
+};
+
+
+export type UpdateUserMutation = (
+  { __typename?: 'Mutation' }
+  & { updateUser: Maybe<(
+    { __typename?: 'UpdateUserPayload' }
+    & { user: Maybe<Array<Maybe<(
+      { __typename?: 'User' }
+      & Pick<User, 'id' | 'username' | 'password' | 'location'>
+      & { roles: Maybe<Array<Maybe<(
+        { __typename?: 'Worker' }
+        & Pick<Worker, 'id' | 'name' | 'availability'>
+        & { user: (
+          { __typename?: 'User' }
+          & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          & { stars: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        ), tags: Maybe<Array<Maybe<(
+          { __typename?: 'Tag' }
+          & Pick<Tag, 'id' | 'title'>
+        )>>>, tasks: Maybe<Array<Maybe<(
+          { __typename?: 'Task' }
+          & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          & { likes: Maybe<Array<Maybe<(
+            { __typename?: 'Worker' }
+            & Pick<Worker, 'id' | 'name' | 'availability'>
+          )>>>, comments: Maybe<Array<Maybe<(
+            { __typename?: 'Comment' }
+            & Pick<Comment, 'id' | 'content'>
+          )>>> }
+        )>>> }
+      )>>> }
+    )>>> }
+  )> }
+);
+
+export type UpdateWorkerMutationVariables = {
+  filter?: Maybe<UserFilter>,
+  filter1?: Maybe<TagFilter>,
+  order?: Maybe<TagOrder>,
+  first?: Maybe<Scalars['Int']>,
+  offset?: Maybe<Scalars['Int']>,
+  filter2?: Maybe<TaskFilter>,
+  order1?: Maybe<TaskOrder>,
+  first1?: Maybe<Scalars['Int']>,
+  offset1?: Maybe<Scalars['Int']>,
+  filter3?: Maybe<WorkerFilter>,
+  order2?: Maybe<WorkerOrder>,
+  first2?: Maybe<Scalars['Int']>,
+  offset2?: Maybe<Scalars['Int']>,
+  filter4?: Maybe<WorkerFilter>,
+  order3?: Maybe<WorkerOrder>,
+  first3?: Maybe<Scalars['Int']>,
+  offset3?: Maybe<Scalars['Int']>,
+  filter5?: Maybe<CommentFilter>,
+  order4?: Maybe<CommentOrder>,
+  first4?: Maybe<Scalars['Int']>,
+  offset4?: Maybe<Scalars['Int']>,
+  filter6?: Maybe<TaskFilter>,
+  order5?: Maybe<TaskOrder>,
+  first5?: Maybe<Scalars['Int']>,
+  offset5?: Maybe<Scalars['Int']>,
+  filter7?: Maybe<UserFilter>,
+  filter8?: Maybe<TagFilter>,
+  order6?: Maybe<TagOrder>,
+  first6?: Maybe<Scalars['Int']>,
+  offset6?: Maybe<Scalars['Int']>,
+  filter9?: Maybe<UserFilter>,
+  filter10?: Maybe<TagFilter>,
+  order7?: Maybe<TagOrder>,
+  first7?: Maybe<Scalars['Int']>,
+  offset7?: Maybe<Scalars['Int']>,
+  filter11?: Maybe<TaskFilter>,
+  order8?: Maybe<TaskOrder>,
+  first8?: Maybe<Scalars['Int']>,
+  offset8?: Maybe<Scalars['Int']>,
+  filter12?: Maybe<WorkerFilter>,
+  order9?: Maybe<WorkerOrder>,
+  first9?: Maybe<Scalars['Int']>,
+  offset9?: Maybe<Scalars['Int']>,
+  filter13?: Maybe<WorkerFilter>,
+  filter14?: Maybe<CommentFilter>,
+  order10?: Maybe<CommentOrder>,
+  first10?: Maybe<Scalars['Int']>,
+  offset10?: Maybe<Scalars['Int']>,
+  filter15?: Maybe<TaskFilter>,
+  order11?: Maybe<TaskOrder>,
+  first11?: Maybe<Scalars['Int']>,
+  offset11?: Maybe<Scalars['Int']>,
+  filter16?: Maybe<WorkerFilter>,
+  order12?: Maybe<WorkerOrder>,
+  first12?: Maybe<Scalars['Int']>,
+  offset12?: Maybe<Scalars['Int']>,
+  input: UpdateWorkerInput
+};
+
+
+export type UpdateWorkerMutation = (
+  { __typename?: 'Mutation' }
+  & { updateWorker: Maybe<(
+    { __typename?: 'UpdateWorkerPayload' }
+    & { worker: Maybe<Array<Maybe<(
+      { __typename?: 'Worker' }
+      & Pick<Worker, 'id' | 'name' | 'availability'>
+      & { user: (
+        { __typename?: 'User' }
+        & Pick<User, 'id' | 'username' | 'password' | 'location'>
+        & { roles: Maybe<Array<Maybe<(
+          { __typename?: 'Worker' }
+          & Pick<Worker, 'id' | 'name' | 'availability'>
+          & { user: (
+            { __typename?: 'User' }
+            & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          ), tags: Maybe<Array<Maybe<(
+            { __typename?: 'Tag' }
+            & Pick<Tag, 'id' | 'title'>
+          )>>>, tasks: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        )>>>, stars: Maybe<Array<Maybe<(
+          { __typename?: 'Task' }
+          & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          & { likes: Maybe<Array<Maybe<(
+            { __typename?: 'Worker' }
+            & Pick<Worker, 'id' | 'name' | 'availability'>
+          )>>>, comments: Maybe<Array<Maybe<(
+            { __typename?: 'Comment' }
+            & Pick<Comment, 'id' | 'content'>
+          )>>> }
+        )>>> }
+      ), tags: Maybe<Array<Maybe<(
+        { __typename?: 'Tag' }
+        & Pick<Tag, 'id' | 'title'>
+      )>>>, tasks: Maybe<Array<Maybe<(
+        { __typename?: 'Task' }
+        & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+        & { likes: Maybe<Array<Maybe<(
+          { __typename?: 'Worker' }
+          & Pick<Worker, 'id' | 'name' | 'availability'>
+          & { user: (
+            { __typename?: 'User' }
+            & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          ), tags: Maybe<Array<Maybe<(
+            { __typename?: 'Tag' }
+            & Pick<Tag, 'id' | 'title'>
+          )>>>, tasks: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        )>>>, comments: Maybe<Array<Maybe<(
+          { __typename?: 'Comment' }
+          & Pick<Comment, 'id' | 'content'>
+          & { worker: Maybe<(
+            { __typename?: 'Worker' }
+            & Pick<Worker, 'id' | 'name' | 'availability'>
+          )> }
+        )>>> }
+      )>>> }
+    )>>> }
+  )> }
+);
+
+export type GetBoardQueryVariables = {
+  filter?: Maybe<ColumnFilter>,
+  order?: Maybe<ColumnOrder>,
+  first?: Maybe<Scalars['Int']>,
+  offset?: Maybe<Scalars['Int']>,
+  id: Scalars['ID']
+};
+
+
+export type GetBoardQuery = (
+  { __typename?: 'Query' }
+  & { getBoard: Maybe<(
+    { __typename?: 'Board' }
+    & Pick<Board, 'id' | 'title' | 'order'>
+    & { columns: Maybe<Array<Maybe<(
+      { __typename?: 'Column' }
+      & Pick<Column, 'id' | 'title' | 'taskIds'>
+    )>>> }
+  )> }
+);
+
+export type GetColumnQueryVariables = {
+  id: Scalars['ID']
+};
+
+
+export type GetColumnQuery = (
+  { __typename?: 'Query' }
+  & { getColumn: Maybe<(
+    { __typename?: 'Column' }
+    & Pick<Column, 'id' | 'title' | 'taskIds'>
+  )> }
+);
+
+export type GetCommentQueryVariables = {
+  filter?: Maybe<UserFilter>,
+  filter1?: Maybe<TagFilter>,
+  order?: Maybe<TagOrder>,
+  first?: Maybe<Scalars['Int']>,
+  offset?: Maybe<Scalars['Int']>,
+  filter2?: Maybe<TaskFilter>,
+  order1?: Maybe<TaskOrder>,
+  first1?: Maybe<Scalars['Int']>,
+  offset1?: Maybe<Scalars['Int']>,
+  filter3?: Maybe<WorkerFilter>,
+  order2?: Maybe<WorkerOrder>,
+  first2?: Maybe<Scalars['Int']>,
+  offset2?: Maybe<Scalars['Int']>,
+  filter4?: Maybe<WorkerFilter>,
+  order3?: Maybe<WorkerOrder>,
+  first3?: Maybe<Scalars['Int']>,
+  offset3?: Maybe<Scalars['Int']>,
+  filter5?: Maybe<CommentFilter>,
+  order4?: Maybe<CommentOrder>,
+  first4?: Maybe<Scalars['Int']>,
+  offset4?: Maybe<Scalars['Int']>,
+  filter6?: Maybe<TaskFilter>,
+  order5?: Maybe<TaskOrder>,
+  first5?: Maybe<Scalars['Int']>,
+  offset5?: Maybe<Scalars['Int']>,
+  filter7?: Maybe<UserFilter>,
+  filter8?: Maybe<TagFilter>,
+  order6?: Maybe<TagOrder>,
+  first6?: Maybe<Scalars['Int']>,
+  offset6?: Maybe<Scalars['Int']>,
+  filter9?: Maybe<UserFilter>,
+  filter10?: Maybe<TagFilter>,
+  order7?: Maybe<TagOrder>,
+  first7?: Maybe<Scalars['Int']>,
+  offset7?: Maybe<Scalars['Int']>,
+  filter11?: Maybe<TaskFilter>,
+  order8?: Maybe<TaskOrder>,
+  first8?: Maybe<Scalars['Int']>,
+  offset8?: Maybe<Scalars['Int']>,
+  filter12?: Maybe<WorkerFilter>,
+  order9?: Maybe<WorkerOrder>,
+  first9?: Maybe<Scalars['Int']>,
+  offset9?: Maybe<Scalars['Int']>,
+  filter13?: Maybe<WorkerFilter>,
+  filter14?: Maybe<CommentFilter>,
+  order10?: Maybe<CommentOrder>,
+  first10?: Maybe<Scalars['Int']>,
+  offset10?: Maybe<Scalars['Int']>,
+  filter15?: Maybe<TaskFilter>,
+  order11?: Maybe<TaskOrder>,
+  first11?: Maybe<Scalars['Int']>,
+  offset11?: Maybe<Scalars['Int']>,
+  filter16?: Maybe<WorkerFilter>,
+  id: Scalars['ID']
+};
+
+
+export type GetCommentQuery = (
+  { __typename?: 'Query' }
+  & { getComment: Maybe<(
+    { __typename?: 'Comment' }
+    & Pick<Comment, 'id' | 'content'>
+    & { worker: Maybe<(
+      { __typename?: 'Worker' }
+      & Pick<Worker, 'id' | 'name' | 'availability'>
+      & { user: (
+        { __typename?: 'User' }
+        & Pick<User, 'id' | 'username' | 'password' | 'location'>
+        & { roles: Maybe<Array<Maybe<(
+          { __typename?: 'Worker' }
+          & Pick<Worker, 'id' | 'name' | 'availability'>
+          & { user: (
+            { __typename?: 'User' }
+            & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          ), tags: Maybe<Array<Maybe<(
+            { __typename?: 'Tag' }
+            & Pick<Tag, 'id' | 'title'>
+          )>>>, tasks: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        )>>>, stars: Maybe<Array<Maybe<(
+          { __typename?: 'Task' }
+          & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          & { likes: Maybe<Array<Maybe<(
+            { __typename?: 'Worker' }
+            & Pick<Worker, 'id' | 'name' | 'availability'>
+          )>>>, comments: Maybe<Array<Maybe<(
+            { __typename?: 'Comment' }
+            & Pick<Comment, 'id' | 'content'>
+          )>>> }
+        )>>> }
+      ), tags: Maybe<Array<Maybe<(
+        { __typename?: 'Tag' }
+        & Pick<Tag, 'id' | 'title'>
+      )>>>, tasks: Maybe<Array<Maybe<(
+        { __typename?: 'Task' }
+        & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+        & { likes: Maybe<Array<Maybe<(
+          { __typename?: 'Worker' }
+          & Pick<Worker, 'id' | 'name' | 'availability'>
+          & { user: (
+            { __typename?: 'User' }
+            & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          ), tags: Maybe<Array<Maybe<(
+            { __typename?: 'Tag' }
+            & Pick<Tag, 'id' | 'title'>
+          )>>>, tasks: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        )>>>, comments: Maybe<Array<Maybe<(
+          { __typename?: 'Comment' }
+          & Pick<Comment, 'id' | 'content'>
+          & { worker: Maybe<(
+            { __typename?: 'Worker' }
+            & Pick<Worker, 'id' | 'name' | 'availability'>
+          )> }
+        )>>> }
+      )>>> }
+    )> }
+  )> }
+);
+
+export type GetProjectQueryVariables = {
+  filter?: Maybe<TagFilter>,
+  order?: Maybe<TagOrder>,
+  first?: Maybe<Scalars['Int']>,
+  offset?: Maybe<Scalars['Int']>,
+  filter1?: Maybe<WorkerFilter>,
+  order1?: Maybe<WorkerOrder>,
+  first1?: Maybe<Scalars['Int']>,
+  offset1?: Maybe<Scalars['Int']>,
+  filter2?: Maybe<TaskFilter>,
+  order2?: Maybe<TaskOrder>,
+  first2?: Maybe<Scalars['Int']>,
+  offset2?: Maybe<Scalars['Int']>,
+  filter3?: Maybe<UserFilter>,
+  filter4?: Maybe<TagFilter>,
+  order3?: Maybe<TagOrder>,
+  first3?: Maybe<Scalars['Int']>,
+  offset3?: Maybe<Scalars['Int']>,
+  filter5?: Maybe<CommentFilter>,
+  order4?: Maybe<CommentOrder>,
+  first4?: Maybe<Scalars['Int']>,
+  offset4?: Maybe<Scalars['Int']>,
+  filter6?: Maybe<TaskFilter>,
+  order5?: Maybe<TaskOrder>,
+  first5?: Maybe<Scalars['Int']>,
+  offset5?: Maybe<Scalars['Int']>,
+  filter7?: Maybe<WorkerFilter>,
+  order6?: Maybe<WorkerOrder>,
+  first6?: Maybe<Scalars['Int']>,
+  offset6?: Maybe<Scalars['Int']>,
+  filter8?: Maybe<TaskFilter>,
+  order7?: Maybe<TaskOrder>,
+  first7?: Maybe<Scalars['Int']>,
+  offset7?: Maybe<Scalars['Int']>,
+  filter9?: Maybe<ColumnFilter>,
+  order8?: Maybe<ColumnOrder>,
+  first8?: Maybe<Scalars['Int']>,
+  offset8?: Maybe<Scalars['Int']>,
+  filter10?: Maybe<BoardFilter>,
+  order9?: Maybe<BoardOrder>,
+  first9?: Maybe<Scalars['Int']>,
+  offset9?: Maybe<Scalars['Int']>,
+  filter11?: Maybe<UserFilter>,
+  filter12?: Maybe<TagFilter>,
+  order10?: Maybe<TagOrder>,
+  first10?: Maybe<Scalars['Int']>,
+  offset10?: Maybe<Scalars['Int']>,
+  filter13?: Maybe<TaskFilter>,
+  order11?: Maybe<TaskOrder>,
+  first11?: Maybe<Scalars['Int']>,
+  offset11?: Maybe<Scalars['Int']>,
+  filter14?: Maybe<WorkerFilter>,
+  order12?: Maybe<WorkerOrder>,
+  first12?: Maybe<Scalars['Int']>,
+  offset12?: Maybe<Scalars['Int']>,
+  id: Scalars['ID']
+};
+
+
+export type GetProjectQuery = (
+  { __typename?: 'Query' }
+  & { getProject: Maybe<(
+    { __typename?: 'Project' }
+    & Pick<Project, 'id' | 'title'>
+    & { tags: Maybe<Array<Maybe<(
+      { __typename?: 'Tag' }
+      & Pick<Tag, 'id' | 'title'>
+    )>>>, tasks: Maybe<Array<Maybe<(
+      { __typename?: 'Task' }
+      & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+      & { likes: Maybe<Array<Maybe<(
+        { __typename?: 'Worker' }
+        & Pick<Worker, 'id' | 'name' | 'availability'>
+        & { user: (
+          { __typename?: 'User' }
+          & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          & { roles: Maybe<Array<Maybe<(
+            { __typename?: 'Worker' }
+            & Pick<Worker, 'id' | 'name' | 'availability'>
+          )>>>, stars: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        ), tags: Maybe<Array<Maybe<(
+          { __typename?: 'Tag' }
+          & Pick<Tag, 'id' | 'title'>
+        )>>>, tasks: Maybe<Array<Maybe<(
+          { __typename?: 'Task' }
+          & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          & { comments: Maybe<Array<Maybe<(
+            { __typename?: 'Comment' }
+            & Pick<Comment, 'id' | 'content'>
+          )>>> }
+        )>>> }
+      )>>> }
+    )>>>, boards: Maybe<Array<Maybe<(
+      { __typename?: 'Board' }
+      & Pick<Board, 'id' | 'title' | 'order'>
+      & { columns: Maybe<Array<Maybe<(
+        { __typename?: 'Column' }
+        & Pick<Column, 'id' | 'title' | 'taskIds'>
+      )>>> }
+    )>>>, workers: Maybe<Array<Maybe<(
+      { __typename?: 'Worker' }
+      & Pick<Worker, 'id' | 'name' | 'availability'>
+      & { user: (
+        { __typename?: 'User' }
+        & Pick<User, 'id' | 'username' | 'password' | 'location'>
+      ), tags: Maybe<Array<Maybe<(
+        { __typename?: 'Tag' }
+        & Pick<Tag, 'id' | 'title'>
+      )>>>, tasks: Maybe<Array<Maybe<(
+        { __typename?: 'Task' }
+        & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+      )>>> }
+    )>>> }
+  )> }
+);
+
+export type GetTagQueryVariables = {
+  id: Scalars['ID']
+};
+
+
+export type GetTagQuery = (
+  { __typename?: 'Query' }
+  & { getTag: Maybe<(
+    { __typename?: 'Tag' }
+    & Pick<Tag, 'id' | 'title'>
+  )> }
+);
+
+export type GetTaskQueryVariables = {
+  filter?: Maybe<UserFilter>,
+  filter1?: Maybe<TagFilter>,
+  order?: Maybe<TagOrder>,
+  first?: Maybe<Scalars['Int']>,
+  offset?: Maybe<Scalars['Int']>,
+  filter2?: Maybe<TaskFilter>,
+  order1?: Maybe<TaskOrder>,
+  first1?: Maybe<Scalars['Int']>,
+  offset1?: Maybe<Scalars['Int']>,
+  filter3?: Maybe<WorkerFilter>,
+  order2?: Maybe<WorkerOrder>,
+  first2?: Maybe<Scalars['Int']>,
+  offset2?: Maybe<Scalars['Int']>,
+  filter4?: Maybe<WorkerFilter>,
+  order3?: Maybe<WorkerOrder>,
+  first3?: Maybe<Scalars['Int']>,
+  offset3?: Maybe<Scalars['Int']>,
+  filter5?: Maybe<CommentFilter>,
+  order4?: Maybe<CommentOrder>,
+  first4?: Maybe<Scalars['Int']>,
+  offset4?: Maybe<Scalars['Int']>,
+  filter6?: Maybe<TaskFilter>,
+  order5?: Maybe<TaskOrder>,
+  first5?: Maybe<Scalars['Int']>,
+  offset5?: Maybe<Scalars['Int']>,
+  filter7?: Maybe<UserFilter>,
+  filter8?: Maybe<TagFilter>,
+  order6?: Maybe<TagOrder>,
+  first6?: Maybe<Scalars['Int']>,
+  offset6?: Maybe<Scalars['Int']>,
+  filter9?: Maybe<WorkerFilter>,
+  order7?: Maybe<WorkerOrder>,
+  first7?: Maybe<Scalars['Int']>,
+  offset7?: Maybe<Scalars['Int']>,
+  filter10?: Maybe<WorkerFilter>,
+  filter11?: Maybe<CommentFilter>,
+  order8?: Maybe<CommentOrder>,
+  first8?: Maybe<Scalars['Int']>,
+  offset8?: Maybe<Scalars['Int']>,
+  filter12?: Maybe<TaskFilter>,
+  order9?: Maybe<TaskOrder>,
+  first9?: Maybe<Scalars['Int']>,
+  offset9?: Maybe<Scalars['Int']>,
+  filter13?: Maybe<WorkerFilter>,
+  order10?: Maybe<WorkerOrder>,
+  first10?: Maybe<Scalars['Int']>,
+  offset10?: Maybe<Scalars['Int']>,
+  filter14?: Maybe<CommentFilter>,
+  order11?: Maybe<CommentOrder>,
+  first11?: Maybe<Scalars['Int']>,
+  offset11?: Maybe<Scalars['Int']>,
+  id: Scalars['ID']
+};
+
+
+export type GetTaskQuery = (
+  { __typename?: 'Query' }
+  & { getTask: Maybe<(
+    { __typename?: 'Task' }
+    & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+    & { likes: Maybe<Array<Maybe<(
+      { __typename?: 'Worker' }
+      & Pick<Worker, 'id' | 'name' | 'availability'>
+      & { user: (
+        { __typename?: 'User' }
+        & Pick<User, 'id' | 'username' | 'password' | 'location'>
+        & { roles: Maybe<Array<Maybe<(
+          { __typename?: 'Worker' }
+          & Pick<Worker, 'id' | 'name' | 'availability'>
+          & { user: (
+            { __typename?: 'User' }
+            & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          ), tags: Maybe<Array<Maybe<(
+            { __typename?: 'Tag' }
+            & Pick<Tag, 'id' | 'title'>
+          )>>>, tasks: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        )>>>, stars: Maybe<Array<Maybe<(
+          { __typename?: 'Task' }
+          & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          & { likes: Maybe<Array<Maybe<(
+            { __typename?: 'Worker' }
+            & Pick<Worker, 'id' | 'name' | 'availability'>
+          )>>>, comments: Maybe<Array<Maybe<(
+            { __typename?: 'Comment' }
+            & Pick<Comment, 'id' | 'content'>
+          )>>> }
+        )>>> }
+      ), tags: Maybe<Array<Maybe<(
+        { __typename?: 'Tag' }
+        & Pick<Tag, 'id' | 'title'>
+      )>>>, tasks: Maybe<Array<Maybe<(
+        { __typename?: 'Task' }
+        & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+        & { likes: Maybe<Array<Maybe<(
+          { __typename?: 'Worker' }
+          & Pick<Worker, 'id' | 'name' | 'availability'>
+        )>>>, comments: Maybe<Array<Maybe<(
+          { __typename?: 'Comment' }
+          & Pick<Comment, 'id' | 'content'>
+          & { worker: Maybe<(
+            { __typename?: 'Worker' }
+            & Pick<Worker, 'id' | 'name' | 'availability'>
+          )> }
+        )>>> }
+      )>>> }
+    )>>>, comments: Maybe<Array<Maybe<(
+      { __typename?: 'Comment' }
+      & Pick<Comment, 'id' | 'content'>
+    )>>> }
+  )> }
+);
+
+export type GetUserQueryVariables = {
+  filter?: Maybe<TagFilter>,
+  order?: Maybe<TagOrder>,
+  first?: Maybe<Scalars['Int']>,
+  offset?: Maybe<Scalars['Int']>,
+  filter1?: Maybe<TaskFilter>,
+  order1?: Maybe<TaskOrder>,
+  first1?: Maybe<Scalars['Int']>,
+  offset1?: Maybe<Scalars['Int']>,
+  filter2?: Maybe<WorkerFilter>,
+  order2?: Maybe<WorkerOrder>,
+  first2?: Maybe<Scalars['Int']>,
+  offset2?: Maybe<Scalars['Int']>,
+  filter3?: Maybe<WorkerFilter>,
+  order3?: Maybe<WorkerOrder>,
+  first3?: Maybe<Scalars['Int']>,
+  offset3?: Maybe<Scalars['Int']>,
+  filter4?: Maybe<CommentFilter>,
+  order4?: Maybe<CommentOrder>,
+  first4?: Maybe<Scalars['Int']>,
+  offset4?: Maybe<Scalars['Int']>,
+  filter5?: Maybe<TaskFilter>,
+  order5?: Maybe<TaskOrder>,
+  first5?: Maybe<Scalars['Int']>,
+  offset5?: Maybe<Scalars['Int']>,
+  filter6?: Maybe<UserFilter>,
+  filter7?: Maybe<WorkerFilter>,
+  order6?: Maybe<WorkerOrder>,
+  first6?: Maybe<Scalars['Int']>,
+  offset6?: Maybe<Scalars['Int']>,
+  filter8?: Maybe<TaskFilter>,
+  order7?: Maybe<TaskOrder>,
+  first7?: Maybe<Scalars['Int']>,
+  offset7?: Maybe<Scalars['Int']>,
+  id: Scalars['ID']
+};
+
+
+export type GetUserQuery = (
+  { __typename?: 'Query' }
+  & { getUser: Maybe<(
+    { __typename?: 'User' }
+    & Pick<User, 'id' | 'username' | 'password' | 'location'>
+    & { roles: Maybe<Array<Maybe<(
+      { __typename?: 'Worker' }
+      & Pick<Worker, 'id' | 'name' | 'availability'>
+      & { user: (
+        { __typename?: 'User' }
+        & Pick<User, 'id' | 'username' | 'password' | 'location'>
+        & { roles: Maybe<Array<Maybe<(
+          { __typename?: 'Worker' }
+          & Pick<Worker, 'id' | 'name' | 'availability'>
+          & { tags: Maybe<Array<Maybe<(
+            { __typename?: 'Tag' }
+            & Pick<Tag, 'id' | 'title'>
+          )>>>, tasks: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        )>>>, stars: Maybe<Array<Maybe<(
+          { __typename?: 'Task' }
+          & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          & { likes: Maybe<Array<Maybe<(
+            { __typename?: 'Worker' }
+            & Pick<Worker, 'id' | 'name' | 'availability'>
+          )>>>, comments: Maybe<Array<Maybe<(
+            { __typename?: 'Comment' }
+            & Pick<Comment, 'id' | 'content'>
+          )>>> }
+        )>>> }
+      ) }
+    )>>>, stars: Maybe<Array<Maybe<(
+      { __typename?: 'Task' }
+      & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+    )>>> }
+  )> }
+);
+
+export type GetWorkerQueryVariables = {
+  filter?: Maybe<TaskFilter>,
+  order?: Maybe<TaskOrder>,
+  first?: Maybe<Scalars['Int']>,
+  offset?: Maybe<Scalars['Int']>,
+  filter1?: Maybe<UserFilter>,
+  filter2?: Maybe<TagFilter>,
+  order1?: Maybe<TagOrder>,
+  first1?: Maybe<Scalars['Int']>,
+  offset1?: Maybe<Scalars['Int']>,
+  filter3?: Maybe<WorkerFilter>,
+  order2?: Maybe<WorkerOrder>,
+  first2?: Maybe<Scalars['Int']>,
+  offset2?: Maybe<Scalars['Int']>,
+  filter4?: Maybe<CommentFilter>,
+  order3?: Maybe<CommentOrder>,
+  first3?: Maybe<Scalars['Int']>,
+  offset3?: Maybe<Scalars['Int']>,
+  filter5?: Maybe<TaskFilter>,
+  order4?: Maybe<TaskOrder>,
+  first4?: Maybe<Scalars['Int']>,
+  offset4?: Maybe<Scalars['Int']>,
+  filter6?: Maybe<WorkerFilter>,
+  order5?: Maybe<WorkerOrder>,
+  first5?: Maybe<Scalars['Int']>,
+  offset5?: Maybe<Scalars['Int']>,
+  filter7?: Maybe<UserFilter>,
+  filter8?: Maybe<TagFilter>,
+  order6?: Maybe<TagOrder>,
+  first6?: Maybe<Scalars['Int']>,
+  offset6?: Maybe<Scalars['Int']>,
+  filter9?: Maybe<TaskFilter>,
+  order7?: Maybe<TaskOrder>,
+  first7?: Maybe<Scalars['Int']>,
+  offset7?: Maybe<Scalars['Int']>,
+  id: Scalars['ID']
+};
+
+
+export type GetWorkerQuery = (
+  { __typename?: 'Query' }
+  & { getWorker: Maybe<(
+    { __typename?: 'Worker' }
+    & Pick<Worker, 'id' | 'name' | 'availability'>
+    & { user: (
+      { __typename?: 'User' }
+      & Pick<User, 'id' | 'username' | 'password' | 'location'>
+      & { roles: Maybe<Array<Maybe<(
+        { __typename?: 'Worker' }
+        & Pick<Worker, 'id' | 'name' | 'availability'>
+        & { user: (
+          { __typename?: 'User' }
+          & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          & { stars: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        ), tags: Maybe<Array<Maybe<(
+          { __typename?: 'Tag' }
+          & Pick<Tag, 'id' | 'title'>
+        )>>>, tasks: Maybe<Array<Maybe<(
+          { __typename?: 'Task' }
+          & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          & { likes: Maybe<Array<Maybe<(
+            { __typename?: 'Worker' }
+            & Pick<Worker, 'id' | 'name' | 'availability'>
+          )>>>, comments: Maybe<Array<Maybe<(
+            { __typename?: 'Comment' }
+            & Pick<Comment, 'id' | 'content'>
+          )>>> }
+        )>>> }
+      )>>> }
+    ), tags: Maybe<Array<Maybe<(
+      { __typename?: 'Tag' }
+      & Pick<Tag, 'id' | 'title'>
+    )>>>, tasks: Maybe<Array<Maybe<(
+      { __typename?: 'Task' }
+      & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+    )>>> }
+  )> }
+);
+
+export type QueryBoardQueryVariables = {
+  filter?: Maybe<ColumnFilter>,
+  order?: Maybe<ColumnOrder>,
+  first?: Maybe<Scalars['Int']>,
+  offset?: Maybe<Scalars['Int']>,
+  filter1?: Maybe<BoardFilter>,
+  order1?: Maybe<BoardOrder>,
+  first1?: Maybe<Scalars['Int']>,
+  offset1?: Maybe<Scalars['Int']>
+};
+
+
+export type QueryBoardQuery = (
+  { __typename?: 'Query' }
+  & { queryBoard: Maybe<Array<Maybe<(
+    { __typename?: 'Board' }
+    & Pick<Board, 'id' | 'title' | 'order'>
+    & { columns: Maybe<Array<Maybe<(
+      { __typename?: 'Column' }
+      & Pick<Column, 'id' | 'title' | 'taskIds'>
+    )>>> }
+  )>>> }
+);
+
+export type QueryColumnQueryVariables = {
+  filter?: Maybe<ColumnFilter>,
+  order?: Maybe<ColumnOrder>,
+  first?: Maybe<Scalars['Int']>,
+  offset?: Maybe<Scalars['Int']>
+};
+
+
+export type QueryColumnQuery = (
+  { __typename?: 'Query' }
+  & { queryColumn: Maybe<Array<Maybe<(
+    { __typename?: 'Column' }
+    & Pick<Column, 'id' | 'title' | 'taskIds'>
+  )>>> }
+);
+
+export type QueryCommentQueryVariables = {
+  filter?: Maybe<UserFilter>,
+  filter1?: Maybe<TagFilter>,
+  order?: Maybe<TagOrder>,
+  first?: Maybe<Scalars['Int']>,
+  offset?: Maybe<Scalars['Int']>,
+  filter2?: Maybe<TaskFilter>,
+  order1?: Maybe<TaskOrder>,
+  first1?: Maybe<Scalars['Int']>,
+  offset1?: Maybe<Scalars['Int']>,
+  filter3?: Maybe<WorkerFilter>,
+  order2?: Maybe<WorkerOrder>,
+  first2?: Maybe<Scalars['Int']>,
+  offset2?: Maybe<Scalars['Int']>,
+  filter4?: Maybe<WorkerFilter>,
+  order3?: Maybe<WorkerOrder>,
+  first3?: Maybe<Scalars['Int']>,
+  offset3?: Maybe<Scalars['Int']>,
+  filter5?: Maybe<CommentFilter>,
+  order4?: Maybe<CommentOrder>,
+  first4?: Maybe<Scalars['Int']>,
+  offset4?: Maybe<Scalars['Int']>,
+  filter6?: Maybe<TaskFilter>,
+  order5?: Maybe<TaskOrder>,
+  first5?: Maybe<Scalars['Int']>,
+  offset5?: Maybe<Scalars['Int']>,
+  filter7?: Maybe<UserFilter>,
+  filter8?: Maybe<TagFilter>,
+  order6?: Maybe<TagOrder>,
+  first6?: Maybe<Scalars['Int']>,
+  offset6?: Maybe<Scalars['Int']>,
+  filter9?: Maybe<UserFilter>,
+  filter10?: Maybe<TagFilter>,
+  order7?: Maybe<TagOrder>,
+  first7?: Maybe<Scalars['Int']>,
+  offset7?: Maybe<Scalars['Int']>,
+  filter11?: Maybe<TaskFilter>,
+  order8?: Maybe<TaskOrder>,
+  first8?: Maybe<Scalars['Int']>,
+  offset8?: Maybe<Scalars['Int']>,
+  filter12?: Maybe<WorkerFilter>,
+  order9?: Maybe<WorkerOrder>,
+  first9?: Maybe<Scalars['Int']>,
+  offset9?: Maybe<Scalars['Int']>,
+  filter13?: Maybe<WorkerFilter>,
+  filter14?: Maybe<CommentFilter>,
+  order10?: Maybe<CommentOrder>,
+  first10?: Maybe<Scalars['Int']>,
+  offset10?: Maybe<Scalars['Int']>,
+  filter15?: Maybe<TaskFilter>,
+  order11?: Maybe<TaskOrder>,
+  first11?: Maybe<Scalars['Int']>,
+  offset11?: Maybe<Scalars['Int']>,
+  filter16?: Maybe<WorkerFilter>,
+  filter17?: Maybe<CommentFilter>,
+  order12?: Maybe<CommentOrder>,
+  first12?: Maybe<Scalars['Int']>,
+  offset12?: Maybe<Scalars['Int']>
+};
+
+
+export type QueryCommentQuery = (
+  { __typename?: 'Query' }
+  & { queryComment: Maybe<Array<Maybe<(
+    { __typename?: 'Comment' }
+    & Pick<Comment, 'id' | 'content'>
+    & { worker: Maybe<(
+      { __typename?: 'Worker' }
+      & Pick<Worker, 'id' | 'name' | 'availability'>
+      & { user: (
+        { __typename?: 'User' }
+        & Pick<User, 'id' | 'username' | 'password' | 'location'>
+        & { roles: Maybe<Array<Maybe<(
+          { __typename?: 'Worker' }
+          & Pick<Worker, 'id' | 'name' | 'availability'>
+          & { user: (
+            { __typename?: 'User' }
+            & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          ), tags: Maybe<Array<Maybe<(
+            { __typename?: 'Tag' }
+            & Pick<Tag, 'id' | 'title'>
+          )>>>, tasks: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        )>>>, stars: Maybe<Array<Maybe<(
+          { __typename?: 'Task' }
+          & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          & { likes: Maybe<Array<Maybe<(
+            { __typename?: 'Worker' }
+            & Pick<Worker, 'id' | 'name' | 'availability'>
+          )>>>, comments: Maybe<Array<Maybe<(
+            { __typename?: 'Comment' }
+            & Pick<Comment, 'id' | 'content'>
+          )>>> }
+        )>>> }
+      ), tags: Maybe<Array<Maybe<(
+        { __typename?: 'Tag' }
+        & Pick<Tag, 'id' | 'title'>
+      )>>>, tasks: Maybe<Array<Maybe<(
+        { __typename?: 'Task' }
+        & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+        & { likes: Maybe<Array<Maybe<(
+          { __typename?: 'Worker' }
+          & Pick<Worker, 'id' | 'name' | 'availability'>
+          & { user: (
+            { __typename?: 'User' }
+            & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          ), tags: Maybe<Array<Maybe<(
+            { __typename?: 'Tag' }
+            & Pick<Tag, 'id' | 'title'>
+          )>>>, tasks: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        )>>>, comments: Maybe<Array<Maybe<(
+          { __typename?: 'Comment' }
+          & Pick<Comment, 'id' | 'content'>
+          & { worker: Maybe<(
+            { __typename?: 'Worker' }
+            & Pick<Worker, 'id' | 'name' | 'availability'>
+          )> }
+        )>>> }
+      )>>> }
+    )> }
+  )>>> }
+);
+
+export type QueryProjectQueryVariables = {
+  filter?: Maybe<TagFilter>,
+  order?: Maybe<TagOrder>,
+  first?: Maybe<Scalars['Int']>,
+  offset?: Maybe<Scalars['Int']>,
+  filter1?: Maybe<WorkerFilter>,
+  order1?: Maybe<WorkerOrder>,
+  first1?: Maybe<Scalars['Int']>,
+  offset1?: Maybe<Scalars['Int']>,
+  filter2?: Maybe<TaskFilter>,
+  order2?: Maybe<TaskOrder>,
+  first2?: Maybe<Scalars['Int']>,
+  offset2?: Maybe<Scalars['Int']>,
+  filter3?: Maybe<UserFilter>,
+  filter4?: Maybe<TagFilter>,
+  order3?: Maybe<TagOrder>,
+  first3?: Maybe<Scalars['Int']>,
+  offset3?: Maybe<Scalars['Int']>,
+  filter5?: Maybe<CommentFilter>,
+  order4?: Maybe<CommentOrder>,
+  first4?: Maybe<Scalars['Int']>,
+  offset4?: Maybe<Scalars['Int']>,
+  filter6?: Maybe<TaskFilter>,
+  order5?: Maybe<TaskOrder>,
+  first5?: Maybe<Scalars['Int']>,
+  offset5?: Maybe<Scalars['Int']>,
+  filter7?: Maybe<WorkerFilter>,
+  order6?: Maybe<WorkerOrder>,
+  first6?: Maybe<Scalars['Int']>,
+  offset6?: Maybe<Scalars['Int']>,
+  filter8?: Maybe<TaskFilter>,
+  order7?: Maybe<TaskOrder>,
+  first7?: Maybe<Scalars['Int']>,
+  offset7?: Maybe<Scalars['Int']>,
+  filter9?: Maybe<ColumnFilter>,
+  order8?: Maybe<ColumnOrder>,
+  first8?: Maybe<Scalars['Int']>,
+  offset8?: Maybe<Scalars['Int']>,
+  filter10?: Maybe<BoardFilter>,
+  order9?: Maybe<BoardOrder>,
+  first9?: Maybe<Scalars['Int']>,
+  offset9?: Maybe<Scalars['Int']>,
+  filter11?: Maybe<UserFilter>,
+  filter12?: Maybe<TagFilter>,
+  order10?: Maybe<TagOrder>,
+  first10?: Maybe<Scalars['Int']>,
+  offset10?: Maybe<Scalars['Int']>,
+  filter13?: Maybe<TaskFilter>,
+  order11?: Maybe<TaskOrder>,
+  first11?: Maybe<Scalars['Int']>,
+  offset11?: Maybe<Scalars['Int']>,
+  filter14?: Maybe<WorkerFilter>,
+  order12?: Maybe<WorkerOrder>,
+  first12?: Maybe<Scalars['Int']>,
+  offset12?: Maybe<Scalars['Int']>,
+  filter15?: Maybe<ProjectFilter>,
+  order13?: Maybe<ProjectOrder>,
+  first13?: Maybe<Scalars['Int']>,
+  offset13?: Maybe<Scalars['Int']>
+};
+
+
+export type QueryProjectQuery = (
+  { __typename?: 'Query' }
+  & { queryProject: Maybe<Array<Maybe<(
+    { __typename?: 'Project' }
+    & Pick<Project, 'id' | 'title'>
+    & { tags: Maybe<Array<Maybe<(
+      { __typename?: 'Tag' }
+      & Pick<Tag, 'id' | 'title'>
+    )>>>, tasks: Maybe<Array<Maybe<(
+      { __typename?: 'Task' }
+      & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+      & { likes: Maybe<Array<Maybe<(
+        { __typename?: 'Worker' }
+        & Pick<Worker, 'id' | 'name' | 'availability'>
+        & { user: (
+          { __typename?: 'User' }
+          & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          & { roles: Maybe<Array<Maybe<(
+            { __typename?: 'Worker' }
+            & Pick<Worker, 'id' | 'name' | 'availability'>
+          )>>>, stars: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        ), tags: Maybe<Array<Maybe<(
+          { __typename?: 'Tag' }
+          & Pick<Tag, 'id' | 'title'>
+        )>>>, tasks: Maybe<Array<Maybe<(
+          { __typename?: 'Task' }
+          & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          & { comments: Maybe<Array<Maybe<(
+            { __typename?: 'Comment' }
+            & Pick<Comment, 'id' | 'content'>
+          )>>> }
+        )>>> }
+      )>>> }
+    )>>>, boards: Maybe<Array<Maybe<(
+      { __typename?: 'Board' }
+      & Pick<Board, 'id' | 'title' | 'order'>
+      & { columns: Maybe<Array<Maybe<(
+        { __typename?: 'Column' }
+        & Pick<Column, 'id' | 'title' | 'taskIds'>
+      )>>> }
+    )>>>, workers: Maybe<Array<Maybe<(
+      { __typename?: 'Worker' }
+      & Pick<Worker, 'id' | 'name' | 'availability'>
+      & { user: (
+        { __typename?: 'User' }
+        & Pick<User, 'id' | 'username' | 'password' | 'location'>
+      ), tags: Maybe<Array<Maybe<(
+        { __typename?: 'Tag' }
+        & Pick<Tag, 'id' | 'title'>
+      )>>>, tasks: Maybe<Array<Maybe<(
+        { __typename?: 'Task' }
+        & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+      )>>> }
+    )>>> }
+  )>>> }
+);
+
+export type QueryTagQueryVariables = {
+  filter?: Maybe<TagFilter>,
+  order?: Maybe<TagOrder>,
+  first?: Maybe<Scalars['Int']>,
+  offset?: Maybe<Scalars['Int']>
+};
+
+
+export type QueryTagQuery = (
+  { __typename?: 'Query' }
+  & { queryTag: Maybe<Array<Maybe<(
+    { __typename?: 'Tag' }
+    & Pick<Tag, 'id' | 'title'>
+  )>>> }
+);
+
+export type QueryTaskQueryVariables = {
+  filter?: Maybe<UserFilter>,
+  filter1?: Maybe<TagFilter>,
+  order?: Maybe<TagOrder>,
+  first?: Maybe<Scalars['Int']>,
+  offset?: Maybe<Scalars['Int']>,
+  filter2?: Maybe<TaskFilter>,
+  order1?: Maybe<TaskOrder>,
+  first1?: Maybe<Scalars['Int']>,
+  offset1?: Maybe<Scalars['Int']>,
+  filter3?: Maybe<WorkerFilter>,
+  order2?: Maybe<WorkerOrder>,
+  first2?: Maybe<Scalars['Int']>,
+  offset2?: Maybe<Scalars['Int']>,
+  filter4?: Maybe<WorkerFilter>,
+  order3?: Maybe<WorkerOrder>,
+  first3?: Maybe<Scalars['Int']>,
+  offset3?: Maybe<Scalars['Int']>,
+  filter5?: Maybe<CommentFilter>,
+  order4?: Maybe<CommentOrder>,
+  first4?: Maybe<Scalars['Int']>,
+  offset4?: Maybe<Scalars['Int']>,
+  filter6?: Maybe<TaskFilter>,
+  order5?: Maybe<TaskOrder>,
+  first5?: Maybe<Scalars['Int']>,
+  offset5?: Maybe<Scalars['Int']>,
+  filter7?: Maybe<UserFilter>,
+  filter8?: Maybe<TagFilter>,
+  order6?: Maybe<TagOrder>,
+  first6?: Maybe<Scalars['Int']>,
+  offset6?: Maybe<Scalars['Int']>,
+  filter9?: Maybe<WorkerFilter>,
+  order7?: Maybe<WorkerOrder>,
+  first7?: Maybe<Scalars['Int']>,
+  offset7?: Maybe<Scalars['Int']>,
+  filter10?: Maybe<WorkerFilter>,
+  filter11?: Maybe<CommentFilter>,
+  order8?: Maybe<CommentOrder>,
+  first8?: Maybe<Scalars['Int']>,
+  offset8?: Maybe<Scalars['Int']>,
+  filter12?: Maybe<TaskFilter>,
+  order9?: Maybe<TaskOrder>,
+  first9?: Maybe<Scalars['Int']>,
+  offset9?: Maybe<Scalars['Int']>,
+  filter13?: Maybe<WorkerFilter>,
+  order10?: Maybe<WorkerOrder>,
+  first10?: Maybe<Scalars['Int']>,
+  offset10?: Maybe<Scalars['Int']>,
+  filter14?: Maybe<CommentFilter>,
+  order11?: Maybe<CommentOrder>,
+  first11?: Maybe<Scalars['Int']>,
+  offset11?: Maybe<Scalars['Int']>,
+  filter15?: Maybe<TaskFilter>,
+  order12?: Maybe<TaskOrder>,
+  first12?: Maybe<Scalars['Int']>,
+  offset12?: Maybe<Scalars['Int']>
+};
+
+
+export type QueryTaskQuery = (
+  { __typename?: 'Query' }
+  & { queryTask: Maybe<Array<Maybe<(
+    { __typename?: 'Task' }
+    & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+    & { likes: Maybe<Array<Maybe<(
+      { __typename?: 'Worker' }
+      & Pick<Worker, 'id' | 'name' | 'availability'>
+      & { user: (
+        { __typename?: 'User' }
+        & Pick<User, 'id' | 'username' | 'password' | 'location'>
+        & { roles: Maybe<Array<Maybe<(
+          { __typename?: 'Worker' }
+          & Pick<Worker, 'id' | 'name' | 'availability'>
+          & { user: (
+            { __typename?: 'User' }
+            & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          ), tags: Maybe<Array<Maybe<(
+            { __typename?: 'Tag' }
+            & Pick<Tag, 'id' | 'title'>
+          )>>>, tasks: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        )>>>, stars: Maybe<Array<Maybe<(
+          { __typename?: 'Task' }
+          & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          & { likes: Maybe<Array<Maybe<(
+            { __typename?: 'Worker' }
+            & Pick<Worker, 'id' | 'name' | 'availability'>
+          )>>>, comments: Maybe<Array<Maybe<(
+            { __typename?: 'Comment' }
+            & Pick<Comment, 'id' | 'content'>
+          )>>> }
+        )>>> }
+      ), tags: Maybe<Array<Maybe<(
+        { __typename?: 'Tag' }
+        & Pick<Tag, 'id' | 'title'>
+      )>>>, tasks: Maybe<Array<Maybe<(
+        { __typename?: 'Task' }
+        & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+        & { likes: Maybe<Array<Maybe<(
+          { __typename?: 'Worker' }
+          & Pick<Worker, 'id' | 'name' | 'availability'>
+        )>>>, comments: Maybe<Array<Maybe<(
+          { __typename?: 'Comment' }
+          & Pick<Comment, 'id' | 'content'>
+          & { worker: Maybe<(
+            { __typename?: 'Worker' }
+            & Pick<Worker, 'id' | 'name' | 'availability'>
+          )> }
+        )>>> }
+      )>>> }
+    )>>>, comments: Maybe<Array<Maybe<(
+      { __typename?: 'Comment' }
+      & Pick<Comment, 'id' | 'content'>
+    )>>> }
+  )>>> }
+);
+
+export type QueryUserQueryVariables = {
+  filter?: Maybe<TagFilter>,
+  order?: Maybe<TagOrder>,
+  first?: Maybe<Scalars['Int']>,
+  offset?: Maybe<Scalars['Int']>,
+  filter1?: Maybe<TaskFilter>,
+  order1?: Maybe<TaskOrder>,
+  first1?: Maybe<Scalars['Int']>,
+  offset1?: Maybe<Scalars['Int']>,
+  filter2?: Maybe<WorkerFilter>,
+  order2?: Maybe<WorkerOrder>,
+  first2?: Maybe<Scalars['Int']>,
+  offset2?: Maybe<Scalars['Int']>,
+  filter3?: Maybe<WorkerFilter>,
+  order3?: Maybe<WorkerOrder>,
+  first3?: Maybe<Scalars['Int']>,
+  offset3?: Maybe<Scalars['Int']>,
+  filter4?: Maybe<CommentFilter>,
+  order4?: Maybe<CommentOrder>,
+  first4?: Maybe<Scalars['Int']>,
+  offset4?: Maybe<Scalars['Int']>,
+  filter5?: Maybe<TaskFilter>,
+  order5?: Maybe<TaskOrder>,
+  first5?: Maybe<Scalars['Int']>,
+  offset5?: Maybe<Scalars['Int']>,
+  filter6?: Maybe<UserFilter>,
+  filter7?: Maybe<WorkerFilter>,
+  order6?: Maybe<WorkerOrder>,
+  first6?: Maybe<Scalars['Int']>,
+  offset6?: Maybe<Scalars['Int']>,
+  filter8?: Maybe<TaskFilter>,
+  order7?: Maybe<TaskOrder>,
+  first7?: Maybe<Scalars['Int']>,
+  offset7?: Maybe<Scalars['Int']>,
+  filter9?: Maybe<UserFilter>,
+  order8?: Maybe<UserOrder>,
+  first8?: Maybe<Scalars['Int']>,
+  offset8?: Maybe<Scalars['Int']>
+};
+
+
+export type QueryUserQuery = (
+  { __typename?: 'Query' }
+  & { queryUser: Maybe<Array<Maybe<(
+    { __typename?: 'User' }
+    & Pick<User, 'id' | 'username' | 'password' | 'location'>
+    & { roles: Maybe<Array<Maybe<(
+      { __typename?: 'Worker' }
+      & Pick<Worker, 'id' | 'name' | 'availability'>
+      & { user: (
+        { __typename?: 'User' }
+        & Pick<User, 'id' | 'username' | 'password' | 'location'>
+        & { roles: Maybe<Array<Maybe<(
+          { __typename?: 'Worker' }
+          & Pick<Worker, 'id' | 'name' | 'availability'>
+          & { tags: Maybe<Array<Maybe<(
+            { __typename?: 'Tag' }
+            & Pick<Tag, 'id' | 'title'>
+          )>>>, tasks: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        )>>>, stars: Maybe<Array<Maybe<(
+          { __typename?: 'Task' }
+          & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          & { likes: Maybe<Array<Maybe<(
+            { __typename?: 'Worker' }
+            & Pick<Worker, 'id' | 'name' | 'availability'>
+          )>>>, comments: Maybe<Array<Maybe<(
+            { __typename?: 'Comment' }
+            & Pick<Comment, 'id' | 'content'>
+          )>>> }
+        )>>> }
+      ) }
+    )>>>, stars: Maybe<Array<Maybe<(
+      { __typename?: 'Task' }
+      & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+    )>>> }
+  )>>> }
+);
+
+export type QueryWorkerQueryVariables = {
+  filter?: Maybe<TaskFilter>,
+  order?: Maybe<TaskOrder>,
+  first?: Maybe<Scalars['Int']>,
+  offset?: Maybe<Scalars['Int']>,
+  filter1?: Maybe<UserFilter>,
+  filter2?: Maybe<TagFilter>,
+  order1?: Maybe<TagOrder>,
+  first1?: Maybe<Scalars['Int']>,
+  offset1?: Maybe<Scalars['Int']>,
+  filter3?: Maybe<WorkerFilter>,
+  order2?: Maybe<WorkerOrder>,
+  first2?: Maybe<Scalars['Int']>,
+  offset2?: Maybe<Scalars['Int']>,
+  filter4?: Maybe<CommentFilter>,
+  order3?: Maybe<CommentOrder>,
+  first3?: Maybe<Scalars['Int']>,
+  offset3?: Maybe<Scalars['Int']>,
+  filter5?: Maybe<TaskFilter>,
+  order4?: Maybe<TaskOrder>,
+  first4?: Maybe<Scalars['Int']>,
+  offset4?: Maybe<Scalars['Int']>,
+  filter6?: Maybe<WorkerFilter>,
+  order5?: Maybe<WorkerOrder>,
+  first5?: Maybe<Scalars['Int']>,
+  offset5?: Maybe<Scalars['Int']>,
+  filter7?: Maybe<UserFilter>,
+  filter8?: Maybe<TagFilter>,
+  order6?: Maybe<TagOrder>,
+  first6?: Maybe<Scalars['Int']>,
+  offset6?: Maybe<Scalars['Int']>,
+  filter9?: Maybe<TaskFilter>,
+  order7?: Maybe<TaskOrder>,
+  first7?: Maybe<Scalars['Int']>,
+  offset7?: Maybe<Scalars['Int']>,
+  filter10?: Maybe<WorkerFilter>,
+  order8?: Maybe<WorkerOrder>,
+  first8?: Maybe<Scalars['Int']>,
+  offset8?: Maybe<Scalars['Int']>
+};
+
+
+export type QueryWorkerQuery = (
+  { __typename?: 'Query' }
+  & { queryWorker: Maybe<Array<Maybe<(
+    { __typename?: 'Worker' }
+    & Pick<Worker, 'id' | 'name' | 'availability'>
+    & { user: (
+      { __typename?: 'User' }
+      & Pick<User, 'id' | 'username' | 'password' | 'location'>
+      & { roles: Maybe<Array<Maybe<(
+        { __typename?: 'Worker' }
+        & Pick<Worker, 'id' | 'name' | 'availability'>
+        & { user: (
+          { __typename?: 'User' }
+          & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          & { stars: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        ), tags: Maybe<Array<Maybe<(
+          { __typename?: 'Tag' }
+          & Pick<Tag, 'id' | 'title'>
+        )>>>, tasks: Maybe<Array<Maybe<(
+          { __typename?: 'Task' }
+          & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          & { likes: Maybe<Array<Maybe<(
+            { __typename?: 'Worker' }
+            & Pick<Worker, 'id' | 'name' | 'availability'>
+          )>>>, comments: Maybe<Array<Maybe<(
+            { __typename?: 'Comment' }
+            & Pick<Comment, 'id' | 'content'>
+          )>>> }
+        )>>> }
+      )>>> }
+    ), tags: Maybe<Array<Maybe<(
+      { __typename?: 'Tag' }
+      & Pick<Tag, 'id' | 'title'>
+    )>>>, tasks: Maybe<Array<Maybe<(
+      { __typename?: 'Task' }
+      & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+    )>>> }
+  )>>> }
+);

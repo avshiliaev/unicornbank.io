@@ -1,4 +1,5 @@
 schema: http://localhost:8080/graphql
+documents: ./schema/documents/**/*.gql
 generates:
   ./interfaces/types.d.ts:
     plugins:
