@@ -30,7 +30,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "generate": "graphql get-schema && gqlg --schemaFilePath api/schema/schema.graphql --destDirPath ./api/schema/documents --depthLimit 5 && graphql-codegen",
+    "generate": "graphql get-schema && gqlg --schemaFilePath src/api/schema/schema.graphql --destDirPath ./src/api/schema/documents --depthLimit 5 && graphql-codegen",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
