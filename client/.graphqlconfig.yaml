@@ -1,6 +1,6 @@
 projects:
   lagerist:
-    schemaPath: ./api/schema/schema.graphql
+    schemaPath: ./src/api/schema/schema.graphql
     extensions:
       endpoints:
         dev: 'http://localhost:8080/graphql'
