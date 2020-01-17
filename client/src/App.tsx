@@ -14,6 +14,9 @@ const client = new ApolloClient({
 });
 
 const App: React.FC = () => {
+    const onProjectClick = (id) => {
+        console.log(id)
+    };
     return (
         <ApolloProvider client={client}>
             <QueryProjectComponent skip={false}>
@@ -24,7 +27,12 @@ const App: React.FC = () => {
                         <ul>
                             {data.queryProject.map(project => {
                                 return (
-                                    <li>{project.title}</li>
+                                    <li key={project.id}>
+                                        <h5>Title: {project.title}</h5>
+                                        <h6>Tasks: {project.tasks.length}</h6>
+                                        <h6>Workers: {project.workers.length}</h6>
+                                        <button onClick={() => onProjectClick(project.id)}>Select</button>
+                                    </li>
                                 )
                             })}
                         </ul>
