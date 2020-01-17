@@ -18,12 +18,16 @@ const App: React.FC = () => {
         <ApolloProvider client={client}>
             <QueryProjectComponent skip={false}>
                 {({loading, error, data}) => {
-                    if (loading) return(<div>Loading...</div>);
-                    if (error) return(<div>Error!</div>);
+                    if (loading) return (<div>Loading...</div>);
+                    if (error) return (<div>Error!</div>);
                     return (
-                        <div>
-                            {data.queryProject.map(project => project.title)}
-                        </div>
+                        <ul>
+                            {data.queryProject.map(project => {
+                                return (
+                                    <li>{project.title}</li>
+                                )
+                            })}
+                        </ul>
                     )
                 }}
             </QueryProjectComponent>
