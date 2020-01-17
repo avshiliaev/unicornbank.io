@@ -1,18 +1,18 @@
 
 
 type Comment {
-    id: ID
-    worker: Worker
+    id: ID!
+    worker: Worker!
     content: String!
 }
 
 type Tag {
-    id: ID
+    id: ID!
     title: String!
 }
 
 type Task {
-    id: ID
+    id: ID!
     title: String! @search(by: [hash])
     hours: Int!
     deadline: String!
@@ -24,20 +24,20 @@ type Task {
 }
 
 type Column {
-    id: ID
+    id: ID!
     title: String!
-    taskIds: [String]
+    tasks: [Task]
 }
 
 type Board {
-    id: ID
+    id: ID!
     title: String!
     columns: [Column]
     order: [String]
 }
 
 type Worker {
-    id: ID
+    id: ID!
     name: String! @search(by: [hash])
     availability: Int!
     user: User! @hasInverse(field: roles)
@@ -46,7 +46,7 @@ type Worker {
 }
 
 type User {
-    id: ID
+    id: ID!
     username: String! @search(by: [hash])
     password: String!
     location: String!
@@ -55,7 +55,7 @@ type User {
 }
 
 type Project {
-    id: ID
+    id: ID!
     title: String! @search(by: [hash])
     tags: [Tag]
     tasks: [Task]

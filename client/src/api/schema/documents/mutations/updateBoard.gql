@@ -1,12 +1,29 @@
-mutation updateBoard($filter: ColumnFilter, $order: ColumnOrder, $first: Int, $offset: Int, $filter1: BoardFilter, $order1: BoardOrder, $first1: Int, $offset1: Int, $input: UpdateBoardInput!){
+mutation updateBoard($filter: WorkerFilter, $order: WorkerOrder, $first: Int, $offset: Int, $filter1: CommentFilter, $order1: CommentOrder, $first1: Int, $offset1: Int, $filter2: TaskFilter, $order2: TaskOrder, $first2: Int, $offset2: Int, $filter3: ColumnFilter, $order3: ColumnOrder, $first3: Int, $offset3: Int, $filter4: BoardFilter, $order4: BoardOrder, $first4: Int, $offset4: Int, $input: UpdateBoardInput!){
     updateBoard(input: $input){
-        board(filter: $filter1, order: $order1, first: $first1, offset: $offset1){
+        board(filter: $filter4, order: $order4, first: $first4, offset: $offset4){
             id
             title
-            columns(filter: $filter, order: $order, first: $first, offset: $offset){
+            columns(filter: $filter3, order: $order3, first: $first3, offset: $offset3){
                 id
                 title
-                taskIds
+                tasks(filter: $filter2, order: $order2, first: $first2, offset: $offset2){
+                    id
+                    title
+                    hours
+                    deadline
+                    content
+                    priority
+                    complete
+                    likes(filter: $filter, order: $order, first: $first, offset: $offset){
+                        id
+                        name
+                        availability
+                    }
+                    comments(filter: $filter1, order: $order1, first: $first1, offset: $offset1){
+                        id
+                        content
+                    }
+                }
             }
             order
         }

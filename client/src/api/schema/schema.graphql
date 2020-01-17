@@ -1,13 +1,13 @@
 # source: http://localhost:8080/graphql
-# timestamp: Fri Jan 17 2020 11:47:31 GMT+0100 (Central European Standard Time)
+# timestamp: Fri Jan 17 2020 12:37:05 GMT+0100 (Central European Standard Time)
+
+directive @hasInverse(field: String!) on FIELD_DEFINITION
 
 directive @search(by: [DgraphIndex!]) on FIELD_DEFINITION
 
 directive @dgraph(type: String, pred: String) on OBJECT | INTERFACE | FIELD_DEFINITION
 
 directive @id on FIELD_DEFINITION
-
-directive @hasInverse(field: String!) on FIELD_DEFINITION
 
 input AddBoardInput {
   title: String!
@@ -21,7 +21,7 @@ type AddBoardPayload {
 
 input AddColumnInput {
   title: String!
-  taskIds: [String]
+  tasks: [TaskRef]
 }
 
 type AddColumnPayload {
@@ -29,7 +29,7 @@ type AddColumnPayload {
 }
 
 input AddCommentInput {
-  worker: WorkerRef
+  worker: WorkerRef!
   content: String!
 }
 
@@ -97,7 +97,7 @@ type AddWorkerPayload {
 }
 
 type Board {
-  id: ID
+  id: ID!
   title: String!
   columns(filter: ColumnFilter, order: ColumnOrder, first: Int, offset: Int): [Column]
   order: [String]
@@ -133,9 +133,9 @@ input BoardRef {
 }
 
 type Column {
-  id: ID
+  id: ID!
   title: String!
-  taskIds: [String]
+  tasks(filter: TaskFilter, order: TaskOrder, first: Int, offset: Int): [Task]
 }
 
 input ColumnFilter {
@@ -151,23 +151,22 @@ input ColumnOrder {
 
 enum ColumnOrderable {
   title
-  taskIds
 }
 
 input ColumnPatch {
   title: String
-  taskIds: [String]
+  tasks: [TaskRef]
 }
 
 input ColumnRef {
   id: ID
   title: String
-  taskIds: [String]
+  tasks: [TaskRef]
 }
 
 type Comment {
-  id: ID
-  worker(filter: WorkerFilter): Worker
+  id: ID!
+  worker(filter: WorkerFilter): Worker!
   content: String!
 }
 
@@ -299,7 +298,7 @@ type Mutation {
 }
 
 type Project {
-  id: ID
+  id: ID!
   title: String!
   tags(filter: TagFilter, order: TagOrder, first: Int, offset: Int): [Tag]
   tasks(filter: TaskFilter, order: TaskOrder, first: Int, offset: Int): [Task]
@@ -388,7 +387,7 @@ input StringTermFilter {
 }
 
 type Tag {
-  id: ID
+  id: ID!
   title: String!
 }
 
@@ -417,7 +416,7 @@ input TagRef {
 }
 
 type Task {
-  id: ID
+  id: ID!
   title: String!
   hours: Int!
   deadline: String!
@@ -554,7 +553,7 @@ type UpdateWorkerPayload {
 }
 
 type User {
-  id: ID
+  id: ID!
   username: String!
   password: String!
   location: String!
@@ -600,7 +599,7 @@ input UserRef {
 }
 
 type Worker {
-  id: ID
+  id: ID!
   name: String!
   availability: Int!
   user(filter: UserFilter): User!
