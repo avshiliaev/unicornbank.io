@@ -13,6 +13,18 @@ const client = new ApolloClient({
     }),
 });
 
+/*
+!WHY INVERSE EDGE IS AWESOME!
+Add a Tag to a project, and then query the project:
+
+mutation {
+    addTag(
+        input: [{ title: "awesome", project: {id: "0x2"} }]
+    ) { tag {id} }
+}
+
+ */
+
 const App: React.FC = () => {
     const onProjectClick = (id) => {
         console.log(id)
@@ -30,7 +42,7 @@ const App: React.FC = () => {
                                     <li key={project.id}>
                                         <h5>Title: {project.title}</h5>
                                         <h6>Tasks: {project.tasks.length}</h6>
-                                        <h6>Workers: {project.workers.length}</h6>
+                                        <h6>Tags: {project.tags.length}</h6>
                                         <button onClick={() => onProjectClick(project.id)}>Select</button>
                                     </li>
                                 )
