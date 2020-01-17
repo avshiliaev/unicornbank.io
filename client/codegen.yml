@@ -1,7 +1,8 @@
 schema: http://localhost:8080/graphql
 documents: ./schema/documents/**/*.gql
 generates:
-  ./interfaces/types.d.ts:
+  ./interfaces/types.d.tsx:
     plugins:
       - typescript
       - typescript-operations
+      - typescript-react-apollo
