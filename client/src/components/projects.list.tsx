@@ -1,5 +1,6 @@
 import React from 'react';
 import {withDeleteProject} from '../api/interfaces/types.d';
+import ProjectsDelete from '../containers/projects.delete';
 
 const ProjectsList = ({data}) => {
 
@@ -17,6 +18,7 @@ const ProjectsList = ({data}) => {
                             <h5>Title: {project.title}</h5>
                             <h6>Tasks: {project.tasks.length}</h6>
                             <h6>Tags: {project.tags.length}</h6>
+                            <ProjectsDelete project={project}/>
                         </li>
                     )
                 })}
