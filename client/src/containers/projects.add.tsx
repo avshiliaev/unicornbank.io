@@ -1,31 +1,18 @@
 import React from 'react';
 import {AddProjectComponent} from '../api/interfaces/types.d';
+import ProjectsForm from '../components/projects.form';
 
 const ProjectsAdd = () => {
 
-    // const input: AddProjectInput[] = [{title: 'ffffffff'}];
-    let field;
-
     return (
         <AddProjectComponent>
-            {(mutate, {loading, error}) => (
-                <div>
-                    <form
-                        onSubmit={e => {
-                            e.preventDefault();
-                            mutate({variables: {input: [{title: field.value}]}});
-                            field.value = '';
-                        }}
-                    >
-                        <input
-                            ref={node => {
-                                field = node;
-                            }}
-                        />
-                        <button type="submit">Add Todo</button>
-                    </form>
-                </div>
-            )}
+            {(mutate, {loading, error}) => {
+                if (loading) return (<div>Loading...</div>);
+                if (error) return (<div>Error!</div>);
+                return (
+                    <ProjectsForm mutate={mutate}/>
+                )
+            }}
         </AddProjectComponent>
     )
 };

@@ -5,7 +5,9 @@ import {HttpLink} from 'apollo-link-http';
 import {ApolloProvider} from '@apollo/react-hoc';
 import Pages from './pages';
 
-const cache = new InMemoryCache();
+const cache = new InMemoryCache({
+    addTypename: true
+});
 const client = new ApolloClient({
     cache,
     link: new HttpLink({
@@ -22,7 +24,6 @@ mutation {
         input: [{ title: "awesome", project: {id: "0x2"} }]
     ) { tag {id} }
 }
-
  */
 
 const App: React.FC = () => {

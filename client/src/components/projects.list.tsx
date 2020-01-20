@@ -1,9 +1,11 @@
 import React from 'react';
+import {withDeleteProject} from '../api/interfaces/types.d';
 
 const ProjectsList = ({data}) => {
 
     const onProjectClick = (project) => {
-        console.log(project)
+        const payload = withDeleteProject(project);
+        console.log(payload);
     };
 
     return (
