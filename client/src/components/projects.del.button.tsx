@@ -1,10 +1,11 @@
 import React from 'react';
+import { Button } from 'antd';
 
 const ProjectsDelButton = ({mutate, variables}) => {
 
     return (
         <div>
-            <button onClick={() => mutate({variables})}>Delete</button>
+            <Button size="small" onClick={() => mutate({variables})}>Delete</Button>
         </div>
     )
 };

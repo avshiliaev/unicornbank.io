@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from 'antd';
 import {AddProjectInput} from '../api/interfaces/types.d';
 
 const ProjectsForm = ({mutate}) => {
@@ -15,7 +16,7 @@ const ProjectsForm = ({mutate}) => {
         <div>
             <form onSubmit={e => onSubmit(e)}>
                 <input ref={node => { field = node }}/>
-                <button type="submit">Add Todo</button>
+                <Button htmlType="submit" size="small">Add Project</Button>
             </form>
         </div>
     )
