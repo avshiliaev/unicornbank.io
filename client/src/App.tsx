@@ -2,12 +2,9 @@ import React from 'react';
 import {ApolloClient} from 'apollo-client';
 import {InMemoryCache} from 'apollo-cache-inmemory';
 import {HttpLink} from 'apollo-link-http';
-import {Layout} from 'antd';
 import './App.css';
 import {ApolloProvider} from '@apollo/react-common';
 import Pages from './pages';
-
-const {Content} = Layout;
 
 /**
  * Updating cache strategies:
@@ -36,15 +33,9 @@ mutation {
 
 const App: React.FC = () => {
     return (
-        <Layout>
-            <Layout>
-                <Content style={{margin: '24px 16px 0', height: '100vh'}}>
-                    <ApolloProvider client={client}>
-                        <Pages/>
-                    </ApolloProvider>
-                </Content>
-            </Layout>
-        </Layout>
+        <ApolloProvider client={client}>
+            <Pages/>
+        </ApolloProvider>
     );
 };
 
