@@ -1,10 +1,10 @@
 import React from 'react';
 
-const ProjectsDelButton = ({mutate}) => {
+const ProjectsDelButton = ({mutate, variables}) => {
 
     return (
         <div>
-            <button onClick={() => mutate()}>Delete</button>
+            <button onClick={() => mutate({variables})}>Delete</button>
         </div>
     )
 };

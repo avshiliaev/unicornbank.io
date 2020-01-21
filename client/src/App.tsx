@@ -6,7 +6,7 @@ import {ApolloProvider} from '@apollo/react-hoc';
 import Pages from './pages';
 
 const cache = new InMemoryCache({
-    addTypename: true
+    addTypename: true,
 });
 const client = new ApolloClient({
     cache,
@@ -31,6 +31,8 @@ const App: React.FC = () => {
     return (
         <ApolloProvider client={client}>
             <Pages/>
+            <h2>The cache:</h2>
+            <div>{JSON.stringify(client.cache)}</div>
         </ApolloProvider>
     );
 };
