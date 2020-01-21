@@ -16,7 +16,7 @@ const ProjectsDelete = ({project}) => {
 
     const variables = {filter: {id: [project.id]}};
 
-    const [mutate, {loading, error, data}] = useMutation(
+    const [mutate, {loading, error}] = useMutation(
         DELETE_PROJECT,
         {
             refetchQueries: [{query: GET_PROJECTS}]
