@@ -1,27 +1,39 @@
 import React from 'react';
-import {Button, Card} from 'antd';
-import {AddProjectInput} from '../api/interfaces/types.d';
+import {Button, Form, Icon, Input} from 'antd';
 
-const ProjectsForm = ({mutate}) => {
+const ProjectsForm = ({form, mutate}) => {
 
-    let field;
-    const onSubmit = (e) => {
+    const handleSubmit = e => {
         e.preventDefault();
-        const addProjectInputs: AddProjectInput[] = [{title: field.value}];
-        mutate({variables: {input: addProjectInputs}, _typename: 'Project'});
-        field.value = '';
+        form.validateFields((err, values) => {
+            if (!err) {
+                console.log('Received values of form: ', values);
+                mutate({variables: {input: [values]}})
+            }
+        });
     };
 
+    const {getFieldDecorator} = form;
+
     return (
-        <Card>
-            <form onSubmit={e => onSubmit(e)}>
-                <input ref={node => {
-                    field = node
-                }}/>
-                <Button htmlType="submit" size="small">Add Project</Button>
-            </form>
-        </Card>
-    )
+        <Form onSubmit={handleSubmit} className="login-form">
+            <Form.Item>
+                {getFieldDecorator('title', {
+                    rules: [{required: true, message: 'Please input a title of your project'}],
+                })(
+                    <Input
+                        prefix={<Icon type="user" style={{color: 'rgba(0,0,0,.25)'}}/>}
+                        placeholder="Title"
+                    />,
+                )}
+            </Form.Item>
+            <Form.Item>
+                <Button type="primary" htmlType="submit" className="login-form-button">
+                    Add Project
+                </Button>
+            </Form.Item>
+        </Form>
+    );
 };
 
 export default ProjectsForm;
