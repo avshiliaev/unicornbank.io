@@ -1,21 +1,11 @@
 import React, {Fragment} from 'react';
 import ProjectsDelButton from '../components/projects.del.button';
 import {useMutation} from '@apollo/react-hooks';
-import gql from 'graphql-tag';
-import {GET_PROJECTS} from './projects.query';
+import {DELETE_PROJECT, GET_PROJECTS} from './documents';
 
 const ProjectsDelete = ({project}) => {
 
-    const DELETE_PROJECT = gql`
-        mutation deleteProject($filter: ProjectFilter!){
-            deleteProject(filter: $filter){
-                msg
-            }
-        }
-    `;
-
     const variables = {filter: {id: [project.id]}};
-
     const [mutate, {loading, error}] = useMutation(
         DELETE_PROJECT,
         {

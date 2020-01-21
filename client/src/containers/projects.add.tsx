@@ -1,29 +1,22 @@
 import React, {Fragment} from 'react';
 import ProjectsForm from '../components/projects.form';
 import {useMutation} from '@apollo/react-hooks';
-import gql from 'graphql-tag';
-import {GET_PROJECTS} from './projects.query';
+
+import {QueryProjectQuery} from '../api/interfaces/types.d';
+import {ADD_PROJECTS, GET_PROJECTS} from './documents';
 
 const ProjectsAdd = () => {
-
-    const ADD_PROJECTS = gql`
-        mutation addProject($input: [AddProjectInput!]!){
-            addProject(
-                input: $input
-            ) {
-                project {
-                    id
-                    __typename
-                }
-                __typename
-            }
-        }
-    `;
 
     const [mutate, {loading, error}] = useMutation(
         ADD_PROJECTS,
         {
-            refetchQueries: [{query: GET_PROJECTS}]
+            update: (store, {data}) => {
+                const projectsData = store.readQuery<QueryProjectQuery>({query: GET_PROJECTS});
+                store.writeQuery<QueryProjectQuery>({
+                    query: GET_PROJECTS,
+                    data: {queryProject: [...projectsData!.queryProject, ...data!.addProject.project]}
+                });
+            }
         }
     );
     if (loading) return (<div>Loading...</div>);

@@ -5,6 +5,11 @@ import {HttpLink} from 'apollo-link-http';
 import {ApolloProvider} from '@apollo/react-hoc';
 import Pages from './pages';
 
+
+/**
+ * Updating cache strategies:
+ * https://youtu.be/lQ7t20gFR14
+ */
 const cache = new InMemoryCache({
     addTypename: true,
 });
