@@ -7,7 +7,6 @@ const ProjectsForm = ({form, mutate}) => {
         e.preventDefault();
         form.validateFields((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
                 mutate({variables: {input: [values]}})
             }
         });
@@ -16,7 +15,7 @@ const ProjectsForm = ({form, mutate}) => {
     const {getFieldDecorator} = form;
 
     return (
-        <Form onSubmit={handleSubmit} className="login-form">
+        <Form onSubmit={handleSubmit}>
             <Form.Item>
                 {getFieldDecorator('title', {
                     rules: [{required: true, message: 'Please input a title of your project'}],
@@ -28,7 +27,7 @@ const ProjectsForm = ({form, mutate}) => {
                 )}
             </Form.Item>
             <Form.Item>
-                <Button type="primary" htmlType="submit" className="login-form-button">
+                <Button type="primary" htmlType="submit" style={{width: '100%'}}>
                     Add Project
                 </Button>
             </Form.Item>

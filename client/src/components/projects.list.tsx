@@ -1,14 +1,9 @@
 import React from 'react';
-import {withDeleteProject} from '../api/interfaces/types.d';
+import {Project} from '../api/interfaces/types.d';
+import {Avatar, Empty, List} from 'antd';
 import ProjectsDelete from '../containers/projects.delete';
-import {Card, Empty} from 'antd';
 
 const ProjectsList = ({projects}) => {
-
-    const onProjectClick = (project) => {
-        const payload = withDeleteProject(project);
-        console.log(payload);
-    };
 
     if (projects.length === 0) {
         return (
@@ -16,21 +11,27 @@ const ProjectsList = ({projects}) => {
         )
     }
 
+    const projectsList: Project[] = projects;
+
     return (
-        <Card>
-            <ul>
-                {projects.map(project => {
-                    return (
-                        <li key={project.id} onClick={() => onProjectClick(project)}>
-                            <h5>Title: {project.title}</h5>
-                            <h6>Tasks: {project.tasks.length}</h6>
-                            <h6>Tags: {project.tags.length}</h6>
-                            <ProjectsDelete project={project}/>
-                        </li>
-                    )
-                })}
-            </ul>
-        </Card>
+        <List
+            itemLayout="horizontal"
+            dataSource={projectsList}
+            renderItem={project => {
+                const link = `/projects/${project.id}`;
+                const ava = project.title.charAt(0);
+                const descr = `tasks: ${project.tasks.length}`;
+                return (
+                    <List.Item actions={[<ProjectsDelete project={project}/>]}>
+                        <List.Item.Meta
+                            avatar={<Avatar>{ava}</Avatar>}
+                            title={<a href={link}>{project.title}</a>}
+                            description={descr}
+                        />
+                    </List.Item>
+                )
+            }}
+        />
     )
 };
 

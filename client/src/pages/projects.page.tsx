@@ -1,5 +1,5 @@
 import React from 'react';
-import {Layout, Menu} from 'antd';
+import {Col, Layout, Menu, Row} from 'antd';
 import ProjectsQuery from '../containers/projects.query';
 import {WrappedProjectsAdd} from '../containers/projects.add';
 
@@ -15,15 +15,25 @@ const ProjectsPage = () => {
                     defaultSelectedKeys={['1']}
                     style={{lineHeight: '64px'}}
                 >
-                    <Menu.Item key="1">nav 1</Menu.Item>
-                    <Menu.Item key="2">nav 2</Menu.Item>
+                    <Menu.Item key="1">My projects</Menu.Item>
+                    <Menu.Item key="2">Discover</Menu.Item>
                 </Menu>
             </Header>
             <Content style={{padding: '50px'}}>
-                <div style={{background: '#fff', padding: 24, minHeight: 280}}>
-                    <WrappedProjectsAdd/>
-                    <ProjectsQuery/>
-                </div>
+                <Row>
+                    <Col span={8}>
+                        <div style={{background: '#fff', padding: 24, minHeight: 280}}>
+                            <WrappedProjectsAdd/>
+                        </div>
+
+                    </Col>
+                    <Col span={16}>
+                        <div style={{background: '#fff', padding: 24, minHeight: 280, marginLeft: '50px'}}>
+                            <ProjectsQuery/>
+                        </div>
+                    </Col>
+                </Row>
+
             </Content>
             <Footer style={{textAlign: 'center'}}>Lagerist ©2020</Footer>
         </Layout>
