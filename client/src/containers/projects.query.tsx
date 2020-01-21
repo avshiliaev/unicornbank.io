@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react';
 import {useQuery} from '@apollo/react-hooks';
 import ProjectsList from '../components/projects.list';
-import {GET_PROJECTS} from './documents';
+import {GET_PROJECTS} from './projects.documents';
 
 const ProjectsQuery = () => {
 

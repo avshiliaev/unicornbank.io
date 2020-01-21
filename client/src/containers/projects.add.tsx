@@ -1,9 +1,8 @@
 import React, {Fragment} from 'react';
 import ProjectsForm from '../components/projects.form';
 import {useMutation} from '@apollo/react-hooks';
-
 import {QueryProjectQuery} from '../api/interfaces/types.d';
-import {ADD_PROJECTS, GET_PROJECTS} from './documents';
+import {ADD_PROJECTS, GET_PROJECTS} from './projects.documents';
 
 const ProjectsAdd = () => {
 

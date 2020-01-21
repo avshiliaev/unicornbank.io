@@ -2,9 +2,9 @@ import React from 'react';
 import {ApolloClient} from 'apollo-client';
 import {InMemoryCache} from 'apollo-cache-inmemory';
 import {HttpLink} from 'apollo-link-http';
-import './App.css';
 import {ApolloProvider} from '@apollo/react-common';
 import Pages from './pages';
+import './App.css';
 
 /**
  * Updating cache strategies:
