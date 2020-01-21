@@ -1,6 +1,7 @@
 import React from 'react';
 import {withDeleteProject} from '../api/interfaces/types.d';
 import ProjectsDelete from '../containers/projects.delete';
+import {Card, Empty} from 'antd';
 
 const ProjectsList = ({projects}) => {
 
@@ -9,8 +10,14 @@ const ProjectsList = ({projects}) => {
         console.log(payload);
     };
 
+    if (projects.length === 0) {
+        return (
+            <Empty/>
+        )
+    }
+
     return (
-        <div>
+        <Card>
             <ul>
                 {projects.map(project => {
                     return (
@@ -23,7 +30,7 @@ const ProjectsList = ({projects}) => {
                     )
                 })}
             </ul>
-        </div>
+        </Card>
     )
 };
 

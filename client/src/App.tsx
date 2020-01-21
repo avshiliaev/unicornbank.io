@@ -38,7 +38,7 @@ const App: React.FC = () => {
     return (
         <Layout>
             <Layout>
-                <Content style={{margin: '24px 16px 0'}}>
+                <Content style={{margin: '24px 16px 0', height: '100vh'}}>
                     <ApolloProvider client={client}>
                         <Pages/>
                     </ApolloProvider>
