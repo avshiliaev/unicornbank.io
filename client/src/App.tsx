@@ -6,6 +6,7 @@ import {ApolloProvider} from '@apollo/react-common';
 import Pages from './pages';
 import './App.css';
 import {BreakpointProvider} from './providers/breakpoint.provider';
+import {useMedia} from 'react-use-media';
 
 /**
  * Updating cache strategies:
@@ -21,17 +22,15 @@ const client = new ApolloClient({
     }),
 });
 
-const queries = {
-    small: '(max-width: 320px)',
-    medium: '(max-width: 720px)',
-    large: '(max-width: 1024px)',
-    portrait: '(orientation: portrait)', // we can check orientation also
-};
-
 const App: React.FC = () => {
+
+    const isWide = useMedia({
+        minWidth: 1000,
+    });
+
     return (
         <ApolloProvider client={client}>
-            <BreakpointProvider queries={queries}>
+            <BreakpointProvider queries={{small: !isWide}}>
                 <Pages/>
             </BreakpointProvider>
         </ApolloProvider>

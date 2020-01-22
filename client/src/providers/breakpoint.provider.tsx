@@ -1,13 +1,16 @@
 import React, {createContext, useContext, useEffect, useState} from 'react';
 
+interface Breakpoint {
+    small: boolean
+}
 
-const BreakpointContext = createContext({});
+const BreakpointContext = createContext<Breakpoint>({small: false});
 
 const BreakpointProvider = ({children, queries}) => {
-    const [queryMatch, setQueryMatch] = useState({});
+    const [queryMatch, setQueryMatch] = useState({small: false});
 
     useEffect(() => {
-        setQueryMatch({bla: 'bla'})
+        setQueryMatch(queries)
     }, [queries]);
 
     return (

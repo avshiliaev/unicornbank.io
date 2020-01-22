@@ -9,8 +9,6 @@ const ProjectsList = ({projects}) => {
 
     const breakpoints = useBreakpoint();
 
-    console.log(breakpoints);
-
     if (projects.length === 0) {
         return (
             <Empty/>
@@ -21,7 +19,7 @@ const ProjectsList = ({projects}) => {
 
     return (
         <List
-            itemLayout="horizontal"
+            itemLayout={breakpoints.small ? "vertical": 'horizontal'}
             dataSource={projectsList}
             renderItem={project => {
                 const link = `/projects/${project.id}`;
