@@ -34,7 +34,7 @@ const ProjectsList = ({projects}) => {
                         <List.Item.Meta
                             avatar={<Avatar>{ava}</Avatar>}
                             title={<a href={link}>{project.title}</a>}
-                            description={numberTasks}
+                            description={project.description}
                         />
                     </List.Item>
                 )

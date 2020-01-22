@@ -5,6 +5,7 @@ export const GET_PROJECTS = gql`
         queryProject{
             id
             title
+            description
             tasks {
                 id
             }
@@ -32,10 +33,11 @@ export const ADD_PROJECTS = gql`
             project {
                 id
                 title
+                description
                 tasks {
                     id
                 }
-                tags {
+                workers {
                     id
                 }
                 __typename
