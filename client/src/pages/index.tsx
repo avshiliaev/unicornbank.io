@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react';
 import {RouteComponentProps, Router} from '@reach/router';
 import ProjectsPage from './projects.page';
-const ProjectDetail = props => <h2>{props.id}</h2>;
+import ProjectDetail from './project.detail.page';
+
 const Pages = () => {
     const RouterPage = (
       props: { pageComponent: JSX.Element } & RouteComponentProps

@@ -11,7 +11,7 @@ import './App.css';
  * https://youtu.be/lQ7t20gFR14
  */
 const cache = new InMemoryCache({
-    addTypename: true,
+    addTypename: true, // default
 });
 const client = new ApolloClient({
     cache,

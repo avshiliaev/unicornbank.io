@@ -8,7 +8,7 @@ export const GET_PROJECTS = gql`
             tasks {
                 id
             }
-            tags {
+            workers {
                 id
             }
             __typename

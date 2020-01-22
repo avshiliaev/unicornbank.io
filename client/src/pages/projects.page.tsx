@@ -1,15 +1,15 @@
 import React from 'react';
 import {Col, Layout, Menu, Row} from 'antd';
-import ProjectsQuery from '../containers/projects.query';
-import {WrappedProjectsAdd} from '../containers/projects.add';
+import ProjectsQuery from '../containers/projects/projects.query';
+import {WrappedProjectsAdd} from '../containers/projects/projects.add';
 
 const {Header, Content, Footer} = Layout;
 
 const ProjectsOverviewHeader = () => {
     return (
-        <Header>
+        <Header style={{background: '#fff'}}>
             <Menu
-                theme="dark"
+                theme="light"
                 mode="horizontal"
                 defaultSelectedKeys={['1']}
                 style={{lineHeight: '64px'}}
@@ -27,7 +27,7 @@ const ProjectsOverviewContent = () => {
             <Row>
                 <Col span={8}>
                     <div style={
-                        {background: '#fff', padding: 24, minHeight: 280}
+                        {background: '#fff', padding: 24, minHeight: 100}
                     }>
                         <WrappedProjectsAdd/>
                     </div>
