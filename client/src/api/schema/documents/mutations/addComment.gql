@@ -7,6 +7,7 @@ mutation addComment($filter: TagFilter, $order: TagOrder, $first: Int, $offset: 
                 project(filter: $filter4){
                     id
                     title
+                    description
                     tags(filter: $filter, order: $order, first: $first, offset: $offset){
                         id
                         title
@@ -55,6 +56,7 @@ mutation addComment($filter: TagFilter, $order: TagOrder, $first: Int, $offset: 
                     project(filter: $filter8){
                         id
                         title
+                        description
                     }
                     name
                     availability
@@ -97,6 +99,7 @@ mutation addComment($filter: TagFilter, $order: TagOrder, $first: Int, $offset: 
                     project(filter: $filter14){
                         id
                         title
+                        description
                     }
                     name
                     availability
@@ -153,6 +156,7 @@ mutation addComment($filter: TagFilter, $order: TagOrder, $first: Int, $offset: 
                 project(filter: $filter24){
                     id
                     title
+                    description
                 }
                 name
                 availability
@@ -182,6 +186,7 @@ mutation addComment($filter: TagFilter, $order: TagOrder, $first: Int, $offset: 
                     project(filter: $filter28){
                         id
                         title
+                        description
                     }
                     workers(filter: $filter29, order: $order16, first: $first16, offset: $offset16){
                         id
@@ -194,6 +199,7 @@ mutation addComment($filter: TagFilter, $order: TagOrder, $first: Int, $offset: 
                     project(filter: $filter31){
                         id
                         title
+                        description
                     }
                     column(filter: $filter32){
                         id
@@ -225,6 +231,7 @@ mutation addComment($filter: TagFilter, $order: TagOrder, $first: Int, $offset: 
                     project(filter: $filter37){
                         id
                         title
+                        description
                     }
                     column(filter: $filter38){
                         id

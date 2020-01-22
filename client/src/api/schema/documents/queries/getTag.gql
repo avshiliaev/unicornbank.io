@@ -5,12 +5,14 @@ query getTag($filter: TaskFilter, $order: TaskOrder, $first: Int, $offset: Int, 
         project(filter: $filter11){
             id
             title
+            description
             tags(filter: $filter10, order: $order7, first: $first7, offset: $offset7){
                 id
                 title
                 project(filter: $filter3){
                     id
                     title
+                    description
                     tasks(filter: $filter, order: $order, first: $first, offset: $offset){
                         id
                         title
@@ -36,6 +38,7 @@ query getTag($filter: TaskFilter, $order: TaskOrder, $first: Int, $offset: Int, 
                     project(filter: $filter4){
                         id
                         title
+                        description
                     }
                     name
                     availability

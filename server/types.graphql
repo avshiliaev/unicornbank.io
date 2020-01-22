@@ -67,6 +67,7 @@ type User {
 type Project {
     id: ID!
     title: String! @search(by: [hash])
+    description: String!
     tags: [Tag] @hasInverse(field: project)
     tasks: [Task] @hasInverse(field: project)
     boards: [Board] @hasInverse(field: project)

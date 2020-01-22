@@ -4,12 +4,14 @@ query queryWorker($filter: TaskFilter, $order: TaskOrder, $first: Int, $offset: 
         project(filter: $filter11){
             id
             title
+            description
             tags(filter: $filter10, order: $order7, first: $first7, offset: $offset7){
                 id
                 title
                 project(filter: $filter3){
                     id
                     title
+                    description
                     tasks(filter: $filter, order: $order, first: $first, offset: $offset){
                         id
                         title
@@ -35,6 +37,7 @@ query queryWorker($filter: TaskFilter, $order: TaskOrder, $first: Int, $offset: 
                     project(filter: $filter4){
                         id
                         title
+                        description
                     }
                     name
                     availability
@@ -81,6 +84,7 @@ query queryWorker($filter: TaskFilter, $order: TaskOrder, $first: Int, $offset: 
                 project(filter: $filter12){
                     id
                     title
+                    description
                 }
                 name
                 availability
@@ -108,6 +112,7 @@ query queryWorker($filter: TaskFilter, $order: TaskOrder, $first: Int, $offset: 
                     project(filter: $filter16){
                         id
                         title
+                        description
                     }
                     column(filter: $filter17){
                         id
@@ -139,6 +144,7 @@ query queryWorker($filter: TaskFilter, $order: TaskOrder, $first: Int, $offset: 
                     project(filter: $filter22){
                         id
                         title
+                        description
                     }
                     column(filter: $filter23){
                         id

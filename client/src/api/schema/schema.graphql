@@ -1,5 +1,5 @@
 # source: http://localhost:8080/graphql
-# timestamp: Fri Jan 17 2020 15:33:45 GMT+0100 (Central European Standard Time)
+# timestamp: Wed Jan 22 2020 10:43:01 GMT+0100 (Central European Standard Time)
 
 directive @hasInverse(field: String!) on FIELD_DEFINITION
 
@@ -42,6 +42,7 @@ type AddCommentPayload {
 
 input AddProjectInput {
   title: String!
+  description: String!
   tags: [TagRef]
   tasks: [TaskRef]
   boards: [BoardRef]
@@ -319,6 +320,7 @@ type Mutation {
 type Project {
   id: ID!
   title: String!
+  description: String!
   tags(filter: TagFilter, order: TagOrder, first: Int, offset: Int): [Tag]
   tasks(filter: TaskFilter, order: TaskOrder, first: Int, offset: Int): [Task]
   boards(filter: BoardFilter, order: BoardOrder, first: Int, offset: Int): [Board]
@@ -341,10 +343,12 @@ input ProjectOrder {
 
 enum ProjectOrderable {
   title
+  description
 }
 
 input ProjectPatch {
   title: String
+  description: String
   tags: [TagRef]
   tasks: [TaskRef]
   boards: [BoardRef]
@@ -354,6 +358,7 @@ input ProjectPatch {
 input ProjectRef {
   id: ID
   title: String
+  description: String
   tags: [TagRef]
   tasks: [TaskRef]
   boards: [BoardRef]

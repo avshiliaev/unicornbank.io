@@ -10,6 +10,7 @@ mutation addUser($filter: TagFilter, $order: TagOrder, $first: Int, $offset: Int
                 project(filter: $filter4){
                     id
                     title
+                    description
                     tags(filter: $filter, order: $order, first: $first, offset: $offset){
                         id
                         title
@@ -57,6 +58,7 @@ mutation addUser($filter: TagFilter, $order: TagOrder, $first: Int, $offset: Int
                     project(filter: $filter7){
                         id
                         title
+                        description
                     }
                     workers(filter: $filter8, order: $order5, first: $first5, offset: $offset5){
                         id
@@ -69,6 +71,7 @@ mutation addUser($filter: TagFilter, $order: TagOrder, $first: Int, $offset: Int
                     project(filter: $filter10){
                         id
                         title
+                        description
                     }
                     column(filter: $filter11){
                         id
@@ -100,6 +103,7 @@ mutation addUser($filter: TagFilter, $order: TagOrder, $first: Int, $offset: Int
                     project(filter: $filter16){
                         id
                         title
+                        description
                     }
                     column(filter: $filter17){
                         id

@@ -79,6 +79,7 @@ export type AddCommentPayloadCommentArgs = {
 
 export type AddProjectInput = {
   title: Scalars['String'],
+  description: Scalars['String'],
   tags?: Maybe<Array<Maybe<TagRef>>>,
   tasks?: Maybe<Array<Maybe<TaskRef>>>,
   boards?: Maybe<Array<Maybe<BoardRef>>>,
@@ -569,6 +570,7 @@ export type Project = {
    __typename?: 'Project',
   id: Scalars['ID'],
   title: Scalars['String'],
+  description: Scalars['String'],
   tags?: Maybe<Array<Maybe<Tag>>>,
   tasks?: Maybe<Array<Maybe<Task>>>,
   boards?: Maybe<Array<Maybe<Board>>>,
@@ -622,11 +624,13 @@ export type ProjectOrder = {
 };
 
 export enum ProjectOrderable {
-  Title = 'title'
+  Title = 'title',
+  Description = 'description'
 }
 
 export type ProjectPatch = {
   title?: Maybe<Scalars['String']>,
+  description?: Maybe<Scalars['String']>,
   tags?: Maybe<Array<Maybe<TagRef>>>,
   tasks?: Maybe<Array<Maybe<TaskRef>>>,
   boards?: Maybe<Array<Maybe<BoardRef>>>,
@@ -636,6 +640,7 @@ export type ProjectPatch = {
 export type ProjectRef = {
   id?: Maybe<Scalars['ID']>,
   title?: Maybe<Scalars['String']>,
+  description?: Maybe<Scalars['String']>,
   tags?: Maybe<Array<Maybe<TagRef>>>,
   tasks?: Maybe<Array<Maybe<TaskRef>>>,
   boards?: Maybe<Array<Maybe<BoardRef>>>,
@@ -1325,13 +1330,13 @@ export type AddBoardMutation = (
       & Pick<Board, 'id' | 'title' | 'order'>
       & { project: (
         { __typename?: 'Project' }
-        & Pick<Project, 'id' | 'title'>
+        & Pick<Project, 'id' | 'title' | 'description'>
         & { tags: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), workers: Maybe<Array<Maybe<(
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
@@ -1341,7 +1346,7 @@ export type AddBoardMutation = (
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), column: (
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -1360,7 +1365,7 @@ export type AddBoardMutation = (
           & Pick<Board, 'id' | 'title' | 'order'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), columns: Maybe<Array<Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -1370,7 +1375,7 @@ export type AddBoardMutation = (
           & Pick<Worker, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), user: (
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
@@ -1496,7 +1501,7 @@ export type AddColumnMutation = (
         & Pick<Board, 'id' | 'title' | 'order'>
         & { project: (
           { __typename?: 'Project' }
-          & Pick<Project, 'id' | 'title'>
+          & Pick<Project, 'id' | 'title' | 'description'>
           & { tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
@@ -1526,7 +1531,7 @@ export type AddColumnMutation = (
         & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
         & { project: (
           { __typename?: 'Project' }
-          & Pick<Project, 'id' | 'title'>
+          & Pick<Project, 'id' | 'title' | 'description'>
         ), column: (
           { __typename?: 'Column' }
           & Pick<Column, 'id' | 'title'>
@@ -1535,7 +1540,7 @@ export type AddColumnMutation = (
           & Pick<Worker, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), user: (
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
@@ -1554,7 +1559,7 @@ export type AddColumnMutation = (
           & Pick<Worker, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), user: (
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
@@ -1727,7 +1732,7 @@ export type AddCommentMutation = (
         & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
         & { project: (
           { __typename?: 'Project' }
-          & Pick<Project, 'id' | 'title'>
+          & Pick<Project, 'id' | 'title' | 'description'>
           & { tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
@@ -1756,7 +1761,7 @@ export type AddCommentMutation = (
           & Pick<Worker, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), user: (
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
@@ -1775,7 +1780,7 @@ export type AddCommentMutation = (
           & Pick<Worker, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), user: (
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
@@ -1805,7 +1810,7 @@ export type AddCommentMutation = (
         & Pick<Worker, 'id' | 'name' | 'availability'>
         & { project: (
           { __typename?: 'Project' }
-          & Pick<Project, 'id' | 'title'>
+          & Pick<Project, 'id' | 'title' | 'description'>
         ), user: (
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
@@ -1821,7 +1826,7 @@ export type AddCommentMutation = (
           & Pick<Tag, 'id' | 'title'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), workers: Maybe<Array<Maybe<(
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
@@ -1831,7 +1836,7 @@ export type AddCommentMutation = (
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), column: (
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -1850,7 +1855,7 @@ export type AddCommentMutation = (
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), column: (
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -1920,13 +1925,13 @@ export type AddProjectMutation = (
     { __typename?: 'AddProjectPayload' }
     & { project: Maybe<Array<Maybe<(
       { __typename?: 'Project' }
-      & Pick<Project, 'id' | 'title'>
+      & Pick<Project, 'id' | 'title' | 'description'>
       & { tags: Maybe<Array<Maybe<(
         { __typename?: 'Tag' }
         & Pick<Tag, 'id' | 'title'>
         & { project: (
           { __typename?: 'Project' }
-          & Pick<Project, 'id' | 'title'>
+          & Pick<Project, 'id' | 'title' | 'description'>
           & { tasks: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
@@ -1942,7 +1947,7 @@ export type AddProjectMutation = (
           & Pick<Worker, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), user: (
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
@@ -2039,13 +2044,13 @@ export type AddTagMutation = (
       & Pick<Tag, 'id' | 'title'>
       & { project: (
         { __typename?: 'Project' }
-        & Pick<Project, 'id' | 'title'>
+        & Pick<Project, 'id' | 'title' | 'description'>
         & { tags: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), workers: Maybe<Array<Maybe<(
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
@@ -2055,7 +2060,7 @@ export type AddTagMutation = (
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), column: (
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -2074,7 +2079,7 @@ export type AddTagMutation = (
           & Pick<Board, 'id' | 'title' | 'order'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), columns: Maybe<Array<Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -2084,7 +2089,7 @@ export type AddTagMutation = (
           & Pick<Worker, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), user: (
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
@@ -2255,13 +2260,13 @@ export type AddTaskMutation = (
       & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
       & { project: (
         { __typename?: 'Project' }
-        & Pick<Project, 'id' | 'title'>
+        & Pick<Project, 'id' | 'title' | 'description'>
         & { tags: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), workers: Maybe<Array<Maybe<(
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
@@ -2271,7 +2276,7 @@ export type AddTaskMutation = (
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), column: (
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -2290,7 +2295,7 @@ export type AddTaskMutation = (
           & Pick<Board, 'id' | 'title' | 'order'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), columns: Maybe<Array<Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -2300,7 +2305,7 @@ export type AddTaskMutation = (
           & Pick<Worker, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), user: (
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
@@ -2323,7 +2328,7 @@ export type AddTaskMutation = (
           & Pick<Board, 'id' | 'title' | 'order'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), columns: Maybe<Array<Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -2340,7 +2345,7 @@ export type AddTaskMutation = (
         & Pick<Worker, 'id' | 'name' | 'availability'>
         & { project: (
           { __typename?: 'Project' }
-          & Pick<Project, 'id' | 'title'>
+          & Pick<Project, 'id' | 'title' | 'description'>
         ), user: (
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
@@ -2362,7 +2367,7 @@ export type AddTaskMutation = (
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), column: (
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -2388,7 +2393,7 @@ export type AddTaskMutation = (
           & Pick<Worker, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), user: (
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
@@ -2500,7 +2505,7 @@ export type AddUserMutation = (
         & Pick<Worker, 'id' | 'name' | 'availability'>
         & { project: (
           { __typename?: 'Project' }
-          & Pick<Project, 'id' | 'title'>
+          & Pick<Project, 'id' | 'title' | 'description'>
           & { tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
@@ -2526,7 +2531,7 @@ export type AddUserMutation = (
           & Pick<Tag, 'id' | 'title'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), workers: Maybe<Array<Maybe<(
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
@@ -2536,7 +2541,7 @@ export type AddUserMutation = (
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), column: (
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -2555,7 +2560,7 @@ export type AddUserMutation = (
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), column: (
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -2732,13 +2737,13 @@ export type AddWorkerMutation = (
       & Pick<Worker, 'id' | 'name' | 'availability'>
       & { project: (
         { __typename?: 'Project' }
-        & Pick<Project, 'id' | 'title'>
+        & Pick<Project, 'id' | 'title' | 'description'>
         & { tags: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), workers: Maybe<Array<Maybe<(
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
@@ -2748,7 +2753,7 @@ export type AddWorkerMutation = (
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), column: (
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -2767,7 +2772,7 @@ export type AddWorkerMutation = (
           & Pick<Board, 'id' | 'title' | 'order'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), columns: Maybe<Array<Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -2777,7 +2782,7 @@ export type AddWorkerMutation = (
           & Pick<Worker, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), user: (
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
@@ -2800,7 +2805,7 @@ export type AddWorkerMutation = (
           & Pick<Worker, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), user: (
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
@@ -2819,7 +2824,7 @@ export type AddWorkerMutation = (
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), column: (
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -2845,7 +2850,7 @@ export type AddWorkerMutation = (
         & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
         & { project: (
           { __typename?: 'Project' }
-          & Pick<Project, 'id' | 'title'>
+          & Pick<Project, 'id' | 'title' | 'description'>
         ), column: (
           { __typename?: 'Column' }
           & Pick<Column, 'id' | 'title'>
@@ -2864,7 +2869,7 @@ export type AddWorkerMutation = (
           & Pick<Worker, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), user: (
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
@@ -3080,13 +3085,13 @@ export type UpdateBoardMutation = (
       & Pick<Board, 'id' | 'title' | 'order'>
       & { project: (
         { __typename?: 'Project' }
-        & Pick<Project, 'id' | 'title'>
+        & Pick<Project, 'id' | 'title' | 'description'>
         & { tags: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), workers: Maybe<Array<Maybe<(
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
@@ -3096,7 +3101,7 @@ export type UpdateBoardMutation = (
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), column: (
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -3115,7 +3120,7 @@ export type UpdateBoardMutation = (
           & Pick<Board, 'id' | 'title' | 'order'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), columns: Maybe<Array<Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -3125,7 +3130,7 @@ export type UpdateBoardMutation = (
           & Pick<Worker, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), user: (
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
@@ -3251,7 +3256,7 @@ export type UpdateColumnMutation = (
         & Pick<Board, 'id' | 'title' | 'order'>
         & { project: (
           { __typename?: 'Project' }
-          & Pick<Project, 'id' | 'title'>
+          & Pick<Project, 'id' | 'title' | 'description'>
           & { tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
@@ -3281,7 +3286,7 @@ export type UpdateColumnMutation = (
         & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
         & { project: (
           { __typename?: 'Project' }
-          & Pick<Project, 'id' | 'title'>
+          & Pick<Project, 'id' | 'title' | 'description'>
         ), column: (
           { __typename?: 'Column' }
           & Pick<Column, 'id' | 'title'>
@@ -3290,7 +3295,7 @@ export type UpdateColumnMutation = (
           & Pick<Worker, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), user: (
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
@@ -3309,7 +3314,7 @@ export type UpdateColumnMutation = (
           & Pick<Worker, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), user: (
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
@@ -3482,7 +3487,7 @@ export type UpdateCommentMutation = (
         & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
         & { project: (
           { __typename?: 'Project' }
-          & Pick<Project, 'id' | 'title'>
+          & Pick<Project, 'id' | 'title' | 'description'>
           & { tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
@@ -3511,7 +3516,7 @@ export type UpdateCommentMutation = (
           & Pick<Worker, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), user: (
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
@@ -3530,7 +3535,7 @@ export type UpdateCommentMutation = (
           & Pick<Worker, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), user: (
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
@@ -3560,7 +3565,7 @@ export type UpdateCommentMutation = (
         & Pick<Worker, 'id' | 'name' | 'availability'>
         & { project: (
           { __typename?: 'Project' }
-          & Pick<Project, 'id' | 'title'>
+          & Pick<Project, 'id' | 'title' | 'description'>
         ), user: (
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
@@ -3576,7 +3581,7 @@ export type UpdateCommentMutation = (
           & Pick<Tag, 'id' | 'title'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), workers: Maybe<Array<Maybe<(
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
@@ -3586,7 +3591,7 @@ export type UpdateCommentMutation = (
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), column: (
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -3605,7 +3610,7 @@ export type UpdateCommentMutation = (
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), column: (
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -3675,13 +3680,13 @@ export type UpdateProjectMutation = (
     { __typename?: 'UpdateProjectPayload' }
     & { project: Maybe<Array<Maybe<(
       { __typename?: 'Project' }
-      & Pick<Project, 'id' | 'title'>
+      & Pick<Project, 'id' | 'title' | 'description'>
       & { tags: Maybe<Array<Maybe<(
         { __typename?: 'Tag' }
         & Pick<Tag, 'id' | 'title'>
         & { project: (
           { __typename?: 'Project' }
-          & Pick<Project, 'id' | 'title'>
+          & Pick<Project, 'id' | 'title' | 'description'>
           & { tasks: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
@@ -3697,7 +3702,7 @@ export type UpdateProjectMutation = (
           & Pick<Worker, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), user: (
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
@@ -3794,13 +3799,13 @@ export type UpdateTagMutation = (
       & Pick<Tag, 'id' | 'title'>
       & { project: (
         { __typename?: 'Project' }
-        & Pick<Project, 'id' | 'title'>
+        & Pick<Project, 'id' | 'title' | 'description'>
         & { tags: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), workers: Maybe<Array<Maybe<(
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
@@ -3810,7 +3815,7 @@ export type UpdateTagMutation = (
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), column: (
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -3829,7 +3834,7 @@ export type UpdateTagMutation = (
           & Pick<Board, 'id' | 'title' | 'order'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), columns: Maybe<Array<Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -3839,7 +3844,7 @@ export type UpdateTagMutation = (
           & Pick<Worker, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), user: (
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
@@ -4010,13 +4015,13 @@ export type UpdateTaskMutation = (
       & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
       & { project: (
         { __typename?: 'Project' }
-        & Pick<Project, 'id' | 'title'>
+        & Pick<Project, 'id' | 'title' | 'description'>
         & { tags: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), workers: Maybe<Array<Maybe<(
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
@@ -4026,7 +4031,7 @@ export type UpdateTaskMutation = (
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), column: (
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -4045,7 +4050,7 @@ export type UpdateTaskMutation = (
           & Pick<Board, 'id' | 'title' | 'order'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), columns: Maybe<Array<Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -4055,7 +4060,7 @@ export type UpdateTaskMutation = (
           & Pick<Worker, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), user: (
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
@@ -4078,7 +4083,7 @@ export type UpdateTaskMutation = (
           & Pick<Board, 'id' | 'title' | 'order'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), columns: Maybe<Array<Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -4095,7 +4100,7 @@ export type UpdateTaskMutation = (
         & Pick<Worker, 'id' | 'name' | 'availability'>
         & { project: (
           { __typename?: 'Project' }
-          & Pick<Project, 'id' | 'title'>
+          & Pick<Project, 'id' | 'title' | 'description'>
         ), user: (
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
@@ -4117,7 +4122,7 @@ export type UpdateTaskMutation = (
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), column: (
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -4143,7 +4148,7 @@ export type UpdateTaskMutation = (
           & Pick<Worker, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), user: (
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
@@ -4255,7 +4260,7 @@ export type UpdateUserMutation = (
         & Pick<Worker, 'id' | 'name' | 'availability'>
         & { project: (
           { __typename?: 'Project' }
-          & Pick<Project, 'id' | 'title'>
+          & Pick<Project, 'id' | 'title' | 'description'>
           & { tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
@@ -4281,7 +4286,7 @@ export type UpdateUserMutation = (
           & Pick<Tag, 'id' | 'title'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), workers: Maybe<Array<Maybe<(
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
@@ -4291,7 +4296,7 @@ export type UpdateUserMutation = (
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), column: (
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -4310,7 +4315,7 @@ export type UpdateUserMutation = (
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), column: (
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -4487,13 +4492,13 @@ export type UpdateWorkerMutation = (
       & Pick<Worker, 'id' | 'name' | 'availability'>
       & { project: (
         { __typename?: 'Project' }
-        & Pick<Project, 'id' | 'title'>
+        & Pick<Project, 'id' | 'title' | 'description'>
         & { tags: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), workers: Maybe<Array<Maybe<(
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
@@ -4503,7 +4508,7 @@ export type UpdateWorkerMutation = (
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), column: (
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -4522,7 +4527,7 @@ export type UpdateWorkerMutation = (
           & Pick<Board, 'id' | 'title' | 'order'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), columns: Maybe<Array<Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -4532,7 +4537,7 @@ export type UpdateWorkerMutation = (
           & Pick<Worker, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), user: (
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
@@ -4555,7 +4560,7 @@ export type UpdateWorkerMutation = (
           & Pick<Worker, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), user: (
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
@@ -4574,7 +4579,7 @@ export type UpdateWorkerMutation = (
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), column: (
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -4600,7 +4605,7 @@ export type UpdateWorkerMutation = (
         & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
         & { project: (
           { __typename?: 'Project' }
-          & Pick<Project, 'id' | 'title'>
+          & Pick<Project, 'id' | 'title' | 'description'>
         ), column: (
           { __typename?: 'Column' }
           & Pick<Column, 'id' | 'title'>
@@ -4619,7 +4624,7 @@ export type UpdateWorkerMutation = (
           & Pick<Worker, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), user: (
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
@@ -4711,13 +4716,13 @@ export type GetBoardQuery = (
     & Pick<Board, 'id' | 'title' | 'order'>
     & { project: (
       { __typename?: 'Project' }
-      & Pick<Project, 'id' | 'title'>
+      & Pick<Project, 'id' | 'title' | 'description'>
       & { tags: Maybe<Array<Maybe<(
         { __typename?: 'Tag' }
         & Pick<Tag, 'id' | 'title'>
         & { project: (
           { __typename?: 'Project' }
-          & Pick<Project, 'id' | 'title'>
+          & Pick<Project, 'id' | 'title' | 'description'>
           & { tasks: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
@@ -4733,7 +4738,7 @@ export type GetBoardQuery = (
           & Pick<Worker, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), user: (
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
@@ -4757,7 +4762,7 @@ export type GetBoardQuery = (
         & Pick<Board, 'id' | 'title' | 'order'>
         & { project: (
           { __typename?: 'Project' }
-          & Pick<Project, 'id' | 'title'>
+          & Pick<Project, 'id' | 'title' | 'description'>
         ), columns: Maybe<Array<Maybe<(
           { __typename?: 'Column' }
           & Pick<Column, 'id' | 'title'>
@@ -4855,13 +4860,13 @@ export type GetColumnQuery = (
       & Pick<Board, 'id' | 'title' | 'order'>
       & { project: (
         { __typename?: 'Project' }
-        & Pick<Project, 'id' | 'title'>
+        & Pick<Project, 'id' | 'title' | 'description'>
         & { tags: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), workers: Maybe<Array<Maybe<(
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
@@ -4871,7 +4876,7 @@ export type GetColumnQuery = (
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), column: (
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -4890,7 +4895,7 @@ export type GetColumnQuery = (
           & Pick<Board, 'id' | 'title' | 'order'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), columns: Maybe<Array<Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -4900,7 +4905,7 @@ export type GetColumnQuery = (
           & Pick<Worker, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), user: (
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
@@ -5080,13 +5085,13 @@ export type GetCommentQuery = (
       & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
       & { project: (
         { __typename?: 'Project' }
-        & Pick<Project, 'id' | 'title'>
+        & Pick<Project, 'id' | 'title' | 'description'>
         & { tags: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), workers: Maybe<Array<Maybe<(
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
@@ -5096,7 +5101,7 @@ export type GetCommentQuery = (
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), column: (
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -5115,7 +5120,7 @@ export type GetCommentQuery = (
           & Pick<Board, 'id' | 'title' | 'order'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), columns: Maybe<Array<Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -5125,7 +5130,7 @@ export type GetCommentQuery = (
           & Pick<Worker, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), user: (
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
@@ -5148,7 +5153,7 @@ export type GetCommentQuery = (
           & Pick<Board, 'id' | 'title' | 'order'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), columns: Maybe<Array<Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -5165,7 +5170,7 @@ export type GetCommentQuery = (
         & Pick<Worker, 'id' | 'name' | 'availability'>
         & { project: (
           { __typename?: 'Project' }
-          & Pick<Project, 'id' | 'title'>
+          & Pick<Project, 'id' | 'title' | 'description'>
         ), user: (
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
@@ -5187,7 +5192,7 @@ export type GetCommentQuery = (
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), column: (
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -5213,7 +5218,7 @@ export type GetCommentQuery = (
           & Pick<Worker, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), user: (
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
@@ -5315,13 +5320,13 @@ export type GetProjectQuery = (
   { __typename?: 'Query' }
   & { getProject: Maybe<(
     { __typename?: 'Project' }
-    & Pick<Project, 'id' | 'title'>
+    & Pick<Project, 'id' | 'title' | 'description'>
     & { tags: Maybe<Array<Maybe<(
       { __typename?: 'Tag' }
       & Pick<Tag, 'id' | 'title'>
       & { project: (
         { __typename?: 'Project' }
-        & Pick<Project, 'id' | 'title'>
+        & Pick<Project, 'id' | 'title' | 'description'>
         & { tags: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
@@ -5334,7 +5339,7 @@ export type GetProjectQuery = (
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), column: (
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -5353,7 +5358,7 @@ export type GetProjectQuery = (
           & Pick<Board, 'id' | 'title' | 'order'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), columns: Maybe<Array<Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -5363,7 +5368,7 @@ export type GetProjectQuery = (
           & Pick<Worker, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), user: (
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
@@ -5444,13 +5449,13 @@ export type GetTagQuery = (
     & Pick<Tag, 'id' | 'title'>
     & { project: (
       { __typename?: 'Project' }
-      & Pick<Project, 'id' | 'title'>
+      & Pick<Project, 'id' | 'title' | 'description'>
       & { tags: Maybe<Array<Maybe<(
         { __typename?: 'Tag' }
         & Pick<Tag, 'id' | 'title'>
         & { project: (
           { __typename?: 'Project' }
-          & Pick<Project, 'id' | 'title'>
+          & Pick<Project, 'id' | 'title' | 'description'>
           & { tasks: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
@@ -5466,7 +5471,7 @@ export type GetTagQuery = (
           & Pick<Worker, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), user: (
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
@@ -5595,13 +5600,13 @@ export type GetTaskQuery = (
     & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
     & { project: (
       { __typename?: 'Project' }
-      & Pick<Project, 'id' | 'title'>
+      & Pick<Project, 'id' | 'title' | 'description'>
       & { tags: Maybe<Array<Maybe<(
         { __typename?: 'Tag' }
         & Pick<Tag, 'id' | 'title'>
         & { project: (
           { __typename?: 'Project' }
-          & Pick<Project, 'id' | 'title'>
+          & Pick<Project, 'id' | 'title' | 'description'>
           & { tasks: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
@@ -5617,7 +5622,7 @@ export type GetTaskQuery = (
           & Pick<Worker, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), user: (
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
@@ -5641,7 +5646,7 @@ export type GetTaskQuery = (
         & Pick<Board, 'id' | 'title' | 'order'>
         & { project: (
           { __typename?: 'Project' }
-          & Pick<Project, 'id' | 'title'>
+          & Pick<Project, 'id' | 'title' | 'description'>
         ), columns: Maybe<Array<Maybe<(
           { __typename?: 'Column' }
           & Pick<Column, 'id' | 'title'>
@@ -5658,7 +5663,7 @@ export type GetTaskQuery = (
         & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
         & { project: (
           { __typename?: 'Project' }
-          & Pick<Project, 'id' | 'title'>
+          & Pick<Project, 'id' | 'title' | 'description'>
         ), column: (
           { __typename?: 'Column' }
           & Pick<Column, 'id' | 'title'>
@@ -5670,7 +5675,7 @@ export type GetTaskQuery = (
           & Pick<Worker, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), user: (
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
@@ -5822,13 +5827,13 @@ export type GetUserQuery = (
       & Pick<Worker, 'id' | 'name' | 'availability'>
       & { project: (
         { __typename?: 'Project' }
-        & Pick<Project, 'id' | 'title'>
+        & Pick<Project, 'id' | 'title' | 'description'>
         & { tags: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), workers: Maybe<Array<Maybe<(
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
@@ -5838,7 +5843,7 @@ export type GetUserQuery = (
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), column: (
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -5857,7 +5862,7 @@ export type GetUserQuery = (
           & Pick<Board, 'id' | 'title' | 'order'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), columns: Maybe<Array<Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -5867,7 +5872,7 @@ export type GetUserQuery = (
           & Pick<Worker, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), user: (
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
@@ -5903,7 +5908,7 @@ export type GetUserQuery = (
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), column: (
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -6037,13 +6042,13 @@ export type GetWorkerQuery = (
     & Pick<Worker, 'id' | 'name' | 'availability'>
     & { project: (
       { __typename?: 'Project' }
-      & Pick<Project, 'id' | 'title'>
+      & Pick<Project, 'id' | 'title' | 'description'>
       & { tags: Maybe<Array<Maybe<(
         { __typename?: 'Tag' }
         & Pick<Tag, 'id' | 'title'>
         & { project: (
           { __typename?: 'Project' }
-          & Pick<Project, 'id' | 'title'>
+          & Pick<Project, 'id' | 'title' | 'description'>
           & { tasks: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
@@ -6059,7 +6064,7 @@ export type GetWorkerQuery = (
           & Pick<Worker, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), user: (
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
@@ -6083,7 +6088,7 @@ export type GetWorkerQuery = (
         & Pick<Worker, 'id' | 'name' | 'availability'>
         & { project: (
           { __typename?: 'Project' }
-          & Pick<Project, 'id' | 'title'>
+          & Pick<Project, 'id' | 'title' | 'description'>
         ), user: (
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
@@ -6099,7 +6104,7 @@ export type GetWorkerQuery = (
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), column: (
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -6118,7 +6123,7 @@ export type GetWorkerQuery = (
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), column: (
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -6212,13 +6217,13 @@ export type QueryBoardQuery = (
     & Pick<Board, 'id' | 'title' | 'order'>
     & { project: (
       { __typename?: 'Project' }
-      & Pick<Project, 'id' | 'title'>
+      & Pick<Project, 'id' | 'title' | 'description'>
       & { tags: Maybe<Array<Maybe<(
         { __typename?: 'Tag' }
         & Pick<Tag, 'id' | 'title'>
         & { project: (
           { __typename?: 'Project' }
-          & Pick<Project, 'id' | 'title'>
+          & Pick<Project, 'id' | 'title' | 'description'>
           & { tasks: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
@@ -6234,7 +6239,7 @@ export type QueryBoardQuery = (
           & Pick<Worker, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), user: (
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
@@ -6258,7 +6263,7 @@ export type QueryBoardQuery = (
         & Pick<Board, 'id' | 'title' | 'order'>
         & { project: (
           { __typename?: 'Project' }
-          & Pick<Project, 'id' | 'title'>
+          & Pick<Project, 'id' | 'title' | 'description'>
         ), columns: Maybe<Array<Maybe<(
           { __typename?: 'Column' }
           & Pick<Column, 'id' | 'title'>
@@ -6359,13 +6364,13 @@ export type QueryColumnQuery = (
       & Pick<Board, 'id' | 'title' | 'order'>
       & { project: (
         { __typename?: 'Project' }
-        & Pick<Project, 'id' | 'title'>
+        & Pick<Project, 'id' | 'title' | 'description'>
         & { tags: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), workers: Maybe<Array<Maybe<(
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
@@ -6375,7 +6380,7 @@ export type QueryColumnQuery = (
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), column: (
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -6394,7 +6399,7 @@ export type QueryColumnQuery = (
           & Pick<Board, 'id' | 'title' | 'order'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), columns: Maybe<Array<Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -6404,7 +6409,7 @@ export type QueryColumnQuery = (
           & Pick<Worker, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), user: (
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
@@ -6587,13 +6592,13 @@ export type QueryCommentQuery = (
       & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
       & { project: (
         { __typename?: 'Project' }
-        & Pick<Project, 'id' | 'title'>
+        & Pick<Project, 'id' | 'title' | 'description'>
         & { tags: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), workers: Maybe<Array<Maybe<(
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
@@ -6603,7 +6608,7 @@ export type QueryCommentQuery = (
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), column: (
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -6622,7 +6627,7 @@ export type QueryCommentQuery = (
           & Pick<Board, 'id' | 'title' | 'order'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), columns: Maybe<Array<Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -6632,7 +6637,7 @@ export type QueryCommentQuery = (
           & Pick<Worker, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), user: (
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
@@ -6655,7 +6660,7 @@ export type QueryCommentQuery = (
           & Pick<Board, 'id' | 'title' | 'order'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), columns: Maybe<Array<Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -6672,7 +6677,7 @@ export type QueryCommentQuery = (
         & Pick<Worker, 'id' | 'name' | 'availability'>
         & { project: (
           { __typename?: 'Project' }
-          & Pick<Project, 'id' | 'title'>
+          & Pick<Project, 'id' | 'title' | 'description'>
         ), user: (
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
@@ -6694,7 +6699,7 @@ export type QueryCommentQuery = (
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), column: (
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -6720,7 +6725,7 @@ export type QueryCommentQuery = (
           & Pick<Worker, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), user: (
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
@@ -6825,13 +6830,13 @@ export type QueryProjectQuery = (
   { __typename?: 'Query' }
   & { queryProject: Maybe<Array<Maybe<(
     { __typename?: 'Project' }
-    & Pick<Project, 'id' | 'title'>
+    & Pick<Project, 'id' | 'title' | 'description'>
     & { tags: Maybe<Array<Maybe<(
       { __typename?: 'Tag' }
       & Pick<Tag, 'id' | 'title'>
       & { project: (
         { __typename?: 'Project' }
-        & Pick<Project, 'id' | 'title'>
+        & Pick<Project, 'id' | 'title' | 'description'>
         & { tags: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
@@ -6844,7 +6849,7 @@ export type QueryProjectQuery = (
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), column: (
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -6863,7 +6868,7 @@ export type QueryProjectQuery = (
           & Pick<Board, 'id' | 'title' | 'order'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), columns: Maybe<Array<Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -6873,7 +6878,7 @@ export type QueryProjectQuery = (
           & Pick<Worker, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), user: (
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
@@ -6957,13 +6962,13 @@ export type QueryTagQuery = (
     & Pick<Tag, 'id' | 'title'>
     & { project: (
       { __typename?: 'Project' }
-      & Pick<Project, 'id' | 'title'>
+      & Pick<Project, 'id' | 'title' | 'description'>
       & { tags: Maybe<Array<Maybe<(
         { __typename?: 'Tag' }
         & Pick<Tag, 'id' | 'title'>
         & { project: (
           { __typename?: 'Project' }
-          & Pick<Project, 'id' | 'title'>
+          & Pick<Project, 'id' | 'title' | 'description'>
           & { tasks: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
@@ -6979,7 +6984,7 @@ export type QueryTagQuery = (
           & Pick<Worker, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), user: (
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
@@ -7111,13 +7116,13 @@ export type QueryTaskQuery = (
     & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
     & { project: (
       { __typename?: 'Project' }
-      & Pick<Project, 'id' | 'title'>
+      & Pick<Project, 'id' | 'title' | 'description'>
       & { tags: Maybe<Array<Maybe<(
         { __typename?: 'Tag' }
         & Pick<Tag, 'id' | 'title'>
         & { project: (
           { __typename?: 'Project' }
-          & Pick<Project, 'id' | 'title'>
+          & Pick<Project, 'id' | 'title' | 'description'>
           & { tasks: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
@@ -7133,7 +7138,7 @@ export type QueryTaskQuery = (
           & Pick<Worker, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), user: (
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
@@ -7157,7 +7162,7 @@ export type QueryTaskQuery = (
         & Pick<Board, 'id' | 'title' | 'order'>
         & { project: (
           { __typename?: 'Project' }
-          & Pick<Project, 'id' | 'title'>
+          & Pick<Project, 'id' | 'title' | 'description'>
         ), columns: Maybe<Array<Maybe<(
           { __typename?: 'Column' }
           & Pick<Column, 'id' | 'title'>
@@ -7174,7 +7179,7 @@ export type QueryTaskQuery = (
         & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
         & { project: (
           { __typename?: 'Project' }
-          & Pick<Project, 'id' | 'title'>
+          & Pick<Project, 'id' | 'title' | 'description'>
         ), column: (
           { __typename?: 'Column' }
           & Pick<Column, 'id' | 'title'>
@@ -7186,7 +7191,7 @@ export type QueryTaskQuery = (
           & Pick<Worker, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), user: (
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
@@ -7341,13 +7346,13 @@ export type QueryUserQuery = (
       & Pick<Worker, 'id' | 'name' | 'availability'>
       & { project: (
         { __typename?: 'Project' }
-        & Pick<Project, 'id' | 'title'>
+        & Pick<Project, 'id' | 'title' | 'description'>
         & { tags: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), workers: Maybe<Array<Maybe<(
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
@@ -7357,7 +7362,7 @@ export type QueryUserQuery = (
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), column: (
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -7376,7 +7381,7 @@ export type QueryUserQuery = (
           & Pick<Board, 'id' | 'title' | 'order'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), columns: Maybe<Array<Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -7386,7 +7391,7 @@ export type QueryUserQuery = (
           & Pick<Worker, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), user: (
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
@@ -7422,7 +7427,7 @@ export type QueryUserQuery = (
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), column: (
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -7559,13 +7564,13 @@ export type QueryWorkerQuery = (
     & Pick<Worker, 'id' | 'name' | 'availability'>
     & { project: (
       { __typename?: 'Project' }
-      & Pick<Project, 'id' | 'title'>
+      & Pick<Project, 'id' | 'title' | 'description'>
       & { tags: Maybe<Array<Maybe<(
         { __typename?: 'Tag' }
         & Pick<Tag, 'id' | 'title'>
         & { project: (
           { __typename?: 'Project' }
-          & Pick<Project, 'id' | 'title'>
+          & Pick<Project, 'id' | 'title' | 'description'>
           & { tasks: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
@@ -7581,7 +7586,7 @@ export type QueryWorkerQuery = (
           & Pick<Worker, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), user: (
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
@@ -7605,7 +7610,7 @@ export type QueryWorkerQuery = (
         & Pick<Worker, 'id' | 'name' | 'availability'>
         & { project: (
           { __typename?: 'Project' }
-          & Pick<Project, 'id' | 'title'>
+          & Pick<Project, 'id' | 'title' | 'description'>
         ), user: (
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
@@ -7621,7 +7626,7 @@ export type QueryWorkerQuery = (
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), column: (
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -7640,7 +7645,7 @@ export type QueryWorkerQuery = (
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title'>
+            & Pick<Project, 'id' | 'title' | 'description'>
           ), column: (
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
@@ -7678,12 +7683,14 @@ export const AddBoardDocument = gql`
       project(filter: $filter18) {
         id
         title
+        description
         tags(filter: $filter2, order: $order1, first: $first1, offset: $offset1) {
           id
           title
           project(filter: $filter) {
             id
             title
+            description
           }
           workers(filter: $filter1, order: $order, first: $first, offset: $offset) {
             id
@@ -7696,6 +7703,7 @@ export const AddBoardDocument = gql`
           project(filter: $filter3) {
             id
             title
+            description
           }
           column(filter: $filter4) {
             id
@@ -7727,6 +7735,7 @@ export const AddBoardDocument = gql`
           project(filter: $filter9) {
             id
             title
+            description
           }
           title
           columns(filter: $filter10, order: $order6, first: $first6, offset: $offset6) {
@@ -7740,6 +7749,7 @@ export const AddBoardDocument = gql`
           project(filter: $filter12) {
             id
             title
+            description
           }
           name
           availability
@@ -7827,6 +7837,7 @@ export const AddColumnDocument = gql`
         project(filter: $filter4) {
           id
           title
+          description
           tags(filter: $filter, order: $order, first: $first, offset: $offset) {
             id
             title
@@ -7878,6 +7889,7 @@ export const AddColumnDocument = gql`
         project(filter: $filter9) {
           id
           title
+          description
         }
         column(filter: $filter10) {
           id
@@ -7889,6 +7901,7 @@ export const AddColumnDocument = gql`
           project(filter: $filter11) {
             id
             title
+            description
           }
           name
           availability
@@ -7931,6 +7944,7 @@ export const AddColumnDocument = gql`
           project(filter: $filter17) {
             id
             title
+            description
           }
           name
           availability
@@ -8016,6 +8030,7 @@ export const AddCommentDocument = gql`
         project(filter: $filter4) {
           id
           title
+          description
           tags(filter: $filter, order: $order, first: $first, offset: $offset) {
             id
             title
@@ -8064,6 +8079,7 @@ export const AddCommentDocument = gql`
           project(filter: $filter8) {
             id
             title
+            description
           }
           name
           availability
@@ -8106,6 +8122,7 @@ export const AddCommentDocument = gql`
           project(filter: $filter14) {
             id
             title
+            description
           }
           name
           availability
@@ -8162,6 +8179,7 @@ export const AddCommentDocument = gql`
         project(filter: $filter24) {
           id
           title
+          description
         }
         name
         availability
@@ -8191,6 +8209,7 @@ export const AddCommentDocument = gql`
           project(filter: $filter28) {
             id
             title
+            description
           }
           workers(filter: $filter29, order: $order16, first: $first16, offset: $offset16) {
             id
@@ -8203,6 +8222,7 @@ export const AddCommentDocument = gql`
           project(filter: $filter31) {
             id
             title
+            description
           }
           column(filter: $filter32) {
             id
@@ -8234,6 +8254,7 @@ export const AddCommentDocument = gql`
           project(filter: $filter37) {
             id
             title
+            description
           }
           column(filter: $filter38) {
             id
@@ -8292,12 +8313,14 @@ export const AddProjectDocument = gql`
     project(filter: $filter11, order: $order8, first: $first8, offset: $offset8) {
       id
       title
+      description
       tags(filter: $filter10, order: $order7, first: $first7, offset: $offset7) {
         id
         title
         project(filter: $filter3) {
           id
           title
+          description
           tasks(filter: $filter, order: $order, first: $first, offset: $offset) {
             id
             title
@@ -8323,6 +8346,7 @@ export const AddProjectDocument = gql`
           project(filter: $filter4) {
             id
             title
+            description
           }
           name
           availability
@@ -8389,12 +8413,14 @@ export const AddTagDocument = gql`
       project(filter: $filter18) {
         id
         title
+        description
         tags(filter: $filter2, order: $order1, first: $first1, offset: $offset1) {
           id
           title
           project(filter: $filter) {
             id
             title
+            description
           }
           workers(filter: $filter1, order: $order, first: $first, offset: $offset) {
             id
@@ -8407,6 +8433,7 @@ export const AddTagDocument = gql`
           project(filter: $filter3) {
             id
             title
+            description
           }
           column(filter: $filter4) {
             id
@@ -8438,6 +8465,7 @@ export const AddTagDocument = gql`
           project(filter: $filter9) {
             id
             title
+            description
           }
           title
           columns(filter: $filter10, order: $order6, first: $first6, offset: $offset6) {
@@ -8451,6 +8479,7 @@ export const AddTagDocument = gql`
           project(filter: $filter12) {
             id
             title
+            description
           }
           name
           availability
@@ -8521,12 +8550,14 @@ export const AddTaskDocument = gql`
       project(filter: $filter18) {
         id
         title
+        description
         tags(filter: $filter2, order: $order1, first: $first1, offset: $offset1) {
           id
           title
           project(filter: $filter) {
             id
             title
+            description
           }
           workers(filter: $filter1, order: $order, first: $first, offset: $offset) {
             id
@@ -8539,6 +8570,7 @@ export const AddTaskDocument = gql`
           project(filter: $filter3) {
             id
             title
+            description
           }
           column(filter: $filter4) {
             id
@@ -8570,6 +8602,7 @@ export const AddTaskDocument = gql`
           project(filter: $filter9) {
             id
             title
+            description
           }
           title
           columns(filter: $filter10, order: $order6, first: $first6, offset: $offset6) {
@@ -8583,6 +8616,7 @@ export const AddTaskDocument = gql`
           project(filter: $filter12) {
             id
             title
+            description
           }
           name
           availability
@@ -8623,6 +8657,7 @@ export const AddTaskDocument = gql`
           project(filter: $filter19) {
             id
             title
+            description
           }
           title
           columns(filter: $filter20, order: $order12, first: $first12, offset: $offset12) {
@@ -8658,6 +8693,7 @@ export const AddTaskDocument = gql`
         project(filter: $filter25) {
           id
           title
+          description
         }
         name
         availability
@@ -8699,6 +8735,7 @@ export const AddTaskDocument = gql`
           project(filter: $filter31) {
             id
             title
+            description
           }
           column(filter: $filter32) {
             id
@@ -8742,6 +8779,7 @@ export const AddTaskDocument = gql`
           project(filter: $filter39) {
             id
             title
+            description
           }
           name
           availability
@@ -8813,6 +8851,7 @@ export const AddUserDocument = gql`
         project(filter: $filter4) {
           id
           title
+          description
           tags(filter: $filter, order: $order, first: $first, offset: $offset) {
             id
             title
@@ -8860,6 +8899,7 @@ export const AddUserDocument = gql`
           project(filter: $filter7) {
             id
             title
+            description
           }
           workers(filter: $filter8, order: $order5, first: $first5, offset: $offset5) {
             id
@@ -8872,6 +8912,7 @@ export const AddUserDocument = gql`
           project(filter: $filter10) {
             id
             title
+            description
           }
           column(filter: $filter11) {
             id
@@ -8903,6 +8944,7 @@ export const AddUserDocument = gql`
           project(filter: $filter16) {
             id
             title
+            description
           }
           column(filter: $filter17) {
             id
@@ -8962,12 +9004,14 @@ export const AddWorkerDocument = gql`
       project(filter: $filter18) {
         id
         title
+        description
         tags(filter: $filter2, order: $order1, first: $first1, offset: $offset1) {
           id
           title
           project(filter: $filter) {
             id
             title
+            description
           }
           workers(filter: $filter1, order: $order, first: $first, offset: $offset) {
             id
@@ -8980,6 +9024,7 @@ export const AddWorkerDocument = gql`
           project(filter: $filter3) {
             id
             title
+            description
           }
           column(filter: $filter4) {
             id
@@ -9011,6 +9056,7 @@ export const AddWorkerDocument = gql`
           project(filter: $filter9) {
             id
             title
+            description
           }
           title
           columns(filter: $filter10, order: $order6, first: $first6, offset: $offset6) {
@@ -9024,6 +9070,7 @@ export const AddWorkerDocument = gql`
           project(filter: $filter12) {
             id
             title
+            description
           }
           name
           availability
@@ -9069,6 +9116,7 @@ export const AddWorkerDocument = gql`
           project(filter: $filter19) {
             id
             title
+            description
           }
           name
           availability
@@ -9106,6 +9154,7 @@ export const AddWorkerDocument = gql`
           project(filter: $filter25) {
             id
             title
+            description
           }
           column(filter: $filter26) {
             id
@@ -9151,6 +9200,7 @@ export const AddWorkerDocument = gql`
         project(filter: $filter34) {
           id
           title
+          description
         }
         column(filter: $filter37) {
           id
@@ -9186,6 +9236,7 @@ export const AddWorkerDocument = gql`
           project(filter: $filter39) {
             id
             title
+            description
           }
           name
           availability
@@ -9485,12 +9536,14 @@ export const UpdateBoardDocument = gql`
       project(filter: $filter18) {
         id
         title
+        description
         tags(filter: $filter2, order: $order1, first: $first1, offset: $offset1) {
           id
           title
           project(filter: $filter) {
             id
             title
+            description
           }
           workers(filter: $filter1, order: $order, first: $first, offset: $offset) {
             id
@@ -9503,6 +9556,7 @@ export const UpdateBoardDocument = gql`
           project(filter: $filter3) {
             id
             title
+            description
           }
           column(filter: $filter4) {
             id
@@ -9534,6 +9588,7 @@ export const UpdateBoardDocument = gql`
           project(filter: $filter9) {
             id
             title
+            description
           }
           title
           columns(filter: $filter10, order: $order6, first: $first6, offset: $offset6) {
@@ -9547,6 +9602,7 @@ export const UpdateBoardDocument = gql`
           project(filter: $filter12) {
             id
             title
+            description
           }
           name
           availability
@@ -9634,6 +9690,7 @@ export const UpdateColumnDocument = gql`
         project(filter: $filter4) {
           id
           title
+          description
           tags(filter: $filter, order: $order, first: $first, offset: $offset) {
             id
             title
@@ -9685,6 +9742,7 @@ export const UpdateColumnDocument = gql`
         project(filter: $filter9) {
           id
           title
+          description
         }
         column(filter: $filter10) {
           id
@@ -9696,6 +9754,7 @@ export const UpdateColumnDocument = gql`
           project(filter: $filter11) {
             id
             title
+            description
           }
           name
           availability
@@ -9738,6 +9797,7 @@ export const UpdateColumnDocument = gql`
           project(filter: $filter17) {
             id
             title
+            description
           }
           name
           availability
@@ -9823,6 +9883,7 @@ export const UpdateCommentDocument = gql`
         project(filter: $filter4) {
           id
           title
+          description
           tags(filter: $filter, order: $order, first: $first, offset: $offset) {
             id
             title
@@ -9871,6 +9932,7 @@ export const UpdateCommentDocument = gql`
           project(filter: $filter8) {
             id
             title
+            description
           }
           name
           availability
@@ -9913,6 +9975,7 @@ export const UpdateCommentDocument = gql`
           project(filter: $filter14) {
             id
             title
+            description
           }
           name
           availability
@@ -9969,6 +10032,7 @@ export const UpdateCommentDocument = gql`
         project(filter: $filter24) {
           id
           title
+          description
         }
         name
         availability
@@ -9998,6 +10062,7 @@ export const UpdateCommentDocument = gql`
           project(filter: $filter28) {
             id
             title
+            description
           }
           workers(filter: $filter29, order: $order16, first: $first16, offset: $offset16) {
             id
@@ -10010,6 +10075,7 @@ export const UpdateCommentDocument = gql`
           project(filter: $filter31) {
             id
             title
+            description
           }
           column(filter: $filter32) {
             id
@@ -10041,6 +10107,7 @@ export const UpdateCommentDocument = gql`
           project(filter: $filter37) {
             id
             title
+            description
           }
           column(filter: $filter38) {
             id
@@ -10099,12 +10166,14 @@ export const UpdateProjectDocument = gql`
     project(filter: $filter11, order: $order8, first: $first8, offset: $offset8) {
       id
       title
+      description
       tags(filter: $filter10, order: $order7, first: $first7, offset: $offset7) {
         id
         title
         project(filter: $filter3) {
           id
           title
+          description
           tasks(filter: $filter, order: $order, first: $first, offset: $offset) {
             id
             title
@@ -10130,6 +10199,7 @@ export const UpdateProjectDocument = gql`
           project(filter: $filter4) {
             id
             title
+            description
           }
           name
           availability
@@ -10196,12 +10266,14 @@ export const UpdateTagDocument = gql`
       project(filter: $filter18) {
         id
         title
+        description
         tags(filter: $filter2, order: $order1, first: $first1, offset: $offset1) {
           id
           title
           project(filter: $filter) {
             id
             title
+            description
           }
           workers(filter: $filter1, order: $order, first: $first, offset: $offset) {
             id
@@ -10214,6 +10286,7 @@ export const UpdateTagDocument = gql`
           project(filter: $filter3) {
             id
             title
+            description
           }
           column(filter: $filter4) {
             id
@@ -10245,6 +10318,7 @@ export const UpdateTagDocument = gql`
           project(filter: $filter9) {
             id
             title
+            description
           }
           title
           columns(filter: $filter10, order: $order6, first: $first6, offset: $offset6) {
@@ -10258,6 +10332,7 @@ export const UpdateTagDocument = gql`
           project(filter: $filter12) {
             id
             title
+            description
           }
           name
           availability
@@ -10328,12 +10403,14 @@ export const UpdateTaskDocument = gql`
       project(filter: $filter18) {
         id
         title
+        description
         tags(filter: $filter2, order: $order1, first: $first1, offset: $offset1) {
           id
           title
           project(filter: $filter) {
             id
             title
+            description
           }
           workers(filter: $filter1, order: $order, first: $first, offset: $offset) {
             id
@@ -10346,6 +10423,7 @@ export const UpdateTaskDocument = gql`
           project(filter: $filter3) {
             id
             title
+            description
           }
           column(filter: $filter4) {
             id
@@ -10377,6 +10455,7 @@ export const UpdateTaskDocument = gql`
           project(filter: $filter9) {
             id
             title
+            description
           }
           title
           columns(filter: $filter10, order: $order6, first: $first6, offset: $offset6) {
@@ -10390,6 +10469,7 @@ export const UpdateTaskDocument = gql`
           project(filter: $filter12) {
             id
             title
+            description
           }
           name
           availability
@@ -10430,6 +10510,7 @@ export const UpdateTaskDocument = gql`
           project(filter: $filter19) {
             id
             title
+            description
           }
           title
           columns(filter: $filter20, order: $order12, first: $first12, offset: $offset12) {
@@ -10465,6 +10546,7 @@ export const UpdateTaskDocument = gql`
         project(filter: $filter25) {
           id
           title
+          description
         }
         name
         availability
@@ -10506,6 +10588,7 @@ export const UpdateTaskDocument = gql`
           project(filter: $filter31) {
             id
             title
+            description
           }
           column(filter: $filter32) {
             id
@@ -10549,6 +10632,7 @@ export const UpdateTaskDocument = gql`
           project(filter: $filter39) {
             id
             title
+            description
           }
           name
           availability
@@ -10620,6 +10704,7 @@ export const UpdateUserDocument = gql`
         project(filter: $filter4) {
           id
           title
+          description
           tags(filter: $filter, order: $order, first: $first, offset: $offset) {
             id
             title
@@ -10667,6 +10752,7 @@ export const UpdateUserDocument = gql`
           project(filter: $filter7) {
             id
             title
+            description
           }
           workers(filter: $filter8, order: $order5, first: $first5, offset: $offset5) {
             id
@@ -10679,6 +10765,7 @@ export const UpdateUserDocument = gql`
           project(filter: $filter10) {
             id
             title
+            description
           }
           column(filter: $filter11) {
             id
@@ -10710,6 +10797,7 @@ export const UpdateUserDocument = gql`
           project(filter: $filter16) {
             id
             title
+            description
           }
           column(filter: $filter17) {
             id
@@ -10769,12 +10857,14 @@ export const UpdateWorkerDocument = gql`
       project(filter: $filter18) {
         id
         title
+        description
         tags(filter: $filter2, order: $order1, first: $first1, offset: $offset1) {
           id
           title
           project(filter: $filter) {
             id
             title
+            description
           }
           workers(filter: $filter1, order: $order, first: $first, offset: $offset) {
             id
@@ -10787,6 +10877,7 @@ export const UpdateWorkerDocument = gql`
           project(filter: $filter3) {
             id
             title
+            description
           }
           column(filter: $filter4) {
             id
@@ -10818,6 +10909,7 @@ export const UpdateWorkerDocument = gql`
           project(filter: $filter9) {
             id
             title
+            description
           }
           title
           columns(filter: $filter10, order: $order6, first: $first6, offset: $offset6) {
@@ -10831,6 +10923,7 @@ export const UpdateWorkerDocument = gql`
           project(filter: $filter12) {
             id
             title
+            description
           }
           name
           availability
@@ -10876,6 +10969,7 @@ export const UpdateWorkerDocument = gql`
           project(filter: $filter19) {
             id
             title
+            description
           }
           name
           availability
@@ -10913,6 +11007,7 @@ export const UpdateWorkerDocument = gql`
           project(filter: $filter25) {
             id
             title
+            description
           }
           column(filter: $filter26) {
             id
@@ -10958,6 +11053,7 @@ export const UpdateWorkerDocument = gql`
         project(filter: $filter34) {
           id
           title
+          description
         }
         column(filter: $filter37) {
           id
@@ -10993,6 +11089,7 @@ export const UpdateWorkerDocument = gql`
           project(filter: $filter39) {
             id
             title
+            description
           }
           name
           availability
@@ -11075,12 +11172,14 @@ export const GetBoardDocument = gql`
     project(filter: $filter11) {
       id
       title
+      description
       tags(filter: $filter10, order: $order7, first: $first7, offset: $offset7) {
         id
         title
         project(filter: $filter3) {
           id
           title
+          description
           tasks(filter: $filter, order: $order, first: $first, offset: $offset) {
             id
             title
@@ -11106,6 +11205,7 @@ export const GetBoardDocument = gql`
           project(filter: $filter4) {
             id
             title
+            description
           }
           name
           availability
@@ -11148,6 +11248,7 @@ export const GetBoardDocument = gql`
         project(filter: $filter12) {
           id
           title
+          description
         }
         title
         columns(filter: $filter14, order: $order9, first: $first9, offset: $offset9) {
@@ -11198,12 +11299,14 @@ export const GetColumnDocument = gql`
       project(filter: $filter18) {
         id
         title
+        description
         tags(filter: $filter2, order: $order1, first: $first1, offset: $offset1) {
           id
           title
           project(filter: $filter) {
             id
             title
+            description
           }
           workers(filter: $filter1, order: $order, first: $first, offset: $offset) {
             id
@@ -11216,6 +11319,7 @@ export const GetColumnDocument = gql`
           project(filter: $filter3) {
             id
             title
+            description
           }
           column(filter: $filter4) {
             id
@@ -11247,6 +11351,7 @@ export const GetColumnDocument = gql`
           project(filter: $filter9) {
             id
             title
+            description
           }
           title
           columns(filter: $filter10, order: $order6, first: $first6, offset: $offset6) {
@@ -11260,6 +11365,7 @@ export const GetColumnDocument = gql`
           project(filter: $filter12) {
             id
             title
+            description
           }
           name
           availability
@@ -11354,12 +11460,14 @@ export const GetCommentDocument = gql`
       project(filter: $filter18) {
         id
         title
+        description
         tags(filter: $filter2, order: $order1, first: $first1, offset: $offset1) {
           id
           title
           project(filter: $filter) {
             id
             title
+            description
           }
           workers(filter: $filter1, order: $order, first: $first, offset: $offset) {
             id
@@ -11372,6 +11480,7 @@ export const GetCommentDocument = gql`
           project(filter: $filter3) {
             id
             title
+            description
           }
           column(filter: $filter4) {
             id
@@ -11403,6 +11512,7 @@ export const GetCommentDocument = gql`
           project(filter: $filter9) {
             id
             title
+            description
           }
           title
           columns(filter: $filter10, order: $order6, first: $first6, offset: $offset6) {
@@ -11416,6 +11526,7 @@ export const GetCommentDocument = gql`
           project(filter: $filter12) {
             id
             title
+            description
           }
           name
           availability
@@ -11456,6 +11567,7 @@ export const GetCommentDocument = gql`
           project(filter: $filter19) {
             id
             title
+            description
           }
           title
           columns(filter: $filter20, order: $order12, first: $first12, offset: $offset12) {
@@ -11491,6 +11603,7 @@ export const GetCommentDocument = gql`
         project(filter: $filter25) {
           id
           title
+          description
         }
         name
         availability
@@ -11532,6 +11645,7 @@ export const GetCommentDocument = gql`
           project(filter: $filter31) {
             id
             title
+            description
           }
           column(filter: $filter32) {
             id
@@ -11575,6 +11689,7 @@ export const GetCommentDocument = gql`
           project(filter: $filter39) {
             id
             title
+            description
           }
           name
           availability
@@ -11642,12 +11757,14 @@ export const GetProjectDocument = gql`
   getProject(id: $id) {
     id
     title
+    description
     tags(filter: $filter18, order: $order12, first: $first12, offset: $offset12) {
       id
       title
       project(filter: $filter17) {
         id
         title
+        description
         tags(filter: $filter1, order: $order1, first: $first1, offset: $offset1) {
           id
           title
@@ -11662,6 +11779,7 @@ export const GetProjectDocument = gql`
           project(filter: $filter2) {
             id
             title
+            description
           }
           column(filter: $filter3) {
             id
@@ -11693,6 +11811,7 @@ export const GetProjectDocument = gql`
           project(filter: $filter8) {
             id
             title
+            description
           }
           title
           columns(filter: $filter9, order: $order6, first: $first6, offset: $offset6) {
@@ -11706,6 +11825,7 @@ export const GetProjectDocument = gql`
           project(filter: $filter11) {
             id
             title
+            description
           }
           name
           availability
@@ -11788,12 +11908,14 @@ export const GetTagDocument = gql`
     project(filter: $filter11) {
       id
       title
+      description
       tags(filter: $filter10, order: $order7, first: $first7, offset: $offset7) {
         id
         title
         project(filter: $filter3) {
           id
           title
+          description
           tasks(filter: $filter, order: $order, first: $first, offset: $offset) {
             id
             title
@@ -11819,6 +11941,7 @@ export const GetTagDocument = gql`
           project(filter: $filter4) {
             id
             title
+            description
           }
           name
           availability
@@ -11886,12 +12009,14 @@ export const GetTaskDocument = gql`
     project(filter: $filter11) {
       id
       title
+      description
       tags(filter: $filter10, order: $order7, first: $first7, offset: $offset7) {
         id
         title
         project(filter: $filter3) {
           id
           title
+          description
           tasks(filter: $filter, order: $order, first: $first, offset: $offset) {
             id
             title
@@ -11917,6 +12042,7 @@ export const GetTaskDocument = gql`
           project(filter: $filter4) {
             id
             title
+            description
           }
           name
           availability
@@ -11958,6 +12084,7 @@ export const GetTaskDocument = gql`
         project(filter: $filter12) {
           id
           title
+          description
         }
         title
         columns(filter: $filter15, order: $order9, first: $first9, offset: $offset9) {
@@ -11986,6 +12113,7 @@ export const GetTaskDocument = gql`
         project(filter: $filter17) {
           id
           title
+          description
         }
         column(filter: $filter18) {
           id
@@ -12007,6 +12135,7 @@ export const GetTaskDocument = gql`
           project(filter: $filter20) {
             id
             title
+            description
           }
           name
           availability
@@ -12112,12 +12241,14 @@ export const GetUserDocument = gql`
       project(filter: $filter18) {
         id
         title
+        description
         tags(filter: $filter2, order: $order1, first: $first1, offset: $offset1) {
           id
           title
           project(filter: $filter) {
             id
             title
+            description
           }
           workers(filter: $filter1, order: $order, first: $first, offset: $offset) {
             id
@@ -12130,6 +12261,7 @@ export const GetUserDocument = gql`
           project(filter: $filter3) {
             id
             title
+            description
           }
           column(filter: $filter4) {
             id
@@ -12161,6 +12293,7 @@ export const GetUserDocument = gql`
           project(filter: $filter9) {
             id
             title
+            description
           }
           title
           columns(filter: $filter10, order: $order6, first: $first6, offset: $offset6) {
@@ -12174,6 +12307,7 @@ export const GetUserDocument = gql`
           project(filter: $filter12) {
             id
             title
+            description
           }
           name
           availability
@@ -12246,6 +12380,7 @@ export const GetUserDocument = gql`
           project(filter: $filter23) {
             id
             title
+            description
           }
           column(filter: $filter24) {
             id
@@ -12311,12 +12446,14 @@ export const GetWorkerDocument = gql`
     project(filter: $filter11) {
       id
       title
+      description
       tags(filter: $filter10, order: $order7, first: $first7, offset: $offset7) {
         id
         title
         project(filter: $filter3) {
           id
           title
+          description
           tasks(filter: $filter, order: $order, first: $first, offset: $offset) {
             id
             title
@@ -12342,6 +12479,7 @@ export const GetWorkerDocument = gql`
           project(filter: $filter4) {
             id
             title
+            description
           }
           name
           availability
@@ -12388,6 +12526,7 @@ export const GetWorkerDocument = gql`
         project(filter: $filter12) {
           id
           title
+          description
         }
         name
         availability
@@ -12415,6 +12554,7 @@ export const GetWorkerDocument = gql`
           project(filter: $filter16) {
             id
             title
+            description
           }
           column(filter: $filter17) {
             id
@@ -12446,6 +12586,7 @@ export const GetWorkerDocument = gql`
           project(filter: $filter22) {
             id
             title
+            description
           }
           column(filter: $filter23) {
             id
@@ -12524,12 +12665,14 @@ export const QueryBoardDocument = gql`
     project(filter: $filter11) {
       id
       title
+      description
       tags(filter: $filter10, order: $order7, first: $first7, offset: $offset7) {
         id
         title
         project(filter: $filter3) {
           id
           title
+          description
           tasks(filter: $filter, order: $order, first: $first, offset: $offset) {
             id
             title
@@ -12555,6 +12698,7 @@ export const QueryBoardDocument = gql`
           project(filter: $filter4) {
             id
             title
+            description
           }
           name
           availability
@@ -12597,6 +12741,7 @@ export const QueryBoardDocument = gql`
         project(filter: $filter12) {
           id
           title
+          description
         }
         title
         columns(filter: $filter14, order: $order9, first: $first9, offset: $offset9) {
@@ -12647,12 +12792,14 @@ export const QueryColumnDocument = gql`
       project(filter: $filter18) {
         id
         title
+        description
         tags(filter: $filter2, order: $order1, first: $first1, offset: $offset1) {
           id
           title
           project(filter: $filter) {
             id
             title
+            description
           }
           workers(filter: $filter1, order: $order, first: $first, offset: $offset) {
             id
@@ -12665,6 +12812,7 @@ export const QueryColumnDocument = gql`
           project(filter: $filter3) {
             id
             title
+            description
           }
           column(filter: $filter4) {
             id
@@ -12696,6 +12844,7 @@ export const QueryColumnDocument = gql`
           project(filter: $filter9) {
             id
             title
+            description
           }
           title
           columns(filter: $filter10, order: $order6, first: $first6, offset: $offset6) {
@@ -12709,6 +12858,7 @@ export const QueryColumnDocument = gql`
           project(filter: $filter12) {
             id
             title
+            description
           }
           name
           availability
@@ -12803,12 +12953,14 @@ export const QueryCommentDocument = gql`
       project(filter: $filter18) {
         id
         title
+        description
         tags(filter: $filter2, order: $order1, first: $first1, offset: $offset1) {
           id
           title
           project(filter: $filter) {
             id
             title
+            description
           }
           workers(filter: $filter1, order: $order, first: $first, offset: $offset) {
             id
@@ -12821,6 +12973,7 @@ export const QueryCommentDocument = gql`
           project(filter: $filter3) {
             id
             title
+            description
           }
           column(filter: $filter4) {
             id
@@ -12852,6 +13005,7 @@ export const QueryCommentDocument = gql`
           project(filter: $filter9) {
             id
             title
+            description
           }
           title
           columns(filter: $filter10, order: $order6, first: $first6, offset: $offset6) {
@@ -12865,6 +13019,7 @@ export const QueryCommentDocument = gql`
           project(filter: $filter12) {
             id
             title
+            description
           }
           name
           availability
@@ -12905,6 +13060,7 @@ export const QueryCommentDocument = gql`
           project(filter: $filter19) {
             id
             title
+            description
           }
           title
           columns(filter: $filter20, order: $order12, first: $first12, offset: $offset12) {
@@ -12940,6 +13096,7 @@ export const QueryCommentDocument = gql`
         project(filter: $filter25) {
           id
           title
+          description
         }
         name
         availability
@@ -12981,6 +13138,7 @@ export const QueryCommentDocument = gql`
           project(filter: $filter31) {
             id
             title
+            description
           }
           column(filter: $filter32) {
             id
@@ -13024,6 +13182,7 @@ export const QueryCommentDocument = gql`
           project(filter: $filter39) {
             id
             title
+            description
           }
           name
           availability
@@ -13091,12 +13250,14 @@ export const QueryProjectDocument = gql`
   queryProject(filter: $filter22, order: $order16, first: $first16, offset: $offset16) {
     id
     title
+    description
     tags(filter: $filter18, order: $order12, first: $first12, offset: $offset12) {
       id
       title
       project(filter: $filter17) {
         id
         title
+        description
         tags(filter: $filter1, order: $order1, first: $first1, offset: $offset1) {
           id
           title
@@ -13111,6 +13272,7 @@ export const QueryProjectDocument = gql`
           project(filter: $filter2) {
             id
             title
+            description
           }
           column(filter: $filter3) {
             id
@@ -13142,6 +13304,7 @@ export const QueryProjectDocument = gql`
           project(filter: $filter8) {
             id
             title
+            description
           }
           title
           columns(filter: $filter9, order: $order6, first: $first6, offset: $offset6) {
@@ -13155,6 +13318,7 @@ export const QueryProjectDocument = gql`
           project(filter: $filter11) {
             id
             title
+            description
           }
           name
           availability
@@ -13237,12 +13401,14 @@ export const QueryTagDocument = gql`
     project(filter: $filter11) {
       id
       title
+      description
       tags(filter: $filter10, order: $order7, first: $first7, offset: $offset7) {
         id
         title
         project(filter: $filter3) {
           id
           title
+          description
           tasks(filter: $filter, order: $order, first: $first, offset: $offset) {
             id
             title
@@ -13268,6 +13434,7 @@ export const QueryTagDocument = gql`
           project(filter: $filter4) {
             id
             title
+            description
           }
           name
           availability
@@ -13335,12 +13502,14 @@ export const QueryTaskDocument = gql`
     project(filter: $filter11) {
       id
       title
+      description
       tags(filter: $filter10, order: $order7, first: $first7, offset: $offset7) {
         id
         title
         project(filter: $filter3) {
           id
           title
+          description
           tasks(filter: $filter, order: $order, first: $first, offset: $offset) {
             id
             title
@@ -13366,6 +13535,7 @@ export const QueryTaskDocument = gql`
           project(filter: $filter4) {
             id
             title
+            description
           }
           name
           availability
@@ -13407,6 +13577,7 @@ export const QueryTaskDocument = gql`
         project(filter: $filter12) {
           id
           title
+          description
         }
         title
         columns(filter: $filter15, order: $order9, first: $first9, offset: $offset9) {
@@ -13435,6 +13606,7 @@ export const QueryTaskDocument = gql`
         project(filter: $filter17) {
           id
           title
+          description
         }
         column(filter: $filter18) {
           id
@@ -13456,6 +13628,7 @@ export const QueryTaskDocument = gql`
           project(filter: $filter20) {
             id
             title
+            description
           }
           name
           availability
@@ -13561,12 +13734,14 @@ export const QueryUserDocument = gql`
       project(filter: $filter18) {
         id
         title
+        description
         tags(filter: $filter2, order: $order1, first: $first1, offset: $offset1) {
           id
           title
           project(filter: $filter) {
             id
             title
+            description
           }
           workers(filter: $filter1, order: $order, first: $first, offset: $offset) {
             id
@@ -13579,6 +13754,7 @@ export const QueryUserDocument = gql`
           project(filter: $filter3) {
             id
             title
+            description
           }
           column(filter: $filter4) {
             id
@@ -13610,6 +13786,7 @@ export const QueryUserDocument = gql`
           project(filter: $filter9) {
             id
             title
+            description
           }
           title
           columns(filter: $filter10, order: $order6, first: $first6, offset: $offset6) {
@@ -13623,6 +13800,7 @@ export const QueryUserDocument = gql`
           project(filter: $filter12) {
             id
             title
+            description
           }
           name
           availability
@@ -13695,6 +13873,7 @@ export const QueryUserDocument = gql`
           project(filter: $filter23) {
             id
             title
+            description
           }
           column(filter: $filter24) {
             id
@@ -13760,12 +13939,14 @@ export const QueryWorkerDocument = gql`
     project(filter: $filter11) {
       id
       title
+      description
       tags(filter: $filter10, order: $order7, first: $first7, offset: $offset7) {
         id
         title
         project(filter: $filter3) {
           id
           title
+          description
           tasks(filter: $filter, order: $order, first: $first, offset: $offset) {
             id
             title
@@ -13791,6 +13972,7 @@ export const QueryWorkerDocument = gql`
           project(filter: $filter4) {
             id
             title
+            description
           }
           name
           availability
@@ -13837,6 +14019,7 @@ export const QueryWorkerDocument = gql`
         project(filter: $filter12) {
           id
           title
+          description
         }
         name
         availability
@@ -13864,6 +14047,7 @@ export const QueryWorkerDocument = gql`
           project(filter: $filter16) {
             id
             title
+            description
           }
           column(filter: $filter17) {
             id
@@ -13895,6 +14079,7 @@ export const QueryWorkerDocument = gql`
           project(filter: $filter22) {
             id
             title
+            description
           }
           column(filter: $filter23) {
             id

@@ -7,6 +7,7 @@ mutation updateColumn($filter: TagFilter, $order: TagOrder, $first: Int, $offset
                 project(filter: $filter4){
                     id
                     title
+                    description
                     tags(filter: $filter, order: $order, first: $first, offset: $offset){
                         id
                         title
@@ -58,6 +59,7 @@ mutation updateColumn($filter: TagFilter, $order: TagOrder, $first: Int, $offset
                 project(filter: $filter9){
                     id
                     title
+                    description
                 }
                 column(filter: $filter10){
                     id
@@ -69,6 +71,7 @@ mutation updateColumn($filter: TagFilter, $order: TagOrder, $first: Int, $offset
                     project(filter: $filter11){
                         id
                         title
+                        description
                     }
                     name
                     availability
@@ -111,6 +114,7 @@ mutation updateColumn($filter: TagFilter, $order: TagOrder, $first: Int, $offset
                     project(filter: $filter17){
                         id
                         title
+                        description
                     }
                     name
                     availability

@@ -4,12 +4,14 @@ query queryTask($filter: TaskFilter, $order: TaskOrder, $first: Int, $offset: In
         project(filter: $filter11){
             id
             title
+            description
             tags(filter: $filter10, order: $order7, first: $first7, offset: $offset7){
                 id
                 title
                 project(filter: $filter3){
                     id
                     title
+                    description
                     tasks(filter: $filter, order: $order, first: $first, offset: $offset){
                         id
                         title
@@ -35,6 +37,7 @@ query queryTask($filter: TaskFilter, $order: TaskOrder, $first: Int, $offset: In
                     project(filter: $filter4){
                         id
                         title
+                        description
                     }
                     name
                     availability
@@ -76,6 +79,7 @@ query queryTask($filter: TaskFilter, $order: TaskOrder, $first: Int, $offset: In
                 project(filter: $filter12){
                     id
                     title
+                    description
                 }
                 title
                 columns(filter: $filter15, order: $order9, first: $first9, offset: $offset9){
@@ -104,6 +108,7 @@ query queryTask($filter: TaskFilter, $order: TaskOrder, $first: Int, $offset: In
                 project(filter: $filter17){
                     id
                     title
+                    description
                 }
                 column(filter: $filter18){
                     id
@@ -125,6 +130,7 @@ query queryTask($filter: TaskFilter, $order: TaskOrder, $first: Int, $offset: In
                     project(filter: $filter20){
                         id
                         title
+                        description
                     }
                     name
                     availability

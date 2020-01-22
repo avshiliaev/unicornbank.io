@@ -4,12 +4,14 @@ query getBoard($filter: TaskFilter, $order: TaskOrder, $first: Int, $offset: Int
         project(filter: $filter11){
             id
             title
+            description
             tags(filter: $filter10, order: $order7, first: $first7, offset: $offset7){
                 id
                 title
                 project(filter: $filter3){
                     id
                     title
+                    description
                     tasks(filter: $filter, order: $order, first: $first, offset: $offset){
                         id
                         title
@@ -35,6 +37,7 @@ query getBoard($filter: TaskFilter, $order: TaskOrder, $first: Int, $offset: Int
                     project(filter: $filter4){
                         id
                         title
+                        description
                     }
                     name
                     availability
@@ -77,6 +80,7 @@ query getBoard($filter: TaskFilter, $order: TaskOrder, $first: Int, $offset: Int
                 project(filter: $filter12){
                     id
                     title
+                    description
                 }
                 title
                 columns(filter: $filter14, order: $order9, first: $first9, offset: $offset9){

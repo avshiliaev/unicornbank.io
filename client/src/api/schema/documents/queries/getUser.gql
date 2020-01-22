@@ -9,12 +9,14 @@ query getUser($filter: ProjectFilter, $filter1: WorkerFilter, $order: WorkerOrde
             project(filter: $filter18){
                 id
                 title
+                description
                 tags(filter: $filter2, order: $order1, first: $first1, offset: $offset1){
                     id
                     title
                     project(filter: $filter){
                         id
                         title
+                        description
                     }
                     workers(filter: $filter1, order: $order, first: $first, offset: $offset){
                         id
@@ -27,6 +29,7 @@ query getUser($filter: ProjectFilter, $filter1: WorkerFilter, $order: WorkerOrde
                     project(filter: $filter3){
                         id
                         title
+                        description
                     }
                     column(filter: $filter4){
                         id
@@ -58,6 +61,7 @@ query getUser($filter: ProjectFilter, $filter1: WorkerFilter, $order: WorkerOrde
                     project(filter: $filter9){
                         id
                         title
+                        description
                     }
                     title
                     columns(filter: $filter10, order: $order6, first: $first6, offset: $offset6){
@@ -71,6 +75,7 @@ query getUser($filter: ProjectFilter, $filter1: WorkerFilter, $order: WorkerOrde
                     project(filter: $filter12){
                         id
                         title
+                        description
                     }
                     name
                     availability
@@ -143,6 +148,7 @@ query getUser($filter: ProjectFilter, $filter1: WorkerFilter, $order: WorkerOrde
                     project(filter: $filter23){
                         id
                         title
+                        description
                     }
                     column(filter: $filter24){
                         id
