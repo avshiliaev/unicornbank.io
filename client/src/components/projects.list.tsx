@@ -9,7 +9,7 @@ const ProjectsList = ({projects}) => {
 
     const breakpoints = useBreakpoint();
 
-    console.log(breakpoints)
+    console.log(breakpoints);
 
     if (projects.length === 0) {
         return (
