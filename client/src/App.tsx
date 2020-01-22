@@ -5,6 +5,7 @@ import {HttpLink} from 'apollo-link-http';
 import {ApolloProvider} from '@apollo/react-common';
 import Pages from './pages';
 import './App.css';
+import {BreakpointProvider} from './providers/breakpoint.provider';
 
 /**
  * Updating cache strategies:
@@ -20,21 +21,19 @@ const client = new ApolloClient({
     }),
 });
 
-/*
-!WHY INVERSE EDGE IS AWESOME!
-Add a Tag to a project, and then query the project:
-
-mutation {
-    addTag(
-        input: [{ title: "awesome", project: {id: "0x2"} }]
-    ) { tag {id} }
-}
- */
+const queries = {
+    small: '(max-width: 320px)',
+    medium: '(max-width: 720px)',
+    large: '(max-width: 1024px)',
+    portrait: '(orientation: portrait)', // we can check orientation also
+};
 
 const App: React.FC = () => {
     return (
         <ApolloProvider client={client}>
-            <Pages/>
+            <BreakpointProvider queries={queries}>
+                <Pages/>
+            </BreakpointProvider>
         </ApolloProvider>
     );
 };

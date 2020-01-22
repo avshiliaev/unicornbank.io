@@ -3,8 +3,13 @@ import {Project} from '../api/interfaces/types.d';
 import {Avatar, Empty, List} from 'antd';
 import ProjectsDelete from '../containers/projects/projects.delete';
 import ActionIcon from './action.icon';
+import {useBreakpoint} from '../providers/breakpoint.provider';
 
 const ProjectsList = ({projects}) => {
+
+    const breakpoints = useBreakpoint();
+
+    console.log(breakpoints)
 
     if (projects.length === 0) {
         return (
