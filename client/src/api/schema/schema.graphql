@@ -1,5 +1,5 @@
 # source: http://localhost:8080/graphql
-# timestamp: Fri Jan 17 2020 11:17:11 GMT+0100 (Central European Standard Time)
+# timestamp: Wed Jan 22 2020 10:43:01 GMT+0100 (Central European Standard Time)
 
 directive @hasInverse(field: String!) on FIELD_DEFINITION
 
@@ -10,6 +10,7 @@ directive @dgraph(type: String, pred: String) on OBJECT | INTERFACE | FIELD_DEFI
 directive @id on FIELD_DEFINITION
 
 input AddBoardInput {
+  project: ProjectRef!
   title: String!
   columns: [ColumnRef]
   order: [String]
@@ -20,8 +21,9 @@ type AddBoardPayload {
 }
 
 input AddColumnInput {
+  board: BoardRef!
   title: String!
-  taskIds: [String]
+  tasks: [TaskRef]
 }
 
 type AddColumnPayload {
@@ -29,7 +31,8 @@ type AddColumnPayload {
 }
 
 input AddCommentInput {
-  worker: WorkerRef
+  task: TaskRef!
+  worker: WorkerRef!
   content: String!
 }
 
@@ -39,6 +42,7 @@ type AddCommentPayload {
 
 input AddProjectInput {
   title: String!
+  description: String!
   tags: [TagRef]
   tasks: [TaskRef]
   boards: [BoardRef]
@@ -51,6 +55,8 @@ type AddProjectPayload {
 
 input AddTagInput {
   title: String!
+  project: ProjectRef!
+  workers: [WorkerRef]
 }
 
 type AddTagPayload {
@@ -58,7 +64,10 @@ type AddTagPayload {
 }
 
 input AddTaskInput {
+  project: ProjectRef!
+  column: ColumnRef!
   title: String!
+  workers: [WorkerRef]
   hours: Int!
   deadline: String!
   content: String!
@@ -85,11 +94,13 @@ type AddUserPayload {
 }
 
 input AddWorkerInput {
+  project: ProjectRef!
   name: String!
   availability: Int!
   user: UserRef!
   tags: [TagRef]
   tasks: [TaskRef]
+  liked: [TaskRef]
 }
 
 type AddWorkerPayload {
@@ -97,7 +108,8 @@ type AddWorkerPayload {
 }
 
 type Board {
-  id: ID
+  id: ID!
+  project(filter: ProjectFilter): Project!
   title: String!
   columns(filter: ColumnFilter, order: ColumnOrder, first: Int, offset: Int): [Column]
   order: [String]
@@ -120,6 +132,7 @@ enum BoardOrderable {
 }
 
 input BoardPatch {
+  project: ProjectRef
   title: String
   columns: [ColumnRef]
   order: [String]
@@ -127,15 +140,17 @@ input BoardPatch {
 
 input BoardRef {
   id: ID
+  project: ProjectRef
   title: String
   columns: [ColumnRef]
   order: [String]
 }
 
 type Column {
-  id: ID
+  id: ID!
+  board(filter: BoardFilter): Board!
   title: String!
-  taskIds: [String]
+  tasks(filter: TaskFilter, order: TaskOrder, first: Int, offset: Int): [Task]
 }
 
 input ColumnFilter {
@@ -151,23 +166,25 @@ input ColumnOrder {
 
 enum ColumnOrderable {
   title
-  taskIds
 }
 
 input ColumnPatch {
+  board: BoardRef
   title: String
-  taskIds: [String]
+  tasks: [TaskRef]
 }
 
 input ColumnRef {
   id: ID
+  board: BoardRef
   title: String
-  taskIds: [String]
+  tasks: [TaskRef]
 }
 
 type Comment {
-  id: ID
-  worker(filter: WorkerFilter): Worker
+  id: ID!
+  task(filter: TaskFilter): Task!
+  worker(filter: WorkerFilter): Worker!
   content: String!
 }
 
@@ -187,12 +204,14 @@ enum CommentOrderable {
 }
 
 input CommentPatch {
+  task: TaskRef
   worker: WorkerRef
   content: String
 }
 
 input CommentRef {
   id: ID
+  task: TaskRef
   worker: WorkerRef
   content: String
 }
@@ -299,8 +318,9 @@ type Mutation {
 }
 
 type Project {
-  id: ID
+  id: ID!
   title: String!
+  description: String!
   tags(filter: TagFilter, order: TagOrder, first: Int, offset: Int): [Tag]
   tasks(filter: TaskFilter, order: TaskOrder, first: Int, offset: Int): [Task]
   boards(filter: BoardFilter, order: BoardOrder, first: Int, offset: Int): [Board]
@@ -323,10 +343,12 @@ input ProjectOrder {
 
 enum ProjectOrderable {
   title
+  description
 }
 
 input ProjectPatch {
   title: String
+  description: String
   tags: [TagRef]
   tasks: [TaskRef]
   boards: [BoardRef]
@@ -336,6 +358,7 @@ input ProjectPatch {
 input ProjectRef {
   id: ID
   title: String
+  description: String
   tags: [TagRef]
   tasks: [TaskRef]
   boards: [BoardRef]
@@ -388,8 +411,10 @@ input StringTermFilter {
 }
 
 type Tag {
-  id: ID
+  id: ID!
   title: String!
+  project(filter: ProjectFilter): Project!
+  workers(filter: WorkerFilter, order: WorkerOrder, first: Int, offset: Int): [Worker]
 }
 
 input TagFilter {
@@ -409,16 +434,23 @@ enum TagOrderable {
 
 input TagPatch {
   title: String
+  project: ProjectRef
+  workers: [WorkerRef]
 }
 
 input TagRef {
   id: ID
   title: String
+  project: ProjectRef
+  workers: [WorkerRef]
 }
 
 type Task {
-  id: ID
+  id: ID!
+  project(filter: ProjectFilter): Project!
+  column(filter: ColumnFilter): Column!
   title: String!
+  workers(filter: WorkerFilter, order: WorkerOrder, first: Int, offset: Int): [Worker]
   hours: Int!
   deadline: String!
   content: String!
@@ -451,7 +483,10 @@ enum TaskOrderable {
 }
 
 input TaskPatch {
+  project: ProjectRef
+  column: ColumnRef
   title: String
+  workers: [WorkerRef]
   hours: Int
   deadline: String
   content: String
@@ -463,7 +498,10 @@ input TaskPatch {
 
 input TaskRef {
   id: ID
+  project: ProjectRef
+  column: ColumnRef
   title: String
+  workers: [WorkerRef]
   hours: Int
   deadline: String
   content: String
@@ -554,7 +592,7 @@ type UpdateWorkerPayload {
 }
 
 type User {
-  id: ID
+  id: ID!
   username: String!
   password: String!
   location: String!
@@ -600,12 +638,14 @@ input UserRef {
 }
 
 type Worker {
-  id: ID
+  id: ID!
+  project(filter: ProjectFilter): Project!
   name: String!
   availability: Int!
   user(filter: UserFilter): User!
   tags(filter: TagFilter, order: TagOrder, first: Int, offset: Int): [Tag]
   tasks(filter: TaskFilter, order: TaskOrder, first: Int, offset: Int): [Task]
+  liked(filter: TaskFilter, order: TaskOrder, first: Int, offset: Int): [Task]
 }
 
 input WorkerFilter {
@@ -628,18 +668,22 @@ enum WorkerOrderable {
 }
 
 input WorkerPatch {
+  project: ProjectRef
   name: String
   availability: Int
   user: UserRef
   tags: [TagRef]
   tasks: [TaskRef]
+  liked: [TaskRef]
 }
 
 input WorkerRef {
   id: ID
+  project: ProjectRef
   name: String
   availability: Int
   user: UserRef
   tags: [TagRef]
   tasks: [TaskRef]
+  liked: [TaskRef]
 }

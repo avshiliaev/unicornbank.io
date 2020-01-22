@@ -1,12 +1,128 @@
-mutation updateBoard($filter: ColumnFilter, $order: ColumnOrder, $first: Int, $offset: Int, $filter1: BoardFilter, $order1: BoardOrder, $first1: Int, $offset1: Int, $input: UpdateBoardInput!){
+mutation updateBoard($filter: ProjectFilter, $filter1: WorkerFilter, $order: WorkerOrder, $first: Int, $offset: Int, $filter2: TagFilter, $order1: TagOrder, $first1: Int, $offset1: Int, $filter3: ProjectFilter, $filter4: ColumnFilter, $filter5: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter6: WorkerFilter, $order3: WorkerOrder, $first3: Int, $offset3: Int, $filter7: CommentFilter, $order4: CommentOrder, $first4: Int, $offset4: Int, $filter8: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter9: ProjectFilter, $filter10: ColumnFilter, $order6: ColumnOrder, $first6: Int, $offset6: Int, $filter11: BoardFilter, $order7: BoardOrder, $first7: Int, $offset7: Int, $filter12: ProjectFilter, $filter13: UserFilter, $filter14: TagFilter, $order8: TagOrder, $first8: Int, $offset8: Int, $filter15: TaskFilter, $order9: TaskOrder, $first9: Int, $offset9: Int, $filter16: TaskFilter, $order10: TaskOrder, $first10: Int, $offset10: Int, $filter17: WorkerFilter, $order11: WorkerOrder, $first11: Int, $offset11: Int, $filter18: ProjectFilter, $filter19: BoardFilter, $filter20: TaskFilter, $order12: TaskOrder, $first12: Int, $offset12: Int, $filter21: ColumnFilter, $order13: ColumnOrder, $first13: Int, $offset13: Int, $filter22: BoardFilter, $order14: BoardOrder, $first14: Int, $offset14: Int, $input: UpdateBoardInput!){
     updateBoard(input: $input){
-        board(filter: $filter1, order: $order1, first: $first1, offset: $offset1){
+        board(filter: $filter22, order: $order14, first: $first14, offset: $offset14){
             id
-            title
-            columns(filter: $filter, order: $order, first: $first, offset: $offset){
+            project(filter: $filter18){
                 id
                 title
-                taskIds
+                description
+                tags(filter: $filter2, order: $order1, first: $first1, offset: $offset1){
+                    id
+                    title
+                    project(filter: $filter){
+                        id
+                        title
+                        description
+                    }
+                    workers(filter: $filter1, order: $order, first: $first, offset: $offset){
+                        id
+                        name
+                        availability
+                    }
+                }
+                tasks(filter: $filter8, order: $order5, first: $first5, offset: $offset5){
+                    id
+                    project(filter: $filter3){
+                        id
+                        title
+                        description
+                    }
+                    column(filter: $filter4){
+                        id
+                        title
+                    }
+                    title
+                    workers(filter: $filter5, order: $order2, first: $first2, offset: $offset2){
+                        id
+                        name
+                        availability
+                    }
+                    hours
+                    deadline
+                    content
+                    priority
+                    complete
+                    likes(filter: $filter6, order: $order3, first: $first3, offset: $offset3){
+                        id
+                        name
+                        availability
+                    }
+                    comments(filter: $filter7, order: $order4, first: $first4, offset: $offset4){
+                        id
+                        content
+                    }
+                }
+                boards(filter: $filter11, order: $order7, first: $first7, offset: $offset7){
+                    id
+                    project(filter: $filter9){
+                        id
+                        title
+                        description
+                    }
+                    title
+                    columns(filter: $filter10, order: $order6, first: $first6, offset: $offset6){
+                        id
+                        title
+                    }
+                    order
+                }
+                workers(filter: $filter17, order: $order11, first: $first11, offset: $offset11){
+                    id
+                    project(filter: $filter12){
+                        id
+                        title
+                        description
+                    }
+                    name
+                    availability
+                    user(filter: $filter13){
+                        id
+                        username
+                        password
+                        location
+                    }
+                    tags(filter: $filter14, order: $order8, first: $first8, offset: $offset8){
+                        id
+                        title
+                    }
+                    tasks(filter: $filter15, order: $order9, first: $first9, offset: $offset9){
+                        id
+                        title
+                        hours
+                        deadline
+                        content
+                        priority
+                        complete
+                    }
+                    liked(filter: $filter16, order: $order10, first: $first10, offset: $offset10){
+                        id
+                        title
+                        hours
+                        deadline
+                        content
+                        priority
+                        complete
+                    }
+                }
+            }
+            title
+            columns(filter: $filter21, order: $order13, first: $first13, offset: $offset13){
+                id
+                board(filter: $filter19){
+                    id
+                    title
+                    order
+                }
+                title
+                tasks(filter: $filter20, order: $order12, first: $first12, offset: $offset12){
+                    id
+                    title
+                    hours
+                    deadline
+                    content
+                    priority
+                    complete
+                }
             }
             order
         }

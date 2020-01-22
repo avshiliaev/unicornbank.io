@@ -1,52 +1,62 @@
 
 
 type Comment {
-    id: ID
-    worker: Worker
+    id: ID!
+    task: Task!
+    worker: Worker!
     content: String!
 }
 
 type Tag {
-    id: ID
+    id: ID!
     title: String!
+    project: Project!
+    workers: [Worker]
 }
 
 type Task {
-    id: ID
+    id: ID!
+    project: Project!
+    column: Column!
     title: String! @search(by: [hash])
+    workers: [Worker]
     hours: Int!
     deadline: String!
     content: String!
     priority: Int!
     complete: Boolean!
-    likes: [Worker]
-    comments: [Comment]
+    likes: [Worker] @hasInverse(field: liked)
+    comments: [Comment] @hasInverse(field: task)
 }
 
 type Column {
-    id: ID
+    id: ID!
+    board: Board!
     title: String!
-    taskIds: [String]
+    tasks: [Task] @hasInverse(field: column)
 }
 
 type Board {
-    id: ID
+    id: ID!
+    project: Project!
     title: String!
-    columns: [Column]
+    columns: [Column] @hasInverse(field: board)
     order: [String]
 }
 
 type Worker {
-    id: ID
+    id: ID!
+    project: Project!
     name: String! @search(by: [hash])
     availability: Int!
     user: User! @hasInverse(field: roles)
-    tags: [Tag]
-    tasks: [Task]
+    tags: [Tag] @hasInverse(field: workers)
+    tasks: [Task] @hasInverse(field: workers)
+    liked: [Task]
 }
 
 type User {
-    id: ID
+    id: ID!
     username: String! @search(by: [hash])
     password: String!
     location: String!
@@ -55,10 +65,11 @@ type User {
 }
 
 type Project {
-    id: ID
+    id: ID!
     title: String! @search(by: [hash])
-    tags: [Tag]
-    tasks: [Task]
-    boards: [Board]
-    workers: [Worker]
+    description: String!
+    tags: [Tag] @hasInverse(field: project)
+    tasks: [Task] @hasInverse(field: project)
+    boards: [Board] @hasInverse(field: project)
+    workers: [Worker] @hasInverse(field: project)
 }
