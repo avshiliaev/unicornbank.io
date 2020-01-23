@@ -5,8 +5,6 @@ import {HttpLink} from 'apollo-link-http';
 import {ApolloProvider} from '@apollo/react-common';
 import Pages from './pages';
 import './App.css';
-import {BreakpointProvider} from './providers/breakpoint.provider';
-import {useMedia} from 'react-use-media';
 
 /**
  * Updating cache strategies:
@@ -24,15 +22,10 @@ const client = new ApolloClient({
 
 const App: React.FC = () => {
 
-    const isWide = useMedia({
-        minWidth: 1000,
-    });
 
     return (
         <ApolloProvider client={client}>
-            <BreakpointProvider queries={{small: !isWide}}>
-                <Pages/>
-            </BreakpointProvider>
+            <Pages/>
         </ApolloProvider>
     );
 };

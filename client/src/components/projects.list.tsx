@@ -3,11 +3,13 @@ import {Project} from '../api/interfaces/types.d';
 import {Avatar, Empty, List} from 'antd';
 import ProjectsDelete from '../containers/projects/projects.delete';
 import ActionIcon from './action.icon';
-import {useBreakpoint} from '../providers/breakpoint.provider';
+import {useMedia} from 'react-use-media';
 
 const ProjectsList = ({projects}) => {
 
-    const breakpoints = useBreakpoint();
+    const large = useMedia({
+        minWidth: 1000,
+    });
 
     if (projects.length === 0) {
         return (
@@ -19,7 +21,7 @@ const ProjectsList = ({projects}) => {
 
     return (
         <List
-            itemLayout={breakpoints.small ? "vertical": 'horizontal'}
+            itemLayout={!large ? "vertical" : 'horizontal'}
             dataSource={projectsList}
             renderItem={project => {
                 const link = `/projects/${project.id}`;

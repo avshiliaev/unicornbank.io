@@ -1,41 +1,33 @@
 import React from 'react';
-import {Col, Layout, Menu, Row} from 'antd';
+import {Col, Layout, Row} from 'antd';
 import ProjectsQuery from '../containers/projects/projects.query';
+import ProjectsOverviewHeader from '../components/layout/projects.overview.header';
+import ProjectsOverviewFooter from '../components/layout/projects.overview.footer';
 import {WrappedProjectsAdd} from '../containers/projects/projects.add';
+import {useMedia} from 'react-use-media';
 
-const {Header, Content, Footer} = Layout;
-
-const ProjectsOverviewHeader = () => {
-    return (
-        <Header style={{background: '#fff'}}>
-            <Menu
-                theme="light"
-                mode="horizontal"
-                defaultSelectedKeys={['1']}
-                style={{lineHeight: '64px'}}
-            >
-                <Menu.Item key="1">My projects</Menu.Item>
-                <Menu.Item key="2">Discover</Menu.Item>
-            </Menu>
-        </Header>
-    )
-};
+const {Content} = Layout;
 
 const ProjectsOverviewContent = () => {
+
+    const large = useMedia({
+        minWidth: 1000,
+    });
+
     return (
-        <Content style={{padding: '50px'}}>
-            <Row>
-                <Col span={8}>
-                    <div style={
-                        {background: '#fff', padding: 24, minHeight: 100}
-                    }>
+        <Content style={{padding: large ? 16 : 0}}>
+            <Row
+                gutter={[{xs: 0, sm: 0, md: 16, lg: 16}, 20]}
+                type="flex"
+                justify="space-around"
+            >
+                <Col xs={24} sm={24} md={8} lg={8} xl={8}>
+                    <div style={{background: '#fff', padding: 24, minHeight: 100}}>
                         <WrappedProjectsAdd/>
                     </div>
                 </Col>
-                <Col span={16}>
-                    <div style={
-                        {background: '#fff', padding: 24, minHeight: 280, marginLeft: '50px'}
-                    }>
+                <Col xs={24} sm={24} md={16} lg={16} xl={16}>
+                    <div style={{background: '#fff', padding: 24, minHeight: 280}}>
                         <ProjectsQuery/>
                     </div>
                 </Col>
@@ -44,11 +36,6 @@ const ProjectsOverviewContent = () => {
     )
 };
 
-const ProjectsOverviewFooter = () => {
-    return (
-        <Footer style={{textAlign: 'center'}}>Lagerist ©2020</Footer>
-    )
-};
 
 const ProjectsPage = () => {
     return (
