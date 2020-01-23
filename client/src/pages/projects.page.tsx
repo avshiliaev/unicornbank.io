@@ -11,13 +11,18 @@ const {Content} = Layout;
 const ProjectsOverviewContent = () => {
 
     const large = useMedia({
-        minWidth: 1000,
+        minWidth: 920,
     });
 
     return (
         <Content style={{padding: large ? 16 : 0}}>
             <Row
-                gutter={[{xs: 0, sm: 0, md: 16, lg: 16}, 20]}
+                gutter={
+                    [
+                        {xs: 0, sm: 0, md: 0, lg: 16},
+                        {xs: 0, sm: 0, md: 0, lg: 16}
+                    ]
+                }
                 type="flex"
                 justify="space-around"
             >
