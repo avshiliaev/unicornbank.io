@@ -1,9 +1,24 @@
 import React from 'react';
 import {Project} from '../api/interfaces/types.d';
-import {Avatar, Empty, List} from 'antd';
+import {Avatar, Badge, Empty, List} from 'antd';
 import ProjectsDelete from '../containers/projects/projects.delete';
 import ActionIcon from './action.icon';
 import {useMedia} from 'react-use-media';
+
+const ProjectAvatar = ({text}) => {
+
+    function getRandomInt(max) {
+        return Math.floor(Math.random() * Math.floor(max));
+    }
+
+    const colorList = ['#f56a00', '#7265e6', '#ffbf00', '#00a2ae'];
+
+    return (
+        <Badge count={getRandomInt(6)}>
+            <Avatar style={{backgroundColor: colorList[getRandomInt(4)]}}>{text}</Avatar>
+        </Badge>
+    )
+};
 
 const ProjectsList = ({projects}) => {
 
@@ -34,10 +49,10 @@ const ProjectsList = ({projects}) => {
                     <List.Item actions={[
                         <ActionIcon text={numberWorkers} type="team" action={openWorkers}/>,
                         <ActionIcon text={numberTasks} type="container" action={openTasks}/>,
-                        large? <ProjectsDelete project={project}/> : <div>Del</div>
+                        large ? <ProjectsDelete project={project}/> : <div>Del</div>
                     ]}>
                         <List.Item.Meta
-                            avatar={<Avatar>{ava}</Avatar>}
+                            avatar={<ProjectAvatar text={ava}/>}
                             title={<a href={link}>{project.title}</a>}
                             description={project.description}
                         />

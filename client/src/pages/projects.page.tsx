@@ -1,5 +1,5 @@
 import React from 'react';
-import {Col, Layout, Row} from 'antd';
+import {Button, Col, Layout, Row} from 'antd';
 import ProjectsQuery from '../containers/projects/projects.query';
 import ProjectsOverviewHeader from '../components/layout/projects.overview.header';
 import ProjectsOverviewFooter from '../components/layout/projects.overview.footer';
@@ -8,10 +8,28 @@ import {useMedia} from 'react-use-media';
 
 const {Content} = Layout;
 
+const ProjectsAddSmall = () => {
+    return (
+        <div>
+            <Button type="primary" block>
+                Add project
+            </Button>
+        </div>
+    )
+};
+
 const ProjectsOverviewContent = () => {
 
+    const breakpoints = {
+        xs: '480px',
+        sm: '576px',
+        md: '768px',
+        lg: '992px',
+        xl: '1200px',
+        xxl: '1600px',
+    };
     const large = useMedia({
-        minWidth: 920,
+        minWidth: breakpoints.lg,
     });
 
     return (
@@ -28,7 +46,10 @@ const ProjectsOverviewContent = () => {
             >
                 <Col xs={24} sm={24} md={8} lg={8} xl={8}>
                     <div style={{background: '#fff', padding: 24, minHeight: 100}}>
-                        <WrappedProjectsAdd/>
+                        {large
+                            ? (<WrappedProjectsAdd/>)
+                            : (<ProjectsAddSmall/>)
+                        }
                     </div>
                 </Col>
                 <Col xs={24} sm={24} md={16} lg={16} xl={16}>
