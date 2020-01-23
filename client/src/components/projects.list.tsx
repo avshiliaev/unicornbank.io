@@ -8,7 +8,7 @@ import {useMedia} from 'react-use-media';
 const ProjectsList = ({projects}) => {
 
     const large = useMedia({
-        minWidth: 1000,
+        minWidth: 1024,
     });
 
     if (projects.length === 0) {
@@ -34,7 +34,7 @@ const ProjectsList = ({projects}) => {
                     <List.Item actions={[
                         <ActionIcon text={numberWorkers} type="team" action={openWorkers}/>,
                         <ActionIcon text={numberTasks} type="container" action={openTasks}/>,
-                        <ProjectsDelete project={project}/>
+                        large? <ProjectsDelete project={project}/> : <div>Del</div>
                     ]}>
                         <List.Item.Meta
                             avatar={<Avatar>{ava}</Avatar>}
