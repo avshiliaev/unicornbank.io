@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from 'antd';
 
-const ProjectsDelButton = ({mutate, variables}) => {
+const ProjectsDelBtn = ({mutate, variables}) => {
 
     return (
         <div>
@@ -10,5 +10,5 @@ const ProjectsDelButton = ({mutate, variables}) => {
     )
 };
 
-export default ProjectsDelButton;
+export default ProjectsDelBtn;
 

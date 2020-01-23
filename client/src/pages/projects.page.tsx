@@ -1,36 +1,24 @@
 import React from 'react';
-import {Button, Col, Layout, Row} from 'antd';
+import {BackTop, Col, Layout, Row} from 'antd';
 import ProjectsQuery from '../containers/projects/projects.query';
 import ProjectsOverviewHeader from '../components/layout/projects.overview.header';
 import ProjectsOverviewFooter from '../components/layout/projects.overview.footer';
 import {useMedia} from 'react-use-media';
-import {WrappedProjectsAdd} from '../containers/projects/projects.add';
+import ProjectsAddBtn from '../components/projects.add.btn';
+import {flexCenter} from '../JSXStyles';
 
 const {Content} = Layout;
 
-const ProjectsAddSmall = () => {
-    return (
-        <div>
-            <Button block>
-                Add project
-            </Button>
+const Profile = ({large}) => {
+
+    return(
+        <div style={flexCenter}>
+            {large ? 'Profile big' : 'Profile small'}
         </div>
     )
 };
 
-const ProjectsOverviewContent = () => {
-
-    const breakpoints = {
-        xs: '480px',
-        sm: '576px',
-        md: '768px',
-        lg: '992px',
-        xl: '1200px',
-        xxl: '1600px',
-    };
-    const large = useMedia({
-        minWidth: breakpoints.lg,
-    });
+const ProjectsOverviewContent = ({large}) => {
 
     return (
         <Content style={{padding: large ? 16 : 0}}>
@@ -54,31 +42,23 @@ const ProjectsOverviewContent = () => {
                         }
                     >
                         <Col>
-                            <div style={{background: '#fff', padding: 24, minHeight: 100}}>
-                                Col
+                            <div style={{background: '#fff', padding: 24}}>
+                                <Profile large={large}/>
                             </div>
                         </Col>
                     </Row>
-                    <Row
-
-                        gutter={
-                            [
-                                {xs: 0, sm: 0, md: 0, lg: 16},
-                                {xs: 0, sm: 0, md: 0, lg: 16}
-                            ]
-                        }>
+                    {large ? (<Row
+                        gutter={{xs: 0, sm: 0, md: 0, lg: 16}}
+                    >
                         <Col>
-                            <div style={{background: '#fff', padding: 24, minHeight: 100}}>
-                                {large
-                                    ? (<WrappedProjectsAdd/>)
-                                    : (<ProjectsAddSmall/>)
-                                }
+                            <div style={{background: '#fff', padding: 24}}>
+                                <ProjectsAddBtn/>
                             </div>
                         </Col>
-                    </Row>
+                    </Row>) : (<div></div>)}
                 </Col>
                 <Col xs={24} sm={24} md={24} lg={16} xl={16}>
-                    <div style={{background: '#fff', padding: 24, minHeight: 280}}>
+                    <div style={{background: '#fff', padding: 24}}>
                         <ProjectsQuery large={large}/>
                     </div>
                 </Col>
@@ -89,11 +69,24 @@ const ProjectsOverviewContent = () => {
 
 
 const ProjectsPage = () => {
+
+    const breakpoints = {
+        xs: '480px',
+        sm: '576px',
+        md: '768px',
+        lg: '992px',
+        xl: '1200px',
+        xxl: '1600px',
+    };
+    const large = useMedia({
+        minWidth: breakpoints.lg,
+    });
+
     return (
         <Layout style={{minHeight: '100vh'}}>
-            <ProjectsOverviewHeader/>
-            <ProjectsOverviewContent/>
-            <ProjectsOverviewFooter/>
+            {large ? <ProjectsOverviewHeader/> : (<div></div>)}
+            <ProjectsOverviewContent large={large}/>
+            {large ? <ProjectsOverviewFooter/> : <BackTop/>}
         </Layout>
     )
 };

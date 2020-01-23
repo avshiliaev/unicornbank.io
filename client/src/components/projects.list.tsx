@@ -31,7 +31,7 @@ const ProjectsList = ({projects, large}) => {
 
     return (
         <List
-            header={!large ? "vertical" : 'horizontal'}
+            header={large ? (<h4>Projects</h4>) : 'Projects'}
             itemLayout={!large ? "vertical" : 'horizontal'}
             dataSource={projectsList}
             renderItem={project => {
