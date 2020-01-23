@@ -3,7 +3,6 @@ import {Project} from '../api/interfaces/types.d';
 import {Avatar, Badge, Empty, List} from 'antd';
 import ProjectsDelete from '../containers/projects/projects.delete';
 import ActionIcon from './action.icon';
-import {useMedia} from 'react-use-media';
 
 const ProjectAvatar = ({text}) => {
 
@@ -20,11 +19,7 @@ const ProjectAvatar = ({text}) => {
     )
 };
 
-const ProjectsList = ({projects}) => {
-
-    const large = useMedia({
-        minWidth: 1024,
-    });
+const ProjectsList = ({projects, large}) => {
 
     if (projects.length === 0) {
         return (
@@ -36,6 +31,7 @@ const ProjectsList = ({projects}) => {
 
     return (
         <List
+            header={!large ? "vertical" : 'horizontal'}
             itemLayout={!large ? "vertical" : 'horizontal'}
             dataSource={projectsList}
             renderItem={project => {
