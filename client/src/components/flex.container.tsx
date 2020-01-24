@@ -6,9 +6,12 @@ const FlexContainer = ({children, justify, align}) => {
     const flexContainer: CSS.Properties = {
         display: 'flex',
         justifyContent: justify,
+        justifyItems: justify,
+        textJustify: justify,
         alignItems: align,
+        alignContent: align,
         textAlign: align,
-        flexDirection: 'column',
+        // flexDirection: 'column',
         height: '100%'
     };
 

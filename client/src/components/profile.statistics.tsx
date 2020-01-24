@@ -28,13 +28,13 @@ const ProfileStatistics = ({large}) => {
                 xl={{span: 24, order: 1}}
             >
                 <FlexContainer justify={large ? 'center' : 'start'} align='center'>
-                    <h2>John Smith</h2>
+                    <h2 style={{paddingLeft: 16, paddingRight: 16}}>John Smith</h2>
                 </FlexContainer>
             </Col>
             <Col
-                xs={{span: 4, order: 1}}
+                xs={{span: 6, order: 1}}
                 sm={{span: 4, order: 1}}
-                md={{span: 2, order: 1}}
+                md={{span: 4, order: 1}}
                 lg={{span: 24, order: 2}}
                 xl={{span: 24, order: 2}}
             >
