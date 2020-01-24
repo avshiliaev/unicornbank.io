@@ -1,31 +1,13 @@
 import React from 'react';
-import {BackTop, Col, Layout, Row} from 'antd';
+import {Col, Layout, Row} from 'antd';
 import ProjectsQuery from '../containers/projects/projects.query';
 import ProjectsOverviewHeader from '../components/layout/projects.overview.header';
 import ProjectsOverviewFooter from '../components/layout/projects.overview.footer';
 import {useMedia} from 'react-use-media';
 import ProjectsAddBtn from '../components/projects.add.btn';
-import {flexCenter} from '../JSXStyles';
+import ProfileStatistics from '../components/profile.statistics';
 
-const {Header, Content} = Layout;
-
-const Profile = ({large}) => {
-
-    return(
-        <div style={flexCenter}>
-            {large ? 'Profile big' : 'Profile small'}
-        </div>
-    )
-};
-
-const MobileToolbar = () => {
-
-    return(
-        <Header style={{background: '#fff', padding: 0}}>
-            Mobile header
-        </Header>
-    )
-};
+const {Content} = Layout;
 
 const ProjectsOverviewContent = ({large}) => {
 
@@ -35,7 +17,7 @@ const ProjectsOverviewContent = ({large}) => {
                 gutter={
                     [
                         {xs: 0, sm: 0, md: 0, lg: 16},
-                        {xs: 0, sm: 0, md: 0, lg: 16}
+                        {xs: 16, sm: 16, md: 16, lg: 16}
                     ]
                 }
                 type="flex"
@@ -43,20 +25,30 @@ const ProjectsOverviewContent = ({large}) => {
             >
                 <Col xs={24} sm={24} md={24} lg={8} xl={8}>
                     <Row
-                        gutter={{xs: 0, sm: 0, md: 0, lg: 16}}
+                        gutter={
+                            [
+                                {xs: 0, sm: 0, md: 0, lg: 16},
+                                {xs: 24, sm: 24, md: 24, lg: 24}
+                            ]
+                        }
                     >
                         <Col>
                             <div style={{background: '#fff', padding: 24}}>
-                                {large ? <Profile large={large}/> : (<MobileToolbar/>)}
+                                {large ? <ProfileStatistics large={large}/> : (<div/>)}
                             </div>
                         </Col>
                     </Row>
                     <Row
-                        gutter={{xs: 0, sm: 0, md: 0, lg: 16}}
+                        gutter={
+                            [
+                                {xs: 0, sm: 0, md: 0, lg: 16},
+                                {xs: 24, sm: 24, md: 24, lg: 24}
+                            ]
+                        }
                     >
                         <Col>
                             <div style={{background: '#fff', padding: 24}}>
-                                {large ? <ProjectsAddBtn/> : <Profile large={large}/>}
+                                {large ? <ProjectsAddBtn/> : <ProfileStatistics large={large}/>}
                             </div>
                         </Col>
                     </Row>
@@ -88,9 +80,9 @@ const ProjectsPage = () => {
 
     return (
         <Layout style={{minHeight: '100vh'}}>
-            {large ? <ProjectsOverviewHeader/> : (<div></div>)}
+            <ProjectsOverviewHeader large={large}/>
             <ProjectsOverviewContent large={large}/>
-            {large ? <ProjectsOverviewFooter/> : <BackTop/>}
+            <ProjectsOverviewFooter large={large}/>
         </Layout>
     )
 };
