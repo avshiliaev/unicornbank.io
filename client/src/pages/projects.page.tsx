@@ -1,8 +1,8 @@
 import React from 'react';
 import {Col, Layout, Row} from 'antd';
 import ProjectsQuery from '../containers/projects/projects.query';
-import ProjectsOverviewHeader from '../components/layout/projects.overview.header';
-import ProjectsOverviewFooter from '../components/layout/projects.overview.footer';
+import ProjectsOverviewHeader from '../components/layout/projects/projects.overview.header';
+import ProjectsOverviewFooter from '../components/layout/projects/projects.overview.footer';
 import {useMedia} from 'react-use-media';
 import ProjectsAddBtn from '../components/projects.add.btn';
 import ProfileStatistics from '../components/profile.statistics';
@@ -14,38 +14,19 @@ const ProjectsOverviewContent = ({large}) => {
     return (
         <Content style={{padding: large ? 16 : 0}}>
             <Row
-                gutter={
-                    [
-                        {xs: 0, sm: 0, md: 0, lg: 16},
-                        {xs: 16, sm: 16, md: 16, lg: 16}
-                    ]
-                }
+                gutter={[{xs: 0, sm: 0, md: 0, lg: 16}, 24]}
                 type="flex"
                 justify="space-around"
             >
                 <Col xs={24} sm={24} md={24} lg={8} xl={8}>
-                    <Row
-                        gutter={
-                            [
-                                {xs: 0, sm: 0, md: 0, lg: 16},
-                                {xs: 24, sm: 24, md: 24, lg: 24}
-                            ]
-                        }
-                    >
+                    <Row gutter={[{xs: 0, sm: 0, md: 0, lg: 16}, 24]}>
                         <Col>
                             <div style={{background: '#fff', padding: 24}}>
                                 {large ? <ProfileStatistics large={large}/> : (<div/>)}
                             </div>
                         </Col>
                     </Row>
-                    <Row
-                        gutter={
-                            [
-                                {xs: 0, sm: 0, md: 0, lg: 16},
-                                {xs: 24, sm: 24, md: 24, lg: 24}
-                            ]
-                        }
-                    >
+                    <Row gutter={[{xs: 0, sm: 0, md: 0, lg: 16}, 24]}>
                         <Col>
                             <div style={{background: '#fff', padding: 24}}>
                                 {large ? <ProjectsAddBtn/> : <ProfileStatistics large={large}/>}
