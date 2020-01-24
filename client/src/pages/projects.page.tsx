@@ -7,7 +7,7 @@ import {useMedia} from 'react-use-media';
 import ProjectsAddBtn from '../components/projects.add.btn';
 import {flexCenter} from '../JSXStyles';
 
-const {Content} = Layout;
+const {Header, Content} = Layout;
 
 const Profile = ({large}) => {
 
@@ -15,6 +15,15 @@ const Profile = ({large}) => {
         <div style={flexCenter}>
             {large ? 'Profile big' : 'Profile small'}
         </div>
+    )
+};
+
+const MobileToolbar = () => {
+
+    return(
+        <Header style={{background: '#fff', padding: 0}}>
+            Mobile header
+        </Header>
     )
 };
 
@@ -34,28 +43,23 @@ const ProjectsOverviewContent = ({large}) => {
             >
                 <Col xs={24} sm={24} md={24} lg={8} xl={8}>
                     <Row
-                        gutter={
-                            [
-                                {xs: 0, sm: 0, md: 0, lg: 16},
-                                {xs: 0, sm: 0, md: 0, lg: 16}
-                            ]
-                        }
-                    >
-                        <Col>
-                            <div style={{background: '#fff', padding: 24}}>
-                                <Profile large={large}/>
-                            </div>
-                        </Col>
-                    </Row>
-                    {large ? (<Row
                         gutter={{xs: 0, sm: 0, md: 0, lg: 16}}
                     >
                         <Col>
                             <div style={{background: '#fff', padding: 24}}>
-                                <ProjectsAddBtn/>
+                                {large ? <Profile large={large}/> : (<MobileToolbar/>)}
                             </div>
                         </Col>
-                    </Row>) : (<div></div>)}
+                    </Row>
+                    <Row
+                        gutter={{xs: 0, sm: 0, md: 0, lg: 16}}
+                    >
+                        <Col>
+                            <div style={{background: '#fff', padding: 24}}>
+                                {large ? <ProjectsAddBtn/> : <Profile large={large}/>}
+                            </div>
+                        </Col>
+                    </Row>
                 </Col>
                 <Col xs={24} sm={24} md={24} lg={16} xl={16}>
                     <div style={{background: '#fff', padding: 24}}>

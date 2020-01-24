@@ -5,7 +5,7 @@ const {Header} = Layout;
 
 const ProjectsOverviewHeader = () => {
     return (
-        <Header style={{background: '#fff'}}>
+        <Header style={{background: '#fff', paddingLeft: 16}}>
             <Menu
                 theme="light"
                 mode="horizontal"
