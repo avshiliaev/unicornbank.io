@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Button, Drawer, Icon} from 'antd';
+import {Drawer, Icon} from 'antd';
 
 class MobileDrawer extends React.Component {
     state = {visible: false};
@@ -20,12 +20,12 @@ class MobileDrawer extends React.Component {
     render() {
         return (
             <div>
-                <Icon type="menu" onClick={this.showDrawer} style={{ fontSize: '24px' }}/>
+                <Icon type="menu" onClick={this.showDrawer} style={{fontSize: '16px'}}/>
                 <Drawer
                     title="Basic Drawer"
                     placement="left"
                     bodyStyle={{padding: 0}}
-                    closable={false}
+                    closable={true}
                     onClose={this.onClose}
                     visible={this.state.visible}
                 >

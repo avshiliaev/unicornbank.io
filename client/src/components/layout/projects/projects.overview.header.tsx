@@ -31,7 +31,15 @@ const ProjectsOverviewHeader = ({large}) => {
         )
         : (
             <Header style={
-                {background: '#fff', paddingLeft: 24, position: 'fixed', zIndex: 1, width: '100%'}
+                {
+                    background: '#fff',
+                    paddingLeft: 24,
+                    position: 'fixed',
+                    zIndex: 1,
+                    width: '100%',
+                    boxShadow: '0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19)',
+                    height: '55px'
+                }
             }>
                 <MobileDrawer>
                     <HeaderMenu large={large}/>
