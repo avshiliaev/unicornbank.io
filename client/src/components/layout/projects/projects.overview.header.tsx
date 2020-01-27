@@ -6,6 +6,8 @@ const {Header} = Layout;
 
 const ProjectsOverviewHeader = ({large}) => {
 
+    const headerShadow = '0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19)';
+
     const HeaderMenu = ({large}) => {
 
         return (
@@ -37,7 +39,7 @@ const ProjectsOverviewHeader = ({large}) => {
                     position: 'fixed',
                     zIndex: 1,
                     width: '100%',
-                    boxShadow: '0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19)',
+                    boxShadow: headerShadow,
                     height: '55px'
                 }
             }>
