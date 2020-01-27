@@ -51,7 +51,7 @@ const ProjectsForm = ({form, mutate}) => {
                 )}
             </Form.Item>
             <Form.Item>
-                <Button type="primary" htmlType="submit" style={{width: '100%'}}>
+                <Button htmlType="submit" block>
                     Add Project
                 </Button>
             </Form.Item>

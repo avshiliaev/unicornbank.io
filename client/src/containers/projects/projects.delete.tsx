@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react';
-import ProjectsDelButton from '../../components/projects.del.button';
 import {useMutation} from '@apollo/react-hooks';
 import {DELETE_PROJECT, GET_PROJECTS} from './projects.documents';
+import ProjectsDelBtn from '../../components/projects.del.btn';
 
 const ProjectsDelete = ({project}) => {
 
@@ -17,7 +17,7 @@ const ProjectsDelete = ({project}) => {
 
     return (
         <Fragment>
-            <ProjectsDelButton mutate={mutate} variables={variables}/>
+            <ProjectsDelBtn mutate={mutate} variables={variables}/>
         </Fragment>
     );
 };
