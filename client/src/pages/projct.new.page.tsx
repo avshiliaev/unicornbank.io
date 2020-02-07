@@ -1,11 +1,11 @@
 import React from 'react';
 import {WrappedProjectsAdd} from '../containers/projects/projects.add';
 
-const NewProjectPage = () => {
+const ProjctNewPage = () => {
 
     return (
         <WrappedProjectsAdd/>
     )
 };
 
-export default NewProjectPage;
+export default ProjctNewPage;
