@@ -2,6 +2,7 @@ import React from 'react';
 import {Layout, Menu} from 'antd';
 import MobileDrawer from '../mobile.drawer';
 import Logo from '../../logo';
+import ProfileIcon from '../../profile.icon';
 
 const {Header} = Layout;
 
@@ -34,7 +35,9 @@ const ProjectsOverviewHeader = ({large}) => {
                 {background: '#fff', paddingLeft: 16}
             }>
                 <Logo/>
+                <ProfileIcon/>
                 <HeaderMenu large={large}/>
+
             </Header>
         )
         : (

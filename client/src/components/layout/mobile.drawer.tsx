@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {Drawer, Icon} from 'antd';
+import Logo from '../logo';
 
 class MobileDrawer extends React.Component {
     state = {visible: false};
@@ -22,7 +23,7 @@ class MobileDrawer extends React.Component {
             <div>
                 <Icon type="menu" onClick={this.showDrawer} style={{fontSize: '16px'}}/>
                 <Drawer
-                    title="Basic Drawer"
+                    title={<div>Lagerist</div>}
                     placement="left"
                     bodyStyle={{padding: 0}}
                     closable={true}
@@ -31,6 +32,7 @@ class MobileDrawer extends React.Component {
                 >
                     {this.props.children}
                 </Drawer>
+                <Logo/>
             </div>
         );
     }
