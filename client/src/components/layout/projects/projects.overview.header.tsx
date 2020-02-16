@@ -1,6 +1,9 @@
 import React from 'react';
-import {Layout, Menu} from 'antd';
+import {Col, Layout, Menu, Row} from 'antd';
 import MobileDrawer from '../mobile.drawer';
+import ProfileIcon from '../../profile.icon';
+import LogoIcon from '../../logo.icon';
+import FlexContainer from '../../flex.container';
 
 const {Header} = Layout;
 
@@ -17,8 +20,12 @@ const ProjectsOverviewHeader = ({large}) => {
                 defaultSelectedKeys={['1']}
                 style={{lineHeight: '64px'}}
             >
-                <Menu.Item key="1">My projects</Menu.Item>
-                <Menu.Item key="2">Discover</Menu.Item>
+                <Menu.Item key="1">
+                    <a href='/'>My projects</a>
+                </Menu.Item>
+                <Menu.Item key="2">
+                    <a href='/discover'>Discover</a>
+                </Menu.Item>
             </Menu>
         )
     };
@@ -28,7 +35,29 @@ const ProjectsOverviewHeader = ({large}) => {
             <Header style={
                 {background: '#fff', paddingLeft: 16}
             }>
-                <HeaderMenu large={large}/>
+                <Row type="flex" justify="space-around" align="middle">
+                    <Col span={2}>
+                        <Row type="flex" justify="space-around" align="middle">
+                            <Col span={16}>
+                                <FlexContainer justify={'flex-start'} align={'center'}>
+                                    <LogoIcon/>
+                                </FlexContainer>
+                            </Col>
+                        </Row>
+                    </Col>
+                    <Col span={8}>
+                        <HeaderMenu large={large}/>
+                    </Col>
+                    <Col span={14}>
+                        <Row type="flex" justify="end">
+                            <Col span={2}>
+                                <FlexContainer justify={'flex-end'} align={'center'}>
+                                    <ProfileIcon size={30}/>
+                                </FlexContainer>
+                            </Col>
+                        </Row>
+                    </Col>
+                </Row>
             </Header>
         )
         : (

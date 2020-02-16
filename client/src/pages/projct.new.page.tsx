@@ -1,5 +1,5 @@
 import React from 'react';
-import ProjectGet from '../containers/project/project.get';
+import {WrappedProjectsAdd} from '../containers/projects/projects.add';
 import {useMedia} from 'react-use-media';
 import {Col, Layout, Row} from 'antd';
 import ProjectsOverviewHeader from '../components/layout/projects/projects.overview.header';
@@ -7,7 +7,7 @@ import ProjectsOverviewFooter from '../components/layout/projects/projects.overv
 
 const {Content} = Layout;
 
-const ProjectContent = ({id, large}) => {
+const ProjectNewContent = ({large}) => {
 
     return (
         <Content style={{padding: large ? 16 : 0}}>
@@ -20,21 +20,21 @@ const ProjectContent = ({id, large}) => {
                     <Row gutter={[{xs: 0, sm: 0, md: 0, lg: 16}, 24]}>
                         <Col>
                             <div style={{background: '#fff', padding: 24}}>
-                                {large ? <ProjectGet id={id}/> : (<div/>)}
+                                {large ? (<div>Large</div>) : (<div/>)}
                             </div>
                         </Col>
                     </Row>
                     <Row gutter={[{xs: 0, sm: 0, md: 0, lg: 16}, 24]}>
                         <Col>
                             <div style={{background: '#fff', padding: 24}}>
-                                {large ? (<div>Large</div>) : (<div>Small</div>)}
+                                {large ? (<div>Large</div>): (<div>Small</div>)}
                             </div>
                         </Col>
                     </Row>
                 </Col>
                 <Col xs={24} sm={24} md={24} lg={16} xl={16}>
                     <div style={{background: '#fff', padding: 24}}>
-                        <div>Large</div>
+                        <WrappedProjectsAdd/>
                     </div>
                 </Col>
             </Row>
@@ -42,7 +42,7 @@ const ProjectContent = ({id, large}) => {
     )
 };
 
-const ProjectDetail = (props) => {
+const ProjctNewPage = () => {
 
     const breakpoints = {
         xs: '480px',
@@ -59,10 +59,10 @@ const ProjectDetail = (props) => {
     return (
         <Layout style={{minHeight: '100vh'}}>
             <ProjectsOverviewHeader large={large}/>
-            <ProjectContent large={large} id={props.id}/>
+            <ProjectNewContent large={large}/>
             <ProjectsOverviewFooter large={large}/>
         </Layout>
     )
 };
 
-export default ProjectDetail;
+export default ProjctNewPage;

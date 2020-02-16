@@ -22,7 +22,7 @@ class MobileDrawer extends React.Component {
             <div>
                 <Icon type="menu" onClick={this.showDrawer} style={{fontSize: '16px'}}/>
                 <Drawer
-                    title="Basic Drawer"
+                    title={<div>Lagerist</div>}
                     placement="left"
                     bodyStyle={{padding: 0}}
                     closable={true}
