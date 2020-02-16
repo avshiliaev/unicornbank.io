@@ -14,7 +14,7 @@ const mockProjects = {
             workers: [],
             __typename: "Project"
         }]
-    }, extensions: {requestID: "a3b86875-70d2-4dea-a548-045c436eeccb"}
+    }
 };
 
 describe('Launches Page', () => {
