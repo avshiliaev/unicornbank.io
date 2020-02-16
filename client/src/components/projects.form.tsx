@@ -51,7 +51,7 @@ const ProjectsForm = ({form, mutate}) => {
                 )}
             </Form.Item>
             <Form.Item>
-                <Button htmlType="submit" block>
+                <Button htmlType="submit" block data-testid={'add-button'}>
                     Add Project
                 </Button>
             </Form.Item>

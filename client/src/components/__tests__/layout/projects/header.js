@@ -1,7 +1,7 @@
 import React from 'react';
 
-import {cleanup, render} from '../../../test-utils';
-import ProjectsOverviewHeader from "../layout/projects/projects.overview.header";
+import {cleanup, render} from '../../../../../test-utils';
+import ProjectsOverviewHeader from "../../../layout/projects/projects.overview.header";
 
 describe('Header', () => {
     // automatically unmount and cleanup DOM after the test is finished.

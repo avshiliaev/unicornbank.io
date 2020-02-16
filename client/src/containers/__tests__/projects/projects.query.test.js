@@ -1,8 +1,8 @@
 import React from 'react';
 import {InMemoryCache} from 'apollo-cache-inmemory';
-import {cleanup, renderApollo, waitForElement,} from '../../../test-utils';
-import {GET_PROJECTS} from '../projects/projects.documents';
-import ProjectsQuery from '../projects/projects.query';
+import {cleanup, renderApollo, waitForElement,} from '../../../../test-utils';
+import {GET_PROJECTS} from '../../projects/projects.documents';
+import ProjectsQuery from '../../projects/projects.query';
 
 const mockProjects = {
     data: {
@@ -17,7 +17,7 @@ const mockProjects = {
     }
 };
 
-describe('Launches Page', () => {
+describe('Projects Query Container', () => {
     // automatically unmount and cleanup DOM after the test is finished.
     afterEach(cleanup);
 
