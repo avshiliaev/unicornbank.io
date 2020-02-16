@@ -1,11 +1,10 @@
 import React from 'react';
-import CSS from 'csstype';
 
-const BaseSVG = () => {
+const LogoIcon = () => {
 
     return (
         <svg className="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
-             p-id="5635" width="200" height="200">
+             p-id="5635" width="30" height="30">
             <path
                 d="M512 512m-400.695652 0a400.695652 400.695652 0 1 0 801.391304 0 400.695652 400.695652 0 1 0-801.391304 0Z"
                 fill="#0B77E3" fillOpacity=".2" p-id="5636"></path>
@@ -39,34 +38,4 @@ const BaseSVG = () => {
     )
 };
 
-const Logo = () => {
-
-
-    const upperBox: CSS.Properties = {
-        width: '50px',
-        height: '31px',
-        margin: '16px 24px 16px 0',
-        float: 'left',
-    };
-
-    const innerBox: CSS.Properties = {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        textAlign: 'center',
-        flexDirection: 'column',
-        height: '100%'
-    };
-
-    return (
-        <div style={upperBox}>
-            <div style={innerBox}>
-                <BaseSVG/>
-            </div>
-        </div>
-
-
-    )
-};
-
-export default Logo;
+export default LogoIcon;

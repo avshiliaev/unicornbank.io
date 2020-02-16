@@ -1,6 +1,7 @@
 import React from 'react';
 import {Avatar, Col, Row, Tag} from 'antd';
 import FlexContainer from './flex.container';
+import ProfileIcon from './profile.icon';
 
 const ProfileStatistics = ({large}) => {
 
@@ -39,10 +40,7 @@ const ProfileStatistics = ({large}) => {
                 xl={{span: 24, order: 2}}
             >
                 <FlexContainer justify={large ? 'center' : 'start'} align='center'>
-                    <Avatar
-                        src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-                        size={64}
-                    />
+                    <ProfileIcon size={64}/>
                 </FlexContainer>
 
             </Col>
