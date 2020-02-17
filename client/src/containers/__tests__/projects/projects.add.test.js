@@ -52,26 +52,6 @@ describe('Projects Add Container', () => {
         fireEvent.click(getByTestId('add-button'));
         await waitForElement(() => getByTestId('add-button'));
 
-        // mocks = [
-        //   {
-        //     request: {
-        //       query: CANCEL_TRIP,
-        //       variables: { launchId: 1 },
-        //     },
-        //     result: {
-        //       data: {
-        //         cancelTrip: {
-        //           success: true,
-        //           message: '',
-        //           launches: [{ id: 1, isBooked: false }],
-        //         },
-        //       },
-        //     },
-        //   },
-        // ];
-
-        // renderApollo(<ActionButton id={1} isBooked={true} />, { mocks, container });
-        // fireEvent.click(getByTestId('action-button'));
-        // await waitForElement(() => getByTestId('action-button'));
+        // {"data":{"deleteProject":{"msg":"Deleted"}},"extensions":{"requestID":"48c2d4ca-8ee2-46fe-8108-39070b3553a4"}}
     });
 });
