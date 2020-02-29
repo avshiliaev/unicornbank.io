@@ -1,9 +1,9 @@
 import React from 'react';
 import {Col, Layout, Menu, Row} from 'antd';
 import MobileDrawer from './mobile.drawer';
-import ProfileIcon from '../profile.icon';
-import LogoIcon from '../logo.icon';
-import FlexContainer from '../flex.container';
+import ProfileIcon from '../components/profile.icon';
+import LogoIcon from '../components/logo.icon';
+import FlexContainer from '../components/flex.container';
 
 const {Header} = Layout;
 
