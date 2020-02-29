@@ -1,7 +1,7 @@
 import React from 'react';
 import {Project} from '../api/interfaces/types.d';
 import {Avatar, Badge, Empty, List} from 'antd';
-import ProjectsDelete from '../containers/projects/projects.delete';
+import ProjectsDelete from '../containers/projects.delete';
 import ActionIcon from './action.icon';
 
 const ProjectAvatar = ({text}) => {

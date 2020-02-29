@@ -1,8 +1,8 @@
 import React from 'react';
 import {InMemoryCache} from 'apollo-cache-inmemory';
-import {cleanup, renderApollo, waitForElement,} from '../../../../test-utils';
-import {GET_PROJECTS} from '../../projects/projects.documents';
-import ProjectsQuery from '../../projects/projects.query';
+import {cleanup, renderApollo, waitForElement,} from '../../../test-utils';
+import {GET_PROJECTS} from '../projects.documents';
+import ProjectsQuery from '../projects.query';
 
 const mockProjects = {
     data: {

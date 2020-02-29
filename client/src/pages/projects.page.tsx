@@ -1,8 +1,8 @@
 import React from 'react';
 import {Col, Layout, Row} from 'antd';
-import ProjectsQuery from '../containers/projects/projects.query';
-import ProjectsOverviewHeader from '../components/layout/projects/projects.overview.header';
-import ProjectsOverviewFooter from '../components/layout/projects/projects.overview.footer';
+import ProjectsQuery from '../containers/projects.query';
+import ProjectsOverviewHeader from '../components/layout/projects.overview.header';
+import ProjectsOverviewFooter from '../components/layout/projects.overview.footer';
 import {useMedia} from 'react-use-media';
 import ProjectsAddBtn from '../components/projects.add.btn';
 import ProfileStatistics from '../components/profile.statistics';

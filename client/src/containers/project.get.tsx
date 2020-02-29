@@ -11,8 +11,6 @@ const ProjectGet = ({id}) => {
     return (
         <Fragment>
             <div>{data.getProject.title}</div>
-            <div>{data.getProject.tags}</div>
-            <div>{data.getProject.tasks}</div>
         </Fragment>
     );
 };

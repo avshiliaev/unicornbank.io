@@ -1,9 +1,9 @@
 import React from 'react';
-import {WrappedProjectsAdd} from '../containers/projects/projects.add';
+import {WrappedProjectsAdd} from '../containers/projects.add';
 import {useMedia} from 'react-use-media';
 import {Col, Layout, Row} from 'antd';
-import ProjectsOverviewHeader from '../components/layout/projects/projects.overview.header';
-import ProjectsOverviewFooter from '../components/layout/projects/projects.overview.footer';
+import ProjectsOverviewHeader from '../components/layout/projects.overview.header';
+import ProjectsOverviewFooter from '../components/layout/projects.overview.footer';
 
 const {Content} = Layout;
 

@@ -1,8 +1,8 @@
 import React from 'react';
 import {InMemoryCache} from 'apollo-cache-inmemory';
-import {cleanup, fireEvent, renderApollo, waitForElement} from '../../../../test-utils';
-import {ADD_PROJECTS} from "../../projects/projects.documents";
-import {WrappedProjectsAdd} from "../../projects/projects.add";
+import {cleanup, fireEvent, renderApollo, waitForElement} from '../../../test-utils';
+import {ADD_PROJECTS} from "../projects.documents";
+import {WrappedProjectsAdd} from "../projects.add";
 
 
 describe('Projects Add Container', () => {
