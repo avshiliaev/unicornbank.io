@@ -1,12 +1,12 @@
 import React from 'react';
 import {Layout} from 'antd';
 import ProjectsQuery from '../containers/projects.query';
-import ProjectsOverviewHeader from '../layout/projects.overview.header';
-import ProjectsOverviewFooter from '../layout/projects.overview.footer';
 import {useMedia} from 'react-use-media';
 import ProjectsAddBtn from '../components/projects.add.btn';
 import ProfileStatistics from '../components/profile.statistics';
 import FlexGridBasic from '../layout/flex.grid.basic';
+import HeaderBasic from '../layout/header.basic';
+import FooterBasic from '../layout/footer.basic';
 
 const {Content} = Layout;
 
@@ -43,9 +43,9 @@ const ProjectsPage = () => {
 
     return (
         <Layout style={{minHeight: '100vh'}}>
-            <ProjectsOverviewHeader large={large}/>
+            <HeaderBasic large={large}/>
             <ProjectsOverviewContent large={large}/>
-            <ProjectsOverviewFooter large={large}/>
+            <FooterBasic large={large}/>
         </Layout>
     )
 };

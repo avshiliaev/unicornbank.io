@@ -1,16 +1,16 @@
 import React from 'react';
 
 import {cleanup, render} from '../../../../test-utils';
-import ProjectsOverviewHeader from "../../projects.overview.header";
+import HeaderBasic from "../../projects.overview.header";
 
 describe('Header', () => {
     // automatically unmount and cleanup DOM after the test is finished.
     afterEach(cleanup);
 
     it('renders without error for desktop', () => {
-        render(<ProjectsOverviewHeader large={true}/>);
+        render(<HeaderBasic large={true}/>);
     });
     it('renders without error for mobile', () => {
-        render(<ProjectsOverviewHeader large={false}/>);
+        render(<HeaderBasic large={false}/>);
     });
 });

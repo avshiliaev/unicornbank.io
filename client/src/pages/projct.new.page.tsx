@@ -2,9 +2,9 @@ import React from 'react';
 import {WrappedProjectsAdd} from '../containers/projects.add';
 import {useMedia} from 'react-use-media';
 import {Layout} from 'antd';
-import ProjectsOverviewHeader from '../layout/projects.overview.header';
-import ProjectsOverviewFooter from '../layout/projects.overview.footer';
 import FlexGridBasic from '../layout/flex.grid.basic';
+import HeaderBasic from '../layout/header.basic';
+import FooterBasic from '../layout/footer.basic';
 
 const {Content} = Layout;
 
@@ -40,9 +40,9 @@ const ProjctNewPage = () => {
 
     return (
         <Layout style={{minHeight: '100vh'}}>
-            <ProjectsOverviewHeader large={large}/>
+            <HeaderBasic large={large}/>
             <ProjectNewContent large={large}/>
-            <ProjectsOverviewFooter large={large}/>
+            <FooterBasic large={large}/>
         </Layout>
     )
 };

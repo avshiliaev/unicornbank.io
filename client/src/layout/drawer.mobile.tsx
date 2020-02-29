@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Drawer, Icon} from 'antd';
 
-class MobileDrawer extends React.Component {
+class DrawerMobile extends React.Component {
     state = {visible: false};
 
     showDrawer = () => {
@@ -36,4 +36,4 @@ class MobileDrawer extends React.Component {
     }
 }
 
-export default MobileDrawer;
+export default DrawerMobile;

@@ -1,13 +1,13 @@
 import React from 'react';
 import {Col, Layout, Menu, Row} from 'antd';
-import MobileDrawer from './mobile.drawer';
 import ProfileIcon from '../components/profile.icon';
 import LogoIcon from '../components/logo.icon';
 import FlexContainer from '../components/flex.container';
+import DrawerMobile from './drawer.mobile';
 
 const {Header} = Layout;
 
-const ProjectsOverviewHeader = ({large}) => {
+const HeaderBasic = ({large}) => {
 
     const headerShadow = '0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19)';
 
@@ -72,12 +72,12 @@ const ProjectsOverviewHeader = ({large}) => {
                     height: '55px'
                 }
             }>
-                <MobileDrawer>
+                <DrawerMobile>
                     <HeaderMenu large={large}/>
-                </MobileDrawer>
+                </DrawerMobile>
             </Header>
         )
 
 };
 
-export default ProjectsOverviewHeader;
+export default HeaderBasic;

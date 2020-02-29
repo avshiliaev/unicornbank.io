@@ -2,8 +2,8 @@ import React from 'react';
 import ProjectGet from '../containers/project.get';
 import {useMedia} from 'react-use-media';
 import {Layout} from 'antd';
-import ProjectsOverviewHeader from '../layout/projects.overview.header';
-import ProjectsOverviewFooter from '../layout/projects.overview.footer';
+import HeaderBasic from '../layout/header.basic';
+import FooterBasic from '../layout/footer.basic';
 
 const {Content} = Layout;
 
@@ -32,9 +32,9 @@ const ProjectDetail = (props) => {
 
     return (
         <Layout style={{minHeight: '100vh'}}>
-            <ProjectsOverviewHeader large={large}/>
+            <HeaderBasic large={large}/>
             <ProjectContent large={large} id={props.id}/>
-            <ProjectsOverviewFooter large={large}/>
+            <FooterBasic large={large}/>
         </Layout>
     )
 };

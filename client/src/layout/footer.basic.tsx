@@ -3,7 +3,7 @@ import {BackTop, Layout} from 'antd';
 
 const {Footer} = Layout;
 
-const ProjectsOverviewFooter = ({large}) => {
+const FooterBasic = ({large}) => {
     return large
         ? (
             <Footer style={{textAlign: 'center'}}>Lagerist ©2020</Footer>
@@ -17,4 +17,4 @@ const ProjectsOverviewFooter = ({large}) => {
         )
 };
 
-export default ProjectsOverviewFooter;
+export default FooterBasic;
