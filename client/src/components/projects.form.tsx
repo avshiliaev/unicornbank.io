@@ -1,17 +1,19 @@
 import React from 'react';
 import {Button, Form, Input} from 'antd';
+import { navigate } from "@reach/router"
 
 const {TextArea} = Input;
 
 const ProjectsForm = ({form, mutate}) => {
 
-    const handleSubmit = e => {
-        e.preventDefault();
-        form.validateFields((err, values) => {
+    const handleSubmit = async (e) => {
+        await e.preventDefault();
+        await form.validateFields((err, values) => {
             if (!err) {
                 mutate({variables: {input: [values]}})
             }
         });
+        await navigate('/')
     };
 
     const {getFieldDecorator} = form;
