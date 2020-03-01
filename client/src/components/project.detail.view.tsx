@@ -7,7 +7,7 @@ const MainContent = () => {
     )
 };
 
-const SubHeaderLarge = ({project}) => {
+const ProjectTitle = ({project}) => {
     return (
         <div>{project.title}</div>
     )
@@ -18,10 +18,8 @@ const ProjectDetailView = ({large, project}) => {
     return (
         <FlexGridBasic
             large={large}
-            subHeaderLarge={<SubHeaderLarge project={project}/>}
-            subHeaderSmall={<SubHeaderLarge project={project}/>}
-            subSubHeaderLarge={<SubHeaderLarge project={project}/>}
-            subSubHeaderSmall={<SubHeaderLarge project={project}/>}
+            slotOne={<ProjectTitle project={project}/>}
+            slotTwo={<ProjectTitle project={project}/>}
             mainContent={<MainContent/>}
         />
     )

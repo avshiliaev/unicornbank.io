@@ -14,10 +14,8 @@ const ProjectNewContent = ({large}) => {
         <Content style={{padding: large ? 16 : 0}}>
             <FlexGridBasic
                 large={large}
-                subHeaderLarge={<div>subHeaderLarge</div>}
-                subHeaderSmall={<div>subHeaderSmall</div>}
-                subSubHeaderLarge={<div>subSubHeaderLarge</div>}
-                subSubHeaderSmall={<div>subSubHeaderSmall</div>}
+                slotOne={<div>subHeaderLarge</div>}
+                slotTwo={<div>subSubHeaderLarge</div>}
                 mainContent={<WrappedProjectsAdd/>}
             />
         </Content>

@@ -16,10 +16,8 @@ const ProjectsOverviewContent = ({large}) => {
         <Content style={{padding: large ? 16 : 0}}>
             <FlexGridBasic
                 large={large}
-                subHeaderLarge={<ProfileStatistics large={large}/>}
-                subHeaderSmall={<div/>}
-                subSubHeaderLarge={<ProjectsAddBtn/>}
-                subSubHeaderSmall={<ProfileStatistics large={large}/>}
+                slotOne={<ProfileStatistics large={large}/>}
+                slotTwo={<ProjectsAddBtn/>}
                 mainContent={<ProjectsQuery large={large}/>}
             />
         </Content>
