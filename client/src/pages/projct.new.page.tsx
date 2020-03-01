@@ -22,19 +22,7 @@ const ProjectNewContent = ({large}) => {
     )
 };
 
-const ProjctNewPage = () => {
-
-    const breakpoints = {
-        xs: '480px',
-        sm: '576px',
-        md: '768px',
-        lg: '992px',
-        xl: '1200px',
-        xxl: '1600px',
-    };
-    const large = useMedia({
-        minWidth: breakpoints.lg,
-    });
+const ProjctNewPage = ({large}) => {
 
     return (
         <Layout style={{minHeight: '100vh'}}>

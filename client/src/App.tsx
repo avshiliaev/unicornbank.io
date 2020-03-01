@@ -5,6 +5,7 @@ import {HttpLink} from 'apollo-link-http';
 import {ApolloProvider} from '@apollo/react-common';
 import Pages from './pages';
 import './App.css';
+import {useMedia} from 'react-use-media';
 
 /**
  * Updating cache strategies:
@@ -22,10 +23,21 @@ const client = new ApolloClient({
 
 const App: React.FC = () => {
 
+    const breakpoints = {
+        xs: '480px',
+        sm: '576px',
+        md: '768px',
+        lg: '992px',
+        xl: '1200px',
+        xxl: '1600px',
+    };
+    const large = useMedia({
+        minWidth: breakpoints.lg,
+    });
 
     return (
         <ApolloProvider client={client}>
-            <Pages/>
+            <Pages large={large} />
         </ApolloProvider>
     );
 };

@@ -4,16 +4,16 @@ import ProjectsPage from './projects.page';
 import ProjectDetail from './project.detail.page';
 import ProjctNewPage from './projct.new.page';
 
-const Pages = () => {
+const Pages = ({large}) => {
     const RouterPage = (
         props: { pageComponent: JSX.Element } & RouteComponentProps
     ) => props.pageComponent;
     return (
         <Fragment>
             <Router primary={false} component={Fragment}>
-                <RouterPage path="/" pageComponent={<ProjectsPage/>}/>
-                <RouterPage path="/projects/new" pageComponent={<ProjctNewPage/>}/>
-                <ProjectDetail path="/projects/:id"/>
+                <RouterPage path="/" pageComponent={<ProjectsPage large={large}/>}/>
+                <RouterPage path="/projects/new" pageComponent={<ProjctNewPage large={large}/>}/>
+                <ProjectDetail large={large} path="/projects/:id"/>
             </Router>
         </Fragment>
     );

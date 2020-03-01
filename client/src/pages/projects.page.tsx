@@ -1,7 +1,6 @@
 import React from 'react';
 import {Layout} from 'antd';
 import ProjectsQuery from '../containers/projects.query';
-import {useMedia} from 'react-use-media';
 import ProjectsAddBtn from '../components/projects.add.btn';
 import ProfileStatistics from '../components/profile.statistics';
 import FlexGridBasic from '../layout/flex.grid.basic';
@@ -25,19 +24,7 @@ const ProjectsOverviewContent = ({large}) => {
 };
 
 
-const ProjectsPage = () => {
-
-    const breakpoints = {
-        xs: '480px',
-        sm: '576px',
-        md: '768px',
-        lg: '992px',
-        xl: '1200px',
-        xxl: '1600px',
-    };
-    const large = useMedia({
-        minWidth: breakpoints.lg,
-    });
+const ProjectsPage = ({large}) => {
 
     return (
         <Layout style={{minHeight: '100vh'}}>
