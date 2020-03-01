@@ -43,6 +43,7 @@ const App: React.FC = () => {
         large,
         extraLarge
     };
+    // TODO: window size into the store!
 
     return (
         <ApolloProvider client={client}>
