@@ -1,7 +1,7 @@
 import React from 'react';
 import {Col, Row} from 'antd';
 
-const FlexGridBasic = ({large, slotOne, slotTwo, mainContent}) => {
+const FlexGridBasic = ({windowSize, slotOne, slotTwo, mainContent}) => {
     return (
         <Row
             gutter={[{xs: 0, sm: 0, md: 0, lg: 16}, 24]}
@@ -11,7 +11,7 @@ const FlexGridBasic = ({large, slotOne, slotTwo, mainContent}) => {
             <Col xs={24} sm={24} md={24} lg={8} xl={8}>
                 <Row gutter={[{xs: 0, sm: 0, md: 0, lg: 16}, 24]}>
                     <Col>
-                        <div style={{background: '#fff', padding: 24, marginTop: large ? 'auto' : '64px'}}>
+                        <div style={{background: '#fff', padding: 24, marginTop: windowSize.large ? 'auto' : '64px'}}>
                             {slotOne}
                         </div>
                     </Col>

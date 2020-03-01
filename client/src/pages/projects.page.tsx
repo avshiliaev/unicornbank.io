@@ -9,28 +9,28 @@ import FooterBasic from '../layout/footer.basic';
 
 const {Content} = Layout;
 
-const ProjectsOverviewContent = ({large}) => {
+const ProjectsOverviewContent = ({windowSize}) => {
 
     return (
-        <Content style={{padding: large ? 16 : 0}}>
+        <Content style={{padding: windowSize.large ? 16 : 0}}>
             <FlexGridBasic
-                large={large}
-                slotOne={<ProfileStatistics large={large}/>}
+                windowSize={windowSize}
+                slotOne={<ProfileStatistics windowSize={windowSize}/>}
                 slotTwo={<ProjectsAddBtn/>}
-                mainContent={<ProjectsQuery large={large}/>}
+                mainContent={<ProjectsQuery windowSize={windowSize}/>}
             />
         </Content>
     )
 };
 
 
-const ProjectsPage = ({large}) => {
+const ProjectsPage = ({windowSize}) => {
 
     return (
         <Layout style={{minHeight: '100vh'}}>
-            <HeaderBasic large={large}/>
-            <ProjectsOverviewContent large={large}/>
-            <FooterBasic large={large}/>
+            <HeaderBasic windowSize={windowSize}/>
+            <ProjectsOverviewContent windowSize={windowSize}/>
+            <FooterBasic windowSize={windowSize}/>
         </Layout>
     )
 };

@@ -19,7 +19,7 @@ const ProjectAvatar = ({text}) => {
     )
 };
 
-const ProjectsList = ({projects, large}) => {
+const ProjectsList = ({projects, windowSize}) => {
 
     if (projects.length === 0) {
         return (
@@ -31,8 +31,8 @@ const ProjectsList = ({projects, large}) => {
 
     return (
         <List
-            header={large ? (<h4>Projects</h4>) : 'Projects'}
-            itemLayout={!large ? "vertical" : 'horizontal'}
+            header={windowSize.large ? (<h4>Projects</h4>) : 'Projects'}
+            itemLayout={!windowSize.large ? "vertical" : 'horizontal'}
             dataSource={projectsList}
             renderItem={project => {
                 const link = `/projects/${project.id}`;
@@ -45,7 +45,7 @@ const ProjectsList = ({projects, large}) => {
                     <List.Item actions={[
                         <ActionIcon text={numberWorkers} type="team" action={openWorkers}/>,
                         <ActionIcon text={numberTasks} type="container" action={openTasks}/>,
-                        large ? <ProjectsDelete project={project}/> : <div>Del</div>
+                        windowSize.large ? <ProjectsDelete project={project}/> : <div>Del</div>
                     ]}>
                         <List.Item.Meta
                             avatar={<ProjectAvatar text={ava}/>}

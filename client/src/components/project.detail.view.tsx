@@ -13,11 +13,11 @@ const ProjectTitle = ({project}) => {
     )
 };
 
-const ProjectDetailView = ({large, project}) => {
+const ProjectDetailView = ({windowSize, project}) => {
 
     return (
         <FlexGridBasic
-            large={large}
+            windowSize={windowSize}
             slotOne={<ProjectTitle project={project}/>}
             slotTwo={<ProjectTitle project={project}/>}
             mainContent={<MainContent/>}

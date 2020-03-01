@@ -35,9 +35,18 @@ const App: React.FC = () => {
         minWidth: breakpoints.lg,
     });
 
+    const extraLarge = useMedia({
+        minWidth: breakpoints.xxl,
+    });
+
+    const windowSize = {
+        large,
+        extraLarge
+    };
+
     return (
         <ApolloProvider client={client}>
-            <Pages large={large} />
+            <Pages windowSize={windowSize}/>
         </ApolloProvider>
     );
 };

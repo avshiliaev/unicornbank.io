@@ -3,7 +3,7 @@ import {useQuery} from '@apollo/react-hooks';
 import ProjectsList from '../components/projects.list';
 import {GET_PROJECTS} from './projects.documents';
 
-const ProjectsQuery = ({large}) => {
+const ProjectsQuery = ({windowSize}) => {
 
     const {data, loading, error} = useQuery(GET_PROJECTS);
     if (loading) return (<div>Loading...</div>);
@@ -11,7 +11,7 @@ const ProjectsQuery = ({large}) => {
 
     return (
         <Fragment>
-            <ProjectsList projects={data.queryProject} large={large}/>
+            <ProjectsList projects={data.queryProject} windowSize={windowSize}/>
         </Fragment>
     );
 };

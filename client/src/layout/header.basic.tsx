@@ -7,16 +7,16 @@ import DrawerMobile from './drawer.mobile';
 
 const {Header} = Layout;
 
-const HeaderBasic = ({large}) => {
+const HeaderBasic = ({windowSize}) => {
 
     const headerShadow = '0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19)';
 
-    const HeaderMenu = ({large}) => {
+    const HeaderMenu = ({windowSize}) => {
 
         return (
             <Menu
                 theme="light"
-                mode={large ? 'horizontal' : 'inline'}
+                mode={windowSize.large ? 'horizontal' : 'inline'}
                 defaultSelectedKeys={['1']}
                 style={{lineHeight: '64px'}}
             >
@@ -30,7 +30,7 @@ const HeaderBasic = ({large}) => {
         )
     };
 
-    return large
+    return windowSize.large
         ? (
             <Header style={
                 {background: '#fff', paddingLeft: 16}
@@ -46,7 +46,7 @@ const HeaderBasic = ({large}) => {
                         </Row>
                     </Col>
                     <Col span={8}>
-                        <HeaderMenu large={large}/>
+                        <HeaderMenu windowSize={windowSize}/>
                     </Col>
                     <Col span={14}>
                         <Row type="flex" justify="end">
@@ -73,7 +73,7 @@ const HeaderBasic = ({large}) => {
                 }
             }>
                 <DrawerMobile>
-                    <HeaderMenu large={large}/>
+                    <HeaderMenu windowSize={windowSize}/>
                 </DrawerMobile>
             </Header>
         )

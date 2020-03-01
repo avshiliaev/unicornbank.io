@@ -3,8 +3,8 @@ import {BackTop, Layout} from 'antd';
 
 const {Footer} = Layout;
 
-const FooterBasic = ({large}) => {
-    return large
+const FooterBasic = ({windowSize}) => {
+    return windowSize.large
         ? (
             <Footer style={{textAlign: 'center'}}>Lagerist ©2020</Footer>
         )

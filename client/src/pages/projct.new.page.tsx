@@ -1,6 +1,5 @@
 import React from 'react';
 import {WrappedProjectsAdd} from '../containers/projects.add';
-import {useMedia} from 'react-use-media';
 import {Layout} from 'antd';
 import FlexGridBasic from '../layout/flex.grid.basic';
 import HeaderBasic from '../layout/header.basic';
@@ -8,12 +7,12 @@ import FooterBasic from '../layout/footer.basic';
 
 const {Content} = Layout;
 
-const ProjectNewContent = ({large}) => {
+const ProjectNewContent = ({windowSize}) => {
 
     return (
-        <Content style={{padding: large ? 16 : 0}}>
+        <Content style={{padding: windowSize.large ? 16 : 0}}>
             <FlexGridBasic
-                large={large}
+                windowSize={windowSize}
                 slotOne={<div>subHeaderLarge</div>}
                 slotTwo={<div>subSubHeaderLarge</div>}
                 mainContent={<WrappedProjectsAdd/>}
@@ -22,13 +21,13 @@ const ProjectNewContent = ({large}) => {
     )
 };
 
-const ProjctNewPage = ({large}) => {
+const ProjctNewPage = ({windowSize}) => {
 
     return (
         <Layout style={{minHeight: '100vh'}}>
-            <HeaderBasic large={large}/>
-            <ProjectNewContent large={large}/>
-            <FooterBasic large={large}/>
+            <HeaderBasic windowSize={windowSize}/>
+            <ProjectNewContent windowSize={windowSize}/>
+            <FooterBasic windowSize={windowSize}/>
         </Layout>
     )
 };

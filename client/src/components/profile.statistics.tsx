@@ -3,7 +3,7 @@ import {Avatar, Col, Row, Tag} from 'antd';
 import FlexContainer from './flex.container';
 import ProfileIcon from './profile.icon';
 
-const ProfileStatistics = ({large}) => {
+const ProfileStatistics = ({windowSize}) => {
 
     const Tags = () => {
 
@@ -28,7 +28,7 @@ const ProfileStatistics = ({large}) => {
                 lg={{span: 24, order: 1}}
                 xl={{span: 24, order: 1}}
             >
-                <FlexContainer justify={large ? 'center' : 'start'} align='center'>
+                <FlexContainer justify={windowSize.large ? 'center' : 'start'} align='center'>
                     <h2 style={{paddingLeft: 16, paddingRight: 16}}>John Smith</h2>
                 </FlexContainer>
             </Col>
@@ -39,14 +39,14 @@ const ProfileStatistics = ({large}) => {
                 lg={{span: 24, order: 2}}
                 xl={{span: 24, order: 2}}
             >
-                <FlexContainer justify={large ? 'center' : 'start'} align='center'>
+                <FlexContainer justify={windowSize.large ? 'center' : 'start'} align='center'>
                     <ProfileIcon size={64}/>
                 </FlexContainer>
 
             </Col>
             <Col xs={24} sm={24} md={24} lg={24} xl={24} order={3}>
                 <div style={{marginTop: 16}}>
-                    {large ? (<h4>Skills</h4>) : (<div/>)}
+                    {windowSize.large ? (<h4>Skills</h4>) : (<div/>)}
                     <Tags/>
                 </div>
             </Col>
