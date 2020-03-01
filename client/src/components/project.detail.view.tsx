@@ -13,13 +13,23 @@ const ProjectTitle = ({project}) => {
     )
 };
 
+const ProjectDescription = ({project}) => {
+    return (
+        <div>
+            <div>Tags: {project.tags.length}</div>
+            <div>Tasks: {project.tasks.length}</div>
+            <div>Team: {project.workers.length}</div>
+        </div>
+    )
+};
+
 const ProjectDetailView = ({windowSize, project}) => {
 
     return (
         <FlexGridBasic
             windowSize={windowSize}
             slotOne={<ProjectTitle project={project}/>}
-            slotTwo={<ProjectTitle project={project}/>}
+            slotTwo={<ProjectDescription project={project}/>}
             mainContent={<MainContent/>}
         />
     )

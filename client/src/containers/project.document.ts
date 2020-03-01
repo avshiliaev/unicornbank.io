@@ -16,6 +16,11 @@ export const GET_PROJECT = gql`
                 title
                 __typename
             }
+            workers {
+                id
+                name
+                __typename
+            }
         }
     }
 `;
