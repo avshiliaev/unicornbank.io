@@ -1,11 +1,6 @@
 import React from 'react';
 import FlexGridBasic from '../layout/flex.grid.basic';
-
-const MainContent = () => {
-    return (
-        <div>Main Content</div>
-    )
-};
+import TasksTable from './tasks.table';
 
 const ProjectTitle = ({project}) => {
     return (
@@ -30,7 +25,7 @@ const ProjectDetailView = ({windowSize, project}) => {
             windowSize={windowSize}
             slotOne={<ProjectTitle project={project}/>}
             slotTwo={<ProjectDescription project={project}/>}
-            mainContent={<MainContent/>}
+            mainContent={<TasksTable tasks={project.tasks}/>}
         />
     )
 };
