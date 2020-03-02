@@ -17,7 +17,7 @@ type Tag {
 type Task {
     id: ID!
     project: Project!
-    column: Column!
+    column: Column
     title: String! @search(by: [hash])
     workers: [Worker]
     hours: Int!
