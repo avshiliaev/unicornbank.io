@@ -21,7 +21,7 @@ USERS=$(curl 'localhost:8080/graphql' -H 'Content-Type: application/json' \
 USER0=$(echo "$USERS" | jq '.data.addUser.user[0]')
 USER1=$(echo "$USERS" | jq '.data.addUser.user[1]')
 USER2=$(echo "$USERS" | jq '.data.addUser.user[2]')
-USER3=$(echo "$USERS" | jq '.data.addUser.user[3]')
+ADMIN=$(echo "$USERS" | jq '.data.addUser.user[3]')
 
 # shellcheck disable=SC2016
 curl 'localhost:8080/graphql' -H 'Content-Type: application/json' \
@@ -35,6 +35,7 @@ curl 'localhost:8080/graphql' -H 'Content-Type: application/json' \
           "tags":[{"title":"rust"},{"title":"beginner"}],
           "boards": [{"title": "main", "columns": [{"title": "todo"}, {"title": "doing"}, {"title": "done"}]}],
           "workers":[
+            {"name":"rusty_crusty", "availability":15, "user": '"$ADMIN"'},
             {"name":"anonymRust", "availability":99, "user": '"$USER0"'},
             {"name":"rusty_crusty", "availability":10, "user": '"$USER1"'},
             {"name":"cargoo", "availability":56, "user": '"$USER2"'}
@@ -72,6 +73,7 @@ curl 'localhost:8080/graphql' -H 'Content-Type: application/json' \
           "tags":[{"title":"example"},{"title":"hands-on"},{"title":"game"}],
           "boards": [{"title": "main", "columns": [{"title": "todo"}, {"title": "doing"}, {"title": "done"}]}],
           "workers":[
+            {"name":"rusty_crusty", "availability":15, "user": '"$ADMIN"'},
             {"name":"rusty_crusty", "availability":2, "user": '"$USER1"'},
             {"name":"cargoo", "availability":12, "user": '"$USER2"'}
           ]
@@ -82,6 +84,7 @@ curl 'localhost:8080/graphql' -H 'Content-Type: application/json' \
           "tags":[{"title":"ownership"},{"title":"rust"},{"title":"garbage collector"}],
           "boards": [{"title": "main", "columns": [{"title": "todo"}, {"title": "doing"}, {"title": "done"}]}],
           "workers":[
+            {"name":"rusty_crusty", "availability":15, "user": '"$ADMIN"'},
             {"name":"anonymRust", "availability":2, "user": '"$USER0"'},
             {"name":"cargoo", "availability":33, "user": '"$USER2"'}
           ]
