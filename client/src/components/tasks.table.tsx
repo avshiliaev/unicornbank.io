@@ -12,9 +12,12 @@ const TasksTable = ({tasks}) => {
             itemLayout="horizontal"
             dataSource={tasksList}
             renderItem={item => (
-                <List.Item>
-                    {JSON.stringify(item)}
-                </List.Item>
+              <List.Item>
+                <List.Item.Meta
+                  title={<a href="https://ant.design">{item.title}</a>}
+                  description={item.content}
+                />
+              </List.Item>
             )}
         />
     )

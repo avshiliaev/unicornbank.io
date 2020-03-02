@@ -14,6 +14,7 @@ export const GET_PROJECT = gql`
             tasks {
                 id
                 title
+                content
                 __typename
             }
             workers {
