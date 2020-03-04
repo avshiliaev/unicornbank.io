@@ -60,7 +60,7 @@ type User {
     username: String! @search(by: [hash])
     password: String!
     location: String!
-    roles: [Worker]
+    roles: [Worker] @hasInverse(field: user)
     stars: [Task]
 }
 

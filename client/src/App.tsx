@@ -52,12 +52,13 @@ cache.writeData({
 const IS_LOGGED_IN = gql`
     query IsUserLoggedIn {
         isLoggedIn @client
+        userName @client
     }
 `;
 
 function IsLoggedIn({windowSize}) {
     const {data} = useQuery(IS_LOGGED_IN);
-    return data.isLoggedIn ? <Pages windowSize={windowSize}/> : <LoginPage windowSize={windowSize}/>;
+    return data.isLoggedIn ? <Pages windowSize={windowSize} userName={data.userName}/> : <LoginPage windowSize={windowSize}/>;
 }
 
 const App: React.FC = () => {

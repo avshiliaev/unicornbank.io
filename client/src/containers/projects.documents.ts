@@ -17,6 +17,29 @@ export const GET_PROJECTS = gql`
     }
 `;
 
+export const GET_PROJECTS_OF_USER = gql`
+    query getByName($filter: UserFilter){
+      queryUser(filter: $filter) {
+        id
+        roles {
+          project{
+                id
+                title
+                description
+                tasks {
+                    id
+                }
+                workers {
+                    id
+                }
+                __typename
+          }
+        }
+      }
+    }
+`;
+
+
 export const DELETE_PROJECT = gql`
     mutation deleteProject($filter: ProjectFilter!){
         deleteProject(filter: $filter){

@@ -3,7 +3,7 @@
 # shellcheck disable=SC2016
 USERS=$(curl 'localhost:8080/graphql' -H 'Content-Type: application/json' \
   -d '{
-    "query": "mutation addUser($input: [AddUserInput!]!){addUser(input: $input){user{id}}}",
+    "query": "mutation addUser($input: [AddUserInput!]!){addUser(input: $input){user{id, username}}}",
     "variables": {
       "input": [
         {"username": "superrust", "password":"superrust", "location":"Frankfurt"},
@@ -14,10 +14,10 @@ USERS=$(curl 'localhost:8080/graphql' -H 'Content-Type: application/json' \
     }
   }' )
 
-USER0=$(echo "$USERS" | jq '.data.addUser.user[0]')
-USER1=$(echo "$USERS" | jq '.data.addUser.user[1]')
-USER2=$(echo "$USERS" | jq '.data.addUser.user[2]')
-USER3=$(echo "$USERS" | jq '.data.addUser.user[3]')
+USER0=$(echo "$USERS" | jq '.data.addUser.user[] | select(.username == "superrust")' )
+USER1=$(echo "$USERS" | jq '.data.addUser.user[] | select(.username == "rusty")' )
+USER2=$(echo "$USERS" | jq '.data.addUser.user[] | select(.username == "cargo")' )
+HEREIAM=$(echo "$USERS" | jq '.data.addUser.user[] | select(.username == "hisuperhi")' )
 
 # shellcheck disable=SC2016
 curl 'localhost:8080/graphql' -H 'Content-Type: application/json' \
