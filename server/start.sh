@@ -35,7 +35,7 @@ curl 'localhost:8080/graphql' -H 'Content-Type: application/json' \
           "tags":[{"title":"rust"},{"title":"beginner"}],
           "boards": [{"title": "main", "columns": [{"title": "todo"}, {"title": "doing"}, {"title": "done"}]}],
           "workers":[
-            {"name":"anonymRust", "availability":99, "user": '"$USER0"'},
+            {"name":"hisuperhi", "availability":2, "user": '"$HEREIAM"'},
             {"name":"rusty_crusty", "availability":10, "user": '"$USER1"'},
             {"name":"cargoo", "availability":56, "user": '"$USER2"'}
           ],
@@ -72,8 +72,9 @@ curl 'localhost:8080/graphql' -H 'Content-Type: application/json' \
           "tags":[{"title":"example"},{"title":"hands-on"},{"title":"game"}],
           "boards": [{"title": "main", "columns": [{"title": "todo"}, {"title": "doing"}, {"title": "done"}]}],
           "workers":[
+            {"name":"hisuperhi", "availability":20, "user": '"$HEREIAM"'},
+            {"name":"anonymRust", "availability":2, "user": '"$USER0"'},
             {"name":"rusty_crusty", "availability":2, "user": '"$USER1"'},
-            {"name":"hisuperhi", "availability":2, "user": '"$HEREIAM"'},
             {"name":"cargoo", "availability":12, "user": '"$USER2"'}
           ]
         },
@@ -81,6 +82,16 @@ curl 'localhost:8080/graphql' -H 'Content-Type: application/json' \
           "title": "Understanding Ownership",
           "description": "Ownership is Rust’s most unique feature, and it enables Rust to make memory safety guarantees without needing a garbage collector.",
           "tags":[{"title":"ownership"},{"title":"rust"},{"title":"garbage collector"}],
+          "boards": [{"title": "main", "columns": [{"title": "todo"}, {"title": "doing"}, {"title": "done"}]}],
+          "workers":[
+            {"name":"anonymRust", "availability":2, "user": '"$USER0"'},
+            {"name":"cargoo", "availability":33, "user": '"$USER2"'}
+          ]
+        },
+        {
+          "title": "Enums and Pattern Matching",
+          "description": "In this chapter we’ll look at enumerations, also referred to as enums. Enums allow you to define a type by enumerating its possible variants.",
+          "tags":[{"title":"enums"},{"title":"rust"},{"title":"variants"}],
           "boards": [{"title": "main", "columns": [{"title": "todo"}, {"title": "doing"}, {"title": "done"}]}],
           "workers":[
             {"name":"anonymRust", "availability":2, "user": '"$USER0"'},
