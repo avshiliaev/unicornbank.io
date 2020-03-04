@@ -10,8 +10,9 @@ const LoginPage = ({windowSize}) => {
     const client = useApolloClient();
 
     const onClick = async () => {
-        client.writeData({data: {isLoggedIn: true}});
+        client.writeData({data: {isLoggedIn: true, userName: 'hisuperhi'}});
         await localStorage.setItem('token', 'awesomeToken');
+        await localStorage.setItem('username', 'hisuperhi');
     };
 
     return (

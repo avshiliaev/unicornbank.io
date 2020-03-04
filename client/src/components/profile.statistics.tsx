@@ -1,9 +1,19 @@
 import React from 'react';
-import {Avatar, Col, Row, Tag} from 'antd';
+import {Col, Row, Tag} from 'antd';
 import FlexContainer from './flex.container';
 import ProfileIcon from './profile.icon';
+import gql from 'graphql-tag';
+import {useQuery} from '@apollo/react-hooks';
 
 const ProfileStatistics = ({windowSize}) => {
+
+    const USER_NAME = gql`
+        query UserName {
+            userName @client
+        }
+    `;
+
+    const {data} = useQuery(USER_NAME);
 
     const Tags = () => {
 
@@ -29,7 +39,7 @@ const ProfileStatistics = ({windowSize}) => {
                 xl={{span: 24, order: 1}}
             >
                 <FlexContainer justify={windowSize.large ? 'center' : 'start'} align='center'>
-                    <h2 style={{paddingLeft: 16, paddingRight: 16}}>John Smith</h2>
+                    <h2 style={{paddingLeft: 16, paddingRight: 16}}>{data.userName}</h2>
                 </FlexContainer>
             </Col>
             <Col
