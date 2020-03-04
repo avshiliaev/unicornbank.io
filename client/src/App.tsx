@@ -9,6 +9,7 @@ import {useMedia} from 'react-use-media';
 import gql from 'graphql-tag';
 import {useQuery} from '@apollo/react-hooks';
 import {typeDefs} from './resolvers';
+import LoginPage from './pages/login.page';
 
 /**
  * Updating cache strategies:
@@ -32,10 +33,9 @@ const client = new ApolloClient({
 });
 
 cache.writeData({
-  data: {
-    isLoggedIn: !!localStorage.getItem('token'),
-    cartItems: [],
-  },
+    data: {
+        isLoggedIn: !!localStorage.getItem('token'),
+    },
 });
 
 /**
@@ -49,20 +49,19 @@ cache.writeData({
  */
 
 const IS_LOGGED_IN = gql`
-  query IsUserLoggedIn {
-    isLoggedIn @client
-  }
+    query IsUserLoggedIn {
+        isLoggedIn @client
+    }
 `;
 
 function IsLoggedIn({windowSize}) {
-  const { data } = useQuery(IS_LOGGED_IN);
-  return data.isLoggedIn ? <Pages windowSize={windowSize}/> : (<div>Login</div>);
+    const {data} = useQuery(IS_LOGGED_IN);
+    return data.isLoggedIn ? <Pages windowSize={windowSize}/> : <LoginPage windowSize={windowSize}/>;
 }
 
 const App: React.FC = () => {
 
-    localStorage.setItem('token', 'awesomeToken');
-
+    // TODO: window size into the store!
     const breakpoints = {
         xs: '480px',
         sm: '576px',
@@ -83,11 +82,10 @@ const App: React.FC = () => {
         large,
         extraLarge
     };
-    // TODO: window size into the store!
 
     return (
         <ApolloProvider client={client}>
-            <IsLoggedIn windowSize={windowSize} />
+            <IsLoggedIn windowSize={windowSize}/>
         </ApolloProvider>
     );
 };
