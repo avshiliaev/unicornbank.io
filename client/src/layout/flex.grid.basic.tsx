@@ -5,7 +5,6 @@ const FlexGridBasic = ({windowSize, slotOne, slotTwo, mainContent}) => {
     return (
         <Row
             gutter={[{xs: 0, sm: 0, md: 0, lg: 16}, 24]}
-            type="flex"
             justify="space-around"
         >
             <Col xs={24} sm={24} md={24} lg={8} xl={6} xxl={4}>

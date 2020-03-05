@@ -20,7 +20,7 @@ const ProfileStatistics = ({windowSize, userName}) => {
     };
 
     return (
-        <Row type="flex">
+        <Row>
             <Col
                 xs={{span: 16, order: 2}}
                 sm={{span: 16, order: 2}}

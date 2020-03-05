@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Drawer, Icon} from 'antd';
+import {Drawer} from 'antd';
 
 class DrawerMobile extends React.Component {
     state = {visible: false};
@@ -20,7 +20,7 @@ class DrawerMobile extends React.Component {
     render() {
         return (
             <div>
-                <Icon type="menu" onClick={this.showDrawer} style={{fontSize: '16px'}}/>
+                <div onClick={this.showDrawer} style={{fontSize: '16px'}}>icon</div>
                 <Drawer
                     title={<div>Lagerist</div>}
                     placement="left"

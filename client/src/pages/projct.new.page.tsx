@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react';
-import {WrappedProjectsAdd} from '../containers/projects.add';
 import FlexGridBasic from '../layout/flex.grid.basic';
+import ProjectsAdd from '../containers/projects.add';
 
 const ProjctNewPage = ({windowSize}) => {
 
@@ -10,7 +10,7 @@ const ProjctNewPage = ({windowSize}) => {
                 windowSize={windowSize}
                 slotOne={<div>subHeaderLarge</div>}
                 slotTwo={<div>subSubHeaderLarge</div>}
-                mainContent={<WrappedProjectsAdd/>}
+                mainContent={<ProjectsAdd/>}
             />
         </Fragment>
     )

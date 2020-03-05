@@ -35,9 +35,9 @@ const HeaderBasic = ({windowSize}) => {
             <Header style={
                 {background: '#fff', paddingLeft: 16}
             }>
-                <Row type="flex" justify="space-around" align="middle">
+                <Row justify="space-around" align="middle">
                     <Col span={2}>
-                        <Row type="flex" justify="space-around" align="middle">
+                        <Row justify="space-around" align="middle">
                             <Col span={16}>
                                 <FlexContainer justify={'flex-start'} align={'center'}>
                                     <LogoIcon/>
@@ -49,7 +49,7 @@ const HeaderBasic = ({windowSize}) => {
                         <HeaderMenu windowSize={windowSize}/>
                     </Col>
                     <Col span={14}>
-                        <Row type="flex" justify="end">
+                        <Row justify="end">
                             <Col span={2}>
                                 <FlexContainer justify={'flex-end'} align={'center'}>
                                     <ProfileIcon size={30}/>

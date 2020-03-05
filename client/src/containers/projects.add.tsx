@@ -3,9 +3,8 @@ import {useMutation} from '@apollo/react-hooks';
 import {QueryProjectQuery} from '../api/interfaces/types.d';
 import {ADD_PROJECTS, GET_PROJECTS} from './projects.documents';
 import ProjectsForm from '../components/projects.form';
-import {Form} from 'antd';
 
-const ProjectsAdd = ({form}) => {
+const ProjectsAdd = () => {
 
     const [mutate, {loading, error}] = useMutation(
         ADD_PROJECTS,
@@ -24,9 +23,9 @@ const ProjectsAdd = ({form}) => {
 
     return (
         <Fragment>
-            <ProjectsForm mutate={mutate} form={form}/>
+            <ProjectsForm mutate={mutate}/>
         </Fragment>
     );
 };
 
-export const WrappedProjectsAdd = Form.create()(ProjectsAdd);
+export default ProjectsAdd;
