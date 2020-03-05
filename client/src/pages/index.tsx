@@ -20,10 +20,8 @@ const Pages = ({windowSize, userName}) => {
             <Content style={{padding: windowSize.large ? 16 : 0}}>
                 <Router primary={false} component={Fragment}>
                     <RouterPage path="/" pageComponent={<ProjectsPage windowSize={windowSize} userName={userName}/>}/>
-                    <RouterPage
-
-                        path="/discover"
-                        pageComponent={<DiscoverPage windowSize={windowSize} userName={userName}/>}/>
+                    <RouterPage path="/discover"
+                                pageComponent={<DiscoverPage windowSize={windowSize} userName={userName}/>}/>
                     <RouterPage path="/projects/new" pageComponent={<ProjctNewPage windowSize={windowSize}/>}/>
                     <ProjectDetail windowSize={windowSize} path="/projects/:id"/>
                 </Router>
