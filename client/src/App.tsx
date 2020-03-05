@@ -10,6 +10,7 @@ import gql from 'graphql-tag';
 import {useQuery} from '@apollo/react-hooks';
 import {typeDefs} from './resolvers';
 import LoginPage from './pages/login.page';
+import {Location} from '@reach/router'
 
 /**
  * Updating cache strategies:
@@ -56,9 +57,10 @@ const IS_LOGGED_IN = gql`
     }
 `;
 
-function IsLoggedIn({windowSize}) {
+function IsLoggedIn({windowSize, location}) {
     const {data} = useQuery(IS_LOGGED_IN);
-    return data.isLoggedIn ? <Pages windowSize={windowSize} userName={data.userName}/> : <LoginPage windowSize={windowSize}/>;
+    return data.isLoggedIn ? <Pages windowSize={windowSize} userName={data.userName} location={location}/> :
+        <LoginPage windowSize={windowSize}/>;
 }
 
 const App: React.FC = () => {
@@ -87,7 +89,11 @@ const App: React.FC = () => {
 
     return (
         <ApolloProvider client={client}>
-            <IsLoggedIn windowSize={windowSize}/>
+            <Location>
+                {props => {
+                    return (<IsLoggedIn windowSize={windowSize} location={props.location.pathname}/>)
+                }}
+            </Location>
         </ApolloProvider>
     );
 };

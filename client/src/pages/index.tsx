@@ -11,14 +11,16 @@ import SiderBasic from '../layout/sider.basic';
 
 const {Content} = Layout;
 
-const Pages = ({windowSize, userName}) => {
+const Pages = ({windowSize, userName, location}) => {
+
+    const currentPath = location.split('/');
+
     const RouterPage = (
         props: { pageComponent: JSX.Element } & RouteComponentProps
     ) => props.pageComponent;
     return (
         <Layout style={{minHeight: '100vh'}}>
             {windowSize.large ? <SiderBasic/> : <div/>}
-
             <Layout>
                 <HeaderBasic windowSize={windowSize}/>
                 <Content style={{padding: windowSize.large ? 16 : 0}}>

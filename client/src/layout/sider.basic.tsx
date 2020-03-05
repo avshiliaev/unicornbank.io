@@ -15,7 +15,7 @@ const SiderBasic = () => {
 
     return (
         <Sider>
-          <div className="logo" />
+          <div className="logo"  style={{height: '32px', background: 'rgba(255, 255, 255, 0.2)', margin: '16px'}}/>
           <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
             <Menu.Item key="1">
               <PieChartOutlined />
