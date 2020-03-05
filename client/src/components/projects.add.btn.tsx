@@ -5,7 +5,7 @@ const ProjectsAddBtn = () => {
     return (
         <div>
             <Button block>
-                <a href={'projects/new'}>Add project</a>
+                <a href={'dashboard/new'}>Add project</a>
             </Button>
         </div>
     )

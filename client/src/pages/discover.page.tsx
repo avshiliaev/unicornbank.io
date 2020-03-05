@@ -7,15 +7,15 @@ import DiscoverQuery from '../containers/discover.query';
 
 
 
-const DiscoverPage = ({windowSize, userName}) => {
+const DiscoverPage = (props) => {
 
     return (
         <Fragment>
             <FlexGridBasic
-                windowSize={windowSize}
-                slotOne={<ProfileStatistics windowSize={windowSize} userName={userName}/>}
+                windowSize={props.windowSize}
+                slotOne={<ProfileStatistics windowSize={props.windowSize} userName={props.userName}/>}
                 slotTwo={<ProjectsAddBtn/>}
-                mainContent={<DiscoverQuery windowSize={windowSize} userName={userName}/>}
+                mainContent={<DiscoverQuery windowSize={props.windowSize} userName={props.userName}/>}
             />
         </Fragment>
     )

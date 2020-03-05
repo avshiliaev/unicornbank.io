@@ -35,7 +35,7 @@ const ProjectsList = ({projects, windowSize}) => {
             itemLayout={!windowSize.large ? "vertical" : 'horizontal'}
             dataSource={projectsList}
             renderItem={project => {
-                const link = `/projects/${project.id}`;
+                const link = `/project/${project.id}`;
                 const ava = project.title.charAt(0);
                 const openTasks = () => console.log('tasks');
                 const numberTasks = `tasks: ${project.tasks.length}`;

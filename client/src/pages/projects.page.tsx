@@ -6,15 +6,15 @@ import ProfileStatistics from '../components/profile.statistics';
 import FlexGridBasic from '../layout/flex.grid.basic';
 
 
-const ProjectsPage = ({windowSize, userName}) => {
+const ProjectsPage = (props) => {
 
     return (
         <Fragment>
             <FlexGridBasic
-                windowSize={windowSize}
-                slotOne={<ProfileStatistics windowSize={windowSize} userName={userName}/>}
+                windowSize={props.windowSize}
+                slotOne={<ProfileStatistics windowSize={props.windowSize} userName={props.userName}/>}
                 slotTwo={<ProjectsAddBtn/>}
-                mainContent={<ProjectsQuery windowSize={windowSize} userName={userName}/>}
+                mainContent={<ProjectsQuery windowSize={props.windowSize} userName={props.userName}/>}
             />
         </Fragment>
     )

@@ -1,6 +1,7 @@
 import React from 'react';
 import {Avatar} from 'antd';
 import {useApolloClient} from '@apollo/react-hooks';
+import { UserOutlined } from '@ant-design/icons';
 
 
 const ProfileIcon = ({size}) => {
@@ -15,7 +16,7 @@ const ProfileIcon = ({size}) => {
 
     return (
         <a onClick={() => onClick()}>
-            <Avatar size={size} icon="user"/>
+            <Avatar size={size} icon={<UserOutlined />}/>
         </a>
     )
 };

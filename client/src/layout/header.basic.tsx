@@ -1,8 +1,7 @@
 import React from 'react';
-import {Col, Layout, Menu, Row} from 'antd';
+import {Avatar, Col, Layout, Menu, Row} from 'antd';
 import ProfileIcon from '../components/profile.icon';
 import LogoIcon from '../components/logo.icon';
-import FlexContainer from '../components/flex.container';
 import DrawerMobile from './drawer.mobile';
 
 const {Header} = Layout;
@@ -15,16 +14,20 @@ const HeaderBasic = ({windowSize}) => {
 
         return (
             <Menu
-                theme="light"
+                theme="dark"
                 mode={windowSize.large ? 'horizontal' : 'inline'}
                 defaultSelectedKeys={['1']}
-                style={{lineHeight: '64px'}}
+                style={{
+                    lineHeight: '64px',
+                    paddingLeft: '50px',
+                    // backgroundColor: 'blue'
+                }}
             >
                 <Menu.Item key="1">
-                    <a href='/'>My projects</a>
+                    <a href='/dashboard'>My projects</a>
                 </Menu.Item>
                 <Menu.Item key="2">
-                    <a href='/discover'>Discover</a>
+                    <a href='/dashboard/discover'>Discover</a>
                 </Menu.Item>
             </Menu>
         )
@@ -32,28 +35,26 @@ const HeaderBasic = ({windowSize}) => {
 
     return windowSize.large
         ? (
-            <Header style={
-                {background: '#fff', paddingLeft: 16}
-            }>
-                <Row justify="space-around" align="middle">
+            <Header >
+                <Row align="middle">
                     <Col span={2}>
                         <Row justify="space-around" align="middle">
-                            <Col span={16}>
-                                <FlexContainer justify={'flex-start'} align={'center'}>
-                                    <LogoIcon/>
-                                </FlexContainer>
+                            <Col span={8}>
+                                <Avatar size={30} icon={<LogoIcon/>}/>
                             </Col>
                         </Row>
                     </Col>
-                    <Col span={8}>
-                        <HeaderMenu windowSize={windowSize}/>
+                    <Col span={20}>
+                        <Row justify="start" align="middle">
+                            <Col span={8}>
+                                <HeaderMenu windowSize={windowSize}/>
+                            </Col>
+                        </Row>
                     </Col>
-                    <Col span={14}>
-                        <Row justify="end">
-                            <Col span={2}>
-                                <FlexContainer justify={'flex-end'} align={'center'}>
-                                    <ProfileIcon size={30}/>
-                                </FlexContainer>
+                    <Col span={2}>
+                        <Row justify="space-around" align="middle">
+                            <Col span={8}>
+                                <ProfileIcon size={30}/>
                             </Col>
                         </Row>
                     </Col>
@@ -64,7 +65,7 @@ const HeaderBasic = ({windowSize}) => {
             <Header style={
                 {
                     background: '#fff',
-                    paddingLeft: 24,
+                    // paddingLeft: 24,
                     position: 'fixed',
                     zIndex: 1,
                     width: '100%',

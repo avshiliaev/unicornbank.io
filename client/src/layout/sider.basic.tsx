@@ -1,12 +1,6 @@
 import React from 'react';
 import {Layout, Menu} from 'antd';
-import {
-  DesktopOutlined,
-  PieChartOutlined,
-  FileOutlined,
-  TeamOutlined,
-  UserOutlined,
-} from '@ant-design/icons';
+import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
 
 const {Sider} = Layout;
 const {SubMenu} = Menu;
@@ -14,47 +8,57 @@ const {SubMenu} = Menu;
 const SiderBasic = () => {
 
     return (
-        <Sider>
-          <div className="logo"  style={{height: '32px', background: 'rgba(255, 255, 255, 0.2)', margin: '16px'}}/>
-          <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-            <Menu.Item key="1">
-              <PieChartOutlined />
-              <span>Option 1</span>
-            </Menu.Item>
-            <Menu.Item key="2">
-              <DesktopOutlined />
-              <span>Option 2</span>
-            </Menu.Item>
-            <SubMenu
-              key="sub1"
-              title={
-                <span>
-                  <UserOutlined />
-                  <span>User</span>
-                </span>
-              }
-            >
-              <Menu.Item key="3">Tom</Menu.Item>
-              <Menu.Item key="4">Bill</Menu.Item>
-              <Menu.Item key="5">Alex</Menu.Item>
-            </SubMenu>
-            <SubMenu
-              key="sub2"
-              title={
-                <span>
-                  <TeamOutlined />
-                  <span>Team</span>
-                </span>
-              }
-            >
-              <Menu.Item key="6">Team 1</Menu.Item>
-              <Menu.Item key="8">Team 2</Menu.Item>
-            </SubMenu>
-            <Menu.Item key="9">
-              <FileOutlined />
-            </Menu.Item>
-          </Menu>
-        </Sider>
+      <Sider width={200} className="site-layout-background">
+        <Menu
+          mode="inline"
+          defaultSelectedKeys={['1']}
+          defaultOpenKeys={['sub1']}
+          style={{ height: '100%', borderRight: 0 }}
+        >
+          <SubMenu
+            key="sub1"
+            title={
+              <span>
+                <UserOutlined />
+                subnav 1
+              </span>
+            }
+          >
+            <Menu.Item key="1">option1</Menu.Item>
+            <Menu.Item key="2">option2</Menu.Item>
+            <Menu.Item key="3">option3</Menu.Item>
+            <Menu.Item key="4">option4</Menu.Item>
+          </SubMenu>
+          <SubMenu
+            key="sub2"
+            title={
+              <span>
+                <LaptopOutlined />
+                subnav 2
+              </span>
+            }
+          >
+            <Menu.Item key="5">option5</Menu.Item>
+            <Menu.Item key="6">option6</Menu.Item>
+            <Menu.Item key="7">option7</Menu.Item>
+            <Menu.Item key="8">option8</Menu.Item>
+          </SubMenu>
+          <SubMenu
+            key="sub3"
+            title={
+              <span>
+                <NotificationOutlined />
+                subnav 3
+              </span>
+            }
+          >
+            <Menu.Item key="9">option9</Menu.Item>
+            <Menu.Item key="10">option10</Menu.Item>
+            <Menu.Item key="11">option11</Menu.Item>
+            <Menu.Item key="12">option12</Menu.Item>
+          </SubMenu>
+        </Menu>
+      </Sider>
     )
 };
 

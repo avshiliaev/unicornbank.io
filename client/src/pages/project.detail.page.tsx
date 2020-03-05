@@ -1,11 +1,11 @@
 import React, {Fragment} from 'react';
 import ProjectGet from '../containers/project.get';
 
-const ProjectDetail = (props) => {
+const ProjectDetail = ({windowSize, id}) => {
 
     return (
         <Fragment>
-            <ProjectGet windowSize={props.windowSize} id={props.id}/>
+            <ProjectGet windowSize={windowSize} id={id}/>
         </Fragment>
     )
 };
