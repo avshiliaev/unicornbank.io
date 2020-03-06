@@ -3,7 +3,7 @@ import {Avatar, Col, Layout, Menu, Row} from 'antd';
 import ProfileIcon from '../profile.icon';
 import LogoIcon from '../logo.icon';
 import DrawerMobile from './drawer.mobile';
-import {NotificationFilled} from '@ant-design/icons';
+import {NotificationOutlined} from '@ant-design/icons';
 
 const {Header} = Layout;
 
@@ -19,9 +19,7 @@ const HeaderBasic = ({windowSize}) => {
                 mode={windowSize.large ? 'horizontal' : 'inline'}
                 defaultSelectedKeys={['1']}
                 style={{
-                    lineHeight: '64px',
-                    // paddingLeft: '50px',
-                    // backgroundColor: 'blue'
+                    lineHeight: '61px',
                 }}
             >
                 <Menu.Item key="1">
@@ -36,7 +34,7 @@ const HeaderBasic = ({windowSize}) => {
 
     return windowSize.large
         ? (
-            <Header style={{backgroundColor: '#fff', zIndex: 999}}>
+            <Header style={{backgroundColor: '#fff', zIndex: 999, boxShadow: headerShadow}}>
                 <Row align="middle" gutter={[{xs: 0, sm: 0, md: 0, lg: 16}, 0]}>
                     <Col xs={0} sm={0} md={0} lg={2} xl={2} xxl={2}>
                         <Row justify="start" align="middle" gutter={[{xs: 0, sm: 0, md: 0, lg: 16}, 0]}>
@@ -55,7 +53,7 @@ const HeaderBasic = ({windowSize}) => {
                     <Col xs={0} sm={0} md={0} lg={6} xl={6} xxl={6}>
                         <Row justify="end" align="middle" gutter={[{xs: 0, sm: 0, md: 0, lg: 16}, 0]}>
                             <Col>
-                                <Avatar size={30} icon={<NotificationFilled/>}/>
+                                <Avatar size={30} icon={<NotificationOutlined/>}/>
                             </Col>
                             <Col>
                                 <ProfileIcon size={30}/>
@@ -71,7 +69,7 @@ const HeaderBasic = ({windowSize}) => {
                     background: '#fff',
                     // paddingLeft: 24,
                     position: 'fixed',
-                    zIndex: 1,
+                    zIndex: 999,
                     width: '100%',
                     boxShadow: headerShadow,
                     height: '55px'
