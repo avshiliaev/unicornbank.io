@@ -1,7 +1,7 @@
 import React from 'react';
 import {Router} from '@reach/router';
-import DashboardRoute from './dashboard.route';
-import ProjectRoute from './project.route';
+import DashboardPage from './dashboard.page';
+import ProjectPage from './project.page';
 
 const Pages = ({windowSize, userName, location}) => {
 
@@ -9,8 +9,8 @@ const Pages = ({windowSize, userName, location}) => {
 
     return (
         <Router>
-            <ProjectRoute windowSize={windowSize} path="project/:id/*"/>
-            <DashboardRoute windowSize={windowSize} location={currentPath} userName={userName} path="dashboard/*"/>
+            <ProjectPage windowSize={windowSize} path="project/:id/*"/>
+            <DashboardPage windowSize={windowSize} location={currentPath} userName={userName} path="dashboard/*"/>
         </Router>
     );
 };

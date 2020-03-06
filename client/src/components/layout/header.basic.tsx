@@ -1,8 +1,9 @@
 import React from 'react';
 import {Avatar, Col, Layout, Menu, Row} from 'antd';
-import ProfileIcon from '../components/profile.icon';
-import LogoIcon from '../components/logo.icon';
+import ProfileIcon from '../profile.icon';
+import LogoIcon from '../logo.icon';
 import DrawerMobile from './drawer.mobile';
+import {NotificationFilled} from '@ant-design/icons';
 
 const {Header} = Layout;
 
@@ -14,12 +15,12 @@ const HeaderBasic = ({windowSize}) => {
 
         return (
             <Menu
-                theme="dark"
+                theme="light"
                 mode={windowSize.large ? 'horizontal' : 'inline'}
                 defaultSelectedKeys={['1']}
                 style={{
                     lineHeight: '64px',
-                    paddingLeft: '50px',
+                    // paddingLeft: '50px',
                     // backgroundColor: 'blue'
                 }}
             >
@@ -35,25 +36,28 @@ const HeaderBasic = ({windowSize}) => {
 
     return windowSize.large
         ? (
-            <Header >
-                <Row align="middle">
-                    <Col span={2}>
-                        <Row justify="space-around" align="middle">
-                            <Col span={8}>
-                                <Avatar size={30} icon={<LogoIcon/>}/>
+            <Header style={{backgroundColor: '#fff', zIndex: 999}}>
+                <Row align="middle" gutter={[{xs: 0, sm: 0, md: 0, lg: 16}, 0]}>
+                    <Col xs={0} sm={0} md={0} lg={2} xl={2} xxl={2}>
+                        <Row justify="start" align="middle" gutter={[{xs: 0, sm: 0, md: 0, lg: 16}, 0]}>
+                            <Col>
+                                <Avatar size={30} style={{backgroundColor: '#fff'}} icon={<LogoIcon/>}/>
                             </Col>
                         </Row>
                     </Col>
-                    <Col span={20}>
-                        <Row justify="start" align="middle">
-                            <Col span={8}>
+                    <Col xs={0} sm={0} md={0} lg={16} xl={16} xxl={16}>
+                        <Row justify="start" align="middle" gutter={[{xs: 0, sm: 0, md: 0, lg: 16}, 0]}>
+                            <Col>
                                 <HeaderMenu windowSize={windowSize}/>
                             </Col>
                         </Row>
                     </Col>
-                    <Col span={2}>
-                        <Row justify="space-around" align="middle">
-                            <Col span={8}>
+                    <Col xs={0} sm={0} md={0} lg={6} xl={6} xxl={6}>
+                        <Row justify="end" align="middle" gutter={[{xs: 0, sm: 0, md: 0, lg: 16}, 0]}>
+                            <Col>
+                                <Avatar size={30} icon={<NotificationFilled/>}/>
+                            </Col>
+                            <Col>
                                 <ProfileIcon size={30}/>
                             </Col>
                         </Row>

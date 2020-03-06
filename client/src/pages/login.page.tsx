@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button, Col, Layout, Row} from 'antd';
 import {useApolloClient} from '@apollo/react-hooks';
-import FlexContainer from '../components/flex.container';
+import FlexContainer from '../components/layout/flex.container';
 
 const {Content} = Layout;
 

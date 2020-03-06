@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {cleanup, render} from '../../../../test-utils';
+import {cleanup, render} from '../../../../../test-utils';
 import HeaderBasic from "../../projects.overview.header";
 
 describe('Header', () => {

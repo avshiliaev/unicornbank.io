@@ -1,8 +1,8 @@
 import React from 'react';
 import {Project} from '../api/interfaces/types.d';
 import {Avatar, Badge, Empty, List} from 'antd';
-import ProjectsDelete from '../containers/projects.delete';
 import ActionIcon from './action.icon';
+import ProjectDeleteView from '../views/project.delete.view';
 
 const ProjectAvatar = ({text}) => {
 
@@ -45,7 +45,7 @@ const ProjectsList = ({projects, windowSize}) => {
                     <List.Item actions={[
                         <ActionIcon text={numberWorkers} type="team" action={openWorkers}/>,
                         <ActionIcon text={numberTasks} type="container" action={openTasks}/>,
-                        windowSize.large ? <ProjectsDelete project={project}/> : <div>Del</div>
+                        windowSize.large ? <ProjectDeleteView project={project}/> : <div>Del</div>
                     ]}>
                         <List.Item.Meta
                             avatar={<ProjectAvatar text={ava}/>}

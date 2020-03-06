@@ -1,6 +1,6 @@
 import React from 'react';
 import {Col, Row, Tag} from 'antd';
-import FlexContainer from './flex.container';
+import FlexContainer from './layout/flex.container';
 import ProfileIcon from './profile.icon';
 
 const ProfileStatistics = ({windowSize, userName}) => {

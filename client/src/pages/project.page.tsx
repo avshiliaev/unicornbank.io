@@ -1,13 +1,13 @@
 import React from 'react';
 import {Layout} from 'antd';
-import SiderBasic from '../layout/sider.basic';
-import HeaderBasic from '../layout/header.basic';
-import FooterBasic from '../layout/footer.basic';
-import ProjectDetail from './project.detail.page';
+import SiderBasic from '../components/layout/sider.basic';
+import HeaderBasic from '../components/layout/header.basic';
+import FooterBasic from '../components/layout/footer.basic';
+import ProjectDetail from '../views/project.detail.view';
 
 const {Content} = Layout;
 
-const ProjectRoute = (props) => {
+const ProjectPage = (props) => {
 
     return (
         <Layout style={{minHeight: '100vh'}}>
@@ -16,11 +16,11 @@ const ProjectRoute = (props) => {
                 {props.windowSize.large ? <SiderBasic/> : <div/>}
                 <Content style={{padding: props.windowSize.large ? 16 : 0}}>
                     <ProjectDetail windowSize={props.windowSize} id={props.id}/>
+                    <FooterBasic windowSize={props.windowSize}/>
                 </Content>
-                <FooterBasic windowSize={props.windowSize}/>
             </Layout>
         </Layout>
     )
 };
 
-export default ProjectRoute;
+export default ProjectPage;

@@ -1,10 +1,10 @@
 import React, {Fragment} from 'react';
 import {useMutation} from '@apollo/react-hooks';
+import {ADD_PROJECTS, GET_PROJECTS} from './docs/projects.documents';
 import {QueryProjectQuery} from '../api/interfaces/types.d';
-import {ADD_PROJECTS, GET_PROJECTS} from './projects.documents';
 import ProjectsForm from '../components/projects.form';
 
-const ProjectsAdd = () => {
+const ProjctAddView = (props) => {
 
     const [mutate, {loading, error}] = useMutation(
         ADD_PROJECTS,
@@ -28,4 +28,4 @@ const ProjectsAdd = () => {
     );
 };
 
-export default ProjectsAdd;
+export default ProjctAddView;

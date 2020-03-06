@@ -1,7 +1,7 @@
 import React from 'react';
 import {InMemoryCache} from 'apollo-cache-inmemory';
 import {cleanup, fireEvent, renderApollo, waitForElement} from '../../../test-utils';
-import {ADD_PROJECTS} from "../projects.documents";
+import {ADD_PROJECTS} from "../../views/docs/projects.documents";
 import {WrappedProjectsAdd} from "../projects.add";
 
 

@@ -1,9 +1,9 @@
 import React, {Fragment} from 'react';
 import {useMutation} from '@apollo/react-hooks';
-import {DELETE_PROJECT, GET_PROJECTS} from './projects.documents';
 import ProjectsDelBtn from '../components/projects.del.btn';
+import {DELETE_PROJECT, GET_PROJECTS} from './docs/projects.documents';
 
-const ProjectsDelete = ({project}) => {
+const ProjectDeleteView = ({project}) => {
 
     const variables = {filter: {id: [project.id]}};
     const [mutate, {loading, error}] = useMutation(
@@ -22,4 +22,4 @@ const ProjectsDelete = ({project}) => {
     );
 };
 
-export default ProjectsDelete;
+export default ProjectDeleteView;

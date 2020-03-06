@@ -1,7 +1,7 @@
 import React from 'react';
 import {Col, Row} from 'antd';
 
-const FlexGridBasic = ({windowSize, slotOne, slotTwo, mainContent}) => {
+const FlexGridDashboard = ({windowSize, slotOne, slotTwo, mainContent}) => {
     return (
         <Row
             gutter={[{xs: 0, sm: 0, md: 0, lg: 16}, 16]}
@@ -45,4 +45,4 @@ const FlexGridBasic = ({windowSize, slotOne, slotTwo, mainContent}) => {
     )
 };
 
-export default FlexGridBasic;
+export default FlexGridDashboard;

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button} from 'antd';
 
-const ProjectsAddBtn = () => {
+const ProjectsAddReference = () => {
     return (
         <div>
             <Button block>
@@ -11,4 +11,4 @@ const ProjectsAddBtn = () => {
     )
 };
 
-export default ProjectsAddBtn;
+export default ProjectsAddReference;
