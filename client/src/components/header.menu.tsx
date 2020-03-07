@@ -6,7 +6,8 @@ const HeaderMenu = ({windowSize}) => {
     return (
         <Menu
             theme="light"
-            mode={windowSize.large ? 'horizontal' : 'inline'}
+            // mode={windowSize.large ? 'horizontal' : 'inline'}
+            mode='horizontal'
             defaultSelectedKeys={['1']}
             style={{
                 lineHeight: '61px',

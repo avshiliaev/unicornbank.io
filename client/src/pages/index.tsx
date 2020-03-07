@@ -9,8 +9,8 @@ const Pages = ({windowSize, userName, location}) => {
 
     return (
         <Router>
-            <ProjectPage windowSize={windowSize} path="project/:id/*"/>
             <DashboardPage windowSize={windowSize} location={currentPath} userName={userName} path="dashboard/*"/>
+            <ProjectPage windowSize={windowSize} path="project/:id/*"/>
         </Router>
     );
 };

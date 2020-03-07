@@ -1,9 +1,18 @@
 import React from 'react';
 import {Col, Row, Tag} from 'antd';
-import FlexContainer from './layout/flex.container';
-import ProfileIcon from './profile.icon';
+import FlexContainer from '../components/layout/flex.container';
+import ProfileIcon from '../components/profile.icon';
+import {useApolloClient} from '@apollo/react-hooks';
 
-const ProfileStatistics = ({windowSize, userName}) => {
+const ProfileStatisticsView = ({windowSize, userName}) => {
+
+    const client = useApolloClient();
+
+    const onClick = async () => {
+        client.writeData({data: {isLoggedIn: false}});
+        localStorage.clear();
+        // await localStorage.removeItem('token');
+    };
 
     const Tags = () => {
 
@@ -40,7 +49,7 @@ const ProfileStatistics = ({windowSize, userName}) => {
                 xl={{span: 24, order: 2}}
             >
                 <FlexContainer justify={windowSize.large ? 'center' : 'start'} align='center'>
-                    <ProfileIcon size={64}/>
+                    <ProfileIcon onClick={onClick} size={64}/>
                 </FlexContainer>
 
             </Col>
@@ -54,4 +63,4 @@ const ProfileStatistics = ({windowSize, userName}) => {
     )
 };
 
-export default ProfileStatistics;
+export default ProfileStatisticsView;

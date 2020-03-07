@@ -4,7 +4,7 @@ import {ADD_PROJECTS, GET_PROJECTS} from './docs/projects.documents';
 import {QueryProjectQuery} from '../api/interfaces/types.d';
 import ProjectsForm from '../components/projects.form';
 
-const ProjctAddView = (props) => {
+const ProjctAddView = ({windowSize}) => {
 
     const [mutate, {loading, error}] = useMutation(
         ADD_PROJECTS,
