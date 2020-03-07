@@ -1,6 +1,6 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-import {cleanup, render} from '../../../../test-utils';
+import {cleanup} from '../../../../test-utils';
 import HeaderBasic from "../header.basic";
 
 Object.defineProperty(window, 'matchMedia', {
@@ -31,20 +31,20 @@ describe('Header', () => {
                 slotRight={(<div>Right</div>)}
             />
         );
-
-        expect(header).toBeTruthy();
+        expect(header.contains(<div>Left</div>)).toBeTruthy();
+        expect(header.contains(<div>Middle</div>)).toBeTruthy();
+        expect(header.contains(<div>Right</div>)).toBeTruthy()
 
     });
     it('renders without error for mobile', () => {
         const header = shallow(
             <HeaderBasic
-                windowSize={{large: true}}
+                windowSize={{large: false}}
                 slotLeft={(<div>Left</div>)}
                 slotMiddle={(<div>Middle</div>)}
                 slotRight={(<div>Right</div>)}
             />
         );
-
-        expect(header).toBeTruthy();
+        expect(header.contains(<div>Middle</div>)).toBeTruthy()
     });
 });

@@ -15,9 +15,7 @@ const SiderBasic = () => {
                 defaultOpenKeys={['sub1']}
                 style={{height: '100%', borderRight: 0}}
             >
-                <Breadcrumb style={{margin: '16px'}}>
-                    <Breadcrumb.Item>Title</Breadcrumb.Item>
-                </Breadcrumb>
+
                 <SubMenu
                     key="sub1"
                     title={
