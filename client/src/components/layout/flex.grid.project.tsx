@@ -1,8 +1,7 @@
 import React from 'react';
 import {Col, Row} from 'antd';
-import BreadCrumbBasic from './breadcrumb.basic';
 
-const FlexGridProject = ({windowSize, slotOne, slotTwo}) => {
+const FlexGridProject = ({windowSize, slotOne, slotTwo, breadCrumbs}) => {
 
     return (
         <Row
@@ -10,7 +9,7 @@ const FlexGridProject = ({windowSize, slotOne, slotTwo}) => {
             justify="start"
         >
             <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
-                <BreadCrumbBasic/>
+                {breadCrumbs}
             </Col>
             <Col xs={24} sm={24} md={24} lg={24} xl={18} xxl={16}>
                 <Row gutter={[{xs: 0, sm: 0, md: 0, lg: 16}, 0]} justify="start">

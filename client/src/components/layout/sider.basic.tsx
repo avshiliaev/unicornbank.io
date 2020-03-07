@@ -8,7 +8,7 @@ const {SubMenu} = Menu;
 const SiderBasic = () => {
 
     return (
-        <Sider width={200} className="site-layout-background">
+        <Sider width={200}>
             <Menu
                 mode="inline"
                 defaultSelectedKeys={['1']}

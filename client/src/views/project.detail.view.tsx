@@ -4,6 +4,7 @@ import {GET_PROJECT} from './docs/project.document';
 import TasksTable from '../components/tasks.table';
 import {GetProjectQuery} from '../api/interfaces/types.d';
 import FlexGridProject from '../components/layout/flex.grid.project';
+import BreadCrumbBasic from '../components/layout/breadcrumb.basic';
 
 const ProjectDetailView = ({windowSize, id}) => {
 
@@ -16,6 +17,7 @@ const ProjectDetailView = ({windowSize, id}) => {
     return (
         <Fragment>
             <FlexGridProject
+                breadCrumbs={<BreadCrumbBasic/>}
                 windowSize={windowSize}
                 slotOne={<TasksTable tasks={project.tasks}/>}
                 slotTwo={(<div>Right Column</div>)}

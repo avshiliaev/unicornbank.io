@@ -2,7 +2,7 @@ import React from 'react';
 import {InMemoryCache} from 'apollo-cache-inmemory';
 import {cleanup, renderApollo, waitForElement,} from '../../../test-utils';
 import {GET_PROJECTS} from '../../views/docs/projects.documents';
-import ProjectsQuery from '../projects.query';
+import ProjectsAllView from "../projects.all.view";
 
 const mockProjects = {
     data: {
@@ -30,7 +30,7 @@ describe('Projects Query Container', () => {
             },
         ];
         const {getAllByText} = await renderApollo(
-            (<ProjectsQuery large={true}/>),
+            (<ProjectsAllView windowSize={{large:true}}/>),
             {mocks, cache}
         );
         await waitForElement(() => getAllByText(/test project/i));
