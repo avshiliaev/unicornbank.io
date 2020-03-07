@@ -1,5 +1,5 @@
 import React from 'react';
-
+import {shallow} from 'enzyme';
 import {cleanup, render} from '../../../../test-utils';
 import HeaderBasic from "../header.basic";
 
@@ -22,7 +22,8 @@ describe('Header', () => {
     afterEach(cleanup);
 
     it('renders without error for desktop', () => {
-        render(
+
+        const header = shallow(
             <HeaderBasic
                 windowSize={{large: true}}
                 slotLeft={(<div>Left</div>)}
@@ -30,15 +31,20 @@ describe('Header', () => {
                 slotRight={(<div>Right</div>)}
             />
         );
+
+        expect(header).toBeTruthy();
+
     });
     it('renders without error for mobile', () => {
-        render(
+        const header = shallow(
             <HeaderBasic
-                windowSize={{large: false}}
+                windowSize={{large: true}}
                 slotLeft={(<div>Left</div>)}
                 slotMiddle={(<div>Middle</div>)}
                 slotRight={(<div>Right</div>)}
             />
         );
+
+        expect(header).toBeTruthy();
     });
 });
