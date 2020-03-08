@@ -25,3 +25,11 @@ export const GET_PROJECT = gql`
         }
     }
 `;
+
+export const DELETE_PROJECT = gql`
+    mutation deleteProject($filter: ProjectFilter!){
+        deleteProject(filter: $filter){
+            msg
+        }
+    }
+`;

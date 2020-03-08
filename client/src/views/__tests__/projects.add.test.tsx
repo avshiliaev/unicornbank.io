@@ -47,7 +47,9 @@ describe('Projects Add Container', () => {
             {
                 mocks,
                 cache,
-                resolvers: {}
+                resolvers: {},
+                addTypename: true,
+                defaultOptions: {}
             },
         );
         fireEvent.click(getByTestId('add-button'));
