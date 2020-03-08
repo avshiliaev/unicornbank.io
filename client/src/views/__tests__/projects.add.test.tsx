@@ -1,16 +1,17 @@
 import React from 'react';
 import {InMemoryCache} from 'apollo-cache-inmemory';
 import {cleanup, fireEvent, renderApollo, waitForElement} from '../../../test-utils';
-import {ADD_PROJECTS} from "../../views/docs/projects.documents";
-import {WrappedProjectsAdd} from "../projects.add";
-
+import ProjectsForm from '../../components/projects.form';
+import {ADD_PROJECTS} from '../docs/projects.documents';
 
 describe('Projects Add Container', () => {
     // automatically unmount and cleanup DOM after the test is finished.
     afterEach(cleanup);
 
+    const mutate = () => console.log('CREATE');
+
     it('renders without error', () => {
-        const {getByTestId} = renderApollo(<WrappedProjectsAdd/>);
+        const {getByTestId} = renderApollo(<ProjectsForm mutate={mutate}/>);
         expect(getByTestId('add-button')).toBeTruthy();
     });
 
@@ -42,7 +43,7 @@ describe('Projects Add Container', () => {
         ];
 
         const {getByTestId, container, debug} = renderApollo(
-            <WrappedProjectsAdd/>,
+            <ProjectsForm mutate={mutate}/>,
             {
                 mocks,
                 cache,

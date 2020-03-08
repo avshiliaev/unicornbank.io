@@ -3,7 +3,7 @@ import ProjectDetailView from '../views/project.detail.view';
 import FlexGridProject from '../components/layout/flex.grid.project';
 import BreadCrumbBasic from '../components/layout/breadcrumb.basic';
 
-const ProjectHomeRoute = ({windowSize, id}) => {
+const ProjectHomeRoute = ({windowSize, id, ...rest}) => {
 
     return (
         <FlexGridProject

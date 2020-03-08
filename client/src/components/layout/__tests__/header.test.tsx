@@ -45,6 +45,8 @@ describe('Header', () => {
                 slotRight={(<div>Right</div>)}
             />
         );
-        expect(header.contains(<div>Middle</div>)).toBeTruthy()
+        expect(header.contains(<div>Left</div>)).toBeFalsy();
+        expect(header.contains(<div>Middle</div>)).toBeTruthy();
+        expect(header.contains(<div>Right</div>)).toBeFalsy()
     });
 });
