@@ -40,7 +40,7 @@ describe('Projects Query Container', () => {
     // automatically unmount and cleanup DOM after the test is finished.
     afterEach(cleanup);
 
-    it('renders projects', async () => {
+    it('renders projects and writes into cache: ', async () => {
 
         const userName = 'testUser';
 
@@ -56,5 +56,6 @@ describe('Projects Query Container', () => {
             {mocks, cache, resolvers: {}, addTypename: true, defaultOptions: {}}
         );
         await waitForElement(() => getAllByText(/test project/i));
+        expect(Object.keys(cache.extract()).length).toBeGreaterThan(0)
     });
 });
