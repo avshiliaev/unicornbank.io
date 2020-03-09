@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+curl -X POST localhost:8080/alter -d '{"drop_op": "DATA"}'
 # shellcheck disable=SC2016
 USERS=$(curl 'localhost:8080/graphql' -H 'Content-Type: application/json' \
   -d '{
