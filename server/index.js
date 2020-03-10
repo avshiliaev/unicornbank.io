@@ -3,6 +3,36 @@ const {exec} = require('child_process');
 
 const url = 'http://localhost:8080/graphql';
 
+const queryProjects = async () => {
+    const query = `
+        query {
+            queryProject{
+                id
+                title
+                description
+                tasks {
+                    id
+                }
+                workers {
+                  id
+                  availability
+                  user {username}
+                }
+                __typename
+            }
+        }
+    `;
+
+    const payload = await gqlRequest.request(url, query);
+    const myInvolevedWorkers = payload.queryProject.map(proj => ({
+        id: proj.id,
+        workers: proj.workers.map(w => w.user.username),
+        hours: proj.workers.map(w => w.availability).reduce((a, b) => a + b)
+    }));
+    console.log('From employer perspective: ');
+    console.log(JSON.stringify(myInvolevedWorkers, null, 2));
+};
+
 const getAllRolesByUser = async () => {
     const query = `
         query getByName($filter: UserFilter){
@@ -74,38 +104,34 @@ const DeleteProj = async (projId, workerId) => {
     // While queries are executed in parallel, the mutation are triggered sequentially!
     const query = `
         mutation deleteProject(
-            $projFilter: ProjectFilter!, 
-            $workerFilter: WorkerFilter!
+            $projId: [ID!], 
+            $workerId: [ID!]
         ){
         
-          deleteWorker(filter: $workerFilter){
+          deleteWorker(filter: {id: $workerId}){
             msg
           }
 
-          deleteProject(filter: $projFilter){
+          deleteProject(filter: {id: $projId}){
             msg
           }
         }
     `;
-    const variables = {"workerFilter": {"id": workerId}, "projFilter": {"id": projId}};
+    const variables = {"projId": projId, "workerId": workerId};
     return await gqlRequest.request(url, query, variables);
 };
 
-const updateUser = async (userName, roleId) => {
+const deleteWorker = async (workerId) => {
 
+    // Deleting worker is like deleting contract that connects a user with a project
     const query = `
-        mutation ($userName: Sting, $roleId: String) {
-          updateUser(input: {
-            filter: { username: { eq: $userName }},
-            remove: { roles: [{id: $roleId}]}
-          }) {
-            user {
-              roles {id}
-            }
+        mutation ($id: [ID!]){
+          deleteWorker(filter: {id: $id}){
+            msg
           }
         }
     `;
-    const variables = {"userName": userName, "roleId": roleId};
+    const variables = {id: workerId};
     return await gqlRequest.request(url, query, variables);
 };
 
@@ -124,35 +150,51 @@ const main = async () => {
 
     timer(2000).then(async () => {
 
-        // First I have two projects I'm involved in:
-        const myRoles = await getAllRolesByUser();
-        console.log('My roles: ', JSON.stringify(myRoles));
-        console.log(
-            'My total allocated hours: ',
-            myRoles.map(role => role.availability).reduce((a, b) => a + b)
-        );
+        // --------------------------------
 
-        // One of the projects is being deleted (not by me!):
-        const projectToDelete = await getProjectById(myRoles[0].projId);
-        const projId = [projectToDelete.getProject.id];
-        const workerId = projectToDelete.getProject.workers.map(w => w.id);
-        console.log('Project to delete: ');
-        console.log('\t - project id: ', projId);
-        console.log('\t - workers id: ', workerId);
+        const getMyRoles = async () => {
+            const myRoles = await getAllRolesByUser();
+            console.log('My roles: ', JSON.stringify(myRoles));
+            console.log(
+                'My allocated hours: ',
+                myRoles.map(role => role.availability)//.reduce((a, b) => a + b)
+            );
+            return myRoles;
+        };
 
-        const deletePayload = await DeleteProj(projId, workerId);
-        console.log('The author deleted the Project: ', JSON.stringify(deletePayload, null, 2));
+        const cleanDeleteProject = async (projId) => {
+            const projectToDelete = await getProjectById(projId);
+            const workerId = projectToDelete.getProject.workers.map(w => w.id);
+            console.log('Project to delete: ');
+            console.log('\t - project id: ', [projId]);
+            console.log('\t - workers id: ', workerId);
 
+            const deletePayload = await DeleteProj([projId], workerId);
+            console.log('The author deleted the Project: ', JSON.stringify(deletePayload, null, 2));
+
+        };
+
+        // --------------------------------
+
+        // 0. This is how the employer sees the state:
+        await queryProjects();
+
+        // 1. First I have two projects I'm involved in:
+        const myRoles = await getMyRoles();
+
+        // 2. One of the projects is being deleted (not by me!):
+        await cleanDeleteProject(myRoles[0].projId);
         // Now I am involved in only one project:
-        const myRolesUpdated = await getAllRolesByUser();
-        console.log('I am no longer a part of it: ', JSON.stringify(myRolesUpdated));
-        console.log(
-            'My total allocated hours: ',
-            myRolesUpdated.map(role => role.availability).reduce((a, b) => a + b)
-        );
+        const myRolesUpdated = await getMyRoles();
 
-        // Now I want to leave the left project:
-        // const roleToDelete = myProjectsUpdated
+        // 3. Now I want to leave the left project:
+        const roleToDelete = [myRolesUpdated[0].roleId];
+        const deleteWorkerPayload = await deleteWorker(roleToDelete);
+        console.log('I have deleted my role: ', JSON.stringify(deleteWorkerPayload, null, 2));
+        const myRolesFinal = await getMyRoles();
+
+        // This is how the employer sees the state now:
+        await queryProjects();
 
     });
 
