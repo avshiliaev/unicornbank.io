@@ -26,11 +26,13 @@ const queryProjects = async () => {
     const payload = await gqlRequest.request(url, query);
     const myInvolevedWorkers = payload.queryProject.map(proj => ({
         id: proj.id,
-        workers: proj.workers.map(w => w.user.username),
+        workers: proj.workers.map(w => w.user.map(u => u.username)),
         hours: proj.workers.map(w => w.availability).reduce((a, b) => a + b)
     }));
     console.log('From employer perspective: ');
     console.log(JSON.stringify(myInvolevedWorkers, null, 2));
+
+    return myInvolevedWorkers
 };
 
 const getAllRolesByUser = async () => {
@@ -60,11 +62,14 @@ const getAllRolesByUser = async () => {
     const variables = {"filter": {"username": {"eq": "hisuperhi"}}};
     const payload = await gqlRequest.request(url, query, variables);
     // parse only project ids
-    return payload.queryUser[0].roles.map(role => ({
-        roleId: role.id,
-        projId: role.project.id,
-        availability: role.availability
-    }));
+    return {
+        id: payload.queryUser[0].id,
+        roles: payload.queryUser[0].roles.map(role => ({
+            roleId: role.id,
+            projId: role.project.id,
+            availability: role.availability
+        }))
+    }
 };
 
 const getProjectById = async (id) => {
@@ -135,6 +140,52 @@ const deleteWorker = async (workerId) => {
     return await gqlRequest.request(url, query, variables);
 };
 
+const leaveWorkerSlot = async (userId, workerId) => {
+
+    // Delete links from both sides leaving the vacant place in a project:
+    const query = `
+        mutation($userId: ID!, $workerId: ID!) {
+          updateUser(input: {
+            filter: { id: [$userId]},
+            remove: { roles: [{id: $workerId}]}
+          }) {
+            user {
+              id
+            }
+          }
+          updateWorker(input: {
+            filter: { id: [$workerId]},
+            remove: { user:  [{id: $userId}] }
+          }) {
+            worker {
+              id
+            }
+          }
+        }
+    `;
+    const variables = {userId, workerId};
+    return await gqlRequest.request(url, query, variables);
+};
+
+const addWorker = async (projId, userId, name, avail) => {
+    const query = `
+        mutation ($projId: ID!, $userId: ID!, $avail: Int!, $name: String!){
+          addWorker(input: [
+                {
+                    user: [{id: $userId}], 
+                    project: {id: $projId}, 
+                    name: $name, 
+                    availability: $avail
+                }
+            ]){
+            worker {id}
+          }
+        }
+    `;
+    const variables = {projId, userId, name, avail};
+    return await gqlRequest.request(url, query, variables);
+};
+
 
 const main = async () => {
 
@@ -154,10 +205,10 @@ const main = async () => {
 
         const getMyRoles = async () => {
             const myRoles = await getAllRolesByUser();
-            console.log('My roles: ', JSON.stringify(myRoles));
+            console.log('My roles: ', JSON.stringify(myRoles.roles));
             console.log(
                 'My allocated hours: ',
-                myRoles.map(role => role.availability)//.reduce((a, b) => a + b)
+                myRoles.roles.map(role => role.availability)//.reduce((a, b) => a + b)
             );
             return myRoles;
         };
@@ -183,18 +234,33 @@ const main = async () => {
         const myRoles = await getMyRoles();
 
         // 2. One of the projects is being deleted (not by me!):
-        await cleanDeleteProject(myRoles[0].projId);
+        await cleanDeleteProject(myRoles.roles[0].projId);
         // Now I am involved in only one project:
         const myRolesUpdated = await getMyRoles();
 
         // 3. Now I want to leave the left project:
-        const roleToDelete = [myRolesUpdated[0].roleId];
+        const roleToDelete = [myRolesUpdated.roles[0].roleId];
         const deleteWorkerPayload = await deleteWorker(roleToDelete);
         console.log('I have deleted my role: ', JSON.stringify(deleteWorkerPayload, null, 2));
         const myRolesFinal = await getMyRoles();
 
         // This is how the employer sees the state now:
+        const allProjects = await queryProjects();
+
+        // 4. Now I want to enter a project:
+        const projToEnter = allProjects[0].id;
+        const myId = myRolesFinal.id;
+        const iEnteredAProj = await addWorker(projToEnter, myId, "hisuperhi", 10);
+        console.log(JSON.stringify(iEnteredAProj));
+
         await queryProjects();
+        const myNewRole = await getMyRoles();
+
+        await leaveWorkerSlot(myId, myNewRole.roles[0].roleId);
+
+
+        await queryProjects();
+        await getMyRoles();
 
     });
 

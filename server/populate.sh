@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 curl -X POST localhost:8080/alter -d '{"drop_op": "DATA"}'
+
 # shellcheck disable=SC2016
 USERS=$(curl 'localhost:8080/graphql' -H 'Content-Type: application/json' \
   -d '{
@@ -31,9 +32,9 @@ curl 'localhost:8080/graphql' -H 'Content-Type: application/json' \
           "tags":[{"title":"rust"},{"title":"beginner"}],
           "boards": [{"title": "main", "columns": [{"title": "todo"}, {"title": "doing"}, {"title": "done"}]}],
           "workers":[
-            {"name":"hisuperhi", "availability":2, "user": '"$HEREIAM"'},
-            {"name":"rusty_crusty", "availability":10, "user": '"$USER1"'},
-            {"name":"cargoo", "availability":56, "user": '"$USER2"'}
+            {"name":"hisuperhi", "availability":2, "user": ['"$HEREIAM"']},
+            {"name":"rusty_crusty", "availability":10, "user": ['"$USER1"']},
+            {"name":"cargoo", "availability":56, "user": ['"$USER2"']}
           ],
           "tasks": [
             {
@@ -68,10 +69,10 @@ curl 'localhost:8080/graphql' -H 'Content-Type: application/json' \
           "tags":[{"title":"example"},{"title":"hands-on"},{"title":"game"}],
           "boards": [{"title": "main", "columns": [{"title": "todo"}, {"title": "doing"}, {"title": "done"}]}],
           "workers":[
-            {"name":"hisuperhi", "availability":20, "user": '"$HEREIAM"'},
-            {"name":"anonymRust", "availability":2, "user": '"$USER0"'},
-            {"name":"rusty_crusty", "availability":2, "user": '"$USER1"'},
-            {"name":"cargoo", "availability":12, "user": '"$USER2"'}
+            {"name":"hisuperhi", "availability":20, "user": ['"$HEREIAM"']},
+            {"name":"anonymRust", "availability":2, "user": ['"$USER0"']},
+            {"name":"rusty_crusty", "availability":2, "user": ['"$USER1"']},
+            {"name":"cargoo", "availability":12, "user": ['"$USER2"']}
           ]
         },
         {
@@ -80,8 +81,8 @@ curl 'localhost:8080/graphql' -H 'Content-Type: application/json' \
           "tags":[{"title":"ownership"},{"title":"rust"},{"title":"garbage collector"}],
           "boards": [{"title": "main", "columns": [{"title": "todo"}, {"title": "doing"}, {"title": "done"}]}],
           "workers":[
-            {"name":"anonymRust", "availability":2, "user": '"$USER0"'},
-            {"name":"cargoo", "availability":33, "user": '"$USER2"'}
+            {"name":"anonymRust", "availability":2, "user": ['"$USER0"']},
+            {"name":"cargoo", "availability":33, "user": ['"$USER2"']}
           ]
         },
         {
@@ -90,8 +91,8 @@ curl 'localhost:8080/graphql' -H 'Content-Type: application/json' \
           "tags":[{"title":"enums"},{"title":"rust"},{"title":"variants"}],
           "boards": [{"title": "main", "columns": [{"title": "todo"}, {"title": "doing"}, {"title": "done"}]}],
           "workers":[
-            {"name":"anonymRust", "availability":2, "user": '"$USER0"'},
-            {"name":"cargoo", "availability":33, "user": '"$USER2"'}
+            {"name":"anonymRust", "availability":2, "user": ['"$USER0"']},
+            {"name":"cargoo", "availability":33, "user": ['"$USER2"']}
           ]
         }
       ]
