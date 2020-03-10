@@ -256,8 +256,8 @@ const main = async () => {
         await queryProjects();
         const myNewRole = await getMyRoles();
 
+        // 5. Now I want to leave the project, but the worker place should stay:
         await leaveWorkerSlot(myId, myNewRole.roles[0].roleId);
-
 
         await queryProjects();
         await getMyRoles();
