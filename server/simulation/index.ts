@@ -1,15 +1,6 @@
 // tsc && node index.js
 
-import {
-    addWorker,
-    deleteProj,
-    deleteWorker,
-    getAllRolesByUser,
-    getProjectById,
-    leaveWorkerSlot,
-    queryProjects
-} from './actions';
-import {AddWorkerInput} from '../../client/src/api/interfaces/types.d';
+import {Developer} from './agents';
 
 const {exec} = require('child_process');
 const url = 'http://localhost:8080/graphql';
@@ -19,9 +10,10 @@ const main = async () => {
 
     const timer = (ms: number) => new Promise(res => setTimeout(res, ms));
 
-    await exec('bash populate.sh', async (err: any, stdout: any, stderr: any) => {
+    await exec('bash ../populate.sh', async (err: any, stdout: any, stderr: any) => {
         if (err) {
-            console.error('Dgraph: Error!')
+            console.error('Dgraph: Error!');
+            console.log(err)
         } else {
             console.log('Dgraph: Success!')
         }
@@ -29,8 +21,10 @@ const main = async () => {
 
     timer(2000).then(async () => {
 
-       const myRoles = await getAllRolesByUser(username,url);
-       console.log(myRoles)
+        let developer: Developer = new Developer(username, url);
+        await developer.getRoles();
+        console.log(developer.showRoles());
+
 
     });
 

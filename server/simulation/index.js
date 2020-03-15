@@ -10,23 +10,25 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const actions_1 = require("./actions");
+const agents_1 = require("./agents");
 const { exec } = require('child_process');
 const url = 'http://localhost:8080/graphql';
 const username = 'hisuperhi';
 const main = () => __awaiter(void 0, void 0, void 0, function* () {
     const timer = (ms) => new Promise(res => setTimeout(res, ms));
-    yield exec('bash populate.sh', (err, stdout, stderr) => __awaiter(void 0, void 0, void 0, function* () {
+    yield exec('bash ../populate.sh', (err, stdout, stderr) => __awaiter(void 0, void 0, void 0, function* () {
         if (err) {
             console.error('Dgraph: Error!');
+            console.log(err);
         }
         else {
             console.log('Dgraph: Success!');
         }
     }));
     timer(2000).then(() => __awaiter(void 0, void 0, void 0, function* () {
-        const myRoles = yield actions_1.getAllRolesByUser(username, url);
-        console.log(myRoles);
+        let developer = new agents_1.Developer(username, url);
+        yield developer.getRoles();
+        console.log(developer.showRoles());
     }));
 });
 main().then(() => console.log('-----'));
