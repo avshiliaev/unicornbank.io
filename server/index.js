@@ -1,4 +1,5 @@
 "use strict";
+// tsc && node index.js
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -20,12 +21,12 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
             console.error('Dgraph: Error!');
         }
         else {
-            console.error('Dgraph: Success!');
+            console.log('Dgraph: Success!');
         }
     }));
     timer(2000).then(() => __awaiter(void 0, void 0, void 0, function* () {
-        const payload = yield actions_1.queryProjects(url);
-        console.log(payload);
+        const myRoles = yield actions_1.getAllRolesByUser(username, url);
+        console.log(myRoles);
     }));
 });
 main().then(() => console.log('-----'));

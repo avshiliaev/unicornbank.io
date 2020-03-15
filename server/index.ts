@@ -1,3 +1,5 @@
+// tsc && node index.js
+
 import {
     addWorker,
     deleteProj,
@@ -21,14 +23,14 @@ const main = async () => {
         if (err) {
             console.error('Dgraph: Error!')
         } else {
-            console.error('Dgraph: Success!')
+            console.log('Dgraph: Success!')
         }
     });
 
     timer(2000).then(async () => {
 
-       const payload = await queryProjects(url);
-       console.log(payload)
+       const myRoles = await getAllRolesByUser(username,url);
+       console.log(myRoles)
 
     });
 
