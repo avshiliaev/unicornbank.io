@@ -10,87 +10,29 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const gqlRequest = require('graphql-request');
-exports.queryProjects = (url) => __awaiter(void 0, void 0, void 0, function* () {
+exports.addProject = (addProjectInput, url) => __awaiter(void 0, void 0, void 0, function* () {
     const query = `
-        query {
-            queryProject{
-                id
-                title
-                description
-                tasks {
-                    id
-                }
-                workers {
-                  id
-                  availability
-                  user {username}
-                }
-                __typename
-            }
-        }
-    `;
-    const payload = yield gqlRequest.request(url, query);
-    return payload.queryProject;
-});
-exports.getAllRolesByUser = (username, url) => __awaiter(void 0, void 0, void 0, function* () {
-    const query = `
-        query getByName($filter: UserFilter!){
-          queryUser(filter: $filter) {
-            id
-            roles {
-              id
-              availability
-              project{
-                    id
-                    title
-                    description
-                    tasks {
-                        id
-                    }
-                    workers {
-                        id
-                    }
-                    __typename
-              }
-            }
+        mutation ($addProjectInput: [AddProjectInput!]!){
+          addProject(input: $addProjectInput){
+            project{id}
           }
         }
     `;
-    const variables = { username: { eq: username } };
-    const payload = yield gqlRequest.request(url, query, { filter: variables });
-    return payload.queryUser;
+    const payload = yield gqlRequest.request(url, query, { addProjectInput });
+    return payload.addProject;
 });
-exports.getProjectById = (projId, url) => __awaiter(void 0, void 0, void 0, function* () {
+exports.addWorker = (addWorkerInput, url) => __awaiter(void 0, void 0, void 0, function* () {
     const query = `
-        query getProject($id: ID!){
-            getProject(id: $id) {
-                id
-                title
-                __typename
-                tags {
-                    id
-                    title
-                    __typename
-                }
-                tasks {
-                    id
-                    title
-                    content
-                    __typename
-                }
-                workers {
-                    id
-                    name
-                    __typename
-                }
-            }
+        mutation ($addWorkerInput: [AddWorkerInput!]!){
+          addWorker(input: $addWorkerInput){
+            worker {id}
+          }
         }
     `;
-    const variables = { id: projId };
-    const payload = yield gqlRequest.request(url, query, variables);
-    return payload.getProject;
+    const payload = yield gqlRequest.request(url, query, { addWorkerInput });
+    return payload.addWorker;
 });
-exports.deleteProj = (projId, workerId, url) => __awaiter(void 0, void 0, void 0, function* () {
+exports.deleteProjClean = (projId, workerId, url) => __awaiter(void 0, void 0, void 0, function* () {
     // While queries are executed in parallel, the mutation are triggered sequentially!
     const query = `
         mutation deleteProject(
@@ -108,6 +50,17 @@ exports.deleteProj = (projId, workerId, url) => __awaiter(void 0, void 0, void 0
     const workerFilter = { id: workerId };
     const projectFilter = { id: projId };
     return yield gqlRequest.request(url, query, { workerFilter, projectFilter });
+});
+exports.deleteProject = (projId, url) => __awaiter(void 0, void 0, void 0, function* () {
+    const query = `
+        mutation ($projectFilter: ProjectFilter!){
+          deleteProject(filter: $projectFilter){
+            msg
+          }
+        }
+    `;
+    const projectFilter = { id: projId };
+    return yield gqlRequest.request(url, query, { projectFilter });
 });
 exports.deleteWorker = (workerId, url) => __awaiter(void 0, void 0, void 0, function* () {
     // Deleting worker is like deleting contract that connects a user with a project
@@ -146,14 +99,4 @@ exports.leaveWorkerSlot = (userId, workerId, url) => __awaiter(void 0, void 0, v
     const userFilter = { id: userId };
     const workerFilter = { id: workerId };
     return yield gqlRequest.request(url, query, { userFilter, workerFilter });
-});
-exports.addWorker = (addWorkerInput, url) => __awaiter(void 0, void 0, void 0, function* () {
-    const query = `
-        mutation ($addWorkerInput: [AddWorkerInput]){
-          addWorker(input: $addWorkerInput){
-            worker {id}
-          }
-        }
-    `;
-    return yield gqlRequest.request(url, query, { addWorkerInput });
 });

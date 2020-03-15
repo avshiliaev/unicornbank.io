@@ -9,7 +9,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const actions_1 = require("./actions");
+const queries_1 = require("./actions/queries");
+const mutations_1 = require("./actions/mutations");
 class Developer {
     constructor(username, url) {
         this.myRoles = [];
@@ -18,7 +19,7 @@ class Developer {
     }
     getRoles() {
         return __awaiter(this, void 0, void 0, function* () {
-            this.myRoles = yield actions_1.getAllRolesByUser(this.userName, this.url);
+            this.myRoles = yield queries_1.getAllRolesByUser(this.userName, this.url);
         });
     }
     showRoles() {
@@ -26,8 +27,34 @@ class Developer {
     }
 }
 exports.Developer = Developer;
-class Employer {
-    constructor() {
+class Host {
+    constructor(url) {
+        this.myProjects = [];
+        this.url = url;
+    }
+    updateProjects() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const payload = yield queries_1.queryProjects(this.url);
+            this.myProjects = payload.map(proj => proj.id);
+        });
+    }
+    createProject() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const projectInput = [{ title: 'title', description: 'descr' }];
+            return yield mutations_1.addProject(projectInput, this.url);
+        });
+    }
+    deleteRandom() {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (this.myProjects.length === 0) {
+                return '';
+            }
+            function getRandomInt(max) {
+                return Math.floor(Math.random() * Math.floor(max));
+            }
+            const toDelete = this.myProjects[getRandomInt(this.myProjects.length)];
+            return yield mutations_1.deleteProject([toDelete], this.url);
+        });
     }
 }
-exports.Employer = Employer;
+exports.Host = Host;
