@@ -10,7 +10,7 @@ import {
     User,
     UserFilter,
     WorkerFilter
-} from '../client/src/api/interfaces/types.d';
+} from '../../client/src/api/interfaces/types.d';
 
 const gqlRequest = require('graphql-request');
 

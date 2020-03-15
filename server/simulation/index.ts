@@ -9,7 +9,7 @@ import {
     leaveWorkerSlot,
     queryProjects
 } from './actions';
-import {AddWorkerInput} from '../client/src/api/interfaces/types.d';
+import {AddWorkerInput} from '../../client/src/api/interfaces/types.d';
 
 const {exec} = require('child_process');
 const url = 'http://localhost:8080/graphql';
