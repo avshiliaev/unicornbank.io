@@ -1,11 +1,11 @@
-query getTask($filter: TaskFilter, $order: TaskOrder, $first: Int, $offset: Int, $filter1: BoardFilter, $order1: BoardOrder, $first1: Int, $offset1: Int, $filter2: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter3: ProjectFilter, $filter4: ProjectFilter, $filter5: UserFilter, $filter6: TagFilter, $order3: TagOrder, $first3: Int, $offset3: Int, $filter7: TaskFilter, $order4: TaskOrder, $first4: Int, $offset4: Int, $filter8: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter9: WorkerFilter, $order6: WorkerOrder, $first6: Int, $offset6: Int, $filter10: TagFilter, $order7: TagOrder, $first7: Int, $offset7: Int, $filter11: ProjectFilter, $filter12: ProjectFilter, $filter13: BoardFilter, $filter14: TaskFilter, $order8: TaskOrder, $first8: Int, $offset8: Int, $filter15: ColumnFilter, $order9: ColumnOrder, $first9: Int, $offset9: Int, $filter16: BoardFilter, $filter17: ProjectFilter, $filter18: ColumnFilter, $filter19: WorkerFilter, $order10: WorkerOrder, $first10: Int, $offset10: Int, $filter20: ProjectFilter, $filter21: UserFilter, $filter22: TagFilter, $order11: TagOrder, $first11: Int, $offset11: Int, $filter23: TaskFilter, $order12: TaskOrder, $first12: Int, $offset12: Int, $filter24: TaskFilter, $order13: TaskOrder, $first13: Int, $offset13: Int, $filter25: WorkerFilter, $order14: WorkerOrder, $first14: Int, $offset14: Int, $filter26: TaskFilter, $filter27: WorkerFilter, $filter28: CommentFilter, $order15: CommentOrder, $first15: Int, $offset15: Int, $filter29: TaskFilter, $order16: TaskOrder, $first16: Int, $offset16: Int, $filter30: ColumnFilter, $filter31: WorkerFilter, $order17: WorkerOrder, $first17: Int, $offset17: Int, $filter32: WorkerFilter, $order18: WorkerOrder, $first18: Int, $offset18: Int, $filter33: CommentFilter, $order19: CommentOrder, $first19: Int, $offset19: Int, $id: ID!){
+query getTask($filter: TaskFilter, $order: TaskOrder, $first: Int, $offset: Int, $filter1: BoardFilter, $order1: BoardOrder, $first1: Int, $offset1: Int, $filter2: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter3: ProjectFilter, $filter4: ProjectFilter, $filter5: UserFilter, $order3: UserOrder, $first3: Int, $offset3: Int, $filter6: TagFilter, $order4: TagOrder, $first4: Int, $offset4: Int, $filter7: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter8: TaskFilter, $order6: TaskOrder, $first6: Int, $offset6: Int, $filter9: WorkerFilter, $order7: WorkerOrder, $first7: Int, $offset7: Int, $filter10: TagFilter, $order8: TagOrder, $first8: Int, $offset8: Int, $filter11: ProjectFilter, $filter12: ProjectFilter, $filter13: BoardFilter, $filter14: TaskFilter, $order9: TaskOrder, $first9: Int, $offset9: Int, $filter15: ColumnFilter, $order10: ColumnOrder, $first10: Int, $offset10: Int, $filter16: BoardFilter, $filter17: ProjectFilter, $filter18: ColumnFilter, $filter19: WorkerFilter, $order11: WorkerOrder, $first11: Int, $offset11: Int, $filter20: ProjectFilter, $filter21: UserFilter, $order12: UserOrder, $first12: Int, $offset12: Int, $filter22: TagFilter, $order13: TagOrder, $first13: Int, $offset13: Int, $filter23: TaskFilter, $order14: TaskOrder, $first14: Int, $offset14: Int, $filter24: TaskFilter, $order15: TaskOrder, $first15: Int, $offset15: Int, $filter25: WorkerFilter, $order16: WorkerOrder, $first16: Int, $offset16: Int, $filter26: TaskFilter, $filter27: WorkerFilter, $filter28: CommentFilter, $order17: CommentOrder, $first17: Int, $offset17: Int, $filter29: TaskFilter, $order18: TaskOrder, $first18: Int, $offset18: Int, $filter30: ColumnFilter, $filter31: WorkerFilter, $order19: WorkerOrder, $first19: Int, $offset19: Int, $filter32: WorkerFilter, $order20: WorkerOrder, $first20: Int, $offset20: Int, $filter33: CommentFilter, $order21: CommentOrder, $first21: Int, $offset21: Int, $id: ID!){
     getTask(id: $id){
         id
         project(filter: $filter11){
             id
             title
             description
-            tags(filter: $filter10, order: $order7, first: $first7, offset: $offset7){
+            tags(filter: $filter10, order: $order8, first: $first8, offset: $offset8){
                 id
                 title
                 project(filter: $filter3){
@@ -32,7 +32,7 @@ query getTask($filter: TaskFilter, $order: TaskOrder, $first: Int, $offset: Int,
                         availability
                     }
                 }
-                workers(filter: $filter9, order: $order6, first: $first6, offset: $offset6){
+                workers(filter: $filter9, order: $order7, first: $first7, offset: $offset7){
                     id
                     project(filter: $filter4){
                         id
@@ -41,17 +41,17 @@ query getTask($filter: TaskFilter, $order: TaskOrder, $first: Int, $offset: Int,
                     }
                     name
                     availability
-                    user(filter: $filter5){
+                    user(filter: $filter5, order: $order3, first: $first3, offset: $offset3){
                         id
                         username
                         password
                         location
                     }
-                    tags(filter: $filter6, order: $order3, first: $first3, offset: $offset3){
+                    tags(filter: $filter6, order: $order4, first: $first4, offset: $offset4){
                         id
                         title
                     }
-                    tasks(filter: $filter7, order: $order4, first: $first4, offset: $offset4){
+                    tasks(filter: $filter7, order: $order5, first: $first5, offset: $offset5){
                         id
                         title
                         hours
@@ -60,7 +60,7 @@ query getTask($filter: TaskFilter, $order: TaskOrder, $first: Int, $offset: Int,
                         priority
                         complete
                     }
-                    liked(filter: $filter8, order: $order5, first: $first5, offset: $offset5){
+                    liked(filter: $filter8, order: $order6, first: $first6, offset: $offset6){
                         id
                         title
                         hours
@@ -82,7 +82,7 @@ query getTask($filter: TaskFilter, $order: TaskOrder, $first: Int, $offset: Int,
                     description
                 }
                 title
-                columns(filter: $filter15, order: $order9, first: $first9, offset: $offset9){
+                columns(filter: $filter15, order: $order10, first: $first10, offset: $offset10){
                     id
                     board(filter: $filter13){
                         id
@@ -90,7 +90,7 @@ query getTask($filter: TaskFilter, $order: TaskOrder, $first: Int, $offset: Int,
                         order
                     }
                     title
-                    tasks(filter: $filter14, order: $order8, first: $first8, offset: $offset8){
+                    tasks(filter: $filter14, order: $order9, first: $first9, offset: $offset9){
                         id
                         title
                         hours
@@ -103,7 +103,7 @@ query getTask($filter: TaskFilter, $order: TaskOrder, $first: Int, $offset: Int,
                 order
             }
             title
-            tasks(filter: $filter29, order: $order16, first: $first16, offset: $offset16){
+            tasks(filter: $filter29, order: $order18, first: $first18, offset: $offset18){
                 id
                 project(filter: $filter17){
                     id
@@ -115,7 +115,7 @@ query getTask($filter: TaskFilter, $order: TaskOrder, $first: Int, $offset: Int,
                     title
                 }
                 title
-                workers(filter: $filter19, order: $order10, first: $first10, offset: $offset10){
+                workers(filter: $filter19, order: $order11, first: $first11, offset: $offset11){
                     id
                     name
                     availability
@@ -125,7 +125,7 @@ query getTask($filter: TaskFilter, $order: TaskOrder, $first: Int, $offset: Int,
                 content
                 priority
                 complete
-                likes(filter: $filter25, order: $order14, first: $first14, offset: $offset14){
+                likes(filter: $filter25, order: $order16, first: $first16, offset: $offset16){
                     id
                     project(filter: $filter20){
                         id
@@ -134,17 +134,17 @@ query getTask($filter: TaskFilter, $order: TaskOrder, $first: Int, $offset: Int,
                     }
                     name
                     availability
-                    user(filter: $filter21){
+                    user(filter: $filter21, order: $order12, first: $first12, offset: $offset12){
                         id
                         username
                         password
                         location
                     }
-                    tags(filter: $filter22, order: $order11, first: $first11, offset: $offset11){
+                    tags(filter: $filter22, order: $order13, first: $first13, offset: $offset13){
                         id
                         title
                     }
-                    tasks(filter: $filter23, order: $order12, first: $first12, offset: $offset12){
+                    tasks(filter: $filter23, order: $order14, first: $first14, offset: $offset14){
                         id
                         title
                         hours
@@ -153,7 +153,7 @@ query getTask($filter: TaskFilter, $order: TaskOrder, $first: Int, $offset: Int,
                         priority
                         complete
                     }
-                    liked(filter: $filter24, order: $order13, first: $first13, offset: $offset13){
+                    liked(filter: $filter24, order: $order15, first: $first15, offset: $offset15){
                         id
                         title
                         hours
@@ -163,7 +163,7 @@ query getTask($filter: TaskFilter, $order: TaskOrder, $first: Int, $offset: Int,
                         complete
                     }
                 }
-                comments(filter: $filter28, order: $order15, first: $first15, offset: $offset15){
+                comments(filter: $filter28, order: $order17, first: $first17, offset: $offset17){
                     id
                     task(filter: $filter26){
                         id
@@ -184,7 +184,7 @@ query getTask($filter: TaskFilter, $order: TaskOrder, $first: Int, $offset: Int,
             }
         }
         title
-        workers(filter: $filter31, order: $order17, first: $first17, offset: $offset17){
+        workers(filter: $filter31, order: $order19, first: $first19, offset: $offset19){
             id
             name
             availability
@@ -194,12 +194,12 @@ query getTask($filter: TaskFilter, $order: TaskOrder, $first: Int, $offset: Int,
         content
         priority
         complete
-        likes(filter: $filter32, order: $order18, first: $first18, offset: $offset18){
+        likes(filter: $filter32, order: $order20, first: $first20, offset: $offset20){
             id
             name
             availability
         }
-        comments(filter: $filter33, order: $order19, first: $first19, offset: $offset19){
+        comments(filter: $filter33, order: $order21, first: $first21, offset: $offset21){
             id
             content
         }

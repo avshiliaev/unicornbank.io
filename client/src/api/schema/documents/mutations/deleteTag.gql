@@ -1,5 +1,6 @@
 mutation deleteTag($filter: TagFilter!){
     deleteTag(filter: $filter){
         msg
+        numUids
     }
 }

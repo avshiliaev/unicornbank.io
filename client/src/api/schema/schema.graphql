@@ -1,13 +1,13 @@
 # source: http://localhost:8080/graphql
-# timestamp: Wed Jan 22 2020 10:43:01 GMT+0100 (Central European Standard Time)
-
-directive @hasInverse(field: String!) on FIELD_DEFINITION
+# timestamp: Sat Mar 14 2020 19:21:30 GMT+0100 (Central European Standard Time)
 
 directive @search(by: [DgraphIndex!]) on FIELD_DEFINITION
 
 directive @dgraph(type: String, pred: String) on OBJECT | INTERFACE | FIELD_DEFINITION
 
 directive @id on FIELD_DEFINITION
+
+directive @hasInverse(field: String!) on FIELD_DEFINITION
 
 input AddBoardInput {
   project: ProjectRef!
@@ -18,6 +18,7 @@ input AddBoardInput {
 
 type AddBoardPayload {
   board(filter: BoardFilter, order: BoardOrder, first: Int, offset: Int): [Board]
+  numUids: Int
 }
 
 input AddColumnInput {
@@ -28,6 +29,7 @@ input AddColumnInput {
 
 type AddColumnPayload {
   column(filter: ColumnFilter, order: ColumnOrder, first: Int, offset: Int): [Column]
+  numUids: Int
 }
 
 input AddCommentInput {
@@ -38,6 +40,7 @@ input AddCommentInput {
 
 type AddCommentPayload {
   comment(filter: CommentFilter, order: CommentOrder, first: Int, offset: Int): [Comment]
+  numUids: Int
 }
 
 input AddProjectInput {
@@ -51,6 +54,7 @@ input AddProjectInput {
 
 type AddProjectPayload {
   project(filter: ProjectFilter, order: ProjectOrder, first: Int, offset: Int): [Project]
+  numUids: Int
 }
 
 input AddTagInput {
@@ -61,11 +65,12 @@ input AddTagInput {
 
 type AddTagPayload {
   tag(filter: TagFilter, order: TagOrder, first: Int, offset: Int): [Tag]
+  numUids: Int
 }
 
 input AddTaskInput {
   project: ProjectRef!
-  column: ColumnRef!
+  column: ColumnRef
   title: String!
   workers: [WorkerRef]
   hours: Int!
@@ -79,6 +84,7 @@ input AddTaskInput {
 
 type AddTaskPayload {
   task(filter: TaskFilter, order: TaskOrder, first: Int, offset: Int): [Task]
+  numUids: Int
 }
 
 input AddUserInput {
@@ -91,13 +97,14 @@ input AddUserInput {
 
 type AddUserPayload {
   user(filter: UserFilter, order: UserOrder, first: Int, offset: Int): [User]
+  numUids: Int
 }
 
 input AddWorkerInput {
   project: ProjectRef!
   name: String!
   availability: Int!
-  user: UserRef!
+  user: [UserRef]
   tags: [TagRef]
   tasks: [TaskRef]
   liked: [TaskRef]
@@ -105,6 +112,7 @@ input AddWorkerInput {
 
 type AddWorkerPayload {
   worker(filter: WorkerFilter, order: WorkerOrder, first: Int, offset: Int): [Worker]
+  numUids: Int
 }
 
 type Board {
@@ -228,34 +236,42 @@ input DateTimeFilter {
 
 type DeleteBoardPayload {
   msg: String
+  numUids: Int
 }
 
 type DeleteColumnPayload {
   msg: String
+  numUids: Int
 }
 
 type DeleteCommentPayload {
   msg: String
+  numUids: Int
 }
 
 type DeleteProjectPayload {
   msg: String
+  numUids: Int
 }
 
 type DeleteTagPayload {
   msg: String
+  numUids: Int
 }
 
 type DeleteTaskPayload {
   msg: String
+  numUids: Int
 }
 
 type DeleteUserPayload {
   msg: String
+  numUids: Int
 }
 
 type DeleteWorkerPayload {
   msg: String
+  numUids: Int
 }
 
 enum DgraphIndex {
@@ -448,7 +464,7 @@ input TagRef {
 type Task {
   id: ID!
   project(filter: ProjectFilter): Project!
-  column(filter: ColumnFilter): Column!
+  column(filter: ColumnFilter): Column
   title: String!
   workers(filter: WorkerFilter, order: WorkerOrder, first: Int, offset: Int): [Worker]
   hours: Int!
@@ -519,6 +535,7 @@ input UpdateBoardInput {
 
 type UpdateBoardPayload {
   board(filter: BoardFilter, order: BoardOrder, first: Int, offset: Int): [Board]
+  numUids: Int
 }
 
 input UpdateColumnInput {
@@ -529,6 +546,7 @@ input UpdateColumnInput {
 
 type UpdateColumnPayload {
   column(filter: ColumnFilter, order: ColumnOrder, first: Int, offset: Int): [Column]
+  numUids: Int
 }
 
 input UpdateCommentInput {
@@ -539,6 +557,7 @@ input UpdateCommentInput {
 
 type UpdateCommentPayload {
   comment(filter: CommentFilter, order: CommentOrder, first: Int, offset: Int): [Comment]
+  numUids: Int
 }
 
 input UpdateProjectInput {
@@ -549,6 +568,7 @@ input UpdateProjectInput {
 
 type UpdateProjectPayload {
   project(filter: ProjectFilter, order: ProjectOrder, first: Int, offset: Int): [Project]
+  numUids: Int
 }
 
 input UpdateTagInput {
@@ -559,6 +579,7 @@ input UpdateTagInput {
 
 type UpdateTagPayload {
   tag(filter: TagFilter, order: TagOrder, first: Int, offset: Int): [Tag]
+  numUids: Int
 }
 
 input UpdateTaskInput {
@@ -569,6 +590,7 @@ input UpdateTaskInput {
 
 type UpdateTaskPayload {
   task(filter: TaskFilter, order: TaskOrder, first: Int, offset: Int): [Task]
+  numUids: Int
 }
 
 input UpdateUserInput {
@@ -579,6 +601,7 @@ input UpdateUserInput {
 
 type UpdateUserPayload {
   user(filter: UserFilter, order: UserOrder, first: Int, offset: Int): [User]
+  numUids: Int
 }
 
 input UpdateWorkerInput {
@@ -589,6 +612,7 @@ input UpdateWorkerInput {
 
 type UpdateWorkerPayload {
   worker(filter: WorkerFilter, order: WorkerOrder, first: Int, offset: Int): [Worker]
+  numUids: Int
 }
 
 type User {
@@ -642,7 +666,7 @@ type Worker {
   project(filter: ProjectFilter): Project!
   name: String!
   availability: Int!
-  user(filter: UserFilter): User!
+  user(filter: UserFilter, order: UserOrder, first: Int, offset: Int): [User]
   tags(filter: TagFilter, order: TagOrder, first: Int, offset: Int): [Tag]
   tasks(filter: TaskFilter, order: TaskOrder, first: Int, offset: Int): [Task]
   liked(filter: TaskFilter, order: TaskOrder, first: Int, offset: Int): [Task]
@@ -671,7 +695,7 @@ input WorkerPatch {
   project: ProjectRef
   name: String
   availability: Int
-  user: UserRef
+  user: [UserRef]
   tags: [TagRef]
   tasks: [TaskRef]
   liked: [TaskRef]
@@ -682,7 +706,7 @@ input WorkerRef {
   project: ProjectRef
   name: String
   availability: Int
-  user: UserRef
+  user: [UserRef]
   tags: [TagRef]
   tasks: [TaskRef]
   liked: [TaskRef]

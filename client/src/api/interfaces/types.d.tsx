@@ -29,6 +29,7 @@ export type AddBoardInput = {
 export type AddBoardPayload = {
    __typename?: 'AddBoardPayload',
   board?: Maybe<Array<Maybe<Board>>>,
+  numUids?: Maybe<Scalars['Int']>,
 };
 
 
@@ -48,6 +49,7 @@ export type AddColumnInput = {
 export type AddColumnPayload = {
    __typename?: 'AddColumnPayload',
   column?: Maybe<Array<Maybe<Column>>>,
+  numUids?: Maybe<Scalars['Int']>,
 };
 
 
@@ -67,6 +69,7 @@ export type AddCommentInput = {
 export type AddCommentPayload = {
    __typename?: 'AddCommentPayload',
   comment?: Maybe<Array<Maybe<Comment>>>,
+  numUids?: Maybe<Scalars['Int']>,
 };
 
 
@@ -89,6 +92,7 @@ export type AddProjectInput = {
 export type AddProjectPayload = {
    __typename?: 'AddProjectPayload',
   project?: Maybe<Array<Maybe<Project>>>,
+  numUids?: Maybe<Scalars['Int']>,
 };
 
 
@@ -108,6 +112,7 @@ export type AddTagInput = {
 export type AddTagPayload = {
    __typename?: 'AddTagPayload',
   tag?: Maybe<Array<Maybe<Tag>>>,
+  numUids?: Maybe<Scalars['Int']>,
 };
 
 
@@ -120,7 +125,7 @@ export type AddTagPayloadTagArgs = {
 
 export type AddTaskInput = {
   project: ProjectRef,
-  column: ColumnRef,
+  column?: Maybe<ColumnRef>,
   title: Scalars['String'],
   workers?: Maybe<Array<Maybe<WorkerRef>>>,
   hours: Scalars['Int'],
@@ -135,6 +140,7 @@ export type AddTaskInput = {
 export type AddTaskPayload = {
    __typename?: 'AddTaskPayload',
   task?: Maybe<Array<Maybe<Task>>>,
+  numUids?: Maybe<Scalars['Int']>,
 };
 
 
@@ -156,6 +162,7 @@ export type AddUserInput = {
 export type AddUserPayload = {
    __typename?: 'AddUserPayload',
   user?: Maybe<Array<Maybe<User>>>,
+  numUids?: Maybe<Scalars['Int']>,
 };
 
 
@@ -170,7 +177,7 @@ export type AddWorkerInput = {
   project: ProjectRef,
   name: Scalars['String'],
   availability: Scalars['Int'],
-  user: UserRef,
+  user?: Maybe<Array<Maybe<UserRef>>>,
   tags?: Maybe<Array<Maybe<TagRef>>>,
   tasks?: Maybe<Array<Maybe<TaskRef>>>,
   liked?: Maybe<Array<Maybe<TaskRef>>>,
@@ -179,6 +186,7 @@ export type AddWorkerInput = {
 export type AddWorkerPayload = {
    __typename?: 'AddWorkerPayload',
   worker?: Maybe<Array<Maybe<Worker>>>,
+  numUids?: Maybe<Scalars['Int']>,
 };
 
 
@@ -349,41 +357,49 @@ export type DateTimeFilter = {
 export type DeleteBoardPayload = {
    __typename?: 'DeleteBoardPayload',
   msg?: Maybe<Scalars['String']>,
+  numUids?: Maybe<Scalars['Int']>,
 };
 
 export type DeleteColumnPayload = {
    __typename?: 'DeleteColumnPayload',
   msg?: Maybe<Scalars['String']>,
+  numUids?: Maybe<Scalars['Int']>,
 };
 
 export type DeleteCommentPayload = {
    __typename?: 'DeleteCommentPayload',
   msg?: Maybe<Scalars['String']>,
+  numUids?: Maybe<Scalars['Int']>,
 };
 
 export type DeleteProjectPayload = {
    __typename?: 'DeleteProjectPayload',
   msg?: Maybe<Scalars['String']>,
+  numUids?: Maybe<Scalars['Int']>,
 };
 
 export type DeleteTagPayload = {
    __typename?: 'DeleteTagPayload',
   msg?: Maybe<Scalars['String']>,
+  numUids?: Maybe<Scalars['Int']>,
 };
 
 export type DeleteTaskPayload = {
    __typename?: 'DeleteTaskPayload',
   msg?: Maybe<Scalars['String']>,
+  numUids?: Maybe<Scalars['Int']>,
 };
 
 export type DeleteUserPayload = {
    __typename?: 'DeleteUserPayload',
   msg?: Maybe<Scalars['String']>,
+  numUids?: Maybe<Scalars['Int']>,
 };
 
 export type DeleteWorkerPayload = {
    __typename?: 'DeleteWorkerPayload',
   msg?: Maybe<Scalars['String']>,
+  numUids?: Maybe<Scalars['Int']>,
 };
 
 export enum DgraphIndex {
@@ -850,7 +866,7 @@ export type Task = {
    __typename?: 'Task',
   id: Scalars['ID'],
   project: Project,
-  column: Column,
+  column?: Maybe<Column>,
   title: Scalars['String'],
   workers?: Maybe<Array<Maybe<Worker>>>,
   hours: Scalars['Int'],
@@ -956,6 +972,7 @@ export type UpdateBoardInput = {
 export type UpdateBoardPayload = {
    __typename?: 'UpdateBoardPayload',
   board?: Maybe<Array<Maybe<Board>>>,
+  numUids?: Maybe<Scalars['Int']>,
 };
 
 
@@ -975,6 +992,7 @@ export type UpdateColumnInput = {
 export type UpdateColumnPayload = {
    __typename?: 'UpdateColumnPayload',
   column?: Maybe<Array<Maybe<Column>>>,
+  numUids?: Maybe<Scalars['Int']>,
 };
 
 
@@ -994,6 +1012,7 @@ export type UpdateCommentInput = {
 export type UpdateCommentPayload = {
    __typename?: 'UpdateCommentPayload',
   comment?: Maybe<Array<Maybe<Comment>>>,
+  numUids?: Maybe<Scalars['Int']>,
 };
 
 
@@ -1013,6 +1032,7 @@ export type UpdateProjectInput = {
 export type UpdateProjectPayload = {
    __typename?: 'UpdateProjectPayload',
   project?: Maybe<Array<Maybe<Project>>>,
+  numUids?: Maybe<Scalars['Int']>,
 };
 
 
@@ -1032,6 +1052,7 @@ export type UpdateTagInput = {
 export type UpdateTagPayload = {
    __typename?: 'UpdateTagPayload',
   tag?: Maybe<Array<Maybe<Tag>>>,
+  numUids?: Maybe<Scalars['Int']>,
 };
 
 
@@ -1051,6 +1072,7 @@ export type UpdateTaskInput = {
 export type UpdateTaskPayload = {
    __typename?: 'UpdateTaskPayload',
   task?: Maybe<Array<Maybe<Task>>>,
+  numUids?: Maybe<Scalars['Int']>,
 };
 
 
@@ -1070,6 +1092,7 @@ export type UpdateUserInput = {
 export type UpdateUserPayload = {
    __typename?: 'UpdateUserPayload',
   user?: Maybe<Array<Maybe<User>>>,
+  numUids?: Maybe<Scalars['Int']>,
 };
 
 
@@ -1089,6 +1112,7 @@ export type UpdateWorkerInput = {
 export type UpdateWorkerPayload = {
    __typename?: 'UpdateWorkerPayload',
   worker?: Maybe<Array<Maybe<Worker>>>,
+  numUids?: Maybe<Scalars['Int']>,
 };
 
 
@@ -1168,7 +1192,7 @@ export type Worker = {
   project: Project,
   name: Scalars['String'],
   availability: Scalars['Int'],
-  user: User,
+  user?: Maybe<Array<Maybe<User>>>,
   tags?: Maybe<Array<Maybe<Tag>>>,
   tasks?: Maybe<Array<Maybe<Task>>>,
   liked?: Maybe<Array<Maybe<Task>>>,
@@ -1181,7 +1205,10 @@ export type WorkerProjectArgs = {
 
 
 export type WorkerUserArgs = {
-  filter?: Maybe<UserFilter>
+  filter?: Maybe<UserFilter>,
+  order?: Maybe<UserOrder>,
+  first?: Maybe<Scalars['Int']>,
+  offset?: Maybe<Scalars['Int']>
 };
 
 
@@ -1231,7 +1258,7 @@ export type WorkerPatch = {
   project?: Maybe<ProjectRef>,
   name?: Maybe<Scalars['String']>,
   availability?: Maybe<Scalars['Int']>,
-  user?: Maybe<UserRef>,
+  user?: Maybe<Array<Maybe<UserRef>>>,
   tags?: Maybe<Array<Maybe<TagRef>>>,
   tasks?: Maybe<Array<Maybe<TaskRef>>>,
   liked?: Maybe<Array<Maybe<TaskRef>>>,
@@ -1242,7 +1269,7 @@ export type WorkerRef = {
   project?: Maybe<ProjectRef>,
   name?: Maybe<Scalars['String']>,
   availability?: Maybe<Scalars['Int']>,
-  user?: Maybe<UserRef>,
+  user?: Maybe<Array<Maybe<UserRef>>>,
   tags?: Maybe<Array<Maybe<TagRef>>>,
   tasks?: Maybe<Array<Maybe<TaskRef>>>,
   liked?: Maybe<Array<Maybe<TaskRef>>>,
@@ -1287,36 +1314,39 @@ export type AddBoardMutationVariables = {
   offset7?: Maybe<Scalars['Int']>,
   filter12?: Maybe<ProjectFilter>,
   filter13?: Maybe<UserFilter>,
-  filter14?: Maybe<TagFilter>,
-  order8?: Maybe<TagOrder>,
+  order8?: Maybe<UserOrder>,
   first8?: Maybe<Scalars['Int']>,
   offset8?: Maybe<Scalars['Int']>,
-  filter15?: Maybe<TaskFilter>,
-  order9?: Maybe<TaskOrder>,
+  filter14?: Maybe<TagFilter>,
+  order9?: Maybe<TagOrder>,
   first9?: Maybe<Scalars['Int']>,
   offset9?: Maybe<Scalars['Int']>,
-  filter16?: Maybe<TaskFilter>,
+  filter15?: Maybe<TaskFilter>,
   order10?: Maybe<TaskOrder>,
   first10?: Maybe<Scalars['Int']>,
   offset10?: Maybe<Scalars['Int']>,
-  filter17?: Maybe<WorkerFilter>,
-  order11?: Maybe<WorkerOrder>,
+  filter16?: Maybe<TaskFilter>,
+  order11?: Maybe<TaskOrder>,
   first11?: Maybe<Scalars['Int']>,
   offset11?: Maybe<Scalars['Int']>,
+  filter17?: Maybe<WorkerFilter>,
+  order12?: Maybe<WorkerOrder>,
+  first12?: Maybe<Scalars['Int']>,
+  offset12?: Maybe<Scalars['Int']>,
   filter18?: Maybe<ProjectFilter>,
   filter19?: Maybe<BoardFilter>,
   filter20?: Maybe<TaskFilter>,
-  order12?: Maybe<TaskOrder>,
-  first12?: Maybe<Scalars['Int']>,
-  offset12?: Maybe<Scalars['Int']>,
-  filter21?: Maybe<ColumnFilter>,
-  order13?: Maybe<ColumnOrder>,
+  order13?: Maybe<TaskOrder>,
   first13?: Maybe<Scalars['Int']>,
   offset13?: Maybe<Scalars['Int']>,
-  filter22?: Maybe<BoardFilter>,
-  order14?: Maybe<BoardOrder>,
+  filter21?: Maybe<ColumnFilter>,
+  order14?: Maybe<ColumnOrder>,
   first14?: Maybe<Scalars['Int']>,
   offset14?: Maybe<Scalars['Int']>,
+  filter22?: Maybe<BoardFilter>,
+  order15?: Maybe<BoardOrder>,
+  first15?: Maybe<Scalars['Int']>,
+  offset15?: Maybe<Scalars['Int']>,
   input: Array<AddBoardInput>
 };
 
@@ -1325,6 +1355,7 @@ export type AddBoardMutation = (
   { __typename?: 'Mutation' }
   & { addBoard: Maybe<(
     { __typename?: 'AddBoardPayload' }
+    & Pick<AddBoardPayload, 'numUids'>
     & { board: Maybe<Array<Maybe<(
       { __typename?: 'Board' }
       & Pick<Board, 'id' | 'title' | 'order'>
@@ -1347,10 +1378,10 @@ export type AddBoardMutation = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: (
+          ), column: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          ), workers: Maybe<Array<Maybe<(
+          )>, workers: Maybe<Array<Maybe<(
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
           )>>>, likes: Maybe<Array<Maybe<(
@@ -1376,10 +1407,10 @@ export type AddBoardMutation = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: (
+          ), user: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          ), tags: Maybe<Array<Maybe<(
+          )>>>, tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
           )>>>, tasks: Maybe<Array<Maybe<(
@@ -1437,54 +1468,60 @@ export type AddColumnMutationVariables = {
   filter10?: Maybe<ColumnFilter>,
   filter11?: Maybe<ProjectFilter>,
   filter12?: Maybe<UserFilter>,
-  filter13?: Maybe<TagFilter>,
-  order6?: Maybe<TagOrder>,
+  order6?: Maybe<UserOrder>,
   first6?: Maybe<Scalars['Int']>,
   offset6?: Maybe<Scalars['Int']>,
-  filter14?: Maybe<TaskFilter>,
-  order7?: Maybe<TaskOrder>,
+  filter13?: Maybe<TagFilter>,
+  order7?: Maybe<TagOrder>,
   first7?: Maybe<Scalars['Int']>,
   offset7?: Maybe<Scalars['Int']>,
-  filter15?: Maybe<TaskFilter>,
+  filter14?: Maybe<TaskFilter>,
   order8?: Maybe<TaskOrder>,
   first8?: Maybe<Scalars['Int']>,
   offset8?: Maybe<Scalars['Int']>,
-  filter16?: Maybe<WorkerFilter>,
-  order9?: Maybe<WorkerOrder>,
+  filter15?: Maybe<TaskFilter>,
+  order9?: Maybe<TaskOrder>,
   first9?: Maybe<Scalars['Int']>,
   offset9?: Maybe<Scalars['Int']>,
-  filter17?: Maybe<ProjectFilter>,
-  filter18?: Maybe<UserFilter>,
-  filter19?: Maybe<TagFilter>,
-  order10?: Maybe<TagOrder>,
+  filter16?: Maybe<WorkerFilter>,
+  order10?: Maybe<WorkerOrder>,
   first10?: Maybe<Scalars['Int']>,
   offset10?: Maybe<Scalars['Int']>,
-  filter20?: Maybe<TaskFilter>,
-  order11?: Maybe<TaskOrder>,
+  filter17?: Maybe<ProjectFilter>,
+  filter18?: Maybe<UserFilter>,
+  order11?: Maybe<UserOrder>,
   first11?: Maybe<Scalars['Int']>,
   offset11?: Maybe<Scalars['Int']>,
-  filter21?: Maybe<TaskFilter>,
-  order12?: Maybe<TaskOrder>,
+  filter19?: Maybe<TagFilter>,
+  order12?: Maybe<TagOrder>,
   first12?: Maybe<Scalars['Int']>,
   offset12?: Maybe<Scalars['Int']>,
-  filter22?: Maybe<WorkerFilter>,
-  order13?: Maybe<WorkerOrder>,
+  filter20?: Maybe<TaskFilter>,
+  order13?: Maybe<TaskOrder>,
   first13?: Maybe<Scalars['Int']>,
   offset13?: Maybe<Scalars['Int']>,
+  filter21?: Maybe<TaskFilter>,
+  order14?: Maybe<TaskOrder>,
+  first14?: Maybe<Scalars['Int']>,
+  offset14?: Maybe<Scalars['Int']>,
+  filter22?: Maybe<WorkerFilter>,
+  order15?: Maybe<WorkerOrder>,
+  first15?: Maybe<Scalars['Int']>,
+  offset15?: Maybe<Scalars['Int']>,
   filter23?: Maybe<TaskFilter>,
   filter24?: Maybe<WorkerFilter>,
   filter25?: Maybe<CommentFilter>,
-  order14?: Maybe<CommentOrder>,
-  first14?: Maybe<Scalars['Int']>,
-  offset14?: Maybe<Scalars['Int']>,
-  filter26?: Maybe<TaskFilter>,
-  order15?: Maybe<TaskOrder>,
-  first15?: Maybe<Scalars['Int']>,
-  offset15?: Maybe<Scalars['Int']>,
-  filter27?: Maybe<ColumnFilter>,
-  order16?: Maybe<ColumnOrder>,
+  order16?: Maybe<CommentOrder>,
   first16?: Maybe<Scalars['Int']>,
   offset16?: Maybe<Scalars['Int']>,
+  filter26?: Maybe<TaskFilter>,
+  order17?: Maybe<TaskOrder>,
+  first17?: Maybe<Scalars['Int']>,
+  offset17?: Maybe<Scalars['Int']>,
+  filter27?: Maybe<ColumnFilter>,
+  order18?: Maybe<ColumnOrder>,
+  first18?: Maybe<Scalars['Int']>,
+  offset18?: Maybe<Scalars['Int']>,
   input: Array<AddColumnInput>
 };
 
@@ -1493,6 +1530,7 @@ export type AddColumnMutation = (
   { __typename?: 'Mutation' }
   & { addColumn: Maybe<(
     { __typename?: 'AddColumnPayload' }
+    & Pick<AddColumnPayload, 'numUids'>
     & { column: Maybe<Array<Maybe<(
       { __typename?: 'Column' }
       & Pick<Column, 'id' | 'title'>
@@ -1532,19 +1570,19 @@ export type AddColumnMutation = (
         & { project: (
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
-        ), column: (
+        ), column: Maybe<(
           { __typename?: 'Column' }
           & Pick<Column, 'id' | 'title'>
-        ), workers: Maybe<Array<Maybe<(
+        )>, workers: Maybe<Array<Maybe<(
           { __typename?: 'Worker' }
           & Pick<Worker, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: (
+          ), user: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          ), tags: Maybe<Array<Maybe<(
+          )>>>, tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
           )>>>, tasks: Maybe<Array<Maybe<(
@@ -1560,10 +1598,10 @@ export type AddColumnMutation = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: (
+          ), user: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          ), tags: Maybe<Array<Maybe<(
+          )>>>, tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
           )>>>, tasks: Maybe<Array<Maybe<(
@@ -1615,107 +1653,116 @@ export type AddCommentMutationVariables = {
   filter7?: Maybe<ColumnFilter>,
   filter8?: Maybe<ProjectFilter>,
   filter9?: Maybe<UserFilter>,
-  filter10?: Maybe<TagFilter>,
-  order5?: Maybe<TagOrder>,
+  order5?: Maybe<UserOrder>,
   first5?: Maybe<Scalars['Int']>,
   offset5?: Maybe<Scalars['Int']>,
-  filter11?: Maybe<TaskFilter>,
-  order6?: Maybe<TaskOrder>,
+  filter10?: Maybe<TagFilter>,
+  order6?: Maybe<TagOrder>,
   first6?: Maybe<Scalars['Int']>,
   offset6?: Maybe<Scalars['Int']>,
-  filter12?: Maybe<TaskFilter>,
+  filter11?: Maybe<TaskFilter>,
   order7?: Maybe<TaskOrder>,
   first7?: Maybe<Scalars['Int']>,
   offset7?: Maybe<Scalars['Int']>,
-  filter13?: Maybe<WorkerFilter>,
-  order8?: Maybe<WorkerOrder>,
+  filter12?: Maybe<TaskFilter>,
+  order8?: Maybe<TaskOrder>,
   first8?: Maybe<Scalars['Int']>,
   offset8?: Maybe<Scalars['Int']>,
-  filter14?: Maybe<ProjectFilter>,
-  filter15?: Maybe<UserFilter>,
-  filter16?: Maybe<TagFilter>,
-  order9?: Maybe<TagOrder>,
+  filter13?: Maybe<WorkerFilter>,
+  order9?: Maybe<WorkerOrder>,
   first9?: Maybe<Scalars['Int']>,
   offset9?: Maybe<Scalars['Int']>,
-  filter17?: Maybe<TaskFilter>,
-  order10?: Maybe<TaskOrder>,
+  filter14?: Maybe<ProjectFilter>,
+  filter15?: Maybe<UserFilter>,
+  order10?: Maybe<UserOrder>,
   first10?: Maybe<Scalars['Int']>,
   offset10?: Maybe<Scalars['Int']>,
-  filter18?: Maybe<TaskFilter>,
-  order11?: Maybe<TaskOrder>,
+  filter16?: Maybe<TagFilter>,
+  order11?: Maybe<TagOrder>,
   first11?: Maybe<Scalars['Int']>,
   offset11?: Maybe<Scalars['Int']>,
-  filter19?: Maybe<WorkerFilter>,
-  order12?: Maybe<WorkerOrder>,
+  filter17?: Maybe<TaskFilter>,
+  order12?: Maybe<TaskOrder>,
   first12?: Maybe<Scalars['Int']>,
   offset12?: Maybe<Scalars['Int']>,
-  filter20?: Maybe<TaskFilter>,
-  filter21?: Maybe<WorkerFilter>,
-  filter22?: Maybe<CommentFilter>,
-  order13?: Maybe<CommentOrder>,
+  filter18?: Maybe<TaskFilter>,
+  order13?: Maybe<TaskOrder>,
   first13?: Maybe<Scalars['Int']>,
   offset13?: Maybe<Scalars['Int']>,
-  filter23?: Maybe<TaskFilter>,
-  filter24?: Maybe<ProjectFilter>,
-  filter25?: Maybe<WorkerFilter>,
+  filter19?: Maybe<WorkerFilter>,
   order14?: Maybe<WorkerOrder>,
   first14?: Maybe<Scalars['Int']>,
   offset14?: Maybe<Scalars['Int']>,
-  filter26?: Maybe<TaskFilter>,
-  order15?: Maybe<TaskOrder>,
+  filter20?: Maybe<TaskFilter>,
+  filter21?: Maybe<WorkerFilter>,
+  filter22?: Maybe<CommentFilter>,
+  order15?: Maybe<CommentOrder>,
   first15?: Maybe<Scalars['Int']>,
   offset15?: Maybe<Scalars['Int']>,
-  filter27?: Maybe<UserFilter>,
-  filter28?: Maybe<ProjectFilter>,
-  filter29?: Maybe<WorkerFilter>,
+  filter23?: Maybe<TaskFilter>,
+  filter24?: Maybe<ProjectFilter>,
+  filter25?: Maybe<WorkerFilter>,
   order16?: Maybe<WorkerOrder>,
   first16?: Maybe<Scalars['Int']>,
   offset16?: Maybe<Scalars['Int']>,
-  filter30?: Maybe<TagFilter>,
-  order17?: Maybe<TagOrder>,
+  filter26?: Maybe<TaskFilter>,
+  order17?: Maybe<TaskOrder>,
   first17?: Maybe<Scalars['Int']>,
   offset17?: Maybe<Scalars['Int']>,
-  filter31?: Maybe<ProjectFilter>,
-  filter32?: Maybe<ColumnFilter>,
-  filter33?: Maybe<WorkerFilter>,
-  order18?: Maybe<WorkerOrder>,
+  filter27?: Maybe<UserFilter>,
+  order18?: Maybe<UserOrder>,
   first18?: Maybe<Scalars['Int']>,
   offset18?: Maybe<Scalars['Int']>,
-  filter34?: Maybe<WorkerFilter>,
+  filter28?: Maybe<ProjectFilter>,
+  filter29?: Maybe<WorkerFilter>,
   order19?: Maybe<WorkerOrder>,
   first19?: Maybe<Scalars['Int']>,
   offset19?: Maybe<Scalars['Int']>,
-  filter35?: Maybe<CommentFilter>,
-  order20?: Maybe<CommentOrder>,
+  filter30?: Maybe<TagFilter>,
+  order20?: Maybe<TagOrder>,
   first20?: Maybe<Scalars['Int']>,
   offset20?: Maybe<Scalars['Int']>,
-  filter36?: Maybe<TaskFilter>,
-  order21?: Maybe<TaskOrder>,
+  filter31?: Maybe<ProjectFilter>,
+  filter32?: Maybe<ColumnFilter>,
+  filter33?: Maybe<WorkerFilter>,
+  order21?: Maybe<WorkerOrder>,
   first21?: Maybe<Scalars['Int']>,
   offset21?: Maybe<Scalars['Int']>,
-  filter37?: Maybe<ProjectFilter>,
-  filter38?: Maybe<ColumnFilter>,
-  filter39?: Maybe<WorkerFilter>,
+  filter34?: Maybe<WorkerFilter>,
   order22?: Maybe<WorkerOrder>,
   first22?: Maybe<Scalars['Int']>,
   offset22?: Maybe<Scalars['Int']>,
-  filter40?: Maybe<WorkerFilter>,
-  order23?: Maybe<WorkerOrder>,
+  filter35?: Maybe<CommentFilter>,
+  order23?: Maybe<CommentOrder>,
   first23?: Maybe<Scalars['Int']>,
   offset23?: Maybe<Scalars['Int']>,
-  filter41?: Maybe<CommentFilter>,
-  order24?: Maybe<CommentOrder>,
+  filter36?: Maybe<TaskFilter>,
+  order24?: Maybe<TaskOrder>,
   first24?: Maybe<Scalars['Int']>,
   offset24?: Maybe<Scalars['Int']>,
-  filter42?: Maybe<TaskFilter>,
-  order25?: Maybe<TaskOrder>,
+  filter37?: Maybe<ProjectFilter>,
+  filter38?: Maybe<ColumnFilter>,
+  filter39?: Maybe<WorkerFilter>,
+  order25?: Maybe<WorkerOrder>,
   first25?: Maybe<Scalars['Int']>,
   offset25?: Maybe<Scalars['Int']>,
-  filter43?: Maybe<WorkerFilter>,
-  filter44?: Maybe<CommentFilter>,
-  order26?: Maybe<CommentOrder>,
+  filter40?: Maybe<WorkerFilter>,
+  order26?: Maybe<WorkerOrder>,
   first26?: Maybe<Scalars['Int']>,
   offset26?: Maybe<Scalars['Int']>,
+  filter41?: Maybe<CommentFilter>,
+  order27?: Maybe<CommentOrder>,
+  first27?: Maybe<Scalars['Int']>,
+  offset27?: Maybe<Scalars['Int']>,
+  filter42?: Maybe<TaskFilter>,
+  order28?: Maybe<TaskOrder>,
+  first28?: Maybe<Scalars['Int']>,
+  offset28?: Maybe<Scalars['Int']>,
+  filter43?: Maybe<WorkerFilter>,
+  filter44?: Maybe<CommentFilter>,
+  order29?: Maybe<CommentOrder>,
+  first29?: Maybe<Scalars['Int']>,
+  offset29?: Maybe<Scalars['Int']>,
   input: Array<AddCommentInput>
 };
 
@@ -1724,6 +1771,7 @@ export type AddCommentMutation = (
   { __typename?: 'Mutation' }
   & { addComment: Maybe<(
     { __typename?: 'AddCommentPayload' }
+    & Pick<AddCommentPayload, 'numUids'>
     & { comment: Maybe<Array<Maybe<(
       { __typename?: 'Comment' }
       & Pick<Comment, 'id' | 'content'>
@@ -1746,7 +1794,7 @@ export type AddCommentMutation = (
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
           )>>> }
-        ), column: (
+        ), column: Maybe<(
           { __typename?: 'Column' }
           & Pick<Column, 'id' | 'title'>
           & { board: (
@@ -1756,16 +1804,16 @@ export type AddCommentMutation = (
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        ), workers: Maybe<Array<Maybe<(
+        )>, workers: Maybe<Array<Maybe<(
           { __typename?: 'Worker' }
           & Pick<Worker, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: (
+          ), user: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          ), tags: Maybe<Array<Maybe<(
+          )>>>, tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
           )>>>, tasks: Maybe<Array<Maybe<(
@@ -1781,10 +1829,10 @@ export type AddCommentMutation = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: (
+          ), user: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          ), tags: Maybe<Array<Maybe<(
+          )>>>, tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
           )>>>, tasks: Maybe<Array<Maybe<(
@@ -1811,7 +1859,7 @@ export type AddCommentMutation = (
         & { project: (
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
-        ), user: (
+        ), user: Maybe<Array<Maybe<(
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
           & { roles: Maybe<Array<Maybe<(
@@ -1821,7 +1869,7 @@ export type AddCommentMutation = (
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        ), tags: Maybe<Array<Maybe<(
+        )>>>, tags: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
           & { project: (
@@ -1837,10 +1885,10 @@ export type AddCommentMutation = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: (
+          ), column: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          ), workers: Maybe<Array<Maybe<(
+          )>, workers: Maybe<Array<Maybe<(
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
           )>>>, likes: Maybe<Array<Maybe<(
@@ -1856,10 +1904,10 @@ export type AddCommentMutation = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: (
+          ), column: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          ), workers: Maybe<Array<Maybe<(
+          )>, workers: Maybe<Array<Maybe<(
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
           )>>>, likes: Maybe<Array<Maybe<(
@@ -1891,30 +1939,33 @@ export type AddProjectMutationVariables = {
   filter3?: Maybe<ProjectFilter>,
   filter4?: Maybe<ProjectFilter>,
   filter5?: Maybe<UserFilter>,
-  filter6?: Maybe<TagFilter>,
-  order3?: Maybe<TagOrder>,
+  order3?: Maybe<UserOrder>,
   first3?: Maybe<Scalars['Int']>,
   offset3?: Maybe<Scalars['Int']>,
-  filter7?: Maybe<TaskFilter>,
-  order4?: Maybe<TaskOrder>,
+  filter6?: Maybe<TagFilter>,
+  order4?: Maybe<TagOrder>,
   first4?: Maybe<Scalars['Int']>,
   offset4?: Maybe<Scalars['Int']>,
-  filter8?: Maybe<TaskFilter>,
+  filter7?: Maybe<TaskFilter>,
   order5?: Maybe<TaskOrder>,
   first5?: Maybe<Scalars['Int']>,
   offset5?: Maybe<Scalars['Int']>,
-  filter9?: Maybe<WorkerFilter>,
-  order6?: Maybe<WorkerOrder>,
+  filter8?: Maybe<TaskFilter>,
+  order6?: Maybe<TaskOrder>,
   first6?: Maybe<Scalars['Int']>,
   offset6?: Maybe<Scalars['Int']>,
-  filter10?: Maybe<TagFilter>,
-  order7?: Maybe<TagOrder>,
+  filter9?: Maybe<WorkerFilter>,
+  order7?: Maybe<WorkerOrder>,
   first7?: Maybe<Scalars['Int']>,
   offset7?: Maybe<Scalars['Int']>,
-  filter11?: Maybe<ProjectFilter>,
-  order8?: Maybe<ProjectOrder>,
+  filter10?: Maybe<TagFilter>,
+  order8?: Maybe<TagOrder>,
   first8?: Maybe<Scalars['Int']>,
   offset8?: Maybe<Scalars['Int']>,
+  filter11?: Maybe<ProjectFilter>,
+  order9?: Maybe<ProjectOrder>,
+  first9?: Maybe<Scalars['Int']>,
+  offset9?: Maybe<Scalars['Int']>,
   input: Array<AddProjectInput>
 };
 
@@ -1923,6 +1974,7 @@ export type AddProjectMutation = (
   { __typename?: 'Mutation' }
   & { addProject: Maybe<(
     { __typename?: 'AddProjectPayload' }
+    & Pick<AddProjectPayload, 'numUids'>
     & { project: Maybe<Array<Maybe<(
       { __typename?: 'Project' }
       & Pick<Project, 'id' | 'title' | 'description'>
@@ -1948,10 +2000,10 @@ export type AddProjectMutation = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: (
+          ), user: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          ), tags: Maybe<Array<Maybe<(
+          )>>>, tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
           )>>>, tasks: Maybe<Array<Maybe<(
@@ -2006,31 +2058,34 @@ export type AddTagMutationVariables = {
   offset7?: Maybe<Scalars['Int']>,
   filter12?: Maybe<ProjectFilter>,
   filter13?: Maybe<UserFilter>,
-  filter14?: Maybe<TagFilter>,
-  order8?: Maybe<TagOrder>,
+  order8?: Maybe<UserOrder>,
   first8?: Maybe<Scalars['Int']>,
   offset8?: Maybe<Scalars['Int']>,
-  filter15?: Maybe<TaskFilter>,
-  order9?: Maybe<TaskOrder>,
+  filter14?: Maybe<TagFilter>,
+  order9?: Maybe<TagOrder>,
   first9?: Maybe<Scalars['Int']>,
   offset9?: Maybe<Scalars['Int']>,
-  filter16?: Maybe<TaskFilter>,
+  filter15?: Maybe<TaskFilter>,
   order10?: Maybe<TaskOrder>,
   first10?: Maybe<Scalars['Int']>,
   offset10?: Maybe<Scalars['Int']>,
-  filter17?: Maybe<WorkerFilter>,
-  order11?: Maybe<WorkerOrder>,
+  filter16?: Maybe<TaskFilter>,
+  order11?: Maybe<TaskOrder>,
   first11?: Maybe<Scalars['Int']>,
   offset11?: Maybe<Scalars['Int']>,
-  filter18?: Maybe<ProjectFilter>,
-  filter19?: Maybe<WorkerFilter>,
+  filter17?: Maybe<WorkerFilter>,
   order12?: Maybe<WorkerOrder>,
   first12?: Maybe<Scalars['Int']>,
   offset12?: Maybe<Scalars['Int']>,
-  filter20?: Maybe<TagFilter>,
-  order13?: Maybe<TagOrder>,
+  filter18?: Maybe<ProjectFilter>,
+  filter19?: Maybe<WorkerFilter>,
+  order13?: Maybe<WorkerOrder>,
   first13?: Maybe<Scalars['Int']>,
   offset13?: Maybe<Scalars['Int']>,
+  filter20?: Maybe<TagFilter>,
+  order14?: Maybe<TagOrder>,
+  first14?: Maybe<Scalars['Int']>,
+  offset14?: Maybe<Scalars['Int']>,
   input: Array<AddTagInput>
 };
 
@@ -2039,6 +2094,7 @@ export type AddTagMutation = (
   { __typename?: 'Mutation' }
   & { addTag: Maybe<(
     { __typename?: 'AddTagPayload' }
+    & Pick<AddTagPayload, 'numUids'>
     & { tag: Maybe<Array<Maybe<(
       { __typename?: 'Tag' }
       & Pick<Tag, 'id' | 'title'>
@@ -2061,10 +2117,10 @@ export type AddTagMutation = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: (
+          ), column: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          ), workers: Maybe<Array<Maybe<(
+          )>, workers: Maybe<Array<Maybe<(
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
           )>>>, likes: Maybe<Array<Maybe<(
@@ -2090,10 +2146,10 @@ export type AddTagMutation = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: (
+          ), user: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          ), tags: Maybe<Array<Maybe<(
+          )>>>, tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
           )>>>, tasks: Maybe<Array<Maybe<(
@@ -2151,102 +2207,111 @@ export type AddTaskMutationVariables = {
   offset7?: Maybe<Scalars['Int']>,
   filter12?: Maybe<ProjectFilter>,
   filter13?: Maybe<UserFilter>,
-  filter14?: Maybe<TagFilter>,
-  order8?: Maybe<TagOrder>,
+  order8?: Maybe<UserOrder>,
   first8?: Maybe<Scalars['Int']>,
   offset8?: Maybe<Scalars['Int']>,
-  filter15?: Maybe<TaskFilter>,
-  order9?: Maybe<TaskOrder>,
+  filter14?: Maybe<TagFilter>,
+  order9?: Maybe<TagOrder>,
   first9?: Maybe<Scalars['Int']>,
   offset9?: Maybe<Scalars['Int']>,
-  filter16?: Maybe<TaskFilter>,
+  filter15?: Maybe<TaskFilter>,
   order10?: Maybe<TaskOrder>,
   first10?: Maybe<Scalars['Int']>,
   offset10?: Maybe<Scalars['Int']>,
-  filter17?: Maybe<WorkerFilter>,
-  order11?: Maybe<WorkerOrder>,
+  filter16?: Maybe<TaskFilter>,
+  order11?: Maybe<TaskOrder>,
   first11?: Maybe<Scalars['Int']>,
   offset11?: Maybe<Scalars['Int']>,
+  filter17?: Maybe<WorkerFilter>,
+  order12?: Maybe<WorkerOrder>,
+  first12?: Maybe<Scalars['Int']>,
+  offset12?: Maybe<Scalars['Int']>,
   filter18?: Maybe<ProjectFilter>,
   filter19?: Maybe<ProjectFilter>,
   filter20?: Maybe<ColumnFilter>,
-  order12?: Maybe<ColumnOrder>,
-  first12?: Maybe<Scalars['Int']>,
-  offset12?: Maybe<Scalars['Int']>,
-  filter21?: Maybe<BoardFilter>,
-  filter22?: Maybe<TaskFilter>,
-  order13?: Maybe<TaskOrder>,
+  order13?: Maybe<ColumnOrder>,
   first13?: Maybe<Scalars['Int']>,
   offset13?: Maybe<Scalars['Int']>,
-  filter23?: Maybe<ColumnFilter>,
-  filter24?: Maybe<WorkerFilter>,
-  order14?: Maybe<WorkerOrder>,
+  filter21?: Maybe<BoardFilter>,
+  filter22?: Maybe<TaskFilter>,
+  order14?: Maybe<TaskOrder>,
   first14?: Maybe<Scalars['Int']>,
   offset14?: Maybe<Scalars['Int']>,
-  filter25?: Maybe<ProjectFilter>,
-  filter26?: Maybe<WorkerFilter>,
+  filter23?: Maybe<ColumnFilter>,
+  filter24?: Maybe<WorkerFilter>,
   order15?: Maybe<WorkerOrder>,
   first15?: Maybe<Scalars['Int']>,
   offset15?: Maybe<Scalars['Int']>,
-  filter27?: Maybe<TaskFilter>,
-  order16?: Maybe<TaskOrder>,
+  filter25?: Maybe<ProjectFilter>,
+  filter26?: Maybe<WorkerFilter>,
+  order16?: Maybe<WorkerOrder>,
   first16?: Maybe<Scalars['Int']>,
   offset16?: Maybe<Scalars['Int']>,
-  filter28?: Maybe<UserFilter>,
-  filter29?: Maybe<TagFilter>,
-  order17?: Maybe<TagOrder>,
+  filter27?: Maybe<TaskFilter>,
+  order17?: Maybe<TaskOrder>,
   first17?: Maybe<Scalars['Int']>,
   offset17?: Maybe<Scalars['Int']>,
-  filter30?: Maybe<TaskFilter>,
-  order18?: Maybe<TaskOrder>,
+  filter28?: Maybe<UserFilter>,
+  order18?: Maybe<UserOrder>,
   first18?: Maybe<Scalars['Int']>,
   offset18?: Maybe<Scalars['Int']>,
+  filter29?: Maybe<TagFilter>,
+  order19?: Maybe<TagOrder>,
+  first19?: Maybe<Scalars['Int']>,
+  offset19?: Maybe<Scalars['Int']>,
+  filter30?: Maybe<TaskFilter>,
+  order20?: Maybe<TaskOrder>,
+  first20?: Maybe<Scalars['Int']>,
+  offset20?: Maybe<Scalars['Int']>,
   filter31?: Maybe<ProjectFilter>,
   filter32?: Maybe<ColumnFilter>,
   filter33?: Maybe<WorkerFilter>,
-  order19?: Maybe<WorkerOrder>,
-  first19?: Maybe<Scalars['Int']>,
-  offset19?: Maybe<Scalars['Int']>,
-  filter34?: Maybe<WorkerFilter>,
-  order20?: Maybe<WorkerOrder>,
-  first20?: Maybe<Scalars['Int']>,
-  offset20?: Maybe<Scalars['Int']>,
-  filter35?: Maybe<CommentFilter>,
-  order21?: Maybe<CommentOrder>,
+  order21?: Maybe<WorkerOrder>,
   first21?: Maybe<Scalars['Int']>,
   offset21?: Maybe<Scalars['Int']>,
-  filter36?: Maybe<TaskFilter>,
-  order22?: Maybe<TaskOrder>,
+  filter34?: Maybe<WorkerFilter>,
+  order22?: Maybe<WorkerOrder>,
   first22?: Maybe<Scalars['Int']>,
   offset22?: Maybe<Scalars['Int']>,
-  filter37?: Maybe<WorkerFilter>,
-  order23?: Maybe<WorkerOrder>,
+  filter35?: Maybe<CommentFilter>,
+  order23?: Maybe<CommentOrder>,
   first23?: Maybe<Scalars['Int']>,
   offset23?: Maybe<Scalars['Int']>,
+  filter36?: Maybe<TaskFilter>,
+  order24?: Maybe<TaskOrder>,
+  first24?: Maybe<Scalars['Int']>,
+  offset24?: Maybe<Scalars['Int']>,
+  filter37?: Maybe<WorkerFilter>,
+  order25?: Maybe<WorkerOrder>,
+  first25?: Maybe<Scalars['Int']>,
+  offset25?: Maybe<Scalars['Int']>,
   filter38?: Maybe<TaskFilter>,
   filter39?: Maybe<ProjectFilter>,
   filter40?: Maybe<UserFilter>,
-  filter41?: Maybe<TagFilter>,
-  order24?: Maybe<TagOrder>,
-  first24?: Maybe<Scalars['Int']>,
-  offset24?: Maybe<Scalars['Int']>,
-  filter42?: Maybe<TaskFilter>,
-  order25?: Maybe<TaskOrder>,
-  first25?: Maybe<Scalars['Int']>,
-  offset25?: Maybe<Scalars['Int']>,
-  filter43?: Maybe<TaskFilter>,
-  order26?: Maybe<TaskOrder>,
+  order26?: Maybe<UserOrder>,
   first26?: Maybe<Scalars['Int']>,
   offset26?: Maybe<Scalars['Int']>,
-  filter44?: Maybe<WorkerFilter>,
-  filter45?: Maybe<CommentFilter>,
-  order27?: Maybe<CommentOrder>,
+  filter41?: Maybe<TagFilter>,
+  order27?: Maybe<TagOrder>,
   first27?: Maybe<Scalars['Int']>,
   offset27?: Maybe<Scalars['Int']>,
-  filter46?: Maybe<TaskFilter>,
+  filter42?: Maybe<TaskFilter>,
   order28?: Maybe<TaskOrder>,
   first28?: Maybe<Scalars['Int']>,
   offset28?: Maybe<Scalars['Int']>,
+  filter43?: Maybe<TaskFilter>,
+  order29?: Maybe<TaskOrder>,
+  first29?: Maybe<Scalars['Int']>,
+  offset29?: Maybe<Scalars['Int']>,
+  filter44?: Maybe<WorkerFilter>,
+  filter45?: Maybe<CommentFilter>,
+  order30?: Maybe<CommentOrder>,
+  first30?: Maybe<Scalars['Int']>,
+  offset30?: Maybe<Scalars['Int']>,
+  filter46?: Maybe<TaskFilter>,
+  order31?: Maybe<TaskOrder>,
+  first31?: Maybe<Scalars['Int']>,
+  offset31?: Maybe<Scalars['Int']>,
   input: Array<AddTaskInput>
 };
 
@@ -2255,6 +2320,7 @@ export type AddTaskMutation = (
   { __typename?: 'Mutation' }
   & { addTask: Maybe<(
     { __typename?: 'AddTaskPayload' }
+    & Pick<AddTaskPayload, 'numUids'>
     & { task: Maybe<Array<Maybe<(
       { __typename?: 'Task' }
       & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
@@ -2277,10 +2343,10 @@ export type AddTaskMutation = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: (
+          ), column: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          ), workers: Maybe<Array<Maybe<(
+          )>, workers: Maybe<Array<Maybe<(
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
           )>>>, likes: Maybe<Array<Maybe<(
@@ -2306,10 +2372,10 @@ export type AddTaskMutation = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: (
+          ), user: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          ), tags: Maybe<Array<Maybe<(
+          )>>>, tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
           )>>>, tasks: Maybe<Array<Maybe<(
@@ -2320,7 +2386,7 @@ export type AddTaskMutation = (
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
         )>>> }
-      ), column: (
+      ), column: Maybe<(
         { __typename?: 'Column' }
         & Pick<Column, 'id' | 'title'>
         & { board: (
@@ -2337,7 +2403,7 @@ export type AddTaskMutation = (
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
         )>>> }
-      ), workers: Maybe<Array<Maybe<(
+      )>, workers: Maybe<Array<Maybe<(
         { __typename?: 'Worker' }
         & Pick<Worker, 'id' | 'name' | 'availability'>
       )>>>, likes: Maybe<Array<Maybe<(
@@ -2346,7 +2412,7 @@ export type AddTaskMutation = (
         & { project: (
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
-        ), user: (
+        ), user: Maybe<Array<Maybe<(
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
           & { roles: Maybe<Array<Maybe<(
@@ -2356,7 +2422,7 @@ export type AddTaskMutation = (
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        ), tags: Maybe<Array<Maybe<(
+        )>>>, tags: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
         )>>>, tasks: Maybe<Array<Maybe<(
@@ -2368,10 +2434,10 @@ export type AddTaskMutation = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: (
+          ), column: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          ), workers: Maybe<Array<Maybe<(
+          )>, workers: Maybe<Array<Maybe<(
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
           )>>>, likes: Maybe<Array<Maybe<(
@@ -2394,10 +2460,10 @@ export type AddTaskMutation = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: (
+          ), user: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          ), tags: Maybe<Array<Maybe<(
+          )>>>, tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
           )>>>, tasks: Maybe<Array<Maybe<(
@@ -2436,59 +2502,62 @@ export type AddUserMutationVariables = {
   first4?: Maybe<Scalars['Int']>,
   offset4?: Maybe<Scalars['Int']>,
   filter6?: Maybe<UserFilter>,
-  filter7?: Maybe<ProjectFilter>,
-  filter8?: Maybe<WorkerFilter>,
-  order5?: Maybe<WorkerOrder>,
+  order5?: Maybe<UserOrder>,
   first5?: Maybe<Scalars['Int']>,
   offset5?: Maybe<Scalars['Int']>,
-  filter9?: Maybe<TagFilter>,
-  order6?: Maybe<TagOrder>,
+  filter7?: Maybe<ProjectFilter>,
+  filter8?: Maybe<WorkerFilter>,
+  order6?: Maybe<WorkerOrder>,
   first6?: Maybe<Scalars['Int']>,
   offset6?: Maybe<Scalars['Int']>,
+  filter9?: Maybe<TagFilter>,
+  order7?: Maybe<TagOrder>,
+  first7?: Maybe<Scalars['Int']>,
+  offset7?: Maybe<Scalars['Int']>,
   filter10?: Maybe<ProjectFilter>,
   filter11?: Maybe<ColumnFilter>,
   filter12?: Maybe<WorkerFilter>,
-  order7?: Maybe<WorkerOrder>,
-  first7?: Maybe<Scalars['Int']>,
-  offset7?: Maybe<Scalars['Int']>,
-  filter13?: Maybe<WorkerFilter>,
   order8?: Maybe<WorkerOrder>,
   first8?: Maybe<Scalars['Int']>,
   offset8?: Maybe<Scalars['Int']>,
-  filter14?: Maybe<CommentFilter>,
-  order9?: Maybe<CommentOrder>,
+  filter13?: Maybe<WorkerFilter>,
+  order9?: Maybe<WorkerOrder>,
   first9?: Maybe<Scalars['Int']>,
   offset9?: Maybe<Scalars['Int']>,
-  filter15?: Maybe<TaskFilter>,
-  order10?: Maybe<TaskOrder>,
+  filter14?: Maybe<CommentFilter>,
+  order10?: Maybe<CommentOrder>,
   first10?: Maybe<Scalars['Int']>,
   offset10?: Maybe<Scalars['Int']>,
+  filter15?: Maybe<TaskFilter>,
+  order11?: Maybe<TaskOrder>,
+  first11?: Maybe<Scalars['Int']>,
+  offset11?: Maybe<Scalars['Int']>,
   filter16?: Maybe<ProjectFilter>,
   filter17?: Maybe<ColumnFilter>,
   filter18?: Maybe<WorkerFilter>,
-  order11?: Maybe<WorkerOrder>,
-  first11?: Maybe<Scalars['Int']>,
-  offset11?: Maybe<Scalars['Int']>,
-  filter19?: Maybe<WorkerFilter>,
   order12?: Maybe<WorkerOrder>,
   first12?: Maybe<Scalars['Int']>,
   offset12?: Maybe<Scalars['Int']>,
-  filter20?: Maybe<CommentFilter>,
-  order13?: Maybe<CommentOrder>,
+  filter19?: Maybe<WorkerFilter>,
+  order13?: Maybe<WorkerOrder>,
   first13?: Maybe<Scalars['Int']>,
   offset13?: Maybe<Scalars['Int']>,
-  filter21?: Maybe<TaskFilter>,
-  order14?: Maybe<TaskOrder>,
+  filter20?: Maybe<CommentFilter>,
+  order14?: Maybe<CommentOrder>,
   first14?: Maybe<Scalars['Int']>,
   offset14?: Maybe<Scalars['Int']>,
-  filter22?: Maybe<WorkerFilter>,
-  order15?: Maybe<WorkerOrder>,
+  filter21?: Maybe<TaskFilter>,
+  order15?: Maybe<TaskOrder>,
   first15?: Maybe<Scalars['Int']>,
   offset15?: Maybe<Scalars['Int']>,
-  filter23?: Maybe<UserFilter>,
-  order16?: Maybe<UserOrder>,
+  filter22?: Maybe<WorkerFilter>,
+  order16?: Maybe<WorkerOrder>,
   first16?: Maybe<Scalars['Int']>,
   offset16?: Maybe<Scalars['Int']>,
+  filter23?: Maybe<UserFilter>,
+  order17?: Maybe<UserOrder>,
+  first17?: Maybe<Scalars['Int']>,
+  offset17?: Maybe<Scalars['Int']>,
   input: Array<AddUserInput>
 };
 
@@ -2497,6 +2566,7 @@ export type AddUserMutation = (
   { __typename?: 'Mutation' }
   & { addUser: Maybe<(
     { __typename?: 'AddUserPayload' }
+    & Pick<AddUserPayload, 'numUids'>
     & { user: Maybe<Array<Maybe<(
       { __typename?: 'User' }
       & Pick<User, 'id' | 'username' | 'password' | 'location'>
@@ -2519,14 +2589,14 @@ export type AddUserMutation = (
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
           )>>> }
-        ), user: (
+        ), user: Maybe<Array<Maybe<(
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
           & { stars: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        ), tags: Maybe<Array<Maybe<(
+        )>>>, tags: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
           & { project: (
@@ -2542,10 +2612,10 @@ export type AddUserMutation = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: (
+          ), column: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          ), workers: Maybe<Array<Maybe<(
+          )>, workers: Maybe<Array<Maybe<(
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
           )>>>, likes: Maybe<Array<Maybe<(
@@ -2561,10 +2631,10 @@ export type AddUserMutation = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: (
+          ), column: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          ), workers: Maybe<Array<Maybe<(
+          )>, workers: Maybe<Array<Maybe<(
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
           )>>>, likes: Maybe<Array<Maybe<(
@@ -2619,111 +2689,123 @@ export type AddWorkerMutationVariables = {
   offset7?: Maybe<Scalars['Int']>,
   filter12?: Maybe<ProjectFilter>,
   filter13?: Maybe<UserFilter>,
-  filter14?: Maybe<TagFilter>,
-  order8?: Maybe<TagOrder>,
+  order8?: Maybe<UserOrder>,
   first8?: Maybe<Scalars['Int']>,
   offset8?: Maybe<Scalars['Int']>,
-  filter15?: Maybe<TaskFilter>,
-  order9?: Maybe<TaskOrder>,
+  filter14?: Maybe<TagFilter>,
+  order9?: Maybe<TagOrder>,
   first9?: Maybe<Scalars['Int']>,
   offset9?: Maybe<Scalars['Int']>,
-  filter16?: Maybe<TaskFilter>,
+  filter15?: Maybe<TaskFilter>,
   order10?: Maybe<TaskOrder>,
   first10?: Maybe<Scalars['Int']>,
   offset10?: Maybe<Scalars['Int']>,
-  filter17?: Maybe<WorkerFilter>,
-  order11?: Maybe<WorkerOrder>,
+  filter16?: Maybe<TaskFilter>,
+  order11?: Maybe<TaskOrder>,
   first11?: Maybe<Scalars['Int']>,
   offset11?: Maybe<Scalars['Int']>,
+  filter17?: Maybe<WorkerFilter>,
+  order12?: Maybe<WorkerOrder>,
+  first12?: Maybe<Scalars['Int']>,
+  offset12?: Maybe<Scalars['Int']>,
   filter18?: Maybe<ProjectFilter>,
   filter19?: Maybe<ProjectFilter>,
   filter20?: Maybe<UserFilter>,
-  filter21?: Maybe<TagFilter>,
-  order12?: Maybe<TagOrder>,
-  first12?: Maybe<Scalars['Int']>,
-  offset12?: Maybe<Scalars['Int']>,
-  filter22?: Maybe<TaskFilter>,
-  order13?: Maybe<TaskOrder>,
+  order13?: Maybe<UserOrder>,
   first13?: Maybe<Scalars['Int']>,
   offset13?: Maybe<Scalars['Int']>,
-  filter23?: Maybe<TaskFilter>,
-  order14?: Maybe<TaskOrder>,
+  filter21?: Maybe<TagFilter>,
+  order14?: Maybe<TagOrder>,
   first14?: Maybe<Scalars['Int']>,
   offset14?: Maybe<Scalars['Int']>,
-  filter24?: Maybe<WorkerFilter>,
-  order15?: Maybe<WorkerOrder>,
+  filter22?: Maybe<TaskFilter>,
+  order15?: Maybe<TaskOrder>,
   first15?: Maybe<Scalars['Int']>,
   offset15?: Maybe<Scalars['Int']>,
-  filter25?: Maybe<ProjectFilter>,
-  filter26?: Maybe<ColumnFilter>,
-  filter27?: Maybe<WorkerFilter>,
-  order16?: Maybe<WorkerOrder>,
+  filter23?: Maybe<TaskFilter>,
+  order16?: Maybe<TaskOrder>,
   first16?: Maybe<Scalars['Int']>,
   offset16?: Maybe<Scalars['Int']>,
-  filter28?: Maybe<WorkerFilter>,
+  filter24?: Maybe<WorkerFilter>,
   order17?: Maybe<WorkerOrder>,
   first17?: Maybe<Scalars['Int']>,
   offset17?: Maybe<Scalars['Int']>,
-  filter29?: Maybe<CommentFilter>,
-  order18?: Maybe<CommentOrder>,
+  filter25?: Maybe<ProjectFilter>,
+  filter26?: Maybe<ColumnFilter>,
+  filter27?: Maybe<WorkerFilter>,
+  order18?: Maybe<WorkerOrder>,
   first18?: Maybe<Scalars['Int']>,
   offset18?: Maybe<Scalars['Int']>,
-  filter30?: Maybe<TaskFilter>,
-  order19?: Maybe<TaskOrder>,
+  filter28?: Maybe<WorkerFilter>,
+  order19?: Maybe<WorkerOrder>,
   first19?: Maybe<Scalars['Int']>,
   offset19?: Maybe<Scalars['Int']>,
-  filter31?: Maybe<UserFilter>,
-  filter32?: Maybe<TagFilter>,
-  order20?: Maybe<TagOrder>,
+  filter29?: Maybe<CommentFilter>,
+  order20?: Maybe<CommentOrder>,
   first20?: Maybe<Scalars['Int']>,
   offset20?: Maybe<Scalars['Int']>,
-  filter33?: Maybe<TaskFilter>,
+  filter30?: Maybe<TaskFilter>,
   order21?: Maybe<TaskOrder>,
   first21?: Maybe<Scalars['Int']>,
   offset21?: Maybe<Scalars['Int']>,
+  filter31?: Maybe<UserFilter>,
+  order22?: Maybe<UserOrder>,
+  first22?: Maybe<Scalars['Int']>,
+  offset22?: Maybe<Scalars['Int']>,
+  filter32?: Maybe<TagFilter>,
+  order23?: Maybe<TagOrder>,
+  first23?: Maybe<Scalars['Int']>,
+  offset23?: Maybe<Scalars['Int']>,
+  filter33?: Maybe<TaskFilter>,
+  order24?: Maybe<TaskOrder>,
+  first24?: Maybe<Scalars['Int']>,
+  offset24?: Maybe<Scalars['Int']>,
   filter34?: Maybe<ProjectFilter>,
   filter35?: Maybe<BoardFilter>,
   filter36?: Maybe<TaskFilter>,
-  order22?: Maybe<TaskOrder>,
-  first22?: Maybe<Scalars['Int']>,
-  offset22?: Maybe<Scalars['Int']>,
-  filter37?: Maybe<ColumnFilter>,
-  filter38?: Maybe<WorkerFilter>,
-  order23?: Maybe<WorkerOrder>,
-  first23?: Maybe<Scalars['Int']>,
-  offset23?: Maybe<Scalars['Int']>,
-  filter39?: Maybe<ProjectFilter>,
-  filter40?: Maybe<UserFilter>,
-  filter41?: Maybe<TagFilter>,
-  order24?: Maybe<TagOrder>,
-  first24?: Maybe<Scalars['Int']>,
-  offset24?: Maybe<Scalars['Int']>,
-  filter42?: Maybe<TaskFilter>,
   order25?: Maybe<TaskOrder>,
   first25?: Maybe<Scalars['Int']>,
   offset25?: Maybe<Scalars['Int']>,
-  filter43?: Maybe<TaskFilter>,
-  order26?: Maybe<TaskOrder>,
+  filter37?: Maybe<ColumnFilter>,
+  filter38?: Maybe<WorkerFilter>,
+  order26?: Maybe<WorkerOrder>,
   first26?: Maybe<Scalars['Int']>,
   offset26?: Maybe<Scalars['Int']>,
-  filter44?: Maybe<WorkerFilter>,
-  order27?: Maybe<WorkerOrder>,
+  filter39?: Maybe<ProjectFilter>,
+  filter40?: Maybe<UserFilter>,
+  order27?: Maybe<UserOrder>,
   first27?: Maybe<Scalars['Int']>,
   offset27?: Maybe<Scalars['Int']>,
-  filter45?: Maybe<TaskFilter>,
-  filter46?: Maybe<WorkerFilter>,
-  filter47?: Maybe<CommentFilter>,
-  order28?: Maybe<CommentOrder>,
+  filter41?: Maybe<TagFilter>,
+  order28?: Maybe<TagOrder>,
   first28?: Maybe<Scalars['Int']>,
   offset28?: Maybe<Scalars['Int']>,
-  filter48?: Maybe<TaskFilter>,
+  filter42?: Maybe<TaskFilter>,
   order29?: Maybe<TaskOrder>,
   first29?: Maybe<Scalars['Int']>,
   offset29?: Maybe<Scalars['Int']>,
-  filter49?: Maybe<WorkerFilter>,
-  order30?: Maybe<WorkerOrder>,
+  filter43?: Maybe<TaskFilter>,
+  order30?: Maybe<TaskOrder>,
   first30?: Maybe<Scalars['Int']>,
   offset30?: Maybe<Scalars['Int']>,
+  filter44?: Maybe<WorkerFilter>,
+  order31?: Maybe<WorkerOrder>,
+  first31?: Maybe<Scalars['Int']>,
+  offset31?: Maybe<Scalars['Int']>,
+  filter45?: Maybe<TaskFilter>,
+  filter46?: Maybe<WorkerFilter>,
+  filter47?: Maybe<CommentFilter>,
+  order32?: Maybe<CommentOrder>,
+  first32?: Maybe<Scalars['Int']>,
+  offset32?: Maybe<Scalars['Int']>,
+  filter48?: Maybe<TaskFilter>,
+  order33?: Maybe<TaskOrder>,
+  first33?: Maybe<Scalars['Int']>,
+  offset33?: Maybe<Scalars['Int']>,
+  filter49?: Maybe<WorkerFilter>,
+  order34?: Maybe<WorkerOrder>,
+  first34?: Maybe<Scalars['Int']>,
+  offset34?: Maybe<Scalars['Int']>,
   input: Array<AddWorkerInput>
 };
 
@@ -2732,6 +2814,7 @@ export type AddWorkerMutation = (
   { __typename?: 'Mutation' }
   & { addWorker: Maybe<(
     { __typename?: 'AddWorkerPayload' }
+    & Pick<AddWorkerPayload, 'numUids'>
     & { worker: Maybe<Array<Maybe<(
       { __typename?: 'Worker' }
       & Pick<Worker, 'id' | 'name' | 'availability'>
@@ -2754,10 +2837,10 @@ export type AddWorkerMutation = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: (
+          ), column: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          ), workers: Maybe<Array<Maybe<(
+          )>, workers: Maybe<Array<Maybe<(
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
           )>>>, likes: Maybe<Array<Maybe<(
@@ -2783,10 +2866,10 @@ export type AddWorkerMutation = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: (
+          ), user: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          ), tags: Maybe<Array<Maybe<(
+          )>>>, tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
           )>>>, tasks: Maybe<Array<Maybe<(
@@ -2797,7 +2880,7 @@ export type AddWorkerMutation = (
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
         )>>> }
-      ), user: (
+      ), user: Maybe<Array<Maybe<(
         { __typename?: 'User' }
         & Pick<User, 'id' | 'username' | 'password' | 'location'>
         & { roles: Maybe<Array<Maybe<(
@@ -2806,10 +2889,10 @@ export type AddWorkerMutation = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: (
+          ), user: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          ), tags: Maybe<Array<Maybe<(
+          )>>>, tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
           )>>>, tasks: Maybe<Array<Maybe<(
@@ -2825,10 +2908,10 @@ export type AddWorkerMutation = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: (
+          ), column: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          ), workers: Maybe<Array<Maybe<(
+          )>, workers: Maybe<Array<Maybe<(
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
           )>>>, likes: Maybe<Array<Maybe<(
@@ -2839,7 +2922,7 @@ export type AddWorkerMutation = (
             & Pick<Comment, 'id' | 'content'>
           )>>> }
         )>>> }
-      ), tags: Maybe<Array<Maybe<(
+      )>>>, tags: Maybe<Array<Maybe<(
         { __typename?: 'Tag' }
         & Pick<Tag, 'id' | 'title'>
       )>>>, tasks: Maybe<Array<Maybe<(
@@ -2851,7 +2934,7 @@ export type AddWorkerMutation = (
         & { project: (
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
-        ), column: (
+        ), column: Maybe<(
           { __typename?: 'Column' }
           & Pick<Column, 'id' | 'title'>
           & { board: (
@@ -2861,7 +2944,7 @@ export type AddWorkerMutation = (
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        ), workers: Maybe<Array<Maybe<(
+        )>, workers: Maybe<Array<Maybe<(
           { __typename?: 'Worker' }
           & Pick<Worker, 'id' | 'name' | 'availability'>
         )>>>, likes: Maybe<Array<Maybe<(
@@ -2870,10 +2953,10 @@ export type AddWorkerMutation = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: (
+          ), user: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          ), tags: Maybe<Array<Maybe<(
+          )>>>, tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
           )>>>, tasks: Maybe<Array<Maybe<(
@@ -2908,7 +2991,7 @@ export type DeleteBoardMutation = (
   { __typename?: 'Mutation' }
   & { deleteBoard: Maybe<(
     { __typename?: 'DeleteBoardPayload' }
-    & Pick<DeleteBoardPayload, 'msg'>
+    & Pick<DeleteBoardPayload, 'msg' | 'numUids'>
   )> }
 );
 
@@ -2921,7 +3004,7 @@ export type DeleteColumnMutation = (
   { __typename?: 'Mutation' }
   & { deleteColumn: Maybe<(
     { __typename?: 'DeleteColumnPayload' }
-    & Pick<DeleteColumnPayload, 'msg'>
+    & Pick<DeleteColumnPayload, 'msg' | 'numUids'>
   )> }
 );
 
@@ -2934,7 +3017,7 @@ export type DeleteCommentMutation = (
   { __typename?: 'Mutation' }
   & { deleteComment: Maybe<(
     { __typename?: 'DeleteCommentPayload' }
-    & Pick<DeleteCommentPayload, 'msg'>
+    & Pick<DeleteCommentPayload, 'msg' | 'numUids'>
   )> }
 );
 
@@ -2947,7 +3030,7 @@ export type DeleteProjectMutation = (
   { __typename?: 'Mutation' }
   & { deleteProject: Maybe<(
     { __typename?: 'DeleteProjectPayload' }
-    & Pick<DeleteProjectPayload, 'msg'>
+    & Pick<DeleteProjectPayload, 'msg' | 'numUids'>
   )> }
 );
 
@@ -2960,7 +3043,7 @@ export type DeleteTagMutation = (
   { __typename?: 'Mutation' }
   & { deleteTag: Maybe<(
     { __typename?: 'DeleteTagPayload' }
-    & Pick<DeleteTagPayload, 'msg'>
+    & Pick<DeleteTagPayload, 'msg' | 'numUids'>
   )> }
 );
 
@@ -2973,7 +3056,7 @@ export type DeleteTaskMutation = (
   { __typename?: 'Mutation' }
   & { deleteTask: Maybe<(
     { __typename?: 'DeleteTaskPayload' }
-    & Pick<DeleteTaskPayload, 'msg'>
+    & Pick<DeleteTaskPayload, 'msg' | 'numUids'>
   )> }
 );
 
@@ -2986,7 +3069,7 @@ export type DeleteUserMutation = (
   { __typename?: 'Mutation' }
   & { deleteUser: Maybe<(
     { __typename?: 'DeleteUserPayload' }
-    & Pick<DeleteUserPayload, 'msg'>
+    & Pick<DeleteUserPayload, 'msg' | 'numUids'>
   )> }
 );
 
@@ -2999,7 +3082,7 @@ export type DeleteWorkerMutation = (
   { __typename?: 'Mutation' }
   & { deleteWorker: Maybe<(
     { __typename?: 'DeleteWorkerPayload' }
-    & Pick<DeleteWorkerPayload, 'msg'>
+    & Pick<DeleteWorkerPayload, 'msg' | 'numUids'>
   )> }
 );
 
@@ -3042,36 +3125,39 @@ export type UpdateBoardMutationVariables = {
   offset7?: Maybe<Scalars['Int']>,
   filter12?: Maybe<ProjectFilter>,
   filter13?: Maybe<UserFilter>,
-  filter14?: Maybe<TagFilter>,
-  order8?: Maybe<TagOrder>,
+  order8?: Maybe<UserOrder>,
   first8?: Maybe<Scalars['Int']>,
   offset8?: Maybe<Scalars['Int']>,
-  filter15?: Maybe<TaskFilter>,
-  order9?: Maybe<TaskOrder>,
+  filter14?: Maybe<TagFilter>,
+  order9?: Maybe<TagOrder>,
   first9?: Maybe<Scalars['Int']>,
   offset9?: Maybe<Scalars['Int']>,
-  filter16?: Maybe<TaskFilter>,
+  filter15?: Maybe<TaskFilter>,
   order10?: Maybe<TaskOrder>,
   first10?: Maybe<Scalars['Int']>,
   offset10?: Maybe<Scalars['Int']>,
-  filter17?: Maybe<WorkerFilter>,
-  order11?: Maybe<WorkerOrder>,
+  filter16?: Maybe<TaskFilter>,
+  order11?: Maybe<TaskOrder>,
   first11?: Maybe<Scalars['Int']>,
   offset11?: Maybe<Scalars['Int']>,
+  filter17?: Maybe<WorkerFilter>,
+  order12?: Maybe<WorkerOrder>,
+  first12?: Maybe<Scalars['Int']>,
+  offset12?: Maybe<Scalars['Int']>,
   filter18?: Maybe<ProjectFilter>,
   filter19?: Maybe<BoardFilter>,
   filter20?: Maybe<TaskFilter>,
-  order12?: Maybe<TaskOrder>,
-  first12?: Maybe<Scalars['Int']>,
-  offset12?: Maybe<Scalars['Int']>,
-  filter21?: Maybe<ColumnFilter>,
-  order13?: Maybe<ColumnOrder>,
+  order13?: Maybe<TaskOrder>,
   first13?: Maybe<Scalars['Int']>,
   offset13?: Maybe<Scalars['Int']>,
-  filter22?: Maybe<BoardFilter>,
-  order14?: Maybe<BoardOrder>,
+  filter21?: Maybe<ColumnFilter>,
+  order14?: Maybe<ColumnOrder>,
   first14?: Maybe<Scalars['Int']>,
   offset14?: Maybe<Scalars['Int']>,
+  filter22?: Maybe<BoardFilter>,
+  order15?: Maybe<BoardOrder>,
+  first15?: Maybe<Scalars['Int']>,
+  offset15?: Maybe<Scalars['Int']>,
   input: UpdateBoardInput
 };
 
@@ -3080,6 +3166,7 @@ export type UpdateBoardMutation = (
   { __typename?: 'Mutation' }
   & { updateBoard: Maybe<(
     { __typename?: 'UpdateBoardPayload' }
+    & Pick<UpdateBoardPayload, 'numUids'>
     & { board: Maybe<Array<Maybe<(
       { __typename?: 'Board' }
       & Pick<Board, 'id' | 'title' | 'order'>
@@ -3102,10 +3189,10 @@ export type UpdateBoardMutation = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: (
+          ), column: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          ), workers: Maybe<Array<Maybe<(
+          )>, workers: Maybe<Array<Maybe<(
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
           )>>>, likes: Maybe<Array<Maybe<(
@@ -3131,10 +3218,10 @@ export type UpdateBoardMutation = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: (
+          ), user: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          ), tags: Maybe<Array<Maybe<(
+          )>>>, tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
           )>>>, tasks: Maybe<Array<Maybe<(
@@ -3192,54 +3279,60 @@ export type UpdateColumnMutationVariables = {
   filter10?: Maybe<ColumnFilter>,
   filter11?: Maybe<ProjectFilter>,
   filter12?: Maybe<UserFilter>,
-  filter13?: Maybe<TagFilter>,
-  order6?: Maybe<TagOrder>,
+  order6?: Maybe<UserOrder>,
   first6?: Maybe<Scalars['Int']>,
   offset6?: Maybe<Scalars['Int']>,
-  filter14?: Maybe<TaskFilter>,
-  order7?: Maybe<TaskOrder>,
+  filter13?: Maybe<TagFilter>,
+  order7?: Maybe<TagOrder>,
   first7?: Maybe<Scalars['Int']>,
   offset7?: Maybe<Scalars['Int']>,
-  filter15?: Maybe<TaskFilter>,
+  filter14?: Maybe<TaskFilter>,
   order8?: Maybe<TaskOrder>,
   first8?: Maybe<Scalars['Int']>,
   offset8?: Maybe<Scalars['Int']>,
-  filter16?: Maybe<WorkerFilter>,
-  order9?: Maybe<WorkerOrder>,
+  filter15?: Maybe<TaskFilter>,
+  order9?: Maybe<TaskOrder>,
   first9?: Maybe<Scalars['Int']>,
   offset9?: Maybe<Scalars['Int']>,
-  filter17?: Maybe<ProjectFilter>,
-  filter18?: Maybe<UserFilter>,
-  filter19?: Maybe<TagFilter>,
-  order10?: Maybe<TagOrder>,
+  filter16?: Maybe<WorkerFilter>,
+  order10?: Maybe<WorkerOrder>,
   first10?: Maybe<Scalars['Int']>,
   offset10?: Maybe<Scalars['Int']>,
-  filter20?: Maybe<TaskFilter>,
-  order11?: Maybe<TaskOrder>,
+  filter17?: Maybe<ProjectFilter>,
+  filter18?: Maybe<UserFilter>,
+  order11?: Maybe<UserOrder>,
   first11?: Maybe<Scalars['Int']>,
   offset11?: Maybe<Scalars['Int']>,
-  filter21?: Maybe<TaskFilter>,
-  order12?: Maybe<TaskOrder>,
+  filter19?: Maybe<TagFilter>,
+  order12?: Maybe<TagOrder>,
   first12?: Maybe<Scalars['Int']>,
   offset12?: Maybe<Scalars['Int']>,
-  filter22?: Maybe<WorkerFilter>,
-  order13?: Maybe<WorkerOrder>,
+  filter20?: Maybe<TaskFilter>,
+  order13?: Maybe<TaskOrder>,
   first13?: Maybe<Scalars['Int']>,
   offset13?: Maybe<Scalars['Int']>,
+  filter21?: Maybe<TaskFilter>,
+  order14?: Maybe<TaskOrder>,
+  first14?: Maybe<Scalars['Int']>,
+  offset14?: Maybe<Scalars['Int']>,
+  filter22?: Maybe<WorkerFilter>,
+  order15?: Maybe<WorkerOrder>,
+  first15?: Maybe<Scalars['Int']>,
+  offset15?: Maybe<Scalars['Int']>,
   filter23?: Maybe<TaskFilter>,
   filter24?: Maybe<WorkerFilter>,
   filter25?: Maybe<CommentFilter>,
-  order14?: Maybe<CommentOrder>,
-  first14?: Maybe<Scalars['Int']>,
-  offset14?: Maybe<Scalars['Int']>,
-  filter26?: Maybe<TaskFilter>,
-  order15?: Maybe<TaskOrder>,
-  first15?: Maybe<Scalars['Int']>,
-  offset15?: Maybe<Scalars['Int']>,
-  filter27?: Maybe<ColumnFilter>,
-  order16?: Maybe<ColumnOrder>,
+  order16?: Maybe<CommentOrder>,
   first16?: Maybe<Scalars['Int']>,
   offset16?: Maybe<Scalars['Int']>,
+  filter26?: Maybe<TaskFilter>,
+  order17?: Maybe<TaskOrder>,
+  first17?: Maybe<Scalars['Int']>,
+  offset17?: Maybe<Scalars['Int']>,
+  filter27?: Maybe<ColumnFilter>,
+  order18?: Maybe<ColumnOrder>,
+  first18?: Maybe<Scalars['Int']>,
+  offset18?: Maybe<Scalars['Int']>,
   input: UpdateColumnInput
 };
 
@@ -3248,6 +3341,7 @@ export type UpdateColumnMutation = (
   { __typename?: 'Mutation' }
   & { updateColumn: Maybe<(
     { __typename?: 'UpdateColumnPayload' }
+    & Pick<UpdateColumnPayload, 'numUids'>
     & { column: Maybe<Array<Maybe<(
       { __typename?: 'Column' }
       & Pick<Column, 'id' | 'title'>
@@ -3287,19 +3381,19 @@ export type UpdateColumnMutation = (
         & { project: (
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
-        ), column: (
+        ), column: Maybe<(
           { __typename?: 'Column' }
           & Pick<Column, 'id' | 'title'>
-        ), workers: Maybe<Array<Maybe<(
+        )>, workers: Maybe<Array<Maybe<(
           { __typename?: 'Worker' }
           & Pick<Worker, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: (
+          ), user: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          ), tags: Maybe<Array<Maybe<(
+          )>>>, tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
           )>>>, tasks: Maybe<Array<Maybe<(
@@ -3315,10 +3409,10 @@ export type UpdateColumnMutation = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: (
+          ), user: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          ), tags: Maybe<Array<Maybe<(
+          )>>>, tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
           )>>>, tasks: Maybe<Array<Maybe<(
@@ -3370,107 +3464,116 @@ export type UpdateCommentMutationVariables = {
   filter7?: Maybe<ColumnFilter>,
   filter8?: Maybe<ProjectFilter>,
   filter9?: Maybe<UserFilter>,
-  filter10?: Maybe<TagFilter>,
-  order5?: Maybe<TagOrder>,
+  order5?: Maybe<UserOrder>,
   first5?: Maybe<Scalars['Int']>,
   offset5?: Maybe<Scalars['Int']>,
-  filter11?: Maybe<TaskFilter>,
-  order6?: Maybe<TaskOrder>,
+  filter10?: Maybe<TagFilter>,
+  order6?: Maybe<TagOrder>,
   first6?: Maybe<Scalars['Int']>,
   offset6?: Maybe<Scalars['Int']>,
-  filter12?: Maybe<TaskFilter>,
+  filter11?: Maybe<TaskFilter>,
   order7?: Maybe<TaskOrder>,
   first7?: Maybe<Scalars['Int']>,
   offset7?: Maybe<Scalars['Int']>,
-  filter13?: Maybe<WorkerFilter>,
-  order8?: Maybe<WorkerOrder>,
+  filter12?: Maybe<TaskFilter>,
+  order8?: Maybe<TaskOrder>,
   first8?: Maybe<Scalars['Int']>,
   offset8?: Maybe<Scalars['Int']>,
-  filter14?: Maybe<ProjectFilter>,
-  filter15?: Maybe<UserFilter>,
-  filter16?: Maybe<TagFilter>,
-  order9?: Maybe<TagOrder>,
+  filter13?: Maybe<WorkerFilter>,
+  order9?: Maybe<WorkerOrder>,
   first9?: Maybe<Scalars['Int']>,
   offset9?: Maybe<Scalars['Int']>,
-  filter17?: Maybe<TaskFilter>,
-  order10?: Maybe<TaskOrder>,
+  filter14?: Maybe<ProjectFilter>,
+  filter15?: Maybe<UserFilter>,
+  order10?: Maybe<UserOrder>,
   first10?: Maybe<Scalars['Int']>,
   offset10?: Maybe<Scalars['Int']>,
-  filter18?: Maybe<TaskFilter>,
-  order11?: Maybe<TaskOrder>,
+  filter16?: Maybe<TagFilter>,
+  order11?: Maybe<TagOrder>,
   first11?: Maybe<Scalars['Int']>,
   offset11?: Maybe<Scalars['Int']>,
-  filter19?: Maybe<WorkerFilter>,
-  order12?: Maybe<WorkerOrder>,
+  filter17?: Maybe<TaskFilter>,
+  order12?: Maybe<TaskOrder>,
   first12?: Maybe<Scalars['Int']>,
   offset12?: Maybe<Scalars['Int']>,
-  filter20?: Maybe<TaskFilter>,
-  filter21?: Maybe<WorkerFilter>,
-  filter22?: Maybe<CommentFilter>,
-  order13?: Maybe<CommentOrder>,
+  filter18?: Maybe<TaskFilter>,
+  order13?: Maybe<TaskOrder>,
   first13?: Maybe<Scalars['Int']>,
   offset13?: Maybe<Scalars['Int']>,
-  filter23?: Maybe<TaskFilter>,
-  filter24?: Maybe<ProjectFilter>,
-  filter25?: Maybe<WorkerFilter>,
+  filter19?: Maybe<WorkerFilter>,
   order14?: Maybe<WorkerOrder>,
   first14?: Maybe<Scalars['Int']>,
   offset14?: Maybe<Scalars['Int']>,
-  filter26?: Maybe<TaskFilter>,
-  order15?: Maybe<TaskOrder>,
+  filter20?: Maybe<TaskFilter>,
+  filter21?: Maybe<WorkerFilter>,
+  filter22?: Maybe<CommentFilter>,
+  order15?: Maybe<CommentOrder>,
   first15?: Maybe<Scalars['Int']>,
   offset15?: Maybe<Scalars['Int']>,
-  filter27?: Maybe<UserFilter>,
-  filter28?: Maybe<ProjectFilter>,
-  filter29?: Maybe<WorkerFilter>,
+  filter23?: Maybe<TaskFilter>,
+  filter24?: Maybe<ProjectFilter>,
+  filter25?: Maybe<WorkerFilter>,
   order16?: Maybe<WorkerOrder>,
   first16?: Maybe<Scalars['Int']>,
   offset16?: Maybe<Scalars['Int']>,
-  filter30?: Maybe<TagFilter>,
-  order17?: Maybe<TagOrder>,
+  filter26?: Maybe<TaskFilter>,
+  order17?: Maybe<TaskOrder>,
   first17?: Maybe<Scalars['Int']>,
   offset17?: Maybe<Scalars['Int']>,
-  filter31?: Maybe<ProjectFilter>,
-  filter32?: Maybe<ColumnFilter>,
-  filter33?: Maybe<WorkerFilter>,
-  order18?: Maybe<WorkerOrder>,
+  filter27?: Maybe<UserFilter>,
+  order18?: Maybe<UserOrder>,
   first18?: Maybe<Scalars['Int']>,
   offset18?: Maybe<Scalars['Int']>,
-  filter34?: Maybe<WorkerFilter>,
+  filter28?: Maybe<ProjectFilter>,
+  filter29?: Maybe<WorkerFilter>,
   order19?: Maybe<WorkerOrder>,
   first19?: Maybe<Scalars['Int']>,
   offset19?: Maybe<Scalars['Int']>,
-  filter35?: Maybe<CommentFilter>,
-  order20?: Maybe<CommentOrder>,
+  filter30?: Maybe<TagFilter>,
+  order20?: Maybe<TagOrder>,
   first20?: Maybe<Scalars['Int']>,
   offset20?: Maybe<Scalars['Int']>,
-  filter36?: Maybe<TaskFilter>,
-  order21?: Maybe<TaskOrder>,
+  filter31?: Maybe<ProjectFilter>,
+  filter32?: Maybe<ColumnFilter>,
+  filter33?: Maybe<WorkerFilter>,
+  order21?: Maybe<WorkerOrder>,
   first21?: Maybe<Scalars['Int']>,
   offset21?: Maybe<Scalars['Int']>,
-  filter37?: Maybe<ProjectFilter>,
-  filter38?: Maybe<ColumnFilter>,
-  filter39?: Maybe<WorkerFilter>,
+  filter34?: Maybe<WorkerFilter>,
   order22?: Maybe<WorkerOrder>,
   first22?: Maybe<Scalars['Int']>,
   offset22?: Maybe<Scalars['Int']>,
-  filter40?: Maybe<WorkerFilter>,
-  order23?: Maybe<WorkerOrder>,
+  filter35?: Maybe<CommentFilter>,
+  order23?: Maybe<CommentOrder>,
   first23?: Maybe<Scalars['Int']>,
   offset23?: Maybe<Scalars['Int']>,
-  filter41?: Maybe<CommentFilter>,
-  order24?: Maybe<CommentOrder>,
+  filter36?: Maybe<TaskFilter>,
+  order24?: Maybe<TaskOrder>,
   first24?: Maybe<Scalars['Int']>,
   offset24?: Maybe<Scalars['Int']>,
-  filter42?: Maybe<TaskFilter>,
-  order25?: Maybe<TaskOrder>,
+  filter37?: Maybe<ProjectFilter>,
+  filter38?: Maybe<ColumnFilter>,
+  filter39?: Maybe<WorkerFilter>,
+  order25?: Maybe<WorkerOrder>,
   first25?: Maybe<Scalars['Int']>,
   offset25?: Maybe<Scalars['Int']>,
-  filter43?: Maybe<WorkerFilter>,
-  filter44?: Maybe<CommentFilter>,
-  order26?: Maybe<CommentOrder>,
+  filter40?: Maybe<WorkerFilter>,
+  order26?: Maybe<WorkerOrder>,
   first26?: Maybe<Scalars['Int']>,
   offset26?: Maybe<Scalars['Int']>,
+  filter41?: Maybe<CommentFilter>,
+  order27?: Maybe<CommentOrder>,
+  first27?: Maybe<Scalars['Int']>,
+  offset27?: Maybe<Scalars['Int']>,
+  filter42?: Maybe<TaskFilter>,
+  order28?: Maybe<TaskOrder>,
+  first28?: Maybe<Scalars['Int']>,
+  offset28?: Maybe<Scalars['Int']>,
+  filter43?: Maybe<WorkerFilter>,
+  filter44?: Maybe<CommentFilter>,
+  order29?: Maybe<CommentOrder>,
+  first29?: Maybe<Scalars['Int']>,
+  offset29?: Maybe<Scalars['Int']>,
   input: UpdateCommentInput
 };
 
@@ -3479,6 +3582,7 @@ export type UpdateCommentMutation = (
   { __typename?: 'Mutation' }
   & { updateComment: Maybe<(
     { __typename?: 'UpdateCommentPayload' }
+    & Pick<UpdateCommentPayload, 'numUids'>
     & { comment: Maybe<Array<Maybe<(
       { __typename?: 'Comment' }
       & Pick<Comment, 'id' | 'content'>
@@ -3501,7 +3605,7 @@ export type UpdateCommentMutation = (
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
           )>>> }
-        ), column: (
+        ), column: Maybe<(
           { __typename?: 'Column' }
           & Pick<Column, 'id' | 'title'>
           & { board: (
@@ -3511,16 +3615,16 @@ export type UpdateCommentMutation = (
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        ), workers: Maybe<Array<Maybe<(
+        )>, workers: Maybe<Array<Maybe<(
           { __typename?: 'Worker' }
           & Pick<Worker, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: (
+          ), user: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          ), tags: Maybe<Array<Maybe<(
+          )>>>, tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
           )>>>, tasks: Maybe<Array<Maybe<(
@@ -3536,10 +3640,10 @@ export type UpdateCommentMutation = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: (
+          ), user: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          ), tags: Maybe<Array<Maybe<(
+          )>>>, tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
           )>>>, tasks: Maybe<Array<Maybe<(
@@ -3566,7 +3670,7 @@ export type UpdateCommentMutation = (
         & { project: (
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
-        ), user: (
+        ), user: Maybe<Array<Maybe<(
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
           & { roles: Maybe<Array<Maybe<(
@@ -3576,7 +3680,7 @@ export type UpdateCommentMutation = (
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        ), tags: Maybe<Array<Maybe<(
+        )>>>, tags: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
           & { project: (
@@ -3592,10 +3696,10 @@ export type UpdateCommentMutation = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: (
+          ), column: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          ), workers: Maybe<Array<Maybe<(
+          )>, workers: Maybe<Array<Maybe<(
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
           )>>>, likes: Maybe<Array<Maybe<(
@@ -3611,10 +3715,10 @@ export type UpdateCommentMutation = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: (
+          ), column: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          ), workers: Maybe<Array<Maybe<(
+          )>, workers: Maybe<Array<Maybe<(
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
           )>>>, likes: Maybe<Array<Maybe<(
@@ -3646,30 +3750,33 @@ export type UpdateProjectMutationVariables = {
   filter3?: Maybe<ProjectFilter>,
   filter4?: Maybe<ProjectFilter>,
   filter5?: Maybe<UserFilter>,
-  filter6?: Maybe<TagFilter>,
-  order3?: Maybe<TagOrder>,
+  order3?: Maybe<UserOrder>,
   first3?: Maybe<Scalars['Int']>,
   offset3?: Maybe<Scalars['Int']>,
-  filter7?: Maybe<TaskFilter>,
-  order4?: Maybe<TaskOrder>,
+  filter6?: Maybe<TagFilter>,
+  order4?: Maybe<TagOrder>,
   first4?: Maybe<Scalars['Int']>,
   offset4?: Maybe<Scalars['Int']>,
-  filter8?: Maybe<TaskFilter>,
+  filter7?: Maybe<TaskFilter>,
   order5?: Maybe<TaskOrder>,
   first5?: Maybe<Scalars['Int']>,
   offset5?: Maybe<Scalars['Int']>,
-  filter9?: Maybe<WorkerFilter>,
-  order6?: Maybe<WorkerOrder>,
+  filter8?: Maybe<TaskFilter>,
+  order6?: Maybe<TaskOrder>,
   first6?: Maybe<Scalars['Int']>,
   offset6?: Maybe<Scalars['Int']>,
-  filter10?: Maybe<TagFilter>,
-  order7?: Maybe<TagOrder>,
+  filter9?: Maybe<WorkerFilter>,
+  order7?: Maybe<WorkerOrder>,
   first7?: Maybe<Scalars['Int']>,
   offset7?: Maybe<Scalars['Int']>,
-  filter11?: Maybe<ProjectFilter>,
-  order8?: Maybe<ProjectOrder>,
+  filter10?: Maybe<TagFilter>,
+  order8?: Maybe<TagOrder>,
   first8?: Maybe<Scalars['Int']>,
   offset8?: Maybe<Scalars['Int']>,
+  filter11?: Maybe<ProjectFilter>,
+  order9?: Maybe<ProjectOrder>,
+  first9?: Maybe<Scalars['Int']>,
+  offset9?: Maybe<Scalars['Int']>,
   input: UpdateProjectInput
 };
 
@@ -3678,6 +3785,7 @@ export type UpdateProjectMutation = (
   { __typename?: 'Mutation' }
   & { updateProject: Maybe<(
     { __typename?: 'UpdateProjectPayload' }
+    & Pick<UpdateProjectPayload, 'numUids'>
     & { project: Maybe<Array<Maybe<(
       { __typename?: 'Project' }
       & Pick<Project, 'id' | 'title' | 'description'>
@@ -3703,10 +3811,10 @@ export type UpdateProjectMutation = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: (
+          ), user: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          ), tags: Maybe<Array<Maybe<(
+          )>>>, tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
           )>>>, tasks: Maybe<Array<Maybe<(
@@ -3761,31 +3869,34 @@ export type UpdateTagMutationVariables = {
   offset7?: Maybe<Scalars['Int']>,
   filter12?: Maybe<ProjectFilter>,
   filter13?: Maybe<UserFilter>,
-  filter14?: Maybe<TagFilter>,
-  order8?: Maybe<TagOrder>,
+  order8?: Maybe<UserOrder>,
   first8?: Maybe<Scalars['Int']>,
   offset8?: Maybe<Scalars['Int']>,
-  filter15?: Maybe<TaskFilter>,
-  order9?: Maybe<TaskOrder>,
+  filter14?: Maybe<TagFilter>,
+  order9?: Maybe<TagOrder>,
   first9?: Maybe<Scalars['Int']>,
   offset9?: Maybe<Scalars['Int']>,
-  filter16?: Maybe<TaskFilter>,
+  filter15?: Maybe<TaskFilter>,
   order10?: Maybe<TaskOrder>,
   first10?: Maybe<Scalars['Int']>,
   offset10?: Maybe<Scalars['Int']>,
-  filter17?: Maybe<WorkerFilter>,
-  order11?: Maybe<WorkerOrder>,
+  filter16?: Maybe<TaskFilter>,
+  order11?: Maybe<TaskOrder>,
   first11?: Maybe<Scalars['Int']>,
   offset11?: Maybe<Scalars['Int']>,
-  filter18?: Maybe<ProjectFilter>,
-  filter19?: Maybe<WorkerFilter>,
+  filter17?: Maybe<WorkerFilter>,
   order12?: Maybe<WorkerOrder>,
   first12?: Maybe<Scalars['Int']>,
   offset12?: Maybe<Scalars['Int']>,
-  filter20?: Maybe<TagFilter>,
-  order13?: Maybe<TagOrder>,
+  filter18?: Maybe<ProjectFilter>,
+  filter19?: Maybe<WorkerFilter>,
+  order13?: Maybe<WorkerOrder>,
   first13?: Maybe<Scalars['Int']>,
   offset13?: Maybe<Scalars['Int']>,
+  filter20?: Maybe<TagFilter>,
+  order14?: Maybe<TagOrder>,
+  first14?: Maybe<Scalars['Int']>,
+  offset14?: Maybe<Scalars['Int']>,
   input: UpdateTagInput
 };
 
@@ -3794,6 +3905,7 @@ export type UpdateTagMutation = (
   { __typename?: 'Mutation' }
   & { updateTag: Maybe<(
     { __typename?: 'UpdateTagPayload' }
+    & Pick<UpdateTagPayload, 'numUids'>
     & { tag: Maybe<Array<Maybe<(
       { __typename?: 'Tag' }
       & Pick<Tag, 'id' | 'title'>
@@ -3816,10 +3928,10 @@ export type UpdateTagMutation = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: (
+          ), column: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          ), workers: Maybe<Array<Maybe<(
+          )>, workers: Maybe<Array<Maybe<(
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
           )>>>, likes: Maybe<Array<Maybe<(
@@ -3845,10 +3957,10 @@ export type UpdateTagMutation = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: (
+          ), user: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          ), tags: Maybe<Array<Maybe<(
+          )>>>, tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
           )>>>, tasks: Maybe<Array<Maybe<(
@@ -3906,102 +4018,111 @@ export type UpdateTaskMutationVariables = {
   offset7?: Maybe<Scalars['Int']>,
   filter12?: Maybe<ProjectFilter>,
   filter13?: Maybe<UserFilter>,
-  filter14?: Maybe<TagFilter>,
-  order8?: Maybe<TagOrder>,
+  order8?: Maybe<UserOrder>,
   first8?: Maybe<Scalars['Int']>,
   offset8?: Maybe<Scalars['Int']>,
-  filter15?: Maybe<TaskFilter>,
-  order9?: Maybe<TaskOrder>,
+  filter14?: Maybe<TagFilter>,
+  order9?: Maybe<TagOrder>,
   first9?: Maybe<Scalars['Int']>,
   offset9?: Maybe<Scalars['Int']>,
-  filter16?: Maybe<TaskFilter>,
+  filter15?: Maybe<TaskFilter>,
   order10?: Maybe<TaskOrder>,
   first10?: Maybe<Scalars['Int']>,
   offset10?: Maybe<Scalars['Int']>,
-  filter17?: Maybe<WorkerFilter>,
-  order11?: Maybe<WorkerOrder>,
+  filter16?: Maybe<TaskFilter>,
+  order11?: Maybe<TaskOrder>,
   first11?: Maybe<Scalars['Int']>,
   offset11?: Maybe<Scalars['Int']>,
+  filter17?: Maybe<WorkerFilter>,
+  order12?: Maybe<WorkerOrder>,
+  first12?: Maybe<Scalars['Int']>,
+  offset12?: Maybe<Scalars['Int']>,
   filter18?: Maybe<ProjectFilter>,
   filter19?: Maybe<ProjectFilter>,
   filter20?: Maybe<ColumnFilter>,
-  order12?: Maybe<ColumnOrder>,
-  first12?: Maybe<Scalars['Int']>,
-  offset12?: Maybe<Scalars['Int']>,
-  filter21?: Maybe<BoardFilter>,
-  filter22?: Maybe<TaskFilter>,
-  order13?: Maybe<TaskOrder>,
+  order13?: Maybe<ColumnOrder>,
   first13?: Maybe<Scalars['Int']>,
   offset13?: Maybe<Scalars['Int']>,
-  filter23?: Maybe<ColumnFilter>,
-  filter24?: Maybe<WorkerFilter>,
-  order14?: Maybe<WorkerOrder>,
+  filter21?: Maybe<BoardFilter>,
+  filter22?: Maybe<TaskFilter>,
+  order14?: Maybe<TaskOrder>,
   first14?: Maybe<Scalars['Int']>,
   offset14?: Maybe<Scalars['Int']>,
-  filter25?: Maybe<ProjectFilter>,
-  filter26?: Maybe<WorkerFilter>,
+  filter23?: Maybe<ColumnFilter>,
+  filter24?: Maybe<WorkerFilter>,
   order15?: Maybe<WorkerOrder>,
   first15?: Maybe<Scalars['Int']>,
   offset15?: Maybe<Scalars['Int']>,
-  filter27?: Maybe<TaskFilter>,
-  order16?: Maybe<TaskOrder>,
+  filter25?: Maybe<ProjectFilter>,
+  filter26?: Maybe<WorkerFilter>,
+  order16?: Maybe<WorkerOrder>,
   first16?: Maybe<Scalars['Int']>,
   offset16?: Maybe<Scalars['Int']>,
-  filter28?: Maybe<UserFilter>,
-  filter29?: Maybe<TagFilter>,
-  order17?: Maybe<TagOrder>,
+  filter27?: Maybe<TaskFilter>,
+  order17?: Maybe<TaskOrder>,
   first17?: Maybe<Scalars['Int']>,
   offset17?: Maybe<Scalars['Int']>,
-  filter30?: Maybe<TaskFilter>,
-  order18?: Maybe<TaskOrder>,
+  filter28?: Maybe<UserFilter>,
+  order18?: Maybe<UserOrder>,
   first18?: Maybe<Scalars['Int']>,
   offset18?: Maybe<Scalars['Int']>,
+  filter29?: Maybe<TagFilter>,
+  order19?: Maybe<TagOrder>,
+  first19?: Maybe<Scalars['Int']>,
+  offset19?: Maybe<Scalars['Int']>,
+  filter30?: Maybe<TaskFilter>,
+  order20?: Maybe<TaskOrder>,
+  first20?: Maybe<Scalars['Int']>,
+  offset20?: Maybe<Scalars['Int']>,
   filter31?: Maybe<ProjectFilter>,
   filter32?: Maybe<ColumnFilter>,
   filter33?: Maybe<WorkerFilter>,
-  order19?: Maybe<WorkerOrder>,
-  first19?: Maybe<Scalars['Int']>,
-  offset19?: Maybe<Scalars['Int']>,
-  filter34?: Maybe<WorkerFilter>,
-  order20?: Maybe<WorkerOrder>,
-  first20?: Maybe<Scalars['Int']>,
-  offset20?: Maybe<Scalars['Int']>,
-  filter35?: Maybe<CommentFilter>,
-  order21?: Maybe<CommentOrder>,
+  order21?: Maybe<WorkerOrder>,
   first21?: Maybe<Scalars['Int']>,
   offset21?: Maybe<Scalars['Int']>,
-  filter36?: Maybe<TaskFilter>,
-  order22?: Maybe<TaskOrder>,
+  filter34?: Maybe<WorkerFilter>,
+  order22?: Maybe<WorkerOrder>,
   first22?: Maybe<Scalars['Int']>,
   offset22?: Maybe<Scalars['Int']>,
-  filter37?: Maybe<WorkerFilter>,
-  order23?: Maybe<WorkerOrder>,
+  filter35?: Maybe<CommentFilter>,
+  order23?: Maybe<CommentOrder>,
   first23?: Maybe<Scalars['Int']>,
   offset23?: Maybe<Scalars['Int']>,
+  filter36?: Maybe<TaskFilter>,
+  order24?: Maybe<TaskOrder>,
+  first24?: Maybe<Scalars['Int']>,
+  offset24?: Maybe<Scalars['Int']>,
+  filter37?: Maybe<WorkerFilter>,
+  order25?: Maybe<WorkerOrder>,
+  first25?: Maybe<Scalars['Int']>,
+  offset25?: Maybe<Scalars['Int']>,
   filter38?: Maybe<TaskFilter>,
   filter39?: Maybe<ProjectFilter>,
   filter40?: Maybe<UserFilter>,
-  filter41?: Maybe<TagFilter>,
-  order24?: Maybe<TagOrder>,
-  first24?: Maybe<Scalars['Int']>,
-  offset24?: Maybe<Scalars['Int']>,
-  filter42?: Maybe<TaskFilter>,
-  order25?: Maybe<TaskOrder>,
-  first25?: Maybe<Scalars['Int']>,
-  offset25?: Maybe<Scalars['Int']>,
-  filter43?: Maybe<TaskFilter>,
-  order26?: Maybe<TaskOrder>,
+  order26?: Maybe<UserOrder>,
   first26?: Maybe<Scalars['Int']>,
   offset26?: Maybe<Scalars['Int']>,
-  filter44?: Maybe<WorkerFilter>,
-  filter45?: Maybe<CommentFilter>,
-  order27?: Maybe<CommentOrder>,
+  filter41?: Maybe<TagFilter>,
+  order27?: Maybe<TagOrder>,
   first27?: Maybe<Scalars['Int']>,
   offset27?: Maybe<Scalars['Int']>,
-  filter46?: Maybe<TaskFilter>,
+  filter42?: Maybe<TaskFilter>,
   order28?: Maybe<TaskOrder>,
   first28?: Maybe<Scalars['Int']>,
   offset28?: Maybe<Scalars['Int']>,
+  filter43?: Maybe<TaskFilter>,
+  order29?: Maybe<TaskOrder>,
+  first29?: Maybe<Scalars['Int']>,
+  offset29?: Maybe<Scalars['Int']>,
+  filter44?: Maybe<WorkerFilter>,
+  filter45?: Maybe<CommentFilter>,
+  order30?: Maybe<CommentOrder>,
+  first30?: Maybe<Scalars['Int']>,
+  offset30?: Maybe<Scalars['Int']>,
+  filter46?: Maybe<TaskFilter>,
+  order31?: Maybe<TaskOrder>,
+  first31?: Maybe<Scalars['Int']>,
+  offset31?: Maybe<Scalars['Int']>,
   input: UpdateTaskInput
 };
 
@@ -4010,6 +4131,7 @@ export type UpdateTaskMutation = (
   { __typename?: 'Mutation' }
   & { updateTask: Maybe<(
     { __typename?: 'UpdateTaskPayload' }
+    & Pick<UpdateTaskPayload, 'numUids'>
     & { task: Maybe<Array<Maybe<(
       { __typename?: 'Task' }
       & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
@@ -4032,10 +4154,10 @@ export type UpdateTaskMutation = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: (
+          ), column: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          ), workers: Maybe<Array<Maybe<(
+          )>, workers: Maybe<Array<Maybe<(
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
           )>>>, likes: Maybe<Array<Maybe<(
@@ -4061,10 +4183,10 @@ export type UpdateTaskMutation = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: (
+          ), user: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          ), tags: Maybe<Array<Maybe<(
+          )>>>, tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
           )>>>, tasks: Maybe<Array<Maybe<(
@@ -4075,7 +4197,7 @@ export type UpdateTaskMutation = (
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
         )>>> }
-      ), column: (
+      ), column: Maybe<(
         { __typename?: 'Column' }
         & Pick<Column, 'id' | 'title'>
         & { board: (
@@ -4092,7 +4214,7 @@ export type UpdateTaskMutation = (
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
         )>>> }
-      ), workers: Maybe<Array<Maybe<(
+      )>, workers: Maybe<Array<Maybe<(
         { __typename?: 'Worker' }
         & Pick<Worker, 'id' | 'name' | 'availability'>
       )>>>, likes: Maybe<Array<Maybe<(
@@ -4101,7 +4223,7 @@ export type UpdateTaskMutation = (
         & { project: (
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
-        ), user: (
+        ), user: Maybe<Array<Maybe<(
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
           & { roles: Maybe<Array<Maybe<(
@@ -4111,7 +4233,7 @@ export type UpdateTaskMutation = (
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        ), tags: Maybe<Array<Maybe<(
+        )>>>, tags: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
         )>>>, tasks: Maybe<Array<Maybe<(
@@ -4123,10 +4245,10 @@ export type UpdateTaskMutation = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: (
+          ), column: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          ), workers: Maybe<Array<Maybe<(
+          )>, workers: Maybe<Array<Maybe<(
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
           )>>>, likes: Maybe<Array<Maybe<(
@@ -4149,10 +4271,10 @@ export type UpdateTaskMutation = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: (
+          ), user: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          ), tags: Maybe<Array<Maybe<(
+          )>>>, tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
           )>>>, tasks: Maybe<Array<Maybe<(
@@ -4191,59 +4313,62 @@ export type UpdateUserMutationVariables = {
   first4?: Maybe<Scalars['Int']>,
   offset4?: Maybe<Scalars['Int']>,
   filter6?: Maybe<UserFilter>,
-  filter7?: Maybe<ProjectFilter>,
-  filter8?: Maybe<WorkerFilter>,
-  order5?: Maybe<WorkerOrder>,
+  order5?: Maybe<UserOrder>,
   first5?: Maybe<Scalars['Int']>,
   offset5?: Maybe<Scalars['Int']>,
-  filter9?: Maybe<TagFilter>,
-  order6?: Maybe<TagOrder>,
+  filter7?: Maybe<ProjectFilter>,
+  filter8?: Maybe<WorkerFilter>,
+  order6?: Maybe<WorkerOrder>,
   first6?: Maybe<Scalars['Int']>,
   offset6?: Maybe<Scalars['Int']>,
+  filter9?: Maybe<TagFilter>,
+  order7?: Maybe<TagOrder>,
+  first7?: Maybe<Scalars['Int']>,
+  offset7?: Maybe<Scalars['Int']>,
   filter10?: Maybe<ProjectFilter>,
   filter11?: Maybe<ColumnFilter>,
   filter12?: Maybe<WorkerFilter>,
-  order7?: Maybe<WorkerOrder>,
-  first7?: Maybe<Scalars['Int']>,
-  offset7?: Maybe<Scalars['Int']>,
-  filter13?: Maybe<WorkerFilter>,
   order8?: Maybe<WorkerOrder>,
   first8?: Maybe<Scalars['Int']>,
   offset8?: Maybe<Scalars['Int']>,
-  filter14?: Maybe<CommentFilter>,
-  order9?: Maybe<CommentOrder>,
+  filter13?: Maybe<WorkerFilter>,
+  order9?: Maybe<WorkerOrder>,
   first9?: Maybe<Scalars['Int']>,
   offset9?: Maybe<Scalars['Int']>,
-  filter15?: Maybe<TaskFilter>,
-  order10?: Maybe<TaskOrder>,
+  filter14?: Maybe<CommentFilter>,
+  order10?: Maybe<CommentOrder>,
   first10?: Maybe<Scalars['Int']>,
   offset10?: Maybe<Scalars['Int']>,
+  filter15?: Maybe<TaskFilter>,
+  order11?: Maybe<TaskOrder>,
+  first11?: Maybe<Scalars['Int']>,
+  offset11?: Maybe<Scalars['Int']>,
   filter16?: Maybe<ProjectFilter>,
   filter17?: Maybe<ColumnFilter>,
   filter18?: Maybe<WorkerFilter>,
-  order11?: Maybe<WorkerOrder>,
-  first11?: Maybe<Scalars['Int']>,
-  offset11?: Maybe<Scalars['Int']>,
-  filter19?: Maybe<WorkerFilter>,
   order12?: Maybe<WorkerOrder>,
   first12?: Maybe<Scalars['Int']>,
   offset12?: Maybe<Scalars['Int']>,
-  filter20?: Maybe<CommentFilter>,
-  order13?: Maybe<CommentOrder>,
+  filter19?: Maybe<WorkerFilter>,
+  order13?: Maybe<WorkerOrder>,
   first13?: Maybe<Scalars['Int']>,
   offset13?: Maybe<Scalars['Int']>,
-  filter21?: Maybe<TaskFilter>,
-  order14?: Maybe<TaskOrder>,
+  filter20?: Maybe<CommentFilter>,
+  order14?: Maybe<CommentOrder>,
   first14?: Maybe<Scalars['Int']>,
   offset14?: Maybe<Scalars['Int']>,
-  filter22?: Maybe<WorkerFilter>,
-  order15?: Maybe<WorkerOrder>,
+  filter21?: Maybe<TaskFilter>,
+  order15?: Maybe<TaskOrder>,
   first15?: Maybe<Scalars['Int']>,
   offset15?: Maybe<Scalars['Int']>,
-  filter23?: Maybe<UserFilter>,
-  order16?: Maybe<UserOrder>,
+  filter22?: Maybe<WorkerFilter>,
+  order16?: Maybe<WorkerOrder>,
   first16?: Maybe<Scalars['Int']>,
   offset16?: Maybe<Scalars['Int']>,
+  filter23?: Maybe<UserFilter>,
+  order17?: Maybe<UserOrder>,
+  first17?: Maybe<Scalars['Int']>,
+  offset17?: Maybe<Scalars['Int']>,
   input: UpdateUserInput
 };
 
@@ -4252,6 +4377,7 @@ export type UpdateUserMutation = (
   { __typename?: 'Mutation' }
   & { updateUser: Maybe<(
     { __typename?: 'UpdateUserPayload' }
+    & Pick<UpdateUserPayload, 'numUids'>
     & { user: Maybe<Array<Maybe<(
       { __typename?: 'User' }
       & Pick<User, 'id' | 'username' | 'password' | 'location'>
@@ -4274,14 +4400,14 @@ export type UpdateUserMutation = (
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
           )>>> }
-        ), user: (
+        ), user: Maybe<Array<Maybe<(
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
           & { stars: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        ), tags: Maybe<Array<Maybe<(
+        )>>>, tags: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
           & { project: (
@@ -4297,10 +4423,10 @@ export type UpdateUserMutation = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: (
+          ), column: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          ), workers: Maybe<Array<Maybe<(
+          )>, workers: Maybe<Array<Maybe<(
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
           )>>>, likes: Maybe<Array<Maybe<(
@@ -4316,10 +4442,10 @@ export type UpdateUserMutation = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: (
+          ), column: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          ), workers: Maybe<Array<Maybe<(
+          )>, workers: Maybe<Array<Maybe<(
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
           )>>>, likes: Maybe<Array<Maybe<(
@@ -4374,111 +4500,123 @@ export type UpdateWorkerMutationVariables = {
   offset7?: Maybe<Scalars['Int']>,
   filter12?: Maybe<ProjectFilter>,
   filter13?: Maybe<UserFilter>,
-  filter14?: Maybe<TagFilter>,
-  order8?: Maybe<TagOrder>,
+  order8?: Maybe<UserOrder>,
   first8?: Maybe<Scalars['Int']>,
   offset8?: Maybe<Scalars['Int']>,
-  filter15?: Maybe<TaskFilter>,
-  order9?: Maybe<TaskOrder>,
+  filter14?: Maybe<TagFilter>,
+  order9?: Maybe<TagOrder>,
   first9?: Maybe<Scalars['Int']>,
   offset9?: Maybe<Scalars['Int']>,
-  filter16?: Maybe<TaskFilter>,
+  filter15?: Maybe<TaskFilter>,
   order10?: Maybe<TaskOrder>,
   first10?: Maybe<Scalars['Int']>,
   offset10?: Maybe<Scalars['Int']>,
-  filter17?: Maybe<WorkerFilter>,
-  order11?: Maybe<WorkerOrder>,
+  filter16?: Maybe<TaskFilter>,
+  order11?: Maybe<TaskOrder>,
   first11?: Maybe<Scalars['Int']>,
   offset11?: Maybe<Scalars['Int']>,
+  filter17?: Maybe<WorkerFilter>,
+  order12?: Maybe<WorkerOrder>,
+  first12?: Maybe<Scalars['Int']>,
+  offset12?: Maybe<Scalars['Int']>,
   filter18?: Maybe<ProjectFilter>,
   filter19?: Maybe<ProjectFilter>,
   filter20?: Maybe<UserFilter>,
-  filter21?: Maybe<TagFilter>,
-  order12?: Maybe<TagOrder>,
-  first12?: Maybe<Scalars['Int']>,
-  offset12?: Maybe<Scalars['Int']>,
-  filter22?: Maybe<TaskFilter>,
-  order13?: Maybe<TaskOrder>,
+  order13?: Maybe<UserOrder>,
   first13?: Maybe<Scalars['Int']>,
   offset13?: Maybe<Scalars['Int']>,
-  filter23?: Maybe<TaskFilter>,
-  order14?: Maybe<TaskOrder>,
+  filter21?: Maybe<TagFilter>,
+  order14?: Maybe<TagOrder>,
   first14?: Maybe<Scalars['Int']>,
   offset14?: Maybe<Scalars['Int']>,
-  filter24?: Maybe<WorkerFilter>,
-  order15?: Maybe<WorkerOrder>,
+  filter22?: Maybe<TaskFilter>,
+  order15?: Maybe<TaskOrder>,
   first15?: Maybe<Scalars['Int']>,
   offset15?: Maybe<Scalars['Int']>,
-  filter25?: Maybe<ProjectFilter>,
-  filter26?: Maybe<ColumnFilter>,
-  filter27?: Maybe<WorkerFilter>,
-  order16?: Maybe<WorkerOrder>,
+  filter23?: Maybe<TaskFilter>,
+  order16?: Maybe<TaskOrder>,
   first16?: Maybe<Scalars['Int']>,
   offset16?: Maybe<Scalars['Int']>,
-  filter28?: Maybe<WorkerFilter>,
+  filter24?: Maybe<WorkerFilter>,
   order17?: Maybe<WorkerOrder>,
   first17?: Maybe<Scalars['Int']>,
   offset17?: Maybe<Scalars['Int']>,
-  filter29?: Maybe<CommentFilter>,
-  order18?: Maybe<CommentOrder>,
+  filter25?: Maybe<ProjectFilter>,
+  filter26?: Maybe<ColumnFilter>,
+  filter27?: Maybe<WorkerFilter>,
+  order18?: Maybe<WorkerOrder>,
   first18?: Maybe<Scalars['Int']>,
   offset18?: Maybe<Scalars['Int']>,
-  filter30?: Maybe<TaskFilter>,
-  order19?: Maybe<TaskOrder>,
+  filter28?: Maybe<WorkerFilter>,
+  order19?: Maybe<WorkerOrder>,
   first19?: Maybe<Scalars['Int']>,
   offset19?: Maybe<Scalars['Int']>,
-  filter31?: Maybe<UserFilter>,
-  filter32?: Maybe<TagFilter>,
-  order20?: Maybe<TagOrder>,
+  filter29?: Maybe<CommentFilter>,
+  order20?: Maybe<CommentOrder>,
   first20?: Maybe<Scalars['Int']>,
   offset20?: Maybe<Scalars['Int']>,
-  filter33?: Maybe<TaskFilter>,
+  filter30?: Maybe<TaskFilter>,
   order21?: Maybe<TaskOrder>,
   first21?: Maybe<Scalars['Int']>,
   offset21?: Maybe<Scalars['Int']>,
+  filter31?: Maybe<UserFilter>,
+  order22?: Maybe<UserOrder>,
+  first22?: Maybe<Scalars['Int']>,
+  offset22?: Maybe<Scalars['Int']>,
+  filter32?: Maybe<TagFilter>,
+  order23?: Maybe<TagOrder>,
+  first23?: Maybe<Scalars['Int']>,
+  offset23?: Maybe<Scalars['Int']>,
+  filter33?: Maybe<TaskFilter>,
+  order24?: Maybe<TaskOrder>,
+  first24?: Maybe<Scalars['Int']>,
+  offset24?: Maybe<Scalars['Int']>,
   filter34?: Maybe<ProjectFilter>,
   filter35?: Maybe<BoardFilter>,
   filter36?: Maybe<TaskFilter>,
-  order22?: Maybe<TaskOrder>,
-  first22?: Maybe<Scalars['Int']>,
-  offset22?: Maybe<Scalars['Int']>,
-  filter37?: Maybe<ColumnFilter>,
-  filter38?: Maybe<WorkerFilter>,
-  order23?: Maybe<WorkerOrder>,
-  first23?: Maybe<Scalars['Int']>,
-  offset23?: Maybe<Scalars['Int']>,
-  filter39?: Maybe<ProjectFilter>,
-  filter40?: Maybe<UserFilter>,
-  filter41?: Maybe<TagFilter>,
-  order24?: Maybe<TagOrder>,
-  first24?: Maybe<Scalars['Int']>,
-  offset24?: Maybe<Scalars['Int']>,
-  filter42?: Maybe<TaskFilter>,
   order25?: Maybe<TaskOrder>,
   first25?: Maybe<Scalars['Int']>,
   offset25?: Maybe<Scalars['Int']>,
-  filter43?: Maybe<TaskFilter>,
-  order26?: Maybe<TaskOrder>,
+  filter37?: Maybe<ColumnFilter>,
+  filter38?: Maybe<WorkerFilter>,
+  order26?: Maybe<WorkerOrder>,
   first26?: Maybe<Scalars['Int']>,
   offset26?: Maybe<Scalars['Int']>,
-  filter44?: Maybe<WorkerFilter>,
-  order27?: Maybe<WorkerOrder>,
+  filter39?: Maybe<ProjectFilter>,
+  filter40?: Maybe<UserFilter>,
+  order27?: Maybe<UserOrder>,
   first27?: Maybe<Scalars['Int']>,
   offset27?: Maybe<Scalars['Int']>,
-  filter45?: Maybe<TaskFilter>,
-  filter46?: Maybe<WorkerFilter>,
-  filter47?: Maybe<CommentFilter>,
-  order28?: Maybe<CommentOrder>,
+  filter41?: Maybe<TagFilter>,
+  order28?: Maybe<TagOrder>,
   first28?: Maybe<Scalars['Int']>,
   offset28?: Maybe<Scalars['Int']>,
-  filter48?: Maybe<TaskFilter>,
+  filter42?: Maybe<TaskFilter>,
   order29?: Maybe<TaskOrder>,
   first29?: Maybe<Scalars['Int']>,
   offset29?: Maybe<Scalars['Int']>,
-  filter49?: Maybe<WorkerFilter>,
-  order30?: Maybe<WorkerOrder>,
+  filter43?: Maybe<TaskFilter>,
+  order30?: Maybe<TaskOrder>,
   first30?: Maybe<Scalars['Int']>,
   offset30?: Maybe<Scalars['Int']>,
+  filter44?: Maybe<WorkerFilter>,
+  order31?: Maybe<WorkerOrder>,
+  first31?: Maybe<Scalars['Int']>,
+  offset31?: Maybe<Scalars['Int']>,
+  filter45?: Maybe<TaskFilter>,
+  filter46?: Maybe<WorkerFilter>,
+  filter47?: Maybe<CommentFilter>,
+  order32?: Maybe<CommentOrder>,
+  first32?: Maybe<Scalars['Int']>,
+  offset32?: Maybe<Scalars['Int']>,
+  filter48?: Maybe<TaskFilter>,
+  order33?: Maybe<TaskOrder>,
+  first33?: Maybe<Scalars['Int']>,
+  offset33?: Maybe<Scalars['Int']>,
+  filter49?: Maybe<WorkerFilter>,
+  order34?: Maybe<WorkerOrder>,
+  first34?: Maybe<Scalars['Int']>,
+  offset34?: Maybe<Scalars['Int']>,
   input: UpdateWorkerInput
 };
 
@@ -4487,6 +4625,7 @@ export type UpdateWorkerMutation = (
   { __typename?: 'Mutation' }
   & { updateWorker: Maybe<(
     { __typename?: 'UpdateWorkerPayload' }
+    & Pick<UpdateWorkerPayload, 'numUids'>
     & { worker: Maybe<Array<Maybe<(
       { __typename?: 'Worker' }
       & Pick<Worker, 'id' | 'name' | 'availability'>
@@ -4509,10 +4648,10 @@ export type UpdateWorkerMutation = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: (
+          ), column: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          ), workers: Maybe<Array<Maybe<(
+          )>, workers: Maybe<Array<Maybe<(
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
           )>>>, likes: Maybe<Array<Maybe<(
@@ -4538,10 +4677,10 @@ export type UpdateWorkerMutation = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: (
+          ), user: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          ), tags: Maybe<Array<Maybe<(
+          )>>>, tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
           )>>>, tasks: Maybe<Array<Maybe<(
@@ -4552,7 +4691,7 @@ export type UpdateWorkerMutation = (
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
         )>>> }
-      ), user: (
+      ), user: Maybe<Array<Maybe<(
         { __typename?: 'User' }
         & Pick<User, 'id' | 'username' | 'password' | 'location'>
         & { roles: Maybe<Array<Maybe<(
@@ -4561,10 +4700,10 @@ export type UpdateWorkerMutation = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: (
+          ), user: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          ), tags: Maybe<Array<Maybe<(
+          )>>>, tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
           )>>>, tasks: Maybe<Array<Maybe<(
@@ -4580,10 +4719,10 @@ export type UpdateWorkerMutation = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: (
+          ), column: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          ), workers: Maybe<Array<Maybe<(
+          )>, workers: Maybe<Array<Maybe<(
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
           )>>>, likes: Maybe<Array<Maybe<(
@@ -4594,7 +4733,7 @@ export type UpdateWorkerMutation = (
             & Pick<Comment, 'id' | 'content'>
           )>>> }
         )>>> }
-      ), tags: Maybe<Array<Maybe<(
+      )>>>, tags: Maybe<Array<Maybe<(
         { __typename?: 'Tag' }
         & Pick<Tag, 'id' | 'title'>
       )>>>, tasks: Maybe<Array<Maybe<(
@@ -4606,7 +4745,7 @@ export type UpdateWorkerMutation = (
         & { project: (
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
-        ), column: (
+        ), column: Maybe<(
           { __typename?: 'Column' }
           & Pick<Column, 'id' | 'title'>
           & { board: (
@@ -4616,7 +4755,7 @@ export type UpdateWorkerMutation = (
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        ), workers: Maybe<Array<Maybe<(
+        )>, workers: Maybe<Array<Maybe<(
           { __typename?: 'Worker' }
           & Pick<Worker, 'id' | 'name' | 'availability'>
         )>>>, likes: Maybe<Array<Maybe<(
@@ -4625,10 +4764,10 @@ export type UpdateWorkerMutation = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: (
+          ), user: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          ), tags: Maybe<Array<Maybe<(
+          )>>>, tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
           )>>>, tasks: Maybe<Array<Maybe<(
@@ -4670,41 +4809,44 @@ export type GetBoardQueryVariables = {
   filter3?: Maybe<ProjectFilter>,
   filter4?: Maybe<ProjectFilter>,
   filter5?: Maybe<UserFilter>,
-  filter6?: Maybe<TagFilter>,
-  order3?: Maybe<TagOrder>,
+  order3?: Maybe<UserOrder>,
   first3?: Maybe<Scalars['Int']>,
   offset3?: Maybe<Scalars['Int']>,
-  filter7?: Maybe<TaskFilter>,
-  order4?: Maybe<TaskOrder>,
+  filter6?: Maybe<TagFilter>,
+  order4?: Maybe<TagOrder>,
   first4?: Maybe<Scalars['Int']>,
   offset4?: Maybe<Scalars['Int']>,
-  filter8?: Maybe<TaskFilter>,
+  filter7?: Maybe<TaskFilter>,
   order5?: Maybe<TaskOrder>,
   first5?: Maybe<Scalars['Int']>,
   offset5?: Maybe<Scalars['Int']>,
-  filter9?: Maybe<WorkerFilter>,
-  order6?: Maybe<WorkerOrder>,
+  filter8?: Maybe<TaskFilter>,
+  order6?: Maybe<TaskOrder>,
   first6?: Maybe<Scalars['Int']>,
   offset6?: Maybe<Scalars['Int']>,
-  filter10?: Maybe<TagFilter>,
-  order7?: Maybe<TagOrder>,
+  filter9?: Maybe<WorkerFilter>,
+  order7?: Maybe<WorkerOrder>,
   first7?: Maybe<Scalars['Int']>,
   offset7?: Maybe<Scalars['Int']>,
+  filter10?: Maybe<TagFilter>,
+  order8?: Maybe<TagOrder>,
+  first8?: Maybe<Scalars['Int']>,
+  offset8?: Maybe<Scalars['Int']>,
   filter11?: Maybe<ProjectFilter>,
   filter12?: Maybe<ProjectFilter>,
   filter13?: Maybe<TaskFilter>,
-  order8?: Maybe<TaskOrder>,
-  first8?: Maybe<Scalars['Int']>,
-  offset8?: Maybe<Scalars['Int']>,
-  filter14?: Maybe<ColumnFilter>,
-  order9?: Maybe<ColumnOrder>,
+  order9?: Maybe<TaskOrder>,
   first9?: Maybe<Scalars['Int']>,
   offset9?: Maybe<Scalars['Int']>,
-  filter15?: Maybe<BoardFilter>,
-  filter16?: Maybe<ColumnFilter>,
+  filter14?: Maybe<ColumnFilter>,
   order10?: Maybe<ColumnOrder>,
   first10?: Maybe<Scalars['Int']>,
   offset10?: Maybe<Scalars['Int']>,
+  filter15?: Maybe<BoardFilter>,
+  filter16?: Maybe<ColumnFilter>,
+  order11?: Maybe<ColumnOrder>,
+  first11?: Maybe<Scalars['Int']>,
+  offset11?: Maybe<Scalars['Int']>,
   id: Scalars['ID']
 };
 
@@ -4739,10 +4881,10 @@ export type GetBoardQuery = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: (
+          ), user: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          ), tags: Maybe<Array<Maybe<(
+          )>>>, tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
           )>>>, tasks: Maybe<Array<Maybe<(
@@ -4815,37 +4957,40 @@ export type GetColumnQueryVariables = {
   offset7?: Maybe<Scalars['Int']>,
   filter12?: Maybe<ProjectFilter>,
   filter13?: Maybe<UserFilter>,
-  filter14?: Maybe<TagFilter>,
-  order8?: Maybe<TagOrder>,
+  order8?: Maybe<UserOrder>,
   first8?: Maybe<Scalars['Int']>,
   offset8?: Maybe<Scalars['Int']>,
-  filter15?: Maybe<TaskFilter>,
-  order9?: Maybe<TaskOrder>,
+  filter14?: Maybe<TagFilter>,
+  order9?: Maybe<TagOrder>,
   first9?: Maybe<Scalars['Int']>,
   offset9?: Maybe<Scalars['Int']>,
-  filter16?: Maybe<TaskFilter>,
+  filter15?: Maybe<TaskFilter>,
   order10?: Maybe<TaskOrder>,
   first10?: Maybe<Scalars['Int']>,
   offset10?: Maybe<Scalars['Int']>,
-  filter17?: Maybe<WorkerFilter>,
-  order11?: Maybe<WorkerOrder>,
+  filter16?: Maybe<TaskFilter>,
+  order11?: Maybe<TaskOrder>,
   first11?: Maybe<Scalars['Int']>,
   offset11?: Maybe<Scalars['Int']>,
+  filter17?: Maybe<WorkerFilter>,
+  order12?: Maybe<WorkerOrder>,
+  first12?: Maybe<Scalars['Int']>,
+  offset12?: Maybe<Scalars['Int']>,
   filter18?: Maybe<ProjectFilter>,
   filter19?: Maybe<BoardFilter>,
   filter20?: Maybe<TaskFilter>,
-  order12?: Maybe<TaskOrder>,
-  first12?: Maybe<Scalars['Int']>,
-  offset12?: Maybe<Scalars['Int']>,
-  filter21?: Maybe<ColumnFilter>,
-  order13?: Maybe<ColumnOrder>,
+  order13?: Maybe<TaskOrder>,
   first13?: Maybe<Scalars['Int']>,
   offset13?: Maybe<Scalars['Int']>,
-  filter22?: Maybe<BoardFilter>,
-  filter23?: Maybe<TaskFilter>,
-  order14?: Maybe<TaskOrder>,
+  filter21?: Maybe<ColumnFilter>,
+  order14?: Maybe<ColumnOrder>,
   first14?: Maybe<Scalars['Int']>,
   offset14?: Maybe<Scalars['Int']>,
+  filter22?: Maybe<BoardFilter>,
+  filter23?: Maybe<TaskFilter>,
+  order15?: Maybe<TaskOrder>,
+  first15?: Maybe<Scalars['Int']>,
+  offset15?: Maybe<Scalars['Int']>,
   id: Scalars['ID']
 };
 
@@ -4877,10 +5022,10 @@ export type GetColumnQuery = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: (
+          ), column: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          ), workers: Maybe<Array<Maybe<(
+          )>, workers: Maybe<Array<Maybe<(
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
           )>>>, likes: Maybe<Array<Maybe<(
@@ -4906,10 +5051,10 @@ export type GetColumnQuery = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: (
+          ), user: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          ), tags: Maybe<Array<Maybe<(
+          )>>>, tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
           )>>>, tasks: Maybe<Array<Maybe<(
@@ -4977,98 +5122,107 @@ export type GetCommentQueryVariables = {
   offset7?: Maybe<Scalars['Int']>,
   filter12?: Maybe<ProjectFilter>,
   filter13?: Maybe<UserFilter>,
-  filter14?: Maybe<TagFilter>,
-  order8?: Maybe<TagOrder>,
+  order8?: Maybe<UserOrder>,
   first8?: Maybe<Scalars['Int']>,
   offset8?: Maybe<Scalars['Int']>,
-  filter15?: Maybe<TaskFilter>,
-  order9?: Maybe<TaskOrder>,
+  filter14?: Maybe<TagFilter>,
+  order9?: Maybe<TagOrder>,
   first9?: Maybe<Scalars['Int']>,
   offset9?: Maybe<Scalars['Int']>,
-  filter16?: Maybe<TaskFilter>,
+  filter15?: Maybe<TaskFilter>,
   order10?: Maybe<TaskOrder>,
   first10?: Maybe<Scalars['Int']>,
   offset10?: Maybe<Scalars['Int']>,
-  filter17?: Maybe<WorkerFilter>,
-  order11?: Maybe<WorkerOrder>,
+  filter16?: Maybe<TaskFilter>,
+  order11?: Maybe<TaskOrder>,
   first11?: Maybe<Scalars['Int']>,
   offset11?: Maybe<Scalars['Int']>,
+  filter17?: Maybe<WorkerFilter>,
+  order12?: Maybe<WorkerOrder>,
+  first12?: Maybe<Scalars['Int']>,
+  offset12?: Maybe<Scalars['Int']>,
   filter18?: Maybe<ProjectFilter>,
   filter19?: Maybe<ProjectFilter>,
   filter20?: Maybe<ColumnFilter>,
-  order12?: Maybe<ColumnOrder>,
-  first12?: Maybe<Scalars['Int']>,
-  offset12?: Maybe<Scalars['Int']>,
-  filter21?: Maybe<BoardFilter>,
-  filter22?: Maybe<TaskFilter>,
-  order13?: Maybe<TaskOrder>,
+  order13?: Maybe<ColumnOrder>,
   first13?: Maybe<Scalars['Int']>,
   offset13?: Maybe<Scalars['Int']>,
-  filter23?: Maybe<ColumnFilter>,
-  filter24?: Maybe<WorkerFilter>,
-  order14?: Maybe<WorkerOrder>,
+  filter21?: Maybe<BoardFilter>,
+  filter22?: Maybe<TaskFilter>,
+  order14?: Maybe<TaskOrder>,
   first14?: Maybe<Scalars['Int']>,
   offset14?: Maybe<Scalars['Int']>,
-  filter25?: Maybe<ProjectFilter>,
-  filter26?: Maybe<WorkerFilter>,
+  filter23?: Maybe<ColumnFilter>,
+  filter24?: Maybe<WorkerFilter>,
   order15?: Maybe<WorkerOrder>,
   first15?: Maybe<Scalars['Int']>,
   offset15?: Maybe<Scalars['Int']>,
-  filter27?: Maybe<TaskFilter>,
-  order16?: Maybe<TaskOrder>,
+  filter25?: Maybe<ProjectFilter>,
+  filter26?: Maybe<WorkerFilter>,
+  order16?: Maybe<WorkerOrder>,
   first16?: Maybe<Scalars['Int']>,
   offset16?: Maybe<Scalars['Int']>,
-  filter28?: Maybe<UserFilter>,
-  filter29?: Maybe<TagFilter>,
-  order17?: Maybe<TagOrder>,
+  filter27?: Maybe<TaskFilter>,
+  order17?: Maybe<TaskOrder>,
   first17?: Maybe<Scalars['Int']>,
   offset17?: Maybe<Scalars['Int']>,
-  filter30?: Maybe<TaskFilter>,
-  order18?: Maybe<TaskOrder>,
+  filter28?: Maybe<UserFilter>,
+  order18?: Maybe<UserOrder>,
   first18?: Maybe<Scalars['Int']>,
   offset18?: Maybe<Scalars['Int']>,
+  filter29?: Maybe<TagFilter>,
+  order19?: Maybe<TagOrder>,
+  first19?: Maybe<Scalars['Int']>,
+  offset19?: Maybe<Scalars['Int']>,
+  filter30?: Maybe<TaskFilter>,
+  order20?: Maybe<TaskOrder>,
+  first20?: Maybe<Scalars['Int']>,
+  offset20?: Maybe<Scalars['Int']>,
   filter31?: Maybe<ProjectFilter>,
   filter32?: Maybe<ColumnFilter>,
   filter33?: Maybe<WorkerFilter>,
-  order19?: Maybe<WorkerOrder>,
-  first19?: Maybe<Scalars['Int']>,
-  offset19?: Maybe<Scalars['Int']>,
-  filter34?: Maybe<WorkerFilter>,
-  order20?: Maybe<WorkerOrder>,
-  first20?: Maybe<Scalars['Int']>,
-  offset20?: Maybe<Scalars['Int']>,
-  filter35?: Maybe<CommentFilter>,
-  order21?: Maybe<CommentOrder>,
+  order21?: Maybe<WorkerOrder>,
   first21?: Maybe<Scalars['Int']>,
   offset21?: Maybe<Scalars['Int']>,
-  filter36?: Maybe<TaskFilter>,
-  order22?: Maybe<TaskOrder>,
+  filter34?: Maybe<WorkerFilter>,
+  order22?: Maybe<WorkerOrder>,
   first22?: Maybe<Scalars['Int']>,
   offset22?: Maybe<Scalars['Int']>,
-  filter37?: Maybe<WorkerFilter>,
-  order23?: Maybe<WorkerOrder>,
+  filter35?: Maybe<CommentFilter>,
+  order23?: Maybe<CommentOrder>,
   first23?: Maybe<Scalars['Int']>,
   offset23?: Maybe<Scalars['Int']>,
+  filter36?: Maybe<TaskFilter>,
+  order24?: Maybe<TaskOrder>,
+  first24?: Maybe<Scalars['Int']>,
+  offset24?: Maybe<Scalars['Int']>,
+  filter37?: Maybe<WorkerFilter>,
+  order25?: Maybe<WorkerOrder>,
+  first25?: Maybe<Scalars['Int']>,
+  offset25?: Maybe<Scalars['Int']>,
   filter38?: Maybe<TaskFilter>,
   filter39?: Maybe<ProjectFilter>,
   filter40?: Maybe<UserFilter>,
-  filter41?: Maybe<TagFilter>,
-  order24?: Maybe<TagOrder>,
-  first24?: Maybe<Scalars['Int']>,
-  offset24?: Maybe<Scalars['Int']>,
-  filter42?: Maybe<TaskFilter>,
-  order25?: Maybe<TaskOrder>,
-  first25?: Maybe<Scalars['Int']>,
-  offset25?: Maybe<Scalars['Int']>,
-  filter43?: Maybe<TaskFilter>,
-  order26?: Maybe<TaskOrder>,
+  order26?: Maybe<UserOrder>,
   first26?: Maybe<Scalars['Int']>,
   offset26?: Maybe<Scalars['Int']>,
-  filter44?: Maybe<WorkerFilter>,
-  filter45?: Maybe<CommentFilter>,
-  order27?: Maybe<CommentOrder>,
+  filter41?: Maybe<TagFilter>,
+  order27?: Maybe<TagOrder>,
   first27?: Maybe<Scalars['Int']>,
   offset27?: Maybe<Scalars['Int']>,
+  filter42?: Maybe<TaskFilter>,
+  order28?: Maybe<TaskOrder>,
+  first28?: Maybe<Scalars['Int']>,
+  offset28?: Maybe<Scalars['Int']>,
+  filter43?: Maybe<TaskFilter>,
+  order29?: Maybe<TaskOrder>,
+  first29?: Maybe<Scalars['Int']>,
+  offset29?: Maybe<Scalars['Int']>,
+  filter44?: Maybe<WorkerFilter>,
+  filter45?: Maybe<CommentFilter>,
+  order30?: Maybe<CommentOrder>,
+  first30?: Maybe<Scalars['Int']>,
+  offset30?: Maybe<Scalars['Int']>,
   filter46?: Maybe<TaskFilter>,
   filter47?: Maybe<WorkerFilter>,
   id: Scalars['ID']
@@ -5102,10 +5256,10 @@ export type GetCommentQuery = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: (
+          ), column: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          ), workers: Maybe<Array<Maybe<(
+          )>, workers: Maybe<Array<Maybe<(
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
           )>>>, likes: Maybe<Array<Maybe<(
@@ -5131,10 +5285,10 @@ export type GetCommentQuery = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: (
+          ), user: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          ), tags: Maybe<Array<Maybe<(
+          )>>>, tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
           )>>>, tasks: Maybe<Array<Maybe<(
@@ -5145,7 +5299,7 @@ export type GetCommentQuery = (
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
         )>>> }
-      ), column: (
+      ), column: Maybe<(
         { __typename?: 'Column' }
         & Pick<Column, 'id' | 'title'>
         & { board: (
@@ -5162,7 +5316,7 @@ export type GetCommentQuery = (
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
         )>>> }
-      ), workers: Maybe<Array<Maybe<(
+      )>, workers: Maybe<Array<Maybe<(
         { __typename?: 'Worker' }
         & Pick<Worker, 'id' | 'name' | 'availability'>
       )>>>, likes: Maybe<Array<Maybe<(
@@ -5171,7 +5325,7 @@ export type GetCommentQuery = (
         & { project: (
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
-        ), user: (
+        ), user: Maybe<Array<Maybe<(
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
           & { roles: Maybe<Array<Maybe<(
@@ -5181,7 +5335,7 @@ export type GetCommentQuery = (
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        ), tags: Maybe<Array<Maybe<(
+        )>>>, tags: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
         )>>>, tasks: Maybe<Array<Maybe<(
@@ -5193,10 +5347,10 @@ export type GetCommentQuery = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: (
+          ), column: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          ), workers: Maybe<Array<Maybe<(
+          )>, workers: Maybe<Array<Maybe<(
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
           )>>>, likes: Maybe<Array<Maybe<(
@@ -5219,10 +5373,10 @@ export type GetCommentQuery = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: (
+          ), user: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          ), tags: Maybe<Array<Maybe<(
+          )>>>, tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
           )>>>, tasks: Maybe<Array<Maybe<(
@@ -5279,39 +5433,42 @@ export type GetProjectQueryVariables = {
   offset7?: Maybe<Scalars['Int']>,
   filter11?: Maybe<ProjectFilter>,
   filter12?: Maybe<UserFilter>,
-  filter13?: Maybe<TagFilter>,
-  order8?: Maybe<TagOrder>,
+  order8?: Maybe<UserOrder>,
   first8?: Maybe<Scalars['Int']>,
   offset8?: Maybe<Scalars['Int']>,
-  filter14?: Maybe<TaskFilter>,
-  order9?: Maybe<TaskOrder>,
+  filter13?: Maybe<TagFilter>,
+  order9?: Maybe<TagOrder>,
   first9?: Maybe<Scalars['Int']>,
   offset9?: Maybe<Scalars['Int']>,
-  filter15?: Maybe<TaskFilter>,
+  filter14?: Maybe<TaskFilter>,
   order10?: Maybe<TaskOrder>,
   first10?: Maybe<Scalars['Int']>,
   offset10?: Maybe<Scalars['Int']>,
-  filter16?: Maybe<WorkerFilter>,
-  order11?: Maybe<WorkerOrder>,
+  filter15?: Maybe<TaskFilter>,
+  order11?: Maybe<TaskOrder>,
   first11?: Maybe<Scalars['Int']>,
   offset11?: Maybe<Scalars['Int']>,
-  filter17?: Maybe<ProjectFilter>,
-  filter18?: Maybe<TagFilter>,
-  order12?: Maybe<TagOrder>,
+  filter16?: Maybe<WorkerFilter>,
+  order12?: Maybe<WorkerOrder>,
   first12?: Maybe<Scalars['Int']>,
   offset12?: Maybe<Scalars['Int']>,
-  filter19?: Maybe<TaskFilter>,
-  order13?: Maybe<TaskOrder>,
+  filter17?: Maybe<ProjectFilter>,
+  filter18?: Maybe<TagFilter>,
+  order13?: Maybe<TagOrder>,
   first13?: Maybe<Scalars['Int']>,
   offset13?: Maybe<Scalars['Int']>,
-  filter20?: Maybe<BoardFilter>,
-  order14?: Maybe<BoardOrder>,
+  filter19?: Maybe<TaskFilter>,
+  order14?: Maybe<TaskOrder>,
   first14?: Maybe<Scalars['Int']>,
   offset14?: Maybe<Scalars['Int']>,
-  filter21?: Maybe<WorkerFilter>,
-  order15?: Maybe<WorkerOrder>,
+  filter20?: Maybe<BoardFilter>,
+  order15?: Maybe<BoardOrder>,
   first15?: Maybe<Scalars['Int']>,
   offset15?: Maybe<Scalars['Int']>,
+  filter21?: Maybe<WorkerFilter>,
+  order16?: Maybe<WorkerOrder>,
+  first16?: Maybe<Scalars['Int']>,
+  offset16?: Maybe<Scalars['Int']>,
   id: Scalars['ID']
 };
 
@@ -5340,10 +5497,10 @@ export type GetProjectQuery = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: (
+          ), column: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          ), workers: Maybe<Array<Maybe<(
+          )>, workers: Maybe<Array<Maybe<(
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
           )>>>, likes: Maybe<Array<Maybe<(
@@ -5369,10 +5526,10 @@ export type GetProjectQuery = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: (
+          ), user: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          ), tags: Maybe<Array<Maybe<(
+          )>>>, tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
           )>>>, tasks: Maybe<Array<Maybe<(
@@ -5413,31 +5570,34 @@ export type GetTagQueryVariables = {
   filter3?: Maybe<ProjectFilter>,
   filter4?: Maybe<ProjectFilter>,
   filter5?: Maybe<UserFilter>,
-  filter6?: Maybe<TagFilter>,
-  order3?: Maybe<TagOrder>,
+  order3?: Maybe<UserOrder>,
   first3?: Maybe<Scalars['Int']>,
   offset3?: Maybe<Scalars['Int']>,
-  filter7?: Maybe<TaskFilter>,
-  order4?: Maybe<TaskOrder>,
+  filter6?: Maybe<TagFilter>,
+  order4?: Maybe<TagOrder>,
   first4?: Maybe<Scalars['Int']>,
   offset4?: Maybe<Scalars['Int']>,
-  filter8?: Maybe<TaskFilter>,
+  filter7?: Maybe<TaskFilter>,
   order5?: Maybe<TaskOrder>,
   first5?: Maybe<Scalars['Int']>,
   offset5?: Maybe<Scalars['Int']>,
-  filter9?: Maybe<WorkerFilter>,
-  order6?: Maybe<WorkerOrder>,
+  filter8?: Maybe<TaskFilter>,
+  order6?: Maybe<TaskOrder>,
   first6?: Maybe<Scalars['Int']>,
   offset6?: Maybe<Scalars['Int']>,
-  filter10?: Maybe<TagFilter>,
-  order7?: Maybe<TagOrder>,
+  filter9?: Maybe<WorkerFilter>,
+  order7?: Maybe<WorkerOrder>,
   first7?: Maybe<Scalars['Int']>,
   offset7?: Maybe<Scalars['Int']>,
-  filter11?: Maybe<ProjectFilter>,
-  filter12?: Maybe<WorkerFilter>,
-  order8?: Maybe<WorkerOrder>,
+  filter10?: Maybe<TagFilter>,
+  order8?: Maybe<TagOrder>,
   first8?: Maybe<Scalars['Int']>,
   offset8?: Maybe<Scalars['Int']>,
+  filter11?: Maybe<ProjectFilter>,
+  filter12?: Maybe<WorkerFilter>,
+  order9?: Maybe<WorkerOrder>,
+  first9?: Maybe<Scalars['Int']>,
+  offset9?: Maybe<Scalars['Int']>,
   id: Scalars['ID']
 };
 
@@ -5472,10 +5632,10 @@ export type GetTagQuery = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: (
+          ), user: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          ), tags: Maybe<Array<Maybe<(
+          )>>>, tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
           )>>>, tasks: Maybe<Array<Maybe<(
@@ -5510,85 +5670,91 @@ export type GetTaskQueryVariables = {
   filter3?: Maybe<ProjectFilter>,
   filter4?: Maybe<ProjectFilter>,
   filter5?: Maybe<UserFilter>,
-  filter6?: Maybe<TagFilter>,
-  order3?: Maybe<TagOrder>,
+  order3?: Maybe<UserOrder>,
   first3?: Maybe<Scalars['Int']>,
   offset3?: Maybe<Scalars['Int']>,
-  filter7?: Maybe<TaskFilter>,
-  order4?: Maybe<TaskOrder>,
+  filter6?: Maybe<TagFilter>,
+  order4?: Maybe<TagOrder>,
   first4?: Maybe<Scalars['Int']>,
   offset4?: Maybe<Scalars['Int']>,
-  filter8?: Maybe<TaskFilter>,
+  filter7?: Maybe<TaskFilter>,
   order5?: Maybe<TaskOrder>,
   first5?: Maybe<Scalars['Int']>,
   offset5?: Maybe<Scalars['Int']>,
-  filter9?: Maybe<WorkerFilter>,
-  order6?: Maybe<WorkerOrder>,
+  filter8?: Maybe<TaskFilter>,
+  order6?: Maybe<TaskOrder>,
   first6?: Maybe<Scalars['Int']>,
   offset6?: Maybe<Scalars['Int']>,
-  filter10?: Maybe<TagFilter>,
-  order7?: Maybe<TagOrder>,
+  filter9?: Maybe<WorkerFilter>,
+  order7?: Maybe<WorkerOrder>,
   first7?: Maybe<Scalars['Int']>,
   offset7?: Maybe<Scalars['Int']>,
+  filter10?: Maybe<TagFilter>,
+  order8?: Maybe<TagOrder>,
+  first8?: Maybe<Scalars['Int']>,
+  offset8?: Maybe<Scalars['Int']>,
   filter11?: Maybe<ProjectFilter>,
   filter12?: Maybe<ProjectFilter>,
   filter13?: Maybe<BoardFilter>,
   filter14?: Maybe<TaskFilter>,
-  order8?: Maybe<TaskOrder>,
-  first8?: Maybe<Scalars['Int']>,
-  offset8?: Maybe<Scalars['Int']>,
-  filter15?: Maybe<ColumnFilter>,
-  order9?: Maybe<ColumnOrder>,
+  order9?: Maybe<TaskOrder>,
   first9?: Maybe<Scalars['Int']>,
   offset9?: Maybe<Scalars['Int']>,
+  filter15?: Maybe<ColumnFilter>,
+  order10?: Maybe<ColumnOrder>,
+  first10?: Maybe<Scalars['Int']>,
+  offset10?: Maybe<Scalars['Int']>,
   filter16?: Maybe<BoardFilter>,
   filter17?: Maybe<ProjectFilter>,
   filter18?: Maybe<ColumnFilter>,
   filter19?: Maybe<WorkerFilter>,
-  order10?: Maybe<WorkerOrder>,
-  first10?: Maybe<Scalars['Int']>,
-  offset10?: Maybe<Scalars['Int']>,
-  filter20?: Maybe<ProjectFilter>,
-  filter21?: Maybe<UserFilter>,
-  filter22?: Maybe<TagFilter>,
-  order11?: Maybe<TagOrder>,
+  order11?: Maybe<WorkerOrder>,
   first11?: Maybe<Scalars['Int']>,
   offset11?: Maybe<Scalars['Int']>,
-  filter23?: Maybe<TaskFilter>,
-  order12?: Maybe<TaskOrder>,
+  filter20?: Maybe<ProjectFilter>,
+  filter21?: Maybe<UserFilter>,
+  order12?: Maybe<UserOrder>,
   first12?: Maybe<Scalars['Int']>,
   offset12?: Maybe<Scalars['Int']>,
-  filter24?: Maybe<TaskFilter>,
-  order13?: Maybe<TaskOrder>,
+  filter22?: Maybe<TagFilter>,
+  order13?: Maybe<TagOrder>,
   first13?: Maybe<Scalars['Int']>,
   offset13?: Maybe<Scalars['Int']>,
-  filter25?: Maybe<WorkerFilter>,
-  order14?: Maybe<WorkerOrder>,
+  filter23?: Maybe<TaskFilter>,
+  order14?: Maybe<TaskOrder>,
   first14?: Maybe<Scalars['Int']>,
   offset14?: Maybe<Scalars['Int']>,
+  filter24?: Maybe<TaskFilter>,
+  order15?: Maybe<TaskOrder>,
+  first15?: Maybe<Scalars['Int']>,
+  offset15?: Maybe<Scalars['Int']>,
+  filter25?: Maybe<WorkerFilter>,
+  order16?: Maybe<WorkerOrder>,
+  first16?: Maybe<Scalars['Int']>,
+  offset16?: Maybe<Scalars['Int']>,
   filter26?: Maybe<TaskFilter>,
   filter27?: Maybe<WorkerFilter>,
   filter28?: Maybe<CommentFilter>,
-  order15?: Maybe<CommentOrder>,
-  first15?: Maybe<Scalars['Int']>,
-  offset15?: Maybe<Scalars['Int']>,
-  filter29?: Maybe<TaskFilter>,
-  order16?: Maybe<TaskOrder>,
-  first16?: Maybe<Scalars['Int']>,
-  offset16?: Maybe<Scalars['Int']>,
-  filter30?: Maybe<ColumnFilter>,
-  filter31?: Maybe<WorkerFilter>,
-  order17?: Maybe<WorkerOrder>,
+  order17?: Maybe<CommentOrder>,
   first17?: Maybe<Scalars['Int']>,
   offset17?: Maybe<Scalars['Int']>,
-  filter32?: Maybe<WorkerFilter>,
-  order18?: Maybe<WorkerOrder>,
+  filter29?: Maybe<TaskFilter>,
+  order18?: Maybe<TaskOrder>,
   first18?: Maybe<Scalars['Int']>,
   offset18?: Maybe<Scalars['Int']>,
-  filter33?: Maybe<CommentFilter>,
-  order19?: Maybe<CommentOrder>,
+  filter30?: Maybe<ColumnFilter>,
+  filter31?: Maybe<WorkerFilter>,
+  order19?: Maybe<WorkerOrder>,
   first19?: Maybe<Scalars['Int']>,
   offset19?: Maybe<Scalars['Int']>,
+  filter32?: Maybe<WorkerFilter>,
+  order20?: Maybe<WorkerOrder>,
+  first20?: Maybe<Scalars['Int']>,
+  offset20?: Maybe<Scalars['Int']>,
+  filter33?: Maybe<CommentFilter>,
+  order21?: Maybe<CommentOrder>,
+  first21?: Maybe<Scalars['Int']>,
+  offset21?: Maybe<Scalars['Int']>,
   id: Scalars['ID']
 };
 
@@ -5623,10 +5789,10 @@ export type GetTaskQuery = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: (
+          ), user: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          ), tags: Maybe<Array<Maybe<(
+          )>>>, tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
           )>>>, tasks: Maybe<Array<Maybe<(
@@ -5638,7 +5804,7 @@ export type GetTaskQuery = (
           )>>> }
         )>>> }
       )>>> }
-    ), column: (
+    ), column: Maybe<(
       { __typename?: 'Column' }
       & Pick<Column, 'id' | 'title'>
       & { board: (
@@ -5664,10 +5830,10 @@ export type GetTaskQuery = (
         & { project: (
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
-        ), column: (
+        ), column: Maybe<(
           { __typename?: 'Column' }
           & Pick<Column, 'id' | 'title'>
-        ), workers: Maybe<Array<Maybe<(
+        )>, workers: Maybe<Array<Maybe<(
           { __typename?: 'Worker' }
           & Pick<Worker, 'id' | 'name' | 'availability'>
         )>>>, likes: Maybe<Array<Maybe<(
@@ -5676,10 +5842,10 @@ export type GetTaskQuery = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: (
+          ), user: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          ), tags: Maybe<Array<Maybe<(
+          )>>>, tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
           )>>>, tasks: Maybe<Array<Maybe<(
@@ -5701,7 +5867,7 @@ export type GetTaskQuery = (
           ) }
         )>>> }
       )>>> }
-    ), workers: Maybe<Array<Maybe<(
+    )>, workers: Maybe<Array<Maybe<(
       { __typename?: 'Worker' }
       & Pick<Worker, 'id' | 'name' | 'availability'>
     )>>>, likes: Maybe<Array<Maybe<(
@@ -5753,66 +5919,72 @@ export type GetUserQueryVariables = {
   offset7?: Maybe<Scalars['Int']>,
   filter12?: Maybe<ProjectFilter>,
   filter13?: Maybe<UserFilter>,
-  filter14?: Maybe<TagFilter>,
-  order8?: Maybe<TagOrder>,
+  order8?: Maybe<UserOrder>,
   first8?: Maybe<Scalars['Int']>,
   offset8?: Maybe<Scalars['Int']>,
-  filter15?: Maybe<TaskFilter>,
-  order9?: Maybe<TaskOrder>,
+  filter14?: Maybe<TagFilter>,
+  order9?: Maybe<TagOrder>,
   first9?: Maybe<Scalars['Int']>,
   offset9?: Maybe<Scalars['Int']>,
-  filter16?: Maybe<TaskFilter>,
+  filter15?: Maybe<TaskFilter>,
   order10?: Maybe<TaskOrder>,
   first10?: Maybe<Scalars['Int']>,
   offset10?: Maybe<Scalars['Int']>,
-  filter17?: Maybe<WorkerFilter>,
-  order11?: Maybe<WorkerOrder>,
+  filter16?: Maybe<TaskFilter>,
+  order11?: Maybe<TaskOrder>,
   first11?: Maybe<Scalars['Int']>,
   offset11?: Maybe<Scalars['Int']>,
-  filter18?: Maybe<ProjectFilter>,
-  filter19?: Maybe<TagFilter>,
-  order12?: Maybe<TagOrder>,
+  filter17?: Maybe<WorkerFilter>,
+  order12?: Maybe<WorkerOrder>,
   first12?: Maybe<Scalars['Int']>,
   offset12?: Maybe<Scalars['Int']>,
-  filter20?: Maybe<TaskFilter>,
-  order13?: Maybe<TaskOrder>,
+  filter18?: Maybe<ProjectFilter>,
+  filter19?: Maybe<TagFilter>,
+  order13?: Maybe<TagOrder>,
   first13?: Maybe<Scalars['Int']>,
   offset13?: Maybe<Scalars['Int']>,
-  filter21?: Maybe<TaskFilter>,
+  filter20?: Maybe<TaskFilter>,
   order14?: Maybe<TaskOrder>,
   first14?: Maybe<Scalars['Int']>,
   offset14?: Maybe<Scalars['Int']>,
-  filter22?: Maybe<WorkerFilter>,
-  order15?: Maybe<WorkerOrder>,
+  filter21?: Maybe<TaskFilter>,
+  order15?: Maybe<TaskOrder>,
   first15?: Maybe<Scalars['Int']>,
   offset15?: Maybe<Scalars['Int']>,
-  filter23?: Maybe<ProjectFilter>,
-  filter24?: Maybe<ColumnFilter>,
-  filter25?: Maybe<WorkerFilter>,
+  filter22?: Maybe<WorkerFilter>,
   order16?: Maybe<WorkerOrder>,
   first16?: Maybe<Scalars['Int']>,
   offset16?: Maybe<Scalars['Int']>,
-  filter26?: Maybe<WorkerFilter>,
+  filter23?: Maybe<ProjectFilter>,
+  filter24?: Maybe<ColumnFilter>,
+  filter25?: Maybe<WorkerFilter>,
   order17?: Maybe<WorkerOrder>,
   first17?: Maybe<Scalars['Int']>,
   offset17?: Maybe<Scalars['Int']>,
-  filter27?: Maybe<CommentFilter>,
-  order18?: Maybe<CommentOrder>,
+  filter26?: Maybe<WorkerFilter>,
+  order18?: Maybe<WorkerOrder>,
   first18?: Maybe<Scalars['Int']>,
   offset18?: Maybe<Scalars['Int']>,
-  filter28?: Maybe<TaskFilter>,
-  order19?: Maybe<TaskOrder>,
+  filter27?: Maybe<CommentFilter>,
+  order19?: Maybe<CommentOrder>,
   first19?: Maybe<Scalars['Int']>,
   offset19?: Maybe<Scalars['Int']>,
-  filter29?: Maybe<UserFilter>,
-  filter30?: Maybe<WorkerFilter>,
-  order20?: Maybe<WorkerOrder>,
+  filter28?: Maybe<TaskFilter>,
+  order20?: Maybe<TaskOrder>,
   first20?: Maybe<Scalars['Int']>,
   offset20?: Maybe<Scalars['Int']>,
-  filter31?: Maybe<TaskFilter>,
-  order21?: Maybe<TaskOrder>,
+  filter29?: Maybe<UserFilter>,
+  order21?: Maybe<UserOrder>,
   first21?: Maybe<Scalars['Int']>,
   offset21?: Maybe<Scalars['Int']>,
+  filter30?: Maybe<WorkerFilter>,
+  order22?: Maybe<WorkerOrder>,
+  first22?: Maybe<Scalars['Int']>,
+  offset22?: Maybe<Scalars['Int']>,
+  filter31?: Maybe<TaskFilter>,
+  order23?: Maybe<TaskOrder>,
+  first23?: Maybe<Scalars['Int']>,
+  offset23?: Maybe<Scalars['Int']>,
   id: Scalars['ID']
 };
 
@@ -5844,10 +6016,10 @@ export type GetUserQuery = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: (
+          ), column: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          ), workers: Maybe<Array<Maybe<(
+          )>, workers: Maybe<Array<Maybe<(
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
           )>>>, likes: Maybe<Array<Maybe<(
@@ -5873,10 +6045,10 @@ export type GetUserQuery = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: (
+          ), user: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          ), tags: Maybe<Array<Maybe<(
+          )>>>, tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
           )>>>, tasks: Maybe<Array<Maybe<(
@@ -5887,7 +6059,7 @@ export type GetUserQuery = (
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
         )>>> }
-      ), user: (
+      ), user: Maybe<Array<Maybe<(
         { __typename?: 'User' }
         & Pick<User, 'id' | 'username' | 'password' | 'location'>
         & { roles: Maybe<Array<Maybe<(
@@ -5909,10 +6081,10 @@ export type GetUserQuery = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: (
+          ), column: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          ), workers: Maybe<Array<Maybe<(
+          )>, workers: Maybe<Array<Maybe<(
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
           )>>>, likes: Maybe<Array<Maybe<(
@@ -5923,7 +6095,7 @@ export type GetUserQuery = (
             & Pick<Comment, 'id' | 'content'>
           )>>> }
         )>>> }
-      ) }
+      )>>> }
     )>>>, stars: Maybe<Array<Maybe<(
       { __typename?: 'Task' }
       & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
@@ -5947,90 +6119,99 @@ export type GetWorkerQueryVariables = {
   filter3?: Maybe<ProjectFilter>,
   filter4?: Maybe<ProjectFilter>,
   filter5?: Maybe<UserFilter>,
-  filter6?: Maybe<TagFilter>,
-  order3?: Maybe<TagOrder>,
+  order3?: Maybe<UserOrder>,
   first3?: Maybe<Scalars['Int']>,
   offset3?: Maybe<Scalars['Int']>,
-  filter7?: Maybe<TaskFilter>,
-  order4?: Maybe<TaskOrder>,
+  filter6?: Maybe<TagFilter>,
+  order4?: Maybe<TagOrder>,
   first4?: Maybe<Scalars['Int']>,
   offset4?: Maybe<Scalars['Int']>,
-  filter8?: Maybe<TaskFilter>,
+  filter7?: Maybe<TaskFilter>,
   order5?: Maybe<TaskOrder>,
   first5?: Maybe<Scalars['Int']>,
   offset5?: Maybe<Scalars['Int']>,
-  filter9?: Maybe<WorkerFilter>,
-  order6?: Maybe<WorkerOrder>,
+  filter8?: Maybe<TaskFilter>,
+  order6?: Maybe<TaskOrder>,
   first6?: Maybe<Scalars['Int']>,
   offset6?: Maybe<Scalars['Int']>,
-  filter10?: Maybe<TagFilter>,
-  order7?: Maybe<TagOrder>,
+  filter9?: Maybe<WorkerFilter>,
+  order7?: Maybe<WorkerOrder>,
   first7?: Maybe<Scalars['Int']>,
   offset7?: Maybe<Scalars['Int']>,
+  filter10?: Maybe<TagFilter>,
+  order8?: Maybe<TagOrder>,
+  first8?: Maybe<Scalars['Int']>,
+  offset8?: Maybe<Scalars['Int']>,
   filter11?: Maybe<ProjectFilter>,
   filter12?: Maybe<ProjectFilter>,
   filter13?: Maybe<TaskFilter>,
-  order8?: Maybe<TaskOrder>,
-  first8?: Maybe<Scalars['Int']>,
-  offset8?: Maybe<Scalars['Int']>,
-  filter14?: Maybe<UserFilter>,
-  filter15?: Maybe<TagFilter>,
-  order9?: Maybe<TagOrder>,
+  order9?: Maybe<TaskOrder>,
   first9?: Maybe<Scalars['Int']>,
   offset9?: Maybe<Scalars['Int']>,
+  filter14?: Maybe<UserFilter>,
+  order10?: Maybe<UserOrder>,
+  first10?: Maybe<Scalars['Int']>,
+  offset10?: Maybe<Scalars['Int']>,
+  filter15?: Maybe<TagFilter>,
+  order11?: Maybe<TagOrder>,
+  first11?: Maybe<Scalars['Int']>,
+  offset11?: Maybe<Scalars['Int']>,
   filter16?: Maybe<ProjectFilter>,
   filter17?: Maybe<ColumnFilter>,
   filter18?: Maybe<WorkerFilter>,
-  order10?: Maybe<WorkerOrder>,
-  first10?: Maybe<Scalars['Int']>,
-  offset10?: Maybe<Scalars['Int']>,
-  filter19?: Maybe<WorkerFilter>,
-  order11?: Maybe<WorkerOrder>,
-  first11?: Maybe<Scalars['Int']>,
-  offset11?: Maybe<Scalars['Int']>,
-  filter20?: Maybe<CommentFilter>,
-  order12?: Maybe<CommentOrder>,
+  order12?: Maybe<WorkerOrder>,
   first12?: Maybe<Scalars['Int']>,
   offset12?: Maybe<Scalars['Int']>,
-  filter21?: Maybe<TaskFilter>,
-  order13?: Maybe<TaskOrder>,
+  filter19?: Maybe<WorkerFilter>,
+  order13?: Maybe<WorkerOrder>,
   first13?: Maybe<Scalars['Int']>,
   offset13?: Maybe<Scalars['Int']>,
+  filter20?: Maybe<CommentFilter>,
+  order14?: Maybe<CommentOrder>,
+  first14?: Maybe<Scalars['Int']>,
+  offset14?: Maybe<Scalars['Int']>,
+  filter21?: Maybe<TaskFilter>,
+  order15?: Maybe<TaskOrder>,
+  first15?: Maybe<Scalars['Int']>,
+  offset15?: Maybe<Scalars['Int']>,
   filter22?: Maybe<ProjectFilter>,
   filter23?: Maybe<ColumnFilter>,
   filter24?: Maybe<WorkerFilter>,
-  order14?: Maybe<WorkerOrder>,
-  first14?: Maybe<Scalars['Int']>,
-  offset14?: Maybe<Scalars['Int']>,
-  filter25?: Maybe<WorkerFilter>,
-  order15?: Maybe<WorkerOrder>,
-  first15?: Maybe<Scalars['Int']>,
-  offset15?: Maybe<Scalars['Int']>,
-  filter26?: Maybe<CommentFilter>,
-  order16?: Maybe<CommentOrder>,
+  order16?: Maybe<WorkerOrder>,
   first16?: Maybe<Scalars['Int']>,
   offset16?: Maybe<Scalars['Int']>,
-  filter27?: Maybe<TaskFilter>,
-  order17?: Maybe<TaskOrder>,
+  filter25?: Maybe<WorkerFilter>,
+  order17?: Maybe<WorkerOrder>,
   first17?: Maybe<Scalars['Int']>,
   offset17?: Maybe<Scalars['Int']>,
-  filter28?: Maybe<WorkerFilter>,
-  order18?: Maybe<WorkerOrder>,
+  filter26?: Maybe<CommentFilter>,
+  order18?: Maybe<CommentOrder>,
   first18?: Maybe<Scalars['Int']>,
   offset18?: Maybe<Scalars['Int']>,
-  filter29?: Maybe<UserFilter>,
-  filter30?: Maybe<TagFilter>,
-  order19?: Maybe<TagOrder>,
+  filter27?: Maybe<TaskFilter>,
+  order19?: Maybe<TaskOrder>,
   first19?: Maybe<Scalars['Int']>,
   offset19?: Maybe<Scalars['Int']>,
-  filter31?: Maybe<TaskFilter>,
-  order20?: Maybe<TaskOrder>,
+  filter28?: Maybe<WorkerFilter>,
+  order20?: Maybe<WorkerOrder>,
   first20?: Maybe<Scalars['Int']>,
   offset20?: Maybe<Scalars['Int']>,
-  filter32?: Maybe<TaskFilter>,
-  order21?: Maybe<TaskOrder>,
+  filter29?: Maybe<UserFilter>,
+  order21?: Maybe<UserOrder>,
   first21?: Maybe<Scalars['Int']>,
   offset21?: Maybe<Scalars['Int']>,
+  filter30?: Maybe<TagFilter>,
+  order22?: Maybe<TagOrder>,
+  first22?: Maybe<Scalars['Int']>,
+  offset22?: Maybe<Scalars['Int']>,
+  filter31?: Maybe<TaskFilter>,
+  order23?: Maybe<TaskOrder>,
+  first23?: Maybe<Scalars['Int']>,
+  offset23?: Maybe<Scalars['Int']>,
+  filter32?: Maybe<TaskFilter>,
+  order24?: Maybe<TaskOrder>,
+  first24?: Maybe<Scalars['Int']>,
+  offset24?: Maybe<Scalars['Int']>,
   id: Scalars['ID']
 };
 
@@ -6065,10 +6246,10 @@ export type GetWorkerQuery = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: (
+          ), user: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          ), tags: Maybe<Array<Maybe<(
+          )>>>, tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
           )>>>, tasks: Maybe<Array<Maybe<(
@@ -6080,7 +6261,7 @@ export type GetWorkerQuery = (
           )>>> }
         )>>> }
       )>>> }
-    ), user: (
+    ), user: Maybe<Array<Maybe<(
       { __typename?: 'User' }
       & Pick<User, 'id' | 'username' | 'password' | 'location'>
       & { roles: Maybe<Array<Maybe<(
@@ -6089,14 +6270,14 @@ export type GetWorkerQuery = (
         & { project: (
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
-        ), user: (
+        ), user: Maybe<Array<Maybe<(
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
           & { stars: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        ), tags: Maybe<Array<Maybe<(
+        )>>>, tags: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
         )>>>, tasks: Maybe<Array<Maybe<(
@@ -6105,10 +6286,10 @@ export type GetWorkerQuery = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: (
+          ), column: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          ), workers: Maybe<Array<Maybe<(
+          )>, workers: Maybe<Array<Maybe<(
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
           )>>>, likes: Maybe<Array<Maybe<(
@@ -6124,10 +6305,10 @@ export type GetWorkerQuery = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: (
+          ), column: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          ), workers: Maybe<Array<Maybe<(
+          )>, workers: Maybe<Array<Maybe<(
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
           )>>>, likes: Maybe<Array<Maybe<(
@@ -6139,7 +6320,7 @@ export type GetWorkerQuery = (
           )>>> }
         )>>> }
       )>>> }
-    ), tags: Maybe<Array<Maybe<(
+    )>>>, tags: Maybe<Array<Maybe<(
       { __typename?: 'Tag' }
       & Pick<Tag, 'id' | 'title'>
     )>>>, tasks: Maybe<Array<Maybe<(
@@ -6168,45 +6349,48 @@ export type QueryBoardQueryVariables = {
   filter3?: Maybe<ProjectFilter>,
   filter4?: Maybe<ProjectFilter>,
   filter5?: Maybe<UserFilter>,
-  filter6?: Maybe<TagFilter>,
-  order3?: Maybe<TagOrder>,
+  order3?: Maybe<UserOrder>,
   first3?: Maybe<Scalars['Int']>,
   offset3?: Maybe<Scalars['Int']>,
-  filter7?: Maybe<TaskFilter>,
-  order4?: Maybe<TaskOrder>,
+  filter6?: Maybe<TagFilter>,
+  order4?: Maybe<TagOrder>,
   first4?: Maybe<Scalars['Int']>,
   offset4?: Maybe<Scalars['Int']>,
-  filter8?: Maybe<TaskFilter>,
+  filter7?: Maybe<TaskFilter>,
   order5?: Maybe<TaskOrder>,
   first5?: Maybe<Scalars['Int']>,
   offset5?: Maybe<Scalars['Int']>,
-  filter9?: Maybe<WorkerFilter>,
-  order6?: Maybe<WorkerOrder>,
+  filter8?: Maybe<TaskFilter>,
+  order6?: Maybe<TaskOrder>,
   first6?: Maybe<Scalars['Int']>,
   offset6?: Maybe<Scalars['Int']>,
-  filter10?: Maybe<TagFilter>,
-  order7?: Maybe<TagOrder>,
+  filter9?: Maybe<WorkerFilter>,
+  order7?: Maybe<WorkerOrder>,
   first7?: Maybe<Scalars['Int']>,
   offset7?: Maybe<Scalars['Int']>,
+  filter10?: Maybe<TagFilter>,
+  order8?: Maybe<TagOrder>,
+  first8?: Maybe<Scalars['Int']>,
+  offset8?: Maybe<Scalars['Int']>,
   filter11?: Maybe<ProjectFilter>,
   filter12?: Maybe<ProjectFilter>,
   filter13?: Maybe<TaskFilter>,
-  order8?: Maybe<TaskOrder>,
-  first8?: Maybe<Scalars['Int']>,
-  offset8?: Maybe<Scalars['Int']>,
-  filter14?: Maybe<ColumnFilter>,
-  order9?: Maybe<ColumnOrder>,
+  order9?: Maybe<TaskOrder>,
   first9?: Maybe<Scalars['Int']>,
   offset9?: Maybe<Scalars['Int']>,
-  filter15?: Maybe<BoardFilter>,
-  filter16?: Maybe<ColumnFilter>,
+  filter14?: Maybe<ColumnFilter>,
   order10?: Maybe<ColumnOrder>,
   first10?: Maybe<Scalars['Int']>,
   offset10?: Maybe<Scalars['Int']>,
-  filter17?: Maybe<BoardFilter>,
-  order11?: Maybe<BoardOrder>,
+  filter15?: Maybe<BoardFilter>,
+  filter16?: Maybe<ColumnFilter>,
+  order11?: Maybe<ColumnOrder>,
   first11?: Maybe<Scalars['Int']>,
-  offset11?: Maybe<Scalars['Int']>
+  offset11?: Maybe<Scalars['Int']>,
+  filter17?: Maybe<BoardFilter>,
+  order12?: Maybe<BoardOrder>,
+  first12?: Maybe<Scalars['Int']>,
+  offset12?: Maybe<Scalars['Int']>
 };
 
 
@@ -6240,10 +6424,10 @@ export type QueryBoardQuery = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: (
+          ), user: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          ), tags: Maybe<Array<Maybe<(
+          )>>>, tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
           )>>>, tasks: Maybe<Array<Maybe<(
@@ -6316,41 +6500,44 @@ export type QueryColumnQueryVariables = {
   offset7?: Maybe<Scalars['Int']>,
   filter12?: Maybe<ProjectFilter>,
   filter13?: Maybe<UserFilter>,
-  filter14?: Maybe<TagFilter>,
-  order8?: Maybe<TagOrder>,
+  order8?: Maybe<UserOrder>,
   first8?: Maybe<Scalars['Int']>,
   offset8?: Maybe<Scalars['Int']>,
-  filter15?: Maybe<TaskFilter>,
-  order9?: Maybe<TaskOrder>,
+  filter14?: Maybe<TagFilter>,
+  order9?: Maybe<TagOrder>,
   first9?: Maybe<Scalars['Int']>,
   offset9?: Maybe<Scalars['Int']>,
-  filter16?: Maybe<TaskFilter>,
+  filter15?: Maybe<TaskFilter>,
   order10?: Maybe<TaskOrder>,
   first10?: Maybe<Scalars['Int']>,
   offset10?: Maybe<Scalars['Int']>,
-  filter17?: Maybe<WorkerFilter>,
-  order11?: Maybe<WorkerOrder>,
+  filter16?: Maybe<TaskFilter>,
+  order11?: Maybe<TaskOrder>,
   first11?: Maybe<Scalars['Int']>,
   offset11?: Maybe<Scalars['Int']>,
+  filter17?: Maybe<WorkerFilter>,
+  order12?: Maybe<WorkerOrder>,
+  first12?: Maybe<Scalars['Int']>,
+  offset12?: Maybe<Scalars['Int']>,
   filter18?: Maybe<ProjectFilter>,
   filter19?: Maybe<BoardFilter>,
   filter20?: Maybe<TaskFilter>,
-  order12?: Maybe<TaskOrder>,
-  first12?: Maybe<Scalars['Int']>,
-  offset12?: Maybe<Scalars['Int']>,
-  filter21?: Maybe<ColumnFilter>,
-  order13?: Maybe<ColumnOrder>,
+  order13?: Maybe<TaskOrder>,
   first13?: Maybe<Scalars['Int']>,
   offset13?: Maybe<Scalars['Int']>,
-  filter22?: Maybe<BoardFilter>,
-  filter23?: Maybe<TaskFilter>,
-  order14?: Maybe<TaskOrder>,
+  filter21?: Maybe<ColumnFilter>,
+  order14?: Maybe<ColumnOrder>,
   first14?: Maybe<Scalars['Int']>,
   offset14?: Maybe<Scalars['Int']>,
-  filter24?: Maybe<ColumnFilter>,
-  order15?: Maybe<ColumnOrder>,
+  filter22?: Maybe<BoardFilter>,
+  filter23?: Maybe<TaskFilter>,
+  order15?: Maybe<TaskOrder>,
   first15?: Maybe<Scalars['Int']>,
-  offset15?: Maybe<Scalars['Int']>
+  offset15?: Maybe<Scalars['Int']>,
+  filter24?: Maybe<ColumnFilter>,
+  order16?: Maybe<ColumnOrder>,
+  first16?: Maybe<Scalars['Int']>,
+  offset16?: Maybe<Scalars['Int']>
 };
 
 
@@ -6381,10 +6568,10 @@ export type QueryColumnQuery = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: (
+          ), column: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          ), workers: Maybe<Array<Maybe<(
+          )>, workers: Maybe<Array<Maybe<(
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
           )>>>, likes: Maybe<Array<Maybe<(
@@ -6410,10 +6597,10 @@ export type QueryColumnQuery = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: (
+          ), user: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          ), tags: Maybe<Array<Maybe<(
+          )>>>, tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
           )>>>, tasks: Maybe<Array<Maybe<(
@@ -6481,104 +6668,113 @@ export type QueryCommentQueryVariables = {
   offset7?: Maybe<Scalars['Int']>,
   filter12?: Maybe<ProjectFilter>,
   filter13?: Maybe<UserFilter>,
-  filter14?: Maybe<TagFilter>,
-  order8?: Maybe<TagOrder>,
+  order8?: Maybe<UserOrder>,
   first8?: Maybe<Scalars['Int']>,
   offset8?: Maybe<Scalars['Int']>,
-  filter15?: Maybe<TaskFilter>,
-  order9?: Maybe<TaskOrder>,
+  filter14?: Maybe<TagFilter>,
+  order9?: Maybe<TagOrder>,
   first9?: Maybe<Scalars['Int']>,
   offset9?: Maybe<Scalars['Int']>,
-  filter16?: Maybe<TaskFilter>,
+  filter15?: Maybe<TaskFilter>,
   order10?: Maybe<TaskOrder>,
   first10?: Maybe<Scalars['Int']>,
   offset10?: Maybe<Scalars['Int']>,
-  filter17?: Maybe<WorkerFilter>,
-  order11?: Maybe<WorkerOrder>,
+  filter16?: Maybe<TaskFilter>,
+  order11?: Maybe<TaskOrder>,
   first11?: Maybe<Scalars['Int']>,
   offset11?: Maybe<Scalars['Int']>,
+  filter17?: Maybe<WorkerFilter>,
+  order12?: Maybe<WorkerOrder>,
+  first12?: Maybe<Scalars['Int']>,
+  offset12?: Maybe<Scalars['Int']>,
   filter18?: Maybe<ProjectFilter>,
   filter19?: Maybe<ProjectFilter>,
   filter20?: Maybe<ColumnFilter>,
-  order12?: Maybe<ColumnOrder>,
-  first12?: Maybe<Scalars['Int']>,
-  offset12?: Maybe<Scalars['Int']>,
-  filter21?: Maybe<BoardFilter>,
-  filter22?: Maybe<TaskFilter>,
-  order13?: Maybe<TaskOrder>,
+  order13?: Maybe<ColumnOrder>,
   first13?: Maybe<Scalars['Int']>,
   offset13?: Maybe<Scalars['Int']>,
-  filter23?: Maybe<ColumnFilter>,
-  filter24?: Maybe<WorkerFilter>,
-  order14?: Maybe<WorkerOrder>,
+  filter21?: Maybe<BoardFilter>,
+  filter22?: Maybe<TaskFilter>,
+  order14?: Maybe<TaskOrder>,
   first14?: Maybe<Scalars['Int']>,
   offset14?: Maybe<Scalars['Int']>,
-  filter25?: Maybe<ProjectFilter>,
-  filter26?: Maybe<WorkerFilter>,
+  filter23?: Maybe<ColumnFilter>,
+  filter24?: Maybe<WorkerFilter>,
   order15?: Maybe<WorkerOrder>,
   first15?: Maybe<Scalars['Int']>,
   offset15?: Maybe<Scalars['Int']>,
-  filter27?: Maybe<TaskFilter>,
-  order16?: Maybe<TaskOrder>,
+  filter25?: Maybe<ProjectFilter>,
+  filter26?: Maybe<WorkerFilter>,
+  order16?: Maybe<WorkerOrder>,
   first16?: Maybe<Scalars['Int']>,
   offset16?: Maybe<Scalars['Int']>,
-  filter28?: Maybe<UserFilter>,
-  filter29?: Maybe<TagFilter>,
-  order17?: Maybe<TagOrder>,
+  filter27?: Maybe<TaskFilter>,
+  order17?: Maybe<TaskOrder>,
   first17?: Maybe<Scalars['Int']>,
   offset17?: Maybe<Scalars['Int']>,
-  filter30?: Maybe<TaskFilter>,
-  order18?: Maybe<TaskOrder>,
+  filter28?: Maybe<UserFilter>,
+  order18?: Maybe<UserOrder>,
   first18?: Maybe<Scalars['Int']>,
   offset18?: Maybe<Scalars['Int']>,
+  filter29?: Maybe<TagFilter>,
+  order19?: Maybe<TagOrder>,
+  first19?: Maybe<Scalars['Int']>,
+  offset19?: Maybe<Scalars['Int']>,
+  filter30?: Maybe<TaskFilter>,
+  order20?: Maybe<TaskOrder>,
+  first20?: Maybe<Scalars['Int']>,
+  offset20?: Maybe<Scalars['Int']>,
   filter31?: Maybe<ProjectFilter>,
   filter32?: Maybe<ColumnFilter>,
   filter33?: Maybe<WorkerFilter>,
-  order19?: Maybe<WorkerOrder>,
-  first19?: Maybe<Scalars['Int']>,
-  offset19?: Maybe<Scalars['Int']>,
-  filter34?: Maybe<WorkerFilter>,
-  order20?: Maybe<WorkerOrder>,
-  first20?: Maybe<Scalars['Int']>,
-  offset20?: Maybe<Scalars['Int']>,
-  filter35?: Maybe<CommentFilter>,
-  order21?: Maybe<CommentOrder>,
+  order21?: Maybe<WorkerOrder>,
   first21?: Maybe<Scalars['Int']>,
   offset21?: Maybe<Scalars['Int']>,
-  filter36?: Maybe<TaskFilter>,
-  order22?: Maybe<TaskOrder>,
+  filter34?: Maybe<WorkerFilter>,
+  order22?: Maybe<WorkerOrder>,
   first22?: Maybe<Scalars['Int']>,
   offset22?: Maybe<Scalars['Int']>,
-  filter37?: Maybe<WorkerFilter>,
-  order23?: Maybe<WorkerOrder>,
+  filter35?: Maybe<CommentFilter>,
+  order23?: Maybe<CommentOrder>,
   first23?: Maybe<Scalars['Int']>,
   offset23?: Maybe<Scalars['Int']>,
+  filter36?: Maybe<TaskFilter>,
+  order24?: Maybe<TaskOrder>,
+  first24?: Maybe<Scalars['Int']>,
+  offset24?: Maybe<Scalars['Int']>,
+  filter37?: Maybe<WorkerFilter>,
+  order25?: Maybe<WorkerOrder>,
+  first25?: Maybe<Scalars['Int']>,
+  offset25?: Maybe<Scalars['Int']>,
   filter38?: Maybe<TaskFilter>,
   filter39?: Maybe<ProjectFilter>,
   filter40?: Maybe<UserFilter>,
-  filter41?: Maybe<TagFilter>,
-  order24?: Maybe<TagOrder>,
-  first24?: Maybe<Scalars['Int']>,
-  offset24?: Maybe<Scalars['Int']>,
-  filter42?: Maybe<TaskFilter>,
-  order25?: Maybe<TaskOrder>,
-  first25?: Maybe<Scalars['Int']>,
-  offset25?: Maybe<Scalars['Int']>,
-  filter43?: Maybe<TaskFilter>,
-  order26?: Maybe<TaskOrder>,
+  order26?: Maybe<UserOrder>,
   first26?: Maybe<Scalars['Int']>,
   offset26?: Maybe<Scalars['Int']>,
-  filter44?: Maybe<WorkerFilter>,
-  filter45?: Maybe<CommentFilter>,
-  order27?: Maybe<CommentOrder>,
+  filter41?: Maybe<TagFilter>,
+  order27?: Maybe<TagOrder>,
   first27?: Maybe<Scalars['Int']>,
   offset27?: Maybe<Scalars['Int']>,
+  filter42?: Maybe<TaskFilter>,
+  order28?: Maybe<TaskOrder>,
+  first28?: Maybe<Scalars['Int']>,
+  offset28?: Maybe<Scalars['Int']>,
+  filter43?: Maybe<TaskFilter>,
+  order29?: Maybe<TaskOrder>,
+  first29?: Maybe<Scalars['Int']>,
+  offset29?: Maybe<Scalars['Int']>,
+  filter44?: Maybe<WorkerFilter>,
+  filter45?: Maybe<CommentFilter>,
+  order30?: Maybe<CommentOrder>,
+  first30?: Maybe<Scalars['Int']>,
+  offset30?: Maybe<Scalars['Int']>,
   filter46?: Maybe<TaskFilter>,
   filter47?: Maybe<WorkerFilter>,
   filter48?: Maybe<CommentFilter>,
-  order28?: Maybe<CommentOrder>,
-  first28?: Maybe<Scalars['Int']>,
-  offset28?: Maybe<Scalars['Int']>
+  order31?: Maybe<CommentOrder>,
+  first31?: Maybe<Scalars['Int']>,
+  offset31?: Maybe<Scalars['Int']>
 };
 
 
@@ -6609,10 +6805,10 @@ export type QueryCommentQuery = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: (
+          ), column: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          ), workers: Maybe<Array<Maybe<(
+          )>, workers: Maybe<Array<Maybe<(
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
           )>>>, likes: Maybe<Array<Maybe<(
@@ -6638,10 +6834,10 @@ export type QueryCommentQuery = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: (
+          ), user: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          ), tags: Maybe<Array<Maybe<(
+          )>>>, tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
           )>>>, tasks: Maybe<Array<Maybe<(
@@ -6652,7 +6848,7 @@ export type QueryCommentQuery = (
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
         )>>> }
-      ), column: (
+      ), column: Maybe<(
         { __typename?: 'Column' }
         & Pick<Column, 'id' | 'title'>
         & { board: (
@@ -6669,7 +6865,7 @@ export type QueryCommentQuery = (
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
         )>>> }
-      ), workers: Maybe<Array<Maybe<(
+      )>, workers: Maybe<Array<Maybe<(
         { __typename?: 'Worker' }
         & Pick<Worker, 'id' | 'name' | 'availability'>
       )>>>, likes: Maybe<Array<Maybe<(
@@ -6678,7 +6874,7 @@ export type QueryCommentQuery = (
         & { project: (
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
-        ), user: (
+        ), user: Maybe<Array<Maybe<(
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
           & { roles: Maybe<Array<Maybe<(
@@ -6688,7 +6884,7 @@ export type QueryCommentQuery = (
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        ), tags: Maybe<Array<Maybe<(
+        )>>>, tags: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
         )>>>, tasks: Maybe<Array<Maybe<(
@@ -6700,10 +6896,10 @@ export type QueryCommentQuery = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: (
+          ), column: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          ), workers: Maybe<Array<Maybe<(
+          )>, workers: Maybe<Array<Maybe<(
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
           )>>>, likes: Maybe<Array<Maybe<(
@@ -6726,10 +6922,10 @@ export type QueryCommentQuery = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: (
+          ), user: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          ), tags: Maybe<Array<Maybe<(
+          )>>>, tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
           )>>>, tasks: Maybe<Array<Maybe<(
@@ -6786,43 +6982,46 @@ export type QueryProjectQueryVariables = {
   offset7?: Maybe<Scalars['Int']>,
   filter11?: Maybe<ProjectFilter>,
   filter12?: Maybe<UserFilter>,
-  filter13?: Maybe<TagFilter>,
-  order8?: Maybe<TagOrder>,
+  order8?: Maybe<UserOrder>,
   first8?: Maybe<Scalars['Int']>,
   offset8?: Maybe<Scalars['Int']>,
-  filter14?: Maybe<TaskFilter>,
-  order9?: Maybe<TaskOrder>,
+  filter13?: Maybe<TagFilter>,
+  order9?: Maybe<TagOrder>,
   first9?: Maybe<Scalars['Int']>,
   offset9?: Maybe<Scalars['Int']>,
-  filter15?: Maybe<TaskFilter>,
+  filter14?: Maybe<TaskFilter>,
   order10?: Maybe<TaskOrder>,
   first10?: Maybe<Scalars['Int']>,
   offset10?: Maybe<Scalars['Int']>,
-  filter16?: Maybe<WorkerFilter>,
-  order11?: Maybe<WorkerOrder>,
+  filter15?: Maybe<TaskFilter>,
+  order11?: Maybe<TaskOrder>,
   first11?: Maybe<Scalars['Int']>,
   offset11?: Maybe<Scalars['Int']>,
-  filter17?: Maybe<ProjectFilter>,
-  filter18?: Maybe<TagFilter>,
-  order12?: Maybe<TagOrder>,
+  filter16?: Maybe<WorkerFilter>,
+  order12?: Maybe<WorkerOrder>,
   first12?: Maybe<Scalars['Int']>,
   offset12?: Maybe<Scalars['Int']>,
-  filter19?: Maybe<TaskFilter>,
-  order13?: Maybe<TaskOrder>,
+  filter17?: Maybe<ProjectFilter>,
+  filter18?: Maybe<TagFilter>,
+  order13?: Maybe<TagOrder>,
   first13?: Maybe<Scalars['Int']>,
   offset13?: Maybe<Scalars['Int']>,
-  filter20?: Maybe<BoardFilter>,
-  order14?: Maybe<BoardOrder>,
+  filter19?: Maybe<TaskFilter>,
+  order14?: Maybe<TaskOrder>,
   first14?: Maybe<Scalars['Int']>,
   offset14?: Maybe<Scalars['Int']>,
-  filter21?: Maybe<WorkerFilter>,
-  order15?: Maybe<WorkerOrder>,
+  filter20?: Maybe<BoardFilter>,
+  order15?: Maybe<BoardOrder>,
   first15?: Maybe<Scalars['Int']>,
   offset15?: Maybe<Scalars['Int']>,
-  filter22?: Maybe<ProjectFilter>,
-  order16?: Maybe<ProjectOrder>,
+  filter21?: Maybe<WorkerFilter>,
+  order16?: Maybe<WorkerOrder>,
   first16?: Maybe<Scalars['Int']>,
-  offset16?: Maybe<Scalars['Int']>
+  offset16?: Maybe<Scalars['Int']>,
+  filter22?: Maybe<ProjectFilter>,
+  order17?: Maybe<ProjectOrder>,
+  first17?: Maybe<Scalars['Int']>,
+  offset17?: Maybe<Scalars['Int']>
 };
 
 
@@ -6850,10 +7049,10 @@ export type QueryProjectQuery = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: (
+          ), column: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          ), workers: Maybe<Array<Maybe<(
+          )>, workers: Maybe<Array<Maybe<(
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
           )>>>, likes: Maybe<Array<Maybe<(
@@ -6879,10 +7078,10 @@ export type QueryProjectQuery = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: (
+          ), user: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          ), tags: Maybe<Array<Maybe<(
+          )>>>, tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
           )>>>, tasks: Maybe<Array<Maybe<(
@@ -6923,35 +7122,38 @@ export type QueryTagQueryVariables = {
   filter3?: Maybe<ProjectFilter>,
   filter4?: Maybe<ProjectFilter>,
   filter5?: Maybe<UserFilter>,
-  filter6?: Maybe<TagFilter>,
-  order3?: Maybe<TagOrder>,
+  order3?: Maybe<UserOrder>,
   first3?: Maybe<Scalars['Int']>,
   offset3?: Maybe<Scalars['Int']>,
-  filter7?: Maybe<TaskFilter>,
-  order4?: Maybe<TaskOrder>,
+  filter6?: Maybe<TagFilter>,
+  order4?: Maybe<TagOrder>,
   first4?: Maybe<Scalars['Int']>,
   offset4?: Maybe<Scalars['Int']>,
-  filter8?: Maybe<TaskFilter>,
+  filter7?: Maybe<TaskFilter>,
   order5?: Maybe<TaskOrder>,
   first5?: Maybe<Scalars['Int']>,
   offset5?: Maybe<Scalars['Int']>,
-  filter9?: Maybe<WorkerFilter>,
-  order6?: Maybe<WorkerOrder>,
+  filter8?: Maybe<TaskFilter>,
+  order6?: Maybe<TaskOrder>,
   first6?: Maybe<Scalars['Int']>,
   offset6?: Maybe<Scalars['Int']>,
-  filter10?: Maybe<TagFilter>,
-  order7?: Maybe<TagOrder>,
+  filter9?: Maybe<WorkerFilter>,
+  order7?: Maybe<WorkerOrder>,
   first7?: Maybe<Scalars['Int']>,
   offset7?: Maybe<Scalars['Int']>,
-  filter11?: Maybe<ProjectFilter>,
-  filter12?: Maybe<WorkerFilter>,
-  order8?: Maybe<WorkerOrder>,
+  filter10?: Maybe<TagFilter>,
+  order8?: Maybe<TagOrder>,
   first8?: Maybe<Scalars['Int']>,
   offset8?: Maybe<Scalars['Int']>,
-  filter13?: Maybe<TagFilter>,
-  order9?: Maybe<TagOrder>,
+  filter11?: Maybe<ProjectFilter>,
+  filter12?: Maybe<WorkerFilter>,
+  order9?: Maybe<WorkerOrder>,
   first9?: Maybe<Scalars['Int']>,
-  offset9?: Maybe<Scalars['Int']>
+  offset9?: Maybe<Scalars['Int']>,
+  filter13?: Maybe<TagFilter>,
+  order10?: Maybe<TagOrder>,
+  first10?: Maybe<Scalars['Int']>,
+  offset10?: Maybe<Scalars['Int']>
 };
 
 
@@ -6985,10 +7187,10 @@ export type QueryTagQuery = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: (
+          ), user: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          ), tags: Maybe<Array<Maybe<(
+          )>>>, tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
           )>>>, tasks: Maybe<Array<Maybe<(
@@ -7023,89 +7225,95 @@ export type QueryTaskQueryVariables = {
   filter3?: Maybe<ProjectFilter>,
   filter4?: Maybe<ProjectFilter>,
   filter5?: Maybe<UserFilter>,
-  filter6?: Maybe<TagFilter>,
-  order3?: Maybe<TagOrder>,
+  order3?: Maybe<UserOrder>,
   first3?: Maybe<Scalars['Int']>,
   offset3?: Maybe<Scalars['Int']>,
-  filter7?: Maybe<TaskFilter>,
-  order4?: Maybe<TaskOrder>,
+  filter6?: Maybe<TagFilter>,
+  order4?: Maybe<TagOrder>,
   first4?: Maybe<Scalars['Int']>,
   offset4?: Maybe<Scalars['Int']>,
-  filter8?: Maybe<TaskFilter>,
+  filter7?: Maybe<TaskFilter>,
   order5?: Maybe<TaskOrder>,
   first5?: Maybe<Scalars['Int']>,
   offset5?: Maybe<Scalars['Int']>,
-  filter9?: Maybe<WorkerFilter>,
-  order6?: Maybe<WorkerOrder>,
+  filter8?: Maybe<TaskFilter>,
+  order6?: Maybe<TaskOrder>,
   first6?: Maybe<Scalars['Int']>,
   offset6?: Maybe<Scalars['Int']>,
-  filter10?: Maybe<TagFilter>,
-  order7?: Maybe<TagOrder>,
+  filter9?: Maybe<WorkerFilter>,
+  order7?: Maybe<WorkerOrder>,
   first7?: Maybe<Scalars['Int']>,
   offset7?: Maybe<Scalars['Int']>,
+  filter10?: Maybe<TagFilter>,
+  order8?: Maybe<TagOrder>,
+  first8?: Maybe<Scalars['Int']>,
+  offset8?: Maybe<Scalars['Int']>,
   filter11?: Maybe<ProjectFilter>,
   filter12?: Maybe<ProjectFilter>,
   filter13?: Maybe<BoardFilter>,
   filter14?: Maybe<TaskFilter>,
-  order8?: Maybe<TaskOrder>,
-  first8?: Maybe<Scalars['Int']>,
-  offset8?: Maybe<Scalars['Int']>,
-  filter15?: Maybe<ColumnFilter>,
-  order9?: Maybe<ColumnOrder>,
+  order9?: Maybe<TaskOrder>,
   first9?: Maybe<Scalars['Int']>,
   offset9?: Maybe<Scalars['Int']>,
+  filter15?: Maybe<ColumnFilter>,
+  order10?: Maybe<ColumnOrder>,
+  first10?: Maybe<Scalars['Int']>,
+  offset10?: Maybe<Scalars['Int']>,
   filter16?: Maybe<BoardFilter>,
   filter17?: Maybe<ProjectFilter>,
   filter18?: Maybe<ColumnFilter>,
   filter19?: Maybe<WorkerFilter>,
-  order10?: Maybe<WorkerOrder>,
-  first10?: Maybe<Scalars['Int']>,
-  offset10?: Maybe<Scalars['Int']>,
-  filter20?: Maybe<ProjectFilter>,
-  filter21?: Maybe<UserFilter>,
-  filter22?: Maybe<TagFilter>,
-  order11?: Maybe<TagOrder>,
+  order11?: Maybe<WorkerOrder>,
   first11?: Maybe<Scalars['Int']>,
   offset11?: Maybe<Scalars['Int']>,
-  filter23?: Maybe<TaskFilter>,
-  order12?: Maybe<TaskOrder>,
+  filter20?: Maybe<ProjectFilter>,
+  filter21?: Maybe<UserFilter>,
+  order12?: Maybe<UserOrder>,
   first12?: Maybe<Scalars['Int']>,
   offset12?: Maybe<Scalars['Int']>,
-  filter24?: Maybe<TaskFilter>,
-  order13?: Maybe<TaskOrder>,
+  filter22?: Maybe<TagFilter>,
+  order13?: Maybe<TagOrder>,
   first13?: Maybe<Scalars['Int']>,
   offset13?: Maybe<Scalars['Int']>,
-  filter25?: Maybe<WorkerFilter>,
-  order14?: Maybe<WorkerOrder>,
+  filter23?: Maybe<TaskFilter>,
+  order14?: Maybe<TaskOrder>,
   first14?: Maybe<Scalars['Int']>,
   offset14?: Maybe<Scalars['Int']>,
+  filter24?: Maybe<TaskFilter>,
+  order15?: Maybe<TaskOrder>,
+  first15?: Maybe<Scalars['Int']>,
+  offset15?: Maybe<Scalars['Int']>,
+  filter25?: Maybe<WorkerFilter>,
+  order16?: Maybe<WorkerOrder>,
+  first16?: Maybe<Scalars['Int']>,
+  offset16?: Maybe<Scalars['Int']>,
   filter26?: Maybe<TaskFilter>,
   filter27?: Maybe<WorkerFilter>,
   filter28?: Maybe<CommentFilter>,
-  order15?: Maybe<CommentOrder>,
-  first15?: Maybe<Scalars['Int']>,
-  offset15?: Maybe<Scalars['Int']>,
-  filter29?: Maybe<TaskFilter>,
-  order16?: Maybe<TaskOrder>,
-  first16?: Maybe<Scalars['Int']>,
-  offset16?: Maybe<Scalars['Int']>,
-  filter30?: Maybe<ColumnFilter>,
-  filter31?: Maybe<WorkerFilter>,
-  order17?: Maybe<WorkerOrder>,
+  order17?: Maybe<CommentOrder>,
   first17?: Maybe<Scalars['Int']>,
   offset17?: Maybe<Scalars['Int']>,
-  filter32?: Maybe<WorkerFilter>,
-  order18?: Maybe<WorkerOrder>,
+  filter29?: Maybe<TaskFilter>,
+  order18?: Maybe<TaskOrder>,
   first18?: Maybe<Scalars['Int']>,
   offset18?: Maybe<Scalars['Int']>,
-  filter33?: Maybe<CommentFilter>,
-  order19?: Maybe<CommentOrder>,
+  filter30?: Maybe<ColumnFilter>,
+  filter31?: Maybe<WorkerFilter>,
+  order19?: Maybe<WorkerOrder>,
   first19?: Maybe<Scalars['Int']>,
   offset19?: Maybe<Scalars['Int']>,
-  filter34?: Maybe<TaskFilter>,
-  order20?: Maybe<TaskOrder>,
+  filter32?: Maybe<WorkerFilter>,
+  order20?: Maybe<WorkerOrder>,
   first20?: Maybe<Scalars['Int']>,
-  offset20?: Maybe<Scalars['Int']>
+  offset20?: Maybe<Scalars['Int']>,
+  filter33?: Maybe<CommentFilter>,
+  order21?: Maybe<CommentOrder>,
+  first21?: Maybe<Scalars['Int']>,
+  offset21?: Maybe<Scalars['Int']>,
+  filter34?: Maybe<TaskFilter>,
+  order22?: Maybe<TaskOrder>,
+  first22?: Maybe<Scalars['Int']>,
+  offset22?: Maybe<Scalars['Int']>
 };
 
 
@@ -7139,10 +7347,10 @@ export type QueryTaskQuery = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: (
+          ), user: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          ), tags: Maybe<Array<Maybe<(
+          )>>>, tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
           )>>>, tasks: Maybe<Array<Maybe<(
@@ -7154,7 +7362,7 @@ export type QueryTaskQuery = (
           )>>> }
         )>>> }
       )>>> }
-    ), column: (
+    ), column: Maybe<(
       { __typename?: 'Column' }
       & Pick<Column, 'id' | 'title'>
       & { board: (
@@ -7180,10 +7388,10 @@ export type QueryTaskQuery = (
         & { project: (
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
-        ), column: (
+        ), column: Maybe<(
           { __typename?: 'Column' }
           & Pick<Column, 'id' | 'title'>
-        ), workers: Maybe<Array<Maybe<(
+        )>, workers: Maybe<Array<Maybe<(
           { __typename?: 'Worker' }
           & Pick<Worker, 'id' | 'name' | 'availability'>
         )>>>, likes: Maybe<Array<Maybe<(
@@ -7192,10 +7400,10 @@ export type QueryTaskQuery = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: (
+          ), user: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          ), tags: Maybe<Array<Maybe<(
+          )>>>, tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
           )>>>, tasks: Maybe<Array<Maybe<(
@@ -7217,7 +7425,7 @@ export type QueryTaskQuery = (
           ) }
         )>>> }
       )>>> }
-    ), workers: Maybe<Array<Maybe<(
+    )>, workers: Maybe<Array<Maybe<(
       { __typename?: 'Worker' }
       & Pick<Worker, 'id' | 'name' | 'availability'>
     )>>>, likes: Maybe<Array<Maybe<(
@@ -7269,70 +7477,76 @@ export type QueryUserQueryVariables = {
   offset7?: Maybe<Scalars['Int']>,
   filter12?: Maybe<ProjectFilter>,
   filter13?: Maybe<UserFilter>,
-  filter14?: Maybe<TagFilter>,
-  order8?: Maybe<TagOrder>,
+  order8?: Maybe<UserOrder>,
   first8?: Maybe<Scalars['Int']>,
   offset8?: Maybe<Scalars['Int']>,
-  filter15?: Maybe<TaskFilter>,
-  order9?: Maybe<TaskOrder>,
+  filter14?: Maybe<TagFilter>,
+  order9?: Maybe<TagOrder>,
   first9?: Maybe<Scalars['Int']>,
   offset9?: Maybe<Scalars['Int']>,
-  filter16?: Maybe<TaskFilter>,
+  filter15?: Maybe<TaskFilter>,
   order10?: Maybe<TaskOrder>,
   first10?: Maybe<Scalars['Int']>,
   offset10?: Maybe<Scalars['Int']>,
-  filter17?: Maybe<WorkerFilter>,
-  order11?: Maybe<WorkerOrder>,
+  filter16?: Maybe<TaskFilter>,
+  order11?: Maybe<TaskOrder>,
   first11?: Maybe<Scalars['Int']>,
   offset11?: Maybe<Scalars['Int']>,
-  filter18?: Maybe<ProjectFilter>,
-  filter19?: Maybe<TagFilter>,
-  order12?: Maybe<TagOrder>,
+  filter17?: Maybe<WorkerFilter>,
+  order12?: Maybe<WorkerOrder>,
   first12?: Maybe<Scalars['Int']>,
   offset12?: Maybe<Scalars['Int']>,
-  filter20?: Maybe<TaskFilter>,
-  order13?: Maybe<TaskOrder>,
+  filter18?: Maybe<ProjectFilter>,
+  filter19?: Maybe<TagFilter>,
+  order13?: Maybe<TagOrder>,
   first13?: Maybe<Scalars['Int']>,
   offset13?: Maybe<Scalars['Int']>,
-  filter21?: Maybe<TaskFilter>,
+  filter20?: Maybe<TaskFilter>,
   order14?: Maybe<TaskOrder>,
   first14?: Maybe<Scalars['Int']>,
   offset14?: Maybe<Scalars['Int']>,
-  filter22?: Maybe<WorkerFilter>,
-  order15?: Maybe<WorkerOrder>,
+  filter21?: Maybe<TaskFilter>,
+  order15?: Maybe<TaskOrder>,
   first15?: Maybe<Scalars['Int']>,
   offset15?: Maybe<Scalars['Int']>,
-  filter23?: Maybe<ProjectFilter>,
-  filter24?: Maybe<ColumnFilter>,
-  filter25?: Maybe<WorkerFilter>,
+  filter22?: Maybe<WorkerFilter>,
   order16?: Maybe<WorkerOrder>,
   first16?: Maybe<Scalars['Int']>,
   offset16?: Maybe<Scalars['Int']>,
-  filter26?: Maybe<WorkerFilter>,
+  filter23?: Maybe<ProjectFilter>,
+  filter24?: Maybe<ColumnFilter>,
+  filter25?: Maybe<WorkerFilter>,
   order17?: Maybe<WorkerOrder>,
   first17?: Maybe<Scalars['Int']>,
   offset17?: Maybe<Scalars['Int']>,
-  filter27?: Maybe<CommentFilter>,
-  order18?: Maybe<CommentOrder>,
+  filter26?: Maybe<WorkerFilter>,
+  order18?: Maybe<WorkerOrder>,
   first18?: Maybe<Scalars['Int']>,
   offset18?: Maybe<Scalars['Int']>,
-  filter28?: Maybe<TaskFilter>,
-  order19?: Maybe<TaskOrder>,
+  filter27?: Maybe<CommentFilter>,
+  order19?: Maybe<CommentOrder>,
   first19?: Maybe<Scalars['Int']>,
   offset19?: Maybe<Scalars['Int']>,
-  filter29?: Maybe<UserFilter>,
-  filter30?: Maybe<WorkerFilter>,
-  order20?: Maybe<WorkerOrder>,
+  filter28?: Maybe<TaskFilter>,
+  order20?: Maybe<TaskOrder>,
   first20?: Maybe<Scalars['Int']>,
   offset20?: Maybe<Scalars['Int']>,
-  filter31?: Maybe<TaskFilter>,
-  order21?: Maybe<TaskOrder>,
+  filter29?: Maybe<UserFilter>,
+  order21?: Maybe<UserOrder>,
   first21?: Maybe<Scalars['Int']>,
   offset21?: Maybe<Scalars['Int']>,
-  filter32?: Maybe<UserFilter>,
-  order22?: Maybe<UserOrder>,
+  filter30?: Maybe<WorkerFilter>,
+  order22?: Maybe<WorkerOrder>,
   first22?: Maybe<Scalars['Int']>,
-  offset22?: Maybe<Scalars['Int']>
+  offset22?: Maybe<Scalars['Int']>,
+  filter31?: Maybe<TaskFilter>,
+  order23?: Maybe<TaskOrder>,
+  first23?: Maybe<Scalars['Int']>,
+  offset23?: Maybe<Scalars['Int']>,
+  filter32?: Maybe<UserFilter>,
+  order24?: Maybe<UserOrder>,
+  first24?: Maybe<Scalars['Int']>,
+  offset24?: Maybe<Scalars['Int']>
 };
 
 
@@ -7363,10 +7577,10 @@ export type QueryUserQuery = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: (
+          ), column: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          ), workers: Maybe<Array<Maybe<(
+          )>, workers: Maybe<Array<Maybe<(
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
           )>>>, likes: Maybe<Array<Maybe<(
@@ -7392,10 +7606,10 @@ export type QueryUserQuery = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: (
+          ), user: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          ), tags: Maybe<Array<Maybe<(
+          )>>>, tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
           )>>>, tasks: Maybe<Array<Maybe<(
@@ -7406,7 +7620,7 @@ export type QueryUserQuery = (
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
         )>>> }
-      ), user: (
+      ), user: Maybe<Array<Maybe<(
         { __typename?: 'User' }
         & Pick<User, 'id' | 'username' | 'password' | 'location'>
         & { roles: Maybe<Array<Maybe<(
@@ -7428,10 +7642,10 @@ export type QueryUserQuery = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: (
+          ), column: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          ), workers: Maybe<Array<Maybe<(
+          )>, workers: Maybe<Array<Maybe<(
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
           )>>>, likes: Maybe<Array<Maybe<(
@@ -7442,7 +7656,7 @@ export type QueryUserQuery = (
             & Pick<Comment, 'id' | 'content'>
           )>>> }
         )>>> }
-      ) }
+      )>>> }
     )>>>, stars: Maybe<Array<Maybe<(
       { __typename?: 'Task' }
       & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
@@ -7466,94 +7680,103 @@ export type QueryWorkerQueryVariables = {
   filter3?: Maybe<ProjectFilter>,
   filter4?: Maybe<ProjectFilter>,
   filter5?: Maybe<UserFilter>,
-  filter6?: Maybe<TagFilter>,
-  order3?: Maybe<TagOrder>,
+  order3?: Maybe<UserOrder>,
   first3?: Maybe<Scalars['Int']>,
   offset3?: Maybe<Scalars['Int']>,
-  filter7?: Maybe<TaskFilter>,
-  order4?: Maybe<TaskOrder>,
+  filter6?: Maybe<TagFilter>,
+  order4?: Maybe<TagOrder>,
   first4?: Maybe<Scalars['Int']>,
   offset4?: Maybe<Scalars['Int']>,
-  filter8?: Maybe<TaskFilter>,
+  filter7?: Maybe<TaskFilter>,
   order5?: Maybe<TaskOrder>,
   first5?: Maybe<Scalars['Int']>,
   offset5?: Maybe<Scalars['Int']>,
-  filter9?: Maybe<WorkerFilter>,
-  order6?: Maybe<WorkerOrder>,
+  filter8?: Maybe<TaskFilter>,
+  order6?: Maybe<TaskOrder>,
   first6?: Maybe<Scalars['Int']>,
   offset6?: Maybe<Scalars['Int']>,
-  filter10?: Maybe<TagFilter>,
-  order7?: Maybe<TagOrder>,
+  filter9?: Maybe<WorkerFilter>,
+  order7?: Maybe<WorkerOrder>,
   first7?: Maybe<Scalars['Int']>,
   offset7?: Maybe<Scalars['Int']>,
+  filter10?: Maybe<TagFilter>,
+  order8?: Maybe<TagOrder>,
+  first8?: Maybe<Scalars['Int']>,
+  offset8?: Maybe<Scalars['Int']>,
   filter11?: Maybe<ProjectFilter>,
   filter12?: Maybe<ProjectFilter>,
   filter13?: Maybe<TaskFilter>,
-  order8?: Maybe<TaskOrder>,
-  first8?: Maybe<Scalars['Int']>,
-  offset8?: Maybe<Scalars['Int']>,
-  filter14?: Maybe<UserFilter>,
-  filter15?: Maybe<TagFilter>,
-  order9?: Maybe<TagOrder>,
+  order9?: Maybe<TaskOrder>,
   first9?: Maybe<Scalars['Int']>,
   offset9?: Maybe<Scalars['Int']>,
+  filter14?: Maybe<UserFilter>,
+  order10?: Maybe<UserOrder>,
+  first10?: Maybe<Scalars['Int']>,
+  offset10?: Maybe<Scalars['Int']>,
+  filter15?: Maybe<TagFilter>,
+  order11?: Maybe<TagOrder>,
+  first11?: Maybe<Scalars['Int']>,
+  offset11?: Maybe<Scalars['Int']>,
   filter16?: Maybe<ProjectFilter>,
   filter17?: Maybe<ColumnFilter>,
   filter18?: Maybe<WorkerFilter>,
-  order10?: Maybe<WorkerOrder>,
-  first10?: Maybe<Scalars['Int']>,
-  offset10?: Maybe<Scalars['Int']>,
-  filter19?: Maybe<WorkerFilter>,
-  order11?: Maybe<WorkerOrder>,
-  first11?: Maybe<Scalars['Int']>,
-  offset11?: Maybe<Scalars['Int']>,
-  filter20?: Maybe<CommentFilter>,
-  order12?: Maybe<CommentOrder>,
+  order12?: Maybe<WorkerOrder>,
   first12?: Maybe<Scalars['Int']>,
   offset12?: Maybe<Scalars['Int']>,
-  filter21?: Maybe<TaskFilter>,
-  order13?: Maybe<TaskOrder>,
+  filter19?: Maybe<WorkerFilter>,
+  order13?: Maybe<WorkerOrder>,
   first13?: Maybe<Scalars['Int']>,
   offset13?: Maybe<Scalars['Int']>,
+  filter20?: Maybe<CommentFilter>,
+  order14?: Maybe<CommentOrder>,
+  first14?: Maybe<Scalars['Int']>,
+  offset14?: Maybe<Scalars['Int']>,
+  filter21?: Maybe<TaskFilter>,
+  order15?: Maybe<TaskOrder>,
+  first15?: Maybe<Scalars['Int']>,
+  offset15?: Maybe<Scalars['Int']>,
   filter22?: Maybe<ProjectFilter>,
   filter23?: Maybe<ColumnFilter>,
   filter24?: Maybe<WorkerFilter>,
-  order14?: Maybe<WorkerOrder>,
-  first14?: Maybe<Scalars['Int']>,
-  offset14?: Maybe<Scalars['Int']>,
-  filter25?: Maybe<WorkerFilter>,
-  order15?: Maybe<WorkerOrder>,
-  first15?: Maybe<Scalars['Int']>,
-  offset15?: Maybe<Scalars['Int']>,
-  filter26?: Maybe<CommentFilter>,
-  order16?: Maybe<CommentOrder>,
+  order16?: Maybe<WorkerOrder>,
   first16?: Maybe<Scalars['Int']>,
   offset16?: Maybe<Scalars['Int']>,
-  filter27?: Maybe<TaskFilter>,
-  order17?: Maybe<TaskOrder>,
+  filter25?: Maybe<WorkerFilter>,
+  order17?: Maybe<WorkerOrder>,
   first17?: Maybe<Scalars['Int']>,
   offset17?: Maybe<Scalars['Int']>,
-  filter28?: Maybe<WorkerFilter>,
-  order18?: Maybe<WorkerOrder>,
+  filter26?: Maybe<CommentFilter>,
+  order18?: Maybe<CommentOrder>,
   first18?: Maybe<Scalars['Int']>,
   offset18?: Maybe<Scalars['Int']>,
-  filter29?: Maybe<UserFilter>,
-  filter30?: Maybe<TagFilter>,
-  order19?: Maybe<TagOrder>,
+  filter27?: Maybe<TaskFilter>,
+  order19?: Maybe<TaskOrder>,
   first19?: Maybe<Scalars['Int']>,
   offset19?: Maybe<Scalars['Int']>,
-  filter31?: Maybe<TaskFilter>,
-  order20?: Maybe<TaskOrder>,
+  filter28?: Maybe<WorkerFilter>,
+  order20?: Maybe<WorkerOrder>,
   first20?: Maybe<Scalars['Int']>,
   offset20?: Maybe<Scalars['Int']>,
-  filter32?: Maybe<TaskFilter>,
-  order21?: Maybe<TaskOrder>,
+  filter29?: Maybe<UserFilter>,
+  order21?: Maybe<UserOrder>,
   first21?: Maybe<Scalars['Int']>,
   offset21?: Maybe<Scalars['Int']>,
-  filter33?: Maybe<WorkerFilter>,
-  order22?: Maybe<WorkerOrder>,
+  filter30?: Maybe<TagFilter>,
+  order22?: Maybe<TagOrder>,
   first22?: Maybe<Scalars['Int']>,
-  offset22?: Maybe<Scalars['Int']>
+  offset22?: Maybe<Scalars['Int']>,
+  filter31?: Maybe<TaskFilter>,
+  order23?: Maybe<TaskOrder>,
+  first23?: Maybe<Scalars['Int']>,
+  offset23?: Maybe<Scalars['Int']>,
+  filter32?: Maybe<TaskFilter>,
+  order24?: Maybe<TaskOrder>,
+  first24?: Maybe<Scalars['Int']>,
+  offset24?: Maybe<Scalars['Int']>,
+  filter33?: Maybe<WorkerFilter>,
+  order25?: Maybe<WorkerOrder>,
+  first25?: Maybe<Scalars['Int']>,
+  offset25?: Maybe<Scalars['Int']>
 };
 
 
@@ -7587,10 +7810,10 @@ export type QueryWorkerQuery = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: (
+          ), user: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          ), tags: Maybe<Array<Maybe<(
+          )>>>, tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
           )>>>, tasks: Maybe<Array<Maybe<(
@@ -7602,7 +7825,7 @@ export type QueryWorkerQuery = (
           )>>> }
         )>>> }
       )>>> }
-    ), user: (
+    ), user: Maybe<Array<Maybe<(
       { __typename?: 'User' }
       & Pick<User, 'id' | 'username' | 'password' | 'location'>
       & { roles: Maybe<Array<Maybe<(
@@ -7611,14 +7834,14 @@ export type QueryWorkerQuery = (
         & { project: (
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
-        ), user: (
+        ), user: Maybe<Array<Maybe<(
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
           & { stars: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        ), tags: Maybe<Array<Maybe<(
+        )>>>, tags: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
         )>>>, tasks: Maybe<Array<Maybe<(
@@ -7627,10 +7850,10 @@ export type QueryWorkerQuery = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: (
+          ), column: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          ), workers: Maybe<Array<Maybe<(
+          )>, workers: Maybe<Array<Maybe<(
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
           )>>>, likes: Maybe<Array<Maybe<(
@@ -7646,10 +7869,10 @@ export type QueryWorkerQuery = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: (
+          ), column: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          ), workers: Maybe<Array<Maybe<(
+          )>, workers: Maybe<Array<Maybe<(
             { __typename?: 'Worker' }
             & Pick<Worker, 'id' | 'name' | 'availability'>
           )>>>, likes: Maybe<Array<Maybe<(
@@ -7661,7 +7884,7 @@ export type QueryWorkerQuery = (
           )>>> }
         )>>> }
       )>>> }
-    ), tags: Maybe<Array<Maybe<(
+    )>>>, tags: Maybe<Array<Maybe<(
       { __typename?: 'Tag' }
       & Pick<Tag, 'id' | 'title'>
     )>>>, tasks: Maybe<Array<Maybe<(
@@ -7676,9 +7899,9 @@ export type QueryWorkerQuery = (
 
 
 export const AddBoardDocument = gql`
-    mutation addBoard($filter: ProjectFilter, $filter1: WorkerFilter, $order: WorkerOrder, $first: Int, $offset: Int, $filter2: TagFilter, $order1: TagOrder, $first1: Int, $offset1: Int, $filter3: ProjectFilter, $filter4: ColumnFilter, $filter5: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter6: WorkerFilter, $order3: WorkerOrder, $first3: Int, $offset3: Int, $filter7: CommentFilter, $order4: CommentOrder, $first4: Int, $offset4: Int, $filter8: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter9: ProjectFilter, $filter10: ColumnFilter, $order6: ColumnOrder, $first6: Int, $offset6: Int, $filter11: BoardFilter, $order7: BoardOrder, $first7: Int, $offset7: Int, $filter12: ProjectFilter, $filter13: UserFilter, $filter14: TagFilter, $order8: TagOrder, $first8: Int, $offset8: Int, $filter15: TaskFilter, $order9: TaskOrder, $first9: Int, $offset9: Int, $filter16: TaskFilter, $order10: TaskOrder, $first10: Int, $offset10: Int, $filter17: WorkerFilter, $order11: WorkerOrder, $first11: Int, $offset11: Int, $filter18: ProjectFilter, $filter19: BoardFilter, $filter20: TaskFilter, $order12: TaskOrder, $first12: Int, $offset12: Int, $filter21: ColumnFilter, $order13: ColumnOrder, $first13: Int, $offset13: Int, $filter22: BoardFilter, $order14: BoardOrder, $first14: Int, $offset14: Int, $input: [AddBoardInput!]!) {
+    mutation addBoard($filter: ProjectFilter, $filter1: WorkerFilter, $order: WorkerOrder, $first: Int, $offset: Int, $filter2: TagFilter, $order1: TagOrder, $first1: Int, $offset1: Int, $filter3: ProjectFilter, $filter4: ColumnFilter, $filter5: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter6: WorkerFilter, $order3: WorkerOrder, $first3: Int, $offset3: Int, $filter7: CommentFilter, $order4: CommentOrder, $first4: Int, $offset4: Int, $filter8: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter9: ProjectFilter, $filter10: ColumnFilter, $order6: ColumnOrder, $first6: Int, $offset6: Int, $filter11: BoardFilter, $order7: BoardOrder, $first7: Int, $offset7: Int, $filter12: ProjectFilter, $filter13: UserFilter, $order8: UserOrder, $first8: Int, $offset8: Int, $filter14: TagFilter, $order9: TagOrder, $first9: Int, $offset9: Int, $filter15: TaskFilter, $order10: TaskOrder, $first10: Int, $offset10: Int, $filter16: TaskFilter, $order11: TaskOrder, $first11: Int, $offset11: Int, $filter17: WorkerFilter, $order12: WorkerOrder, $first12: Int, $offset12: Int, $filter18: ProjectFilter, $filter19: BoardFilter, $filter20: TaskFilter, $order13: TaskOrder, $first13: Int, $offset13: Int, $filter21: ColumnFilter, $order14: ColumnOrder, $first14: Int, $offset14: Int, $filter22: BoardFilter, $order15: BoardOrder, $first15: Int, $offset15: Int, $input: [AddBoardInput!]!) {
   addBoard(input: $input) {
-    board(filter: $filter22, order: $order14, first: $first14, offset: $offset14) {
+    board(filter: $filter22, order: $order15, first: $first15, offset: $offset15) {
       id
       project(filter: $filter18) {
         id
@@ -7744,7 +7967,7 @@ export const AddBoardDocument = gql`
           }
           order
         }
-        workers(filter: $filter17, order: $order11, first: $first11, offset: $offset11) {
+        workers(filter: $filter17, order: $order12, first: $first12, offset: $offset12) {
           id
           project(filter: $filter12) {
             id
@@ -7753,17 +7976,17 @@ export const AddBoardDocument = gql`
           }
           name
           availability
-          user(filter: $filter13) {
+          user(filter: $filter13, order: $order8, first: $first8, offset: $offset8) {
             id
             username
             password
             location
           }
-          tags(filter: $filter14, order: $order8, first: $first8, offset: $offset8) {
+          tags(filter: $filter14, order: $order9, first: $first9, offset: $offset9) {
             id
             title
           }
-          tasks(filter: $filter15, order: $order9, first: $first9, offset: $offset9) {
+          tasks(filter: $filter15, order: $order10, first: $first10, offset: $offset10) {
             id
             title
             hours
@@ -7772,7 +7995,7 @@ export const AddBoardDocument = gql`
             priority
             complete
           }
-          liked(filter: $filter16, order: $order10, first: $first10, offset: $offset10) {
+          liked(filter: $filter16, order: $order11, first: $first11, offset: $offset11) {
             id
             title
             hours
@@ -7784,7 +8007,7 @@ export const AddBoardDocument = gql`
         }
       }
       title
-      columns(filter: $filter21, order: $order13, first: $first13, offset: $offset13) {
+      columns(filter: $filter21, order: $order14, first: $first14, offset: $offset14) {
         id
         board(filter: $filter19) {
           id
@@ -7792,7 +8015,7 @@ export const AddBoardDocument = gql`
           order
         }
         title
-        tasks(filter: $filter20, order: $order12, first: $first12, offset: $offset12) {
+        tasks(filter: $filter20, order: $order13, first: $first13, offset: $offset13) {
           id
           title
           hours
@@ -7804,6 +8027,7 @@ export const AddBoardDocument = gql`
       }
       order
     }
+    numUids
   }
 }
     `;
@@ -7828,9 +8052,9 @@ export function withAddBoard<TProps, TChildProps = {}>(operationOptions?: Apollo
 export type AddBoardMutationResult = ApolloReactCommon.MutationResult<AddBoardMutation>;
 export type AddBoardMutationOptions = ApolloReactCommon.BaseMutationOptions<AddBoardMutation, AddBoardMutationVariables>;
 export const AddColumnDocument = gql`
-    mutation addColumn($filter: TagFilter, $order: TagOrder, $first: Int, $offset: Int, $filter1: TaskFilter, $order1: TaskOrder, $first1: Int, $offset1: Int, $filter2: BoardFilter, $order2: BoardOrder, $first2: Int, $offset2: Int, $filter3: WorkerFilter, $order3: WorkerOrder, $first3: Int, $offset3: Int, $filter4: ProjectFilter, $filter5: BoardFilter, $filter6: TaskFilter, $order4: TaskOrder, $first4: Int, $offset4: Int, $filter7: ColumnFilter, $order5: ColumnOrder, $first5: Int, $offset5: Int, $filter8: BoardFilter, $filter9: ProjectFilter, $filter10: ColumnFilter, $filter11: ProjectFilter, $filter12: UserFilter, $filter13: TagFilter, $order6: TagOrder, $first6: Int, $offset6: Int, $filter14: TaskFilter, $order7: TaskOrder, $first7: Int, $offset7: Int, $filter15: TaskFilter, $order8: TaskOrder, $first8: Int, $offset8: Int, $filter16: WorkerFilter, $order9: WorkerOrder, $first9: Int, $offset9: Int, $filter17: ProjectFilter, $filter18: UserFilter, $filter19: TagFilter, $order10: TagOrder, $first10: Int, $offset10: Int, $filter20: TaskFilter, $order11: TaskOrder, $first11: Int, $offset11: Int, $filter21: TaskFilter, $order12: TaskOrder, $first12: Int, $offset12: Int, $filter22: WorkerFilter, $order13: WorkerOrder, $first13: Int, $offset13: Int, $filter23: TaskFilter, $filter24: WorkerFilter, $filter25: CommentFilter, $order14: CommentOrder, $first14: Int, $offset14: Int, $filter26: TaskFilter, $order15: TaskOrder, $first15: Int, $offset15: Int, $filter27: ColumnFilter, $order16: ColumnOrder, $first16: Int, $offset16: Int, $input: [AddColumnInput!]!) {
+    mutation addColumn($filter: TagFilter, $order: TagOrder, $first: Int, $offset: Int, $filter1: TaskFilter, $order1: TaskOrder, $first1: Int, $offset1: Int, $filter2: BoardFilter, $order2: BoardOrder, $first2: Int, $offset2: Int, $filter3: WorkerFilter, $order3: WorkerOrder, $first3: Int, $offset3: Int, $filter4: ProjectFilter, $filter5: BoardFilter, $filter6: TaskFilter, $order4: TaskOrder, $first4: Int, $offset4: Int, $filter7: ColumnFilter, $order5: ColumnOrder, $first5: Int, $offset5: Int, $filter8: BoardFilter, $filter9: ProjectFilter, $filter10: ColumnFilter, $filter11: ProjectFilter, $filter12: UserFilter, $order6: UserOrder, $first6: Int, $offset6: Int, $filter13: TagFilter, $order7: TagOrder, $first7: Int, $offset7: Int, $filter14: TaskFilter, $order8: TaskOrder, $first8: Int, $offset8: Int, $filter15: TaskFilter, $order9: TaskOrder, $first9: Int, $offset9: Int, $filter16: WorkerFilter, $order10: WorkerOrder, $first10: Int, $offset10: Int, $filter17: ProjectFilter, $filter18: UserFilter, $order11: UserOrder, $first11: Int, $offset11: Int, $filter19: TagFilter, $order12: TagOrder, $first12: Int, $offset12: Int, $filter20: TaskFilter, $order13: TaskOrder, $first13: Int, $offset13: Int, $filter21: TaskFilter, $order14: TaskOrder, $first14: Int, $offset14: Int, $filter22: WorkerFilter, $order15: WorkerOrder, $first15: Int, $offset15: Int, $filter23: TaskFilter, $filter24: WorkerFilter, $filter25: CommentFilter, $order16: CommentOrder, $first16: Int, $offset16: Int, $filter26: TaskFilter, $order17: TaskOrder, $first17: Int, $offset17: Int, $filter27: ColumnFilter, $order18: ColumnOrder, $first18: Int, $offset18: Int, $input: [AddColumnInput!]!) {
   addColumn(input: $input) {
-    column(filter: $filter27, order: $order16, first: $first16, offset: $offset16) {
+    column(filter: $filter27, order: $order18, first: $first18, offset: $offset18) {
       id
       board(filter: $filter8) {
         id
@@ -7884,7 +8108,7 @@ export const AddColumnDocument = gql`
         order
       }
       title
-      tasks(filter: $filter26, order: $order15, first: $first15, offset: $offset15) {
+      tasks(filter: $filter26, order: $order17, first: $first17, offset: $offset17) {
         id
         project(filter: $filter9) {
           id
@@ -7896,7 +8120,7 @@ export const AddColumnDocument = gql`
           title
         }
         title
-        workers(filter: $filter16, order: $order9, first: $first9, offset: $offset9) {
+        workers(filter: $filter16, order: $order10, first: $first10, offset: $offset10) {
           id
           project(filter: $filter11) {
             id
@@ -7905,17 +8129,17 @@ export const AddColumnDocument = gql`
           }
           name
           availability
-          user(filter: $filter12) {
+          user(filter: $filter12, order: $order6, first: $first6, offset: $offset6) {
             id
             username
             password
             location
           }
-          tags(filter: $filter13, order: $order6, first: $first6, offset: $offset6) {
+          tags(filter: $filter13, order: $order7, first: $first7, offset: $offset7) {
             id
             title
           }
-          tasks(filter: $filter14, order: $order7, first: $first7, offset: $offset7) {
+          tasks(filter: $filter14, order: $order8, first: $first8, offset: $offset8) {
             id
             title
             hours
@@ -7924,7 +8148,7 @@ export const AddColumnDocument = gql`
             priority
             complete
           }
-          liked(filter: $filter15, order: $order8, first: $first8, offset: $offset8) {
+          liked(filter: $filter15, order: $order9, first: $first9, offset: $offset9) {
             id
             title
             hours
@@ -7939,7 +8163,7 @@ export const AddColumnDocument = gql`
         content
         priority
         complete
-        likes(filter: $filter22, order: $order13, first: $first13, offset: $offset13) {
+        likes(filter: $filter22, order: $order15, first: $first15, offset: $offset15) {
           id
           project(filter: $filter17) {
             id
@@ -7948,17 +8172,17 @@ export const AddColumnDocument = gql`
           }
           name
           availability
-          user(filter: $filter18) {
+          user(filter: $filter18, order: $order11, first: $first11, offset: $offset11) {
             id
             username
             password
             location
           }
-          tags(filter: $filter19, order: $order10, first: $first10, offset: $offset10) {
+          tags(filter: $filter19, order: $order12, first: $first12, offset: $offset12) {
             id
             title
           }
-          tasks(filter: $filter20, order: $order11, first: $first11, offset: $offset11) {
+          tasks(filter: $filter20, order: $order13, first: $first13, offset: $offset13) {
             id
             title
             hours
@@ -7967,7 +8191,7 @@ export const AddColumnDocument = gql`
             priority
             complete
           }
-          liked(filter: $filter21, order: $order12, first: $first12, offset: $offset12) {
+          liked(filter: $filter21, order: $order14, first: $first14, offset: $offset14) {
             id
             title
             hours
@@ -7977,7 +8201,7 @@ export const AddColumnDocument = gql`
             complete
           }
         }
-        comments(filter: $filter25, order: $order14, first: $first14, offset: $offset14) {
+        comments(filter: $filter25, order: $order16, first: $first16, offset: $offset16) {
           id
           task(filter: $filter23) {
             id
@@ -7997,6 +8221,7 @@ export const AddColumnDocument = gql`
         }
       }
     }
+    numUids
   }
 }
     `;
@@ -8021,9 +8246,9 @@ export function withAddColumn<TProps, TChildProps = {}>(operationOptions?: Apoll
 export type AddColumnMutationResult = ApolloReactCommon.MutationResult<AddColumnMutation>;
 export type AddColumnMutationOptions = ApolloReactCommon.BaseMutationOptions<AddColumnMutation, AddColumnMutationVariables>;
 export const AddCommentDocument = gql`
-    mutation addComment($filter: TagFilter, $order: TagOrder, $first: Int, $offset: Int, $filter1: TaskFilter, $order1: TaskOrder, $first1: Int, $offset1: Int, $filter2: BoardFilter, $order2: BoardOrder, $first2: Int, $offset2: Int, $filter3: WorkerFilter, $order3: WorkerOrder, $first3: Int, $offset3: Int, $filter4: ProjectFilter, $filter5: BoardFilter, $filter6: TaskFilter, $order4: TaskOrder, $first4: Int, $offset4: Int, $filter7: ColumnFilter, $filter8: ProjectFilter, $filter9: UserFilter, $filter10: TagFilter, $order5: TagOrder, $first5: Int, $offset5: Int, $filter11: TaskFilter, $order6: TaskOrder, $first6: Int, $offset6: Int, $filter12: TaskFilter, $order7: TaskOrder, $first7: Int, $offset7: Int, $filter13: WorkerFilter, $order8: WorkerOrder, $first8: Int, $offset8: Int, $filter14: ProjectFilter, $filter15: UserFilter, $filter16: TagFilter, $order9: TagOrder, $first9: Int, $offset9: Int, $filter17: TaskFilter, $order10: TaskOrder, $first10: Int, $offset10: Int, $filter18: TaskFilter, $order11: TaskOrder, $first11: Int, $offset11: Int, $filter19: WorkerFilter, $order12: WorkerOrder, $first12: Int, $offset12: Int, $filter20: TaskFilter, $filter21: WorkerFilter, $filter22: CommentFilter, $order13: CommentOrder, $first13: Int, $offset13: Int, $filter23: TaskFilter, $filter24: ProjectFilter, $filter25: WorkerFilter, $order14: WorkerOrder, $first14: Int, $offset14: Int, $filter26: TaskFilter, $order15: TaskOrder, $first15: Int, $offset15: Int, $filter27: UserFilter, $filter28: ProjectFilter, $filter29: WorkerFilter, $order16: WorkerOrder, $first16: Int, $offset16: Int, $filter30: TagFilter, $order17: TagOrder, $first17: Int, $offset17: Int, $filter31: ProjectFilter, $filter32: ColumnFilter, $filter33: WorkerFilter, $order18: WorkerOrder, $first18: Int, $offset18: Int, $filter34: WorkerFilter, $order19: WorkerOrder, $first19: Int, $offset19: Int, $filter35: CommentFilter, $order20: CommentOrder, $first20: Int, $offset20: Int, $filter36: TaskFilter, $order21: TaskOrder, $first21: Int, $offset21: Int, $filter37: ProjectFilter, $filter38: ColumnFilter, $filter39: WorkerFilter, $order22: WorkerOrder, $first22: Int, $offset22: Int, $filter40: WorkerFilter, $order23: WorkerOrder, $first23: Int, $offset23: Int, $filter41: CommentFilter, $order24: CommentOrder, $first24: Int, $offset24: Int, $filter42: TaskFilter, $order25: TaskOrder, $first25: Int, $offset25: Int, $filter43: WorkerFilter, $filter44: CommentFilter, $order26: CommentOrder, $first26: Int, $offset26: Int, $input: [AddCommentInput!]!) {
+    mutation addComment($filter: TagFilter, $order: TagOrder, $first: Int, $offset: Int, $filter1: TaskFilter, $order1: TaskOrder, $first1: Int, $offset1: Int, $filter2: BoardFilter, $order2: BoardOrder, $first2: Int, $offset2: Int, $filter3: WorkerFilter, $order3: WorkerOrder, $first3: Int, $offset3: Int, $filter4: ProjectFilter, $filter5: BoardFilter, $filter6: TaskFilter, $order4: TaskOrder, $first4: Int, $offset4: Int, $filter7: ColumnFilter, $filter8: ProjectFilter, $filter9: UserFilter, $order5: UserOrder, $first5: Int, $offset5: Int, $filter10: TagFilter, $order6: TagOrder, $first6: Int, $offset6: Int, $filter11: TaskFilter, $order7: TaskOrder, $first7: Int, $offset7: Int, $filter12: TaskFilter, $order8: TaskOrder, $first8: Int, $offset8: Int, $filter13: WorkerFilter, $order9: WorkerOrder, $first9: Int, $offset9: Int, $filter14: ProjectFilter, $filter15: UserFilter, $order10: UserOrder, $first10: Int, $offset10: Int, $filter16: TagFilter, $order11: TagOrder, $first11: Int, $offset11: Int, $filter17: TaskFilter, $order12: TaskOrder, $first12: Int, $offset12: Int, $filter18: TaskFilter, $order13: TaskOrder, $first13: Int, $offset13: Int, $filter19: WorkerFilter, $order14: WorkerOrder, $first14: Int, $offset14: Int, $filter20: TaskFilter, $filter21: WorkerFilter, $filter22: CommentFilter, $order15: CommentOrder, $first15: Int, $offset15: Int, $filter23: TaskFilter, $filter24: ProjectFilter, $filter25: WorkerFilter, $order16: WorkerOrder, $first16: Int, $offset16: Int, $filter26: TaskFilter, $order17: TaskOrder, $first17: Int, $offset17: Int, $filter27: UserFilter, $order18: UserOrder, $first18: Int, $offset18: Int, $filter28: ProjectFilter, $filter29: WorkerFilter, $order19: WorkerOrder, $first19: Int, $offset19: Int, $filter30: TagFilter, $order20: TagOrder, $first20: Int, $offset20: Int, $filter31: ProjectFilter, $filter32: ColumnFilter, $filter33: WorkerFilter, $order21: WorkerOrder, $first21: Int, $offset21: Int, $filter34: WorkerFilter, $order22: WorkerOrder, $first22: Int, $offset22: Int, $filter35: CommentFilter, $order23: CommentOrder, $first23: Int, $offset23: Int, $filter36: TaskFilter, $order24: TaskOrder, $first24: Int, $offset24: Int, $filter37: ProjectFilter, $filter38: ColumnFilter, $filter39: WorkerFilter, $order25: WorkerOrder, $first25: Int, $offset25: Int, $filter40: WorkerFilter, $order26: WorkerOrder, $first26: Int, $offset26: Int, $filter41: CommentFilter, $order27: CommentOrder, $first27: Int, $offset27: Int, $filter42: TaskFilter, $order28: TaskOrder, $first28: Int, $offset28: Int, $filter43: WorkerFilter, $filter44: CommentFilter, $order29: CommentOrder, $first29: Int, $offset29: Int, $input: [AddCommentInput!]!) {
   addComment(input: $input) {
-    comment(filter: $filter44, order: $order26, first: $first26, offset: $offset26) {
+    comment(filter: $filter44, order: $order29, first: $first29, offset: $offset29) {
       id
       task(filter: $filter23) {
         id
@@ -8074,7 +8299,7 @@ export const AddCommentDocument = gql`
           }
         }
         title
-        workers(filter: $filter13, order: $order8, first: $first8, offset: $offset8) {
+        workers(filter: $filter13, order: $order9, first: $first9, offset: $offset9) {
           id
           project(filter: $filter8) {
             id
@@ -8083,17 +8308,17 @@ export const AddCommentDocument = gql`
           }
           name
           availability
-          user(filter: $filter9) {
+          user(filter: $filter9, order: $order5, first: $first5, offset: $offset5) {
             id
             username
             password
             location
           }
-          tags(filter: $filter10, order: $order5, first: $first5, offset: $offset5) {
+          tags(filter: $filter10, order: $order6, first: $first6, offset: $offset6) {
             id
             title
           }
-          tasks(filter: $filter11, order: $order6, first: $first6, offset: $offset6) {
+          tasks(filter: $filter11, order: $order7, first: $first7, offset: $offset7) {
             id
             title
             hours
@@ -8102,7 +8327,7 @@ export const AddCommentDocument = gql`
             priority
             complete
           }
-          liked(filter: $filter12, order: $order7, first: $first7, offset: $offset7) {
+          liked(filter: $filter12, order: $order8, first: $first8, offset: $offset8) {
             id
             title
             hours
@@ -8117,7 +8342,7 @@ export const AddCommentDocument = gql`
         content
         priority
         complete
-        likes(filter: $filter19, order: $order12, first: $first12, offset: $offset12) {
+        likes(filter: $filter19, order: $order14, first: $first14, offset: $offset14) {
           id
           project(filter: $filter14) {
             id
@@ -8126,17 +8351,17 @@ export const AddCommentDocument = gql`
           }
           name
           availability
-          user(filter: $filter15) {
+          user(filter: $filter15, order: $order10, first: $first10, offset: $offset10) {
             id
             username
             password
             location
           }
-          tags(filter: $filter16, order: $order9, first: $first9, offset: $offset9) {
+          tags(filter: $filter16, order: $order11, first: $first11, offset: $offset11) {
             id
             title
           }
-          tasks(filter: $filter17, order: $order10, first: $first10, offset: $offset10) {
+          tasks(filter: $filter17, order: $order12, first: $first12, offset: $offset12) {
             id
             title
             hours
@@ -8145,7 +8370,7 @@ export const AddCommentDocument = gql`
             priority
             complete
           }
-          liked(filter: $filter18, order: $order11, first: $first11, offset: $offset11) {
+          liked(filter: $filter18, order: $order13, first: $first13, offset: $offset13) {
             id
             title
             hours
@@ -8155,7 +8380,7 @@ export const AddCommentDocument = gql`
             complete
           }
         }
-        comments(filter: $filter22, order: $order13, first: $first13, offset: $offset13) {
+        comments(filter: $filter22, order: $order15, first: $first15, offset: $offset15) {
           id
           task(filter: $filter20) {
             id
@@ -8183,17 +8408,17 @@ export const AddCommentDocument = gql`
         }
         name
         availability
-        user(filter: $filter27) {
+        user(filter: $filter27, order: $order18, first: $first18, offset: $offset18) {
           id
           username
           password
           location
-          roles(filter: $filter25, order: $order14, first: $first14, offset: $offset14) {
+          roles(filter: $filter25, order: $order16, first: $first16, offset: $offset16) {
             id
             name
             availability
           }
-          stars(filter: $filter26, order: $order15, first: $first15, offset: $offset15) {
+          stars(filter: $filter26, order: $order17, first: $first17, offset: $offset17) {
             id
             title
             hours
@@ -8203,7 +8428,7 @@ export const AddCommentDocument = gql`
             complete
           }
         }
-        tags(filter: $filter30, order: $order17, first: $first17, offset: $offset17) {
+        tags(filter: $filter30, order: $order20, first: $first20, offset: $offset20) {
           id
           title
           project(filter: $filter28) {
@@ -8211,13 +8436,13 @@ export const AddCommentDocument = gql`
             title
             description
           }
-          workers(filter: $filter29, order: $order16, first: $first16, offset: $offset16) {
+          workers(filter: $filter29, order: $order19, first: $first19, offset: $offset19) {
             id
             name
             availability
           }
         }
-        tasks(filter: $filter36, order: $order21, first: $first21, offset: $offset21) {
+        tasks(filter: $filter36, order: $order24, first: $first24, offset: $offset24) {
           id
           project(filter: $filter31) {
             id
@@ -8229,7 +8454,7 @@ export const AddCommentDocument = gql`
             title
           }
           title
-          workers(filter: $filter33, order: $order18, first: $first18, offset: $offset18) {
+          workers(filter: $filter33, order: $order21, first: $first21, offset: $offset21) {
             id
             name
             availability
@@ -8239,17 +8464,17 @@ export const AddCommentDocument = gql`
           content
           priority
           complete
-          likes(filter: $filter34, order: $order19, first: $first19, offset: $offset19) {
+          likes(filter: $filter34, order: $order22, first: $first22, offset: $offset22) {
             id
             name
             availability
           }
-          comments(filter: $filter35, order: $order20, first: $first20, offset: $offset20) {
+          comments(filter: $filter35, order: $order23, first: $first23, offset: $offset23) {
             id
             content
           }
         }
-        liked(filter: $filter42, order: $order25, first: $first25, offset: $offset25) {
+        liked(filter: $filter42, order: $order28, first: $first28, offset: $offset28) {
           id
           project(filter: $filter37) {
             id
@@ -8261,7 +8486,7 @@ export const AddCommentDocument = gql`
             title
           }
           title
-          workers(filter: $filter39, order: $order22, first: $first22, offset: $offset22) {
+          workers(filter: $filter39, order: $order25, first: $first25, offset: $offset25) {
             id
             name
             availability
@@ -8271,12 +8496,12 @@ export const AddCommentDocument = gql`
           content
           priority
           complete
-          likes(filter: $filter40, order: $order23, first: $first23, offset: $offset23) {
+          likes(filter: $filter40, order: $order26, first: $first26, offset: $offset26) {
             id
             name
             availability
           }
-          comments(filter: $filter41, order: $order24, first: $first24, offset: $offset24) {
+          comments(filter: $filter41, order: $order27, first: $first27, offset: $offset27) {
             id
             content
           }
@@ -8284,6 +8509,7 @@ export const AddCommentDocument = gql`
       }
       content
     }
+    numUids
   }
 }
     `;
@@ -8308,13 +8534,13 @@ export function withAddComment<TProps, TChildProps = {}>(operationOptions?: Apol
 export type AddCommentMutationResult = ApolloReactCommon.MutationResult<AddCommentMutation>;
 export type AddCommentMutationOptions = ApolloReactCommon.BaseMutationOptions<AddCommentMutation, AddCommentMutationVariables>;
 export const AddProjectDocument = gql`
-    mutation addProject($filter: TaskFilter, $order: TaskOrder, $first: Int, $offset: Int, $filter1: BoardFilter, $order1: BoardOrder, $first1: Int, $offset1: Int, $filter2: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter3: ProjectFilter, $filter4: ProjectFilter, $filter5: UserFilter, $filter6: TagFilter, $order3: TagOrder, $first3: Int, $offset3: Int, $filter7: TaskFilter, $order4: TaskOrder, $first4: Int, $offset4: Int, $filter8: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter9: WorkerFilter, $order6: WorkerOrder, $first6: Int, $offset6: Int, $filter10: TagFilter, $order7: TagOrder, $first7: Int, $offset7: Int, $filter11: ProjectFilter, $order8: ProjectOrder, $first8: Int, $offset8: Int, $input: [AddProjectInput!]!) {
+    mutation addProject($filter: TaskFilter, $order: TaskOrder, $first: Int, $offset: Int, $filter1: BoardFilter, $order1: BoardOrder, $first1: Int, $offset1: Int, $filter2: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter3: ProjectFilter, $filter4: ProjectFilter, $filter5: UserFilter, $order3: UserOrder, $first3: Int, $offset3: Int, $filter6: TagFilter, $order4: TagOrder, $first4: Int, $offset4: Int, $filter7: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter8: TaskFilter, $order6: TaskOrder, $first6: Int, $offset6: Int, $filter9: WorkerFilter, $order7: WorkerOrder, $first7: Int, $offset7: Int, $filter10: TagFilter, $order8: TagOrder, $first8: Int, $offset8: Int, $filter11: ProjectFilter, $order9: ProjectOrder, $first9: Int, $offset9: Int, $input: [AddProjectInput!]!) {
   addProject(input: $input) {
-    project(filter: $filter11, order: $order8, first: $first8, offset: $offset8) {
+    project(filter: $filter11, order: $order9, first: $first9, offset: $offset9) {
       id
       title
       description
-      tags(filter: $filter10, order: $order7, first: $first7, offset: $offset7) {
+      tags(filter: $filter10, order: $order8, first: $first8, offset: $offset8) {
         id
         title
         project(filter: $filter3) {
@@ -8341,7 +8567,7 @@ export const AddProjectDocument = gql`
             availability
           }
         }
-        workers(filter: $filter9, order: $order6, first: $first6, offset: $offset6) {
+        workers(filter: $filter9, order: $order7, first: $first7, offset: $offset7) {
           id
           project(filter: $filter4) {
             id
@@ -8350,17 +8576,17 @@ export const AddProjectDocument = gql`
           }
           name
           availability
-          user(filter: $filter5) {
+          user(filter: $filter5, order: $order3, first: $first3, offset: $offset3) {
             id
             username
             password
             location
           }
-          tags(filter: $filter6, order: $order3, first: $first3, offset: $offset3) {
+          tags(filter: $filter6, order: $order4, first: $first4, offset: $offset4) {
             id
             title
           }
-          tasks(filter: $filter7, order: $order4, first: $first4, offset: $offset4) {
+          tasks(filter: $filter7, order: $order5, first: $first5, offset: $offset5) {
             id
             title
             hours
@@ -8369,7 +8595,7 @@ export const AddProjectDocument = gql`
             priority
             complete
           }
-          liked(filter: $filter8, order: $order5, first: $first5, offset: $offset5) {
+          liked(filter: $filter8, order: $order6, first: $first6, offset: $offset6) {
             id
             title
             hours
@@ -8381,6 +8607,7 @@ export const AddProjectDocument = gql`
         }
       }
     }
+    numUids
   }
 }
     `;
@@ -8405,9 +8632,9 @@ export function withAddProject<TProps, TChildProps = {}>(operationOptions?: Apol
 export type AddProjectMutationResult = ApolloReactCommon.MutationResult<AddProjectMutation>;
 export type AddProjectMutationOptions = ApolloReactCommon.BaseMutationOptions<AddProjectMutation, AddProjectMutationVariables>;
 export const AddTagDocument = gql`
-    mutation addTag($filter: ProjectFilter, $filter1: WorkerFilter, $order: WorkerOrder, $first: Int, $offset: Int, $filter2: TagFilter, $order1: TagOrder, $first1: Int, $offset1: Int, $filter3: ProjectFilter, $filter4: ColumnFilter, $filter5: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter6: WorkerFilter, $order3: WorkerOrder, $first3: Int, $offset3: Int, $filter7: CommentFilter, $order4: CommentOrder, $first4: Int, $offset4: Int, $filter8: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter9: ProjectFilter, $filter10: ColumnFilter, $order6: ColumnOrder, $first6: Int, $offset6: Int, $filter11: BoardFilter, $order7: BoardOrder, $first7: Int, $offset7: Int, $filter12: ProjectFilter, $filter13: UserFilter, $filter14: TagFilter, $order8: TagOrder, $first8: Int, $offset8: Int, $filter15: TaskFilter, $order9: TaskOrder, $first9: Int, $offset9: Int, $filter16: TaskFilter, $order10: TaskOrder, $first10: Int, $offset10: Int, $filter17: WorkerFilter, $order11: WorkerOrder, $first11: Int, $offset11: Int, $filter18: ProjectFilter, $filter19: WorkerFilter, $order12: WorkerOrder, $first12: Int, $offset12: Int, $filter20: TagFilter, $order13: TagOrder, $first13: Int, $offset13: Int, $input: [AddTagInput!]!) {
+    mutation addTag($filter: ProjectFilter, $filter1: WorkerFilter, $order: WorkerOrder, $first: Int, $offset: Int, $filter2: TagFilter, $order1: TagOrder, $first1: Int, $offset1: Int, $filter3: ProjectFilter, $filter4: ColumnFilter, $filter5: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter6: WorkerFilter, $order3: WorkerOrder, $first3: Int, $offset3: Int, $filter7: CommentFilter, $order4: CommentOrder, $first4: Int, $offset4: Int, $filter8: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter9: ProjectFilter, $filter10: ColumnFilter, $order6: ColumnOrder, $first6: Int, $offset6: Int, $filter11: BoardFilter, $order7: BoardOrder, $first7: Int, $offset7: Int, $filter12: ProjectFilter, $filter13: UserFilter, $order8: UserOrder, $first8: Int, $offset8: Int, $filter14: TagFilter, $order9: TagOrder, $first9: Int, $offset9: Int, $filter15: TaskFilter, $order10: TaskOrder, $first10: Int, $offset10: Int, $filter16: TaskFilter, $order11: TaskOrder, $first11: Int, $offset11: Int, $filter17: WorkerFilter, $order12: WorkerOrder, $first12: Int, $offset12: Int, $filter18: ProjectFilter, $filter19: WorkerFilter, $order13: WorkerOrder, $first13: Int, $offset13: Int, $filter20: TagFilter, $order14: TagOrder, $first14: Int, $offset14: Int, $input: [AddTagInput!]!) {
   addTag(input: $input) {
-    tag(filter: $filter20, order: $order13, first: $first13, offset: $offset13) {
+    tag(filter: $filter20, order: $order14, first: $first14, offset: $offset14) {
       id
       title
       project(filter: $filter18) {
@@ -8474,7 +8701,7 @@ export const AddTagDocument = gql`
           }
           order
         }
-        workers(filter: $filter17, order: $order11, first: $first11, offset: $offset11) {
+        workers(filter: $filter17, order: $order12, first: $first12, offset: $offset12) {
           id
           project(filter: $filter12) {
             id
@@ -8483,17 +8710,17 @@ export const AddTagDocument = gql`
           }
           name
           availability
-          user(filter: $filter13) {
+          user(filter: $filter13, order: $order8, first: $first8, offset: $offset8) {
             id
             username
             password
             location
           }
-          tags(filter: $filter14, order: $order8, first: $first8, offset: $offset8) {
+          tags(filter: $filter14, order: $order9, first: $first9, offset: $offset9) {
             id
             title
           }
-          tasks(filter: $filter15, order: $order9, first: $first9, offset: $offset9) {
+          tasks(filter: $filter15, order: $order10, first: $first10, offset: $offset10) {
             id
             title
             hours
@@ -8502,7 +8729,7 @@ export const AddTagDocument = gql`
             priority
             complete
           }
-          liked(filter: $filter16, order: $order10, first: $first10, offset: $offset10) {
+          liked(filter: $filter16, order: $order11, first: $first11, offset: $offset11) {
             id
             title
             hours
@@ -8513,12 +8740,13 @@ export const AddTagDocument = gql`
           }
         }
       }
-      workers(filter: $filter19, order: $order12, first: $first12, offset: $offset12) {
+      workers(filter: $filter19, order: $order13, first: $first13, offset: $offset13) {
         id
         name
         availability
       }
     }
+    numUids
   }
 }
     `;
@@ -8543,9 +8771,9 @@ export function withAddTag<TProps, TChildProps = {}>(operationOptions?: ApolloRe
 export type AddTagMutationResult = ApolloReactCommon.MutationResult<AddTagMutation>;
 export type AddTagMutationOptions = ApolloReactCommon.BaseMutationOptions<AddTagMutation, AddTagMutationVariables>;
 export const AddTaskDocument = gql`
-    mutation addTask($filter: ProjectFilter, $filter1: WorkerFilter, $order: WorkerOrder, $first: Int, $offset: Int, $filter2: TagFilter, $order1: TagOrder, $first1: Int, $offset1: Int, $filter3: ProjectFilter, $filter4: ColumnFilter, $filter5: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter6: WorkerFilter, $order3: WorkerOrder, $first3: Int, $offset3: Int, $filter7: CommentFilter, $order4: CommentOrder, $first4: Int, $offset4: Int, $filter8: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter9: ProjectFilter, $filter10: ColumnFilter, $order6: ColumnOrder, $first6: Int, $offset6: Int, $filter11: BoardFilter, $order7: BoardOrder, $first7: Int, $offset7: Int, $filter12: ProjectFilter, $filter13: UserFilter, $filter14: TagFilter, $order8: TagOrder, $first8: Int, $offset8: Int, $filter15: TaskFilter, $order9: TaskOrder, $first9: Int, $offset9: Int, $filter16: TaskFilter, $order10: TaskOrder, $first10: Int, $offset10: Int, $filter17: WorkerFilter, $order11: WorkerOrder, $first11: Int, $offset11: Int, $filter18: ProjectFilter, $filter19: ProjectFilter, $filter20: ColumnFilter, $order12: ColumnOrder, $first12: Int, $offset12: Int, $filter21: BoardFilter, $filter22: TaskFilter, $order13: TaskOrder, $first13: Int, $offset13: Int, $filter23: ColumnFilter, $filter24: WorkerFilter, $order14: WorkerOrder, $first14: Int, $offset14: Int, $filter25: ProjectFilter, $filter26: WorkerFilter, $order15: WorkerOrder, $first15: Int, $offset15: Int, $filter27: TaskFilter, $order16: TaskOrder, $first16: Int, $offset16: Int, $filter28: UserFilter, $filter29: TagFilter, $order17: TagOrder, $first17: Int, $offset17: Int, $filter30: TaskFilter, $order18: TaskOrder, $first18: Int, $offset18: Int, $filter31: ProjectFilter, $filter32: ColumnFilter, $filter33: WorkerFilter, $order19: WorkerOrder, $first19: Int, $offset19: Int, $filter34: WorkerFilter, $order20: WorkerOrder, $first20: Int, $offset20: Int, $filter35: CommentFilter, $order21: CommentOrder, $first21: Int, $offset21: Int, $filter36: TaskFilter, $order22: TaskOrder, $first22: Int, $offset22: Int, $filter37: WorkerFilter, $order23: WorkerOrder, $first23: Int, $offset23: Int, $filter38: TaskFilter, $filter39: ProjectFilter, $filter40: UserFilter, $filter41: TagFilter, $order24: TagOrder, $first24: Int, $offset24: Int, $filter42: TaskFilter, $order25: TaskOrder, $first25: Int, $offset25: Int, $filter43: TaskFilter, $order26: TaskOrder, $first26: Int, $offset26: Int, $filter44: WorkerFilter, $filter45: CommentFilter, $order27: CommentOrder, $first27: Int, $offset27: Int, $filter46: TaskFilter, $order28: TaskOrder, $first28: Int, $offset28: Int, $input: [AddTaskInput!]!) {
+    mutation addTask($filter: ProjectFilter, $filter1: WorkerFilter, $order: WorkerOrder, $first: Int, $offset: Int, $filter2: TagFilter, $order1: TagOrder, $first1: Int, $offset1: Int, $filter3: ProjectFilter, $filter4: ColumnFilter, $filter5: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter6: WorkerFilter, $order3: WorkerOrder, $first3: Int, $offset3: Int, $filter7: CommentFilter, $order4: CommentOrder, $first4: Int, $offset4: Int, $filter8: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter9: ProjectFilter, $filter10: ColumnFilter, $order6: ColumnOrder, $first6: Int, $offset6: Int, $filter11: BoardFilter, $order7: BoardOrder, $first7: Int, $offset7: Int, $filter12: ProjectFilter, $filter13: UserFilter, $order8: UserOrder, $first8: Int, $offset8: Int, $filter14: TagFilter, $order9: TagOrder, $first9: Int, $offset9: Int, $filter15: TaskFilter, $order10: TaskOrder, $first10: Int, $offset10: Int, $filter16: TaskFilter, $order11: TaskOrder, $first11: Int, $offset11: Int, $filter17: WorkerFilter, $order12: WorkerOrder, $first12: Int, $offset12: Int, $filter18: ProjectFilter, $filter19: ProjectFilter, $filter20: ColumnFilter, $order13: ColumnOrder, $first13: Int, $offset13: Int, $filter21: BoardFilter, $filter22: TaskFilter, $order14: TaskOrder, $first14: Int, $offset14: Int, $filter23: ColumnFilter, $filter24: WorkerFilter, $order15: WorkerOrder, $first15: Int, $offset15: Int, $filter25: ProjectFilter, $filter26: WorkerFilter, $order16: WorkerOrder, $first16: Int, $offset16: Int, $filter27: TaskFilter, $order17: TaskOrder, $first17: Int, $offset17: Int, $filter28: UserFilter, $order18: UserOrder, $first18: Int, $offset18: Int, $filter29: TagFilter, $order19: TagOrder, $first19: Int, $offset19: Int, $filter30: TaskFilter, $order20: TaskOrder, $first20: Int, $offset20: Int, $filter31: ProjectFilter, $filter32: ColumnFilter, $filter33: WorkerFilter, $order21: WorkerOrder, $first21: Int, $offset21: Int, $filter34: WorkerFilter, $order22: WorkerOrder, $first22: Int, $offset22: Int, $filter35: CommentFilter, $order23: CommentOrder, $first23: Int, $offset23: Int, $filter36: TaskFilter, $order24: TaskOrder, $first24: Int, $offset24: Int, $filter37: WorkerFilter, $order25: WorkerOrder, $first25: Int, $offset25: Int, $filter38: TaskFilter, $filter39: ProjectFilter, $filter40: UserFilter, $order26: UserOrder, $first26: Int, $offset26: Int, $filter41: TagFilter, $order27: TagOrder, $first27: Int, $offset27: Int, $filter42: TaskFilter, $order28: TaskOrder, $first28: Int, $offset28: Int, $filter43: TaskFilter, $order29: TaskOrder, $first29: Int, $offset29: Int, $filter44: WorkerFilter, $filter45: CommentFilter, $order30: CommentOrder, $first30: Int, $offset30: Int, $filter46: TaskFilter, $order31: TaskOrder, $first31: Int, $offset31: Int, $input: [AddTaskInput!]!) {
   addTask(input: $input) {
-    task(filter: $filter46, order: $order28, first: $first28, offset: $offset28) {
+    task(filter: $filter46, order: $order31, first: $first31, offset: $offset31) {
       id
       project(filter: $filter18) {
         id
@@ -8611,7 +8839,7 @@ export const AddTaskDocument = gql`
           }
           order
         }
-        workers(filter: $filter17, order: $order11, first: $first11, offset: $offset11) {
+        workers(filter: $filter17, order: $order12, first: $first12, offset: $offset12) {
           id
           project(filter: $filter12) {
             id
@@ -8620,17 +8848,17 @@ export const AddTaskDocument = gql`
           }
           name
           availability
-          user(filter: $filter13) {
+          user(filter: $filter13, order: $order8, first: $first8, offset: $offset8) {
             id
             username
             password
             location
           }
-          tags(filter: $filter14, order: $order8, first: $first8, offset: $offset8) {
+          tags(filter: $filter14, order: $order9, first: $first9, offset: $offset9) {
             id
             title
           }
-          tasks(filter: $filter15, order: $order9, first: $first9, offset: $offset9) {
+          tasks(filter: $filter15, order: $order10, first: $first10, offset: $offset10) {
             id
             title
             hours
@@ -8639,7 +8867,7 @@ export const AddTaskDocument = gql`
             priority
             complete
           }
-          liked(filter: $filter16, order: $order10, first: $first10, offset: $offset10) {
+          liked(filter: $filter16, order: $order11, first: $first11, offset: $offset11) {
             id
             title
             hours
@@ -8660,14 +8888,14 @@ export const AddTaskDocument = gql`
             description
           }
           title
-          columns(filter: $filter20, order: $order12, first: $first12, offset: $offset12) {
+          columns(filter: $filter20, order: $order13, first: $first13, offset: $offset13) {
             id
             title
           }
           order
         }
         title
-        tasks(filter: $filter22, order: $order13, first: $first13, offset: $offset13) {
+        tasks(filter: $filter22, order: $order14, first: $first14, offset: $offset14) {
           id
           title
           hours
@@ -8678,7 +8906,7 @@ export const AddTaskDocument = gql`
         }
       }
       title
-      workers(filter: $filter24, order: $order14, first: $first14, offset: $offset14) {
+      workers(filter: $filter24, order: $order15, first: $first15, offset: $offset15) {
         id
         name
         availability
@@ -8688,7 +8916,7 @@ export const AddTaskDocument = gql`
       content
       priority
       complete
-      likes(filter: $filter37, order: $order23, first: $first23, offset: $offset23) {
+      likes(filter: $filter37, order: $order25, first: $first25, offset: $offset25) {
         id
         project(filter: $filter25) {
           id
@@ -8697,17 +8925,17 @@ export const AddTaskDocument = gql`
         }
         name
         availability
-        user(filter: $filter28) {
+        user(filter: $filter28, order: $order18, first: $first18, offset: $offset18) {
           id
           username
           password
           location
-          roles(filter: $filter26, order: $order15, first: $first15, offset: $offset15) {
+          roles(filter: $filter26, order: $order16, first: $first16, offset: $offset16) {
             id
             name
             availability
           }
-          stars(filter: $filter27, order: $order16, first: $first16, offset: $offset16) {
+          stars(filter: $filter27, order: $order17, first: $first17, offset: $offset17) {
             id
             title
             hours
@@ -8717,11 +8945,11 @@ export const AddTaskDocument = gql`
             complete
           }
         }
-        tags(filter: $filter29, order: $order17, first: $first17, offset: $offset17) {
+        tags(filter: $filter29, order: $order19, first: $first19, offset: $offset19) {
           id
           title
         }
-        tasks(filter: $filter30, order: $order18, first: $first18, offset: $offset18) {
+        tasks(filter: $filter30, order: $order20, first: $first20, offset: $offset20) {
           id
           title
           hours
@@ -8730,7 +8958,7 @@ export const AddTaskDocument = gql`
           priority
           complete
         }
-        liked(filter: $filter36, order: $order22, first: $first22, offset: $offset22) {
+        liked(filter: $filter36, order: $order24, first: $first24, offset: $offset24) {
           id
           project(filter: $filter31) {
             id
@@ -8742,7 +8970,7 @@ export const AddTaskDocument = gql`
             title
           }
           title
-          workers(filter: $filter33, order: $order19, first: $first19, offset: $offset19) {
+          workers(filter: $filter33, order: $order21, first: $first21, offset: $offset21) {
             id
             name
             availability
@@ -8752,18 +8980,18 @@ export const AddTaskDocument = gql`
           content
           priority
           complete
-          likes(filter: $filter34, order: $order20, first: $first20, offset: $offset20) {
+          likes(filter: $filter34, order: $order22, first: $first22, offset: $offset22) {
             id
             name
             availability
           }
-          comments(filter: $filter35, order: $order21, first: $first21, offset: $offset21) {
+          comments(filter: $filter35, order: $order23, first: $first23, offset: $offset23) {
             id
             content
           }
         }
       }
-      comments(filter: $filter45, order: $order27, first: $first27, offset: $offset27) {
+      comments(filter: $filter45, order: $order30, first: $first30, offset: $offset30) {
         id
         task(filter: $filter38) {
           id
@@ -8783,17 +9011,17 @@ export const AddTaskDocument = gql`
           }
           name
           availability
-          user(filter: $filter40) {
+          user(filter: $filter40, order: $order26, first: $first26, offset: $offset26) {
             id
             username
             password
             location
           }
-          tags(filter: $filter41, order: $order24, first: $first24, offset: $offset24) {
+          tags(filter: $filter41, order: $order27, first: $first27, offset: $offset27) {
             id
             title
           }
-          tasks(filter: $filter42, order: $order25, first: $first25, offset: $offset25) {
+          tasks(filter: $filter42, order: $order28, first: $first28, offset: $offset28) {
             id
             title
             hours
@@ -8802,7 +9030,7 @@ export const AddTaskDocument = gql`
             priority
             complete
           }
-          liked(filter: $filter43, order: $order26, first: $first26, offset: $offset26) {
+          liked(filter: $filter43, order: $order29, first: $first29, offset: $offset29) {
             id
             title
             hours
@@ -8815,6 +9043,7 @@ export const AddTaskDocument = gql`
         content
       }
     }
+    numUids
   }
 }
     `;
@@ -8839,14 +9068,14 @@ export function withAddTask<TProps, TChildProps = {}>(operationOptions?: ApolloR
 export type AddTaskMutationResult = ApolloReactCommon.MutationResult<AddTaskMutation>;
 export type AddTaskMutationOptions = ApolloReactCommon.BaseMutationOptions<AddTaskMutation, AddTaskMutationVariables>;
 export const AddUserDocument = gql`
-    mutation addUser($filter: TagFilter, $order: TagOrder, $first: Int, $offset: Int, $filter1: TaskFilter, $order1: TaskOrder, $first1: Int, $offset1: Int, $filter2: BoardFilter, $order2: BoardOrder, $first2: Int, $offset2: Int, $filter3: WorkerFilter, $order3: WorkerOrder, $first3: Int, $offset3: Int, $filter4: ProjectFilter, $filter5: TaskFilter, $order4: TaskOrder, $first4: Int, $offset4: Int, $filter6: UserFilter, $filter7: ProjectFilter, $filter8: WorkerFilter, $order5: WorkerOrder, $first5: Int, $offset5: Int, $filter9: TagFilter, $order6: TagOrder, $first6: Int, $offset6: Int, $filter10: ProjectFilter, $filter11: ColumnFilter, $filter12: WorkerFilter, $order7: WorkerOrder, $first7: Int, $offset7: Int, $filter13: WorkerFilter, $order8: WorkerOrder, $first8: Int, $offset8: Int, $filter14: CommentFilter, $order9: CommentOrder, $first9: Int, $offset9: Int, $filter15: TaskFilter, $order10: TaskOrder, $first10: Int, $offset10: Int, $filter16: ProjectFilter, $filter17: ColumnFilter, $filter18: WorkerFilter, $order11: WorkerOrder, $first11: Int, $offset11: Int, $filter19: WorkerFilter, $order12: WorkerOrder, $first12: Int, $offset12: Int, $filter20: CommentFilter, $order13: CommentOrder, $first13: Int, $offset13: Int, $filter21: TaskFilter, $order14: TaskOrder, $first14: Int, $offset14: Int, $filter22: WorkerFilter, $order15: WorkerOrder, $first15: Int, $offset15: Int, $filter23: UserFilter, $order16: UserOrder, $first16: Int, $offset16: Int, $input: [AddUserInput!]!) {
+    mutation addUser($filter: TagFilter, $order: TagOrder, $first: Int, $offset: Int, $filter1: TaskFilter, $order1: TaskOrder, $first1: Int, $offset1: Int, $filter2: BoardFilter, $order2: BoardOrder, $first2: Int, $offset2: Int, $filter3: WorkerFilter, $order3: WorkerOrder, $first3: Int, $offset3: Int, $filter4: ProjectFilter, $filter5: TaskFilter, $order4: TaskOrder, $first4: Int, $offset4: Int, $filter6: UserFilter, $order5: UserOrder, $first5: Int, $offset5: Int, $filter7: ProjectFilter, $filter8: WorkerFilter, $order6: WorkerOrder, $first6: Int, $offset6: Int, $filter9: TagFilter, $order7: TagOrder, $first7: Int, $offset7: Int, $filter10: ProjectFilter, $filter11: ColumnFilter, $filter12: WorkerFilter, $order8: WorkerOrder, $first8: Int, $offset8: Int, $filter13: WorkerFilter, $order9: WorkerOrder, $first9: Int, $offset9: Int, $filter14: CommentFilter, $order10: CommentOrder, $first10: Int, $offset10: Int, $filter15: TaskFilter, $order11: TaskOrder, $first11: Int, $offset11: Int, $filter16: ProjectFilter, $filter17: ColumnFilter, $filter18: WorkerFilter, $order12: WorkerOrder, $first12: Int, $offset12: Int, $filter19: WorkerFilter, $order13: WorkerOrder, $first13: Int, $offset13: Int, $filter20: CommentFilter, $order14: CommentOrder, $first14: Int, $offset14: Int, $filter21: TaskFilter, $order15: TaskOrder, $first15: Int, $offset15: Int, $filter22: WorkerFilter, $order16: WorkerOrder, $first16: Int, $offset16: Int, $filter23: UserFilter, $order17: UserOrder, $first17: Int, $offset17: Int, $input: [AddUserInput!]!) {
   addUser(input: $input) {
-    user(filter: $filter23, order: $order16, first: $first16, offset: $offset16) {
+    user(filter: $filter23, order: $order17, first: $first17, offset: $offset17) {
       id
       username
       password
       location
-      roles(filter: $filter22, order: $order15, first: $first15, offset: $offset15) {
+      roles(filter: $filter22, order: $order16, first: $first16, offset: $offset16) {
         id
         project(filter: $filter4) {
           id
@@ -8878,7 +9107,7 @@ export const AddUserDocument = gql`
         }
         name
         availability
-        user(filter: $filter6) {
+        user(filter: $filter6, order: $order5, first: $first5, offset: $offset5) {
           id
           username
           password
@@ -8893,7 +9122,7 @@ export const AddUserDocument = gql`
             complete
           }
         }
-        tags(filter: $filter9, order: $order6, first: $first6, offset: $offset6) {
+        tags(filter: $filter9, order: $order7, first: $first7, offset: $offset7) {
           id
           title
           project(filter: $filter7) {
@@ -8901,13 +9130,13 @@ export const AddUserDocument = gql`
             title
             description
           }
-          workers(filter: $filter8, order: $order5, first: $first5, offset: $offset5) {
+          workers(filter: $filter8, order: $order6, first: $first6, offset: $offset6) {
             id
             name
             availability
           }
         }
-        tasks(filter: $filter15, order: $order10, first: $first10, offset: $offset10) {
+        tasks(filter: $filter15, order: $order11, first: $first11, offset: $offset11) {
           id
           project(filter: $filter10) {
             id
@@ -8919,7 +9148,7 @@ export const AddUserDocument = gql`
             title
           }
           title
-          workers(filter: $filter12, order: $order7, first: $first7, offset: $offset7) {
+          workers(filter: $filter12, order: $order8, first: $first8, offset: $offset8) {
             id
             name
             availability
@@ -8929,17 +9158,17 @@ export const AddUserDocument = gql`
           content
           priority
           complete
-          likes(filter: $filter13, order: $order8, first: $first8, offset: $offset8) {
+          likes(filter: $filter13, order: $order9, first: $first9, offset: $offset9) {
             id
             name
             availability
           }
-          comments(filter: $filter14, order: $order9, first: $first9, offset: $offset9) {
+          comments(filter: $filter14, order: $order10, first: $first10, offset: $offset10) {
             id
             content
           }
         }
-        liked(filter: $filter21, order: $order14, first: $first14, offset: $offset14) {
+        liked(filter: $filter21, order: $order15, first: $first15, offset: $offset15) {
           id
           project(filter: $filter16) {
             id
@@ -8951,7 +9180,7 @@ export const AddUserDocument = gql`
             title
           }
           title
-          workers(filter: $filter18, order: $order11, first: $first11, offset: $offset11) {
+          workers(filter: $filter18, order: $order12, first: $first12, offset: $offset12) {
             id
             name
             availability
@@ -8961,18 +9190,19 @@ export const AddUserDocument = gql`
           content
           priority
           complete
-          likes(filter: $filter19, order: $order12, first: $first12, offset: $offset12) {
+          likes(filter: $filter19, order: $order13, first: $first13, offset: $offset13) {
             id
             name
             availability
           }
-          comments(filter: $filter20, order: $order13, first: $first13, offset: $offset13) {
+          comments(filter: $filter20, order: $order14, first: $first14, offset: $offset14) {
             id
             content
           }
         }
       }
     }
+    numUids
   }
 }
     `;
@@ -8997,9 +9227,9 @@ export function withAddUser<TProps, TChildProps = {}>(operationOptions?: ApolloR
 export type AddUserMutationResult = ApolloReactCommon.MutationResult<AddUserMutation>;
 export type AddUserMutationOptions = ApolloReactCommon.BaseMutationOptions<AddUserMutation, AddUserMutationVariables>;
 export const AddWorkerDocument = gql`
-    mutation addWorker($filter: ProjectFilter, $filter1: WorkerFilter, $order: WorkerOrder, $first: Int, $offset: Int, $filter2: TagFilter, $order1: TagOrder, $first1: Int, $offset1: Int, $filter3: ProjectFilter, $filter4: ColumnFilter, $filter5: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter6: WorkerFilter, $order3: WorkerOrder, $first3: Int, $offset3: Int, $filter7: CommentFilter, $order4: CommentOrder, $first4: Int, $offset4: Int, $filter8: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter9: ProjectFilter, $filter10: ColumnFilter, $order6: ColumnOrder, $first6: Int, $offset6: Int, $filter11: BoardFilter, $order7: BoardOrder, $first7: Int, $offset7: Int, $filter12: ProjectFilter, $filter13: UserFilter, $filter14: TagFilter, $order8: TagOrder, $first8: Int, $offset8: Int, $filter15: TaskFilter, $order9: TaskOrder, $first9: Int, $offset9: Int, $filter16: TaskFilter, $order10: TaskOrder, $first10: Int, $offset10: Int, $filter17: WorkerFilter, $order11: WorkerOrder, $first11: Int, $offset11: Int, $filter18: ProjectFilter, $filter19: ProjectFilter, $filter20: UserFilter, $filter21: TagFilter, $order12: TagOrder, $first12: Int, $offset12: Int, $filter22: TaskFilter, $order13: TaskOrder, $first13: Int, $offset13: Int, $filter23: TaskFilter, $order14: TaskOrder, $first14: Int, $offset14: Int, $filter24: WorkerFilter, $order15: WorkerOrder, $first15: Int, $offset15: Int, $filter25: ProjectFilter, $filter26: ColumnFilter, $filter27: WorkerFilter, $order16: WorkerOrder, $first16: Int, $offset16: Int, $filter28: WorkerFilter, $order17: WorkerOrder, $first17: Int, $offset17: Int, $filter29: CommentFilter, $order18: CommentOrder, $first18: Int, $offset18: Int, $filter30: TaskFilter, $order19: TaskOrder, $first19: Int, $offset19: Int, $filter31: UserFilter, $filter32: TagFilter, $order20: TagOrder, $first20: Int, $offset20: Int, $filter33: TaskFilter, $order21: TaskOrder, $first21: Int, $offset21: Int, $filter34: ProjectFilter, $filter35: BoardFilter, $filter36: TaskFilter, $order22: TaskOrder, $first22: Int, $offset22: Int, $filter37: ColumnFilter, $filter38: WorkerFilter, $order23: WorkerOrder, $first23: Int, $offset23: Int, $filter39: ProjectFilter, $filter40: UserFilter, $filter41: TagFilter, $order24: TagOrder, $first24: Int, $offset24: Int, $filter42: TaskFilter, $order25: TaskOrder, $first25: Int, $offset25: Int, $filter43: TaskFilter, $order26: TaskOrder, $first26: Int, $offset26: Int, $filter44: WorkerFilter, $order27: WorkerOrder, $first27: Int, $offset27: Int, $filter45: TaskFilter, $filter46: WorkerFilter, $filter47: CommentFilter, $order28: CommentOrder, $first28: Int, $offset28: Int, $filter48: TaskFilter, $order29: TaskOrder, $first29: Int, $offset29: Int, $filter49: WorkerFilter, $order30: WorkerOrder, $first30: Int, $offset30: Int, $input: [AddWorkerInput!]!) {
+    mutation addWorker($filter: ProjectFilter, $filter1: WorkerFilter, $order: WorkerOrder, $first: Int, $offset: Int, $filter2: TagFilter, $order1: TagOrder, $first1: Int, $offset1: Int, $filter3: ProjectFilter, $filter4: ColumnFilter, $filter5: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter6: WorkerFilter, $order3: WorkerOrder, $first3: Int, $offset3: Int, $filter7: CommentFilter, $order4: CommentOrder, $first4: Int, $offset4: Int, $filter8: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter9: ProjectFilter, $filter10: ColumnFilter, $order6: ColumnOrder, $first6: Int, $offset6: Int, $filter11: BoardFilter, $order7: BoardOrder, $first7: Int, $offset7: Int, $filter12: ProjectFilter, $filter13: UserFilter, $order8: UserOrder, $first8: Int, $offset8: Int, $filter14: TagFilter, $order9: TagOrder, $first9: Int, $offset9: Int, $filter15: TaskFilter, $order10: TaskOrder, $first10: Int, $offset10: Int, $filter16: TaskFilter, $order11: TaskOrder, $first11: Int, $offset11: Int, $filter17: WorkerFilter, $order12: WorkerOrder, $first12: Int, $offset12: Int, $filter18: ProjectFilter, $filter19: ProjectFilter, $filter20: UserFilter, $order13: UserOrder, $first13: Int, $offset13: Int, $filter21: TagFilter, $order14: TagOrder, $first14: Int, $offset14: Int, $filter22: TaskFilter, $order15: TaskOrder, $first15: Int, $offset15: Int, $filter23: TaskFilter, $order16: TaskOrder, $first16: Int, $offset16: Int, $filter24: WorkerFilter, $order17: WorkerOrder, $first17: Int, $offset17: Int, $filter25: ProjectFilter, $filter26: ColumnFilter, $filter27: WorkerFilter, $order18: WorkerOrder, $first18: Int, $offset18: Int, $filter28: WorkerFilter, $order19: WorkerOrder, $first19: Int, $offset19: Int, $filter29: CommentFilter, $order20: CommentOrder, $first20: Int, $offset20: Int, $filter30: TaskFilter, $order21: TaskOrder, $first21: Int, $offset21: Int, $filter31: UserFilter, $order22: UserOrder, $first22: Int, $offset22: Int, $filter32: TagFilter, $order23: TagOrder, $first23: Int, $offset23: Int, $filter33: TaskFilter, $order24: TaskOrder, $first24: Int, $offset24: Int, $filter34: ProjectFilter, $filter35: BoardFilter, $filter36: TaskFilter, $order25: TaskOrder, $first25: Int, $offset25: Int, $filter37: ColumnFilter, $filter38: WorkerFilter, $order26: WorkerOrder, $first26: Int, $offset26: Int, $filter39: ProjectFilter, $filter40: UserFilter, $order27: UserOrder, $first27: Int, $offset27: Int, $filter41: TagFilter, $order28: TagOrder, $first28: Int, $offset28: Int, $filter42: TaskFilter, $order29: TaskOrder, $first29: Int, $offset29: Int, $filter43: TaskFilter, $order30: TaskOrder, $first30: Int, $offset30: Int, $filter44: WorkerFilter, $order31: WorkerOrder, $first31: Int, $offset31: Int, $filter45: TaskFilter, $filter46: WorkerFilter, $filter47: CommentFilter, $order32: CommentOrder, $first32: Int, $offset32: Int, $filter48: TaskFilter, $order33: TaskOrder, $first33: Int, $offset33: Int, $filter49: WorkerFilter, $order34: WorkerOrder, $first34: Int, $offset34: Int, $input: [AddWorkerInput!]!) {
   addWorker(input: $input) {
-    worker(filter: $filter49, order: $order30, first: $first30, offset: $offset30) {
+    worker(filter: $filter49, order: $order34, first: $first34, offset: $offset34) {
       id
       project(filter: $filter18) {
         id
@@ -9065,7 +9295,7 @@ export const AddWorkerDocument = gql`
           }
           order
         }
-        workers(filter: $filter17, order: $order11, first: $first11, offset: $offset11) {
+        workers(filter: $filter17, order: $order12, first: $first12, offset: $offset12) {
           id
           project(filter: $filter12) {
             id
@@ -9074,17 +9304,17 @@ export const AddWorkerDocument = gql`
           }
           name
           availability
-          user(filter: $filter13) {
+          user(filter: $filter13, order: $order8, first: $first8, offset: $offset8) {
             id
             username
             password
             location
           }
-          tags(filter: $filter14, order: $order8, first: $first8, offset: $offset8) {
+          tags(filter: $filter14, order: $order9, first: $first9, offset: $offset9) {
             id
             title
           }
-          tasks(filter: $filter15, order: $order9, first: $first9, offset: $offset9) {
+          tasks(filter: $filter15, order: $order10, first: $first10, offset: $offset10) {
             id
             title
             hours
@@ -9093,7 +9323,7 @@ export const AddWorkerDocument = gql`
             priority
             complete
           }
-          liked(filter: $filter16, order: $order10, first: $first10, offset: $offset10) {
+          liked(filter: $filter16, order: $order11, first: $first11, offset: $offset11) {
             id
             title
             hours
@@ -9106,12 +9336,12 @@ export const AddWorkerDocument = gql`
       }
       name
       availability
-      user(filter: $filter31) {
+      user(filter: $filter31, order: $order22, first: $first22, offset: $offset22) {
         id
         username
         password
         location
-        roles(filter: $filter24, order: $order15, first: $first15, offset: $offset15) {
+        roles(filter: $filter24, order: $order17, first: $first17, offset: $offset17) {
           id
           project(filter: $filter19) {
             id
@@ -9120,17 +9350,17 @@ export const AddWorkerDocument = gql`
           }
           name
           availability
-          user(filter: $filter20) {
+          user(filter: $filter20, order: $order13, first: $first13, offset: $offset13) {
             id
             username
             password
             location
           }
-          tags(filter: $filter21, order: $order12, first: $first12, offset: $offset12) {
+          tags(filter: $filter21, order: $order14, first: $first14, offset: $offset14) {
             id
             title
           }
-          tasks(filter: $filter22, order: $order13, first: $first13, offset: $offset13) {
+          tasks(filter: $filter22, order: $order15, first: $first15, offset: $offset15) {
             id
             title
             hours
@@ -9139,7 +9369,7 @@ export const AddWorkerDocument = gql`
             priority
             complete
           }
-          liked(filter: $filter23, order: $order14, first: $first14, offset: $offset14) {
+          liked(filter: $filter23, order: $order16, first: $first16, offset: $offset16) {
             id
             title
             hours
@@ -9149,7 +9379,7 @@ export const AddWorkerDocument = gql`
             complete
           }
         }
-        stars(filter: $filter30, order: $order19, first: $first19, offset: $offset19) {
+        stars(filter: $filter30, order: $order21, first: $first21, offset: $offset21) {
           id
           project(filter: $filter25) {
             id
@@ -9161,7 +9391,7 @@ export const AddWorkerDocument = gql`
             title
           }
           title
-          workers(filter: $filter27, order: $order16, first: $first16, offset: $offset16) {
+          workers(filter: $filter27, order: $order18, first: $first18, offset: $offset18) {
             id
             name
             availability
@@ -9171,22 +9401,22 @@ export const AddWorkerDocument = gql`
           content
           priority
           complete
-          likes(filter: $filter28, order: $order17, first: $first17, offset: $offset17) {
+          likes(filter: $filter28, order: $order19, first: $first19, offset: $offset19) {
             id
             name
             availability
           }
-          comments(filter: $filter29, order: $order18, first: $first18, offset: $offset18) {
+          comments(filter: $filter29, order: $order20, first: $first20, offset: $offset20) {
             id
             content
           }
         }
       }
-      tags(filter: $filter32, order: $order20, first: $first20, offset: $offset20) {
+      tags(filter: $filter32, order: $order23, first: $first23, offset: $offset23) {
         id
         title
       }
-      tasks(filter: $filter33, order: $order21, first: $first21, offset: $offset21) {
+      tasks(filter: $filter33, order: $order24, first: $first24, offset: $offset24) {
         id
         title
         hours
@@ -9195,7 +9425,7 @@ export const AddWorkerDocument = gql`
         priority
         complete
       }
-      liked(filter: $filter48, order: $order29, first: $first29, offset: $offset29) {
+      liked(filter: $filter48, order: $order33, first: $first33, offset: $offset33) {
         id
         project(filter: $filter34) {
           id
@@ -9210,7 +9440,7 @@ export const AddWorkerDocument = gql`
             order
           }
           title
-          tasks(filter: $filter36, order: $order22, first: $first22, offset: $offset22) {
+          tasks(filter: $filter36, order: $order25, first: $first25, offset: $offset25) {
             id
             title
             hours
@@ -9221,7 +9451,7 @@ export const AddWorkerDocument = gql`
           }
         }
         title
-        workers(filter: $filter38, order: $order23, first: $first23, offset: $offset23) {
+        workers(filter: $filter38, order: $order26, first: $first26, offset: $offset26) {
           id
           name
           availability
@@ -9231,7 +9461,7 @@ export const AddWorkerDocument = gql`
         content
         priority
         complete
-        likes(filter: $filter44, order: $order27, first: $first27, offset: $offset27) {
+        likes(filter: $filter44, order: $order31, first: $first31, offset: $offset31) {
           id
           project(filter: $filter39) {
             id
@@ -9240,17 +9470,17 @@ export const AddWorkerDocument = gql`
           }
           name
           availability
-          user(filter: $filter40) {
+          user(filter: $filter40, order: $order27, first: $first27, offset: $offset27) {
             id
             username
             password
             location
           }
-          tags(filter: $filter41, order: $order24, first: $first24, offset: $offset24) {
+          tags(filter: $filter41, order: $order28, first: $first28, offset: $offset28) {
             id
             title
           }
-          tasks(filter: $filter42, order: $order25, first: $first25, offset: $offset25) {
+          tasks(filter: $filter42, order: $order29, first: $first29, offset: $offset29) {
             id
             title
             hours
@@ -9259,7 +9489,7 @@ export const AddWorkerDocument = gql`
             priority
             complete
           }
-          liked(filter: $filter43, order: $order26, first: $first26, offset: $offset26) {
+          liked(filter: $filter43, order: $order30, first: $first30, offset: $offset30) {
             id
             title
             hours
@@ -9269,7 +9499,7 @@ export const AddWorkerDocument = gql`
             complete
           }
         }
-        comments(filter: $filter47, order: $order28, first: $first28, offset: $offset28) {
+        comments(filter: $filter47, order: $order32, first: $first32, offset: $offset32) {
           id
           task(filter: $filter45) {
             id
@@ -9289,6 +9519,7 @@ export const AddWorkerDocument = gql`
         }
       }
     }
+    numUids
   }
 }
     `;
@@ -9316,6 +9547,7 @@ export const DeleteBoardDocument = gql`
     mutation deleteBoard($filter: BoardFilter!) {
   deleteBoard(filter: $filter) {
     msg
+    numUids
   }
 }
     `;
@@ -9343,6 +9575,7 @@ export const DeleteColumnDocument = gql`
     mutation deleteColumn($filter: ColumnFilter!) {
   deleteColumn(filter: $filter) {
     msg
+    numUids
   }
 }
     `;
@@ -9370,6 +9603,7 @@ export const DeleteCommentDocument = gql`
     mutation deleteComment($filter: CommentFilter!) {
   deleteComment(filter: $filter) {
     msg
+    numUids
   }
 }
     `;
@@ -9397,6 +9631,7 @@ export const DeleteProjectDocument = gql`
     mutation deleteProject($filter: ProjectFilter!) {
   deleteProject(filter: $filter) {
     msg
+    numUids
   }
 }
     `;
@@ -9424,6 +9659,7 @@ export const DeleteTagDocument = gql`
     mutation deleteTag($filter: TagFilter!) {
   deleteTag(filter: $filter) {
     msg
+    numUids
   }
 }
     `;
@@ -9451,6 +9687,7 @@ export const DeleteTaskDocument = gql`
     mutation deleteTask($filter: TaskFilter!) {
   deleteTask(filter: $filter) {
     msg
+    numUids
   }
 }
     `;
@@ -9478,6 +9715,7 @@ export const DeleteUserDocument = gql`
     mutation deleteUser($filter: UserFilter!) {
   deleteUser(filter: $filter) {
     msg
+    numUids
   }
 }
     `;
@@ -9505,6 +9743,7 @@ export const DeleteWorkerDocument = gql`
     mutation deleteWorker($filter: WorkerFilter!) {
   deleteWorker(filter: $filter) {
     msg
+    numUids
   }
 }
     `;
@@ -9529,9 +9768,9 @@ export function withDeleteWorker<TProps, TChildProps = {}>(operationOptions?: Ap
 export type DeleteWorkerMutationResult = ApolloReactCommon.MutationResult<DeleteWorkerMutation>;
 export type DeleteWorkerMutationOptions = ApolloReactCommon.BaseMutationOptions<DeleteWorkerMutation, DeleteWorkerMutationVariables>;
 export const UpdateBoardDocument = gql`
-    mutation updateBoard($filter: ProjectFilter, $filter1: WorkerFilter, $order: WorkerOrder, $first: Int, $offset: Int, $filter2: TagFilter, $order1: TagOrder, $first1: Int, $offset1: Int, $filter3: ProjectFilter, $filter4: ColumnFilter, $filter5: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter6: WorkerFilter, $order3: WorkerOrder, $first3: Int, $offset3: Int, $filter7: CommentFilter, $order4: CommentOrder, $first4: Int, $offset4: Int, $filter8: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter9: ProjectFilter, $filter10: ColumnFilter, $order6: ColumnOrder, $first6: Int, $offset6: Int, $filter11: BoardFilter, $order7: BoardOrder, $first7: Int, $offset7: Int, $filter12: ProjectFilter, $filter13: UserFilter, $filter14: TagFilter, $order8: TagOrder, $first8: Int, $offset8: Int, $filter15: TaskFilter, $order9: TaskOrder, $first9: Int, $offset9: Int, $filter16: TaskFilter, $order10: TaskOrder, $first10: Int, $offset10: Int, $filter17: WorkerFilter, $order11: WorkerOrder, $first11: Int, $offset11: Int, $filter18: ProjectFilter, $filter19: BoardFilter, $filter20: TaskFilter, $order12: TaskOrder, $first12: Int, $offset12: Int, $filter21: ColumnFilter, $order13: ColumnOrder, $first13: Int, $offset13: Int, $filter22: BoardFilter, $order14: BoardOrder, $first14: Int, $offset14: Int, $input: UpdateBoardInput!) {
+    mutation updateBoard($filter: ProjectFilter, $filter1: WorkerFilter, $order: WorkerOrder, $first: Int, $offset: Int, $filter2: TagFilter, $order1: TagOrder, $first1: Int, $offset1: Int, $filter3: ProjectFilter, $filter4: ColumnFilter, $filter5: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter6: WorkerFilter, $order3: WorkerOrder, $first3: Int, $offset3: Int, $filter7: CommentFilter, $order4: CommentOrder, $first4: Int, $offset4: Int, $filter8: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter9: ProjectFilter, $filter10: ColumnFilter, $order6: ColumnOrder, $first6: Int, $offset6: Int, $filter11: BoardFilter, $order7: BoardOrder, $first7: Int, $offset7: Int, $filter12: ProjectFilter, $filter13: UserFilter, $order8: UserOrder, $first8: Int, $offset8: Int, $filter14: TagFilter, $order9: TagOrder, $first9: Int, $offset9: Int, $filter15: TaskFilter, $order10: TaskOrder, $first10: Int, $offset10: Int, $filter16: TaskFilter, $order11: TaskOrder, $first11: Int, $offset11: Int, $filter17: WorkerFilter, $order12: WorkerOrder, $first12: Int, $offset12: Int, $filter18: ProjectFilter, $filter19: BoardFilter, $filter20: TaskFilter, $order13: TaskOrder, $first13: Int, $offset13: Int, $filter21: ColumnFilter, $order14: ColumnOrder, $first14: Int, $offset14: Int, $filter22: BoardFilter, $order15: BoardOrder, $first15: Int, $offset15: Int, $input: UpdateBoardInput!) {
   updateBoard(input: $input) {
-    board(filter: $filter22, order: $order14, first: $first14, offset: $offset14) {
+    board(filter: $filter22, order: $order15, first: $first15, offset: $offset15) {
       id
       project(filter: $filter18) {
         id
@@ -9597,7 +9836,7 @@ export const UpdateBoardDocument = gql`
           }
           order
         }
-        workers(filter: $filter17, order: $order11, first: $first11, offset: $offset11) {
+        workers(filter: $filter17, order: $order12, first: $first12, offset: $offset12) {
           id
           project(filter: $filter12) {
             id
@@ -9606,17 +9845,17 @@ export const UpdateBoardDocument = gql`
           }
           name
           availability
-          user(filter: $filter13) {
+          user(filter: $filter13, order: $order8, first: $first8, offset: $offset8) {
             id
             username
             password
             location
           }
-          tags(filter: $filter14, order: $order8, first: $first8, offset: $offset8) {
+          tags(filter: $filter14, order: $order9, first: $first9, offset: $offset9) {
             id
             title
           }
-          tasks(filter: $filter15, order: $order9, first: $first9, offset: $offset9) {
+          tasks(filter: $filter15, order: $order10, first: $first10, offset: $offset10) {
             id
             title
             hours
@@ -9625,7 +9864,7 @@ export const UpdateBoardDocument = gql`
             priority
             complete
           }
-          liked(filter: $filter16, order: $order10, first: $first10, offset: $offset10) {
+          liked(filter: $filter16, order: $order11, first: $first11, offset: $offset11) {
             id
             title
             hours
@@ -9637,7 +9876,7 @@ export const UpdateBoardDocument = gql`
         }
       }
       title
-      columns(filter: $filter21, order: $order13, first: $first13, offset: $offset13) {
+      columns(filter: $filter21, order: $order14, first: $first14, offset: $offset14) {
         id
         board(filter: $filter19) {
           id
@@ -9645,7 +9884,7 @@ export const UpdateBoardDocument = gql`
           order
         }
         title
-        tasks(filter: $filter20, order: $order12, first: $first12, offset: $offset12) {
+        tasks(filter: $filter20, order: $order13, first: $first13, offset: $offset13) {
           id
           title
           hours
@@ -9657,6 +9896,7 @@ export const UpdateBoardDocument = gql`
       }
       order
     }
+    numUids
   }
 }
     `;
@@ -9681,9 +9921,9 @@ export function withUpdateBoard<TProps, TChildProps = {}>(operationOptions?: Apo
 export type UpdateBoardMutationResult = ApolloReactCommon.MutationResult<UpdateBoardMutation>;
 export type UpdateBoardMutationOptions = ApolloReactCommon.BaseMutationOptions<UpdateBoardMutation, UpdateBoardMutationVariables>;
 export const UpdateColumnDocument = gql`
-    mutation updateColumn($filter: TagFilter, $order: TagOrder, $first: Int, $offset: Int, $filter1: TaskFilter, $order1: TaskOrder, $first1: Int, $offset1: Int, $filter2: BoardFilter, $order2: BoardOrder, $first2: Int, $offset2: Int, $filter3: WorkerFilter, $order3: WorkerOrder, $first3: Int, $offset3: Int, $filter4: ProjectFilter, $filter5: BoardFilter, $filter6: TaskFilter, $order4: TaskOrder, $first4: Int, $offset4: Int, $filter7: ColumnFilter, $order5: ColumnOrder, $first5: Int, $offset5: Int, $filter8: BoardFilter, $filter9: ProjectFilter, $filter10: ColumnFilter, $filter11: ProjectFilter, $filter12: UserFilter, $filter13: TagFilter, $order6: TagOrder, $first6: Int, $offset6: Int, $filter14: TaskFilter, $order7: TaskOrder, $first7: Int, $offset7: Int, $filter15: TaskFilter, $order8: TaskOrder, $first8: Int, $offset8: Int, $filter16: WorkerFilter, $order9: WorkerOrder, $first9: Int, $offset9: Int, $filter17: ProjectFilter, $filter18: UserFilter, $filter19: TagFilter, $order10: TagOrder, $first10: Int, $offset10: Int, $filter20: TaskFilter, $order11: TaskOrder, $first11: Int, $offset11: Int, $filter21: TaskFilter, $order12: TaskOrder, $first12: Int, $offset12: Int, $filter22: WorkerFilter, $order13: WorkerOrder, $first13: Int, $offset13: Int, $filter23: TaskFilter, $filter24: WorkerFilter, $filter25: CommentFilter, $order14: CommentOrder, $first14: Int, $offset14: Int, $filter26: TaskFilter, $order15: TaskOrder, $first15: Int, $offset15: Int, $filter27: ColumnFilter, $order16: ColumnOrder, $first16: Int, $offset16: Int, $input: UpdateColumnInput!) {
+    mutation updateColumn($filter: TagFilter, $order: TagOrder, $first: Int, $offset: Int, $filter1: TaskFilter, $order1: TaskOrder, $first1: Int, $offset1: Int, $filter2: BoardFilter, $order2: BoardOrder, $first2: Int, $offset2: Int, $filter3: WorkerFilter, $order3: WorkerOrder, $first3: Int, $offset3: Int, $filter4: ProjectFilter, $filter5: BoardFilter, $filter6: TaskFilter, $order4: TaskOrder, $first4: Int, $offset4: Int, $filter7: ColumnFilter, $order5: ColumnOrder, $first5: Int, $offset5: Int, $filter8: BoardFilter, $filter9: ProjectFilter, $filter10: ColumnFilter, $filter11: ProjectFilter, $filter12: UserFilter, $order6: UserOrder, $first6: Int, $offset6: Int, $filter13: TagFilter, $order7: TagOrder, $first7: Int, $offset7: Int, $filter14: TaskFilter, $order8: TaskOrder, $first8: Int, $offset8: Int, $filter15: TaskFilter, $order9: TaskOrder, $first9: Int, $offset9: Int, $filter16: WorkerFilter, $order10: WorkerOrder, $first10: Int, $offset10: Int, $filter17: ProjectFilter, $filter18: UserFilter, $order11: UserOrder, $first11: Int, $offset11: Int, $filter19: TagFilter, $order12: TagOrder, $first12: Int, $offset12: Int, $filter20: TaskFilter, $order13: TaskOrder, $first13: Int, $offset13: Int, $filter21: TaskFilter, $order14: TaskOrder, $first14: Int, $offset14: Int, $filter22: WorkerFilter, $order15: WorkerOrder, $first15: Int, $offset15: Int, $filter23: TaskFilter, $filter24: WorkerFilter, $filter25: CommentFilter, $order16: CommentOrder, $first16: Int, $offset16: Int, $filter26: TaskFilter, $order17: TaskOrder, $first17: Int, $offset17: Int, $filter27: ColumnFilter, $order18: ColumnOrder, $first18: Int, $offset18: Int, $input: UpdateColumnInput!) {
   updateColumn(input: $input) {
-    column(filter: $filter27, order: $order16, first: $first16, offset: $offset16) {
+    column(filter: $filter27, order: $order18, first: $first18, offset: $offset18) {
       id
       board(filter: $filter8) {
         id
@@ -9737,7 +9977,7 @@ export const UpdateColumnDocument = gql`
         order
       }
       title
-      tasks(filter: $filter26, order: $order15, first: $first15, offset: $offset15) {
+      tasks(filter: $filter26, order: $order17, first: $first17, offset: $offset17) {
         id
         project(filter: $filter9) {
           id
@@ -9749,7 +9989,7 @@ export const UpdateColumnDocument = gql`
           title
         }
         title
-        workers(filter: $filter16, order: $order9, first: $first9, offset: $offset9) {
+        workers(filter: $filter16, order: $order10, first: $first10, offset: $offset10) {
           id
           project(filter: $filter11) {
             id
@@ -9758,17 +9998,17 @@ export const UpdateColumnDocument = gql`
           }
           name
           availability
-          user(filter: $filter12) {
+          user(filter: $filter12, order: $order6, first: $first6, offset: $offset6) {
             id
             username
             password
             location
           }
-          tags(filter: $filter13, order: $order6, first: $first6, offset: $offset6) {
+          tags(filter: $filter13, order: $order7, first: $first7, offset: $offset7) {
             id
             title
           }
-          tasks(filter: $filter14, order: $order7, first: $first7, offset: $offset7) {
+          tasks(filter: $filter14, order: $order8, first: $first8, offset: $offset8) {
             id
             title
             hours
@@ -9777,7 +10017,7 @@ export const UpdateColumnDocument = gql`
             priority
             complete
           }
-          liked(filter: $filter15, order: $order8, first: $first8, offset: $offset8) {
+          liked(filter: $filter15, order: $order9, first: $first9, offset: $offset9) {
             id
             title
             hours
@@ -9792,7 +10032,7 @@ export const UpdateColumnDocument = gql`
         content
         priority
         complete
-        likes(filter: $filter22, order: $order13, first: $first13, offset: $offset13) {
+        likes(filter: $filter22, order: $order15, first: $first15, offset: $offset15) {
           id
           project(filter: $filter17) {
             id
@@ -9801,17 +10041,17 @@ export const UpdateColumnDocument = gql`
           }
           name
           availability
-          user(filter: $filter18) {
+          user(filter: $filter18, order: $order11, first: $first11, offset: $offset11) {
             id
             username
             password
             location
           }
-          tags(filter: $filter19, order: $order10, first: $first10, offset: $offset10) {
+          tags(filter: $filter19, order: $order12, first: $first12, offset: $offset12) {
             id
             title
           }
-          tasks(filter: $filter20, order: $order11, first: $first11, offset: $offset11) {
+          tasks(filter: $filter20, order: $order13, first: $first13, offset: $offset13) {
             id
             title
             hours
@@ -9820,7 +10060,7 @@ export const UpdateColumnDocument = gql`
             priority
             complete
           }
-          liked(filter: $filter21, order: $order12, first: $first12, offset: $offset12) {
+          liked(filter: $filter21, order: $order14, first: $first14, offset: $offset14) {
             id
             title
             hours
@@ -9830,7 +10070,7 @@ export const UpdateColumnDocument = gql`
             complete
           }
         }
-        comments(filter: $filter25, order: $order14, first: $first14, offset: $offset14) {
+        comments(filter: $filter25, order: $order16, first: $first16, offset: $offset16) {
           id
           task(filter: $filter23) {
             id
@@ -9850,6 +10090,7 @@ export const UpdateColumnDocument = gql`
         }
       }
     }
+    numUids
   }
 }
     `;
@@ -9874,9 +10115,9 @@ export function withUpdateColumn<TProps, TChildProps = {}>(operationOptions?: Ap
 export type UpdateColumnMutationResult = ApolloReactCommon.MutationResult<UpdateColumnMutation>;
 export type UpdateColumnMutationOptions = ApolloReactCommon.BaseMutationOptions<UpdateColumnMutation, UpdateColumnMutationVariables>;
 export const UpdateCommentDocument = gql`
-    mutation updateComment($filter: TagFilter, $order: TagOrder, $first: Int, $offset: Int, $filter1: TaskFilter, $order1: TaskOrder, $first1: Int, $offset1: Int, $filter2: BoardFilter, $order2: BoardOrder, $first2: Int, $offset2: Int, $filter3: WorkerFilter, $order3: WorkerOrder, $first3: Int, $offset3: Int, $filter4: ProjectFilter, $filter5: BoardFilter, $filter6: TaskFilter, $order4: TaskOrder, $first4: Int, $offset4: Int, $filter7: ColumnFilter, $filter8: ProjectFilter, $filter9: UserFilter, $filter10: TagFilter, $order5: TagOrder, $first5: Int, $offset5: Int, $filter11: TaskFilter, $order6: TaskOrder, $first6: Int, $offset6: Int, $filter12: TaskFilter, $order7: TaskOrder, $first7: Int, $offset7: Int, $filter13: WorkerFilter, $order8: WorkerOrder, $first8: Int, $offset8: Int, $filter14: ProjectFilter, $filter15: UserFilter, $filter16: TagFilter, $order9: TagOrder, $first9: Int, $offset9: Int, $filter17: TaskFilter, $order10: TaskOrder, $first10: Int, $offset10: Int, $filter18: TaskFilter, $order11: TaskOrder, $first11: Int, $offset11: Int, $filter19: WorkerFilter, $order12: WorkerOrder, $first12: Int, $offset12: Int, $filter20: TaskFilter, $filter21: WorkerFilter, $filter22: CommentFilter, $order13: CommentOrder, $first13: Int, $offset13: Int, $filter23: TaskFilter, $filter24: ProjectFilter, $filter25: WorkerFilter, $order14: WorkerOrder, $first14: Int, $offset14: Int, $filter26: TaskFilter, $order15: TaskOrder, $first15: Int, $offset15: Int, $filter27: UserFilter, $filter28: ProjectFilter, $filter29: WorkerFilter, $order16: WorkerOrder, $first16: Int, $offset16: Int, $filter30: TagFilter, $order17: TagOrder, $first17: Int, $offset17: Int, $filter31: ProjectFilter, $filter32: ColumnFilter, $filter33: WorkerFilter, $order18: WorkerOrder, $first18: Int, $offset18: Int, $filter34: WorkerFilter, $order19: WorkerOrder, $first19: Int, $offset19: Int, $filter35: CommentFilter, $order20: CommentOrder, $first20: Int, $offset20: Int, $filter36: TaskFilter, $order21: TaskOrder, $first21: Int, $offset21: Int, $filter37: ProjectFilter, $filter38: ColumnFilter, $filter39: WorkerFilter, $order22: WorkerOrder, $first22: Int, $offset22: Int, $filter40: WorkerFilter, $order23: WorkerOrder, $first23: Int, $offset23: Int, $filter41: CommentFilter, $order24: CommentOrder, $first24: Int, $offset24: Int, $filter42: TaskFilter, $order25: TaskOrder, $first25: Int, $offset25: Int, $filter43: WorkerFilter, $filter44: CommentFilter, $order26: CommentOrder, $first26: Int, $offset26: Int, $input: UpdateCommentInput!) {
+    mutation updateComment($filter: TagFilter, $order: TagOrder, $first: Int, $offset: Int, $filter1: TaskFilter, $order1: TaskOrder, $first1: Int, $offset1: Int, $filter2: BoardFilter, $order2: BoardOrder, $first2: Int, $offset2: Int, $filter3: WorkerFilter, $order3: WorkerOrder, $first3: Int, $offset3: Int, $filter4: ProjectFilter, $filter5: BoardFilter, $filter6: TaskFilter, $order4: TaskOrder, $first4: Int, $offset4: Int, $filter7: ColumnFilter, $filter8: ProjectFilter, $filter9: UserFilter, $order5: UserOrder, $first5: Int, $offset5: Int, $filter10: TagFilter, $order6: TagOrder, $first6: Int, $offset6: Int, $filter11: TaskFilter, $order7: TaskOrder, $first7: Int, $offset7: Int, $filter12: TaskFilter, $order8: TaskOrder, $first8: Int, $offset8: Int, $filter13: WorkerFilter, $order9: WorkerOrder, $first9: Int, $offset9: Int, $filter14: ProjectFilter, $filter15: UserFilter, $order10: UserOrder, $first10: Int, $offset10: Int, $filter16: TagFilter, $order11: TagOrder, $first11: Int, $offset11: Int, $filter17: TaskFilter, $order12: TaskOrder, $first12: Int, $offset12: Int, $filter18: TaskFilter, $order13: TaskOrder, $first13: Int, $offset13: Int, $filter19: WorkerFilter, $order14: WorkerOrder, $first14: Int, $offset14: Int, $filter20: TaskFilter, $filter21: WorkerFilter, $filter22: CommentFilter, $order15: CommentOrder, $first15: Int, $offset15: Int, $filter23: TaskFilter, $filter24: ProjectFilter, $filter25: WorkerFilter, $order16: WorkerOrder, $first16: Int, $offset16: Int, $filter26: TaskFilter, $order17: TaskOrder, $first17: Int, $offset17: Int, $filter27: UserFilter, $order18: UserOrder, $first18: Int, $offset18: Int, $filter28: ProjectFilter, $filter29: WorkerFilter, $order19: WorkerOrder, $first19: Int, $offset19: Int, $filter30: TagFilter, $order20: TagOrder, $first20: Int, $offset20: Int, $filter31: ProjectFilter, $filter32: ColumnFilter, $filter33: WorkerFilter, $order21: WorkerOrder, $first21: Int, $offset21: Int, $filter34: WorkerFilter, $order22: WorkerOrder, $first22: Int, $offset22: Int, $filter35: CommentFilter, $order23: CommentOrder, $first23: Int, $offset23: Int, $filter36: TaskFilter, $order24: TaskOrder, $first24: Int, $offset24: Int, $filter37: ProjectFilter, $filter38: ColumnFilter, $filter39: WorkerFilter, $order25: WorkerOrder, $first25: Int, $offset25: Int, $filter40: WorkerFilter, $order26: WorkerOrder, $first26: Int, $offset26: Int, $filter41: CommentFilter, $order27: CommentOrder, $first27: Int, $offset27: Int, $filter42: TaskFilter, $order28: TaskOrder, $first28: Int, $offset28: Int, $filter43: WorkerFilter, $filter44: CommentFilter, $order29: CommentOrder, $first29: Int, $offset29: Int, $input: UpdateCommentInput!) {
   updateComment(input: $input) {
-    comment(filter: $filter44, order: $order26, first: $first26, offset: $offset26) {
+    comment(filter: $filter44, order: $order29, first: $first29, offset: $offset29) {
       id
       task(filter: $filter23) {
         id
@@ -9927,7 +10168,7 @@ export const UpdateCommentDocument = gql`
           }
         }
         title
-        workers(filter: $filter13, order: $order8, first: $first8, offset: $offset8) {
+        workers(filter: $filter13, order: $order9, first: $first9, offset: $offset9) {
           id
           project(filter: $filter8) {
             id
@@ -9936,17 +10177,17 @@ export const UpdateCommentDocument = gql`
           }
           name
           availability
-          user(filter: $filter9) {
+          user(filter: $filter9, order: $order5, first: $first5, offset: $offset5) {
             id
             username
             password
             location
           }
-          tags(filter: $filter10, order: $order5, first: $first5, offset: $offset5) {
+          tags(filter: $filter10, order: $order6, first: $first6, offset: $offset6) {
             id
             title
           }
-          tasks(filter: $filter11, order: $order6, first: $first6, offset: $offset6) {
+          tasks(filter: $filter11, order: $order7, first: $first7, offset: $offset7) {
             id
             title
             hours
@@ -9955,7 +10196,7 @@ export const UpdateCommentDocument = gql`
             priority
             complete
           }
-          liked(filter: $filter12, order: $order7, first: $first7, offset: $offset7) {
+          liked(filter: $filter12, order: $order8, first: $first8, offset: $offset8) {
             id
             title
             hours
@@ -9970,7 +10211,7 @@ export const UpdateCommentDocument = gql`
         content
         priority
         complete
-        likes(filter: $filter19, order: $order12, first: $first12, offset: $offset12) {
+        likes(filter: $filter19, order: $order14, first: $first14, offset: $offset14) {
           id
           project(filter: $filter14) {
             id
@@ -9979,17 +10220,17 @@ export const UpdateCommentDocument = gql`
           }
           name
           availability
-          user(filter: $filter15) {
+          user(filter: $filter15, order: $order10, first: $first10, offset: $offset10) {
             id
             username
             password
             location
           }
-          tags(filter: $filter16, order: $order9, first: $first9, offset: $offset9) {
+          tags(filter: $filter16, order: $order11, first: $first11, offset: $offset11) {
             id
             title
           }
-          tasks(filter: $filter17, order: $order10, first: $first10, offset: $offset10) {
+          tasks(filter: $filter17, order: $order12, first: $first12, offset: $offset12) {
             id
             title
             hours
@@ -9998,7 +10239,7 @@ export const UpdateCommentDocument = gql`
             priority
             complete
           }
-          liked(filter: $filter18, order: $order11, first: $first11, offset: $offset11) {
+          liked(filter: $filter18, order: $order13, first: $first13, offset: $offset13) {
             id
             title
             hours
@@ -10008,7 +10249,7 @@ export const UpdateCommentDocument = gql`
             complete
           }
         }
-        comments(filter: $filter22, order: $order13, first: $first13, offset: $offset13) {
+        comments(filter: $filter22, order: $order15, first: $first15, offset: $offset15) {
           id
           task(filter: $filter20) {
             id
@@ -10036,17 +10277,17 @@ export const UpdateCommentDocument = gql`
         }
         name
         availability
-        user(filter: $filter27) {
+        user(filter: $filter27, order: $order18, first: $first18, offset: $offset18) {
           id
           username
           password
           location
-          roles(filter: $filter25, order: $order14, first: $first14, offset: $offset14) {
+          roles(filter: $filter25, order: $order16, first: $first16, offset: $offset16) {
             id
             name
             availability
           }
-          stars(filter: $filter26, order: $order15, first: $first15, offset: $offset15) {
+          stars(filter: $filter26, order: $order17, first: $first17, offset: $offset17) {
             id
             title
             hours
@@ -10056,7 +10297,7 @@ export const UpdateCommentDocument = gql`
             complete
           }
         }
-        tags(filter: $filter30, order: $order17, first: $first17, offset: $offset17) {
+        tags(filter: $filter30, order: $order20, first: $first20, offset: $offset20) {
           id
           title
           project(filter: $filter28) {
@@ -10064,13 +10305,13 @@ export const UpdateCommentDocument = gql`
             title
             description
           }
-          workers(filter: $filter29, order: $order16, first: $first16, offset: $offset16) {
+          workers(filter: $filter29, order: $order19, first: $first19, offset: $offset19) {
             id
             name
             availability
           }
         }
-        tasks(filter: $filter36, order: $order21, first: $first21, offset: $offset21) {
+        tasks(filter: $filter36, order: $order24, first: $first24, offset: $offset24) {
           id
           project(filter: $filter31) {
             id
@@ -10082,7 +10323,7 @@ export const UpdateCommentDocument = gql`
             title
           }
           title
-          workers(filter: $filter33, order: $order18, first: $first18, offset: $offset18) {
+          workers(filter: $filter33, order: $order21, first: $first21, offset: $offset21) {
             id
             name
             availability
@@ -10092,17 +10333,17 @@ export const UpdateCommentDocument = gql`
           content
           priority
           complete
-          likes(filter: $filter34, order: $order19, first: $first19, offset: $offset19) {
+          likes(filter: $filter34, order: $order22, first: $first22, offset: $offset22) {
             id
             name
             availability
           }
-          comments(filter: $filter35, order: $order20, first: $first20, offset: $offset20) {
+          comments(filter: $filter35, order: $order23, first: $first23, offset: $offset23) {
             id
             content
           }
         }
-        liked(filter: $filter42, order: $order25, first: $first25, offset: $offset25) {
+        liked(filter: $filter42, order: $order28, first: $first28, offset: $offset28) {
           id
           project(filter: $filter37) {
             id
@@ -10114,7 +10355,7 @@ export const UpdateCommentDocument = gql`
             title
           }
           title
-          workers(filter: $filter39, order: $order22, first: $first22, offset: $offset22) {
+          workers(filter: $filter39, order: $order25, first: $first25, offset: $offset25) {
             id
             name
             availability
@@ -10124,12 +10365,12 @@ export const UpdateCommentDocument = gql`
           content
           priority
           complete
-          likes(filter: $filter40, order: $order23, first: $first23, offset: $offset23) {
+          likes(filter: $filter40, order: $order26, first: $first26, offset: $offset26) {
             id
             name
             availability
           }
-          comments(filter: $filter41, order: $order24, first: $first24, offset: $offset24) {
+          comments(filter: $filter41, order: $order27, first: $first27, offset: $offset27) {
             id
             content
           }
@@ -10137,6 +10378,7 @@ export const UpdateCommentDocument = gql`
       }
       content
     }
+    numUids
   }
 }
     `;
@@ -10161,13 +10403,13 @@ export function withUpdateComment<TProps, TChildProps = {}>(operationOptions?: A
 export type UpdateCommentMutationResult = ApolloReactCommon.MutationResult<UpdateCommentMutation>;
 export type UpdateCommentMutationOptions = ApolloReactCommon.BaseMutationOptions<UpdateCommentMutation, UpdateCommentMutationVariables>;
 export const UpdateProjectDocument = gql`
-    mutation updateProject($filter: TaskFilter, $order: TaskOrder, $first: Int, $offset: Int, $filter1: BoardFilter, $order1: BoardOrder, $first1: Int, $offset1: Int, $filter2: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter3: ProjectFilter, $filter4: ProjectFilter, $filter5: UserFilter, $filter6: TagFilter, $order3: TagOrder, $first3: Int, $offset3: Int, $filter7: TaskFilter, $order4: TaskOrder, $first4: Int, $offset4: Int, $filter8: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter9: WorkerFilter, $order6: WorkerOrder, $first6: Int, $offset6: Int, $filter10: TagFilter, $order7: TagOrder, $first7: Int, $offset7: Int, $filter11: ProjectFilter, $order8: ProjectOrder, $first8: Int, $offset8: Int, $input: UpdateProjectInput!) {
+    mutation updateProject($filter: TaskFilter, $order: TaskOrder, $first: Int, $offset: Int, $filter1: BoardFilter, $order1: BoardOrder, $first1: Int, $offset1: Int, $filter2: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter3: ProjectFilter, $filter4: ProjectFilter, $filter5: UserFilter, $order3: UserOrder, $first3: Int, $offset3: Int, $filter6: TagFilter, $order4: TagOrder, $first4: Int, $offset4: Int, $filter7: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter8: TaskFilter, $order6: TaskOrder, $first6: Int, $offset6: Int, $filter9: WorkerFilter, $order7: WorkerOrder, $first7: Int, $offset7: Int, $filter10: TagFilter, $order8: TagOrder, $first8: Int, $offset8: Int, $filter11: ProjectFilter, $order9: ProjectOrder, $first9: Int, $offset9: Int, $input: UpdateProjectInput!) {
   updateProject(input: $input) {
-    project(filter: $filter11, order: $order8, first: $first8, offset: $offset8) {
+    project(filter: $filter11, order: $order9, first: $first9, offset: $offset9) {
       id
       title
       description
-      tags(filter: $filter10, order: $order7, first: $first7, offset: $offset7) {
+      tags(filter: $filter10, order: $order8, first: $first8, offset: $offset8) {
         id
         title
         project(filter: $filter3) {
@@ -10194,7 +10436,7 @@ export const UpdateProjectDocument = gql`
             availability
           }
         }
-        workers(filter: $filter9, order: $order6, first: $first6, offset: $offset6) {
+        workers(filter: $filter9, order: $order7, first: $first7, offset: $offset7) {
           id
           project(filter: $filter4) {
             id
@@ -10203,17 +10445,17 @@ export const UpdateProjectDocument = gql`
           }
           name
           availability
-          user(filter: $filter5) {
+          user(filter: $filter5, order: $order3, first: $first3, offset: $offset3) {
             id
             username
             password
             location
           }
-          tags(filter: $filter6, order: $order3, first: $first3, offset: $offset3) {
+          tags(filter: $filter6, order: $order4, first: $first4, offset: $offset4) {
             id
             title
           }
-          tasks(filter: $filter7, order: $order4, first: $first4, offset: $offset4) {
+          tasks(filter: $filter7, order: $order5, first: $first5, offset: $offset5) {
             id
             title
             hours
@@ -10222,7 +10464,7 @@ export const UpdateProjectDocument = gql`
             priority
             complete
           }
-          liked(filter: $filter8, order: $order5, first: $first5, offset: $offset5) {
+          liked(filter: $filter8, order: $order6, first: $first6, offset: $offset6) {
             id
             title
             hours
@@ -10234,6 +10476,7 @@ export const UpdateProjectDocument = gql`
         }
       }
     }
+    numUids
   }
 }
     `;
@@ -10258,9 +10501,9 @@ export function withUpdateProject<TProps, TChildProps = {}>(operationOptions?: A
 export type UpdateProjectMutationResult = ApolloReactCommon.MutationResult<UpdateProjectMutation>;
 export type UpdateProjectMutationOptions = ApolloReactCommon.BaseMutationOptions<UpdateProjectMutation, UpdateProjectMutationVariables>;
 export const UpdateTagDocument = gql`
-    mutation updateTag($filter: ProjectFilter, $filter1: WorkerFilter, $order: WorkerOrder, $first: Int, $offset: Int, $filter2: TagFilter, $order1: TagOrder, $first1: Int, $offset1: Int, $filter3: ProjectFilter, $filter4: ColumnFilter, $filter5: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter6: WorkerFilter, $order3: WorkerOrder, $first3: Int, $offset3: Int, $filter7: CommentFilter, $order4: CommentOrder, $first4: Int, $offset4: Int, $filter8: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter9: ProjectFilter, $filter10: ColumnFilter, $order6: ColumnOrder, $first6: Int, $offset6: Int, $filter11: BoardFilter, $order7: BoardOrder, $first7: Int, $offset7: Int, $filter12: ProjectFilter, $filter13: UserFilter, $filter14: TagFilter, $order8: TagOrder, $first8: Int, $offset8: Int, $filter15: TaskFilter, $order9: TaskOrder, $first9: Int, $offset9: Int, $filter16: TaskFilter, $order10: TaskOrder, $first10: Int, $offset10: Int, $filter17: WorkerFilter, $order11: WorkerOrder, $first11: Int, $offset11: Int, $filter18: ProjectFilter, $filter19: WorkerFilter, $order12: WorkerOrder, $first12: Int, $offset12: Int, $filter20: TagFilter, $order13: TagOrder, $first13: Int, $offset13: Int, $input: UpdateTagInput!) {
+    mutation updateTag($filter: ProjectFilter, $filter1: WorkerFilter, $order: WorkerOrder, $first: Int, $offset: Int, $filter2: TagFilter, $order1: TagOrder, $first1: Int, $offset1: Int, $filter3: ProjectFilter, $filter4: ColumnFilter, $filter5: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter6: WorkerFilter, $order3: WorkerOrder, $first3: Int, $offset3: Int, $filter7: CommentFilter, $order4: CommentOrder, $first4: Int, $offset4: Int, $filter8: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter9: ProjectFilter, $filter10: ColumnFilter, $order6: ColumnOrder, $first6: Int, $offset6: Int, $filter11: BoardFilter, $order7: BoardOrder, $first7: Int, $offset7: Int, $filter12: ProjectFilter, $filter13: UserFilter, $order8: UserOrder, $first8: Int, $offset8: Int, $filter14: TagFilter, $order9: TagOrder, $first9: Int, $offset9: Int, $filter15: TaskFilter, $order10: TaskOrder, $first10: Int, $offset10: Int, $filter16: TaskFilter, $order11: TaskOrder, $first11: Int, $offset11: Int, $filter17: WorkerFilter, $order12: WorkerOrder, $first12: Int, $offset12: Int, $filter18: ProjectFilter, $filter19: WorkerFilter, $order13: WorkerOrder, $first13: Int, $offset13: Int, $filter20: TagFilter, $order14: TagOrder, $first14: Int, $offset14: Int, $input: UpdateTagInput!) {
   updateTag(input: $input) {
-    tag(filter: $filter20, order: $order13, first: $first13, offset: $offset13) {
+    tag(filter: $filter20, order: $order14, first: $first14, offset: $offset14) {
       id
       title
       project(filter: $filter18) {
@@ -10327,7 +10570,7 @@ export const UpdateTagDocument = gql`
           }
           order
         }
-        workers(filter: $filter17, order: $order11, first: $first11, offset: $offset11) {
+        workers(filter: $filter17, order: $order12, first: $first12, offset: $offset12) {
           id
           project(filter: $filter12) {
             id
@@ -10336,17 +10579,17 @@ export const UpdateTagDocument = gql`
           }
           name
           availability
-          user(filter: $filter13) {
+          user(filter: $filter13, order: $order8, first: $first8, offset: $offset8) {
             id
             username
             password
             location
           }
-          tags(filter: $filter14, order: $order8, first: $first8, offset: $offset8) {
+          tags(filter: $filter14, order: $order9, first: $first9, offset: $offset9) {
             id
             title
           }
-          tasks(filter: $filter15, order: $order9, first: $first9, offset: $offset9) {
+          tasks(filter: $filter15, order: $order10, first: $first10, offset: $offset10) {
             id
             title
             hours
@@ -10355,7 +10598,7 @@ export const UpdateTagDocument = gql`
             priority
             complete
           }
-          liked(filter: $filter16, order: $order10, first: $first10, offset: $offset10) {
+          liked(filter: $filter16, order: $order11, first: $first11, offset: $offset11) {
             id
             title
             hours
@@ -10366,12 +10609,13 @@ export const UpdateTagDocument = gql`
           }
         }
       }
-      workers(filter: $filter19, order: $order12, first: $first12, offset: $offset12) {
+      workers(filter: $filter19, order: $order13, first: $first13, offset: $offset13) {
         id
         name
         availability
       }
     }
+    numUids
   }
 }
     `;
@@ -10396,9 +10640,9 @@ export function withUpdateTag<TProps, TChildProps = {}>(operationOptions?: Apoll
 export type UpdateTagMutationResult = ApolloReactCommon.MutationResult<UpdateTagMutation>;
 export type UpdateTagMutationOptions = ApolloReactCommon.BaseMutationOptions<UpdateTagMutation, UpdateTagMutationVariables>;
 export const UpdateTaskDocument = gql`
-    mutation updateTask($filter: ProjectFilter, $filter1: WorkerFilter, $order: WorkerOrder, $first: Int, $offset: Int, $filter2: TagFilter, $order1: TagOrder, $first1: Int, $offset1: Int, $filter3: ProjectFilter, $filter4: ColumnFilter, $filter5: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter6: WorkerFilter, $order3: WorkerOrder, $first3: Int, $offset3: Int, $filter7: CommentFilter, $order4: CommentOrder, $first4: Int, $offset4: Int, $filter8: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter9: ProjectFilter, $filter10: ColumnFilter, $order6: ColumnOrder, $first6: Int, $offset6: Int, $filter11: BoardFilter, $order7: BoardOrder, $first7: Int, $offset7: Int, $filter12: ProjectFilter, $filter13: UserFilter, $filter14: TagFilter, $order8: TagOrder, $first8: Int, $offset8: Int, $filter15: TaskFilter, $order9: TaskOrder, $first9: Int, $offset9: Int, $filter16: TaskFilter, $order10: TaskOrder, $first10: Int, $offset10: Int, $filter17: WorkerFilter, $order11: WorkerOrder, $first11: Int, $offset11: Int, $filter18: ProjectFilter, $filter19: ProjectFilter, $filter20: ColumnFilter, $order12: ColumnOrder, $first12: Int, $offset12: Int, $filter21: BoardFilter, $filter22: TaskFilter, $order13: TaskOrder, $first13: Int, $offset13: Int, $filter23: ColumnFilter, $filter24: WorkerFilter, $order14: WorkerOrder, $first14: Int, $offset14: Int, $filter25: ProjectFilter, $filter26: WorkerFilter, $order15: WorkerOrder, $first15: Int, $offset15: Int, $filter27: TaskFilter, $order16: TaskOrder, $first16: Int, $offset16: Int, $filter28: UserFilter, $filter29: TagFilter, $order17: TagOrder, $first17: Int, $offset17: Int, $filter30: TaskFilter, $order18: TaskOrder, $first18: Int, $offset18: Int, $filter31: ProjectFilter, $filter32: ColumnFilter, $filter33: WorkerFilter, $order19: WorkerOrder, $first19: Int, $offset19: Int, $filter34: WorkerFilter, $order20: WorkerOrder, $first20: Int, $offset20: Int, $filter35: CommentFilter, $order21: CommentOrder, $first21: Int, $offset21: Int, $filter36: TaskFilter, $order22: TaskOrder, $first22: Int, $offset22: Int, $filter37: WorkerFilter, $order23: WorkerOrder, $first23: Int, $offset23: Int, $filter38: TaskFilter, $filter39: ProjectFilter, $filter40: UserFilter, $filter41: TagFilter, $order24: TagOrder, $first24: Int, $offset24: Int, $filter42: TaskFilter, $order25: TaskOrder, $first25: Int, $offset25: Int, $filter43: TaskFilter, $order26: TaskOrder, $first26: Int, $offset26: Int, $filter44: WorkerFilter, $filter45: CommentFilter, $order27: CommentOrder, $first27: Int, $offset27: Int, $filter46: TaskFilter, $order28: TaskOrder, $first28: Int, $offset28: Int, $input: UpdateTaskInput!) {
+    mutation updateTask($filter: ProjectFilter, $filter1: WorkerFilter, $order: WorkerOrder, $first: Int, $offset: Int, $filter2: TagFilter, $order1: TagOrder, $first1: Int, $offset1: Int, $filter3: ProjectFilter, $filter4: ColumnFilter, $filter5: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter6: WorkerFilter, $order3: WorkerOrder, $first3: Int, $offset3: Int, $filter7: CommentFilter, $order4: CommentOrder, $first4: Int, $offset4: Int, $filter8: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter9: ProjectFilter, $filter10: ColumnFilter, $order6: ColumnOrder, $first6: Int, $offset6: Int, $filter11: BoardFilter, $order7: BoardOrder, $first7: Int, $offset7: Int, $filter12: ProjectFilter, $filter13: UserFilter, $order8: UserOrder, $first8: Int, $offset8: Int, $filter14: TagFilter, $order9: TagOrder, $first9: Int, $offset9: Int, $filter15: TaskFilter, $order10: TaskOrder, $first10: Int, $offset10: Int, $filter16: TaskFilter, $order11: TaskOrder, $first11: Int, $offset11: Int, $filter17: WorkerFilter, $order12: WorkerOrder, $first12: Int, $offset12: Int, $filter18: ProjectFilter, $filter19: ProjectFilter, $filter20: ColumnFilter, $order13: ColumnOrder, $first13: Int, $offset13: Int, $filter21: BoardFilter, $filter22: TaskFilter, $order14: TaskOrder, $first14: Int, $offset14: Int, $filter23: ColumnFilter, $filter24: WorkerFilter, $order15: WorkerOrder, $first15: Int, $offset15: Int, $filter25: ProjectFilter, $filter26: WorkerFilter, $order16: WorkerOrder, $first16: Int, $offset16: Int, $filter27: TaskFilter, $order17: TaskOrder, $first17: Int, $offset17: Int, $filter28: UserFilter, $order18: UserOrder, $first18: Int, $offset18: Int, $filter29: TagFilter, $order19: TagOrder, $first19: Int, $offset19: Int, $filter30: TaskFilter, $order20: TaskOrder, $first20: Int, $offset20: Int, $filter31: ProjectFilter, $filter32: ColumnFilter, $filter33: WorkerFilter, $order21: WorkerOrder, $first21: Int, $offset21: Int, $filter34: WorkerFilter, $order22: WorkerOrder, $first22: Int, $offset22: Int, $filter35: CommentFilter, $order23: CommentOrder, $first23: Int, $offset23: Int, $filter36: TaskFilter, $order24: TaskOrder, $first24: Int, $offset24: Int, $filter37: WorkerFilter, $order25: WorkerOrder, $first25: Int, $offset25: Int, $filter38: TaskFilter, $filter39: ProjectFilter, $filter40: UserFilter, $order26: UserOrder, $first26: Int, $offset26: Int, $filter41: TagFilter, $order27: TagOrder, $first27: Int, $offset27: Int, $filter42: TaskFilter, $order28: TaskOrder, $first28: Int, $offset28: Int, $filter43: TaskFilter, $order29: TaskOrder, $first29: Int, $offset29: Int, $filter44: WorkerFilter, $filter45: CommentFilter, $order30: CommentOrder, $first30: Int, $offset30: Int, $filter46: TaskFilter, $order31: TaskOrder, $first31: Int, $offset31: Int, $input: UpdateTaskInput!) {
   updateTask(input: $input) {
-    task(filter: $filter46, order: $order28, first: $first28, offset: $offset28) {
+    task(filter: $filter46, order: $order31, first: $first31, offset: $offset31) {
       id
       project(filter: $filter18) {
         id
@@ -10464,7 +10708,7 @@ export const UpdateTaskDocument = gql`
           }
           order
         }
-        workers(filter: $filter17, order: $order11, first: $first11, offset: $offset11) {
+        workers(filter: $filter17, order: $order12, first: $first12, offset: $offset12) {
           id
           project(filter: $filter12) {
             id
@@ -10473,17 +10717,17 @@ export const UpdateTaskDocument = gql`
           }
           name
           availability
-          user(filter: $filter13) {
+          user(filter: $filter13, order: $order8, first: $first8, offset: $offset8) {
             id
             username
             password
             location
           }
-          tags(filter: $filter14, order: $order8, first: $first8, offset: $offset8) {
+          tags(filter: $filter14, order: $order9, first: $first9, offset: $offset9) {
             id
             title
           }
-          tasks(filter: $filter15, order: $order9, first: $first9, offset: $offset9) {
+          tasks(filter: $filter15, order: $order10, first: $first10, offset: $offset10) {
             id
             title
             hours
@@ -10492,7 +10736,7 @@ export const UpdateTaskDocument = gql`
             priority
             complete
           }
-          liked(filter: $filter16, order: $order10, first: $first10, offset: $offset10) {
+          liked(filter: $filter16, order: $order11, first: $first11, offset: $offset11) {
             id
             title
             hours
@@ -10513,14 +10757,14 @@ export const UpdateTaskDocument = gql`
             description
           }
           title
-          columns(filter: $filter20, order: $order12, first: $first12, offset: $offset12) {
+          columns(filter: $filter20, order: $order13, first: $first13, offset: $offset13) {
             id
             title
           }
           order
         }
         title
-        tasks(filter: $filter22, order: $order13, first: $first13, offset: $offset13) {
+        tasks(filter: $filter22, order: $order14, first: $first14, offset: $offset14) {
           id
           title
           hours
@@ -10531,7 +10775,7 @@ export const UpdateTaskDocument = gql`
         }
       }
       title
-      workers(filter: $filter24, order: $order14, first: $first14, offset: $offset14) {
+      workers(filter: $filter24, order: $order15, first: $first15, offset: $offset15) {
         id
         name
         availability
@@ -10541,7 +10785,7 @@ export const UpdateTaskDocument = gql`
       content
       priority
       complete
-      likes(filter: $filter37, order: $order23, first: $first23, offset: $offset23) {
+      likes(filter: $filter37, order: $order25, first: $first25, offset: $offset25) {
         id
         project(filter: $filter25) {
           id
@@ -10550,17 +10794,17 @@ export const UpdateTaskDocument = gql`
         }
         name
         availability
-        user(filter: $filter28) {
+        user(filter: $filter28, order: $order18, first: $first18, offset: $offset18) {
           id
           username
           password
           location
-          roles(filter: $filter26, order: $order15, first: $first15, offset: $offset15) {
+          roles(filter: $filter26, order: $order16, first: $first16, offset: $offset16) {
             id
             name
             availability
           }
-          stars(filter: $filter27, order: $order16, first: $first16, offset: $offset16) {
+          stars(filter: $filter27, order: $order17, first: $first17, offset: $offset17) {
             id
             title
             hours
@@ -10570,11 +10814,11 @@ export const UpdateTaskDocument = gql`
             complete
           }
         }
-        tags(filter: $filter29, order: $order17, first: $first17, offset: $offset17) {
+        tags(filter: $filter29, order: $order19, first: $first19, offset: $offset19) {
           id
           title
         }
-        tasks(filter: $filter30, order: $order18, first: $first18, offset: $offset18) {
+        tasks(filter: $filter30, order: $order20, first: $first20, offset: $offset20) {
           id
           title
           hours
@@ -10583,7 +10827,7 @@ export const UpdateTaskDocument = gql`
           priority
           complete
         }
-        liked(filter: $filter36, order: $order22, first: $first22, offset: $offset22) {
+        liked(filter: $filter36, order: $order24, first: $first24, offset: $offset24) {
           id
           project(filter: $filter31) {
             id
@@ -10595,7 +10839,7 @@ export const UpdateTaskDocument = gql`
             title
           }
           title
-          workers(filter: $filter33, order: $order19, first: $first19, offset: $offset19) {
+          workers(filter: $filter33, order: $order21, first: $first21, offset: $offset21) {
             id
             name
             availability
@@ -10605,18 +10849,18 @@ export const UpdateTaskDocument = gql`
           content
           priority
           complete
-          likes(filter: $filter34, order: $order20, first: $first20, offset: $offset20) {
+          likes(filter: $filter34, order: $order22, first: $first22, offset: $offset22) {
             id
             name
             availability
           }
-          comments(filter: $filter35, order: $order21, first: $first21, offset: $offset21) {
+          comments(filter: $filter35, order: $order23, first: $first23, offset: $offset23) {
             id
             content
           }
         }
       }
-      comments(filter: $filter45, order: $order27, first: $first27, offset: $offset27) {
+      comments(filter: $filter45, order: $order30, first: $first30, offset: $offset30) {
         id
         task(filter: $filter38) {
           id
@@ -10636,17 +10880,17 @@ export const UpdateTaskDocument = gql`
           }
           name
           availability
-          user(filter: $filter40) {
+          user(filter: $filter40, order: $order26, first: $first26, offset: $offset26) {
             id
             username
             password
             location
           }
-          tags(filter: $filter41, order: $order24, first: $first24, offset: $offset24) {
+          tags(filter: $filter41, order: $order27, first: $first27, offset: $offset27) {
             id
             title
           }
-          tasks(filter: $filter42, order: $order25, first: $first25, offset: $offset25) {
+          tasks(filter: $filter42, order: $order28, first: $first28, offset: $offset28) {
             id
             title
             hours
@@ -10655,7 +10899,7 @@ export const UpdateTaskDocument = gql`
             priority
             complete
           }
-          liked(filter: $filter43, order: $order26, first: $first26, offset: $offset26) {
+          liked(filter: $filter43, order: $order29, first: $first29, offset: $offset29) {
             id
             title
             hours
@@ -10668,6 +10912,7 @@ export const UpdateTaskDocument = gql`
         content
       }
     }
+    numUids
   }
 }
     `;
@@ -10692,14 +10937,14 @@ export function withUpdateTask<TProps, TChildProps = {}>(operationOptions?: Apol
 export type UpdateTaskMutationResult = ApolloReactCommon.MutationResult<UpdateTaskMutation>;
 export type UpdateTaskMutationOptions = ApolloReactCommon.BaseMutationOptions<UpdateTaskMutation, UpdateTaskMutationVariables>;
 export const UpdateUserDocument = gql`
-    mutation updateUser($filter: TagFilter, $order: TagOrder, $first: Int, $offset: Int, $filter1: TaskFilter, $order1: TaskOrder, $first1: Int, $offset1: Int, $filter2: BoardFilter, $order2: BoardOrder, $first2: Int, $offset2: Int, $filter3: WorkerFilter, $order3: WorkerOrder, $first3: Int, $offset3: Int, $filter4: ProjectFilter, $filter5: TaskFilter, $order4: TaskOrder, $first4: Int, $offset4: Int, $filter6: UserFilter, $filter7: ProjectFilter, $filter8: WorkerFilter, $order5: WorkerOrder, $first5: Int, $offset5: Int, $filter9: TagFilter, $order6: TagOrder, $first6: Int, $offset6: Int, $filter10: ProjectFilter, $filter11: ColumnFilter, $filter12: WorkerFilter, $order7: WorkerOrder, $first7: Int, $offset7: Int, $filter13: WorkerFilter, $order8: WorkerOrder, $first8: Int, $offset8: Int, $filter14: CommentFilter, $order9: CommentOrder, $first9: Int, $offset9: Int, $filter15: TaskFilter, $order10: TaskOrder, $first10: Int, $offset10: Int, $filter16: ProjectFilter, $filter17: ColumnFilter, $filter18: WorkerFilter, $order11: WorkerOrder, $first11: Int, $offset11: Int, $filter19: WorkerFilter, $order12: WorkerOrder, $first12: Int, $offset12: Int, $filter20: CommentFilter, $order13: CommentOrder, $first13: Int, $offset13: Int, $filter21: TaskFilter, $order14: TaskOrder, $first14: Int, $offset14: Int, $filter22: WorkerFilter, $order15: WorkerOrder, $first15: Int, $offset15: Int, $filter23: UserFilter, $order16: UserOrder, $first16: Int, $offset16: Int, $input: UpdateUserInput!) {
+    mutation updateUser($filter: TagFilter, $order: TagOrder, $first: Int, $offset: Int, $filter1: TaskFilter, $order1: TaskOrder, $first1: Int, $offset1: Int, $filter2: BoardFilter, $order2: BoardOrder, $first2: Int, $offset2: Int, $filter3: WorkerFilter, $order3: WorkerOrder, $first3: Int, $offset3: Int, $filter4: ProjectFilter, $filter5: TaskFilter, $order4: TaskOrder, $first4: Int, $offset4: Int, $filter6: UserFilter, $order5: UserOrder, $first5: Int, $offset5: Int, $filter7: ProjectFilter, $filter8: WorkerFilter, $order6: WorkerOrder, $first6: Int, $offset6: Int, $filter9: TagFilter, $order7: TagOrder, $first7: Int, $offset7: Int, $filter10: ProjectFilter, $filter11: ColumnFilter, $filter12: WorkerFilter, $order8: WorkerOrder, $first8: Int, $offset8: Int, $filter13: WorkerFilter, $order9: WorkerOrder, $first9: Int, $offset9: Int, $filter14: CommentFilter, $order10: CommentOrder, $first10: Int, $offset10: Int, $filter15: TaskFilter, $order11: TaskOrder, $first11: Int, $offset11: Int, $filter16: ProjectFilter, $filter17: ColumnFilter, $filter18: WorkerFilter, $order12: WorkerOrder, $first12: Int, $offset12: Int, $filter19: WorkerFilter, $order13: WorkerOrder, $first13: Int, $offset13: Int, $filter20: CommentFilter, $order14: CommentOrder, $first14: Int, $offset14: Int, $filter21: TaskFilter, $order15: TaskOrder, $first15: Int, $offset15: Int, $filter22: WorkerFilter, $order16: WorkerOrder, $first16: Int, $offset16: Int, $filter23: UserFilter, $order17: UserOrder, $first17: Int, $offset17: Int, $input: UpdateUserInput!) {
   updateUser(input: $input) {
-    user(filter: $filter23, order: $order16, first: $first16, offset: $offset16) {
+    user(filter: $filter23, order: $order17, first: $first17, offset: $offset17) {
       id
       username
       password
       location
-      roles(filter: $filter22, order: $order15, first: $first15, offset: $offset15) {
+      roles(filter: $filter22, order: $order16, first: $first16, offset: $offset16) {
         id
         project(filter: $filter4) {
           id
@@ -10731,7 +10976,7 @@ export const UpdateUserDocument = gql`
         }
         name
         availability
-        user(filter: $filter6) {
+        user(filter: $filter6, order: $order5, first: $first5, offset: $offset5) {
           id
           username
           password
@@ -10746,7 +10991,7 @@ export const UpdateUserDocument = gql`
             complete
           }
         }
-        tags(filter: $filter9, order: $order6, first: $first6, offset: $offset6) {
+        tags(filter: $filter9, order: $order7, first: $first7, offset: $offset7) {
           id
           title
           project(filter: $filter7) {
@@ -10754,13 +10999,13 @@ export const UpdateUserDocument = gql`
             title
             description
           }
-          workers(filter: $filter8, order: $order5, first: $first5, offset: $offset5) {
+          workers(filter: $filter8, order: $order6, first: $first6, offset: $offset6) {
             id
             name
             availability
           }
         }
-        tasks(filter: $filter15, order: $order10, first: $first10, offset: $offset10) {
+        tasks(filter: $filter15, order: $order11, first: $first11, offset: $offset11) {
           id
           project(filter: $filter10) {
             id
@@ -10772,7 +11017,7 @@ export const UpdateUserDocument = gql`
             title
           }
           title
-          workers(filter: $filter12, order: $order7, first: $first7, offset: $offset7) {
+          workers(filter: $filter12, order: $order8, first: $first8, offset: $offset8) {
             id
             name
             availability
@@ -10782,17 +11027,17 @@ export const UpdateUserDocument = gql`
           content
           priority
           complete
-          likes(filter: $filter13, order: $order8, first: $first8, offset: $offset8) {
+          likes(filter: $filter13, order: $order9, first: $first9, offset: $offset9) {
             id
             name
             availability
           }
-          comments(filter: $filter14, order: $order9, first: $first9, offset: $offset9) {
+          comments(filter: $filter14, order: $order10, first: $first10, offset: $offset10) {
             id
             content
           }
         }
-        liked(filter: $filter21, order: $order14, first: $first14, offset: $offset14) {
+        liked(filter: $filter21, order: $order15, first: $first15, offset: $offset15) {
           id
           project(filter: $filter16) {
             id
@@ -10804,7 +11049,7 @@ export const UpdateUserDocument = gql`
             title
           }
           title
-          workers(filter: $filter18, order: $order11, first: $first11, offset: $offset11) {
+          workers(filter: $filter18, order: $order12, first: $first12, offset: $offset12) {
             id
             name
             availability
@@ -10814,18 +11059,19 @@ export const UpdateUserDocument = gql`
           content
           priority
           complete
-          likes(filter: $filter19, order: $order12, first: $first12, offset: $offset12) {
+          likes(filter: $filter19, order: $order13, first: $first13, offset: $offset13) {
             id
             name
             availability
           }
-          comments(filter: $filter20, order: $order13, first: $first13, offset: $offset13) {
+          comments(filter: $filter20, order: $order14, first: $first14, offset: $offset14) {
             id
             content
           }
         }
       }
     }
+    numUids
   }
 }
     `;
@@ -10850,9 +11096,9 @@ export function withUpdateUser<TProps, TChildProps = {}>(operationOptions?: Apol
 export type UpdateUserMutationResult = ApolloReactCommon.MutationResult<UpdateUserMutation>;
 export type UpdateUserMutationOptions = ApolloReactCommon.BaseMutationOptions<UpdateUserMutation, UpdateUserMutationVariables>;
 export const UpdateWorkerDocument = gql`
-    mutation updateWorker($filter: ProjectFilter, $filter1: WorkerFilter, $order: WorkerOrder, $first: Int, $offset: Int, $filter2: TagFilter, $order1: TagOrder, $first1: Int, $offset1: Int, $filter3: ProjectFilter, $filter4: ColumnFilter, $filter5: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter6: WorkerFilter, $order3: WorkerOrder, $first3: Int, $offset3: Int, $filter7: CommentFilter, $order4: CommentOrder, $first4: Int, $offset4: Int, $filter8: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter9: ProjectFilter, $filter10: ColumnFilter, $order6: ColumnOrder, $first6: Int, $offset6: Int, $filter11: BoardFilter, $order7: BoardOrder, $first7: Int, $offset7: Int, $filter12: ProjectFilter, $filter13: UserFilter, $filter14: TagFilter, $order8: TagOrder, $first8: Int, $offset8: Int, $filter15: TaskFilter, $order9: TaskOrder, $first9: Int, $offset9: Int, $filter16: TaskFilter, $order10: TaskOrder, $first10: Int, $offset10: Int, $filter17: WorkerFilter, $order11: WorkerOrder, $first11: Int, $offset11: Int, $filter18: ProjectFilter, $filter19: ProjectFilter, $filter20: UserFilter, $filter21: TagFilter, $order12: TagOrder, $first12: Int, $offset12: Int, $filter22: TaskFilter, $order13: TaskOrder, $first13: Int, $offset13: Int, $filter23: TaskFilter, $order14: TaskOrder, $first14: Int, $offset14: Int, $filter24: WorkerFilter, $order15: WorkerOrder, $first15: Int, $offset15: Int, $filter25: ProjectFilter, $filter26: ColumnFilter, $filter27: WorkerFilter, $order16: WorkerOrder, $first16: Int, $offset16: Int, $filter28: WorkerFilter, $order17: WorkerOrder, $first17: Int, $offset17: Int, $filter29: CommentFilter, $order18: CommentOrder, $first18: Int, $offset18: Int, $filter30: TaskFilter, $order19: TaskOrder, $first19: Int, $offset19: Int, $filter31: UserFilter, $filter32: TagFilter, $order20: TagOrder, $first20: Int, $offset20: Int, $filter33: TaskFilter, $order21: TaskOrder, $first21: Int, $offset21: Int, $filter34: ProjectFilter, $filter35: BoardFilter, $filter36: TaskFilter, $order22: TaskOrder, $first22: Int, $offset22: Int, $filter37: ColumnFilter, $filter38: WorkerFilter, $order23: WorkerOrder, $first23: Int, $offset23: Int, $filter39: ProjectFilter, $filter40: UserFilter, $filter41: TagFilter, $order24: TagOrder, $first24: Int, $offset24: Int, $filter42: TaskFilter, $order25: TaskOrder, $first25: Int, $offset25: Int, $filter43: TaskFilter, $order26: TaskOrder, $first26: Int, $offset26: Int, $filter44: WorkerFilter, $order27: WorkerOrder, $first27: Int, $offset27: Int, $filter45: TaskFilter, $filter46: WorkerFilter, $filter47: CommentFilter, $order28: CommentOrder, $first28: Int, $offset28: Int, $filter48: TaskFilter, $order29: TaskOrder, $first29: Int, $offset29: Int, $filter49: WorkerFilter, $order30: WorkerOrder, $first30: Int, $offset30: Int, $input: UpdateWorkerInput!) {
+    mutation updateWorker($filter: ProjectFilter, $filter1: WorkerFilter, $order: WorkerOrder, $first: Int, $offset: Int, $filter2: TagFilter, $order1: TagOrder, $first1: Int, $offset1: Int, $filter3: ProjectFilter, $filter4: ColumnFilter, $filter5: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter6: WorkerFilter, $order3: WorkerOrder, $first3: Int, $offset3: Int, $filter7: CommentFilter, $order4: CommentOrder, $first4: Int, $offset4: Int, $filter8: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter9: ProjectFilter, $filter10: ColumnFilter, $order6: ColumnOrder, $first6: Int, $offset6: Int, $filter11: BoardFilter, $order7: BoardOrder, $first7: Int, $offset7: Int, $filter12: ProjectFilter, $filter13: UserFilter, $order8: UserOrder, $first8: Int, $offset8: Int, $filter14: TagFilter, $order9: TagOrder, $first9: Int, $offset9: Int, $filter15: TaskFilter, $order10: TaskOrder, $first10: Int, $offset10: Int, $filter16: TaskFilter, $order11: TaskOrder, $first11: Int, $offset11: Int, $filter17: WorkerFilter, $order12: WorkerOrder, $first12: Int, $offset12: Int, $filter18: ProjectFilter, $filter19: ProjectFilter, $filter20: UserFilter, $order13: UserOrder, $first13: Int, $offset13: Int, $filter21: TagFilter, $order14: TagOrder, $first14: Int, $offset14: Int, $filter22: TaskFilter, $order15: TaskOrder, $first15: Int, $offset15: Int, $filter23: TaskFilter, $order16: TaskOrder, $first16: Int, $offset16: Int, $filter24: WorkerFilter, $order17: WorkerOrder, $first17: Int, $offset17: Int, $filter25: ProjectFilter, $filter26: ColumnFilter, $filter27: WorkerFilter, $order18: WorkerOrder, $first18: Int, $offset18: Int, $filter28: WorkerFilter, $order19: WorkerOrder, $first19: Int, $offset19: Int, $filter29: CommentFilter, $order20: CommentOrder, $first20: Int, $offset20: Int, $filter30: TaskFilter, $order21: TaskOrder, $first21: Int, $offset21: Int, $filter31: UserFilter, $order22: UserOrder, $first22: Int, $offset22: Int, $filter32: TagFilter, $order23: TagOrder, $first23: Int, $offset23: Int, $filter33: TaskFilter, $order24: TaskOrder, $first24: Int, $offset24: Int, $filter34: ProjectFilter, $filter35: BoardFilter, $filter36: TaskFilter, $order25: TaskOrder, $first25: Int, $offset25: Int, $filter37: ColumnFilter, $filter38: WorkerFilter, $order26: WorkerOrder, $first26: Int, $offset26: Int, $filter39: ProjectFilter, $filter40: UserFilter, $order27: UserOrder, $first27: Int, $offset27: Int, $filter41: TagFilter, $order28: TagOrder, $first28: Int, $offset28: Int, $filter42: TaskFilter, $order29: TaskOrder, $first29: Int, $offset29: Int, $filter43: TaskFilter, $order30: TaskOrder, $first30: Int, $offset30: Int, $filter44: WorkerFilter, $order31: WorkerOrder, $first31: Int, $offset31: Int, $filter45: TaskFilter, $filter46: WorkerFilter, $filter47: CommentFilter, $order32: CommentOrder, $first32: Int, $offset32: Int, $filter48: TaskFilter, $order33: TaskOrder, $first33: Int, $offset33: Int, $filter49: WorkerFilter, $order34: WorkerOrder, $first34: Int, $offset34: Int, $input: UpdateWorkerInput!) {
   updateWorker(input: $input) {
-    worker(filter: $filter49, order: $order30, first: $first30, offset: $offset30) {
+    worker(filter: $filter49, order: $order34, first: $first34, offset: $offset34) {
       id
       project(filter: $filter18) {
         id
@@ -10918,7 +11164,7 @@ export const UpdateWorkerDocument = gql`
           }
           order
         }
-        workers(filter: $filter17, order: $order11, first: $first11, offset: $offset11) {
+        workers(filter: $filter17, order: $order12, first: $first12, offset: $offset12) {
           id
           project(filter: $filter12) {
             id
@@ -10927,17 +11173,17 @@ export const UpdateWorkerDocument = gql`
           }
           name
           availability
-          user(filter: $filter13) {
+          user(filter: $filter13, order: $order8, first: $first8, offset: $offset8) {
             id
             username
             password
             location
           }
-          tags(filter: $filter14, order: $order8, first: $first8, offset: $offset8) {
+          tags(filter: $filter14, order: $order9, first: $first9, offset: $offset9) {
             id
             title
           }
-          tasks(filter: $filter15, order: $order9, first: $first9, offset: $offset9) {
+          tasks(filter: $filter15, order: $order10, first: $first10, offset: $offset10) {
             id
             title
             hours
@@ -10946,7 +11192,7 @@ export const UpdateWorkerDocument = gql`
             priority
             complete
           }
-          liked(filter: $filter16, order: $order10, first: $first10, offset: $offset10) {
+          liked(filter: $filter16, order: $order11, first: $first11, offset: $offset11) {
             id
             title
             hours
@@ -10959,12 +11205,12 @@ export const UpdateWorkerDocument = gql`
       }
       name
       availability
-      user(filter: $filter31) {
+      user(filter: $filter31, order: $order22, first: $first22, offset: $offset22) {
         id
         username
         password
         location
-        roles(filter: $filter24, order: $order15, first: $first15, offset: $offset15) {
+        roles(filter: $filter24, order: $order17, first: $first17, offset: $offset17) {
           id
           project(filter: $filter19) {
             id
@@ -10973,17 +11219,17 @@ export const UpdateWorkerDocument = gql`
           }
           name
           availability
-          user(filter: $filter20) {
+          user(filter: $filter20, order: $order13, first: $first13, offset: $offset13) {
             id
             username
             password
             location
           }
-          tags(filter: $filter21, order: $order12, first: $first12, offset: $offset12) {
+          tags(filter: $filter21, order: $order14, first: $first14, offset: $offset14) {
             id
             title
           }
-          tasks(filter: $filter22, order: $order13, first: $first13, offset: $offset13) {
+          tasks(filter: $filter22, order: $order15, first: $first15, offset: $offset15) {
             id
             title
             hours
@@ -10992,7 +11238,7 @@ export const UpdateWorkerDocument = gql`
             priority
             complete
           }
-          liked(filter: $filter23, order: $order14, first: $first14, offset: $offset14) {
+          liked(filter: $filter23, order: $order16, first: $first16, offset: $offset16) {
             id
             title
             hours
@@ -11002,7 +11248,7 @@ export const UpdateWorkerDocument = gql`
             complete
           }
         }
-        stars(filter: $filter30, order: $order19, first: $first19, offset: $offset19) {
+        stars(filter: $filter30, order: $order21, first: $first21, offset: $offset21) {
           id
           project(filter: $filter25) {
             id
@@ -11014,7 +11260,7 @@ export const UpdateWorkerDocument = gql`
             title
           }
           title
-          workers(filter: $filter27, order: $order16, first: $first16, offset: $offset16) {
+          workers(filter: $filter27, order: $order18, first: $first18, offset: $offset18) {
             id
             name
             availability
@@ -11024,22 +11270,22 @@ export const UpdateWorkerDocument = gql`
           content
           priority
           complete
-          likes(filter: $filter28, order: $order17, first: $first17, offset: $offset17) {
+          likes(filter: $filter28, order: $order19, first: $first19, offset: $offset19) {
             id
             name
             availability
           }
-          comments(filter: $filter29, order: $order18, first: $first18, offset: $offset18) {
+          comments(filter: $filter29, order: $order20, first: $first20, offset: $offset20) {
             id
             content
           }
         }
       }
-      tags(filter: $filter32, order: $order20, first: $first20, offset: $offset20) {
+      tags(filter: $filter32, order: $order23, first: $first23, offset: $offset23) {
         id
         title
       }
-      tasks(filter: $filter33, order: $order21, first: $first21, offset: $offset21) {
+      tasks(filter: $filter33, order: $order24, first: $first24, offset: $offset24) {
         id
         title
         hours
@@ -11048,7 +11294,7 @@ export const UpdateWorkerDocument = gql`
         priority
         complete
       }
-      liked(filter: $filter48, order: $order29, first: $first29, offset: $offset29) {
+      liked(filter: $filter48, order: $order33, first: $first33, offset: $offset33) {
         id
         project(filter: $filter34) {
           id
@@ -11063,7 +11309,7 @@ export const UpdateWorkerDocument = gql`
             order
           }
           title
-          tasks(filter: $filter36, order: $order22, first: $first22, offset: $offset22) {
+          tasks(filter: $filter36, order: $order25, first: $first25, offset: $offset25) {
             id
             title
             hours
@@ -11074,7 +11320,7 @@ export const UpdateWorkerDocument = gql`
           }
         }
         title
-        workers(filter: $filter38, order: $order23, first: $first23, offset: $offset23) {
+        workers(filter: $filter38, order: $order26, first: $first26, offset: $offset26) {
           id
           name
           availability
@@ -11084,7 +11330,7 @@ export const UpdateWorkerDocument = gql`
         content
         priority
         complete
-        likes(filter: $filter44, order: $order27, first: $first27, offset: $offset27) {
+        likes(filter: $filter44, order: $order31, first: $first31, offset: $offset31) {
           id
           project(filter: $filter39) {
             id
@@ -11093,17 +11339,17 @@ export const UpdateWorkerDocument = gql`
           }
           name
           availability
-          user(filter: $filter40) {
+          user(filter: $filter40, order: $order27, first: $first27, offset: $offset27) {
             id
             username
             password
             location
           }
-          tags(filter: $filter41, order: $order24, first: $first24, offset: $offset24) {
+          tags(filter: $filter41, order: $order28, first: $first28, offset: $offset28) {
             id
             title
           }
-          tasks(filter: $filter42, order: $order25, first: $first25, offset: $offset25) {
+          tasks(filter: $filter42, order: $order29, first: $first29, offset: $offset29) {
             id
             title
             hours
@@ -11112,7 +11358,7 @@ export const UpdateWorkerDocument = gql`
             priority
             complete
           }
-          liked(filter: $filter43, order: $order26, first: $first26, offset: $offset26) {
+          liked(filter: $filter43, order: $order30, first: $first30, offset: $offset30) {
             id
             title
             hours
@@ -11122,7 +11368,7 @@ export const UpdateWorkerDocument = gql`
             complete
           }
         }
-        comments(filter: $filter47, order: $order28, first: $first28, offset: $offset28) {
+        comments(filter: $filter47, order: $order32, first: $first32, offset: $offset32) {
           id
           task(filter: $filter45) {
             id
@@ -11142,6 +11388,7 @@ export const UpdateWorkerDocument = gql`
         }
       }
     }
+    numUids
   }
 }
     `;
@@ -11166,14 +11413,14 @@ export function withUpdateWorker<TProps, TChildProps = {}>(operationOptions?: Ap
 export type UpdateWorkerMutationResult = ApolloReactCommon.MutationResult<UpdateWorkerMutation>;
 export type UpdateWorkerMutationOptions = ApolloReactCommon.BaseMutationOptions<UpdateWorkerMutation, UpdateWorkerMutationVariables>;
 export const GetBoardDocument = gql`
-    query getBoard($filter: TaskFilter, $order: TaskOrder, $first: Int, $offset: Int, $filter1: BoardFilter, $order1: BoardOrder, $first1: Int, $offset1: Int, $filter2: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter3: ProjectFilter, $filter4: ProjectFilter, $filter5: UserFilter, $filter6: TagFilter, $order3: TagOrder, $first3: Int, $offset3: Int, $filter7: TaskFilter, $order4: TaskOrder, $first4: Int, $offset4: Int, $filter8: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter9: WorkerFilter, $order6: WorkerOrder, $first6: Int, $offset6: Int, $filter10: TagFilter, $order7: TagOrder, $first7: Int, $offset7: Int, $filter11: ProjectFilter, $filter12: ProjectFilter, $filter13: TaskFilter, $order8: TaskOrder, $first8: Int, $offset8: Int, $filter14: ColumnFilter, $order9: ColumnOrder, $first9: Int, $offset9: Int, $filter15: BoardFilter, $filter16: ColumnFilter, $order10: ColumnOrder, $first10: Int, $offset10: Int, $id: ID!) {
+    query getBoard($filter: TaskFilter, $order: TaskOrder, $first: Int, $offset: Int, $filter1: BoardFilter, $order1: BoardOrder, $first1: Int, $offset1: Int, $filter2: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter3: ProjectFilter, $filter4: ProjectFilter, $filter5: UserFilter, $order3: UserOrder, $first3: Int, $offset3: Int, $filter6: TagFilter, $order4: TagOrder, $first4: Int, $offset4: Int, $filter7: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter8: TaskFilter, $order6: TaskOrder, $first6: Int, $offset6: Int, $filter9: WorkerFilter, $order7: WorkerOrder, $first7: Int, $offset7: Int, $filter10: TagFilter, $order8: TagOrder, $first8: Int, $offset8: Int, $filter11: ProjectFilter, $filter12: ProjectFilter, $filter13: TaskFilter, $order9: TaskOrder, $first9: Int, $offset9: Int, $filter14: ColumnFilter, $order10: ColumnOrder, $first10: Int, $offset10: Int, $filter15: BoardFilter, $filter16: ColumnFilter, $order11: ColumnOrder, $first11: Int, $offset11: Int, $id: ID!) {
   getBoard(id: $id) {
     id
     project(filter: $filter11) {
       id
       title
       description
-      tags(filter: $filter10, order: $order7, first: $first7, offset: $offset7) {
+      tags(filter: $filter10, order: $order8, first: $first8, offset: $offset8) {
         id
         title
         project(filter: $filter3) {
@@ -11200,7 +11447,7 @@ export const GetBoardDocument = gql`
             availability
           }
         }
-        workers(filter: $filter9, order: $order6, first: $first6, offset: $offset6) {
+        workers(filter: $filter9, order: $order7, first: $first7, offset: $offset7) {
           id
           project(filter: $filter4) {
             id
@@ -11209,17 +11456,17 @@ export const GetBoardDocument = gql`
           }
           name
           availability
-          user(filter: $filter5) {
+          user(filter: $filter5, order: $order3, first: $first3, offset: $offset3) {
             id
             username
             password
             location
           }
-          tags(filter: $filter6, order: $order3, first: $first3, offset: $offset3) {
+          tags(filter: $filter6, order: $order4, first: $first4, offset: $offset4) {
             id
             title
           }
-          tasks(filter: $filter7, order: $order4, first: $first4, offset: $offset4) {
+          tasks(filter: $filter7, order: $order5, first: $first5, offset: $offset5) {
             id
             title
             hours
@@ -11228,7 +11475,7 @@ export const GetBoardDocument = gql`
             priority
             complete
           }
-          liked(filter: $filter8, order: $order5, first: $first5, offset: $offset5) {
+          liked(filter: $filter8, order: $order6, first: $first6, offset: $offset6) {
             id
             title
             hours
@@ -11241,7 +11488,7 @@ export const GetBoardDocument = gql`
       }
     }
     title
-    columns(filter: $filter16, order: $order10, first: $first10, offset: $offset10) {
+    columns(filter: $filter16, order: $order11, first: $first11, offset: $offset11) {
       id
       board(filter: $filter15) {
         id
@@ -11251,10 +11498,10 @@ export const GetBoardDocument = gql`
           description
         }
         title
-        columns(filter: $filter14, order: $order9, first: $first9, offset: $offset9) {
+        columns(filter: $filter14, order: $order10, first: $first10, offset: $offset10) {
           id
           title
-          tasks(filter: $filter13, order: $order8, first: $first8, offset: $offset8) {
+          tasks(filter: $filter13, order: $order9, first: $first9, offset: $offset9) {
             id
             title
             hours
@@ -11291,7 +11538,7 @@ export function withGetBoard<TProps, TChildProps = {}>(operationOptions?: Apollo
 };
 export type GetBoardQueryResult = ApolloReactCommon.QueryResult<GetBoardQuery, GetBoardQueryVariables>;
 export const GetColumnDocument = gql`
-    query getColumn($filter: ProjectFilter, $filter1: WorkerFilter, $order: WorkerOrder, $first: Int, $offset: Int, $filter2: TagFilter, $order1: TagOrder, $first1: Int, $offset1: Int, $filter3: ProjectFilter, $filter4: ColumnFilter, $filter5: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter6: WorkerFilter, $order3: WorkerOrder, $first3: Int, $offset3: Int, $filter7: CommentFilter, $order4: CommentOrder, $first4: Int, $offset4: Int, $filter8: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter9: ProjectFilter, $filter10: ColumnFilter, $order6: ColumnOrder, $first6: Int, $offset6: Int, $filter11: BoardFilter, $order7: BoardOrder, $first7: Int, $offset7: Int, $filter12: ProjectFilter, $filter13: UserFilter, $filter14: TagFilter, $order8: TagOrder, $first8: Int, $offset8: Int, $filter15: TaskFilter, $order9: TaskOrder, $first9: Int, $offset9: Int, $filter16: TaskFilter, $order10: TaskOrder, $first10: Int, $offset10: Int, $filter17: WorkerFilter, $order11: WorkerOrder, $first11: Int, $offset11: Int, $filter18: ProjectFilter, $filter19: BoardFilter, $filter20: TaskFilter, $order12: TaskOrder, $first12: Int, $offset12: Int, $filter21: ColumnFilter, $order13: ColumnOrder, $first13: Int, $offset13: Int, $filter22: BoardFilter, $filter23: TaskFilter, $order14: TaskOrder, $first14: Int, $offset14: Int, $id: ID!) {
+    query getColumn($filter: ProjectFilter, $filter1: WorkerFilter, $order: WorkerOrder, $first: Int, $offset: Int, $filter2: TagFilter, $order1: TagOrder, $first1: Int, $offset1: Int, $filter3: ProjectFilter, $filter4: ColumnFilter, $filter5: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter6: WorkerFilter, $order3: WorkerOrder, $first3: Int, $offset3: Int, $filter7: CommentFilter, $order4: CommentOrder, $first4: Int, $offset4: Int, $filter8: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter9: ProjectFilter, $filter10: ColumnFilter, $order6: ColumnOrder, $first6: Int, $offset6: Int, $filter11: BoardFilter, $order7: BoardOrder, $first7: Int, $offset7: Int, $filter12: ProjectFilter, $filter13: UserFilter, $order8: UserOrder, $first8: Int, $offset8: Int, $filter14: TagFilter, $order9: TagOrder, $first9: Int, $offset9: Int, $filter15: TaskFilter, $order10: TaskOrder, $first10: Int, $offset10: Int, $filter16: TaskFilter, $order11: TaskOrder, $first11: Int, $offset11: Int, $filter17: WorkerFilter, $order12: WorkerOrder, $first12: Int, $offset12: Int, $filter18: ProjectFilter, $filter19: BoardFilter, $filter20: TaskFilter, $order13: TaskOrder, $first13: Int, $offset13: Int, $filter21: ColumnFilter, $order14: ColumnOrder, $first14: Int, $offset14: Int, $filter22: BoardFilter, $filter23: TaskFilter, $order15: TaskOrder, $first15: Int, $offset15: Int, $id: ID!) {
   getColumn(id: $id) {
     id
     board(filter: $filter22) {
@@ -11360,7 +11607,7 @@ export const GetColumnDocument = gql`
           }
           order
         }
-        workers(filter: $filter17, order: $order11, first: $first11, offset: $offset11) {
+        workers(filter: $filter17, order: $order12, first: $first12, offset: $offset12) {
           id
           project(filter: $filter12) {
             id
@@ -11369,17 +11616,17 @@ export const GetColumnDocument = gql`
           }
           name
           availability
-          user(filter: $filter13) {
+          user(filter: $filter13, order: $order8, first: $first8, offset: $offset8) {
             id
             username
             password
             location
           }
-          tags(filter: $filter14, order: $order8, first: $first8, offset: $offset8) {
+          tags(filter: $filter14, order: $order9, first: $first9, offset: $offset9) {
             id
             title
           }
-          tasks(filter: $filter15, order: $order9, first: $first9, offset: $offset9) {
+          tasks(filter: $filter15, order: $order10, first: $first10, offset: $offset10) {
             id
             title
             hours
@@ -11388,7 +11635,7 @@ export const GetColumnDocument = gql`
             priority
             complete
           }
-          liked(filter: $filter16, order: $order10, first: $first10, offset: $offset10) {
+          liked(filter: $filter16, order: $order11, first: $first11, offset: $offset11) {
             id
             title
             hours
@@ -11400,7 +11647,7 @@ export const GetColumnDocument = gql`
         }
       }
       title
-      columns(filter: $filter21, order: $order13, first: $first13, offset: $offset13) {
+      columns(filter: $filter21, order: $order14, first: $first14, offset: $offset14) {
         id
         board(filter: $filter19) {
           id
@@ -11408,7 +11655,7 @@ export const GetColumnDocument = gql`
           order
         }
         title
-        tasks(filter: $filter20, order: $order12, first: $first12, offset: $offset12) {
+        tasks(filter: $filter20, order: $order13, first: $first13, offset: $offset13) {
           id
           title
           hours
@@ -11421,7 +11668,7 @@ export const GetColumnDocument = gql`
       order
     }
     title
-    tasks(filter: $filter23, order: $order14, first: $first14, offset: $offset14) {
+    tasks(filter: $filter23, order: $order15, first: $first15, offset: $offset15) {
       id
       title
       hours
@@ -11452,7 +11699,7 @@ export function withGetColumn<TProps, TChildProps = {}>(operationOptions?: Apoll
 };
 export type GetColumnQueryResult = ApolloReactCommon.QueryResult<GetColumnQuery, GetColumnQueryVariables>;
 export const GetCommentDocument = gql`
-    query getComment($filter: ProjectFilter, $filter1: WorkerFilter, $order: WorkerOrder, $first: Int, $offset: Int, $filter2: TagFilter, $order1: TagOrder, $first1: Int, $offset1: Int, $filter3: ProjectFilter, $filter4: ColumnFilter, $filter5: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter6: WorkerFilter, $order3: WorkerOrder, $first3: Int, $offset3: Int, $filter7: CommentFilter, $order4: CommentOrder, $first4: Int, $offset4: Int, $filter8: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter9: ProjectFilter, $filter10: ColumnFilter, $order6: ColumnOrder, $first6: Int, $offset6: Int, $filter11: BoardFilter, $order7: BoardOrder, $first7: Int, $offset7: Int, $filter12: ProjectFilter, $filter13: UserFilter, $filter14: TagFilter, $order8: TagOrder, $first8: Int, $offset8: Int, $filter15: TaskFilter, $order9: TaskOrder, $first9: Int, $offset9: Int, $filter16: TaskFilter, $order10: TaskOrder, $first10: Int, $offset10: Int, $filter17: WorkerFilter, $order11: WorkerOrder, $first11: Int, $offset11: Int, $filter18: ProjectFilter, $filter19: ProjectFilter, $filter20: ColumnFilter, $order12: ColumnOrder, $first12: Int, $offset12: Int, $filter21: BoardFilter, $filter22: TaskFilter, $order13: TaskOrder, $first13: Int, $offset13: Int, $filter23: ColumnFilter, $filter24: WorkerFilter, $order14: WorkerOrder, $first14: Int, $offset14: Int, $filter25: ProjectFilter, $filter26: WorkerFilter, $order15: WorkerOrder, $first15: Int, $offset15: Int, $filter27: TaskFilter, $order16: TaskOrder, $first16: Int, $offset16: Int, $filter28: UserFilter, $filter29: TagFilter, $order17: TagOrder, $first17: Int, $offset17: Int, $filter30: TaskFilter, $order18: TaskOrder, $first18: Int, $offset18: Int, $filter31: ProjectFilter, $filter32: ColumnFilter, $filter33: WorkerFilter, $order19: WorkerOrder, $first19: Int, $offset19: Int, $filter34: WorkerFilter, $order20: WorkerOrder, $first20: Int, $offset20: Int, $filter35: CommentFilter, $order21: CommentOrder, $first21: Int, $offset21: Int, $filter36: TaskFilter, $order22: TaskOrder, $first22: Int, $offset22: Int, $filter37: WorkerFilter, $order23: WorkerOrder, $first23: Int, $offset23: Int, $filter38: TaskFilter, $filter39: ProjectFilter, $filter40: UserFilter, $filter41: TagFilter, $order24: TagOrder, $first24: Int, $offset24: Int, $filter42: TaskFilter, $order25: TaskOrder, $first25: Int, $offset25: Int, $filter43: TaskFilter, $order26: TaskOrder, $first26: Int, $offset26: Int, $filter44: WorkerFilter, $filter45: CommentFilter, $order27: CommentOrder, $first27: Int, $offset27: Int, $filter46: TaskFilter, $filter47: WorkerFilter, $id: ID!) {
+    query getComment($filter: ProjectFilter, $filter1: WorkerFilter, $order: WorkerOrder, $first: Int, $offset: Int, $filter2: TagFilter, $order1: TagOrder, $first1: Int, $offset1: Int, $filter3: ProjectFilter, $filter4: ColumnFilter, $filter5: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter6: WorkerFilter, $order3: WorkerOrder, $first3: Int, $offset3: Int, $filter7: CommentFilter, $order4: CommentOrder, $first4: Int, $offset4: Int, $filter8: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter9: ProjectFilter, $filter10: ColumnFilter, $order6: ColumnOrder, $first6: Int, $offset6: Int, $filter11: BoardFilter, $order7: BoardOrder, $first7: Int, $offset7: Int, $filter12: ProjectFilter, $filter13: UserFilter, $order8: UserOrder, $first8: Int, $offset8: Int, $filter14: TagFilter, $order9: TagOrder, $first9: Int, $offset9: Int, $filter15: TaskFilter, $order10: TaskOrder, $first10: Int, $offset10: Int, $filter16: TaskFilter, $order11: TaskOrder, $first11: Int, $offset11: Int, $filter17: WorkerFilter, $order12: WorkerOrder, $first12: Int, $offset12: Int, $filter18: ProjectFilter, $filter19: ProjectFilter, $filter20: ColumnFilter, $order13: ColumnOrder, $first13: Int, $offset13: Int, $filter21: BoardFilter, $filter22: TaskFilter, $order14: TaskOrder, $first14: Int, $offset14: Int, $filter23: ColumnFilter, $filter24: WorkerFilter, $order15: WorkerOrder, $first15: Int, $offset15: Int, $filter25: ProjectFilter, $filter26: WorkerFilter, $order16: WorkerOrder, $first16: Int, $offset16: Int, $filter27: TaskFilter, $order17: TaskOrder, $first17: Int, $offset17: Int, $filter28: UserFilter, $order18: UserOrder, $first18: Int, $offset18: Int, $filter29: TagFilter, $order19: TagOrder, $first19: Int, $offset19: Int, $filter30: TaskFilter, $order20: TaskOrder, $first20: Int, $offset20: Int, $filter31: ProjectFilter, $filter32: ColumnFilter, $filter33: WorkerFilter, $order21: WorkerOrder, $first21: Int, $offset21: Int, $filter34: WorkerFilter, $order22: WorkerOrder, $first22: Int, $offset22: Int, $filter35: CommentFilter, $order23: CommentOrder, $first23: Int, $offset23: Int, $filter36: TaskFilter, $order24: TaskOrder, $first24: Int, $offset24: Int, $filter37: WorkerFilter, $order25: WorkerOrder, $first25: Int, $offset25: Int, $filter38: TaskFilter, $filter39: ProjectFilter, $filter40: UserFilter, $order26: UserOrder, $first26: Int, $offset26: Int, $filter41: TagFilter, $order27: TagOrder, $first27: Int, $offset27: Int, $filter42: TaskFilter, $order28: TaskOrder, $first28: Int, $offset28: Int, $filter43: TaskFilter, $order29: TaskOrder, $first29: Int, $offset29: Int, $filter44: WorkerFilter, $filter45: CommentFilter, $order30: CommentOrder, $first30: Int, $offset30: Int, $filter46: TaskFilter, $filter47: WorkerFilter, $id: ID!) {
   getComment(id: $id) {
     id
     task(filter: $filter46) {
@@ -11521,7 +11768,7 @@ export const GetCommentDocument = gql`
           }
           order
         }
-        workers(filter: $filter17, order: $order11, first: $first11, offset: $offset11) {
+        workers(filter: $filter17, order: $order12, first: $first12, offset: $offset12) {
           id
           project(filter: $filter12) {
             id
@@ -11530,17 +11777,17 @@ export const GetCommentDocument = gql`
           }
           name
           availability
-          user(filter: $filter13) {
+          user(filter: $filter13, order: $order8, first: $first8, offset: $offset8) {
             id
             username
             password
             location
           }
-          tags(filter: $filter14, order: $order8, first: $first8, offset: $offset8) {
+          tags(filter: $filter14, order: $order9, first: $first9, offset: $offset9) {
             id
             title
           }
-          tasks(filter: $filter15, order: $order9, first: $first9, offset: $offset9) {
+          tasks(filter: $filter15, order: $order10, first: $first10, offset: $offset10) {
             id
             title
             hours
@@ -11549,7 +11796,7 @@ export const GetCommentDocument = gql`
             priority
             complete
           }
-          liked(filter: $filter16, order: $order10, first: $first10, offset: $offset10) {
+          liked(filter: $filter16, order: $order11, first: $first11, offset: $offset11) {
             id
             title
             hours
@@ -11570,14 +11817,14 @@ export const GetCommentDocument = gql`
             description
           }
           title
-          columns(filter: $filter20, order: $order12, first: $first12, offset: $offset12) {
+          columns(filter: $filter20, order: $order13, first: $first13, offset: $offset13) {
             id
             title
           }
           order
         }
         title
-        tasks(filter: $filter22, order: $order13, first: $first13, offset: $offset13) {
+        tasks(filter: $filter22, order: $order14, first: $first14, offset: $offset14) {
           id
           title
           hours
@@ -11588,7 +11835,7 @@ export const GetCommentDocument = gql`
         }
       }
       title
-      workers(filter: $filter24, order: $order14, first: $first14, offset: $offset14) {
+      workers(filter: $filter24, order: $order15, first: $first15, offset: $offset15) {
         id
         name
         availability
@@ -11598,7 +11845,7 @@ export const GetCommentDocument = gql`
       content
       priority
       complete
-      likes(filter: $filter37, order: $order23, first: $first23, offset: $offset23) {
+      likes(filter: $filter37, order: $order25, first: $first25, offset: $offset25) {
         id
         project(filter: $filter25) {
           id
@@ -11607,17 +11854,17 @@ export const GetCommentDocument = gql`
         }
         name
         availability
-        user(filter: $filter28) {
+        user(filter: $filter28, order: $order18, first: $first18, offset: $offset18) {
           id
           username
           password
           location
-          roles(filter: $filter26, order: $order15, first: $first15, offset: $offset15) {
+          roles(filter: $filter26, order: $order16, first: $first16, offset: $offset16) {
             id
             name
             availability
           }
-          stars(filter: $filter27, order: $order16, first: $first16, offset: $offset16) {
+          stars(filter: $filter27, order: $order17, first: $first17, offset: $offset17) {
             id
             title
             hours
@@ -11627,11 +11874,11 @@ export const GetCommentDocument = gql`
             complete
           }
         }
-        tags(filter: $filter29, order: $order17, first: $first17, offset: $offset17) {
+        tags(filter: $filter29, order: $order19, first: $first19, offset: $offset19) {
           id
           title
         }
-        tasks(filter: $filter30, order: $order18, first: $first18, offset: $offset18) {
+        tasks(filter: $filter30, order: $order20, first: $first20, offset: $offset20) {
           id
           title
           hours
@@ -11640,7 +11887,7 @@ export const GetCommentDocument = gql`
           priority
           complete
         }
-        liked(filter: $filter36, order: $order22, first: $first22, offset: $offset22) {
+        liked(filter: $filter36, order: $order24, first: $first24, offset: $offset24) {
           id
           project(filter: $filter31) {
             id
@@ -11652,7 +11899,7 @@ export const GetCommentDocument = gql`
             title
           }
           title
-          workers(filter: $filter33, order: $order19, first: $first19, offset: $offset19) {
+          workers(filter: $filter33, order: $order21, first: $first21, offset: $offset21) {
             id
             name
             availability
@@ -11662,18 +11909,18 @@ export const GetCommentDocument = gql`
           content
           priority
           complete
-          likes(filter: $filter34, order: $order20, first: $first20, offset: $offset20) {
+          likes(filter: $filter34, order: $order22, first: $first22, offset: $offset22) {
             id
             name
             availability
           }
-          comments(filter: $filter35, order: $order21, first: $first21, offset: $offset21) {
+          comments(filter: $filter35, order: $order23, first: $first23, offset: $offset23) {
             id
             content
           }
         }
       }
-      comments(filter: $filter45, order: $order27, first: $first27, offset: $offset27) {
+      comments(filter: $filter45, order: $order30, first: $first30, offset: $offset30) {
         id
         task(filter: $filter38) {
           id
@@ -11693,17 +11940,17 @@ export const GetCommentDocument = gql`
           }
           name
           availability
-          user(filter: $filter40) {
+          user(filter: $filter40, order: $order26, first: $first26, offset: $offset26) {
             id
             username
             password
             location
           }
-          tags(filter: $filter41, order: $order24, first: $first24, offset: $offset24) {
+          tags(filter: $filter41, order: $order27, first: $first27, offset: $offset27) {
             id
             title
           }
-          tasks(filter: $filter42, order: $order25, first: $first25, offset: $offset25) {
+          tasks(filter: $filter42, order: $order28, first: $first28, offset: $offset28) {
             id
             title
             hours
@@ -11712,7 +11959,7 @@ export const GetCommentDocument = gql`
             priority
             complete
           }
-          liked(filter: $filter43, order: $order26, first: $first26, offset: $offset26) {
+          liked(filter: $filter43, order: $order29, first: $first29, offset: $offset29) {
             id
             title
             hours
@@ -11753,12 +12000,12 @@ export function withGetComment<TProps, TChildProps = {}>(operationOptions?: Apol
 };
 export type GetCommentQueryResult = ApolloReactCommon.QueryResult<GetCommentQuery, GetCommentQueryVariables>;
 export const GetProjectDocument = gql`
-    query getProject($filter: WorkerFilter, $order: WorkerOrder, $first: Int, $offset: Int, $filter1: TagFilter, $order1: TagOrder, $first1: Int, $offset1: Int, $filter2: ProjectFilter, $filter3: ColumnFilter, $filter4: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter5: WorkerFilter, $order3: WorkerOrder, $first3: Int, $offset3: Int, $filter6: CommentFilter, $order4: CommentOrder, $first4: Int, $offset4: Int, $filter7: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter8: ProjectFilter, $filter9: ColumnFilter, $order6: ColumnOrder, $first6: Int, $offset6: Int, $filter10: BoardFilter, $order7: BoardOrder, $first7: Int, $offset7: Int, $filter11: ProjectFilter, $filter12: UserFilter, $filter13: TagFilter, $order8: TagOrder, $first8: Int, $offset8: Int, $filter14: TaskFilter, $order9: TaskOrder, $first9: Int, $offset9: Int, $filter15: TaskFilter, $order10: TaskOrder, $first10: Int, $offset10: Int, $filter16: WorkerFilter, $order11: WorkerOrder, $first11: Int, $offset11: Int, $filter17: ProjectFilter, $filter18: TagFilter, $order12: TagOrder, $first12: Int, $offset12: Int, $filter19: TaskFilter, $order13: TaskOrder, $first13: Int, $offset13: Int, $filter20: BoardFilter, $order14: BoardOrder, $first14: Int, $offset14: Int, $filter21: WorkerFilter, $order15: WorkerOrder, $first15: Int, $offset15: Int, $id: ID!) {
+    query getProject($filter: WorkerFilter, $order: WorkerOrder, $first: Int, $offset: Int, $filter1: TagFilter, $order1: TagOrder, $first1: Int, $offset1: Int, $filter2: ProjectFilter, $filter3: ColumnFilter, $filter4: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter5: WorkerFilter, $order3: WorkerOrder, $first3: Int, $offset3: Int, $filter6: CommentFilter, $order4: CommentOrder, $first4: Int, $offset4: Int, $filter7: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter8: ProjectFilter, $filter9: ColumnFilter, $order6: ColumnOrder, $first6: Int, $offset6: Int, $filter10: BoardFilter, $order7: BoardOrder, $first7: Int, $offset7: Int, $filter11: ProjectFilter, $filter12: UserFilter, $order8: UserOrder, $first8: Int, $offset8: Int, $filter13: TagFilter, $order9: TagOrder, $first9: Int, $offset9: Int, $filter14: TaskFilter, $order10: TaskOrder, $first10: Int, $offset10: Int, $filter15: TaskFilter, $order11: TaskOrder, $first11: Int, $offset11: Int, $filter16: WorkerFilter, $order12: WorkerOrder, $first12: Int, $offset12: Int, $filter17: ProjectFilter, $filter18: TagFilter, $order13: TagOrder, $first13: Int, $offset13: Int, $filter19: TaskFilter, $order14: TaskOrder, $first14: Int, $offset14: Int, $filter20: BoardFilter, $order15: BoardOrder, $first15: Int, $offset15: Int, $filter21: WorkerFilter, $order16: WorkerOrder, $first16: Int, $offset16: Int, $id: ID!) {
   getProject(id: $id) {
     id
     title
     description
-    tags(filter: $filter18, order: $order12, first: $first12, offset: $offset12) {
+    tags(filter: $filter18, order: $order13, first: $first13, offset: $offset13) {
       id
       title
       project(filter: $filter17) {
@@ -11820,7 +12067,7 @@ export const GetProjectDocument = gql`
           }
           order
         }
-        workers(filter: $filter16, order: $order11, first: $first11, offset: $offset11) {
+        workers(filter: $filter16, order: $order12, first: $first12, offset: $offset12) {
           id
           project(filter: $filter11) {
             id
@@ -11829,17 +12076,17 @@ export const GetProjectDocument = gql`
           }
           name
           availability
-          user(filter: $filter12) {
+          user(filter: $filter12, order: $order8, first: $first8, offset: $offset8) {
             id
             username
             password
             location
           }
-          tags(filter: $filter13, order: $order8, first: $first8, offset: $offset8) {
+          tags(filter: $filter13, order: $order9, first: $first9, offset: $offset9) {
             id
             title
           }
-          tasks(filter: $filter14, order: $order9, first: $first9, offset: $offset9) {
+          tasks(filter: $filter14, order: $order10, first: $first10, offset: $offset10) {
             id
             title
             hours
@@ -11848,7 +12095,7 @@ export const GetProjectDocument = gql`
             priority
             complete
           }
-          liked(filter: $filter15, order: $order10, first: $first10, offset: $offset10) {
+          liked(filter: $filter15, order: $order11, first: $first11, offset: $offset11) {
             id
             title
             hours
@@ -11860,7 +12107,7 @@ export const GetProjectDocument = gql`
         }
       }
     }
-    tasks(filter: $filter19, order: $order13, first: $first13, offset: $offset13) {
+    tasks(filter: $filter19, order: $order14, first: $first14, offset: $offset14) {
       id
       title
       hours
@@ -11869,12 +12116,12 @@ export const GetProjectDocument = gql`
       priority
       complete
     }
-    boards(filter: $filter20, order: $order14, first: $first14, offset: $offset14) {
+    boards(filter: $filter20, order: $order15, first: $first15, offset: $offset15) {
       id
       title
       order
     }
-    workers(filter: $filter21, order: $order15, first: $first15, offset: $offset15) {
+    workers(filter: $filter21, order: $order16, first: $first16, offset: $offset16) {
       id
       name
       availability
@@ -11901,7 +12148,7 @@ export function withGetProject<TProps, TChildProps = {}>(operationOptions?: Apol
 };
 export type GetProjectQueryResult = ApolloReactCommon.QueryResult<GetProjectQuery, GetProjectQueryVariables>;
 export const GetTagDocument = gql`
-    query getTag($filter: TaskFilter, $order: TaskOrder, $first: Int, $offset: Int, $filter1: BoardFilter, $order1: BoardOrder, $first1: Int, $offset1: Int, $filter2: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter3: ProjectFilter, $filter4: ProjectFilter, $filter5: UserFilter, $filter6: TagFilter, $order3: TagOrder, $first3: Int, $offset3: Int, $filter7: TaskFilter, $order4: TaskOrder, $first4: Int, $offset4: Int, $filter8: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter9: WorkerFilter, $order6: WorkerOrder, $first6: Int, $offset6: Int, $filter10: TagFilter, $order7: TagOrder, $first7: Int, $offset7: Int, $filter11: ProjectFilter, $filter12: WorkerFilter, $order8: WorkerOrder, $first8: Int, $offset8: Int, $id: ID!) {
+    query getTag($filter: TaskFilter, $order: TaskOrder, $first: Int, $offset: Int, $filter1: BoardFilter, $order1: BoardOrder, $first1: Int, $offset1: Int, $filter2: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter3: ProjectFilter, $filter4: ProjectFilter, $filter5: UserFilter, $order3: UserOrder, $first3: Int, $offset3: Int, $filter6: TagFilter, $order4: TagOrder, $first4: Int, $offset4: Int, $filter7: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter8: TaskFilter, $order6: TaskOrder, $first6: Int, $offset6: Int, $filter9: WorkerFilter, $order7: WorkerOrder, $first7: Int, $offset7: Int, $filter10: TagFilter, $order8: TagOrder, $first8: Int, $offset8: Int, $filter11: ProjectFilter, $filter12: WorkerFilter, $order9: WorkerOrder, $first9: Int, $offset9: Int, $id: ID!) {
   getTag(id: $id) {
     id
     title
@@ -11909,7 +12156,7 @@ export const GetTagDocument = gql`
       id
       title
       description
-      tags(filter: $filter10, order: $order7, first: $first7, offset: $offset7) {
+      tags(filter: $filter10, order: $order8, first: $first8, offset: $offset8) {
         id
         title
         project(filter: $filter3) {
@@ -11936,7 +12183,7 @@ export const GetTagDocument = gql`
             availability
           }
         }
-        workers(filter: $filter9, order: $order6, first: $first6, offset: $offset6) {
+        workers(filter: $filter9, order: $order7, first: $first7, offset: $offset7) {
           id
           project(filter: $filter4) {
             id
@@ -11945,17 +12192,17 @@ export const GetTagDocument = gql`
           }
           name
           availability
-          user(filter: $filter5) {
+          user(filter: $filter5, order: $order3, first: $first3, offset: $offset3) {
             id
             username
             password
             location
           }
-          tags(filter: $filter6, order: $order3, first: $first3, offset: $offset3) {
+          tags(filter: $filter6, order: $order4, first: $first4, offset: $offset4) {
             id
             title
           }
-          tasks(filter: $filter7, order: $order4, first: $first4, offset: $offset4) {
+          tasks(filter: $filter7, order: $order5, first: $first5, offset: $offset5) {
             id
             title
             hours
@@ -11964,7 +12211,7 @@ export const GetTagDocument = gql`
             priority
             complete
           }
-          liked(filter: $filter8, order: $order5, first: $first5, offset: $offset5) {
+          liked(filter: $filter8, order: $order6, first: $first6, offset: $offset6) {
             id
             title
             hours
@@ -11976,7 +12223,7 @@ export const GetTagDocument = gql`
         }
       }
     }
-    workers(filter: $filter12, order: $order8, first: $first8, offset: $offset8) {
+    workers(filter: $filter12, order: $order9, first: $first9, offset: $offset9) {
       id
       name
       availability
@@ -12003,14 +12250,14 @@ export function withGetTag<TProps, TChildProps = {}>(operationOptions?: ApolloRe
 };
 export type GetTagQueryResult = ApolloReactCommon.QueryResult<GetTagQuery, GetTagQueryVariables>;
 export const GetTaskDocument = gql`
-    query getTask($filter: TaskFilter, $order: TaskOrder, $first: Int, $offset: Int, $filter1: BoardFilter, $order1: BoardOrder, $first1: Int, $offset1: Int, $filter2: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter3: ProjectFilter, $filter4: ProjectFilter, $filter5: UserFilter, $filter6: TagFilter, $order3: TagOrder, $first3: Int, $offset3: Int, $filter7: TaskFilter, $order4: TaskOrder, $first4: Int, $offset4: Int, $filter8: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter9: WorkerFilter, $order6: WorkerOrder, $first6: Int, $offset6: Int, $filter10: TagFilter, $order7: TagOrder, $first7: Int, $offset7: Int, $filter11: ProjectFilter, $filter12: ProjectFilter, $filter13: BoardFilter, $filter14: TaskFilter, $order8: TaskOrder, $first8: Int, $offset8: Int, $filter15: ColumnFilter, $order9: ColumnOrder, $first9: Int, $offset9: Int, $filter16: BoardFilter, $filter17: ProjectFilter, $filter18: ColumnFilter, $filter19: WorkerFilter, $order10: WorkerOrder, $first10: Int, $offset10: Int, $filter20: ProjectFilter, $filter21: UserFilter, $filter22: TagFilter, $order11: TagOrder, $first11: Int, $offset11: Int, $filter23: TaskFilter, $order12: TaskOrder, $first12: Int, $offset12: Int, $filter24: TaskFilter, $order13: TaskOrder, $first13: Int, $offset13: Int, $filter25: WorkerFilter, $order14: WorkerOrder, $first14: Int, $offset14: Int, $filter26: TaskFilter, $filter27: WorkerFilter, $filter28: CommentFilter, $order15: CommentOrder, $first15: Int, $offset15: Int, $filter29: TaskFilter, $order16: TaskOrder, $first16: Int, $offset16: Int, $filter30: ColumnFilter, $filter31: WorkerFilter, $order17: WorkerOrder, $first17: Int, $offset17: Int, $filter32: WorkerFilter, $order18: WorkerOrder, $first18: Int, $offset18: Int, $filter33: CommentFilter, $order19: CommentOrder, $first19: Int, $offset19: Int, $id: ID!) {
+    query getTask($filter: TaskFilter, $order: TaskOrder, $first: Int, $offset: Int, $filter1: BoardFilter, $order1: BoardOrder, $first1: Int, $offset1: Int, $filter2: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter3: ProjectFilter, $filter4: ProjectFilter, $filter5: UserFilter, $order3: UserOrder, $first3: Int, $offset3: Int, $filter6: TagFilter, $order4: TagOrder, $first4: Int, $offset4: Int, $filter7: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter8: TaskFilter, $order6: TaskOrder, $first6: Int, $offset6: Int, $filter9: WorkerFilter, $order7: WorkerOrder, $first7: Int, $offset7: Int, $filter10: TagFilter, $order8: TagOrder, $first8: Int, $offset8: Int, $filter11: ProjectFilter, $filter12: ProjectFilter, $filter13: BoardFilter, $filter14: TaskFilter, $order9: TaskOrder, $first9: Int, $offset9: Int, $filter15: ColumnFilter, $order10: ColumnOrder, $first10: Int, $offset10: Int, $filter16: BoardFilter, $filter17: ProjectFilter, $filter18: ColumnFilter, $filter19: WorkerFilter, $order11: WorkerOrder, $first11: Int, $offset11: Int, $filter20: ProjectFilter, $filter21: UserFilter, $order12: UserOrder, $first12: Int, $offset12: Int, $filter22: TagFilter, $order13: TagOrder, $first13: Int, $offset13: Int, $filter23: TaskFilter, $order14: TaskOrder, $first14: Int, $offset14: Int, $filter24: TaskFilter, $order15: TaskOrder, $first15: Int, $offset15: Int, $filter25: WorkerFilter, $order16: WorkerOrder, $first16: Int, $offset16: Int, $filter26: TaskFilter, $filter27: WorkerFilter, $filter28: CommentFilter, $order17: CommentOrder, $first17: Int, $offset17: Int, $filter29: TaskFilter, $order18: TaskOrder, $first18: Int, $offset18: Int, $filter30: ColumnFilter, $filter31: WorkerFilter, $order19: WorkerOrder, $first19: Int, $offset19: Int, $filter32: WorkerFilter, $order20: WorkerOrder, $first20: Int, $offset20: Int, $filter33: CommentFilter, $order21: CommentOrder, $first21: Int, $offset21: Int, $id: ID!) {
   getTask(id: $id) {
     id
     project(filter: $filter11) {
       id
       title
       description
-      tags(filter: $filter10, order: $order7, first: $first7, offset: $offset7) {
+      tags(filter: $filter10, order: $order8, first: $first8, offset: $offset8) {
         id
         title
         project(filter: $filter3) {
@@ -12037,7 +12284,7 @@ export const GetTaskDocument = gql`
             availability
           }
         }
-        workers(filter: $filter9, order: $order6, first: $first6, offset: $offset6) {
+        workers(filter: $filter9, order: $order7, first: $first7, offset: $offset7) {
           id
           project(filter: $filter4) {
             id
@@ -12046,17 +12293,17 @@ export const GetTaskDocument = gql`
           }
           name
           availability
-          user(filter: $filter5) {
+          user(filter: $filter5, order: $order3, first: $first3, offset: $offset3) {
             id
             username
             password
             location
           }
-          tags(filter: $filter6, order: $order3, first: $first3, offset: $offset3) {
+          tags(filter: $filter6, order: $order4, first: $first4, offset: $offset4) {
             id
             title
           }
-          tasks(filter: $filter7, order: $order4, first: $first4, offset: $offset4) {
+          tasks(filter: $filter7, order: $order5, first: $first5, offset: $offset5) {
             id
             title
             hours
@@ -12065,7 +12312,7 @@ export const GetTaskDocument = gql`
             priority
             complete
           }
-          liked(filter: $filter8, order: $order5, first: $first5, offset: $offset5) {
+          liked(filter: $filter8, order: $order6, first: $first6, offset: $offset6) {
             id
             title
             hours
@@ -12087,7 +12334,7 @@ export const GetTaskDocument = gql`
           description
         }
         title
-        columns(filter: $filter15, order: $order9, first: $first9, offset: $offset9) {
+        columns(filter: $filter15, order: $order10, first: $first10, offset: $offset10) {
           id
           board(filter: $filter13) {
             id
@@ -12095,7 +12342,7 @@ export const GetTaskDocument = gql`
             order
           }
           title
-          tasks(filter: $filter14, order: $order8, first: $first8, offset: $offset8) {
+          tasks(filter: $filter14, order: $order9, first: $first9, offset: $offset9) {
             id
             title
             hours
@@ -12108,7 +12355,7 @@ export const GetTaskDocument = gql`
         order
       }
       title
-      tasks(filter: $filter29, order: $order16, first: $first16, offset: $offset16) {
+      tasks(filter: $filter29, order: $order18, first: $first18, offset: $offset18) {
         id
         project(filter: $filter17) {
           id
@@ -12120,7 +12367,7 @@ export const GetTaskDocument = gql`
           title
         }
         title
-        workers(filter: $filter19, order: $order10, first: $first10, offset: $offset10) {
+        workers(filter: $filter19, order: $order11, first: $first11, offset: $offset11) {
           id
           name
           availability
@@ -12130,7 +12377,7 @@ export const GetTaskDocument = gql`
         content
         priority
         complete
-        likes(filter: $filter25, order: $order14, first: $first14, offset: $offset14) {
+        likes(filter: $filter25, order: $order16, first: $first16, offset: $offset16) {
           id
           project(filter: $filter20) {
             id
@@ -12139,17 +12386,17 @@ export const GetTaskDocument = gql`
           }
           name
           availability
-          user(filter: $filter21) {
+          user(filter: $filter21, order: $order12, first: $first12, offset: $offset12) {
             id
             username
             password
             location
           }
-          tags(filter: $filter22, order: $order11, first: $first11, offset: $offset11) {
+          tags(filter: $filter22, order: $order13, first: $first13, offset: $offset13) {
             id
             title
           }
-          tasks(filter: $filter23, order: $order12, first: $first12, offset: $offset12) {
+          tasks(filter: $filter23, order: $order14, first: $first14, offset: $offset14) {
             id
             title
             hours
@@ -12158,7 +12405,7 @@ export const GetTaskDocument = gql`
             priority
             complete
           }
-          liked(filter: $filter24, order: $order13, first: $first13, offset: $offset13) {
+          liked(filter: $filter24, order: $order15, first: $first15, offset: $offset15) {
             id
             title
             hours
@@ -12168,7 +12415,7 @@ export const GetTaskDocument = gql`
             complete
           }
         }
-        comments(filter: $filter28, order: $order15, first: $first15, offset: $offset15) {
+        comments(filter: $filter28, order: $order17, first: $first17, offset: $offset17) {
           id
           task(filter: $filter26) {
             id
@@ -12189,7 +12436,7 @@ export const GetTaskDocument = gql`
       }
     }
     title
-    workers(filter: $filter31, order: $order17, first: $first17, offset: $offset17) {
+    workers(filter: $filter31, order: $order19, first: $first19, offset: $offset19) {
       id
       name
       availability
@@ -12199,12 +12446,12 @@ export const GetTaskDocument = gql`
     content
     priority
     complete
-    likes(filter: $filter32, order: $order18, first: $first18, offset: $offset18) {
+    likes(filter: $filter32, order: $order20, first: $first20, offset: $offset20) {
       id
       name
       availability
     }
-    comments(filter: $filter33, order: $order19, first: $first19, offset: $offset19) {
+    comments(filter: $filter33, order: $order21, first: $first21, offset: $offset21) {
       id
       content
     }
@@ -12230,13 +12477,13 @@ export function withGetTask<TProps, TChildProps = {}>(operationOptions?: ApolloR
 };
 export type GetTaskQueryResult = ApolloReactCommon.QueryResult<GetTaskQuery, GetTaskQueryVariables>;
 export const GetUserDocument = gql`
-    query getUser($filter: ProjectFilter, $filter1: WorkerFilter, $order: WorkerOrder, $first: Int, $offset: Int, $filter2: TagFilter, $order1: TagOrder, $first1: Int, $offset1: Int, $filter3: ProjectFilter, $filter4: ColumnFilter, $filter5: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter6: WorkerFilter, $order3: WorkerOrder, $first3: Int, $offset3: Int, $filter7: CommentFilter, $order4: CommentOrder, $first4: Int, $offset4: Int, $filter8: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter9: ProjectFilter, $filter10: ColumnFilter, $order6: ColumnOrder, $first6: Int, $offset6: Int, $filter11: BoardFilter, $order7: BoardOrder, $first7: Int, $offset7: Int, $filter12: ProjectFilter, $filter13: UserFilter, $filter14: TagFilter, $order8: TagOrder, $first8: Int, $offset8: Int, $filter15: TaskFilter, $order9: TaskOrder, $first9: Int, $offset9: Int, $filter16: TaskFilter, $order10: TaskOrder, $first10: Int, $offset10: Int, $filter17: WorkerFilter, $order11: WorkerOrder, $first11: Int, $offset11: Int, $filter18: ProjectFilter, $filter19: TagFilter, $order12: TagOrder, $first12: Int, $offset12: Int, $filter20: TaskFilter, $order13: TaskOrder, $first13: Int, $offset13: Int, $filter21: TaskFilter, $order14: TaskOrder, $first14: Int, $offset14: Int, $filter22: WorkerFilter, $order15: WorkerOrder, $first15: Int, $offset15: Int, $filter23: ProjectFilter, $filter24: ColumnFilter, $filter25: WorkerFilter, $order16: WorkerOrder, $first16: Int, $offset16: Int, $filter26: WorkerFilter, $order17: WorkerOrder, $first17: Int, $offset17: Int, $filter27: CommentFilter, $order18: CommentOrder, $first18: Int, $offset18: Int, $filter28: TaskFilter, $order19: TaskOrder, $first19: Int, $offset19: Int, $filter29: UserFilter, $filter30: WorkerFilter, $order20: WorkerOrder, $first20: Int, $offset20: Int, $filter31: TaskFilter, $order21: TaskOrder, $first21: Int, $offset21: Int, $id: ID!) {
+    query getUser($filter: ProjectFilter, $filter1: WorkerFilter, $order: WorkerOrder, $first: Int, $offset: Int, $filter2: TagFilter, $order1: TagOrder, $first1: Int, $offset1: Int, $filter3: ProjectFilter, $filter4: ColumnFilter, $filter5: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter6: WorkerFilter, $order3: WorkerOrder, $first3: Int, $offset3: Int, $filter7: CommentFilter, $order4: CommentOrder, $first4: Int, $offset4: Int, $filter8: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter9: ProjectFilter, $filter10: ColumnFilter, $order6: ColumnOrder, $first6: Int, $offset6: Int, $filter11: BoardFilter, $order7: BoardOrder, $first7: Int, $offset7: Int, $filter12: ProjectFilter, $filter13: UserFilter, $order8: UserOrder, $first8: Int, $offset8: Int, $filter14: TagFilter, $order9: TagOrder, $first9: Int, $offset9: Int, $filter15: TaskFilter, $order10: TaskOrder, $first10: Int, $offset10: Int, $filter16: TaskFilter, $order11: TaskOrder, $first11: Int, $offset11: Int, $filter17: WorkerFilter, $order12: WorkerOrder, $first12: Int, $offset12: Int, $filter18: ProjectFilter, $filter19: TagFilter, $order13: TagOrder, $first13: Int, $offset13: Int, $filter20: TaskFilter, $order14: TaskOrder, $first14: Int, $offset14: Int, $filter21: TaskFilter, $order15: TaskOrder, $first15: Int, $offset15: Int, $filter22: WorkerFilter, $order16: WorkerOrder, $first16: Int, $offset16: Int, $filter23: ProjectFilter, $filter24: ColumnFilter, $filter25: WorkerFilter, $order17: WorkerOrder, $first17: Int, $offset17: Int, $filter26: WorkerFilter, $order18: WorkerOrder, $first18: Int, $offset18: Int, $filter27: CommentFilter, $order19: CommentOrder, $first19: Int, $offset19: Int, $filter28: TaskFilter, $order20: TaskOrder, $first20: Int, $offset20: Int, $filter29: UserFilter, $order21: UserOrder, $first21: Int, $offset21: Int, $filter30: WorkerFilter, $order22: WorkerOrder, $first22: Int, $offset22: Int, $filter31: TaskFilter, $order23: TaskOrder, $first23: Int, $offset23: Int, $id: ID!) {
   getUser(id: $id) {
     id
     username
     password
     location
-    roles(filter: $filter30, order: $order20, first: $first20, offset: $offset20) {
+    roles(filter: $filter30, order: $order22, first: $first22, offset: $offset22) {
       id
       project(filter: $filter18) {
         id
@@ -12302,7 +12549,7 @@ export const GetUserDocument = gql`
           }
           order
         }
-        workers(filter: $filter17, order: $order11, first: $first11, offset: $offset11) {
+        workers(filter: $filter17, order: $order12, first: $first12, offset: $offset12) {
           id
           project(filter: $filter12) {
             id
@@ -12311,17 +12558,17 @@ export const GetUserDocument = gql`
           }
           name
           availability
-          user(filter: $filter13) {
+          user(filter: $filter13, order: $order8, first: $first8, offset: $offset8) {
             id
             username
             password
             location
           }
-          tags(filter: $filter14, order: $order8, first: $first8, offset: $offset8) {
+          tags(filter: $filter14, order: $order9, first: $first9, offset: $offset9) {
             id
             title
           }
-          tasks(filter: $filter15, order: $order9, first: $first9, offset: $offset9) {
+          tasks(filter: $filter15, order: $order10, first: $first10, offset: $offset10) {
             id
             title
             hours
@@ -12330,7 +12577,7 @@ export const GetUserDocument = gql`
             priority
             complete
           }
-          liked(filter: $filter16, order: $order10, first: $first10, offset: $offset10) {
+          liked(filter: $filter16, order: $order11, first: $first11, offset: $offset11) {
             id
             title
             hours
@@ -12343,20 +12590,20 @@ export const GetUserDocument = gql`
       }
       name
       availability
-      user(filter: $filter29) {
+      user(filter: $filter29, order: $order21, first: $first21, offset: $offset21) {
         id
         username
         password
         location
-        roles(filter: $filter22, order: $order15, first: $first15, offset: $offset15) {
+        roles(filter: $filter22, order: $order16, first: $first16, offset: $offset16) {
           id
           name
           availability
-          tags(filter: $filter19, order: $order12, first: $first12, offset: $offset12) {
+          tags(filter: $filter19, order: $order13, first: $first13, offset: $offset13) {
             id
             title
           }
-          tasks(filter: $filter20, order: $order13, first: $first13, offset: $offset13) {
+          tasks(filter: $filter20, order: $order14, first: $first14, offset: $offset14) {
             id
             title
             hours
@@ -12365,7 +12612,7 @@ export const GetUserDocument = gql`
             priority
             complete
           }
-          liked(filter: $filter21, order: $order14, first: $first14, offset: $offset14) {
+          liked(filter: $filter21, order: $order15, first: $first15, offset: $offset15) {
             id
             title
             hours
@@ -12375,7 +12622,7 @@ export const GetUserDocument = gql`
             complete
           }
         }
-        stars(filter: $filter28, order: $order19, first: $first19, offset: $offset19) {
+        stars(filter: $filter28, order: $order20, first: $first20, offset: $offset20) {
           id
           project(filter: $filter23) {
             id
@@ -12387,7 +12634,7 @@ export const GetUserDocument = gql`
             title
           }
           title
-          workers(filter: $filter25, order: $order16, first: $first16, offset: $offset16) {
+          workers(filter: $filter25, order: $order17, first: $first17, offset: $offset17) {
             id
             name
             availability
@@ -12397,19 +12644,19 @@ export const GetUserDocument = gql`
           content
           priority
           complete
-          likes(filter: $filter26, order: $order17, first: $first17, offset: $offset17) {
+          likes(filter: $filter26, order: $order18, first: $first18, offset: $offset18) {
             id
             name
             availability
           }
-          comments(filter: $filter27, order: $order18, first: $first18, offset: $offset18) {
+          comments(filter: $filter27, order: $order19, first: $first19, offset: $offset19) {
             id
             content
           }
         }
       }
     }
-    stars(filter: $filter31, order: $order21, first: $first21, offset: $offset21) {
+    stars(filter: $filter31, order: $order23, first: $first23, offset: $offset23) {
       id
       title
       hours
@@ -12440,14 +12687,14 @@ export function withGetUser<TProps, TChildProps = {}>(operationOptions?: ApolloR
 };
 export type GetUserQueryResult = ApolloReactCommon.QueryResult<GetUserQuery, GetUserQueryVariables>;
 export const GetWorkerDocument = gql`
-    query getWorker($filter: TaskFilter, $order: TaskOrder, $first: Int, $offset: Int, $filter1: BoardFilter, $order1: BoardOrder, $first1: Int, $offset1: Int, $filter2: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter3: ProjectFilter, $filter4: ProjectFilter, $filter5: UserFilter, $filter6: TagFilter, $order3: TagOrder, $first3: Int, $offset3: Int, $filter7: TaskFilter, $order4: TaskOrder, $first4: Int, $offset4: Int, $filter8: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter9: WorkerFilter, $order6: WorkerOrder, $first6: Int, $offset6: Int, $filter10: TagFilter, $order7: TagOrder, $first7: Int, $offset7: Int, $filter11: ProjectFilter, $filter12: ProjectFilter, $filter13: TaskFilter, $order8: TaskOrder, $first8: Int, $offset8: Int, $filter14: UserFilter, $filter15: TagFilter, $order9: TagOrder, $first9: Int, $offset9: Int, $filter16: ProjectFilter, $filter17: ColumnFilter, $filter18: WorkerFilter, $order10: WorkerOrder, $first10: Int, $offset10: Int, $filter19: WorkerFilter, $order11: WorkerOrder, $first11: Int, $offset11: Int, $filter20: CommentFilter, $order12: CommentOrder, $first12: Int, $offset12: Int, $filter21: TaskFilter, $order13: TaskOrder, $first13: Int, $offset13: Int, $filter22: ProjectFilter, $filter23: ColumnFilter, $filter24: WorkerFilter, $order14: WorkerOrder, $first14: Int, $offset14: Int, $filter25: WorkerFilter, $order15: WorkerOrder, $first15: Int, $offset15: Int, $filter26: CommentFilter, $order16: CommentOrder, $first16: Int, $offset16: Int, $filter27: TaskFilter, $order17: TaskOrder, $first17: Int, $offset17: Int, $filter28: WorkerFilter, $order18: WorkerOrder, $first18: Int, $offset18: Int, $filter29: UserFilter, $filter30: TagFilter, $order19: TagOrder, $first19: Int, $offset19: Int, $filter31: TaskFilter, $order20: TaskOrder, $first20: Int, $offset20: Int, $filter32: TaskFilter, $order21: TaskOrder, $first21: Int, $offset21: Int, $id: ID!) {
+    query getWorker($filter: TaskFilter, $order: TaskOrder, $first: Int, $offset: Int, $filter1: BoardFilter, $order1: BoardOrder, $first1: Int, $offset1: Int, $filter2: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter3: ProjectFilter, $filter4: ProjectFilter, $filter5: UserFilter, $order3: UserOrder, $first3: Int, $offset3: Int, $filter6: TagFilter, $order4: TagOrder, $first4: Int, $offset4: Int, $filter7: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter8: TaskFilter, $order6: TaskOrder, $first6: Int, $offset6: Int, $filter9: WorkerFilter, $order7: WorkerOrder, $first7: Int, $offset7: Int, $filter10: TagFilter, $order8: TagOrder, $first8: Int, $offset8: Int, $filter11: ProjectFilter, $filter12: ProjectFilter, $filter13: TaskFilter, $order9: TaskOrder, $first9: Int, $offset9: Int, $filter14: UserFilter, $order10: UserOrder, $first10: Int, $offset10: Int, $filter15: TagFilter, $order11: TagOrder, $first11: Int, $offset11: Int, $filter16: ProjectFilter, $filter17: ColumnFilter, $filter18: WorkerFilter, $order12: WorkerOrder, $first12: Int, $offset12: Int, $filter19: WorkerFilter, $order13: WorkerOrder, $first13: Int, $offset13: Int, $filter20: CommentFilter, $order14: CommentOrder, $first14: Int, $offset14: Int, $filter21: TaskFilter, $order15: TaskOrder, $first15: Int, $offset15: Int, $filter22: ProjectFilter, $filter23: ColumnFilter, $filter24: WorkerFilter, $order16: WorkerOrder, $first16: Int, $offset16: Int, $filter25: WorkerFilter, $order17: WorkerOrder, $first17: Int, $offset17: Int, $filter26: CommentFilter, $order18: CommentOrder, $first18: Int, $offset18: Int, $filter27: TaskFilter, $order19: TaskOrder, $first19: Int, $offset19: Int, $filter28: WorkerFilter, $order20: WorkerOrder, $first20: Int, $offset20: Int, $filter29: UserFilter, $order21: UserOrder, $first21: Int, $offset21: Int, $filter30: TagFilter, $order22: TagOrder, $first22: Int, $offset22: Int, $filter31: TaskFilter, $order23: TaskOrder, $first23: Int, $offset23: Int, $filter32: TaskFilter, $order24: TaskOrder, $first24: Int, $offset24: Int, $id: ID!) {
   getWorker(id: $id) {
     id
     project(filter: $filter11) {
       id
       title
       description
-      tags(filter: $filter10, order: $order7, first: $first7, offset: $offset7) {
+      tags(filter: $filter10, order: $order8, first: $first8, offset: $offset8) {
         id
         title
         project(filter: $filter3) {
@@ -12474,7 +12721,7 @@ export const GetWorkerDocument = gql`
             availability
           }
         }
-        workers(filter: $filter9, order: $order6, first: $first6, offset: $offset6) {
+        workers(filter: $filter9, order: $order7, first: $first7, offset: $offset7) {
           id
           project(filter: $filter4) {
             id
@@ -12483,17 +12730,17 @@ export const GetWorkerDocument = gql`
           }
           name
           availability
-          user(filter: $filter5) {
+          user(filter: $filter5, order: $order3, first: $first3, offset: $offset3) {
             id
             username
             password
             location
           }
-          tags(filter: $filter6, order: $order3, first: $first3, offset: $offset3) {
+          tags(filter: $filter6, order: $order4, first: $first4, offset: $offset4) {
             id
             title
           }
-          tasks(filter: $filter7, order: $order4, first: $first4, offset: $offset4) {
+          tasks(filter: $filter7, order: $order5, first: $first5, offset: $offset5) {
             id
             title
             hours
@@ -12502,7 +12749,7 @@ export const GetWorkerDocument = gql`
             priority
             complete
           }
-          liked(filter: $filter8, order: $order5, first: $first5, offset: $offset5) {
+          liked(filter: $filter8, order: $order6, first: $first6, offset: $offset6) {
             id
             title
             hours
@@ -12516,12 +12763,12 @@ export const GetWorkerDocument = gql`
     }
     name
     availability
-    user(filter: $filter29) {
+    user(filter: $filter29, order: $order21, first: $first21, offset: $offset21) {
       id
       username
       password
       location
-      roles(filter: $filter28, order: $order18, first: $first18, offset: $offset18) {
+      roles(filter: $filter28, order: $order20, first: $first20, offset: $offset20) {
         id
         project(filter: $filter12) {
           id
@@ -12530,12 +12777,12 @@ export const GetWorkerDocument = gql`
         }
         name
         availability
-        user(filter: $filter14) {
+        user(filter: $filter14, order: $order10, first: $first10, offset: $offset10) {
           id
           username
           password
           location
-          stars(filter: $filter13, order: $order8, first: $first8, offset: $offset8) {
+          stars(filter: $filter13, order: $order9, first: $first9, offset: $offset9) {
             id
             title
             hours
@@ -12545,11 +12792,11 @@ export const GetWorkerDocument = gql`
             complete
           }
         }
-        tags(filter: $filter15, order: $order9, first: $first9, offset: $offset9) {
+        tags(filter: $filter15, order: $order11, first: $first11, offset: $offset11) {
           id
           title
         }
-        tasks(filter: $filter21, order: $order13, first: $first13, offset: $offset13) {
+        tasks(filter: $filter21, order: $order15, first: $first15, offset: $offset15) {
           id
           project(filter: $filter16) {
             id
@@ -12561,7 +12808,7 @@ export const GetWorkerDocument = gql`
             title
           }
           title
-          workers(filter: $filter18, order: $order10, first: $first10, offset: $offset10) {
+          workers(filter: $filter18, order: $order12, first: $first12, offset: $offset12) {
             id
             name
             availability
@@ -12571,17 +12818,17 @@ export const GetWorkerDocument = gql`
           content
           priority
           complete
-          likes(filter: $filter19, order: $order11, first: $first11, offset: $offset11) {
+          likes(filter: $filter19, order: $order13, first: $first13, offset: $offset13) {
             id
             name
             availability
           }
-          comments(filter: $filter20, order: $order12, first: $first12, offset: $offset12) {
+          comments(filter: $filter20, order: $order14, first: $first14, offset: $offset14) {
             id
             content
           }
         }
-        liked(filter: $filter27, order: $order17, first: $first17, offset: $offset17) {
+        liked(filter: $filter27, order: $order19, first: $first19, offset: $offset19) {
           id
           project(filter: $filter22) {
             id
@@ -12593,7 +12840,7 @@ export const GetWorkerDocument = gql`
             title
           }
           title
-          workers(filter: $filter24, order: $order14, first: $first14, offset: $offset14) {
+          workers(filter: $filter24, order: $order16, first: $first16, offset: $offset16) {
             id
             name
             availability
@@ -12603,23 +12850,23 @@ export const GetWorkerDocument = gql`
           content
           priority
           complete
-          likes(filter: $filter25, order: $order15, first: $first15, offset: $offset15) {
+          likes(filter: $filter25, order: $order17, first: $first17, offset: $offset17) {
             id
             name
             availability
           }
-          comments(filter: $filter26, order: $order16, first: $first16, offset: $offset16) {
+          comments(filter: $filter26, order: $order18, first: $first18, offset: $offset18) {
             id
             content
           }
         }
       }
     }
-    tags(filter: $filter30, order: $order19, first: $first19, offset: $offset19) {
+    tags(filter: $filter30, order: $order22, first: $first22, offset: $offset22) {
       id
       title
     }
-    tasks(filter: $filter31, order: $order20, first: $first20, offset: $offset20) {
+    tasks(filter: $filter31, order: $order23, first: $first23, offset: $offset23) {
       id
       title
       hours
@@ -12628,7 +12875,7 @@ export const GetWorkerDocument = gql`
       priority
       complete
     }
-    liked(filter: $filter32, order: $order21, first: $first21, offset: $offset21) {
+    liked(filter: $filter32, order: $order24, first: $first24, offset: $offset24) {
       id
       title
       hours
@@ -12659,14 +12906,14 @@ export function withGetWorker<TProps, TChildProps = {}>(operationOptions?: Apoll
 };
 export type GetWorkerQueryResult = ApolloReactCommon.QueryResult<GetWorkerQuery, GetWorkerQueryVariables>;
 export const QueryBoardDocument = gql`
-    query queryBoard($filter: TaskFilter, $order: TaskOrder, $first: Int, $offset: Int, $filter1: BoardFilter, $order1: BoardOrder, $first1: Int, $offset1: Int, $filter2: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter3: ProjectFilter, $filter4: ProjectFilter, $filter5: UserFilter, $filter6: TagFilter, $order3: TagOrder, $first3: Int, $offset3: Int, $filter7: TaskFilter, $order4: TaskOrder, $first4: Int, $offset4: Int, $filter8: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter9: WorkerFilter, $order6: WorkerOrder, $first6: Int, $offset6: Int, $filter10: TagFilter, $order7: TagOrder, $first7: Int, $offset7: Int, $filter11: ProjectFilter, $filter12: ProjectFilter, $filter13: TaskFilter, $order8: TaskOrder, $first8: Int, $offset8: Int, $filter14: ColumnFilter, $order9: ColumnOrder, $first9: Int, $offset9: Int, $filter15: BoardFilter, $filter16: ColumnFilter, $order10: ColumnOrder, $first10: Int, $offset10: Int, $filter17: BoardFilter, $order11: BoardOrder, $first11: Int, $offset11: Int) {
-  queryBoard(filter: $filter17, order: $order11, first: $first11, offset: $offset11) {
+    query queryBoard($filter: TaskFilter, $order: TaskOrder, $first: Int, $offset: Int, $filter1: BoardFilter, $order1: BoardOrder, $first1: Int, $offset1: Int, $filter2: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter3: ProjectFilter, $filter4: ProjectFilter, $filter5: UserFilter, $order3: UserOrder, $first3: Int, $offset3: Int, $filter6: TagFilter, $order4: TagOrder, $first4: Int, $offset4: Int, $filter7: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter8: TaskFilter, $order6: TaskOrder, $first6: Int, $offset6: Int, $filter9: WorkerFilter, $order7: WorkerOrder, $first7: Int, $offset7: Int, $filter10: TagFilter, $order8: TagOrder, $first8: Int, $offset8: Int, $filter11: ProjectFilter, $filter12: ProjectFilter, $filter13: TaskFilter, $order9: TaskOrder, $first9: Int, $offset9: Int, $filter14: ColumnFilter, $order10: ColumnOrder, $first10: Int, $offset10: Int, $filter15: BoardFilter, $filter16: ColumnFilter, $order11: ColumnOrder, $first11: Int, $offset11: Int, $filter17: BoardFilter, $order12: BoardOrder, $first12: Int, $offset12: Int) {
+  queryBoard(filter: $filter17, order: $order12, first: $first12, offset: $offset12) {
     id
     project(filter: $filter11) {
       id
       title
       description
-      tags(filter: $filter10, order: $order7, first: $first7, offset: $offset7) {
+      tags(filter: $filter10, order: $order8, first: $first8, offset: $offset8) {
         id
         title
         project(filter: $filter3) {
@@ -12693,7 +12940,7 @@ export const QueryBoardDocument = gql`
             availability
           }
         }
-        workers(filter: $filter9, order: $order6, first: $first6, offset: $offset6) {
+        workers(filter: $filter9, order: $order7, first: $first7, offset: $offset7) {
           id
           project(filter: $filter4) {
             id
@@ -12702,17 +12949,17 @@ export const QueryBoardDocument = gql`
           }
           name
           availability
-          user(filter: $filter5) {
+          user(filter: $filter5, order: $order3, first: $first3, offset: $offset3) {
             id
             username
             password
             location
           }
-          tags(filter: $filter6, order: $order3, first: $first3, offset: $offset3) {
+          tags(filter: $filter6, order: $order4, first: $first4, offset: $offset4) {
             id
             title
           }
-          tasks(filter: $filter7, order: $order4, first: $first4, offset: $offset4) {
+          tasks(filter: $filter7, order: $order5, first: $first5, offset: $offset5) {
             id
             title
             hours
@@ -12721,7 +12968,7 @@ export const QueryBoardDocument = gql`
             priority
             complete
           }
-          liked(filter: $filter8, order: $order5, first: $first5, offset: $offset5) {
+          liked(filter: $filter8, order: $order6, first: $first6, offset: $offset6) {
             id
             title
             hours
@@ -12734,7 +12981,7 @@ export const QueryBoardDocument = gql`
       }
     }
     title
-    columns(filter: $filter16, order: $order10, first: $first10, offset: $offset10) {
+    columns(filter: $filter16, order: $order11, first: $first11, offset: $offset11) {
       id
       board(filter: $filter15) {
         id
@@ -12744,10 +12991,10 @@ export const QueryBoardDocument = gql`
           description
         }
         title
-        columns(filter: $filter14, order: $order9, first: $first9, offset: $offset9) {
+        columns(filter: $filter14, order: $order10, first: $first10, offset: $offset10) {
           id
           title
-          tasks(filter: $filter13, order: $order8, first: $first8, offset: $offset8) {
+          tasks(filter: $filter13, order: $order9, first: $first9, offset: $offset9) {
             id
             title
             hours
@@ -12784,8 +13031,8 @@ export function withQueryBoard<TProps, TChildProps = {}>(operationOptions?: Apol
 };
 export type QueryBoardQueryResult = ApolloReactCommon.QueryResult<QueryBoardQuery, QueryBoardQueryVariables>;
 export const QueryColumnDocument = gql`
-    query queryColumn($filter: ProjectFilter, $filter1: WorkerFilter, $order: WorkerOrder, $first: Int, $offset: Int, $filter2: TagFilter, $order1: TagOrder, $first1: Int, $offset1: Int, $filter3: ProjectFilter, $filter4: ColumnFilter, $filter5: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter6: WorkerFilter, $order3: WorkerOrder, $first3: Int, $offset3: Int, $filter7: CommentFilter, $order4: CommentOrder, $first4: Int, $offset4: Int, $filter8: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter9: ProjectFilter, $filter10: ColumnFilter, $order6: ColumnOrder, $first6: Int, $offset6: Int, $filter11: BoardFilter, $order7: BoardOrder, $first7: Int, $offset7: Int, $filter12: ProjectFilter, $filter13: UserFilter, $filter14: TagFilter, $order8: TagOrder, $first8: Int, $offset8: Int, $filter15: TaskFilter, $order9: TaskOrder, $first9: Int, $offset9: Int, $filter16: TaskFilter, $order10: TaskOrder, $first10: Int, $offset10: Int, $filter17: WorkerFilter, $order11: WorkerOrder, $first11: Int, $offset11: Int, $filter18: ProjectFilter, $filter19: BoardFilter, $filter20: TaskFilter, $order12: TaskOrder, $first12: Int, $offset12: Int, $filter21: ColumnFilter, $order13: ColumnOrder, $first13: Int, $offset13: Int, $filter22: BoardFilter, $filter23: TaskFilter, $order14: TaskOrder, $first14: Int, $offset14: Int, $filter24: ColumnFilter, $order15: ColumnOrder, $first15: Int, $offset15: Int) {
-  queryColumn(filter: $filter24, order: $order15, first: $first15, offset: $offset15) {
+    query queryColumn($filter: ProjectFilter, $filter1: WorkerFilter, $order: WorkerOrder, $first: Int, $offset: Int, $filter2: TagFilter, $order1: TagOrder, $first1: Int, $offset1: Int, $filter3: ProjectFilter, $filter4: ColumnFilter, $filter5: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter6: WorkerFilter, $order3: WorkerOrder, $first3: Int, $offset3: Int, $filter7: CommentFilter, $order4: CommentOrder, $first4: Int, $offset4: Int, $filter8: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter9: ProjectFilter, $filter10: ColumnFilter, $order6: ColumnOrder, $first6: Int, $offset6: Int, $filter11: BoardFilter, $order7: BoardOrder, $first7: Int, $offset7: Int, $filter12: ProjectFilter, $filter13: UserFilter, $order8: UserOrder, $first8: Int, $offset8: Int, $filter14: TagFilter, $order9: TagOrder, $first9: Int, $offset9: Int, $filter15: TaskFilter, $order10: TaskOrder, $first10: Int, $offset10: Int, $filter16: TaskFilter, $order11: TaskOrder, $first11: Int, $offset11: Int, $filter17: WorkerFilter, $order12: WorkerOrder, $first12: Int, $offset12: Int, $filter18: ProjectFilter, $filter19: BoardFilter, $filter20: TaskFilter, $order13: TaskOrder, $first13: Int, $offset13: Int, $filter21: ColumnFilter, $order14: ColumnOrder, $first14: Int, $offset14: Int, $filter22: BoardFilter, $filter23: TaskFilter, $order15: TaskOrder, $first15: Int, $offset15: Int, $filter24: ColumnFilter, $order16: ColumnOrder, $first16: Int, $offset16: Int) {
+  queryColumn(filter: $filter24, order: $order16, first: $first16, offset: $offset16) {
     id
     board(filter: $filter22) {
       id
@@ -12853,7 +13100,7 @@ export const QueryColumnDocument = gql`
           }
           order
         }
-        workers(filter: $filter17, order: $order11, first: $first11, offset: $offset11) {
+        workers(filter: $filter17, order: $order12, first: $first12, offset: $offset12) {
           id
           project(filter: $filter12) {
             id
@@ -12862,17 +13109,17 @@ export const QueryColumnDocument = gql`
           }
           name
           availability
-          user(filter: $filter13) {
+          user(filter: $filter13, order: $order8, first: $first8, offset: $offset8) {
             id
             username
             password
             location
           }
-          tags(filter: $filter14, order: $order8, first: $first8, offset: $offset8) {
+          tags(filter: $filter14, order: $order9, first: $first9, offset: $offset9) {
             id
             title
           }
-          tasks(filter: $filter15, order: $order9, first: $first9, offset: $offset9) {
+          tasks(filter: $filter15, order: $order10, first: $first10, offset: $offset10) {
             id
             title
             hours
@@ -12881,7 +13128,7 @@ export const QueryColumnDocument = gql`
             priority
             complete
           }
-          liked(filter: $filter16, order: $order10, first: $first10, offset: $offset10) {
+          liked(filter: $filter16, order: $order11, first: $first11, offset: $offset11) {
             id
             title
             hours
@@ -12893,7 +13140,7 @@ export const QueryColumnDocument = gql`
         }
       }
       title
-      columns(filter: $filter21, order: $order13, first: $first13, offset: $offset13) {
+      columns(filter: $filter21, order: $order14, first: $first14, offset: $offset14) {
         id
         board(filter: $filter19) {
           id
@@ -12901,7 +13148,7 @@ export const QueryColumnDocument = gql`
           order
         }
         title
-        tasks(filter: $filter20, order: $order12, first: $first12, offset: $offset12) {
+        tasks(filter: $filter20, order: $order13, first: $first13, offset: $offset13) {
           id
           title
           hours
@@ -12914,7 +13161,7 @@ export const QueryColumnDocument = gql`
       order
     }
     title
-    tasks(filter: $filter23, order: $order14, first: $first14, offset: $offset14) {
+    tasks(filter: $filter23, order: $order15, first: $first15, offset: $offset15) {
       id
       title
       hours
@@ -12945,8 +13192,8 @@ export function withQueryColumn<TProps, TChildProps = {}>(operationOptions?: Apo
 };
 export type QueryColumnQueryResult = ApolloReactCommon.QueryResult<QueryColumnQuery, QueryColumnQueryVariables>;
 export const QueryCommentDocument = gql`
-    query queryComment($filter: ProjectFilter, $filter1: WorkerFilter, $order: WorkerOrder, $first: Int, $offset: Int, $filter2: TagFilter, $order1: TagOrder, $first1: Int, $offset1: Int, $filter3: ProjectFilter, $filter4: ColumnFilter, $filter5: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter6: WorkerFilter, $order3: WorkerOrder, $first3: Int, $offset3: Int, $filter7: CommentFilter, $order4: CommentOrder, $first4: Int, $offset4: Int, $filter8: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter9: ProjectFilter, $filter10: ColumnFilter, $order6: ColumnOrder, $first6: Int, $offset6: Int, $filter11: BoardFilter, $order7: BoardOrder, $first7: Int, $offset7: Int, $filter12: ProjectFilter, $filter13: UserFilter, $filter14: TagFilter, $order8: TagOrder, $first8: Int, $offset8: Int, $filter15: TaskFilter, $order9: TaskOrder, $first9: Int, $offset9: Int, $filter16: TaskFilter, $order10: TaskOrder, $first10: Int, $offset10: Int, $filter17: WorkerFilter, $order11: WorkerOrder, $first11: Int, $offset11: Int, $filter18: ProjectFilter, $filter19: ProjectFilter, $filter20: ColumnFilter, $order12: ColumnOrder, $first12: Int, $offset12: Int, $filter21: BoardFilter, $filter22: TaskFilter, $order13: TaskOrder, $first13: Int, $offset13: Int, $filter23: ColumnFilter, $filter24: WorkerFilter, $order14: WorkerOrder, $first14: Int, $offset14: Int, $filter25: ProjectFilter, $filter26: WorkerFilter, $order15: WorkerOrder, $first15: Int, $offset15: Int, $filter27: TaskFilter, $order16: TaskOrder, $first16: Int, $offset16: Int, $filter28: UserFilter, $filter29: TagFilter, $order17: TagOrder, $first17: Int, $offset17: Int, $filter30: TaskFilter, $order18: TaskOrder, $first18: Int, $offset18: Int, $filter31: ProjectFilter, $filter32: ColumnFilter, $filter33: WorkerFilter, $order19: WorkerOrder, $first19: Int, $offset19: Int, $filter34: WorkerFilter, $order20: WorkerOrder, $first20: Int, $offset20: Int, $filter35: CommentFilter, $order21: CommentOrder, $first21: Int, $offset21: Int, $filter36: TaskFilter, $order22: TaskOrder, $first22: Int, $offset22: Int, $filter37: WorkerFilter, $order23: WorkerOrder, $first23: Int, $offset23: Int, $filter38: TaskFilter, $filter39: ProjectFilter, $filter40: UserFilter, $filter41: TagFilter, $order24: TagOrder, $first24: Int, $offset24: Int, $filter42: TaskFilter, $order25: TaskOrder, $first25: Int, $offset25: Int, $filter43: TaskFilter, $order26: TaskOrder, $first26: Int, $offset26: Int, $filter44: WorkerFilter, $filter45: CommentFilter, $order27: CommentOrder, $first27: Int, $offset27: Int, $filter46: TaskFilter, $filter47: WorkerFilter, $filter48: CommentFilter, $order28: CommentOrder, $first28: Int, $offset28: Int) {
-  queryComment(filter: $filter48, order: $order28, first: $first28, offset: $offset28) {
+    query queryComment($filter: ProjectFilter, $filter1: WorkerFilter, $order: WorkerOrder, $first: Int, $offset: Int, $filter2: TagFilter, $order1: TagOrder, $first1: Int, $offset1: Int, $filter3: ProjectFilter, $filter4: ColumnFilter, $filter5: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter6: WorkerFilter, $order3: WorkerOrder, $first3: Int, $offset3: Int, $filter7: CommentFilter, $order4: CommentOrder, $first4: Int, $offset4: Int, $filter8: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter9: ProjectFilter, $filter10: ColumnFilter, $order6: ColumnOrder, $first6: Int, $offset6: Int, $filter11: BoardFilter, $order7: BoardOrder, $first7: Int, $offset7: Int, $filter12: ProjectFilter, $filter13: UserFilter, $order8: UserOrder, $first8: Int, $offset8: Int, $filter14: TagFilter, $order9: TagOrder, $first9: Int, $offset9: Int, $filter15: TaskFilter, $order10: TaskOrder, $first10: Int, $offset10: Int, $filter16: TaskFilter, $order11: TaskOrder, $first11: Int, $offset11: Int, $filter17: WorkerFilter, $order12: WorkerOrder, $first12: Int, $offset12: Int, $filter18: ProjectFilter, $filter19: ProjectFilter, $filter20: ColumnFilter, $order13: ColumnOrder, $first13: Int, $offset13: Int, $filter21: BoardFilter, $filter22: TaskFilter, $order14: TaskOrder, $first14: Int, $offset14: Int, $filter23: ColumnFilter, $filter24: WorkerFilter, $order15: WorkerOrder, $first15: Int, $offset15: Int, $filter25: ProjectFilter, $filter26: WorkerFilter, $order16: WorkerOrder, $first16: Int, $offset16: Int, $filter27: TaskFilter, $order17: TaskOrder, $first17: Int, $offset17: Int, $filter28: UserFilter, $order18: UserOrder, $first18: Int, $offset18: Int, $filter29: TagFilter, $order19: TagOrder, $first19: Int, $offset19: Int, $filter30: TaskFilter, $order20: TaskOrder, $first20: Int, $offset20: Int, $filter31: ProjectFilter, $filter32: ColumnFilter, $filter33: WorkerFilter, $order21: WorkerOrder, $first21: Int, $offset21: Int, $filter34: WorkerFilter, $order22: WorkerOrder, $first22: Int, $offset22: Int, $filter35: CommentFilter, $order23: CommentOrder, $first23: Int, $offset23: Int, $filter36: TaskFilter, $order24: TaskOrder, $first24: Int, $offset24: Int, $filter37: WorkerFilter, $order25: WorkerOrder, $first25: Int, $offset25: Int, $filter38: TaskFilter, $filter39: ProjectFilter, $filter40: UserFilter, $order26: UserOrder, $first26: Int, $offset26: Int, $filter41: TagFilter, $order27: TagOrder, $first27: Int, $offset27: Int, $filter42: TaskFilter, $order28: TaskOrder, $first28: Int, $offset28: Int, $filter43: TaskFilter, $order29: TaskOrder, $first29: Int, $offset29: Int, $filter44: WorkerFilter, $filter45: CommentFilter, $order30: CommentOrder, $first30: Int, $offset30: Int, $filter46: TaskFilter, $filter47: WorkerFilter, $filter48: CommentFilter, $order31: CommentOrder, $first31: Int, $offset31: Int) {
+  queryComment(filter: $filter48, order: $order31, first: $first31, offset: $offset31) {
     id
     task(filter: $filter46) {
       id
@@ -13014,7 +13261,7 @@ export const QueryCommentDocument = gql`
           }
           order
         }
-        workers(filter: $filter17, order: $order11, first: $first11, offset: $offset11) {
+        workers(filter: $filter17, order: $order12, first: $first12, offset: $offset12) {
           id
           project(filter: $filter12) {
             id
@@ -13023,17 +13270,17 @@ export const QueryCommentDocument = gql`
           }
           name
           availability
-          user(filter: $filter13) {
+          user(filter: $filter13, order: $order8, first: $first8, offset: $offset8) {
             id
             username
             password
             location
           }
-          tags(filter: $filter14, order: $order8, first: $first8, offset: $offset8) {
+          tags(filter: $filter14, order: $order9, first: $first9, offset: $offset9) {
             id
             title
           }
-          tasks(filter: $filter15, order: $order9, first: $first9, offset: $offset9) {
+          tasks(filter: $filter15, order: $order10, first: $first10, offset: $offset10) {
             id
             title
             hours
@@ -13042,7 +13289,7 @@ export const QueryCommentDocument = gql`
             priority
             complete
           }
-          liked(filter: $filter16, order: $order10, first: $first10, offset: $offset10) {
+          liked(filter: $filter16, order: $order11, first: $first11, offset: $offset11) {
             id
             title
             hours
@@ -13063,14 +13310,14 @@ export const QueryCommentDocument = gql`
             description
           }
           title
-          columns(filter: $filter20, order: $order12, first: $first12, offset: $offset12) {
+          columns(filter: $filter20, order: $order13, first: $first13, offset: $offset13) {
             id
             title
           }
           order
         }
         title
-        tasks(filter: $filter22, order: $order13, first: $first13, offset: $offset13) {
+        tasks(filter: $filter22, order: $order14, first: $first14, offset: $offset14) {
           id
           title
           hours
@@ -13081,7 +13328,7 @@ export const QueryCommentDocument = gql`
         }
       }
       title
-      workers(filter: $filter24, order: $order14, first: $first14, offset: $offset14) {
+      workers(filter: $filter24, order: $order15, first: $first15, offset: $offset15) {
         id
         name
         availability
@@ -13091,7 +13338,7 @@ export const QueryCommentDocument = gql`
       content
       priority
       complete
-      likes(filter: $filter37, order: $order23, first: $first23, offset: $offset23) {
+      likes(filter: $filter37, order: $order25, first: $first25, offset: $offset25) {
         id
         project(filter: $filter25) {
           id
@@ -13100,17 +13347,17 @@ export const QueryCommentDocument = gql`
         }
         name
         availability
-        user(filter: $filter28) {
+        user(filter: $filter28, order: $order18, first: $first18, offset: $offset18) {
           id
           username
           password
           location
-          roles(filter: $filter26, order: $order15, first: $first15, offset: $offset15) {
+          roles(filter: $filter26, order: $order16, first: $first16, offset: $offset16) {
             id
             name
             availability
           }
-          stars(filter: $filter27, order: $order16, first: $first16, offset: $offset16) {
+          stars(filter: $filter27, order: $order17, first: $first17, offset: $offset17) {
             id
             title
             hours
@@ -13120,11 +13367,11 @@ export const QueryCommentDocument = gql`
             complete
           }
         }
-        tags(filter: $filter29, order: $order17, first: $first17, offset: $offset17) {
+        tags(filter: $filter29, order: $order19, first: $first19, offset: $offset19) {
           id
           title
         }
-        tasks(filter: $filter30, order: $order18, first: $first18, offset: $offset18) {
+        tasks(filter: $filter30, order: $order20, first: $first20, offset: $offset20) {
           id
           title
           hours
@@ -13133,7 +13380,7 @@ export const QueryCommentDocument = gql`
           priority
           complete
         }
-        liked(filter: $filter36, order: $order22, first: $first22, offset: $offset22) {
+        liked(filter: $filter36, order: $order24, first: $first24, offset: $offset24) {
           id
           project(filter: $filter31) {
             id
@@ -13145,7 +13392,7 @@ export const QueryCommentDocument = gql`
             title
           }
           title
-          workers(filter: $filter33, order: $order19, first: $first19, offset: $offset19) {
+          workers(filter: $filter33, order: $order21, first: $first21, offset: $offset21) {
             id
             name
             availability
@@ -13155,18 +13402,18 @@ export const QueryCommentDocument = gql`
           content
           priority
           complete
-          likes(filter: $filter34, order: $order20, first: $first20, offset: $offset20) {
+          likes(filter: $filter34, order: $order22, first: $first22, offset: $offset22) {
             id
             name
             availability
           }
-          comments(filter: $filter35, order: $order21, first: $first21, offset: $offset21) {
+          comments(filter: $filter35, order: $order23, first: $first23, offset: $offset23) {
             id
             content
           }
         }
       }
-      comments(filter: $filter45, order: $order27, first: $first27, offset: $offset27) {
+      comments(filter: $filter45, order: $order30, first: $first30, offset: $offset30) {
         id
         task(filter: $filter38) {
           id
@@ -13186,17 +13433,17 @@ export const QueryCommentDocument = gql`
           }
           name
           availability
-          user(filter: $filter40) {
+          user(filter: $filter40, order: $order26, first: $first26, offset: $offset26) {
             id
             username
             password
             location
           }
-          tags(filter: $filter41, order: $order24, first: $first24, offset: $offset24) {
+          tags(filter: $filter41, order: $order27, first: $first27, offset: $offset27) {
             id
             title
           }
-          tasks(filter: $filter42, order: $order25, first: $first25, offset: $offset25) {
+          tasks(filter: $filter42, order: $order28, first: $first28, offset: $offset28) {
             id
             title
             hours
@@ -13205,7 +13452,7 @@ export const QueryCommentDocument = gql`
             priority
             complete
           }
-          liked(filter: $filter43, order: $order26, first: $first26, offset: $offset26) {
+          liked(filter: $filter43, order: $order29, first: $first29, offset: $offset29) {
             id
             title
             hours
@@ -13246,12 +13493,12 @@ export function withQueryComment<TProps, TChildProps = {}>(operationOptions?: Ap
 };
 export type QueryCommentQueryResult = ApolloReactCommon.QueryResult<QueryCommentQuery, QueryCommentQueryVariables>;
 export const QueryProjectDocument = gql`
-    query queryProject($filter: WorkerFilter, $order: WorkerOrder, $first: Int, $offset: Int, $filter1: TagFilter, $order1: TagOrder, $first1: Int, $offset1: Int, $filter2: ProjectFilter, $filter3: ColumnFilter, $filter4: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter5: WorkerFilter, $order3: WorkerOrder, $first3: Int, $offset3: Int, $filter6: CommentFilter, $order4: CommentOrder, $first4: Int, $offset4: Int, $filter7: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter8: ProjectFilter, $filter9: ColumnFilter, $order6: ColumnOrder, $first6: Int, $offset6: Int, $filter10: BoardFilter, $order7: BoardOrder, $first7: Int, $offset7: Int, $filter11: ProjectFilter, $filter12: UserFilter, $filter13: TagFilter, $order8: TagOrder, $first8: Int, $offset8: Int, $filter14: TaskFilter, $order9: TaskOrder, $first9: Int, $offset9: Int, $filter15: TaskFilter, $order10: TaskOrder, $first10: Int, $offset10: Int, $filter16: WorkerFilter, $order11: WorkerOrder, $first11: Int, $offset11: Int, $filter17: ProjectFilter, $filter18: TagFilter, $order12: TagOrder, $first12: Int, $offset12: Int, $filter19: TaskFilter, $order13: TaskOrder, $first13: Int, $offset13: Int, $filter20: BoardFilter, $order14: BoardOrder, $first14: Int, $offset14: Int, $filter21: WorkerFilter, $order15: WorkerOrder, $first15: Int, $offset15: Int, $filter22: ProjectFilter, $order16: ProjectOrder, $first16: Int, $offset16: Int) {
-  queryProject(filter: $filter22, order: $order16, first: $first16, offset: $offset16) {
+    query queryProject($filter: WorkerFilter, $order: WorkerOrder, $first: Int, $offset: Int, $filter1: TagFilter, $order1: TagOrder, $first1: Int, $offset1: Int, $filter2: ProjectFilter, $filter3: ColumnFilter, $filter4: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter5: WorkerFilter, $order3: WorkerOrder, $first3: Int, $offset3: Int, $filter6: CommentFilter, $order4: CommentOrder, $first4: Int, $offset4: Int, $filter7: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter8: ProjectFilter, $filter9: ColumnFilter, $order6: ColumnOrder, $first6: Int, $offset6: Int, $filter10: BoardFilter, $order7: BoardOrder, $first7: Int, $offset7: Int, $filter11: ProjectFilter, $filter12: UserFilter, $order8: UserOrder, $first8: Int, $offset8: Int, $filter13: TagFilter, $order9: TagOrder, $first9: Int, $offset9: Int, $filter14: TaskFilter, $order10: TaskOrder, $first10: Int, $offset10: Int, $filter15: TaskFilter, $order11: TaskOrder, $first11: Int, $offset11: Int, $filter16: WorkerFilter, $order12: WorkerOrder, $first12: Int, $offset12: Int, $filter17: ProjectFilter, $filter18: TagFilter, $order13: TagOrder, $first13: Int, $offset13: Int, $filter19: TaskFilter, $order14: TaskOrder, $first14: Int, $offset14: Int, $filter20: BoardFilter, $order15: BoardOrder, $first15: Int, $offset15: Int, $filter21: WorkerFilter, $order16: WorkerOrder, $first16: Int, $offset16: Int, $filter22: ProjectFilter, $order17: ProjectOrder, $first17: Int, $offset17: Int) {
+  queryProject(filter: $filter22, order: $order17, first: $first17, offset: $offset17) {
     id
     title
     description
-    tags(filter: $filter18, order: $order12, first: $first12, offset: $offset12) {
+    tags(filter: $filter18, order: $order13, first: $first13, offset: $offset13) {
       id
       title
       project(filter: $filter17) {
@@ -13313,7 +13560,7 @@ export const QueryProjectDocument = gql`
           }
           order
         }
-        workers(filter: $filter16, order: $order11, first: $first11, offset: $offset11) {
+        workers(filter: $filter16, order: $order12, first: $first12, offset: $offset12) {
           id
           project(filter: $filter11) {
             id
@@ -13322,17 +13569,17 @@ export const QueryProjectDocument = gql`
           }
           name
           availability
-          user(filter: $filter12) {
+          user(filter: $filter12, order: $order8, first: $first8, offset: $offset8) {
             id
             username
             password
             location
           }
-          tags(filter: $filter13, order: $order8, first: $first8, offset: $offset8) {
+          tags(filter: $filter13, order: $order9, first: $first9, offset: $offset9) {
             id
             title
           }
-          tasks(filter: $filter14, order: $order9, first: $first9, offset: $offset9) {
+          tasks(filter: $filter14, order: $order10, first: $first10, offset: $offset10) {
             id
             title
             hours
@@ -13341,7 +13588,7 @@ export const QueryProjectDocument = gql`
             priority
             complete
           }
-          liked(filter: $filter15, order: $order10, first: $first10, offset: $offset10) {
+          liked(filter: $filter15, order: $order11, first: $first11, offset: $offset11) {
             id
             title
             hours
@@ -13353,7 +13600,7 @@ export const QueryProjectDocument = gql`
         }
       }
     }
-    tasks(filter: $filter19, order: $order13, first: $first13, offset: $offset13) {
+    tasks(filter: $filter19, order: $order14, first: $first14, offset: $offset14) {
       id
       title
       hours
@@ -13362,12 +13609,12 @@ export const QueryProjectDocument = gql`
       priority
       complete
     }
-    boards(filter: $filter20, order: $order14, first: $first14, offset: $offset14) {
+    boards(filter: $filter20, order: $order15, first: $first15, offset: $offset15) {
       id
       title
       order
     }
-    workers(filter: $filter21, order: $order15, first: $first15, offset: $offset15) {
+    workers(filter: $filter21, order: $order16, first: $first16, offset: $offset16) {
       id
       name
       availability
@@ -13394,15 +13641,15 @@ export function withQueryProject<TProps, TChildProps = {}>(operationOptions?: Ap
 };
 export type QueryProjectQueryResult = ApolloReactCommon.QueryResult<QueryProjectQuery, QueryProjectQueryVariables>;
 export const QueryTagDocument = gql`
-    query queryTag($filter: TaskFilter, $order: TaskOrder, $first: Int, $offset: Int, $filter1: BoardFilter, $order1: BoardOrder, $first1: Int, $offset1: Int, $filter2: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter3: ProjectFilter, $filter4: ProjectFilter, $filter5: UserFilter, $filter6: TagFilter, $order3: TagOrder, $first3: Int, $offset3: Int, $filter7: TaskFilter, $order4: TaskOrder, $first4: Int, $offset4: Int, $filter8: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter9: WorkerFilter, $order6: WorkerOrder, $first6: Int, $offset6: Int, $filter10: TagFilter, $order7: TagOrder, $first7: Int, $offset7: Int, $filter11: ProjectFilter, $filter12: WorkerFilter, $order8: WorkerOrder, $first8: Int, $offset8: Int, $filter13: TagFilter, $order9: TagOrder, $first9: Int, $offset9: Int) {
-  queryTag(filter: $filter13, order: $order9, first: $first9, offset: $offset9) {
+    query queryTag($filter: TaskFilter, $order: TaskOrder, $first: Int, $offset: Int, $filter1: BoardFilter, $order1: BoardOrder, $first1: Int, $offset1: Int, $filter2: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter3: ProjectFilter, $filter4: ProjectFilter, $filter5: UserFilter, $order3: UserOrder, $first3: Int, $offset3: Int, $filter6: TagFilter, $order4: TagOrder, $first4: Int, $offset4: Int, $filter7: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter8: TaskFilter, $order6: TaskOrder, $first6: Int, $offset6: Int, $filter9: WorkerFilter, $order7: WorkerOrder, $first7: Int, $offset7: Int, $filter10: TagFilter, $order8: TagOrder, $first8: Int, $offset8: Int, $filter11: ProjectFilter, $filter12: WorkerFilter, $order9: WorkerOrder, $first9: Int, $offset9: Int, $filter13: TagFilter, $order10: TagOrder, $first10: Int, $offset10: Int) {
+  queryTag(filter: $filter13, order: $order10, first: $first10, offset: $offset10) {
     id
     title
     project(filter: $filter11) {
       id
       title
       description
-      tags(filter: $filter10, order: $order7, first: $first7, offset: $offset7) {
+      tags(filter: $filter10, order: $order8, first: $first8, offset: $offset8) {
         id
         title
         project(filter: $filter3) {
@@ -13429,7 +13676,7 @@ export const QueryTagDocument = gql`
             availability
           }
         }
-        workers(filter: $filter9, order: $order6, first: $first6, offset: $offset6) {
+        workers(filter: $filter9, order: $order7, first: $first7, offset: $offset7) {
           id
           project(filter: $filter4) {
             id
@@ -13438,17 +13685,17 @@ export const QueryTagDocument = gql`
           }
           name
           availability
-          user(filter: $filter5) {
+          user(filter: $filter5, order: $order3, first: $first3, offset: $offset3) {
             id
             username
             password
             location
           }
-          tags(filter: $filter6, order: $order3, first: $first3, offset: $offset3) {
+          tags(filter: $filter6, order: $order4, first: $first4, offset: $offset4) {
             id
             title
           }
-          tasks(filter: $filter7, order: $order4, first: $first4, offset: $offset4) {
+          tasks(filter: $filter7, order: $order5, first: $first5, offset: $offset5) {
             id
             title
             hours
@@ -13457,7 +13704,7 @@ export const QueryTagDocument = gql`
             priority
             complete
           }
-          liked(filter: $filter8, order: $order5, first: $first5, offset: $offset5) {
+          liked(filter: $filter8, order: $order6, first: $first6, offset: $offset6) {
             id
             title
             hours
@@ -13469,7 +13716,7 @@ export const QueryTagDocument = gql`
         }
       }
     }
-    workers(filter: $filter12, order: $order8, first: $first8, offset: $offset8) {
+    workers(filter: $filter12, order: $order9, first: $first9, offset: $offset9) {
       id
       name
       availability
@@ -13496,14 +13743,14 @@ export function withQueryTag<TProps, TChildProps = {}>(operationOptions?: Apollo
 };
 export type QueryTagQueryResult = ApolloReactCommon.QueryResult<QueryTagQuery, QueryTagQueryVariables>;
 export const QueryTaskDocument = gql`
-    query queryTask($filter: TaskFilter, $order: TaskOrder, $first: Int, $offset: Int, $filter1: BoardFilter, $order1: BoardOrder, $first1: Int, $offset1: Int, $filter2: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter3: ProjectFilter, $filter4: ProjectFilter, $filter5: UserFilter, $filter6: TagFilter, $order3: TagOrder, $first3: Int, $offset3: Int, $filter7: TaskFilter, $order4: TaskOrder, $first4: Int, $offset4: Int, $filter8: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter9: WorkerFilter, $order6: WorkerOrder, $first6: Int, $offset6: Int, $filter10: TagFilter, $order7: TagOrder, $first7: Int, $offset7: Int, $filter11: ProjectFilter, $filter12: ProjectFilter, $filter13: BoardFilter, $filter14: TaskFilter, $order8: TaskOrder, $first8: Int, $offset8: Int, $filter15: ColumnFilter, $order9: ColumnOrder, $first9: Int, $offset9: Int, $filter16: BoardFilter, $filter17: ProjectFilter, $filter18: ColumnFilter, $filter19: WorkerFilter, $order10: WorkerOrder, $first10: Int, $offset10: Int, $filter20: ProjectFilter, $filter21: UserFilter, $filter22: TagFilter, $order11: TagOrder, $first11: Int, $offset11: Int, $filter23: TaskFilter, $order12: TaskOrder, $first12: Int, $offset12: Int, $filter24: TaskFilter, $order13: TaskOrder, $first13: Int, $offset13: Int, $filter25: WorkerFilter, $order14: WorkerOrder, $first14: Int, $offset14: Int, $filter26: TaskFilter, $filter27: WorkerFilter, $filter28: CommentFilter, $order15: CommentOrder, $first15: Int, $offset15: Int, $filter29: TaskFilter, $order16: TaskOrder, $first16: Int, $offset16: Int, $filter30: ColumnFilter, $filter31: WorkerFilter, $order17: WorkerOrder, $first17: Int, $offset17: Int, $filter32: WorkerFilter, $order18: WorkerOrder, $first18: Int, $offset18: Int, $filter33: CommentFilter, $order19: CommentOrder, $first19: Int, $offset19: Int, $filter34: TaskFilter, $order20: TaskOrder, $first20: Int, $offset20: Int) {
-  queryTask(filter: $filter34, order: $order20, first: $first20, offset: $offset20) {
+    query queryTask($filter: TaskFilter, $order: TaskOrder, $first: Int, $offset: Int, $filter1: BoardFilter, $order1: BoardOrder, $first1: Int, $offset1: Int, $filter2: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter3: ProjectFilter, $filter4: ProjectFilter, $filter5: UserFilter, $order3: UserOrder, $first3: Int, $offset3: Int, $filter6: TagFilter, $order4: TagOrder, $first4: Int, $offset4: Int, $filter7: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter8: TaskFilter, $order6: TaskOrder, $first6: Int, $offset6: Int, $filter9: WorkerFilter, $order7: WorkerOrder, $first7: Int, $offset7: Int, $filter10: TagFilter, $order8: TagOrder, $first8: Int, $offset8: Int, $filter11: ProjectFilter, $filter12: ProjectFilter, $filter13: BoardFilter, $filter14: TaskFilter, $order9: TaskOrder, $first9: Int, $offset9: Int, $filter15: ColumnFilter, $order10: ColumnOrder, $first10: Int, $offset10: Int, $filter16: BoardFilter, $filter17: ProjectFilter, $filter18: ColumnFilter, $filter19: WorkerFilter, $order11: WorkerOrder, $first11: Int, $offset11: Int, $filter20: ProjectFilter, $filter21: UserFilter, $order12: UserOrder, $first12: Int, $offset12: Int, $filter22: TagFilter, $order13: TagOrder, $first13: Int, $offset13: Int, $filter23: TaskFilter, $order14: TaskOrder, $first14: Int, $offset14: Int, $filter24: TaskFilter, $order15: TaskOrder, $first15: Int, $offset15: Int, $filter25: WorkerFilter, $order16: WorkerOrder, $first16: Int, $offset16: Int, $filter26: TaskFilter, $filter27: WorkerFilter, $filter28: CommentFilter, $order17: CommentOrder, $first17: Int, $offset17: Int, $filter29: TaskFilter, $order18: TaskOrder, $first18: Int, $offset18: Int, $filter30: ColumnFilter, $filter31: WorkerFilter, $order19: WorkerOrder, $first19: Int, $offset19: Int, $filter32: WorkerFilter, $order20: WorkerOrder, $first20: Int, $offset20: Int, $filter33: CommentFilter, $order21: CommentOrder, $first21: Int, $offset21: Int, $filter34: TaskFilter, $order22: TaskOrder, $first22: Int, $offset22: Int) {
+  queryTask(filter: $filter34, order: $order22, first: $first22, offset: $offset22) {
     id
     project(filter: $filter11) {
       id
       title
       description
-      tags(filter: $filter10, order: $order7, first: $first7, offset: $offset7) {
+      tags(filter: $filter10, order: $order8, first: $first8, offset: $offset8) {
         id
         title
         project(filter: $filter3) {
@@ -13530,7 +13777,7 @@ export const QueryTaskDocument = gql`
             availability
           }
         }
-        workers(filter: $filter9, order: $order6, first: $first6, offset: $offset6) {
+        workers(filter: $filter9, order: $order7, first: $first7, offset: $offset7) {
           id
           project(filter: $filter4) {
             id
@@ -13539,17 +13786,17 @@ export const QueryTaskDocument = gql`
           }
           name
           availability
-          user(filter: $filter5) {
+          user(filter: $filter5, order: $order3, first: $first3, offset: $offset3) {
             id
             username
             password
             location
           }
-          tags(filter: $filter6, order: $order3, first: $first3, offset: $offset3) {
+          tags(filter: $filter6, order: $order4, first: $first4, offset: $offset4) {
             id
             title
           }
-          tasks(filter: $filter7, order: $order4, first: $first4, offset: $offset4) {
+          tasks(filter: $filter7, order: $order5, first: $first5, offset: $offset5) {
             id
             title
             hours
@@ -13558,7 +13805,7 @@ export const QueryTaskDocument = gql`
             priority
             complete
           }
-          liked(filter: $filter8, order: $order5, first: $first5, offset: $offset5) {
+          liked(filter: $filter8, order: $order6, first: $first6, offset: $offset6) {
             id
             title
             hours
@@ -13580,7 +13827,7 @@ export const QueryTaskDocument = gql`
           description
         }
         title
-        columns(filter: $filter15, order: $order9, first: $first9, offset: $offset9) {
+        columns(filter: $filter15, order: $order10, first: $first10, offset: $offset10) {
           id
           board(filter: $filter13) {
             id
@@ -13588,7 +13835,7 @@ export const QueryTaskDocument = gql`
             order
           }
           title
-          tasks(filter: $filter14, order: $order8, first: $first8, offset: $offset8) {
+          tasks(filter: $filter14, order: $order9, first: $first9, offset: $offset9) {
             id
             title
             hours
@@ -13601,7 +13848,7 @@ export const QueryTaskDocument = gql`
         order
       }
       title
-      tasks(filter: $filter29, order: $order16, first: $first16, offset: $offset16) {
+      tasks(filter: $filter29, order: $order18, first: $first18, offset: $offset18) {
         id
         project(filter: $filter17) {
           id
@@ -13613,7 +13860,7 @@ export const QueryTaskDocument = gql`
           title
         }
         title
-        workers(filter: $filter19, order: $order10, first: $first10, offset: $offset10) {
+        workers(filter: $filter19, order: $order11, first: $first11, offset: $offset11) {
           id
           name
           availability
@@ -13623,7 +13870,7 @@ export const QueryTaskDocument = gql`
         content
         priority
         complete
-        likes(filter: $filter25, order: $order14, first: $first14, offset: $offset14) {
+        likes(filter: $filter25, order: $order16, first: $first16, offset: $offset16) {
           id
           project(filter: $filter20) {
             id
@@ -13632,17 +13879,17 @@ export const QueryTaskDocument = gql`
           }
           name
           availability
-          user(filter: $filter21) {
+          user(filter: $filter21, order: $order12, first: $first12, offset: $offset12) {
             id
             username
             password
             location
           }
-          tags(filter: $filter22, order: $order11, first: $first11, offset: $offset11) {
+          tags(filter: $filter22, order: $order13, first: $first13, offset: $offset13) {
             id
             title
           }
-          tasks(filter: $filter23, order: $order12, first: $first12, offset: $offset12) {
+          tasks(filter: $filter23, order: $order14, first: $first14, offset: $offset14) {
             id
             title
             hours
@@ -13651,7 +13898,7 @@ export const QueryTaskDocument = gql`
             priority
             complete
           }
-          liked(filter: $filter24, order: $order13, first: $first13, offset: $offset13) {
+          liked(filter: $filter24, order: $order15, first: $first15, offset: $offset15) {
             id
             title
             hours
@@ -13661,7 +13908,7 @@ export const QueryTaskDocument = gql`
             complete
           }
         }
-        comments(filter: $filter28, order: $order15, first: $first15, offset: $offset15) {
+        comments(filter: $filter28, order: $order17, first: $first17, offset: $offset17) {
           id
           task(filter: $filter26) {
             id
@@ -13682,7 +13929,7 @@ export const QueryTaskDocument = gql`
       }
     }
     title
-    workers(filter: $filter31, order: $order17, first: $first17, offset: $offset17) {
+    workers(filter: $filter31, order: $order19, first: $first19, offset: $offset19) {
       id
       name
       availability
@@ -13692,12 +13939,12 @@ export const QueryTaskDocument = gql`
     content
     priority
     complete
-    likes(filter: $filter32, order: $order18, first: $first18, offset: $offset18) {
+    likes(filter: $filter32, order: $order20, first: $first20, offset: $offset20) {
       id
       name
       availability
     }
-    comments(filter: $filter33, order: $order19, first: $first19, offset: $offset19) {
+    comments(filter: $filter33, order: $order21, first: $first21, offset: $offset21) {
       id
       content
     }
@@ -13723,13 +13970,13 @@ export function withQueryTask<TProps, TChildProps = {}>(operationOptions?: Apoll
 };
 export type QueryTaskQueryResult = ApolloReactCommon.QueryResult<QueryTaskQuery, QueryTaskQueryVariables>;
 export const QueryUserDocument = gql`
-    query queryUser($filter: ProjectFilter, $filter1: WorkerFilter, $order: WorkerOrder, $first: Int, $offset: Int, $filter2: TagFilter, $order1: TagOrder, $first1: Int, $offset1: Int, $filter3: ProjectFilter, $filter4: ColumnFilter, $filter5: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter6: WorkerFilter, $order3: WorkerOrder, $first3: Int, $offset3: Int, $filter7: CommentFilter, $order4: CommentOrder, $first4: Int, $offset4: Int, $filter8: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter9: ProjectFilter, $filter10: ColumnFilter, $order6: ColumnOrder, $first6: Int, $offset6: Int, $filter11: BoardFilter, $order7: BoardOrder, $first7: Int, $offset7: Int, $filter12: ProjectFilter, $filter13: UserFilter, $filter14: TagFilter, $order8: TagOrder, $first8: Int, $offset8: Int, $filter15: TaskFilter, $order9: TaskOrder, $first9: Int, $offset9: Int, $filter16: TaskFilter, $order10: TaskOrder, $first10: Int, $offset10: Int, $filter17: WorkerFilter, $order11: WorkerOrder, $first11: Int, $offset11: Int, $filter18: ProjectFilter, $filter19: TagFilter, $order12: TagOrder, $first12: Int, $offset12: Int, $filter20: TaskFilter, $order13: TaskOrder, $first13: Int, $offset13: Int, $filter21: TaskFilter, $order14: TaskOrder, $first14: Int, $offset14: Int, $filter22: WorkerFilter, $order15: WorkerOrder, $first15: Int, $offset15: Int, $filter23: ProjectFilter, $filter24: ColumnFilter, $filter25: WorkerFilter, $order16: WorkerOrder, $first16: Int, $offset16: Int, $filter26: WorkerFilter, $order17: WorkerOrder, $first17: Int, $offset17: Int, $filter27: CommentFilter, $order18: CommentOrder, $first18: Int, $offset18: Int, $filter28: TaskFilter, $order19: TaskOrder, $first19: Int, $offset19: Int, $filter29: UserFilter, $filter30: WorkerFilter, $order20: WorkerOrder, $first20: Int, $offset20: Int, $filter31: TaskFilter, $order21: TaskOrder, $first21: Int, $offset21: Int, $filter32: UserFilter, $order22: UserOrder, $first22: Int, $offset22: Int) {
-  queryUser(filter: $filter32, order: $order22, first: $first22, offset: $offset22) {
+    query queryUser($filter: ProjectFilter, $filter1: WorkerFilter, $order: WorkerOrder, $first: Int, $offset: Int, $filter2: TagFilter, $order1: TagOrder, $first1: Int, $offset1: Int, $filter3: ProjectFilter, $filter4: ColumnFilter, $filter5: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter6: WorkerFilter, $order3: WorkerOrder, $first3: Int, $offset3: Int, $filter7: CommentFilter, $order4: CommentOrder, $first4: Int, $offset4: Int, $filter8: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter9: ProjectFilter, $filter10: ColumnFilter, $order6: ColumnOrder, $first6: Int, $offset6: Int, $filter11: BoardFilter, $order7: BoardOrder, $first7: Int, $offset7: Int, $filter12: ProjectFilter, $filter13: UserFilter, $order8: UserOrder, $first8: Int, $offset8: Int, $filter14: TagFilter, $order9: TagOrder, $first9: Int, $offset9: Int, $filter15: TaskFilter, $order10: TaskOrder, $first10: Int, $offset10: Int, $filter16: TaskFilter, $order11: TaskOrder, $first11: Int, $offset11: Int, $filter17: WorkerFilter, $order12: WorkerOrder, $first12: Int, $offset12: Int, $filter18: ProjectFilter, $filter19: TagFilter, $order13: TagOrder, $first13: Int, $offset13: Int, $filter20: TaskFilter, $order14: TaskOrder, $first14: Int, $offset14: Int, $filter21: TaskFilter, $order15: TaskOrder, $first15: Int, $offset15: Int, $filter22: WorkerFilter, $order16: WorkerOrder, $first16: Int, $offset16: Int, $filter23: ProjectFilter, $filter24: ColumnFilter, $filter25: WorkerFilter, $order17: WorkerOrder, $first17: Int, $offset17: Int, $filter26: WorkerFilter, $order18: WorkerOrder, $first18: Int, $offset18: Int, $filter27: CommentFilter, $order19: CommentOrder, $first19: Int, $offset19: Int, $filter28: TaskFilter, $order20: TaskOrder, $first20: Int, $offset20: Int, $filter29: UserFilter, $order21: UserOrder, $first21: Int, $offset21: Int, $filter30: WorkerFilter, $order22: WorkerOrder, $first22: Int, $offset22: Int, $filter31: TaskFilter, $order23: TaskOrder, $first23: Int, $offset23: Int, $filter32: UserFilter, $order24: UserOrder, $first24: Int, $offset24: Int) {
+  queryUser(filter: $filter32, order: $order24, first: $first24, offset: $offset24) {
     id
     username
     password
     location
-    roles(filter: $filter30, order: $order20, first: $first20, offset: $offset20) {
+    roles(filter: $filter30, order: $order22, first: $first22, offset: $offset22) {
       id
       project(filter: $filter18) {
         id
@@ -13795,7 +14042,7 @@ export const QueryUserDocument = gql`
           }
           order
         }
-        workers(filter: $filter17, order: $order11, first: $first11, offset: $offset11) {
+        workers(filter: $filter17, order: $order12, first: $first12, offset: $offset12) {
           id
           project(filter: $filter12) {
             id
@@ -13804,17 +14051,17 @@ export const QueryUserDocument = gql`
           }
           name
           availability
-          user(filter: $filter13) {
+          user(filter: $filter13, order: $order8, first: $first8, offset: $offset8) {
             id
             username
             password
             location
           }
-          tags(filter: $filter14, order: $order8, first: $first8, offset: $offset8) {
+          tags(filter: $filter14, order: $order9, first: $first9, offset: $offset9) {
             id
             title
           }
-          tasks(filter: $filter15, order: $order9, first: $first9, offset: $offset9) {
+          tasks(filter: $filter15, order: $order10, first: $first10, offset: $offset10) {
             id
             title
             hours
@@ -13823,7 +14070,7 @@ export const QueryUserDocument = gql`
             priority
             complete
           }
-          liked(filter: $filter16, order: $order10, first: $first10, offset: $offset10) {
+          liked(filter: $filter16, order: $order11, first: $first11, offset: $offset11) {
             id
             title
             hours
@@ -13836,20 +14083,20 @@ export const QueryUserDocument = gql`
       }
       name
       availability
-      user(filter: $filter29) {
+      user(filter: $filter29, order: $order21, first: $first21, offset: $offset21) {
         id
         username
         password
         location
-        roles(filter: $filter22, order: $order15, first: $first15, offset: $offset15) {
+        roles(filter: $filter22, order: $order16, first: $first16, offset: $offset16) {
           id
           name
           availability
-          tags(filter: $filter19, order: $order12, first: $first12, offset: $offset12) {
+          tags(filter: $filter19, order: $order13, first: $first13, offset: $offset13) {
             id
             title
           }
-          tasks(filter: $filter20, order: $order13, first: $first13, offset: $offset13) {
+          tasks(filter: $filter20, order: $order14, first: $first14, offset: $offset14) {
             id
             title
             hours
@@ -13858,7 +14105,7 @@ export const QueryUserDocument = gql`
             priority
             complete
           }
-          liked(filter: $filter21, order: $order14, first: $first14, offset: $offset14) {
+          liked(filter: $filter21, order: $order15, first: $first15, offset: $offset15) {
             id
             title
             hours
@@ -13868,7 +14115,7 @@ export const QueryUserDocument = gql`
             complete
           }
         }
-        stars(filter: $filter28, order: $order19, first: $first19, offset: $offset19) {
+        stars(filter: $filter28, order: $order20, first: $first20, offset: $offset20) {
           id
           project(filter: $filter23) {
             id
@@ -13880,7 +14127,7 @@ export const QueryUserDocument = gql`
             title
           }
           title
-          workers(filter: $filter25, order: $order16, first: $first16, offset: $offset16) {
+          workers(filter: $filter25, order: $order17, first: $first17, offset: $offset17) {
             id
             name
             availability
@@ -13890,19 +14137,19 @@ export const QueryUserDocument = gql`
           content
           priority
           complete
-          likes(filter: $filter26, order: $order17, first: $first17, offset: $offset17) {
+          likes(filter: $filter26, order: $order18, first: $first18, offset: $offset18) {
             id
             name
             availability
           }
-          comments(filter: $filter27, order: $order18, first: $first18, offset: $offset18) {
+          comments(filter: $filter27, order: $order19, first: $first19, offset: $offset19) {
             id
             content
           }
         }
       }
     }
-    stars(filter: $filter31, order: $order21, first: $first21, offset: $offset21) {
+    stars(filter: $filter31, order: $order23, first: $first23, offset: $offset23) {
       id
       title
       hours
@@ -13933,14 +14180,14 @@ export function withQueryUser<TProps, TChildProps = {}>(operationOptions?: Apoll
 };
 export type QueryUserQueryResult = ApolloReactCommon.QueryResult<QueryUserQuery, QueryUserQueryVariables>;
 export const QueryWorkerDocument = gql`
-    query queryWorker($filter: TaskFilter, $order: TaskOrder, $first: Int, $offset: Int, $filter1: BoardFilter, $order1: BoardOrder, $first1: Int, $offset1: Int, $filter2: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter3: ProjectFilter, $filter4: ProjectFilter, $filter5: UserFilter, $filter6: TagFilter, $order3: TagOrder, $first3: Int, $offset3: Int, $filter7: TaskFilter, $order4: TaskOrder, $first4: Int, $offset4: Int, $filter8: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter9: WorkerFilter, $order6: WorkerOrder, $first6: Int, $offset6: Int, $filter10: TagFilter, $order7: TagOrder, $first7: Int, $offset7: Int, $filter11: ProjectFilter, $filter12: ProjectFilter, $filter13: TaskFilter, $order8: TaskOrder, $first8: Int, $offset8: Int, $filter14: UserFilter, $filter15: TagFilter, $order9: TagOrder, $first9: Int, $offset9: Int, $filter16: ProjectFilter, $filter17: ColumnFilter, $filter18: WorkerFilter, $order10: WorkerOrder, $first10: Int, $offset10: Int, $filter19: WorkerFilter, $order11: WorkerOrder, $first11: Int, $offset11: Int, $filter20: CommentFilter, $order12: CommentOrder, $first12: Int, $offset12: Int, $filter21: TaskFilter, $order13: TaskOrder, $first13: Int, $offset13: Int, $filter22: ProjectFilter, $filter23: ColumnFilter, $filter24: WorkerFilter, $order14: WorkerOrder, $first14: Int, $offset14: Int, $filter25: WorkerFilter, $order15: WorkerOrder, $first15: Int, $offset15: Int, $filter26: CommentFilter, $order16: CommentOrder, $first16: Int, $offset16: Int, $filter27: TaskFilter, $order17: TaskOrder, $first17: Int, $offset17: Int, $filter28: WorkerFilter, $order18: WorkerOrder, $first18: Int, $offset18: Int, $filter29: UserFilter, $filter30: TagFilter, $order19: TagOrder, $first19: Int, $offset19: Int, $filter31: TaskFilter, $order20: TaskOrder, $first20: Int, $offset20: Int, $filter32: TaskFilter, $order21: TaskOrder, $first21: Int, $offset21: Int, $filter33: WorkerFilter, $order22: WorkerOrder, $first22: Int, $offset22: Int) {
-  queryWorker(filter: $filter33, order: $order22, first: $first22, offset: $offset22) {
+    query queryWorker($filter: TaskFilter, $order: TaskOrder, $first: Int, $offset: Int, $filter1: BoardFilter, $order1: BoardOrder, $first1: Int, $offset1: Int, $filter2: WorkerFilter, $order2: WorkerOrder, $first2: Int, $offset2: Int, $filter3: ProjectFilter, $filter4: ProjectFilter, $filter5: UserFilter, $order3: UserOrder, $first3: Int, $offset3: Int, $filter6: TagFilter, $order4: TagOrder, $first4: Int, $offset4: Int, $filter7: TaskFilter, $order5: TaskOrder, $first5: Int, $offset5: Int, $filter8: TaskFilter, $order6: TaskOrder, $first6: Int, $offset6: Int, $filter9: WorkerFilter, $order7: WorkerOrder, $first7: Int, $offset7: Int, $filter10: TagFilter, $order8: TagOrder, $first8: Int, $offset8: Int, $filter11: ProjectFilter, $filter12: ProjectFilter, $filter13: TaskFilter, $order9: TaskOrder, $first9: Int, $offset9: Int, $filter14: UserFilter, $order10: UserOrder, $first10: Int, $offset10: Int, $filter15: TagFilter, $order11: TagOrder, $first11: Int, $offset11: Int, $filter16: ProjectFilter, $filter17: ColumnFilter, $filter18: WorkerFilter, $order12: WorkerOrder, $first12: Int, $offset12: Int, $filter19: WorkerFilter, $order13: WorkerOrder, $first13: Int, $offset13: Int, $filter20: CommentFilter, $order14: CommentOrder, $first14: Int, $offset14: Int, $filter21: TaskFilter, $order15: TaskOrder, $first15: Int, $offset15: Int, $filter22: ProjectFilter, $filter23: ColumnFilter, $filter24: WorkerFilter, $order16: WorkerOrder, $first16: Int, $offset16: Int, $filter25: WorkerFilter, $order17: WorkerOrder, $first17: Int, $offset17: Int, $filter26: CommentFilter, $order18: CommentOrder, $first18: Int, $offset18: Int, $filter27: TaskFilter, $order19: TaskOrder, $first19: Int, $offset19: Int, $filter28: WorkerFilter, $order20: WorkerOrder, $first20: Int, $offset20: Int, $filter29: UserFilter, $order21: UserOrder, $first21: Int, $offset21: Int, $filter30: TagFilter, $order22: TagOrder, $first22: Int, $offset22: Int, $filter31: TaskFilter, $order23: TaskOrder, $first23: Int, $offset23: Int, $filter32: TaskFilter, $order24: TaskOrder, $first24: Int, $offset24: Int, $filter33: WorkerFilter, $order25: WorkerOrder, $first25: Int, $offset25: Int) {
+  queryWorker(filter: $filter33, order: $order25, first: $first25, offset: $offset25) {
     id
     project(filter: $filter11) {
       id
       title
       description
-      tags(filter: $filter10, order: $order7, first: $first7, offset: $offset7) {
+      tags(filter: $filter10, order: $order8, first: $first8, offset: $offset8) {
         id
         title
         project(filter: $filter3) {
@@ -13967,7 +14214,7 @@ export const QueryWorkerDocument = gql`
             availability
           }
         }
-        workers(filter: $filter9, order: $order6, first: $first6, offset: $offset6) {
+        workers(filter: $filter9, order: $order7, first: $first7, offset: $offset7) {
           id
           project(filter: $filter4) {
             id
@@ -13976,17 +14223,17 @@ export const QueryWorkerDocument = gql`
           }
           name
           availability
-          user(filter: $filter5) {
+          user(filter: $filter5, order: $order3, first: $first3, offset: $offset3) {
             id
             username
             password
             location
           }
-          tags(filter: $filter6, order: $order3, first: $first3, offset: $offset3) {
+          tags(filter: $filter6, order: $order4, first: $first4, offset: $offset4) {
             id
             title
           }
-          tasks(filter: $filter7, order: $order4, first: $first4, offset: $offset4) {
+          tasks(filter: $filter7, order: $order5, first: $first5, offset: $offset5) {
             id
             title
             hours
@@ -13995,7 +14242,7 @@ export const QueryWorkerDocument = gql`
             priority
             complete
           }
-          liked(filter: $filter8, order: $order5, first: $first5, offset: $offset5) {
+          liked(filter: $filter8, order: $order6, first: $first6, offset: $offset6) {
             id
             title
             hours
@@ -14009,12 +14256,12 @@ export const QueryWorkerDocument = gql`
     }
     name
     availability
-    user(filter: $filter29) {
+    user(filter: $filter29, order: $order21, first: $first21, offset: $offset21) {
       id
       username
       password
       location
-      roles(filter: $filter28, order: $order18, first: $first18, offset: $offset18) {
+      roles(filter: $filter28, order: $order20, first: $first20, offset: $offset20) {
         id
         project(filter: $filter12) {
           id
@@ -14023,12 +14270,12 @@ export const QueryWorkerDocument = gql`
         }
         name
         availability
-        user(filter: $filter14) {
+        user(filter: $filter14, order: $order10, first: $first10, offset: $offset10) {
           id
           username
           password
           location
-          stars(filter: $filter13, order: $order8, first: $first8, offset: $offset8) {
+          stars(filter: $filter13, order: $order9, first: $first9, offset: $offset9) {
             id
             title
             hours
@@ -14038,11 +14285,11 @@ export const QueryWorkerDocument = gql`
             complete
           }
         }
-        tags(filter: $filter15, order: $order9, first: $first9, offset: $offset9) {
+        tags(filter: $filter15, order: $order11, first: $first11, offset: $offset11) {
           id
           title
         }
-        tasks(filter: $filter21, order: $order13, first: $first13, offset: $offset13) {
+        tasks(filter: $filter21, order: $order15, first: $first15, offset: $offset15) {
           id
           project(filter: $filter16) {
             id
@@ -14054,7 +14301,7 @@ export const QueryWorkerDocument = gql`
             title
           }
           title
-          workers(filter: $filter18, order: $order10, first: $first10, offset: $offset10) {
+          workers(filter: $filter18, order: $order12, first: $first12, offset: $offset12) {
             id
             name
             availability
@@ -14064,17 +14311,17 @@ export const QueryWorkerDocument = gql`
           content
           priority
           complete
-          likes(filter: $filter19, order: $order11, first: $first11, offset: $offset11) {
+          likes(filter: $filter19, order: $order13, first: $first13, offset: $offset13) {
             id
             name
             availability
           }
-          comments(filter: $filter20, order: $order12, first: $first12, offset: $offset12) {
+          comments(filter: $filter20, order: $order14, first: $first14, offset: $offset14) {
             id
             content
           }
         }
-        liked(filter: $filter27, order: $order17, first: $first17, offset: $offset17) {
+        liked(filter: $filter27, order: $order19, first: $first19, offset: $offset19) {
           id
           project(filter: $filter22) {
             id
@@ -14086,7 +14333,7 @@ export const QueryWorkerDocument = gql`
             title
           }
           title
-          workers(filter: $filter24, order: $order14, first: $first14, offset: $offset14) {
+          workers(filter: $filter24, order: $order16, first: $first16, offset: $offset16) {
             id
             name
             availability
@@ -14096,23 +14343,23 @@ export const QueryWorkerDocument = gql`
           content
           priority
           complete
-          likes(filter: $filter25, order: $order15, first: $first15, offset: $offset15) {
+          likes(filter: $filter25, order: $order17, first: $first17, offset: $offset17) {
             id
             name
             availability
           }
-          comments(filter: $filter26, order: $order16, first: $first16, offset: $offset16) {
+          comments(filter: $filter26, order: $order18, first: $first18, offset: $offset18) {
             id
             content
           }
         }
       }
     }
-    tags(filter: $filter30, order: $order19, first: $first19, offset: $offset19) {
+    tags(filter: $filter30, order: $order22, first: $first22, offset: $offset22) {
       id
       title
     }
-    tasks(filter: $filter31, order: $order20, first: $first20, offset: $offset20) {
+    tasks(filter: $filter31, order: $order23, first: $first23, offset: $offset23) {
       id
       title
       hours
@@ -14121,7 +14368,7 @@ export const QueryWorkerDocument = gql`
       priority
       complete
     }
-    liked(filter: $filter32, order: $order21, first: $first21, offset: $offset21) {
+    liked(filter: $filter32, order: $order24, first: $first24, offset: $offset24) {
       id
       title
       hours

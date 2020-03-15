@@ -1,5 +1,6 @@
 mutation deleteComment($filter: CommentFilter!){
     deleteComment(filter: $filter){
         msg
+        numUids
     }
 }
