@@ -6,7 +6,7 @@ const {exec} = require('child_process');
 const cliProgress = require('cli-progress');
 const url = 'http://localhost:8080/graphql';
 const username = 'hisuperhi';
-const simTime = 30 * 12 + 1;
+const simTime = 365;
 const pricePerProj = 15;
 
 const playSim = async () => {

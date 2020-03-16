@@ -1,4 +1,4 @@
-import {AddProjectInput, Project, ProjectFilter, User} from '../../client/src/api/interfaces/types.d';
+import {AddProjectInput, User} from '../../client/src/api/interfaces/types.d';
 import {getAllRolesByUser, queryProjects} from './actions/queries';
 import {addProject, deleteProject} from './actions/mutations';
 
@@ -36,6 +36,7 @@ export class Host {
         this.hostsNames = this.hostsNames.concat(this.hostsNames.length)
     }
 
+    // Keep always min one host
     removeHost() {
         if (this.hostsNames.length > 1) {
             this.hostsNames = this.hostsNames.slice(0, -1)
@@ -48,20 +49,25 @@ export class Host {
     }
 
     async createProject() {
-        const projectInput: AddProjectInput[] = this.hostsNames.map(name => ({title: 'title', description: 'descr'}));
-        return await addProject(projectInput, this.url)
+        function getRandomInt(max: number) {
+            return Math.floor(Math.random() * Math.floor(max)) + 1;
+        }
+        const activeHosts = this.hostsNames.slice(0, getRandomInt(this.myProjects.length));
+
+        const projectInput: AddProjectInput[] = activeHosts.map(name => ({title: 'title', description: 'descr'}));
+        await addProject(projectInput, this.url)
     }
 
     async deleteRandom() {
-        if (this.myProjects.length === 0) {
-            return '';
-        }
-        function getRandomInt(max: number) {
-            return Math.floor(Math.random() * Math.floor(max));
-        }
-        const toDelete = this.myProjects[getRandomInt(this.myProjects.length)];
-        return await deleteProject([toDelete], this.url)
+        // Delete random number of all projects
+        if (this.myProjects.length !== 0) {
+            function getRandomInt(max: number) {
+                return Math.floor(Math.random() * Math.floor(max)) + 1;
+            }
 
+            const toDelete = this.myProjects.slice(0, getRandomInt(this.myProjects.length));
+            await deleteProject(toDelete, this.url)
+        }
     }
 
 }

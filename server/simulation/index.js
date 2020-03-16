@@ -15,8 +15,8 @@ const { exec } = require('child_process');
 const cliProgress = require('cli-progress');
 const url = 'http://localhost:8080/graphql';
 const username = 'hisuperhi';
-const simTime = 30 * 12 + 1;
-const price_host = 15;
+const simTime = 365;
+const pricePerProj = 15;
 const playSim = () => __awaiter(void 0, void 0, void 0, function* () {
     const host = new agents_1.Host(url);
     // create a new progress bar instance and use shades_classic theme
@@ -65,7 +65,7 @@ const playSim = () => __awaiter(void 0, void 0, void 0, function* () {
         }
         if (counter % 30 == 0) {
             yield host.updateProjects();
-            revenue += host.myProjects.length * price_host;
+            revenue += host.myProjects.length * pricePerProj;
         }
         counter += 1;
         bar1.update(counter);

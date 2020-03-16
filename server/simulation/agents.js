@@ -36,6 +36,7 @@ class Host {
     addNewHost() {
         this.hostsNames = this.hostsNames.concat(this.hostsNames.length);
     }
+    // Keep always min one host
     removeHost() {
         if (this.hostsNames.length > 1) {
             this.hostsNames = this.hostsNames.slice(0, -1);
@@ -49,20 +50,24 @@ class Host {
     }
     createProject() {
         return __awaiter(this, void 0, void 0, function* () {
-            const projectInput = this.hostsNames.map(name => ({ title: 'title', description: 'descr' }));
-            return yield mutations_1.addProject(projectInput, this.url);
+            function getRandomInt(max) {
+                return Math.floor(Math.random() * Math.floor(max)) + 1;
+            }
+            const activeHosts = this.hostsNames.slice(0, getRandomInt(this.myProjects.length));
+            const projectInput = activeHosts.map(name => ({ title: 'title', description: 'descr' }));
+            yield mutations_1.addProject(projectInput, this.url);
         });
     }
     deleteRandom() {
         return __awaiter(this, void 0, void 0, function* () {
-            if (this.myProjects.length === 0) {
-                return '';
+            // Delete random number of all projects
+            if (this.myProjects.length !== 0) {
+                function getRandomInt(max) {
+                    return Math.floor(Math.random() * Math.floor(max)) + 1;
+                }
+                const toDelete = this.myProjects.slice(0, getRandomInt(this.myProjects.length));
+                yield mutations_1.deleteProject(toDelete, this.url);
             }
-            function getRandomInt(max) {
-                return Math.floor(Math.random() * Math.floor(max));
-            }
-            const toDelete = this.myProjects[getRandomInt(this.myProjects.length)];
-            return yield mutations_1.deleteProject([toDelete], this.url);
         });
     }
 }
