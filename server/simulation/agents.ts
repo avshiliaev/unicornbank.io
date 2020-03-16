@@ -26,9 +26,20 @@ export class Host {
 
     url: string;
     myProjects: string[] = [];
+    hostsNames = [0];
 
     constructor(url: string) {
         this.url = url;
+    }
+
+    addNewHost() {
+        this.hostsNames = this.hostsNames.concat(this.hostsNames.length)
+    }
+
+    removeHost() {
+        if (this.hostsNames.length > 1) {
+            this.hostsNames = this.hostsNames.slice(0, -1)
+        }
     }
 
     async updateProjects() {
@@ -37,7 +48,7 @@ export class Host {
     }
 
     async createProject() {
-        const projectInput: AddProjectInput[] = [{title: 'title', description: 'descr'}];
+        const projectInput: AddProjectInput[] = this.hostsNames.map(name => ({title: 'title', description: 'descr'}));
         return await addProject(projectInput, this.url)
     }
 

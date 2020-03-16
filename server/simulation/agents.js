@@ -30,7 +30,16 @@ exports.Developer = Developer;
 class Host {
     constructor(url) {
         this.myProjects = [];
+        this.hostsNames = [0];
         this.url = url;
+    }
+    addNewHost() {
+        this.hostsNames = this.hostsNames.concat(this.hostsNames.length);
+    }
+    removeHost() {
+        if (this.hostsNames.length > 1) {
+            this.hostsNames = this.hostsNames.slice(0, -1);
+        }
     }
     updateProjects() {
         return __awaiter(this, void 0, void 0, function* () {
@@ -40,7 +49,7 @@ class Host {
     }
     createProject() {
         return __awaiter(this, void 0, void 0, function* () {
-            const projectInput = [{ title: 'title', description: 'descr' }];
+            const projectInput = this.hostsNames.map(name => ({ title: 'title', description: 'descr' }));
             return yield mutations_1.addProject(projectInput, this.url);
         });
     }
