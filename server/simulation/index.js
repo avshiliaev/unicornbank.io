@@ -27,26 +27,23 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
     }));
     timer(2000).then(() => __awaiter(void 0, void 0, void 0, function* () {
         const host = new agents_1.Host(url);
-        const actions = ['create', 'skip', 'delete'];
-        function getRandomInt(max) {
-            return Math.floor(Math.random() * Math.floor(max));
-        }
+        const rollDice = () => {
+            const first = Math.ceil(Math.random() * 6);
+            const second = Math.ceil(Math.random() * 6);
+            return first + second;
+        };
         let counter = 100;
         while (counter !== 0) {
             counter -= 1;
-            let action = actions[getRandomInt(actions.length)];
-            switch (action) {
-                case 'create':
-                    yield host.createProject();
-                    break;
-                case 'skip':
-                    break;
-                case 'delete':
-                    yield host.updateProjects();
-                    yield host.deleteRandom();
-                    break;
-                default:
-                    break;
+            let diceHost = rollDice();
+            if (diceHost <= 5) {
+                yield host.createProject();
+                // } else if (diceHost >= 5 && diceHost <= 10) {
+                //     console.log('')
+            }
+            else if (diceHost >= 9) {
+                yield host.updateProjects();
+                yield host.deleteRandom();
             }
         }
         yield host.updateProjects();

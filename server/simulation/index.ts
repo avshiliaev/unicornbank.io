@@ -23,29 +23,22 @@ const main = async () => {
 
         const host: Host = new Host(url);
 
-        const actions = ['create', 'skip', 'delete'];
-
-        function getRandomInt(max: number) {
-            return Math.floor(Math.random() * Math.floor(max));
-        }
+        const rollDice = () => {
+            const first = Math.ceil(Math.random() * 6);
+            const second = Math.ceil(Math.random() * 6);
+            return first + second;
+        };
 
         let counter = 100;
         while (counter !== 0) {
             counter -= 1;
-            let action = actions[getRandomInt(actions.length)];
 
-            switch (action) {
-                case 'create':
-                    await host.createProject();
-                    break;
-                case 'skip':
-                    break;
-                case 'delete':
-                    await host.updateProjects();
-                    await host.deleteRandom();
-                    break;
-                default:
-                    break;
+            let diceHost = rollDice();
+            if (diceHost <= 5) {
+                await host.createProject();
+            } else if (diceHost >= 9) {
+                await host.updateProjects();
+                await host.deleteRandom();
             }
         }
 
