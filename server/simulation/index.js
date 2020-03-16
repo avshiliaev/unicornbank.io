@@ -26,11 +26,31 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
         }
     }));
     timer(2000).then(() => __awaiter(void 0, void 0, void 0, function* () {
-        let host = new agents_1.Host(url);
-        const payload = yield host.createProject();
+        const host = new agents_1.Host(url);
+        const actions = ['create', 'skip', 'delete'];
+        function getRandomInt(max) {
+            return Math.floor(Math.random() * Math.floor(max));
+        }
+        let counter = 100;
+        while (counter !== 0) {
+            counter -= 1;
+            let action = actions[getRandomInt(actions.length)];
+            switch (action) {
+                case 'create':
+                    yield host.createProject();
+                    break;
+                case 'skip':
+                    break;
+                case 'delete':
+                    yield host.updateProjects();
+                    yield host.deleteRandom();
+                    break;
+                default:
+                    break;
+            }
+        }
         yield host.updateProjects();
-        const delPayload = yield host.deleteRandom();
-        console.log(delPayload);
+        console.log('Number of projects: ', host.myProjects.length);
     }));
 });
 main().then(() => console.log('-----'));
