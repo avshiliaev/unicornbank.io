@@ -12,7 +12,7 @@ export const queryProjects = async (url: string): Promise<Project[]> => {
                 tasks {
                     id
                 }
-                workers {
+                developers {
                   id
                   availability
                   user {username}
@@ -40,7 +40,7 @@ export const getAllRolesByUser = async (username: string, url: string): Promise<
                     tasks {
                         id
                     }
-                    workers {
+                    developers {
                         id
                     }
                     __typename
@@ -72,7 +72,7 @@ export const getProjectById = async (projId: string, url: string): Promise<Proje
                     content
                     __typename
                 }
-                workers {
+                developers {
                     id
                     name
                     __typename

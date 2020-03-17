@@ -21,25 +21,25 @@ exports.addProject = (addProjectInput, url) => __awaiter(void 0, void 0, void 0,
     const payload = yield gqlRequest.request(url, query, { addProjectInput });
     return payload.addProject;
 });
-exports.addWorker = (addWorkerInput, url) => __awaiter(void 0, void 0, void 0, function* () {
+exports.addDeveloper = (addDeveloperInput, url) => __awaiter(void 0, void 0, void 0, function* () {
     const query = `
-        mutation ($addWorkerInput: [AddWorkerInput!]!){
-          addWorker(input: $addWorkerInput){
-            worker {id}
+        mutation ($addDeveloperInput: [AddDeveloperInput!]!){
+          addDeveloper(input: $addDeveloperInput){
+            developer {id}
           }
         }
     `;
-    const payload = yield gqlRequest.request(url, query, { addWorkerInput });
-    return payload.addWorker;
+    const payload = yield gqlRequest.request(url, query, { addDeveloperInput });
+    return payload.addDeveloper;
 });
-exports.deleteProjClean = (projId, workerId, url) => __awaiter(void 0, void 0, void 0, function* () {
+exports.deleteProjClean = (projId, developerId, url) => __awaiter(void 0, void 0, void 0, function* () {
     // While queries are executed in parallel, the mutation are triggered sequentially!
     const query = `
         mutation deleteProject(
-            $workerFilter: WorkerFilter!, 
+            $developerFilter: DeveloperFilter!, 
             $projectFilter: ProjectFilter!
         ){
-          deleteWorker(filter: $workerFilter){
+          deleteDeveloper(filter: $developerFilter){
             msg
           }
           deleteProject(filter: $projectFilter){
@@ -47,9 +47,9 @@ exports.deleteProjClean = (projId, workerId, url) => __awaiter(void 0, void 0, v
           }
         }
     `;
-    const workerFilter = { id: workerId };
+    const developerFilter = { id: developerId };
     const projectFilter = { id: projId };
-    return yield gqlRequest.request(url, query, { workerFilter, projectFilter });
+    return yield gqlRequest.request(url, query, { developerFilter, projectFilter });
 });
 exports.deleteProject = (projId, url) => __awaiter(void 0, void 0, void 0, function* () {
     const query = `
@@ -62,41 +62,41 @@ exports.deleteProject = (projId, url) => __awaiter(void 0, void 0, void 0, funct
     const projectFilter = { id: projId };
     return yield gqlRequest.request(url, query, { projectFilter });
 });
-exports.deleteWorker = (workerId, url) => __awaiter(void 0, void 0, void 0, function* () {
-    // Deleting worker is like deleting contract that connects a user with a project
+exports.deleteDeveloper = (developerId, url) => __awaiter(void 0, void 0, void 0, function* () {
+    // Deleting developer is like deleting contract that connects a user with a project
     const query = `
-        mutation ($workerFilter: WorkerFilter!){
-          deleteWorker(filter: $workerFilter){
+        mutation ($developerFilter: DeveloperFilter!){
+          deleteDeveloper(filter: $developerFilter){
             msg
           }
         }
     `;
-    const workerFilter = { id: workerId };
-    return yield gqlRequest.request(url, query, { workerFilter });
+    const developerFilter = { id: developerId };
+    return yield gqlRequest.request(url, query, { developerFilter });
 });
-exports.leaveWorkerSlot = (userId, workerId, url) => __awaiter(void 0, void 0, void 0, function* () {
+exports.leaveDeveloperSlot = (userId, developerId, url) => __awaiter(void 0, void 0, void 0, function* () {
     // Delete links from both sides leaving the vacant place in a project:
     const query = `
-        mutation($userFilter: UserFilter!, $workerFilter: WorkerFilter!) {
+        mutation($userFilter: UserFilter!, $developerFilter: DeveloperFilter!) {
           updateUser(input: {
             filter: $userFilter,
-            remove: { roles: [$workerFilter]}
+            remove: { roles: [$developerFilter]}
           }) {
             user {
               id
             }
           }
-          updateWorker(input: {
-            filter: $workerFilter,
+          updateDeveloper(input: {
+            filter: $developerFilter,
             remove: { user:  [$userFilter] }
           }) {
-            worker {
+            developer {
               id
             }
           }
         }
     `;
     const userFilter = { id: userId };
-    const workerFilter = { id: workerId };
-    return yield gqlRequest.request(url, query, { userFilter, workerFilter });
+    const developerFilter = { id: developerId };
+    return yield gqlRequest.request(url, query, { userFilter, developerFilter });
 });

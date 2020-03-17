@@ -1,13 +1,13 @@
 import {
     AddProjectInput,
-    AddWorkerInput,
+    AddDeveloperInput,
     DeleteProjectPayload,
-    DeleteWorkerPayload,
+    DeleteDeveloperPayload,
     Project,
     ProjectFilter,
-    UpdateWorkerPayload,
+    UpdateDeveloperPayload,
     UserFilter,
-    WorkerFilter
+    DeveloperFilter, Developer
 } from '../../../client/src/api/interfaces/types.d';
 
 const gqlRequest = require('graphql-request');
@@ -25,27 +25,27 @@ export const addProject = async (addProjectInput: AddProjectInput[], url: string
 };
 
 
-export const addWorker = async (addWorkerInput: AddWorkerInput[], url: string): Promise<Worker> => {
+export const addDeveloper = async (addDeveloperInput: AddDeveloperInput[], url: string): Promise<Developer> => {
     const query = `
-        mutation ($addWorkerInput: [AddWorkerInput!]!){
-          addWorker(input: $addWorkerInput){
-            worker {id}
+        mutation ($addDeveloperInput: [AddDeveloperInput!]!){
+          addDeveloper(input: $addDeveloperInput){
+            developer {id}
           }
         }
     `;
-    const payload = await gqlRequest.request(url, query, {addWorkerInput});
-    return payload.addWorker;
+    const payload = await gqlRequest.request(url, query, {addDeveloperInput});
+    return payload.addDeveloper;
 };
 
-export const deleteProjClean = async (projId: string[], workerId: string[], url: string): Promise<DeleteProjectPayload> => {
+export const deleteProjClean = async (projId: string[], developerId: string[], url: string): Promise<DeleteProjectPayload> => {
 
     // While queries are executed in parallel, the mutation are triggered sequentially!
     const query = `
         mutation deleteProject(
-            $workerFilter: WorkerFilter!, 
+            $developerFilter: DeveloperFilter!, 
             $projectFilter: ProjectFilter!
         ){
-          deleteWorker(filter: $workerFilter){
+          deleteDeveloper(filter: $developerFilter){
             msg
           }
           deleteProject(filter: $projectFilter){
@@ -53,9 +53,9 @@ export const deleteProjClean = async (projId: string[], workerId: string[], url:
           }
         }
     `;
-    const workerFilter: WorkerFilter = {id: workerId};
+    const developerFilter: DeveloperFilter = {id: developerId};
     const projectFilter: ProjectFilter = {id: projId};
-    return await gqlRequest.request(url, query, {workerFilter, projectFilter});
+    return await gqlRequest.request(url, query, {developerFilter, projectFilter});
 };
 
 export const deleteProject = async (projId: string[], url: string): Promise<DeleteProjectPayload> => {
@@ -71,48 +71,48 @@ export const deleteProject = async (projId: string[], url: string): Promise<Dele
     return await gqlRequest.request(url, query, {projectFilter});
 };
 
-export const deleteWorker = async (workerId: string[], url: string): Promise<DeleteWorkerPayload> => {
+export const deleteDeveloper = async (developerId: string[], url: string): Promise<DeleteDeveloperPayload> => {
 
-    // Deleting worker is like deleting contract that connects a user with a project
+    // Deleting developer is like deleting contract that connects a user with a project
     const query = `
-        mutation ($workerFilter: WorkerFilter!){
-          deleteWorker(filter: $workerFilter){
+        mutation ($developerFilter: DeveloperFilter!){
+          deleteDeveloper(filter: $developerFilter){
             msg
           }
         }
     `;
-    const workerFilter: WorkerFilter = {id: workerId};
-    return await gqlRequest.request(url, query, {workerFilter});
+    const developerFilter: DeveloperFilter = {id: developerId};
+    return await gqlRequest.request(url, query, {developerFilter});
 };
 
-export const leaveWorkerSlot = async (
-    userId: string[], workerId: string[], url: string
-): Promise<UpdateWorkerPayload> => {
+export const leaveDeveloperSlot = async (
+    userId: string[], developerId: string[], url: string
+): Promise<UpdateDeveloperPayload> => {
 
     // Delete links from both sides leaving the vacant place in a project:
     const query = `
-        mutation($userFilter: UserFilter!, $workerFilter: WorkerFilter!) {
+        mutation($userFilter: UserFilter!, $developerFilter: DeveloperFilter!) {
           updateUser(input: {
             filter: $userFilter,
-            remove: { roles: [$workerFilter]}
+            remove: { roles: [$developerFilter]}
           }) {
             user {
               id
             }
           }
-          updateWorker(input: {
-            filter: $workerFilter,
+          updateDeveloper(input: {
+            filter: $developerFilter,
             remove: { user:  [$userFilter] }
           }) {
-            worker {
+            developer {
               id
             }
           }
         }
     `;
     const userFilter: UserFilter = {id: userId};
-    const workerFilter: WorkerFilter = {id: workerId};
-    return await gqlRequest.request(url, query, {userFilter, workerFilter});
+    const developerFilter: DeveloperFilter = {id: developerId};
+    return await gqlRequest.request(url, query, {userFilter, developerFilter});
 };
 
 

@@ -3,7 +3,7 @@
 type Comment {
     id: ID!
     task: Task!
-    worker: Worker!
+    developer: Developer!
     content: String!
 }
 
@@ -11,7 +11,7 @@ type Tag {
     id: ID!
     title: String!
     project: Project!
-    workers: [Worker]
+    developers: [Developer]
 }
 
 type Task {
@@ -19,13 +19,13 @@ type Task {
     project: Project!
     column: Column
     title: String! @search(by: [hash])
-    workers: [Worker]
+    developers: [Developer]
     hours: Int!
     deadline: String!
     content: String!
     priority: Int!
     complete: Boolean!
-    likes: [Worker] @hasInverse(field: liked)
+    likes: [Developer] @hasInverse(field: liked)
     comments: [Comment] @hasInverse(field: task)
 }
 
@@ -44,14 +44,14 @@ type Board {
     order: [String]
 }
 
-type Worker {
+type Developer {
     id: ID!
     project: Project!
     name: String! @search(by: [hash])
     availability: Int!
     user: [User] @hasInverse(field: roles)
-    tags: [Tag] @hasInverse(field: workers)
-    tasks: [Task] @hasInverse(field: workers)
+    tags: [Tag] @hasInverse(field: developers)
+    tasks: [Task] @hasInverse(field: developers)
     liked: [Task]
 }
 
@@ -60,7 +60,7 @@ type User {
     username: String! @search(by: [hash])
     password: String!
     location: String!
-    roles: [Worker] @hasInverse(field: user)
+    roles: [Developer] @hasInverse(field: user)
     stars: [Task]
 }
 
@@ -71,5 +71,5 @@ type Project {
     tags: [Tag] @hasInverse(field: project)
     tasks: [Task] @hasInverse(field: project)
     boards: [Board] @hasInverse(field: project)
-    workers: [Worker] @hasInverse(field: project)
+    developers: [Developer] @hasInverse(field: project)
 }

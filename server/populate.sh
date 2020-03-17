@@ -31,7 +31,7 @@ curl 'localhost:8080/graphql' -H 'Content-Type: application/json' \
           "description": "Let’s start your Rust journey! There’s a lot to learn, but every journey starts somewhere.",
           "tags":[{"title":"rust"},{"title":"beginner"}],
           "boards": [{"title": "main", "columns": [{"title": "todo"}, {"title": "doing"}, {"title": "done"}]}],
-          "workers":[
+          "developers":[
             {"name":"hisuperhi", "availability":2, "user": ['"$HEREIAM"']},
             {"name":"rusty_crusty", "availability":10, "user": ['"$USER1"']},
             {"name":"cargoo", "availability":56, "user": ['"$USER2"']}
@@ -68,7 +68,7 @@ curl 'localhost:8080/graphql' -H 'Content-Type: application/json' \
           "description": "Let’s jump into Rust by working through a hands-on project together! This chapter introduces you to a few common Rust concepts by showing you how to use them in a real program.",
           "tags":[{"title":"example"},{"title":"hands-on"},{"title":"game"}],
           "boards": [{"title": "main", "columns": [{"title": "todo"}, {"title": "doing"}, {"title": "done"}]}],
-          "workers":[
+          "developers":[
             {"name":"hisuperhi", "availability":20, "user": ['"$HEREIAM"']},
             {"name":"anonymRust", "availability":2, "user": ['"$USER0"']},
             {"name":"rusty_crusty", "availability":2, "user": ['"$USER1"']},
@@ -80,7 +80,7 @@ curl 'localhost:8080/graphql' -H 'Content-Type: application/json' \
           "description": "Ownership is Rust’s most unique feature, and it enables Rust to make memory safety guarantees without needing a garbage collector.",
           "tags":[{"title":"ownership"},{"title":"rust"},{"title":"garbage collector"}],
           "boards": [{"title": "main", "columns": [{"title": "todo"}, {"title": "doing"}, {"title": "done"}]}],
-          "workers":[
+          "developers":[
             {"name":"anonymRust", "availability":2, "user": ['"$USER0"']},
             {"name":"cargoo", "availability":33, "user": ['"$USER2"']}
           ]
@@ -90,7 +90,7 @@ curl 'localhost:8080/graphql' -H 'Content-Type: application/json' \
           "description": "In this chapter we’ll look at enumerations, also referred to as enums. Enums allow you to define a type by enumerating its possible variants.",
           "tags":[{"title":"enums"},{"title":"rust"},{"title":"variants"}],
           "boards": [{"title": "main", "columns": [{"title": "todo"}, {"title": "doing"}, {"title": "done"}]}],
-          "workers":[
+          "developers":[
             {"name":"anonymRust", "availability":2, "user": ['"$USER0"']},
             {"name":"cargoo", "availability":33, "user": ['"$USER2"']}
           ]

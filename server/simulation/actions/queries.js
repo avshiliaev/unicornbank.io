@@ -20,7 +20,7 @@ exports.queryProjects = (url) => __awaiter(void 0, void 0, void 0, function* () 
                 tasks {
                     id
                 }
-                workers {
+                developers {
                   id
                   availability
                   user {username}
@@ -47,7 +47,7 @@ exports.getAllRolesByUser = (username, url) => __awaiter(void 0, void 0, void 0,
                     tasks {
                         id
                     }
-                    workers {
+                    developers {
                         id
                     }
                     __typename
@@ -78,7 +78,7 @@ exports.getProjectById = (projId, url) => __awaiter(void 0, void 0, void 0, func
                     content
                     __typename
                 }
-                workers {
+                developers {
                     id
                     name
                     __typename

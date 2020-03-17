@@ -1,0 +1,6 @@
+mutation deleteDeveloper($filter: DeveloperFilter!){
+    deleteDeveloper(filter: $filter){
+        msg
+        numUids
+    }
+}
