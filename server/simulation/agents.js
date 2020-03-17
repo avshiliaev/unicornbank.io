@@ -15,8 +15,12 @@ const uuid_1 = require("uuid");
 class Developer {
     constructor(url) {
         this.devIds = [];
-        this.maxDevsToCome = 100;
+        this.maxDevsToCome = 10;
         this.url = url;
+    }
+    speedUpLeadsGenereation() {
+        const speedUp = this.getRandomInt(5);
+        this.maxDevsToCome += speedUp;
     }
     getRandomInt(max) {
         return Math.floor(Math.random() * Math.floor(max)) + 1;
@@ -31,7 +35,8 @@ class Developer {
     }
     removeDev() {
         if (this.devIds.length > 3) {
-            this.devIds = this.devIds.slice(0, -2);
+            const toDelete = this.devIds.slice(0, this.getRandomInt(this.devIds.length));
+            this.devIds = this.devIds.filter(dev => !toDelete.includes(dev));
         }
     }
 }
@@ -40,11 +45,15 @@ class Host {
     constructor(url) {
         this.allProjects = [];
         this.hostsIds = [];
-        this.maxHostsToCome = 10;
+        this.maxHostsToCome = 5;
         this.url = url;
     }
     getRandomInt(max) {
         return Math.floor(Math.random() * Math.floor(max)) + 1;
+    }
+    speedUpLeadsGenereation() {
+        const speedUp = this.getRandomInt(3);
+        this.maxHostsToCome += speedUp;
     }
     addNewHost() {
         return __awaiter(this, void 0, void 0, function* () {
@@ -56,8 +65,9 @@ class Host {
     }
     // Keep always min one host
     removeHost() {
-        if (this.hostsIds.length > 1) {
-            this.hostsIds = this.hostsIds.slice(0, -1);
+        if (this.hostsIds.length > 3) {
+            const toDelete = this.hostsIds.slice(0, this.getRandomInt(this.hostsIds.length));
+            this.hostsIds = this.hostsIds.filter(host => !toDelete.includes(host));
         }
     }
     updateProjects() {
@@ -81,9 +91,10 @@ class Host {
     deleteRandom() {
         return __awaiter(this, void 0, void 0, function* () {
             // Delete random number of all projects
-            if (this.allProjects.length !== 0) {
+            if (this.allProjects.length < 0) {
                 const toDelete = this.allProjects.slice(0, this.getRandomInt(this.allProjects.length));
                 yield mutations_1.deleteProject(toDelete, this.url);
+                this.allProjects = this.allProjects.filter((proj) => !toDelete.indexOf(proj));
             }
         });
     }

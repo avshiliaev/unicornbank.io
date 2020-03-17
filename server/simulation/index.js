@@ -19,6 +19,7 @@ const username = 'hisuperhi';
 const simTime = 365;
 const pricePerHost = 29;
 const pricePerDev = 5;
+const timer = (ms) => new Promise(res => setTimeout(res, ms));
 const playSim = () => __awaiter(void 0, void 0, void 0, function* () {
     const host = new agents_1.Host(url);
     const developer = new agents_1.Developer(url);
@@ -41,9 +42,9 @@ const playSim = () => __awaiter(void 0, void 0, void 0, function* () {
         return first + second;
     };
     // Simulation records
-    let maxProjects = 0;
-    let maxHosts = 0;
-    let maxDev = 0;
+    let projects = [0];
+    let hosts = [0];
+    let developers = [0];
     let revenue = [0];
     let counter = 0;
     bar1.start(simTime, 0);
@@ -55,55 +56,57 @@ const playSim = () => __awaiter(void 0, void 0, void 0, function* () {
         }
         else if (diceHost == 5) {
             yield host.addNewHost();
-            host.hostsIds.length > maxHosts
-                ? maxHosts = host.hostsIds.length
-                : maxHosts === maxHosts;
         }
         else if (diceHost == 9) {
             host.removeHost();
         }
         else if (diceHost >= 11) {
             yield host.updateProjects();
-            host.allProjects.length > maxProjects
-                ? maxProjects = host.allProjects.length
-                : maxProjects === maxProjects;
             yield host.deleteRandom();
         }
         // Developers roll the dice
         let diceDev = rollDice();
         if (diceDev == 5) {
             yield developer.addNewDev();
-            developer.devIds.length > maxDev
-                ? maxDev = developer.devIds.length
-                : maxDev === maxDev;
         }
         else if (diceDev == 9) {
             developer.removeDev();
         }
-        // Calculate Revenue
+        // Update Metrics
         if (counter % 30 == 0) {
             revenue = revenue.concat(host.hostsIds.length * pricePerHost);
             revenue = revenue.concat(developer.devIds.length * pricePerDev);
+            projects = projects.concat(host.allProjects.length);
+            hosts = hosts.concat(host.hostsIds.length);
+            developers = developers.concat(developer.devIds.length);
+            host.speedUpLeadsGenereation();
+            developer.speedUpLeadsGenereation();
         }
         // Next
-        counter += 1;
+        yield timer(100).then(() => {
+            counter += 1;
+        });
         bar1.update(counter);
     }
     bar1.stop();
-    yield host.updateProjects();
+    const maxProjects = Math.max.apply(null, projects);
+    const maxHosts = Math.max.apply(null, hosts);
+    const maxDev = Math.max.apply(null, developers);
     console.log('1. Number of projects: ', host.allProjects.length);
     console.log('   Max projects: ', maxProjects);
+    console.log(asciichart.plot(projects, { height: 6 }));
     console.log('2.1. Number of hosts: ', host.hostsIds.length);
     console.log('   Max hosts: ', maxHosts);
+    console.log(asciichart.plot(hosts, { height: 6 }));
     console.log('2.2. Number of developers: ', developer.devIds.length);
     console.log('   Max developers: ', maxDev);
+    console.log(asciichart.plot(developers, { height: 6 }));
     console.log('Mean projects per host: ', ((maxProjects + host.allProjects.length) / 2) / ((maxHosts + host.hostsIds.length) / 2));
     console.log('Mean developers per project: ', ((maxDev + developer.devIds.length) / 2) / ((maxProjects + host.allProjects.length) / 2));
     console.log('4. Revenue: ', revenue.reduce((a, b) => a + b));
     console.log(asciichart.plot(revenue, { height: 6 }));
 });
 const main = () => __awaiter(void 0, void 0, void 0, function* () {
-    const timer = (ms) => new Promise(res => setTimeout(res, ms));
     yield exec('bash prepare.sh', (err, stdout, stderr) => __awaiter(void 0, void 0, void 0, function* () {
         if (err) {
             console.error('Dgraph: Error!');
@@ -113,7 +116,7 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
             console.log('Dgraph: Success!');
         }
     }));
-    timer(2000).then(() => __awaiter(void 0, void 0, void 0, function* () {
+    yield timer(2000).then(() => __awaiter(void 0, void 0, void 0, function* () {
         yield playSim();
     }));
 });

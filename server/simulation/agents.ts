@@ -7,10 +7,15 @@ export class Developer {
 
     url: string;
     devIds: string[] = [];
-    maxDevsToCome = 100;
+    maxDevsToCome = 10;
 
     constructor(url: string) {
         this.url = url;
+    }
+
+    speedUpLeadsGenereation() {
+        const speedUp = this.getRandomInt(5);
+        this.maxDevsToCome += speedUp;
     }
 
     getRandomInt(max: number) {
@@ -26,7 +31,8 @@ export class Developer {
 
     removeDev() {
         if (this.devIds.length > 3) {
-            this.devIds = this.devIds.slice(0, -2)
+            const toDelete = this.devIds.slice(0, this.getRandomInt(this.devIds.length));
+            this.devIds = this.devIds.filter(dev => !toDelete.includes(dev))
         }
     }
 
@@ -37,7 +43,7 @@ export class Host {
     url: string;
     allProjects: string[] = [];
     hostsIds: string[] = [];
-    maxHostsToCome = 10;
+    maxHostsToCome = 5;
 
     constructor(url: string) {
         this.url = url;
@@ -45,6 +51,11 @@ export class Host {
 
     getRandomInt(max: number) {
         return Math.floor(Math.random() * Math.floor(max)) + 1;
+    }
+
+    speedUpLeadsGenereation() {
+        const speedUp = this.getRandomInt(3);
+        this.maxHostsToCome += speedUp;
     }
 
     async addNewHost() {
@@ -56,8 +67,9 @@ export class Host {
 
     // Keep always min one host
     removeHost() {
-        if (this.hostsIds.length > 1) {
-            this.hostsIds = this.hostsIds.slice(0, -1)
+        if (this.hostsIds.length > 3) {
+            const toDelete = this.hostsIds.slice(0, this.getRandomInt(this.hostsIds.length));
+            this.hostsIds = this.hostsIds.filter(host => !toDelete.includes(host))
         }
     }
 
@@ -75,14 +87,14 @@ export class Host {
             const projectInput: AddProjectInput[] = activeHosts.map(hostId => generateProject(hostId));
             await addProject(projectInput, this.url)
         }
-
     }
 
     async deleteRandom() {
         // Delete random number of all projects
-        if (this.allProjects.length !== 0) {
+        if (this.allProjects.length < 0) {
             const toDelete = this.allProjects.slice(0, this.getRandomInt(this.allProjects.length));
             await deleteProject(toDelete, this.url)
+            this.allProjects = this.allProjects.filter((proj) => !toDelete.indexOf(proj))
         }
     }
 
