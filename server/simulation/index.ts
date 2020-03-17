@@ -1,16 +1,19 @@
 // tsc && node index.js
 
-import {Host} from './agents';
+import {Developer, Host} from './agents';
 
 const {exec} = require('child_process');
+const asciichart = require ('asciichart');
 const cliProgress = require('cli-progress');
 const url = 'http://localhost:8080/graphql';
 const username = 'hisuperhi';
 const simTime = 365;
-const pricePerProj = 15;
+const pricePerHost = 29;
+const pricePerDev = 5;
 
 const playSim = async () => {
     const host: Host = new Host(url);
+    const developer: Developer = new Developer(url);
     // create a new progress bar instance and use shades_classic theme
     const bar1 = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
 
@@ -33,14 +36,17 @@ const playSim = async () => {
         return first + second;
     };
 
+    // Simulation records
     let maxProjects = 0;
     let maxHosts = 0;
-    let revenue = 0;
+    let maxDev = 0;
+    let revenue = [0];
     let counter = 0;
     bar1.start(simTime, 0);
 
     while (counter !== simTime) {
 
+        // Hosts roll the dice
         let diceHost = rollDice();
         if (diceHost <= 3) {
             await host.createProject();
@@ -53,28 +59,52 @@ const playSim = async () => {
             host.removeHost();
         } else if (diceHost >= 11) {
             await host.updateProjects();
-            host.myProjects.length > maxProjects
-                ? maxProjects = host.myProjects.length
+            host.allProjects.length > maxProjects
+                ? maxProjects = host.allProjects.length
                 : maxProjects === maxProjects;
             await host.deleteRandom();
         }
 
-        if (counter % 30 == 0) {
-            await host.updateProjects();
-            revenue += host.myProjects.length * pricePerProj
+        // Developers roll the dice
+        let diceDev = rollDice();
+        if (diceDev == 5) {
+            await developer.addNewDev();
+            developer.devIds.length > maxDev
+                ? maxDev = developer.devIds.length
+                : maxDev === maxDev
+        } else if (diceDev == 9) {
+            developer.removeDev();
         }
+
+        // Calculate Revenue
+        if (counter % 30 == 0) {
+            revenue = revenue.concat(host.hostsIds.length * pricePerHost);
+            revenue = revenue.concat(developer.devIds.length * pricePerDev);
+        }
+
+        // Next
         counter += 1;
         bar1.update(counter);
     }
 
     bar1.stop();
     await host.updateProjects();
-    console.log('1. Number of projects: ', host.myProjects.length);
+    console.log('1. Number of projects: ', host.allProjects.length);
     console.log('   Max projects: ', maxProjects);
-    console.log('2. Number of hosts: ', host.hostsIds.length);
+    console.log('2.1. Number of hosts: ', host.hostsIds.length);
     console.log('   Max hosts: ', maxHosts);
-    console.log('Mean projects per host: ', maxProjects / maxHosts);
-    console.log('4. Revenue: ', revenue);
+    console.log('2.2. Number of developers: ', developer.devIds.length);
+    console.log('   Max developers: ', maxDev);
+    console.log(
+        'Mean projects per host: ',
+        ((maxProjects + host.allProjects.length) / 2) / ((maxHosts + host.hostsIds.length) / 2)
+    );
+    console.log(
+        'Mean developers per project: ',
+        ((maxDev + developer.devIds.length) / 2) / ((maxProjects + host.allProjects.length) / 2)
+    );
+    console.log('4. Revenue: ', revenue.reduce((a,b) => a+b));
+    console.log (asciichart.plot (revenue, { height: 6 }))
 };
 
 const main = async () => {
