@@ -1,6 +1,7 @@
 import {AddProjectInput, User} from '../../client/src/api/interfaces/types.d';
 import {getAllRolesByUser, queryProjects} from './actions/queries';
 import {addProject, deleteProject} from './actions/mutations';
+import { v4 as uuidv4 } from 'uuid';
 
 export class Developer {
 
@@ -26,14 +27,20 @@ export class Host {
 
     url: string;
     myProjects: string[] = [];
-    hostsNames = [0];
+    hostsNames: string[];
 
     constructor(url: string) {
         this.url = url;
+        this.hostsNames = [uuidv4()];
     }
 
     addNewHost() {
-        this.hostsNames = this.hostsNames.concat(this.hostsNames.length)
+        function getRandomInt(max: number) {
+            return Math.floor(Math.random() * Math.floor(max)) + 1;
+        }
+        const numberHosts = getRandomInt(5);
+        const newHosts = [...Array(numberHosts)].map(() => uuidv4());
+        this.hostsNames = this.hostsNames.concat(newHosts)
     }
 
     // Keep always min one host
@@ -52,9 +59,12 @@ export class Host {
         function getRandomInt(max: number) {
             return Math.floor(Math.random() * Math.floor(max)) + 1;
         }
-        const activeHosts = this.hostsNames.slice(0, getRandomInt(this.myProjects.length));
+        const activeHosts = this.hostsNames.slice(0, getRandomInt(this.hostsNames.length));
 
-        const projectInput: AddProjectInput[] = activeHosts.map(name => ({title: 'title', description: 'descr'}));
+        const generateProject = (): AddProjectInput => {
+          return {title: 'title', description: 'descr'}
+        };
+        const projectInput: AddProjectInput[] = activeHosts.map(name => generateProject());
         await addProject(projectInput, this.url)
     }
 

@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const queries_1 = require("./actions/queries");
 const mutations_1 = require("./actions/mutations");
+const uuid_1 = require("uuid");
 class Developer {
     constructor(username, url) {
         this.myRoles = [];
@@ -30,11 +31,16 @@ exports.Developer = Developer;
 class Host {
     constructor(url) {
         this.myProjects = [];
-        this.hostsNames = [0];
         this.url = url;
+        this.hostsNames = [uuid_1.v4()];
     }
     addNewHost() {
-        this.hostsNames = this.hostsNames.concat(this.hostsNames.length);
+        function getRandomInt(max) {
+            return Math.floor(Math.random() * Math.floor(max)) + 1;
+        }
+        const numberHosts = getRandomInt(5);
+        const newHosts = [...Array(numberHosts)].map(() => uuid_1.v4());
+        this.hostsNames = this.hostsNames.concat(newHosts);
     }
     // Keep always min one host
     removeHost() {
@@ -53,8 +59,11 @@ class Host {
             function getRandomInt(max) {
                 return Math.floor(Math.random() * Math.floor(max)) + 1;
             }
-            const activeHosts = this.hostsNames.slice(0, getRandomInt(this.myProjects.length));
-            const projectInput = activeHosts.map(name => ({ title: 'title', description: 'descr' }));
+            const activeHosts = this.hostsNames.slice(0, getRandomInt(this.hostsNames.length));
+            const generateProject = () => {
+                return { title: 'title', description: 'descr' };
+            };
+            const projectInput = activeHosts.map(name => generateProject());
             yield mutations_1.addProject(projectInput, this.url);
         });
     }
