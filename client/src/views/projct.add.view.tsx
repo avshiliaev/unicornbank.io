@@ -1,8 +1,9 @@
 import React, {Fragment} from 'react';
 import {useMutation} from '@apollo/react-hooks';
-import {ADD_PROJECTS, GET_PROJECTS} from './docs/projects.documents';
-import {QueryProjectQuery} from '../api/interfaces/types.d';
+import {ADD_PROJECTS} from './docs/projects.documents';
 import ProjectsForm from '../components/projects.form';
+import {QueryProjectQuery} from '../../../server/api/interfaces/types.d';
+import {GET_PROJECT} from './docs/project.document';
 
 const ProjctAddView = ({windowSize}) => {
 
@@ -10,9 +11,9 @@ const ProjctAddView = ({windowSize}) => {
         ADD_PROJECTS,
         {
             update: (store, {data}) => {
-                const projectsData = store.readQuery<QueryProjectQuery>({query: GET_PROJECTS});
+                const projectsData = store.readQuery<QueryProjectQuery>({query: GET_PROJECT});
                 store.writeQuery<QueryProjectQuery>({
-                    query: GET_PROJECTS,
+                    query: GET_PROJECT,
                     data: {queryProject: [...projectsData!.queryProject, ...data!.addProject.project]}
                 });
             }

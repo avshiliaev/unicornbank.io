@@ -1,0 +1,27 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "simulation/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "generate": "graphql get-schema && gqlg --schemaFilePath ./api/schema/schema.graphql --destDirPath ./api/schema/documents --depthLimit 5 && graphql-codegen --overwrite"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@graphql-codegen/cli": "^1.11.2",
+    "@graphql-codegen/typescript": "^1.11.2",
+    "@graphql-codegen/typescript-operations": "^1.11.2",
+    "@graphql-codegen/typescript-react-apollo": "^1.11.2",
+    "@types/node": "^13.9.1",
+    "@types/uuid": "^7.0.0",
+    "cli-progress": "^3.6.0",
+    "express": "^4.17.1",
+    "gql-generator": "^1.0.12",
+    "graphql": "^14.5.8",
+    "graphql-request": "^1.8.2",
+    "nodemon": "^2.0.2",
+    "uuid": "^7.0.2"
+  }
+}

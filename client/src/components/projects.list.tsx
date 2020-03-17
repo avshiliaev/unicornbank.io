@@ -1,5 +1,5 @@
 import React from 'react';
-import {Project} from '../api/interfaces/types.d';
+import {Project} from '../../../api/interfaces/types.d';
 import {Avatar, Badge, Empty, List} from 'antd';
 import ActionIcon from './action.icon';
 import ProjectDeleteView from '../views/project.delete.view';

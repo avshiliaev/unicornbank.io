@@ -1,4 +1,4 @@
-import {AddProjectInput, User} from '../../client/src/api/interfaces/types.d';
+import {AddProjectInput, User} from '../api/interfaces/types.d';
 import {getAllRolesByUser, queryProjects} from './actions/queries';
 import {addProject, deleteProject} from './actions/mutations';
 import { v4 as uuidv4 } from 'uuid';

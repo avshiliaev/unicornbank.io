@@ -1,4 +1,4 @@
-import {GetProjectQueryVariables, Project, User, UserFilter} from '../../../client/src/api/interfaces/types.d';
+import {GetProjectQueryVariables, Project, User, UserFilter} from '../../api/interfaces/types.d';
 
 const gqlRequest = require('graphql-request');
 

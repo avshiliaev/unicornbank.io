@@ -1,6 +1,6 @@
 import React from 'react';
 import {List} from 'antd';
-import {Task} from '../api/interfaces/types.d';
+import {Task} from '../../../api/interfaces/types.d';
 
 
 const TasksTable = ({tasks}) => {
