@@ -1,7 +1,7 @@
 import {AddProjectInput, User} from '../api/interfaces/types.d';
 import {getAllRolesByUser, queryProjects} from './actions/queries';
-import {addProject, deleteProject} from './actions/mutations';
-import { v4 as uuidv4 } from 'uuid';
+import {addProject, addUser, deleteProject} from './actions/mutations';
+import {v4 as uuidv4} from 'uuid';
 
 export class Developer {
 
@@ -27,26 +27,27 @@ export class Host {
 
     url: string;
     myProjects: string[] = [];
-    hostsNames: string[];
+    hostsIds: string[] = [];
 
     constructor(url: string) {
         this.url = url;
-        this.hostsNames = [uuidv4()];
     }
 
-    addNewHost() {
+    async addNewHost() {
         function getRandomInt(max: number) {
             return Math.floor(Math.random() * Math.floor(max)) + 1;
         }
+
         const numberHosts = getRandomInt(5);
-        const newHosts = [...Array(numberHosts)].map(() => uuidv4());
-        this.hostsNames = this.hostsNames.concat(newHosts)
+        const newHosts = [...Array(numberHosts)].map(() => ({username: uuidv4(), password: 'pass', location: 'loc'}));
+        const newHostsIds = await addUser(newHosts, this.url);
+        this.hostsIds = this.hostsIds.concat(newHostsIds.map(user => user.id))
     }
 
     // Keep always min one host
     removeHost() {
-        if (this.hostsNames.length > 1) {
-            this.hostsNames = this.hostsNames.slice(0, -1)
+        if (this.hostsIds.length > 1) {
+            this.hostsIds = this.hostsIds.slice(0, -1)
         }
     }
 
@@ -56,16 +57,19 @@ export class Host {
     }
 
     async createProject() {
-        function getRandomInt(max: number) {
-            return Math.floor(Math.random() * Math.floor(max)) + 1;
-        }
-        const activeHosts = this.hostsNames.slice(0, getRandomInt(this.hostsNames.length));
+        if (this.hostsIds.length > 1) {
+            function getRandomInt(max: number) {
+                return Math.floor(Math.random() * Math.floor(max)) + 1;
+            }
+            const activeHosts = this.hostsIds.slice(0, getRandomInt(this.hostsIds.length));
 
-        const generateProject = (): AddProjectInput => {
-          return {title: 'title', description: 'descr'}
-        };
-        const projectInput: AddProjectInput[] = activeHosts.map(name => generateProject());
-        await addProject(projectInput, this.url)
+            const generateProject = (hostId: string): AddProjectInput => {
+                return {title: 'title', description: 'descr', hosts: [{id: hostId}]}
+            };
+            const projectInput: AddProjectInput[] = activeHosts.map(hostId => generateProject(hostId));
+            await addProject(projectInput, this.url)
+        }
+
     }
 
     async deleteRandom() {

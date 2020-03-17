@@ -31,21 +31,25 @@ exports.Developer = Developer;
 class Host {
     constructor(url) {
         this.myProjects = [];
+        this.hostsIds = [];
         this.url = url;
-        this.hostsNames = [uuid_1.v4()];
     }
     addNewHost() {
-        function getRandomInt(max) {
-            return Math.floor(Math.random() * Math.floor(max)) + 1;
-        }
-        const numberHosts = getRandomInt(5);
-        const newHosts = [...Array(numberHosts)].map(() => uuid_1.v4());
-        this.hostsNames = this.hostsNames.concat(newHosts);
+        return __awaiter(this, void 0, void 0, function* () {
+            function getRandomInt(max) {
+                return Math.floor(Math.random() * Math.floor(max)) + 1;
+            }
+            const numberHosts = getRandomInt(5);
+            const newHosts = [...Array(numberHosts)].map(() => ({ username: uuid_1.v4(), password: 'pass', location: 'loc' }));
+            const newHostsIds = yield mutations_1.addUser(newHosts, this.url);
+            console.log(newHostsIds);
+            this.hostsIds = this.hostsIds.concat(newHostsIds.map(user => user.id));
+        });
     }
     // Keep always min one host
     removeHost() {
-        if (this.hostsNames.length > 1) {
-            this.hostsNames = this.hostsNames.slice(0, -1);
+        if (this.hostsIds.length > 1) {
+            this.hostsIds = this.hostsIds.slice(0, -1);
         }
     }
     updateProjects() {
@@ -56,15 +60,17 @@ class Host {
     }
     createProject() {
         return __awaiter(this, void 0, void 0, function* () {
-            function getRandomInt(max) {
-                return Math.floor(Math.random() * Math.floor(max)) + 1;
+            if (this.hostsIds.length > 1) {
+                function getRandomInt(max) {
+                    return Math.floor(Math.random() * Math.floor(max)) + 1;
+                }
+                const activeHosts = this.hostsIds.slice(0, getRandomInt(this.hostsIds.length));
+                const generateProject = (hostId) => {
+                    return { title: 'title', description: 'descr', hosts: [{ id: hostId }] };
+                };
+                const projectInput = activeHosts.map(hostId => generateProject(hostId));
+                yield mutations_1.addProject(projectInput, this.url);
             }
-            const activeHosts = this.hostsNames.slice(0, getRandomInt(this.hostsNames.length));
-            const generateProject = () => {
-                return { title: 'title', description: 'descr' };
-            };
-            const projectInput = activeHosts.map(name => generateProject());
-            yield mutations_1.addProject(projectInput, this.url);
         });
     }
     deleteRandom() {

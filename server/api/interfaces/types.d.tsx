@@ -96,6 +96,7 @@ export type AddDeveloperPayloadDeveloperArgs = {
 
 export type AddProjectInput = {
   title: Scalars['String'];
+  hosts: Array<Maybe<UserRef>>;
   description: Scalars['String'];
   tags?: Maybe<Array<Maybe<TagRef>>>;
   tasks?: Maybe<Array<Maybe<TaskRef>>>;
@@ -169,7 +170,8 @@ export type AddUserInput = {
   username: Scalars['String'];
   password: Scalars['String'];
   location: Scalars['String'];
-  roles?: Maybe<Array<Maybe<DeveloperRef>>>;
+  developer?: Maybe<Array<Maybe<DeveloperRef>>>;
+  host?: Maybe<Array<Maybe<ProjectRef>>>;
   stars?: Maybe<Array<Maybe<TaskRef>>>;
 };
 
@@ -665,11 +667,20 @@ export type Project = {
    __typename?: 'Project';
   id: Scalars['ID'];
   title: Scalars['String'];
+  hosts: Array<Maybe<User>>;
   description: Scalars['String'];
   tags?: Maybe<Array<Maybe<Tag>>>;
   tasks?: Maybe<Array<Maybe<Task>>>;
   boards?: Maybe<Array<Maybe<Board>>>;
   developers?: Maybe<Array<Maybe<Developer>>>;
+};
+
+
+export type ProjectHostsArgs = {
+  filter?: Maybe<UserFilter>;
+  order?: Maybe<UserOrder>;
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
 };
 
 
@@ -725,6 +736,7 @@ export enum ProjectOrderable {
 
 export type ProjectPatch = {
   title?: Maybe<Scalars['String']>;
+  hosts?: Maybe<Array<Maybe<UserRef>>>;
   description?: Maybe<Scalars['String']>;
   tags?: Maybe<Array<Maybe<TagRef>>>;
   tasks?: Maybe<Array<Maybe<TaskRef>>>;
@@ -735,6 +747,7 @@ export type ProjectPatch = {
 export type ProjectRef = {
   id?: Maybe<Scalars['ID']>;
   title?: Maybe<Scalars['String']>;
+  hosts?: Maybe<Array<Maybe<UserRef>>>;
   description?: Maybe<Scalars['String']>;
   tags?: Maybe<Array<Maybe<TagRef>>>;
   tasks?: Maybe<Array<Maybe<TaskRef>>>;
@@ -1208,14 +1221,23 @@ export type User = {
   username: Scalars['String'];
   password: Scalars['String'];
   location: Scalars['String'];
-  roles?: Maybe<Array<Maybe<Developer>>>;
+  developer?: Maybe<Array<Maybe<Developer>>>;
+  host?: Maybe<Array<Maybe<Project>>>;
   stars?: Maybe<Array<Maybe<Task>>>;
 };
 
 
-export type UserRolesArgs = {
+export type UserDeveloperArgs = {
   filter?: Maybe<DeveloperFilter>;
   order?: Maybe<DeveloperOrder>;
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
+export type UserHostArgs = {
+  filter?: Maybe<ProjectFilter>;
+  order?: Maybe<ProjectOrder>;
   first?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -1252,7 +1274,8 @@ export type UserPatch = {
   username?: Maybe<Scalars['String']>;
   password?: Maybe<Scalars['String']>;
   location?: Maybe<Scalars['String']>;
-  roles?: Maybe<Array<Maybe<DeveloperRef>>>;
+  developer?: Maybe<Array<Maybe<DeveloperRef>>>;
+  host?: Maybe<Array<Maybe<ProjectRef>>>;
   stars?: Maybe<Array<Maybe<TaskRef>>>;
 };
 
@@ -1261,82 +1284,99 @@ export type UserRef = {
   username?: Maybe<Scalars['String']>;
   password?: Maybe<Scalars['String']>;
   location?: Maybe<Scalars['String']>;
-  roles?: Maybe<Array<Maybe<DeveloperRef>>>;
+  developer?: Maybe<Array<Maybe<DeveloperRef>>>;
+  host?: Maybe<Array<Maybe<ProjectRef>>>;
   stars?: Maybe<Array<Maybe<TaskRef>>>;
 };
 
 export type AddBoardMutationVariables = {
-  filter?: Maybe<ProjectFilter>;
-  filter1?: Maybe<DeveloperFilter>;
+  filter?: Maybe<DeveloperFilter>;
   order?: Maybe<DeveloperOrder>;
   first?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  filter2?: Maybe<TagFilter>;
-  order1?: Maybe<TagOrder>;
+  filter1?: Maybe<ProjectFilter>;
+  order1?: Maybe<ProjectOrder>;
   first1?: Maybe<Scalars['Int']>;
   offset1?: Maybe<Scalars['Int']>;
-  filter3?: Maybe<ProjectFilter>;
-  filter4?: Maybe<ColumnFilter>;
-  filter5?: Maybe<DeveloperFilter>;
-  order2?: Maybe<DeveloperOrder>;
+  filter2?: Maybe<TaskFilter>;
+  order2?: Maybe<TaskOrder>;
   first2?: Maybe<Scalars['Int']>;
   offset2?: Maybe<Scalars['Int']>;
-  filter6?: Maybe<DeveloperFilter>;
-  order3?: Maybe<DeveloperOrder>;
+  filter3?: Maybe<UserFilter>;
+  order3?: Maybe<UserOrder>;
   first3?: Maybe<Scalars['Int']>;
   offset3?: Maybe<Scalars['Int']>;
-  filter7?: Maybe<CommentFilter>;
-  order4?: Maybe<CommentOrder>;
+  filter4?: Maybe<ProjectFilter>;
+  filter5?: Maybe<DeveloperFilter>;
+  order4?: Maybe<DeveloperOrder>;
   first4?: Maybe<Scalars['Int']>;
   offset4?: Maybe<Scalars['Int']>;
-  filter8?: Maybe<TaskFilter>;
-  order5?: Maybe<TaskOrder>;
+  filter6?: Maybe<TagFilter>;
+  order5?: Maybe<TagOrder>;
   first5?: Maybe<Scalars['Int']>;
   offset5?: Maybe<Scalars['Int']>;
-  filter9?: Maybe<ProjectFilter>;
-  filter10?: Maybe<ColumnFilter>;
-  order6?: Maybe<ColumnOrder>;
+  filter7?: Maybe<ProjectFilter>;
+  filter8?: Maybe<ColumnFilter>;
+  filter9?: Maybe<DeveloperFilter>;
+  order6?: Maybe<DeveloperOrder>;
   first6?: Maybe<Scalars['Int']>;
   offset6?: Maybe<Scalars['Int']>;
-  filter11?: Maybe<BoardFilter>;
-  order7?: Maybe<BoardOrder>;
+  filter10?: Maybe<DeveloperFilter>;
+  order7?: Maybe<DeveloperOrder>;
   first7?: Maybe<Scalars['Int']>;
   offset7?: Maybe<Scalars['Int']>;
-  filter12?: Maybe<ProjectFilter>;
-  filter13?: Maybe<UserFilter>;
-  order8?: Maybe<UserOrder>;
+  filter11?: Maybe<CommentFilter>;
+  order8?: Maybe<CommentOrder>;
   first8?: Maybe<Scalars['Int']>;
   offset8?: Maybe<Scalars['Int']>;
-  filter14?: Maybe<TagFilter>;
-  order9?: Maybe<TagOrder>;
+  filter12?: Maybe<TaskFilter>;
+  order9?: Maybe<TaskOrder>;
   first9?: Maybe<Scalars['Int']>;
   offset9?: Maybe<Scalars['Int']>;
-  filter15?: Maybe<TaskFilter>;
-  order10?: Maybe<TaskOrder>;
+  filter13?: Maybe<ProjectFilter>;
+  filter14?: Maybe<ColumnFilter>;
+  order10?: Maybe<ColumnOrder>;
   first10?: Maybe<Scalars['Int']>;
   offset10?: Maybe<Scalars['Int']>;
-  filter16?: Maybe<TaskFilter>;
-  order11?: Maybe<TaskOrder>;
+  filter15?: Maybe<BoardFilter>;
+  order11?: Maybe<BoardOrder>;
   first11?: Maybe<Scalars['Int']>;
   offset11?: Maybe<Scalars['Int']>;
-  filter17?: Maybe<DeveloperFilter>;
-  order12?: Maybe<DeveloperOrder>;
+  filter16?: Maybe<ProjectFilter>;
+  filter17?: Maybe<UserFilter>;
+  order12?: Maybe<UserOrder>;
   first12?: Maybe<Scalars['Int']>;
   offset12?: Maybe<Scalars['Int']>;
-  filter18?: Maybe<ProjectFilter>;
-  filter19?: Maybe<BoardFilter>;
-  filter20?: Maybe<TaskFilter>;
-  order13?: Maybe<TaskOrder>;
+  filter18?: Maybe<TagFilter>;
+  order13?: Maybe<TagOrder>;
   first13?: Maybe<Scalars['Int']>;
   offset13?: Maybe<Scalars['Int']>;
-  filter21?: Maybe<ColumnFilter>;
-  order14?: Maybe<ColumnOrder>;
+  filter19?: Maybe<TaskFilter>;
+  order14?: Maybe<TaskOrder>;
   first14?: Maybe<Scalars['Int']>;
   offset14?: Maybe<Scalars['Int']>;
-  filter22?: Maybe<BoardFilter>;
-  order15?: Maybe<BoardOrder>;
+  filter20?: Maybe<TaskFilter>;
+  order15?: Maybe<TaskOrder>;
   first15?: Maybe<Scalars['Int']>;
   offset15?: Maybe<Scalars['Int']>;
+  filter21?: Maybe<DeveloperFilter>;
+  order16?: Maybe<DeveloperOrder>;
+  first16?: Maybe<Scalars['Int']>;
+  offset16?: Maybe<Scalars['Int']>;
+  filter22?: Maybe<ProjectFilter>;
+  filter23?: Maybe<BoardFilter>;
+  filter24?: Maybe<TaskFilter>;
+  order17?: Maybe<TaskOrder>;
+  first17?: Maybe<Scalars['Int']>;
+  offset17?: Maybe<Scalars['Int']>;
+  filter25?: Maybe<ColumnFilter>;
+  order18?: Maybe<ColumnOrder>;
+  first18?: Maybe<Scalars['Int']>;
+  offset18?: Maybe<Scalars['Int']>;
+  filter26?: Maybe<BoardFilter>;
+  order19?: Maybe<BoardOrder>;
+  first19?: Maybe<Scalars['Int']>;
+  offset19?: Maybe<Scalars['Int']>;
   input: Array<AddBoardInput>;
 };
 
@@ -1352,7 +1392,20 @@ export type AddBoardMutation = (
       & { project: (
         { __typename?: 'Project' }
         & Pick<Project, 'id' | 'title' | 'description'>
-        & { tags: Maybe<Array<Maybe<(
+        & { hosts: Array<Maybe<(
+          { __typename?: 'User' }
+          & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          & { developer: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>>, host: Maybe<Array<Maybe<(
+            { __typename?: 'Project' }
+            & Pick<Project, 'id' | 'title' | 'description'>
+          )>>>, stars: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        )>>, tags: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
           & { project: (
@@ -1427,91 +1480,95 @@ export type AddBoardMutation = (
 );
 
 export type AddColumnMutationVariables = {
-  filter?: Maybe<TagFilter>;
-  order?: Maybe<TagOrder>;
+  filter?: Maybe<UserFilter>;
+  order?: Maybe<UserOrder>;
   first?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  filter1?: Maybe<TaskFilter>;
-  order1?: Maybe<TaskOrder>;
+  filter1?: Maybe<TagFilter>;
+  order1?: Maybe<TagOrder>;
   first1?: Maybe<Scalars['Int']>;
   offset1?: Maybe<Scalars['Int']>;
-  filter2?: Maybe<BoardFilter>;
-  order2?: Maybe<BoardOrder>;
+  filter2?: Maybe<TaskFilter>;
+  order2?: Maybe<TaskOrder>;
   first2?: Maybe<Scalars['Int']>;
   offset2?: Maybe<Scalars['Int']>;
-  filter3?: Maybe<DeveloperFilter>;
-  order3?: Maybe<DeveloperOrder>;
+  filter3?: Maybe<BoardFilter>;
+  order3?: Maybe<BoardOrder>;
   first3?: Maybe<Scalars['Int']>;
   offset3?: Maybe<Scalars['Int']>;
-  filter4?: Maybe<ProjectFilter>;
-  filter5?: Maybe<BoardFilter>;
-  filter6?: Maybe<TaskFilter>;
-  order4?: Maybe<TaskOrder>;
+  filter4?: Maybe<DeveloperFilter>;
+  order4?: Maybe<DeveloperOrder>;
   first4?: Maybe<Scalars['Int']>;
   offset4?: Maybe<Scalars['Int']>;
-  filter7?: Maybe<ColumnFilter>;
-  order5?: Maybe<ColumnOrder>;
+  filter5?: Maybe<ProjectFilter>;
+  filter6?: Maybe<BoardFilter>;
+  filter7?: Maybe<TaskFilter>;
+  order5?: Maybe<TaskOrder>;
   first5?: Maybe<Scalars['Int']>;
   offset5?: Maybe<Scalars['Int']>;
-  filter8?: Maybe<BoardFilter>;
-  filter9?: Maybe<ProjectFilter>;
-  filter10?: Maybe<ColumnFilter>;
-  filter11?: Maybe<ProjectFilter>;
-  filter12?: Maybe<UserFilter>;
-  order6?: Maybe<UserOrder>;
+  filter8?: Maybe<ColumnFilter>;
+  order6?: Maybe<ColumnOrder>;
   first6?: Maybe<Scalars['Int']>;
   offset6?: Maybe<Scalars['Int']>;
-  filter13?: Maybe<TagFilter>;
-  order7?: Maybe<TagOrder>;
+  filter9?: Maybe<BoardFilter>;
+  filter10?: Maybe<ProjectFilter>;
+  filter11?: Maybe<ColumnFilter>;
+  filter12?: Maybe<ProjectFilter>;
+  filter13?: Maybe<UserFilter>;
+  order7?: Maybe<UserOrder>;
   first7?: Maybe<Scalars['Int']>;
   offset7?: Maybe<Scalars['Int']>;
-  filter14?: Maybe<TaskFilter>;
-  order8?: Maybe<TaskOrder>;
+  filter14?: Maybe<TagFilter>;
+  order8?: Maybe<TagOrder>;
   first8?: Maybe<Scalars['Int']>;
   offset8?: Maybe<Scalars['Int']>;
   filter15?: Maybe<TaskFilter>;
   order9?: Maybe<TaskOrder>;
   first9?: Maybe<Scalars['Int']>;
   offset9?: Maybe<Scalars['Int']>;
-  filter16?: Maybe<DeveloperFilter>;
-  order10?: Maybe<DeveloperOrder>;
+  filter16?: Maybe<TaskFilter>;
+  order10?: Maybe<TaskOrder>;
   first10?: Maybe<Scalars['Int']>;
   offset10?: Maybe<Scalars['Int']>;
-  filter17?: Maybe<ProjectFilter>;
-  filter18?: Maybe<UserFilter>;
-  order11?: Maybe<UserOrder>;
+  filter17?: Maybe<DeveloperFilter>;
+  order11?: Maybe<DeveloperOrder>;
   first11?: Maybe<Scalars['Int']>;
   offset11?: Maybe<Scalars['Int']>;
-  filter19?: Maybe<TagFilter>;
-  order12?: Maybe<TagOrder>;
+  filter18?: Maybe<ProjectFilter>;
+  filter19?: Maybe<UserFilter>;
+  order12?: Maybe<UserOrder>;
   first12?: Maybe<Scalars['Int']>;
   offset12?: Maybe<Scalars['Int']>;
-  filter20?: Maybe<TaskFilter>;
-  order13?: Maybe<TaskOrder>;
+  filter20?: Maybe<TagFilter>;
+  order13?: Maybe<TagOrder>;
   first13?: Maybe<Scalars['Int']>;
   offset13?: Maybe<Scalars['Int']>;
   filter21?: Maybe<TaskFilter>;
   order14?: Maybe<TaskOrder>;
   first14?: Maybe<Scalars['Int']>;
   offset14?: Maybe<Scalars['Int']>;
-  filter22?: Maybe<DeveloperFilter>;
-  order15?: Maybe<DeveloperOrder>;
+  filter22?: Maybe<TaskFilter>;
+  order15?: Maybe<TaskOrder>;
   first15?: Maybe<Scalars['Int']>;
   offset15?: Maybe<Scalars['Int']>;
-  filter23?: Maybe<TaskFilter>;
-  filter24?: Maybe<DeveloperFilter>;
-  filter25?: Maybe<CommentFilter>;
-  order16?: Maybe<CommentOrder>;
+  filter23?: Maybe<DeveloperFilter>;
+  order16?: Maybe<DeveloperOrder>;
   first16?: Maybe<Scalars['Int']>;
   offset16?: Maybe<Scalars['Int']>;
-  filter26?: Maybe<TaskFilter>;
-  order17?: Maybe<TaskOrder>;
+  filter24?: Maybe<TaskFilter>;
+  filter25?: Maybe<DeveloperFilter>;
+  filter26?: Maybe<CommentFilter>;
+  order17?: Maybe<CommentOrder>;
   first17?: Maybe<Scalars['Int']>;
   offset17?: Maybe<Scalars['Int']>;
-  filter27?: Maybe<ColumnFilter>;
-  order18?: Maybe<ColumnOrder>;
+  filter27?: Maybe<TaskFilter>;
+  order18?: Maybe<TaskOrder>;
   first18?: Maybe<Scalars['Int']>;
   offset18?: Maybe<Scalars['Int']>;
+  filter28?: Maybe<ColumnFilter>;
+  order19?: Maybe<ColumnOrder>;
+  first19?: Maybe<Scalars['Int']>;
+  offset19?: Maybe<Scalars['Int']>;
   input: Array<AddColumnInput>;
 };
 
@@ -1530,7 +1587,10 @@ export type AddColumnMutation = (
         & { project: (
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
-          & { tags: Maybe<Array<Maybe<(
+          & { hosts: Array<Maybe<(
+            { __typename?: 'User' }
+            & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          )>>, tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
           )>>>, tasks: Maybe<Array<Maybe<(
@@ -1618,141 +1678,149 @@ export type AddColumnMutation = (
 );
 
 export type AddCommentMutationVariables = {
-  filter?: Maybe<TagFilter>;
-  order?: Maybe<TagOrder>;
+  filter?: Maybe<UserFilter>;
+  order?: Maybe<UserOrder>;
   first?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  filter1?: Maybe<TaskFilter>;
-  order1?: Maybe<TaskOrder>;
+  filter1?: Maybe<TagFilter>;
+  order1?: Maybe<TagOrder>;
   first1?: Maybe<Scalars['Int']>;
   offset1?: Maybe<Scalars['Int']>;
-  filter2?: Maybe<BoardFilter>;
-  order2?: Maybe<BoardOrder>;
+  filter2?: Maybe<TaskFilter>;
+  order2?: Maybe<TaskOrder>;
   first2?: Maybe<Scalars['Int']>;
   offset2?: Maybe<Scalars['Int']>;
-  filter3?: Maybe<DeveloperFilter>;
-  order3?: Maybe<DeveloperOrder>;
+  filter3?: Maybe<BoardFilter>;
+  order3?: Maybe<BoardOrder>;
   first3?: Maybe<Scalars['Int']>;
   offset3?: Maybe<Scalars['Int']>;
-  filter4?: Maybe<ProjectFilter>;
-  filter5?: Maybe<BoardFilter>;
-  filter6?: Maybe<TaskFilter>;
-  order4?: Maybe<TaskOrder>;
+  filter4?: Maybe<DeveloperFilter>;
+  order4?: Maybe<DeveloperOrder>;
   first4?: Maybe<Scalars['Int']>;
   offset4?: Maybe<Scalars['Int']>;
-  filter7?: Maybe<ColumnFilter>;
-  filter8?: Maybe<ProjectFilter>;
-  filter9?: Maybe<UserFilter>;
-  order5?: Maybe<UserOrder>;
+  filter5?: Maybe<ProjectFilter>;
+  filter6?: Maybe<BoardFilter>;
+  filter7?: Maybe<TaskFilter>;
+  order5?: Maybe<TaskOrder>;
   first5?: Maybe<Scalars['Int']>;
   offset5?: Maybe<Scalars['Int']>;
-  filter10?: Maybe<TagFilter>;
-  order6?: Maybe<TagOrder>;
+  filter8?: Maybe<ColumnFilter>;
+  filter9?: Maybe<ProjectFilter>;
+  filter10?: Maybe<UserFilter>;
+  order6?: Maybe<UserOrder>;
   first6?: Maybe<Scalars['Int']>;
   offset6?: Maybe<Scalars['Int']>;
-  filter11?: Maybe<TaskFilter>;
-  order7?: Maybe<TaskOrder>;
+  filter11?: Maybe<TagFilter>;
+  order7?: Maybe<TagOrder>;
   first7?: Maybe<Scalars['Int']>;
   offset7?: Maybe<Scalars['Int']>;
   filter12?: Maybe<TaskFilter>;
   order8?: Maybe<TaskOrder>;
   first8?: Maybe<Scalars['Int']>;
   offset8?: Maybe<Scalars['Int']>;
-  filter13?: Maybe<DeveloperFilter>;
-  order9?: Maybe<DeveloperOrder>;
+  filter13?: Maybe<TaskFilter>;
+  order9?: Maybe<TaskOrder>;
   first9?: Maybe<Scalars['Int']>;
   offset9?: Maybe<Scalars['Int']>;
-  filter14?: Maybe<ProjectFilter>;
-  filter15?: Maybe<UserFilter>;
-  order10?: Maybe<UserOrder>;
+  filter14?: Maybe<DeveloperFilter>;
+  order10?: Maybe<DeveloperOrder>;
   first10?: Maybe<Scalars['Int']>;
   offset10?: Maybe<Scalars['Int']>;
-  filter16?: Maybe<TagFilter>;
-  order11?: Maybe<TagOrder>;
+  filter15?: Maybe<ProjectFilter>;
+  filter16?: Maybe<UserFilter>;
+  order11?: Maybe<UserOrder>;
   first11?: Maybe<Scalars['Int']>;
   offset11?: Maybe<Scalars['Int']>;
-  filter17?: Maybe<TaskFilter>;
-  order12?: Maybe<TaskOrder>;
+  filter17?: Maybe<TagFilter>;
+  order12?: Maybe<TagOrder>;
   first12?: Maybe<Scalars['Int']>;
   offset12?: Maybe<Scalars['Int']>;
   filter18?: Maybe<TaskFilter>;
   order13?: Maybe<TaskOrder>;
   first13?: Maybe<Scalars['Int']>;
   offset13?: Maybe<Scalars['Int']>;
-  filter19?: Maybe<DeveloperFilter>;
-  order14?: Maybe<DeveloperOrder>;
+  filter19?: Maybe<TaskFilter>;
+  order14?: Maybe<TaskOrder>;
   first14?: Maybe<Scalars['Int']>;
   offset14?: Maybe<Scalars['Int']>;
-  filter20?: Maybe<TaskFilter>;
-  filter21?: Maybe<DeveloperFilter>;
-  filter22?: Maybe<CommentFilter>;
-  order15?: Maybe<CommentOrder>;
+  filter20?: Maybe<DeveloperFilter>;
+  order15?: Maybe<DeveloperOrder>;
   first15?: Maybe<Scalars['Int']>;
   offset15?: Maybe<Scalars['Int']>;
-  filter23?: Maybe<TaskFilter>;
-  filter24?: Maybe<ProjectFilter>;
-  filter25?: Maybe<DeveloperFilter>;
-  order16?: Maybe<DeveloperOrder>;
+  filter21?: Maybe<TaskFilter>;
+  filter22?: Maybe<DeveloperFilter>;
+  filter23?: Maybe<CommentFilter>;
+  order16?: Maybe<CommentOrder>;
   first16?: Maybe<Scalars['Int']>;
   offset16?: Maybe<Scalars['Int']>;
-  filter26?: Maybe<TaskFilter>;
-  order17?: Maybe<TaskOrder>;
+  filter24?: Maybe<TaskFilter>;
+  filter25?: Maybe<ProjectFilter>;
+  filter26?: Maybe<DeveloperFilter>;
+  order17?: Maybe<DeveloperOrder>;
   first17?: Maybe<Scalars['Int']>;
   offset17?: Maybe<Scalars['Int']>;
-  filter27?: Maybe<UserFilter>;
-  order18?: Maybe<UserOrder>;
+  filter27?: Maybe<ProjectFilter>;
+  order18?: Maybe<ProjectOrder>;
   first18?: Maybe<Scalars['Int']>;
   offset18?: Maybe<Scalars['Int']>;
-  filter28?: Maybe<ProjectFilter>;
-  filter29?: Maybe<DeveloperFilter>;
-  order19?: Maybe<DeveloperOrder>;
+  filter28?: Maybe<TaskFilter>;
+  order19?: Maybe<TaskOrder>;
   first19?: Maybe<Scalars['Int']>;
   offset19?: Maybe<Scalars['Int']>;
-  filter30?: Maybe<TagFilter>;
-  order20?: Maybe<TagOrder>;
+  filter29?: Maybe<UserFilter>;
+  order20?: Maybe<UserOrder>;
   first20?: Maybe<Scalars['Int']>;
   offset20?: Maybe<Scalars['Int']>;
-  filter31?: Maybe<ProjectFilter>;
-  filter32?: Maybe<ColumnFilter>;
-  filter33?: Maybe<DeveloperFilter>;
+  filter30?: Maybe<ProjectFilter>;
+  filter31?: Maybe<DeveloperFilter>;
   order21?: Maybe<DeveloperOrder>;
   first21?: Maybe<Scalars['Int']>;
   offset21?: Maybe<Scalars['Int']>;
-  filter34?: Maybe<DeveloperFilter>;
-  order22?: Maybe<DeveloperOrder>;
+  filter32?: Maybe<TagFilter>;
+  order22?: Maybe<TagOrder>;
   first22?: Maybe<Scalars['Int']>;
   offset22?: Maybe<Scalars['Int']>;
-  filter35?: Maybe<CommentFilter>;
-  order23?: Maybe<CommentOrder>;
+  filter33?: Maybe<ProjectFilter>;
+  filter34?: Maybe<ColumnFilter>;
+  filter35?: Maybe<DeveloperFilter>;
+  order23?: Maybe<DeveloperOrder>;
   first23?: Maybe<Scalars['Int']>;
   offset23?: Maybe<Scalars['Int']>;
-  filter36?: Maybe<TaskFilter>;
-  order24?: Maybe<TaskOrder>;
+  filter36?: Maybe<DeveloperFilter>;
+  order24?: Maybe<DeveloperOrder>;
   first24?: Maybe<Scalars['Int']>;
   offset24?: Maybe<Scalars['Int']>;
-  filter37?: Maybe<ProjectFilter>;
-  filter38?: Maybe<ColumnFilter>;
-  filter39?: Maybe<DeveloperFilter>;
-  order25?: Maybe<DeveloperOrder>;
+  filter37?: Maybe<CommentFilter>;
+  order25?: Maybe<CommentOrder>;
   first25?: Maybe<Scalars['Int']>;
   offset25?: Maybe<Scalars['Int']>;
-  filter40?: Maybe<DeveloperFilter>;
-  order26?: Maybe<DeveloperOrder>;
+  filter38?: Maybe<TaskFilter>;
+  order26?: Maybe<TaskOrder>;
   first26?: Maybe<Scalars['Int']>;
   offset26?: Maybe<Scalars['Int']>;
-  filter41?: Maybe<CommentFilter>;
-  order27?: Maybe<CommentOrder>;
+  filter39?: Maybe<ProjectFilter>;
+  filter40?: Maybe<ColumnFilter>;
+  filter41?: Maybe<DeveloperFilter>;
+  order27?: Maybe<DeveloperOrder>;
   first27?: Maybe<Scalars['Int']>;
   offset27?: Maybe<Scalars['Int']>;
-  filter42?: Maybe<TaskFilter>;
-  order28?: Maybe<TaskOrder>;
+  filter42?: Maybe<DeveloperFilter>;
+  order28?: Maybe<DeveloperOrder>;
   first28?: Maybe<Scalars['Int']>;
   offset28?: Maybe<Scalars['Int']>;
-  filter43?: Maybe<DeveloperFilter>;
-  filter44?: Maybe<CommentFilter>;
+  filter43?: Maybe<CommentFilter>;
   order29?: Maybe<CommentOrder>;
   first29?: Maybe<Scalars['Int']>;
   offset29?: Maybe<Scalars['Int']>;
+  filter44?: Maybe<TaskFilter>;
+  order30?: Maybe<TaskOrder>;
+  first30?: Maybe<Scalars['Int']>;
+  offset30?: Maybe<Scalars['Int']>;
+  filter45?: Maybe<DeveloperFilter>;
+  filter46?: Maybe<CommentFilter>;
+  order31?: Maybe<CommentOrder>;
+  first31?: Maybe<Scalars['Int']>;
+  offset31?: Maybe<Scalars['Int']>;
   input: Array<AddCommentInput>;
 };
 
@@ -1771,7 +1839,10 @@ export type AddCommentMutation = (
         & { project: (
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
-          & { tags: Maybe<Array<Maybe<(
+          & { hosts: Array<Maybe<(
+            { __typename?: 'User' }
+            & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          )>>, tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
           )>>>, tasks: Maybe<Array<Maybe<(
@@ -1852,9 +1923,12 @@ export type AddCommentMutation = (
         ), user: Maybe<Array<Maybe<(
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          & { roles: Maybe<Array<Maybe<(
+          & { developer: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>>, host: Maybe<Array<Maybe<(
+            { __typename?: 'Project' }
+            & Pick<Project, 'id' | 'title' | 'description'>
           )>>>, stars: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
@@ -1914,161 +1988,146 @@ export type AddCommentMutation = (
 );
 
 export type AddDeveloperMutationVariables = {
-  filter?: Maybe<ProjectFilter>;
-  filter1?: Maybe<DeveloperFilter>;
+  filter?: Maybe<DeveloperFilter>;
   order?: Maybe<DeveloperOrder>;
   first?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  filter2?: Maybe<TagFilter>;
-  order1?: Maybe<TagOrder>;
+  filter1?: Maybe<ProjectFilter>;
+  order1?: Maybe<ProjectOrder>;
   first1?: Maybe<Scalars['Int']>;
   offset1?: Maybe<Scalars['Int']>;
-  filter3?: Maybe<ProjectFilter>;
-  filter4?: Maybe<ColumnFilter>;
-  filter5?: Maybe<DeveloperFilter>;
-  order2?: Maybe<DeveloperOrder>;
+  filter2?: Maybe<TaskFilter>;
+  order2?: Maybe<TaskOrder>;
   first2?: Maybe<Scalars['Int']>;
   offset2?: Maybe<Scalars['Int']>;
-  filter6?: Maybe<DeveloperFilter>;
-  order3?: Maybe<DeveloperOrder>;
+  filter3?: Maybe<UserFilter>;
+  order3?: Maybe<UserOrder>;
   first3?: Maybe<Scalars['Int']>;
   offset3?: Maybe<Scalars['Int']>;
-  filter7?: Maybe<CommentFilter>;
-  order4?: Maybe<CommentOrder>;
+  filter4?: Maybe<ProjectFilter>;
+  filter5?: Maybe<DeveloperFilter>;
+  order4?: Maybe<DeveloperOrder>;
   first4?: Maybe<Scalars['Int']>;
   offset4?: Maybe<Scalars['Int']>;
-  filter8?: Maybe<TaskFilter>;
-  order5?: Maybe<TaskOrder>;
+  filter6?: Maybe<TagFilter>;
+  order5?: Maybe<TagOrder>;
   first5?: Maybe<Scalars['Int']>;
   offset5?: Maybe<Scalars['Int']>;
-  filter9?: Maybe<ProjectFilter>;
-  filter10?: Maybe<ColumnFilter>;
-  order6?: Maybe<ColumnOrder>;
+  filter7?: Maybe<ProjectFilter>;
+  filter8?: Maybe<ColumnFilter>;
+  filter9?: Maybe<DeveloperFilter>;
+  order6?: Maybe<DeveloperOrder>;
   first6?: Maybe<Scalars['Int']>;
   offset6?: Maybe<Scalars['Int']>;
-  filter11?: Maybe<BoardFilter>;
-  order7?: Maybe<BoardOrder>;
+  filter10?: Maybe<DeveloperFilter>;
+  order7?: Maybe<DeveloperOrder>;
   first7?: Maybe<Scalars['Int']>;
   offset7?: Maybe<Scalars['Int']>;
-  filter12?: Maybe<ProjectFilter>;
-  filter13?: Maybe<UserFilter>;
-  order8?: Maybe<UserOrder>;
+  filter11?: Maybe<CommentFilter>;
+  order8?: Maybe<CommentOrder>;
   first8?: Maybe<Scalars['Int']>;
   offset8?: Maybe<Scalars['Int']>;
-  filter14?: Maybe<TagFilter>;
-  order9?: Maybe<TagOrder>;
+  filter12?: Maybe<TaskFilter>;
+  order9?: Maybe<TaskOrder>;
   first9?: Maybe<Scalars['Int']>;
   offset9?: Maybe<Scalars['Int']>;
-  filter15?: Maybe<TaskFilter>;
-  order10?: Maybe<TaskOrder>;
+  filter13?: Maybe<ProjectFilter>;
+  filter14?: Maybe<ColumnFilter>;
+  order10?: Maybe<ColumnOrder>;
   first10?: Maybe<Scalars['Int']>;
   offset10?: Maybe<Scalars['Int']>;
-  filter16?: Maybe<TaskFilter>;
-  order11?: Maybe<TaskOrder>;
+  filter15?: Maybe<BoardFilter>;
+  order11?: Maybe<BoardOrder>;
   first11?: Maybe<Scalars['Int']>;
   offset11?: Maybe<Scalars['Int']>;
-  filter17?: Maybe<DeveloperFilter>;
-  order12?: Maybe<DeveloperOrder>;
+  filter16?: Maybe<ProjectFilter>;
+  filter17?: Maybe<UserFilter>;
+  order12?: Maybe<UserOrder>;
   first12?: Maybe<Scalars['Int']>;
   offset12?: Maybe<Scalars['Int']>;
-  filter18?: Maybe<ProjectFilter>;
-  filter19?: Maybe<ProjectFilter>;
-  filter20?: Maybe<UserFilter>;
-  order13?: Maybe<UserOrder>;
+  filter18?: Maybe<TagFilter>;
+  order13?: Maybe<TagOrder>;
   first13?: Maybe<Scalars['Int']>;
   offset13?: Maybe<Scalars['Int']>;
-  filter21?: Maybe<TagFilter>;
-  order14?: Maybe<TagOrder>;
+  filter19?: Maybe<TaskFilter>;
+  order14?: Maybe<TaskOrder>;
   first14?: Maybe<Scalars['Int']>;
   offset14?: Maybe<Scalars['Int']>;
-  filter22?: Maybe<TaskFilter>;
+  filter20?: Maybe<TaskFilter>;
   order15?: Maybe<TaskOrder>;
   first15?: Maybe<Scalars['Int']>;
   offset15?: Maybe<Scalars['Int']>;
-  filter23?: Maybe<TaskFilter>;
-  order16?: Maybe<TaskOrder>;
+  filter21?: Maybe<DeveloperFilter>;
+  order16?: Maybe<DeveloperOrder>;
   first16?: Maybe<Scalars['Int']>;
   offset16?: Maybe<Scalars['Int']>;
-  filter24?: Maybe<DeveloperFilter>;
-  order17?: Maybe<DeveloperOrder>;
+  filter22?: Maybe<ProjectFilter>;
+  filter23?: Maybe<TagFilter>;
+  order17?: Maybe<TagOrder>;
   first17?: Maybe<Scalars['Int']>;
   offset17?: Maybe<Scalars['Int']>;
-  filter25?: Maybe<ProjectFilter>;
-  filter26?: Maybe<ColumnFilter>;
-  filter27?: Maybe<DeveloperFilter>;
-  order18?: Maybe<DeveloperOrder>;
+  filter24?: Maybe<TaskFilter>;
+  order18?: Maybe<TaskOrder>;
   first18?: Maybe<Scalars['Int']>;
   offset18?: Maybe<Scalars['Int']>;
-  filter28?: Maybe<DeveloperFilter>;
-  order19?: Maybe<DeveloperOrder>;
+  filter25?: Maybe<TaskFilter>;
+  order19?: Maybe<TaskOrder>;
   first19?: Maybe<Scalars['Int']>;
   offset19?: Maybe<Scalars['Int']>;
-  filter29?: Maybe<CommentFilter>;
-  order20?: Maybe<CommentOrder>;
+  filter26?: Maybe<DeveloperFilter>;
+  order20?: Maybe<DeveloperOrder>;
   first20?: Maybe<Scalars['Int']>;
   offset20?: Maybe<Scalars['Int']>;
-  filter30?: Maybe<TaskFilter>;
-  order21?: Maybe<TaskOrder>;
+  filter27?: Maybe<UserFilter>;
+  order21?: Maybe<UserOrder>;
   first21?: Maybe<Scalars['Int']>;
   offset21?: Maybe<Scalars['Int']>;
-  filter31?: Maybe<UserFilter>;
-  order22?: Maybe<UserOrder>;
+  filter28?: Maybe<TagFilter>;
+  order22?: Maybe<TagOrder>;
   first22?: Maybe<Scalars['Int']>;
   offset22?: Maybe<Scalars['Int']>;
-  filter32?: Maybe<TagFilter>;
-  order23?: Maybe<TagOrder>;
+  filter29?: Maybe<TaskFilter>;
+  order23?: Maybe<TaskOrder>;
   first23?: Maybe<Scalars['Int']>;
   offset23?: Maybe<Scalars['Int']>;
-  filter33?: Maybe<TaskFilter>;
-  order24?: Maybe<TaskOrder>;
+  filter30?: Maybe<BoardFilter>;
+  order24?: Maybe<BoardOrder>;
   first24?: Maybe<Scalars['Int']>;
   offset24?: Maybe<Scalars['Int']>;
-  filter34?: Maybe<ProjectFilter>;
-  filter35?: Maybe<BoardFilter>;
-  filter36?: Maybe<TaskFilter>;
-  order25?: Maybe<TaskOrder>;
+  filter31?: Maybe<DeveloperFilter>;
+  order25?: Maybe<DeveloperOrder>;
   first25?: Maybe<Scalars['Int']>;
   offset25?: Maybe<Scalars['Int']>;
-  filter37?: Maybe<ColumnFilter>;
-  filter38?: Maybe<DeveloperFilter>;
-  order26?: Maybe<DeveloperOrder>;
+  filter32?: Maybe<ProjectFilter>;
+  order26?: Maybe<ProjectOrder>;
   first26?: Maybe<Scalars['Int']>;
   offset26?: Maybe<Scalars['Int']>;
-  filter39?: Maybe<ProjectFilter>;
-  filter40?: Maybe<UserFilter>;
-  order27?: Maybe<UserOrder>;
+  filter33?: Maybe<ProjectFilter>;
+  filter34?: Maybe<ColumnFilter>;
+  filter35?: Maybe<DeveloperFilter>;
+  order27?: Maybe<DeveloperOrder>;
   first27?: Maybe<Scalars['Int']>;
   offset27?: Maybe<Scalars['Int']>;
-  filter41?: Maybe<TagFilter>;
-  order28?: Maybe<TagOrder>;
+  filter36?: Maybe<DeveloperFilter>;
+  order28?: Maybe<DeveloperOrder>;
   first28?: Maybe<Scalars['Int']>;
   offset28?: Maybe<Scalars['Int']>;
-  filter42?: Maybe<TaskFilter>;
-  order29?: Maybe<TaskOrder>;
+  filter37?: Maybe<CommentFilter>;
+  order29?: Maybe<CommentOrder>;
   first29?: Maybe<Scalars['Int']>;
   offset29?: Maybe<Scalars['Int']>;
-  filter43?: Maybe<TaskFilter>;
+  filter38?: Maybe<TaskFilter>;
   order30?: Maybe<TaskOrder>;
   first30?: Maybe<Scalars['Int']>;
   offset30?: Maybe<Scalars['Int']>;
-  filter44?: Maybe<DeveloperFilter>;
-  order31?: Maybe<DeveloperOrder>;
+  filter39?: Maybe<UserFilter>;
+  order31?: Maybe<UserOrder>;
   first31?: Maybe<Scalars['Int']>;
   offset31?: Maybe<Scalars['Int']>;
-  filter45?: Maybe<TaskFilter>;
-  filter46?: Maybe<DeveloperFilter>;
-  filter47?: Maybe<CommentFilter>;
-  order32?: Maybe<CommentOrder>;
+  filter40?: Maybe<DeveloperFilter>;
+  order32?: Maybe<DeveloperOrder>;
   first32?: Maybe<Scalars['Int']>;
   offset32?: Maybe<Scalars['Int']>;
-  filter48?: Maybe<TaskFilter>;
-  order33?: Maybe<TaskOrder>;
-  first33?: Maybe<Scalars['Int']>;
-  offset33?: Maybe<Scalars['Int']>;
-  filter49?: Maybe<DeveloperFilter>;
-  order34?: Maybe<DeveloperOrder>;
-  first34?: Maybe<Scalars['Int']>;
-  offset34?: Maybe<Scalars['Int']>;
   input: Array<AddDeveloperInput>;
 };
 
@@ -2084,7 +2143,20 @@ export type AddDeveloperMutation = (
       & { project: (
         { __typename?: 'Project' }
         & Pick<Project, 'id' | 'title' | 'description'>
-        & { tags: Maybe<Array<Maybe<(
+        & { hosts: Array<Maybe<(
+          { __typename?: 'User' }
+          & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          & { developer: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>>, host: Maybe<Array<Maybe<(
+            { __typename?: 'Project' }
+            & Pick<Project, 'id' | 'title' | 'description'>
+          )>>>, stars: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        )>>, tags: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
           & { project: (
@@ -2146,16 +2218,10 @@ export type AddDeveloperMutation = (
       ), user: Maybe<Array<Maybe<(
         { __typename?: 'User' }
         & Pick<User, 'id' | 'username' | 'password' | 'location'>
-        & { roles: Maybe<Array<Maybe<(
+        & { developer: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
-          & { project: (
-            { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: Maybe<Array<Maybe<(
-            { __typename?: 'User' }
-            & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>>, tags: Maybe<Array<Maybe<(
+          & { tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
           )>>>, tasks: Maybe<Array<Maybe<(
@@ -2164,6 +2230,25 @@ export type AddDeveloperMutation = (
           )>>>, liked: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        )>>>, host: Maybe<Array<Maybe<(
+          { __typename?: 'Project' }
+          & Pick<Project, 'id' | 'title' | 'description'>
+          & { hosts: Array<Maybe<(
+            { __typename?: 'User' }
+            & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          )>>, tags: Maybe<Array<Maybe<(
+            { __typename?: 'Tag' }
+            & Pick<Tag, 'id' | 'title'>
+          )>>>, tasks: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>>, boards: Maybe<Array<Maybe<(
+            { __typename?: 'Board' }
+            & Pick<Board, 'id' | 'title' | 'order'>
+          )>>>, developers: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
         )>>>, stars: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
@@ -2185,32 +2270,137 @@ export type AddDeveloperMutation = (
             & Pick<Comment, 'id' | 'content'>
           )>>> }
         )>>> }
-      )>>>, tags: Maybe<Array<Maybe<(
-        { __typename?: 'Tag' }
-        & Pick<Tag, 'id' | 'title'>
-      )>>>, tasks: Maybe<Array<Maybe<(
-        { __typename?: 'Task' }
-        & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-      )>>>, liked: Maybe<Array<Maybe<(
-        { __typename?: 'Task' }
-        & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-        & { project: (
-          { __typename?: 'Project' }
-          & Pick<Project, 'id' | 'title' | 'description'>
-        ), column: Maybe<(
-          { __typename?: 'Column' }
-          & Pick<Column, 'id' | 'title'>
-          & { board: (
-            { __typename?: 'Board' }
-            & Pick<Board, 'id' | 'title' | 'order'>
-          ), tasks: Maybe<Array<Maybe<(
-            { __typename?: 'Task' }
-            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>> }
-        )>, developers: Maybe<Array<Maybe<(
-          { __typename?: 'Developer' }
-          & Pick<Developer, 'id' | 'name' | 'availability'>
-        )>>>, likes: Maybe<Array<Maybe<(
+      )>>> }
+    )>>> }
+  )> }
+);
+
+export type AddProjectMutationVariables = {
+  filter?: Maybe<ProjectFilter>;
+  filter1?: Maybe<UserFilter>;
+  order?: Maybe<UserOrder>;
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  filter2?: Maybe<TagFilter>;
+  order1?: Maybe<TagOrder>;
+  first1?: Maybe<Scalars['Int']>;
+  offset1?: Maybe<Scalars['Int']>;
+  filter3?: Maybe<TaskFilter>;
+  order2?: Maybe<TaskOrder>;
+  first2?: Maybe<Scalars['Int']>;
+  offset2?: Maybe<Scalars['Int']>;
+  filter4?: Maybe<TaskFilter>;
+  order3?: Maybe<TaskOrder>;
+  first3?: Maybe<Scalars['Int']>;
+  offset3?: Maybe<Scalars['Int']>;
+  filter5?: Maybe<DeveloperFilter>;
+  order4?: Maybe<DeveloperOrder>;
+  first4?: Maybe<Scalars['Int']>;
+  offset4?: Maybe<Scalars['Int']>;
+  filter6?: Maybe<UserFilter>;
+  order5?: Maybe<UserOrder>;
+  first5?: Maybe<Scalars['Int']>;
+  offset5?: Maybe<Scalars['Int']>;
+  filter7?: Maybe<TagFilter>;
+  order6?: Maybe<TagOrder>;
+  first6?: Maybe<Scalars['Int']>;
+  offset6?: Maybe<Scalars['Int']>;
+  filter8?: Maybe<TaskFilter>;
+  order7?: Maybe<TaskOrder>;
+  first7?: Maybe<Scalars['Int']>;
+  offset7?: Maybe<Scalars['Int']>;
+  filter9?: Maybe<BoardFilter>;
+  order8?: Maybe<BoardOrder>;
+  first8?: Maybe<Scalars['Int']>;
+  offset8?: Maybe<Scalars['Int']>;
+  filter10?: Maybe<DeveloperFilter>;
+  order9?: Maybe<DeveloperOrder>;
+  first9?: Maybe<Scalars['Int']>;
+  offset9?: Maybe<Scalars['Int']>;
+  filter11?: Maybe<ProjectFilter>;
+  order10?: Maybe<ProjectOrder>;
+  first10?: Maybe<Scalars['Int']>;
+  offset10?: Maybe<Scalars['Int']>;
+  filter12?: Maybe<ProjectFilter>;
+  filter13?: Maybe<ColumnFilter>;
+  filter14?: Maybe<DeveloperFilter>;
+  order11?: Maybe<DeveloperOrder>;
+  first11?: Maybe<Scalars['Int']>;
+  offset11?: Maybe<Scalars['Int']>;
+  filter15?: Maybe<DeveloperFilter>;
+  order12?: Maybe<DeveloperOrder>;
+  first12?: Maybe<Scalars['Int']>;
+  offset12?: Maybe<Scalars['Int']>;
+  filter16?: Maybe<CommentFilter>;
+  order13?: Maybe<CommentOrder>;
+  first13?: Maybe<Scalars['Int']>;
+  offset13?: Maybe<Scalars['Int']>;
+  filter17?: Maybe<TaskFilter>;
+  order14?: Maybe<TaskOrder>;
+  first14?: Maybe<Scalars['Int']>;
+  offset14?: Maybe<Scalars['Int']>;
+  filter18?: Maybe<UserFilter>;
+  order15?: Maybe<UserOrder>;
+  first15?: Maybe<Scalars['Int']>;
+  offset15?: Maybe<Scalars['Int']>;
+  filter19?: Maybe<TaskFilter>;
+  order16?: Maybe<TaskOrder>;
+  first16?: Maybe<Scalars['Int']>;
+  offset16?: Maybe<Scalars['Int']>;
+  filter20?: Maybe<BoardFilter>;
+  order17?: Maybe<BoardOrder>;
+  first17?: Maybe<Scalars['Int']>;
+  offset17?: Maybe<Scalars['Int']>;
+  filter21?: Maybe<DeveloperFilter>;
+  order18?: Maybe<DeveloperOrder>;
+  first18?: Maybe<Scalars['Int']>;
+  offset18?: Maybe<Scalars['Int']>;
+  filter22?: Maybe<ProjectFilter>;
+  filter23?: Maybe<ProjectFilter>;
+  filter24?: Maybe<UserFilter>;
+  order19?: Maybe<UserOrder>;
+  first19?: Maybe<Scalars['Int']>;
+  offset19?: Maybe<Scalars['Int']>;
+  filter25?: Maybe<TagFilter>;
+  order20?: Maybe<TagOrder>;
+  first20?: Maybe<Scalars['Int']>;
+  offset20?: Maybe<Scalars['Int']>;
+  filter26?: Maybe<TaskFilter>;
+  order21?: Maybe<TaskOrder>;
+  first21?: Maybe<Scalars['Int']>;
+  offset21?: Maybe<Scalars['Int']>;
+  filter27?: Maybe<TaskFilter>;
+  order22?: Maybe<TaskOrder>;
+  first22?: Maybe<Scalars['Int']>;
+  offset22?: Maybe<Scalars['Int']>;
+  filter28?: Maybe<DeveloperFilter>;
+  order23?: Maybe<DeveloperOrder>;
+  first23?: Maybe<Scalars['Int']>;
+  offset23?: Maybe<Scalars['Int']>;
+  filter29?: Maybe<TagFilter>;
+  order24?: Maybe<TagOrder>;
+  first24?: Maybe<Scalars['Int']>;
+  offset24?: Maybe<Scalars['Int']>;
+  filter30?: Maybe<ProjectFilter>;
+  order25?: Maybe<ProjectOrder>;
+  first25?: Maybe<Scalars['Int']>;
+  offset25?: Maybe<Scalars['Int']>;
+  input: Array<AddProjectInput>;
+};
+
+
+export type AddProjectMutation = (
+  { __typename?: 'Mutation' }
+  & { addProject: Maybe<(
+    { __typename?: 'AddProjectPayload' }
+    & Pick<AddProjectPayload, 'numUids'>
+    & { project: Maybe<Array<Maybe<(
+      { __typename?: 'Project' }
+      & Pick<Project, 'id' | 'title' | 'description'>
+      & { hosts: Array<Maybe<(
+        { __typename?: 'User' }
+        & Pick<User, 'id' | 'username' | 'password' | 'location'>
+        & { developer: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
           & { project: (
@@ -2229,78 +2419,46 @@ export type AddDeveloperMutation = (
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        )>>>, comments: Maybe<Array<Maybe<(
-          { __typename?: 'Comment' }
-          & Pick<Comment, 'id' | 'content'>
-          & { task: (
+        )>>>, host: Maybe<Array<Maybe<(
+          { __typename?: 'Project' }
+          & Pick<Project, 'id' | 'title' | 'description'>
+          & { hosts: Array<Maybe<(
+            { __typename?: 'User' }
+            & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          )>>, tags: Maybe<Array<Maybe<(
+            { __typename?: 'Tag' }
+            & Pick<Tag, 'id' | 'title'>
+          )>>>, tasks: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          ), developer: (
+          )>>>, boards: Maybe<Array<Maybe<(
+            { __typename?: 'Board' }
+            & Pick<Board, 'id' | 'title' | 'order'>
+          )>>>, developers: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          ) }
+          )>>> }
+        )>>>, stars: Maybe<Array<Maybe<(
+          { __typename?: 'Task' }
+          & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          & { project: (
+            { __typename?: 'Project' }
+            & Pick<Project, 'id' | 'title' | 'description'>
+          ), column: Maybe<(
+            { __typename?: 'Column' }
+            & Pick<Column, 'id' | 'title'>
+          )>, developers: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>>, likes: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>>, comments: Maybe<Array<Maybe<(
+            { __typename?: 'Comment' }
+            & Pick<Comment, 'id' | 'content'>
+          )>>> }
         )>>> }
-      )>>> }
-    )>>> }
-  )> }
-);
-
-export type AddProjectMutationVariables = {
-  filter?: Maybe<TaskFilter>;
-  order?: Maybe<TaskOrder>;
-  first?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  filter1?: Maybe<BoardFilter>;
-  order1?: Maybe<BoardOrder>;
-  first1?: Maybe<Scalars['Int']>;
-  offset1?: Maybe<Scalars['Int']>;
-  filter2?: Maybe<DeveloperFilter>;
-  order2?: Maybe<DeveloperOrder>;
-  first2?: Maybe<Scalars['Int']>;
-  offset2?: Maybe<Scalars['Int']>;
-  filter3?: Maybe<ProjectFilter>;
-  filter4?: Maybe<ProjectFilter>;
-  filter5?: Maybe<UserFilter>;
-  order3?: Maybe<UserOrder>;
-  first3?: Maybe<Scalars['Int']>;
-  offset3?: Maybe<Scalars['Int']>;
-  filter6?: Maybe<TagFilter>;
-  order4?: Maybe<TagOrder>;
-  first4?: Maybe<Scalars['Int']>;
-  offset4?: Maybe<Scalars['Int']>;
-  filter7?: Maybe<TaskFilter>;
-  order5?: Maybe<TaskOrder>;
-  first5?: Maybe<Scalars['Int']>;
-  offset5?: Maybe<Scalars['Int']>;
-  filter8?: Maybe<TaskFilter>;
-  order6?: Maybe<TaskOrder>;
-  first6?: Maybe<Scalars['Int']>;
-  offset6?: Maybe<Scalars['Int']>;
-  filter9?: Maybe<DeveloperFilter>;
-  order7?: Maybe<DeveloperOrder>;
-  first7?: Maybe<Scalars['Int']>;
-  offset7?: Maybe<Scalars['Int']>;
-  filter10?: Maybe<TagFilter>;
-  order8?: Maybe<TagOrder>;
-  first8?: Maybe<Scalars['Int']>;
-  offset8?: Maybe<Scalars['Int']>;
-  filter11?: Maybe<ProjectFilter>;
-  order9?: Maybe<ProjectOrder>;
-  first9?: Maybe<Scalars['Int']>;
-  offset9?: Maybe<Scalars['Int']>;
-  input: Array<AddProjectInput>;
-};
-
-
-export type AddProjectMutation = (
-  { __typename?: 'Mutation' }
-  & { addProject: Maybe<(
-    { __typename?: 'AddProjectPayload' }
-    & Pick<AddProjectPayload, 'numUids'>
-    & { project: Maybe<Array<Maybe<(
-      { __typename?: 'Project' }
-      & Pick<Project, 'id' | 'title' | 'description'>
-      & { tags: Maybe<Array<Maybe<(
+      )>>, tags: Maybe<Array<Maybe<(
         { __typename?: 'Tag' }
         & Pick<Tag, 'id' | 'title'>
         & { project: (
@@ -2342,72 +2500,88 @@ export type AddProjectMutation = (
 );
 
 export type AddTagMutationVariables = {
-  filter?: Maybe<ProjectFilter>;
-  filter1?: Maybe<DeveloperFilter>;
+  filter?: Maybe<DeveloperFilter>;
   order?: Maybe<DeveloperOrder>;
   first?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  filter2?: Maybe<TagFilter>;
-  order1?: Maybe<TagOrder>;
+  filter1?: Maybe<ProjectFilter>;
+  order1?: Maybe<ProjectOrder>;
   first1?: Maybe<Scalars['Int']>;
   offset1?: Maybe<Scalars['Int']>;
-  filter3?: Maybe<ProjectFilter>;
-  filter4?: Maybe<ColumnFilter>;
-  filter5?: Maybe<DeveloperFilter>;
-  order2?: Maybe<DeveloperOrder>;
+  filter2?: Maybe<TaskFilter>;
+  order2?: Maybe<TaskOrder>;
   first2?: Maybe<Scalars['Int']>;
   offset2?: Maybe<Scalars['Int']>;
-  filter6?: Maybe<DeveloperFilter>;
-  order3?: Maybe<DeveloperOrder>;
+  filter3?: Maybe<UserFilter>;
+  order3?: Maybe<UserOrder>;
   first3?: Maybe<Scalars['Int']>;
   offset3?: Maybe<Scalars['Int']>;
-  filter7?: Maybe<CommentFilter>;
-  order4?: Maybe<CommentOrder>;
+  filter4?: Maybe<ProjectFilter>;
+  filter5?: Maybe<DeveloperFilter>;
+  order4?: Maybe<DeveloperOrder>;
   first4?: Maybe<Scalars['Int']>;
   offset4?: Maybe<Scalars['Int']>;
-  filter8?: Maybe<TaskFilter>;
-  order5?: Maybe<TaskOrder>;
+  filter6?: Maybe<TagFilter>;
+  order5?: Maybe<TagOrder>;
   first5?: Maybe<Scalars['Int']>;
   offset5?: Maybe<Scalars['Int']>;
-  filter9?: Maybe<ProjectFilter>;
-  filter10?: Maybe<ColumnFilter>;
-  order6?: Maybe<ColumnOrder>;
+  filter7?: Maybe<ProjectFilter>;
+  filter8?: Maybe<ColumnFilter>;
+  filter9?: Maybe<DeveloperFilter>;
+  order6?: Maybe<DeveloperOrder>;
   first6?: Maybe<Scalars['Int']>;
   offset6?: Maybe<Scalars['Int']>;
-  filter11?: Maybe<BoardFilter>;
-  order7?: Maybe<BoardOrder>;
+  filter10?: Maybe<DeveloperFilter>;
+  order7?: Maybe<DeveloperOrder>;
   first7?: Maybe<Scalars['Int']>;
   offset7?: Maybe<Scalars['Int']>;
-  filter12?: Maybe<ProjectFilter>;
-  filter13?: Maybe<UserFilter>;
-  order8?: Maybe<UserOrder>;
+  filter11?: Maybe<CommentFilter>;
+  order8?: Maybe<CommentOrder>;
   first8?: Maybe<Scalars['Int']>;
   offset8?: Maybe<Scalars['Int']>;
-  filter14?: Maybe<TagFilter>;
-  order9?: Maybe<TagOrder>;
+  filter12?: Maybe<TaskFilter>;
+  order9?: Maybe<TaskOrder>;
   first9?: Maybe<Scalars['Int']>;
   offset9?: Maybe<Scalars['Int']>;
-  filter15?: Maybe<TaskFilter>;
-  order10?: Maybe<TaskOrder>;
+  filter13?: Maybe<ProjectFilter>;
+  filter14?: Maybe<ColumnFilter>;
+  order10?: Maybe<ColumnOrder>;
   first10?: Maybe<Scalars['Int']>;
   offset10?: Maybe<Scalars['Int']>;
-  filter16?: Maybe<TaskFilter>;
-  order11?: Maybe<TaskOrder>;
+  filter15?: Maybe<BoardFilter>;
+  order11?: Maybe<BoardOrder>;
   first11?: Maybe<Scalars['Int']>;
   offset11?: Maybe<Scalars['Int']>;
-  filter17?: Maybe<DeveloperFilter>;
-  order12?: Maybe<DeveloperOrder>;
+  filter16?: Maybe<ProjectFilter>;
+  filter17?: Maybe<UserFilter>;
+  order12?: Maybe<UserOrder>;
   first12?: Maybe<Scalars['Int']>;
   offset12?: Maybe<Scalars['Int']>;
-  filter18?: Maybe<ProjectFilter>;
-  filter19?: Maybe<DeveloperFilter>;
-  order13?: Maybe<DeveloperOrder>;
+  filter18?: Maybe<TagFilter>;
+  order13?: Maybe<TagOrder>;
   first13?: Maybe<Scalars['Int']>;
   offset13?: Maybe<Scalars['Int']>;
-  filter20?: Maybe<TagFilter>;
-  order14?: Maybe<TagOrder>;
+  filter19?: Maybe<TaskFilter>;
+  order14?: Maybe<TaskOrder>;
   first14?: Maybe<Scalars['Int']>;
   offset14?: Maybe<Scalars['Int']>;
+  filter20?: Maybe<TaskFilter>;
+  order15?: Maybe<TaskOrder>;
+  first15?: Maybe<Scalars['Int']>;
+  offset15?: Maybe<Scalars['Int']>;
+  filter21?: Maybe<DeveloperFilter>;
+  order16?: Maybe<DeveloperOrder>;
+  first16?: Maybe<Scalars['Int']>;
+  offset16?: Maybe<Scalars['Int']>;
+  filter22?: Maybe<ProjectFilter>;
+  filter23?: Maybe<DeveloperFilter>;
+  order17?: Maybe<DeveloperOrder>;
+  first17?: Maybe<Scalars['Int']>;
+  offset17?: Maybe<Scalars['Int']>;
+  filter24?: Maybe<TagFilter>;
+  order18?: Maybe<TagOrder>;
+  first18?: Maybe<Scalars['Int']>;
+  offset18?: Maybe<Scalars['Int']>;
   input: Array<AddTagInput>;
 };
 
@@ -2423,7 +2597,20 @@ export type AddTagMutation = (
       & { project: (
         { __typename?: 'Project' }
         & Pick<Project, 'id' | 'title' | 'description'>
-        & { tags: Maybe<Array<Maybe<(
+        & { hosts: Array<Maybe<(
+          { __typename?: 'User' }
+          & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          & { developer: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>>, host: Maybe<Array<Maybe<(
+            { __typename?: 'Project' }
+            & Pick<Project, 'id' | 'title' | 'description'>
+          )>>>, stars: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        )>>, tags: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
           & { project: (
@@ -2491,149 +2678,169 @@ export type AddTagMutation = (
 );
 
 export type AddTaskMutationVariables = {
-  filter?: Maybe<ProjectFilter>;
-  filter1?: Maybe<DeveloperFilter>;
+  filter?: Maybe<DeveloperFilter>;
   order?: Maybe<DeveloperOrder>;
   first?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  filter2?: Maybe<TagFilter>;
-  order1?: Maybe<TagOrder>;
+  filter1?: Maybe<ProjectFilter>;
+  order1?: Maybe<ProjectOrder>;
   first1?: Maybe<Scalars['Int']>;
   offset1?: Maybe<Scalars['Int']>;
-  filter3?: Maybe<ProjectFilter>;
-  filter4?: Maybe<ColumnFilter>;
-  filter5?: Maybe<DeveloperFilter>;
-  order2?: Maybe<DeveloperOrder>;
+  filter2?: Maybe<TaskFilter>;
+  order2?: Maybe<TaskOrder>;
   first2?: Maybe<Scalars['Int']>;
   offset2?: Maybe<Scalars['Int']>;
-  filter6?: Maybe<DeveloperFilter>;
-  order3?: Maybe<DeveloperOrder>;
+  filter3?: Maybe<UserFilter>;
+  order3?: Maybe<UserOrder>;
   first3?: Maybe<Scalars['Int']>;
   offset3?: Maybe<Scalars['Int']>;
-  filter7?: Maybe<CommentFilter>;
-  order4?: Maybe<CommentOrder>;
+  filter4?: Maybe<ProjectFilter>;
+  filter5?: Maybe<DeveloperFilter>;
+  order4?: Maybe<DeveloperOrder>;
   first4?: Maybe<Scalars['Int']>;
   offset4?: Maybe<Scalars['Int']>;
-  filter8?: Maybe<TaskFilter>;
-  order5?: Maybe<TaskOrder>;
+  filter6?: Maybe<TagFilter>;
+  order5?: Maybe<TagOrder>;
   first5?: Maybe<Scalars['Int']>;
   offset5?: Maybe<Scalars['Int']>;
-  filter9?: Maybe<ProjectFilter>;
-  filter10?: Maybe<ColumnFilter>;
-  order6?: Maybe<ColumnOrder>;
+  filter7?: Maybe<ProjectFilter>;
+  filter8?: Maybe<ColumnFilter>;
+  filter9?: Maybe<DeveloperFilter>;
+  order6?: Maybe<DeveloperOrder>;
   first6?: Maybe<Scalars['Int']>;
   offset6?: Maybe<Scalars['Int']>;
-  filter11?: Maybe<BoardFilter>;
-  order7?: Maybe<BoardOrder>;
+  filter10?: Maybe<DeveloperFilter>;
+  order7?: Maybe<DeveloperOrder>;
   first7?: Maybe<Scalars['Int']>;
   offset7?: Maybe<Scalars['Int']>;
-  filter12?: Maybe<ProjectFilter>;
-  filter13?: Maybe<UserFilter>;
-  order8?: Maybe<UserOrder>;
+  filter11?: Maybe<CommentFilter>;
+  order8?: Maybe<CommentOrder>;
   first8?: Maybe<Scalars['Int']>;
   offset8?: Maybe<Scalars['Int']>;
-  filter14?: Maybe<TagFilter>;
-  order9?: Maybe<TagOrder>;
+  filter12?: Maybe<TaskFilter>;
+  order9?: Maybe<TaskOrder>;
   first9?: Maybe<Scalars['Int']>;
   offset9?: Maybe<Scalars['Int']>;
-  filter15?: Maybe<TaskFilter>;
-  order10?: Maybe<TaskOrder>;
+  filter13?: Maybe<ProjectFilter>;
+  filter14?: Maybe<ColumnFilter>;
+  order10?: Maybe<ColumnOrder>;
   first10?: Maybe<Scalars['Int']>;
   offset10?: Maybe<Scalars['Int']>;
-  filter16?: Maybe<TaskFilter>;
-  order11?: Maybe<TaskOrder>;
+  filter15?: Maybe<BoardFilter>;
+  order11?: Maybe<BoardOrder>;
   first11?: Maybe<Scalars['Int']>;
   offset11?: Maybe<Scalars['Int']>;
-  filter17?: Maybe<DeveloperFilter>;
-  order12?: Maybe<DeveloperOrder>;
+  filter16?: Maybe<ProjectFilter>;
+  filter17?: Maybe<UserFilter>;
+  order12?: Maybe<UserOrder>;
   first12?: Maybe<Scalars['Int']>;
   offset12?: Maybe<Scalars['Int']>;
-  filter18?: Maybe<ProjectFilter>;
-  filter19?: Maybe<ProjectFilter>;
-  filter20?: Maybe<ColumnFilter>;
-  order13?: Maybe<ColumnOrder>;
+  filter18?: Maybe<TagFilter>;
+  order13?: Maybe<TagOrder>;
   first13?: Maybe<Scalars['Int']>;
   offset13?: Maybe<Scalars['Int']>;
-  filter21?: Maybe<BoardFilter>;
-  filter22?: Maybe<TaskFilter>;
+  filter19?: Maybe<TaskFilter>;
   order14?: Maybe<TaskOrder>;
   first14?: Maybe<Scalars['Int']>;
   offset14?: Maybe<Scalars['Int']>;
-  filter23?: Maybe<ColumnFilter>;
-  filter24?: Maybe<DeveloperFilter>;
-  order15?: Maybe<DeveloperOrder>;
+  filter20?: Maybe<TaskFilter>;
+  order15?: Maybe<TaskOrder>;
   first15?: Maybe<Scalars['Int']>;
   offset15?: Maybe<Scalars['Int']>;
-  filter25?: Maybe<ProjectFilter>;
-  filter26?: Maybe<DeveloperFilter>;
+  filter21?: Maybe<DeveloperFilter>;
   order16?: Maybe<DeveloperOrder>;
   first16?: Maybe<Scalars['Int']>;
   offset16?: Maybe<Scalars['Int']>;
-  filter27?: Maybe<TaskFilter>;
-  order17?: Maybe<TaskOrder>;
+  filter22?: Maybe<ProjectFilter>;
+  filter23?: Maybe<ProjectFilter>;
+  filter24?: Maybe<ColumnFilter>;
+  order17?: Maybe<ColumnOrder>;
   first17?: Maybe<Scalars['Int']>;
   offset17?: Maybe<Scalars['Int']>;
-  filter28?: Maybe<UserFilter>;
-  order18?: Maybe<UserOrder>;
+  filter25?: Maybe<BoardFilter>;
+  filter26?: Maybe<TaskFilter>;
+  order18?: Maybe<TaskOrder>;
   first18?: Maybe<Scalars['Int']>;
   offset18?: Maybe<Scalars['Int']>;
-  filter29?: Maybe<TagFilter>;
-  order19?: Maybe<TagOrder>;
+  filter27?: Maybe<ColumnFilter>;
+  filter28?: Maybe<DeveloperFilter>;
+  order19?: Maybe<DeveloperOrder>;
   first19?: Maybe<Scalars['Int']>;
   offset19?: Maybe<Scalars['Int']>;
-  filter30?: Maybe<TaskFilter>;
-  order20?: Maybe<TaskOrder>;
+  filter29?: Maybe<ProjectFilter>;
+  filter30?: Maybe<DeveloperFilter>;
+  order20?: Maybe<DeveloperOrder>;
   first20?: Maybe<Scalars['Int']>;
   offset20?: Maybe<Scalars['Int']>;
   filter31?: Maybe<ProjectFilter>;
-  filter32?: Maybe<ColumnFilter>;
-  filter33?: Maybe<DeveloperFilter>;
-  order21?: Maybe<DeveloperOrder>;
+  order21?: Maybe<ProjectOrder>;
   first21?: Maybe<Scalars['Int']>;
   offset21?: Maybe<Scalars['Int']>;
-  filter34?: Maybe<DeveloperFilter>;
-  order22?: Maybe<DeveloperOrder>;
+  filter32?: Maybe<TaskFilter>;
+  order22?: Maybe<TaskOrder>;
   first22?: Maybe<Scalars['Int']>;
   offset22?: Maybe<Scalars['Int']>;
-  filter35?: Maybe<CommentFilter>;
-  order23?: Maybe<CommentOrder>;
+  filter33?: Maybe<UserFilter>;
+  order23?: Maybe<UserOrder>;
   first23?: Maybe<Scalars['Int']>;
   offset23?: Maybe<Scalars['Int']>;
-  filter36?: Maybe<TaskFilter>;
-  order24?: Maybe<TaskOrder>;
+  filter34?: Maybe<TagFilter>;
+  order24?: Maybe<TagOrder>;
   first24?: Maybe<Scalars['Int']>;
   offset24?: Maybe<Scalars['Int']>;
-  filter37?: Maybe<DeveloperFilter>;
-  order25?: Maybe<DeveloperOrder>;
+  filter35?: Maybe<TaskFilter>;
+  order25?: Maybe<TaskOrder>;
   first25?: Maybe<Scalars['Int']>;
   offset25?: Maybe<Scalars['Int']>;
-  filter38?: Maybe<TaskFilter>;
-  filter39?: Maybe<ProjectFilter>;
-  filter40?: Maybe<UserFilter>;
-  order26?: Maybe<UserOrder>;
+  filter36?: Maybe<ProjectFilter>;
+  filter37?: Maybe<ColumnFilter>;
+  filter38?: Maybe<DeveloperFilter>;
+  order26?: Maybe<DeveloperOrder>;
   first26?: Maybe<Scalars['Int']>;
   offset26?: Maybe<Scalars['Int']>;
-  filter41?: Maybe<TagFilter>;
-  order27?: Maybe<TagOrder>;
+  filter39?: Maybe<DeveloperFilter>;
+  order27?: Maybe<DeveloperOrder>;
   first27?: Maybe<Scalars['Int']>;
   offset27?: Maybe<Scalars['Int']>;
-  filter42?: Maybe<TaskFilter>;
-  order28?: Maybe<TaskOrder>;
+  filter40?: Maybe<CommentFilter>;
+  order28?: Maybe<CommentOrder>;
   first28?: Maybe<Scalars['Int']>;
   offset28?: Maybe<Scalars['Int']>;
-  filter43?: Maybe<TaskFilter>;
+  filter41?: Maybe<TaskFilter>;
   order29?: Maybe<TaskOrder>;
   first29?: Maybe<Scalars['Int']>;
   offset29?: Maybe<Scalars['Int']>;
-  filter44?: Maybe<DeveloperFilter>;
-  filter45?: Maybe<CommentFilter>;
-  order30?: Maybe<CommentOrder>;
+  filter42?: Maybe<DeveloperFilter>;
+  order30?: Maybe<DeveloperOrder>;
   first30?: Maybe<Scalars['Int']>;
   offset30?: Maybe<Scalars['Int']>;
-  filter46?: Maybe<TaskFilter>;
-  order31?: Maybe<TaskOrder>;
+  filter43?: Maybe<TaskFilter>;
+  filter44?: Maybe<ProjectFilter>;
+  filter45?: Maybe<UserFilter>;
+  order31?: Maybe<UserOrder>;
   first31?: Maybe<Scalars['Int']>;
   offset31?: Maybe<Scalars['Int']>;
+  filter46?: Maybe<TagFilter>;
+  order32?: Maybe<TagOrder>;
+  first32?: Maybe<Scalars['Int']>;
+  offset32?: Maybe<Scalars['Int']>;
+  filter47?: Maybe<TaskFilter>;
+  order33?: Maybe<TaskOrder>;
+  first33?: Maybe<Scalars['Int']>;
+  offset33?: Maybe<Scalars['Int']>;
+  filter48?: Maybe<TaskFilter>;
+  order34?: Maybe<TaskOrder>;
+  first34?: Maybe<Scalars['Int']>;
+  offset34?: Maybe<Scalars['Int']>;
+  filter49?: Maybe<DeveloperFilter>;
+  filter50?: Maybe<CommentFilter>;
+  order35?: Maybe<CommentOrder>;
+  first35?: Maybe<Scalars['Int']>;
+  offset35?: Maybe<Scalars['Int']>;
+  filter51?: Maybe<TaskFilter>;
+  order36?: Maybe<TaskOrder>;
+  first36?: Maybe<Scalars['Int']>;
+  offset36?: Maybe<Scalars['Int']>;
   input: Array<AddTaskInput>;
 };
 
@@ -2649,7 +2856,20 @@ export type AddTaskMutation = (
       & { project: (
         { __typename?: 'Project' }
         & Pick<Project, 'id' | 'title' | 'description'>
-        & { tags: Maybe<Array<Maybe<(
+        & { hosts: Array<Maybe<(
+          { __typename?: 'User' }
+          & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          & { developer: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>>, host: Maybe<Array<Maybe<(
+            { __typename?: 'Project' }
+            & Pick<Project, 'id' | 'title' | 'description'>
+          )>>>, stars: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        )>>, tags: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
           & { project: (
@@ -2737,9 +2957,12 @@ export type AddTaskMutation = (
         ), user: Maybe<Array<Maybe<(
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          & { roles: Maybe<Array<Maybe<(
+          & { developer: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>>, host: Maybe<Array<Maybe<(
+            { __typename?: 'Project' }
+            & Pick<Project, 'id' | 'title' | 'description'>
           )>>>, stars: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
@@ -2802,84 +3025,92 @@ export type AddTaskMutation = (
 );
 
 export type AddUserMutationVariables = {
-  filter?: Maybe<TagFilter>;
-  order?: Maybe<TagOrder>;
+  filter?: Maybe<UserFilter>;
+  order?: Maybe<UserOrder>;
   first?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  filter1?: Maybe<TaskFilter>;
-  order1?: Maybe<TaskOrder>;
+  filter1?: Maybe<TagFilter>;
+  order1?: Maybe<TagOrder>;
   first1?: Maybe<Scalars['Int']>;
   offset1?: Maybe<Scalars['Int']>;
-  filter2?: Maybe<BoardFilter>;
-  order2?: Maybe<BoardOrder>;
+  filter2?: Maybe<TaskFilter>;
+  order2?: Maybe<TaskOrder>;
   first2?: Maybe<Scalars['Int']>;
   offset2?: Maybe<Scalars['Int']>;
-  filter3?: Maybe<DeveloperFilter>;
-  order3?: Maybe<DeveloperOrder>;
+  filter3?: Maybe<BoardFilter>;
+  order3?: Maybe<BoardOrder>;
   first3?: Maybe<Scalars['Int']>;
   offset3?: Maybe<Scalars['Int']>;
-  filter4?: Maybe<ProjectFilter>;
-  filter5?: Maybe<TaskFilter>;
-  order4?: Maybe<TaskOrder>;
+  filter4?: Maybe<DeveloperFilter>;
+  order4?: Maybe<DeveloperOrder>;
   first4?: Maybe<Scalars['Int']>;
   offset4?: Maybe<Scalars['Int']>;
-  filter6?: Maybe<UserFilter>;
-  order5?: Maybe<UserOrder>;
+  filter5?: Maybe<ProjectFilter>;
+  filter6?: Maybe<ProjectFilter>;
+  order5?: Maybe<ProjectOrder>;
   first5?: Maybe<Scalars['Int']>;
   offset5?: Maybe<Scalars['Int']>;
-  filter7?: Maybe<ProjectFilter>;
-  filter8?: Maybe<DeveloperFilter>;
-  order6?: Maybe<DeveloperOrder>;
+  filter7?: Maybe<TaskFilter>;
+  order6?: Maybe<TaskOrder>;
   first6?: Maybe<Scalars['Int']>;
   offset6?: Maybe<Scalars['Int']>;
-  filter9?: Maybe<TagFilter>;
-  order7?: Maybe<TagOrder>;
+  filter8?: Maybe<UserFilter>;
+  order7?: Maybe<UserOrder>;
   first7?: Maybe<Scalars['Int']>;
   offset7?: Maybe<Scalars['Int']>;
-  filter10?: Maybe<ProjectFilter>;
-  filter11?: Maybe<ColumnFilter>;
-  filter12?: Maybe<DeveloperFilter>;
+  filter9?: Maybe<ProjectFilter>;
+  filter10?: Maybe<DeveloperFilter>;
   order8?: Maybe<DeveloperOrder>;
   first8?: Maybe<Scalars['Int']>;
   offset8?: Maybe<Scalars['Int']>;
-  filter13?: Maybe<DeveloperFilter>;
-  order9?: Maybe<DeveloperOrder>;
+  filter11?: Maybe<TagFilter>;
+  order9?: Maybe<TagOrder>;
   first9?: Maybe<Scalars['Int']>;
   offset9?: Maybe<Scalars['Int']>;
-  filter14?: Maybe<CommentFilter>;
-  order10?: Maybe<CommentOrder>;
+  filter12?: Maybe<ProjectFilter>;
+  filter13?: Maybe<ColumnFilter>;
+  filter14?: Maybe<DeveloperFilter>;
+  order10?: Maybe<DeveloperOrder>;
   first10?: Maybe<Scalars['Int']>;
   offset10?: Maybe<Scalars['Int']>;
-  filter15?: Maybe<TaskFilter>;
-  order11?: Maybe<TaskOrder>;
+  filter15?: Maybe<DeveloperFilter>;
+  order11?: Maybe<DeveloperOrder>;
   first11?: Maybe<Scalars['Int']>;
   offset11?: Maybe<Scalars['Int']>;
-  filter16?: Maybe<ProjectFilter>;
-  filter17?: Maybe<ColumnFilter>;
-  filter18?: Maybe<DeveloperFilter>;
-  order12?: Maybe<DeveloperOrder>;
+  filter16?: Maybe<CommentFilter>;
+  order12?: Maybe<CommentOrder>;
   first12?: Maybe<Scalars['Int']>;
   offset12?: Maybe<Scalars['Int']>;
-  filter19?: Maybe<DeveloperFilter>;
-  order13?: Maybe<DeveloperOrder>;
+  filter17?: Maybe<TaskFilter>;
+  order13?: Maybe<TaskOrder>;
   first13?: Maybe<Scalars['Int']>;
   offset13?: Maybe<Scalars['Int']>;
-  filter20?: Maybe<CommentFilter>;
-  order14?: Maybe<CommentOrder>;
+  filter18?: Maybe<ProjectFilter>;
+  filter19?: Maybe<ColumnFilter>;
+  filter20?: Maybe<DeveloperFilter>;
+  order14?: Maybe<DeveloperOrder>;
   first14?: Maybe<Scalars['Int']>;
   offset14?: Maybe<Scalars['Int']>;
-  filter21?: Maybe<TaskFilter>;
-  order15?: Maybe<TaskOrder>;
+  filter21?: Maybe<DeveloperFilter>;
+  order15?: Maybe<DeveloperOrder>;
   first15?: Maybe<Scalars['Int']>;
   offset15?: Maybe<Scalars['Int']>;
-  filter22?: Maybe<DeveloperFilter>;
-  order16?: Maybe<DeveloperOrder>;
+  filter22?: Maybe<CommentFilter>;
+  order16?: Maybe<CommentOrder>;
   first16?: Maybe<Scalars['Int']>;
   offset16?: Maybe<Scalars['Int']>;
-  filter23?: Maybe<UserFilter>;
-  order17?: Maybe<UserOrder>;
+  filter23?: Maybe<TaskFilter>;
+  order17?: Maybe<TaskOrder>;
   first17?: Maybe<Scalars['Int']>;
   offset17?: Maybe<Scalars['Int']>;
+  filter24?: Maybe<DeveloperFilter>;
+  order18?: Maybe<DeveloperOrder>;
+  first18?: Maybe<Scalars['Int']>;
+  offset18?: Maybe<Scalars['Int']>;
+  filter25?: Maybe<UserFilter>;
+  order19?: Maybe<UserOrder>;
+  first19?: Maybe<Scalars['Int']>;
+  offset19?: Maybe<Scalars['Int']>;
   input: Array<AddUserInput>;
 };
 
@@ -2892,13 +3123,16 @@ export type AddUserMutation = (
     & { user: Maybe<Array<Maybe<(
       { __typename?: 'User' }
       & Pick<User, 'id' | 'username' | 'password' | 'location'>
-      & { roles: Maybe<Array<Maybe<(
+      & { developer: Maybe<Array<Maybe<(
         { __typename?: 'Developer' }
         & Pick<Developer, 'id' | 'name' | 'availability'>
         & { project: (
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
-          & { tags: Maybe<Array<Maybe<(
+          & { hosts: Array<Maybe<(
+            { __typename?: 'User' }
+            & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          )>>, tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
           )>>>, tasks: Maybe<Array<Maybe<(
@@ -2914,7 +3148,10 @@ export type AddUserMutation = (
         ), user: Maybe<Array<Maybe<(
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          & { stars: Maybe<Array<Maybe<(
+          & { host: Maybe<Array<Maybe<(
+            { __typename?: 'Project' }
+            & Pick<Project, 'id' | 'title' | 'description'>
+          )>>>, stars: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
@@ -3077,77 +3314,93 @@ export type DeleteUserMutation = (
 );
 
 export type UpdateBoardMutationVariables = {
-  filter?: Maybe<ProjectFilter>;
-  filter1?: Maybe<DeveloperFilter>;
+  filter?: Maybe<DeveloperFilter>;
   order?: Maybe<DeveloperOrder>;
   first?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  filter2?: Maybe<TagFilter>;
-  order1?: Maybe<TagOrder>;
+  filter1?: Maybe<ProjectFilter>;
+  order1?: Maybe<ProjectOrder>;
   first1?: Maybe<Scalars['Int']>;
   offset1?: Maybe<Scalars['Int']>;
-  filter3?: Maybe<ProjectFilter>;
-  filter4?: Maybe<ColumnFilter>;
-  filter5?: Maybe<DeveloperFilter>;
-  order2?: Maybe<DeveloperOrder>;
+  filter2?: Maybe<TaskFilter>;
+  order2?: Maybe<TaskOrder>;
   first2?: Maybe<Scalars['Int']>;
   offset2?: Maybe<Scalars['Int']>;
-  filter6?: Maybe<DeveloperFilter>;
-  order3?: Maybe<DeveloperOrder>;
+  filter3?: Maybe<UserFilter>;
+  order3?: Maybe<UserOrder>;
   first3?: Maybe<Scalars['Int']>;
   offset3?: Maybe<Scalars['Int']>;
-  filter7?: Maybe<CommentFilter>;
-  order4?: Maybe<CommentOrder>;
+  filter4?: Maybe<ProjectFilter>;
+  filter5?: Maybe<DeveloperFilter>;
+  order4?: Maybe<DeveloperOrder>;
   first4?: Maybe<Scalars['Int']>;
   offset4?: Maybe<Scalars['Int']>;
-  filter8?: Maybe<TaskFilter>;
-  order5?: Maybe<TaskOrder>;
+  filter6?: Maybe<TagFilter>;
+  order5?: Maybe<TagOrder>;
   first5?: Maybe<Scalars['Int']>;
   offset5?: Maybe<Scalars['Int']>;
-  filter9?: Maybe<ProjectFilter>;
-  filter10?: Maybe<ColumnFilter>;
-  order6?: Maybe<ColumnOrder>;
+  filter7?: Maybe<ProjectFilter>;
+  filter8?: Maybe<ColumnFilter>;
+  filter9?: Maybe<DeveloperFilter>;
+  order6?: Maybe<DeveloperOrder>;
   first6?: Maybe<Scalars['Int']>;
   offset6?: Maybe<Scalars['Int']>;
-  filter11?: Maybe<BoardFilter>;
-  order7?: Maybe<BoardOrder>;
+  filter10?: Maybe<DeveloperFilter>;
+  order7?: Maybe<DeveloperOrder>;
   first7?: Maybe<Scalars['Int']>;
   offset7?: Maybe<Scalars['Int']>;
-  filter12?: Maybe<ProjectFilter>;
-  filter13?: Maybe<UserFilter>;
-  order8?: Maybe<UserOrder>;
+  filter11?: Maybe<CommentFilter>;
+  order8?: Maybe<CommentOrder>;
   first8?: Maybe<Scalars['Int']>;
   offset8?: Maybe<Scalars['Int']>;
-  filter14?: Maybe<TagFilter>;
-  order9?: Maybe<TagOrder>;
+  filter12?: Maybe<TaskFilter>;
+  order9?: Maybe<TaskOrder>;
   first9?: Maybe<Scalars['Int']>;
   offset9?: Maybe<Scalars['Int']>;
-  filter15?: Maybe<TaskFilter>;
-  order10?: Maybe<TaskOrder>;
+  filter13?: Maybe<ProjectFilter>;
+  filter14?: Maybe<ColumnFilter>;
+  order10?: Maybe<ColumnOrder>;
   first10?: Maybe<Scalars['Int']>;
   offset10?: Maybe<Scalars['Int']>;
-  filter16?: Maybe<TaskFilter>;
-  order11?: Maybe<TaskOrder>;
+  filter15?: Maybe<BoardFilter>;
+  order11?: Maybe<BoardOrder>;
   first11?: Maybe<Scalars['Int']>;
   offset11?: Maybe<Scalars['Int']>;
-  filter17?: Maybe<DeveloperFilter>;
-  order12?: Maybe<DeveloperOrder>;
+  filter16?: Maybe<ProjectFilter>;
+  filter17?: Maybe<UserFilter>;
+  order12?: Maybe<UserOrder>;
   first12?: Maybe<Scalars['Int']>;
   offset12?: Maybe<Scalars['Int']>;
-  filter18?: Maybe<ProjectFilter>;
-  filter19?: Maybe<BoardFilter>;
-  filter20?: Maybe<TaskFilter>;
-  order13?: Maybe<TaskOrder>;
+  filter18?: Maybe<TagFilter>;
+  order13?: Maybe<TagOrder>;
   first13?: Maybe<Scalars['Int']>;
   offset13?: Maybe<Scalars['Int']>;
-  filter21?: Maybe<ColumnFilter>;
-  order14?: Maybe<ColumnOrder>;
+  filter19?: Maybe<TaskFilter>;
+  order14?: Maybe<TaskOrder>;
   first14?: Maybe<Scalars['Int']>;
   offset14?: Maybe<Scalars['Int']>;
-  filter22?: Maybe<BoardFilter>;
-  order15?: Maybe<BoardOrder>;
+  filter20?: Maybe<TaskFilter>;
+  order15?: Maybe<TaskOrder>;
   first15?: Maybe<Scalars['Int']>;
   offset15?: Maybe<Scalars['Int']>;
+  filter21?: Maybe<DeveloperFilter>;
+  order16?: Maybe<DeveloperOrder>;
+  first16?: Maybe<Scalars['Int']>;
+  offset16?: Maybe<Scalars['Int']>;
+  filter22?: Maybe<ProjectFilter>;
+  filter23?: Maybe<BoardFilter>;
+  filter24?: Maybe<TaskFilter>;
+  order17?: Maybe<TaskOrder>;
+  first17?: Maybe<Scalars['Int']>;
+  offset17?: Maybe<Scalars['Int']>;
+  filter25?: Maybe<ColumnFilter>;
+  order18?: Maybe<ColumnOrder>;
+  first18?: Maybe<Scalars['Int']>;
+  offset18?: Maybe<Scalars['Int']>;
+  filter26?: Maybe<BoardFilter>;
+  order19?: Maybe<BoardOrder>;
+  first19?: Maybe<Scalars['Int']>;
+  offset19?: Maybe<Scalars['Int']>;
   input: UpdateBoardInput;
 };
 
@@ -3163,7 +3416,20 @@ export type UpdateBoardMutation = (
       & { project: (
         { __typename?: 'Project' }
         & Pick<Project, 'id' | 'title' | 'description'>
-        & { tags: Maybe<Array<Maybe<(
+        & { hosts: Array<Maybe<(
+          { __typename?: 'User' }
+          & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          & { developer: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>>, host: Maybe<Array<Maybe<(
+            { __typename?: 'Project' }
+            & Pick<Project, 'id' | 'title' | 'description'>
+          )>>>, stars: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        )>>, tags: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
           & { project: (
@@ -3238,91 +3504,95 @@ export type UpdateBoardMutation = (
 );
 
 export type UpdateColumnMutationVariables = {
-  filter?: Maybe<TagFilter>;
-  order?: Maybe<TagOrder>;
+  filter?: Maybe<UserFilter>;
+  order?: Maybe<UserOrder>;
   first?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  filter1?: Maybe<TaskFilter>;
-  order1?: Maybe<TaskOrder>;
+  filter1?: Maybe<TagFilter>;
+  order1?: Maybe<TagOrder>;
   first1?: Maybe<Scalars['Int']>;
   offset1?: Maybe<Scalars['Int']>;
-  filter2?: Maybe<BoardFilter>;
-  order2?: Maybe<BoardOrder>;
+  filter2?: Maybe<TaskFilter>;
+  order2?: Maybe<TaskOrder>;
   first2?: Maybe<Scalars['Int']>;
   offset2?: Maybe<Scalars['Int']>;
-  filter3?: Maybe<DeveloperFilter>;
-  order3?: Maybe<DeveloperOrder>;
+  filter3?: Maybe<BoardFilter>;
+  order3?: Maybe<BoardOrder>;
   first3?: Maybe<Scalars['Int']>;
   offset3?: Maybe<Scalars['Int']>;
-  filter4?: Maybe<ProjectFilter>;
-  filter5?: Maybe<BoardFilter>;
-  filter6?: Maybe<TaskFilter>;
-  order4?: Maybe<TaskOrder>;
+  filter4?: Maybe<DeveloperFilter>;
+  order4?: Maybe<DeveloperOrder>;
   first4?: Maybe<Scalars['Int']>;
   offset4?: Maybe<Scalars['Int']>;
-  filter7?: Maybe<ColumnFilter>;
-  order5?: Maybe<ColumnOrder>;
+  filter5?: Maybe<ProjectFilter>;
+  filter6?: Maybe<BoardFilter>;
+  filter7?: Maybe<TaskFilter>;
+  order5?: Maybe<TaskOrder>;
   first5?: Maybe<Scalars['Int']>;
   offset5?: Maybe<Scalars['Int']>;
-  filter8?: Maybe<BoardFilter>;
-  filter9?: Maybe<ProjectFilter>;
-  filter10?: Maybe<ColumnFilter>;
-  filter11?: Maybe<ProjectFilter>;
-  filter12?: Maybe<UserFilter>;
-  order6?: Maybe<UserOrder>;
+  filter8?: Maybe<ColumnFilter>;
+  order6?: Maybe<ColumnOrder>;
   first6?: Maybe<Scalars['Int']>;
   offset6?: Maybe<Scalars['Int']>;
-  filter13?: Maybe<TagFilter>;
-  order7?: Maybe<TagOrder>;
+  filter9?: Maybe<BoardFilter>;
+  filter10?: Maybe<ProjectFilter>;
+  filter11?: Maybe<ColumnFilter>;
+  filter12?: Maybe<ProjectFilter>;
+  filter13?: Maybe<UserFilter>;
+  order7?: Maybe<UserOrder>;
   first7?: Maybe<Scalars['Int']>;
   offset7?: Maybe<Scalars['Int']>;
-  filter14?: Maybe<TaskFilter>;
-  order8?: Maybe<TaskOrder>;
+  filter14?: Maybe<TagFilter>;
+  order8?: Maybe<TagOrder>;
   first8?: Maybe<Scalars['Int']>;
   offset8?: Maybe<Scalars['Int']>;
   filter15?: Maybe<TaskFilter>;
   order9?: Maybe<TaskOrder>;
   first9?: Maybe<Scalars['Int']>;
   offset9?: Maybe<Scalars['Int']>;
-  filter16?: Maybe<DeveloperFilter>;
-  order10?: Maybe<DeveloperOrder>;
+  filter16?: Maybe<TaskFilter>;
+  order10?: Maybe<TaskOrder>;
   first10?: Maybe<Scalars['Int']>;
   offset10?: Maybe<Scalars['Int']>;
-  filter17?: Maybe<ProjectFilter>;
-  filter18?: Maybe<UserFilter>;
-  order11?: Maybe<UserOrder>;
+  filter17?: Maybe<DeveloperFilter>;
+  order11?: Maybe<DeveloperOrder>;
   first11?: Maybe<Scalars['Int']>;
   offset11?: Maybe<Scalars['Int']>;
-  filter19?: Maybe<TagFilter>;
-  order12?: Maybe<TagOrder>;
+  filter18?: Maybe<ProjectFilter>;
+  filter19?: Maybe<UserFilter>;
+  order12?: Maybe<UserOrder>;
   first12?: Maybe<Scalars['Int']>;
   offset12?: Maybe<Scalars['Int']>;
-  filter20?: Maybe<TaskFilter>;
-  order13?: Maybe<TaskOrder>;
+  filter20?: Maybe<TagFilter>;
+  order13?: Maybe<TagOrder>;
   first13?: Maybe<Scalars['Int']>;
   offset13?: Maybe<Scalars['Int']>;
   filter21?: Maybe<TaskFilter>;
   order14?: Maybe<TaskOrder>;
   first14?: Maybe<Scalars['Int']>;
   offset14?: Maybe<Scalars['Int']>;
-  filter22?: Maybe<DeveloperFilter>;
-  order15?: Maybe<DeveloperOrder>;
+  filter22?: Maybe<TaskFilter>;
+  order15?: Maybe<TaskOrder>;
   first15?: Maybe<Scalars['Int']>;
   offset15?: Maybe<Scalars['Int']>;
-  filter23?: Maybe<TaskFilter>;
-  filter24?: Maybe<DeveloperFilter>;
-  filter25?: Maybe<CommentFilter>;
-  order16?: Maybe<CommentOrder>;
+  filter23?: Maybe<DeveloperFilter>;
+  order16?: Maybe<DeveloperOrder>;
   first16?: Maybe<Scalars['Int']>;
   offset16?: Maybe<Scalars['Int']>;
-  filter26?: Maybe<TaskFilter>;
-  order17?: Maybe<TaskOrder>;
+  filter24?: Maybe<TaskFilter>;
+  filter25?: Maybe<DeveloperFilter>;
+  filter26?: Maybe<CommentFilter>;
+  order17?: Maybe<CommentOrder>;
   first17?: Maybe<Scalars['Int']>;
   offset17?: Maybe<Scalars['Int']>;
-  filter27?: Maybe<ColumnFilter>;
-  order18?: Maybe<ColumnOrder>;
+  filter27?: Maybe<TaskFilter>;
+  order18?: Maybe<TaskOrder>;
   first18?: Maybe<Scalars['Int']>;
   offset18?: Maybe<Scalars['Int']>;
+  filter28?: Maybe<ColumnFilter>;
+  order19?: Maybe<ColumnOrder>;
+  first19?: Maybe<Scalars['Int']>;
+  offset19?: Maybe<Scalars['Int']>;
   input: UpdateColumnInput;
 };
 
@@ -3341,7 +3611,10 @@ export type UpdateColumnMutation = (
         & { project: (
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
-          & { tags: Maybe<Array<Maybe<(
+          & { hosts: Array<Maybe<(
+            { __typename?: 'User' }
+            & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          )>>, tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
           )>>>, tasks: Maybe<Array<Maybe<(
@@ -3429,141 +3702,149 @@ export type UpdateColumnMutation = (
 );
 
 export type UpdateCommentMutationVariables = {
-  filter?: Maybe<TagFilter>;
-  order?: Maybe<TagOrder>;
+  filter?: Maybe<UserFilter>;
+  order?: Maybe<UserOrder>;
   first?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  filter1?: Maybe<TaskFilter>;
-  order1?: Maybe<TaskOrder>;
+  filter1?: Maybe<TagFilter>;
+  order1?: Maybe<TagOrder>;
   first1?: Maybe<Scalars['Int']>;
   offset1?: Maybe<Scalars['Int']>;
-  filter2?: Maybe<BoardFilter>;
-  order2?: Maybe<BoardOrder>;
+  filter2?: Maybe<TaskFilter>;
+  order2?: Maybe<TaskOrder>;
   first2?: Maybe<Scalars['Int']>;
   offset2?: Maybe<Scalars['Int']>;
-  filter3?: Maybe<DeveloperFilter>;
-  order3?: Maybe<DeveloperOrder>;
+  filter3?: Maybe<BoardFilter>;
+  order3?: Maybe<BoardOrder>;
   first3?: Maybe<Scalars['Int']>;
   offset3?: Maybe<Scalars['Int']>;
-  filter4?: Maybe<ProjectFilter>;
-  filter5?: Maybe<BoardFilter>;
-  filter6?: Maybe<TaskFilter>;
-  order4?: Maybe<TaskOrder>;
+  filter4?: Maybe<DeveloperFilter>;
+  order4?: Maybe<DeveloperOrder>;
   first4?: Maybe<Scalars['Int']>;
   offset4?: Maybe<Scalars['Int']>;
-  filter7?: Maybe<ColumnFilter>;
-  filter8?: Maybe<ProjectFilter>;
-  filter9?: Maybe<UserFilter>;
-  order5?: Maybe<UserOrder>;
+  filter5?: Maybe<ProjectFilter>;
+  filter6?: Maybe<BoardFilter>;
+  filter7?: Maybe<TaskFilter>;
+  order5?: Maybe<TaskOrder>;
   first5?: Maybe<Scalars['Int']>;
   offset5?: Maybe<Scalars['Int']>;
-  filter10?: Maybe<TagFilter>;
-  order6?: Maybe<TagOrder>;
+  filter8?: Maybe<ColumnFilter>;
+  filter9?: Maybe<ProjectFilter>;
+  filter10?: Maybe<UserFilter>;
+  order6?: Maybe<UserOrder>;
   first6?: Maybe<Scalars['Int']>;
   offset6?: Maybe<Scalars['Int']>;
-  filter11?: Maybe<TaskFilter>;
-  order7?: Maybe<TaskOrder>;
+  filter11?: Maybe<TagFilter>;
+  order7?: Maybe<TagOrder>;
   first7?: Maybe<Scalars['Int']>;
   offset7?: Maybe<Scalars['Int']>;
   filter12?: Maybe<TaskFilter>;
   order8?: Maybe<TaskOrder>;
   first8?: Maybe<Scalars['Int']>;
   offset8?: Maybe<Scalars['Int']>;
-  filter13?: Maybe<DeveloperFilter>;
-  order9?: Maybe<DeveloperOrder>;
+  filter13?: Maybe<TaskFilter>;
+  order9?: Maybe<TaskOrder>;
   first9?: Maybe<Scalars['Int']>;
   offset9?: Maybe<Scalars['Int']>;
-  filter14?: Maybe<ProjectFilter>;
-  filter15?: Maybe<UserFilter>;
-  order10?: Maybe<UserOrder>;
+  filter14?: Maybe<DeveloperFilter>;
+  order10?: Maybe<DeveloperOrder>;
   first10?: Maybe<Scalars['Int']>;
   offset10?: Maybe<Scalars['Int']>;
-  filter16?: Maybe<TagFilter>;
-  order11?: Maybe<TagOrder>;
+  filter15?: Maybe<ProjectFilter>;
+  filter16?: Maybe<UserFilter>;
+  order11?: Maybe<UserOrder>;
   first11?: Maybe<Scalars['Int']>;
   offset11?: Maybe<Scalars['Int']>;
-  filter17?: Maybe<TaskFilter>;
-  order12?: Maybe<TaskOrder>;
+  filter17?: Maybe<TagFilter>;
+  order12?: Maybe<TagOrder>;
   first12?: Maybe<Scalars['Int']>;
   offset12?: Maybe<Scalars['Int']>;
   filter18?: Maybe<TaskFilter>;
   order13?: Maybe<TaskOrder>;
   first13?: Maybe<Scalars['Int']>;
   offset13?: Maybe<Scalars['Int']>;
-  filter19?: Maybe<DeveloperFilter>;
-  order14?: Maybe<DeveloperOrder>;
+  filter19?: Maybe<TaskFilter>;
+  order14?: Maybe<TaskOrder>;
   first14?: Maybe<Scalars['Int']>;
   offset14?: Maybe<Scalars['Int']>;
-  filter20?: Maybe<TaskFilter>;
-  filter21?: Maybe<DeveloperFilter>;
-  filter22?: Maybe<CommentFilter>;
-  order15?: Maybe<CommentOrder>;
+  filter20?: Maybe<DeveloperFilter>;
+  order15?: Maybe<DeveloperOrder>;
   first15?: Maybe<Scalars['Int']>;
   offset15?: Maybe<Scalars['Int']>;
-  filter23?: Maybe<TaskFilter>;
-  filter24?: Maybe<ProjectFilter>;
-  filter25?: Maybe<DeveloperFilter>;
-  order16?: Maybe<DeveloperOrder>;
+  filter21?: Maybe<TaskFilter>;
+  filter22?: Maybe<DeveloperFilter>;
+  filter23?: Maybe<CommentFilter>;
+  order16?: Maybe<CommentOrder>;
   first16?: Maybe<Scalars['Int']>;
   offset16?: Maybe<Scalars['Int']>;
-  filter26?: Maybe<TaskFilter>;
-  order17?: Maybe<TaskOrder>;
+  filter24?: Maybe<TaskFilter>;
+  filter25?: Maybe<ProjectFilter>;
+  filter26?: Maybe<DeveloperFilter>;
+  order17?: Maybe<DeveloperOrder>;
   first17?: Maybe<Scalars['Int']>;
   offset17?: Maybe<Scalars['Int']>;
-  filter27?: Maybe<UserFilter>;
-  order18?: Maybe<UserOrder>;
+  filter27?: Maybe<ProjectFilter>;
+  order18?: Maybe<ProjectOrder>;
   first18?: Maybe<Scalars['Int']>;
   offset18?: Maybe<Scalars['Int']>;
-  filter28?: Maybe<ProjectFilter>;
-  filter29?: Maybe<DeveloperFilter>;
-  order19?: Maybe<DeveloperOrder>;
+  filter28?: Maybe<TaskFilter>;
+  order19?: Maybe<TaskOrder>;
   first19?: Maybe<Scalars['Int']>;
   offset19?: Maybe<Scalars['Int']>;
-  filter30?: Maybe<TagFilter>;
-  order20?: Maybe<TagOrder>;
+  filter29?: Maybe<UserFilter>;
+  order20?: Maybe<UserOrder>;
   first20?: Maybe<Scalars['Int']>;
   offset20?: Maybe<Scalars['Int']>;
-  filter31?: Maybe<ProjectFilter>;
-  filter32?: Maybe<ColumnFilter>;
-  filter33?: Maybe<DeveloperFilter>;
+  filter30?: Maybe<ProjectFilter>;
+  filter31?: Maybe<DeveloperFilter>;
   order21?: Maybe<DeveloperOrder>;
   first21?: Maybe<Scalars['Int']>;
   offset21?: Maybe<Scalars['Int']>;
-  filter34?: Maybe<DeveloperFilter>;
-  order22?: Maybe<DeveloperOrder>;
+  filter32?: Maybe<TagFilter>;
+  order22?: Maybe<TagOrder>;
   first22?: Maybe<Scalars['Int']>;
   offset22?: Maybe<Scalars['Int']>;
-  filter35?: Maybe<CommentFilter>;
-  order23?: Maybe<CommentOrder>;
+  filter33?: Maybe<ProjectFilter>;
+  filter34?: Maybe<ColumnFilter>;
+  filter35?: Maybe<DeveloperFilter>;
+  order23?: Maybe<DeveloperOrder>;
   first23?: Maybe<Scalars['Int']>;
   offset23?: Maybe<Scalars['Int']>;
-  filter36?: Maybe<TaskFilter>;
-  order24?: Maybe<TaskOrder>;
+  filter36?: Maybe<DeveloperFilter>;
+  order24?: Maybe<DeveloperOrder>;
   first24?: Maybe<Scalars['Int']>;
   offset24?: Maybe<Scalars['Int']>;
-  filter37?: Maybe<ProjectFilter>;
-  filter38?: Maybe<ColumnFilter>;
-  filter39?: Maybe<DeveloperFilter>;
-  order25?: Maybe<DeveloperOrder>;
+  filter37?: Maybe<CommentFilter>;
+  order25?: Maybe<CommentOrder>;
   first25?: Maybe<Scalars['Int']>;
   offset25?: Maybe<Scalars['Int']>;
-  filter40?: Maybe<DeveloperFilter>;
-  order26?: Maybe<DeveloperOrder>;
+  filter38?: Maybe<TaskFilter>;
+  order26?: Maybe<TaskOrder>;
   first26?: Maybe<Scalars['Int']>;
   offset26?: Maybe<Scalars['Int']>;
-  filter41?: Maybe<CommentFilter>;
-  order27?: Maybe<CommentOrder>;
+  filter39?: Maybe<ProjectFilter>;
+  filter40?: Maybe<ColumnFilter>;
+  filter41?: Maybe<DeveloperFilter>;
+  order27?: Maybe<DeveloperOrder>;
   first27?: Maybe<Scalars['Int']>;
   offset27?: Maybe<Scalars['Int']>;
-  filter42?: Maybe<TaskFilter>;
-  order28?: Maybe<TaskOrder>;
+  filter42?: Maybe<DeveloperFilter>;
+  order28?: Maybe<DeveloperOrder>;
   first28?: Maybe<Scalars['Int']>;
   offset28?: Maybe<Scalars['Int']>;
-  filter43?: Maybe<DeveloperFilter>;
-  filter44?: Maybe<CommentFilter>;
+  filter43?: Maybe<CommentFilter>;
   order29?: Maybe<CommentOrder>;
   first29?: Maybe<Scalars['Int']>;
   offset29?: Maybe<Scalars['Int']>;
+  filter44?: Maybe<TaskFilter>;
+  order30?: Maybe<TaskOrder>;
+  first30?: Maybe<Scalars['Int']>;
+  offset30?: Maybe<Scalars['Int']>;
+  filter45?: Maybe<DeveloperFilter>;
+  filter46?: Maybe<CommentFilter>;
+  order31?: Maybe<CommentOrder>;
+  first31?: Maybe<Scalars['Int']>;
+  offset31?: Maybe<Scalars['Int']>;
   input: UpdateCommentInput;
 };
 
@@ -3582,7 +3863,10 @@ export type UpdateCommentMutation = (
         & { project: (
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
-          & { tags: Maybe<Array<Maybe<(
+          & { hosts: Array<Maybe<(
+            { __typename?: 'User' }
+            & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          )>>, tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
           )>>>, tasks: Maybe<Array<Maybe<(
@@ -3663,9 +3947,12 @@ export type UpdateCommentMutation = (
         ), user: Maybe<Array<Maybe<(
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          & { roles: Maybe<Array<Maybe<(
+          & { developer: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>>, host: Maybe<Array<Maybe<(
+            { __typename?: 'Project' }
+            & Pick<Project, 'id' | 'title' | 'description'>
           )>>>, stars: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
@@ -3725,161 +4012,146 @@ export type UpdateCommentMutation = (
 );
 
 export type UpdateDeveloperMutationVariables = {
-  filter?: Maybe<ProjectFilter>;
-  filter1?: Maybe<DeveloperFilter>;
+  filter?: Maybe<DeveloperFilter>;
   order?: Maybe<DeveloperOrder>;
   first?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  filter2?: Maybe<TagFilter>;
-  order1?: Maybe<TagOrder>;
+  filter1?: Maybe<ProjectFilter>;
+  order1?: Maybe<ProjectOrder>;
   first1?: Maybe<Scalars['Int']>;
   offset1?: Maybe<Scalars['Int']>;
-  filter3?: Maybe<ProjectFilter>;
-  filter4?: Maybe<ColumnFilter>;
-  filter5?: Maybe<DeveloperFilter>;
-  order2?: Maybe<DeveloperOrder>;
+  filter2?: Maybe<TaskFilter>;
+  order2?: Maybe<TaskOrder>;
   first2?: Maybe<Scalars['Int']>;
   offset2?: Maybe<Scalars['Int']>;
-  filter6?: Maybe<DeveloperFilter>;
-  order3?: Maybe<DeveloperOrder>;
+  filter3?: Maybe<UserFilter>;
+  order3?: Maybe<UserOrder>;
   first3?: Maybe<Scalars['Int']>;
   offset3?: Maybe<Scalars['Int']>;
-  filter7?: Maybe<CommentFilter>;
-  order4?: Maybe<CommentOrder>;
+  filter4?: Maybe<ProjectFilter>;
+  filter5?: Maybe<DeveloperFilter>;
+  order4?: Maybe<DeveloperOrder>;
   first4?: Maybe<Scalars['Int']>;
   offset4?: Maybe<Scalars['Int']>;
-  filter8?: Maybe<TaskFilter>;
-  order5?: Maybe<TaskOrder>;
+  filter6?: Maybe<TagFilter>;
+  order5?: Maybe<TagOrder>;
   first5?: Maybe<Scalars['Int']>;
   offset5?: Maybe<Scalars['Int']>;
-  filter9?: Maybe<ProjectFilter>;
-  filter10?: Maybe<ColumnFilter>;
-  order6?: Maybe<ColumnOrder>;
+  filter7?: Maybe<ProjectFilter>;
+  filter8?: Maybe<ColumnFilter>;
+  filter9?: Maybe<DeveloperFilter>;
+  order6?: Maybe<DeveloperOrder>;
   first6?: Maybe<Scalars['Int']>;
   offset6?: Maybe<Scalars['Int']>;
-  filter11?: Maybe<BoardFilter>;
-  order7?: Maybe<BoardOrder>;
+  filter10?: Maybe<DeveloperFilter>;
+  order7?: Maybe<DeveloperOrder>;
   first7?: Maybe<Scalars['Int']>;
   offset7?: Maybe<Scalars['Int']>;
-  filter12?: Maybe<ProjectFilter>;
-  filter13?: Maybe<UserFilter>;
-  order8?: Maybe<UserOrder>;
+  filter11?: Maybe<CommentFilter>;
+  order8?: Maybe<CommentOrder>;
   first8?: Maybe<Scalars['Int']>;
   offset8?: Maybe<Scalars['Int']>;
-  filter14?: Maybe<TagFilter>;
-  order9?: Maybe<TagOrder>;
+  filter12?: Maybe<TaskFilter>;
+  order9?: Maybe<TaskOrder>;
   first9?: Maybe<Scalars['Int']>;
   offset9?: Maybe<Scalars['Int']>;
-  filter15?: Maybe<TaskFilter>;
-  order10?: Maybe<TaskOrder>;
+  filter13?: Maybe<ProjectFilter>;
+  filter14?: Maybe<ColumnFilter>;
+  order10?: Maybe<ColumnOrder>;
   first10?: Maybe<Scalars['Int']>;
   offset10?: Maybe<Scalars['Int']>;
-  filter16?: Maybe<TaskFilter>;
-  order11?: Maybe<TaskOrder>;
+  filter15?: Maybe<BoardFilter>;
+  order11?: Maybe<BoardOrder>;
   first11?: Maybe<Scalars['Int']>;
   offset11?: Maybe<Scalars['Int']>;
-  filter17?: Maybe<DeveloperFilter>;
-  order12?: Maybe<DeveloperOrder>;
+  filter16?: Maybe<ProjectFilter>;
+  filter17?: Maybe<UserFilter>;
+  order12?: Maybe<UserOrder>;
   first12?: Maybe<Scalars['Int']>;
   offset12?: Maybe<Scalars['Int']>;
-  filter18?: Maybe<ProjectFilter>;
-  filter19?: Maybe<ProjectFilter>;
-  filter20?: Maybe<UserFilter>;
-  order13?: Maybe<UserOrder>;
+  filter18?: Maybe<TagFilter>;
+  order13?: Maybe<TagOrder>;
   first13?: Maybe<Scalars['Int']>;
   offset13?: Maybe<Scalars['Int']>;
-  filter21?: Maybe<TagFilter>;
-  order14?: Maybe<TagOrder>;
+  filter19?: Maybe<TaskFilter>;
+  order14?: Maybe<TaskOrder>;
   first14?: Maybe<Scalars['Int']>;
   offset14?: Maybe<Scalars['Int']>;
-  filter22?: Maybe<TaskFilter>;
+  filter20?: Maybe<TaskFilter>;
   order15?: Maybe<TaskOrder>;
   first15?: Maybe<Scalars['Int']>;
   offset15?: Maybe<Scalars['Int']>;
-  filter23?: Maybe<TaskFilter>;
-  order16?: Maybe<TaskOrder>;
+  filter21?: Maybe<DeveloperFilter>;
+  order16?: Maybe<DeveloperOrder>;
   first16?: Maybe<Scalars['Int']>;
   offset16?: Maybe<Scalars['Int']>;
-  filter24?: Maybe<DeveloperFilter>;
-  order17?: Maybe<DeveloperOrder>;
+  filter22?: Maybe<ProjectFilter>;
+  filter23?: Maybe<TagFilter>;
+  order17?: Maybe<TagOrder>;
   first17?: Maybe<Scalars['Int']>;
   offset17?: Maybe<Scalars['Int']>;
-  filter25?: Maybe<ProjectFilter>;
-  filter26?: Maybe<ColumnFilter>;
-  filter27?: Maybe<DeveloperFilter>;
-  order18?: Maybe<DeveloperOrder>;
+  filter24?: Maybe<TaskFilter>;
+  order18?: Maybe<TaskOrder>;
   first18?: Maybe<Scalars['Int']>;
   offset18?: Maybe<Scalars['Int']>;
-  filter28?: Maybe<DeveloperFilter>;
-  order19?: Maybe<DeveloperOrder>;
+  filter25?: Maybe<TaskFilter>;
+  order19?: Maybe<TaskOrder>;
   first19?: Maybe<Scalars['Int']>;
   offset19?: Maybe<Scalars['Int']>;
-  filter29?: Maybe<CommentFilter>;
-  order20?: Maybe<CommentOrder>;
+  filter26?: Maybe<DeveloperFilter>;
+  order20?: Maybe<DeveloperOrder>;
   first20?: Maybe<Scalars['Int']>;
   offset20?: Maybe<Scalars['Int']>;
-  filter30?: Maybe<TaskFilter>;
-  order21?: Maybe<TaskOrder>;
+  filter27?: Maybe<UserFilter>;
+  order21?: Maybe<UserOrder>;
   first21?: Maybe<Scalars['Int']>;
   offset21?: Maybe<Scalars['Int']>;
-  filter31?: Maybe<UserFilter>;
-  order22?: Maybe<UserOrder>;
+  filter28?: Maybe<TagFilter>;
+  order22?: Maybe<TagOrder>;
   first22?: Maybe<Scalars['Int']>;
   offset22?: Maybe<Scalars['Int']>;
-  filter32?: Maybe<TagFilter>;
-  order23?: Maybe<TagOrder>;
+  filter29?: Maybe<TaskFilter>;
+  order23?: Maybe<TaskOrder>;
   first23?: Maybe<Scalars['Int']>;
   offset23?: Maybe<Scalars['Int']>;
-  filter33?: Maybe<TaskFilter>;
-  order24?: Maybe<TaskOrder>;
+  filter30?: Maybe<BoardFilter>;
+  order24?: Maybe<BoardOrder>;
   first24?: Maybe<Scalars['Int']>;
   offset24?: Maybe<Scalars['Int']>;
-  filter34?: Maybe<ProjectFilter>;
-  filter35?: Maybe<BoardFilter>;
-  filter36?: Maybe<TaskFilter>;
-  order25?: Maybe<TaskOrder>;
+  filter31?: Maybe<DeveloperFilter>;
+  order25?: Maybe<DeveloperOrder>;
   first25?: Maybe<Scalars['Int']>;
   offset25?: Maybe<Scalars['Int']>;
-  filter37?: Maybe<ColumnFilter>;
-  filter38?: Maybe<DeveloperFilter>;
-  order26?: Maybe<DeveloperOrder>;
+  filter32?: Maybe<ProjectFilter>;
+  order26?: Maybe<ProjectOrder>;
   first26?: Maybe<Scalars['Int']>;
   offset26?: Maybe<Scalars['Int']>;
-  filter39?: Maybe<ProjectFilter>;
-  filter40?: Maybe<UserFilter>;
-  order27?: Maybe<UserOrder>;
+  filter33?: Maybe<ProjectFilter>;
+  filter34?: Maybe<ColumnFilter>;
+  filter35?: Maybe<DeveloperFilter>;
+  order27?: Maybe<DeveloperOrder>;
   first27?: Maybe<Scalars['Int']>;
   offset27?: Maybe<Scalars['Int']>;
-  filter41?: Maybe<TagFilter>;
-  order28?: Maybe<TagOrder>;
+  filter36?: Maybe<DeveloperFilter>;
+  order28?: Maybe<DeveloperOrder>;
   first28?: Maybe<Scalars['Int']>;
   offset28?: Maybe<Scalars['Int']>;
-  filter42?: Maybe<TaskFilter>;
-  order29?: Maybe<TaskOrder>;
+  filter37?: Maybe<CommentFilter>;
+  order29?: Maybe<CommentOrder>;
   first29?: Maybe<Scalars['Int']>;
   offset29?: Maybe<Scalars['Int']>;
-  filter43?: Maybe<TaskFilter>;
+  filter38?: Maybe<TaskFilter>;
   order30?: Maybe<TaskOrder>;
   first30?: Maybe<Scalars['Int']>;
   offset30?: Maybe<Scalars['Int']>;
-  filter44?: Maybe<DeveloperFilter>;
-  order31?: Maybe<DeveloperOrder>;
+  filter39?: Maybe<UserFilter>;
+  order31?: Maybe<UserOrder>;
   first31?: Maybe<Scalars['Int']>;
   offset31?: Maybe<Scalars['Int']>;
-  filter45?: Maybe<TaskFilter>;
-  filter46?: Maybe<DeveloperFilter>;
-  filter47?: Maybe<CommentFilter>;
-  order32?: Maybe<CommentOrder>;
+  filter40?: Maybe<DeveloperFilter>;
+  order32?: Maybe<DeveloperOrder>;
   first32?: Maybe<Scalars['Int']>;
   offset32?: Maybe<Scalars['Int']>;
-  filter48?: Maybe<TaskFilter>;
-  order33?: Maybe<TaskOrder>;
-  first33?: Maybe<Scalars['Int']>;
-  offset33?: Maybe<Scalars['Int']>;
-  filter49?: Maybe<DeveloperFilter>;
-  order34?: Maybe<DeveloperOrder>;
-  first34?: Maybe<Scalars['Int']>;
-  offset34?: Maybe<Scalars['Int']>;
   input: UpdateDeveloperInput;
 };
 
@@ -3895,7 +4167,20 @@ export type UpdateDeveloperMutation = (
       & { project: (
         { __typename?: 'Project' }
         & Pick<Project, 'id' | 'title' | 'description'>
-        & { tags: Maybe<Array<Maybe<(
+        & { hosts: Array<Maybe<(
+          { __typename?: 'User' }
+          & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          & { developer: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>>, host: Maybe<Array<Maybe<(
+            { __typename?: 'Project' }
+            & Pick<Project, 'id' | 'title' | 'description'>
+          )>>>, stars: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        )>>, tags: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
           & { project: (
@@ -3957,16 +4242,10 @@ export type UpdateDeveloperMutation = (
       ), user: Maybe<Array<Maybe<(
         { __typename?: 'User' }
         & Pick<User, 'id' | 'username' | 'password' | 'location'>
-        & { roles: Maybe<Array<Maybe<(
+        & { developer: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
-          & { project: (
-            { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: Maybe<Array<Maybe<(
-            { __typename?: 'User' }
-            & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>>, tags: Maybe<Array<Maybe<(
+          & { tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
           )>>>, tasks: Maybe<Array<Maybe<(
@@ -3975,6 +4254,25 @@ export type UpdateDeveloperMutation = (
           )>>>, liked: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        )>>>, host: Maybe<Array<Maybe<(
+          { __typename?: 'Project' }
+          & Pick<Project, 'id' | 'title' | 'description'>
+          & { hosts: Array<Maybe<(
+            { __typename?: 'User' }
+            & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          )>>, tags: Maybe<Array<Maybe<(
+            { __typename?: 'Tag' }
+            & Pick<Tag, 'id' | 'title'>
+          )>>>, tasks: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>>, boards: Maybe<Array<Maybe<(
+            { __typename?: 'Board' }
+            & Pick<Board, 'id' | 'title' | 'order'>
+          )>>>, developers: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
         )>>>, stars: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
@@ -3996,32 +4294,137 @@ export type UpdateDeveloperMutation = (
             & Pick<Comment, 'id' | 'content'>
           )>>> }
         )>>> }
-      )>>>, tags: Maybe<Array<Maybe<(
-        { __typename?: 'Tag' }
-        & Pick<Tag, 'id' | 'title'>
-      )>>>, tasks: Maybe<Array<Maybe<(
-        { __typename?: 'Task' }
-        & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-      )>>>, liked: Maybe<Array<Maybe<(
-        { __typename?: 'Task' }
-        & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-        & { project: (
-          { __typename?: 'Project' }
-          & Pick<Project, 'id' | 'title' | 'description'>
-        ), column: Maybe<(
-          { __typename?: 'Column' }
-          & Pick<Column, 'id' | 'title'>
-          & { board: (
-            { __typename?: 'Board' }
-            & Pick<Board, 'id' | 'title' | 'order'>
-          ), tasks: Maybe<Array<Maybe<(
-            { __typename?: 'Task' }
-            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>> }
-        )>, developers: Maybe<Array<Maybe<(
-          { __typename?: 'Developer' }
-          & Pick<Developer, 'id' | 'name' | 'availability'>
-        )>>>, likes: Maybe<Array<Maybe<(
+      )>>> }
+    )>>> }
+  )> }
+);
+
+export type UpdateProjectMutationVariables = {
+  filter?: Maybe<ProjectFilter>;
+  filter1?: Maybe<UserFilter>;
+  order?: Maybe<UserOrder>;
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  filter2?: Maybe<TagFilter>;
+  order1?: Maybe<TagOrder>;
+  first1?: Maybe<Scalars['Int']>;
+  offset1?: Maybe<Scalars['Int']>;
+  filter3?: Maybe<TaskFilter>;
+  order2?: Maybe<TaskOrder>;
+  first2?: Maybe<Scalars['Int']>;
+  offset2?: Maybe<Scalars['Int']>;
+  filter4?: Maybe<TaskFilter>;
+  order3?: Maybe<TaskOrder>;
+  first3?: Maybe<Scalars['Int']>;
+  offset3?: Maybe<Scalars['Int']>;
+  filter5?: Maybe<DeveloperFilter>;
+  order4?: Maybe<DeveloperOrder>;
+  first4?: Maybe<Scalars['Int']>;
+  offset4?: Maybe<Scalars['Int']>;
+  filter6?: Maybe<UserFilter>;
+  order5?: Maybe<UserOrder>;
+  first5?: Maybe<Scalars['Int']>;
+  offset5?: Maybe<Scalars['Int']>;
+  filter7?: Maybe<TagFilter>;
+  order6?: Maybe<TagOrder>;
+  first6?: Maybe<Scalars['Int']>;
+  offset6?: Maybe<Scalars['Int']>;
+  filter8?: Maybe<TaskFilter>;
+  order7?: Maybe<TaskOrder>;
+  first7?: Maybe<Scalars['Int']>;
+  offset7?: Maybe<Scalars['Int']>;
+  filter9?: Maybe<BoardFilter>;
+  order8?: Maybe<BoardOrder>;
+  first8?: Maybe<Scalars['Int']>;
+  offset8?: Maybe<Scalars['Int']>;
+  filter10?: Maybe<DeveloperFilter>;
+  order9?: Maybe<DeveloperOrder>;
+  first9?: Maybe<Scalars['Int']>;
+  offset9?: Maybe<Scalars['Int']>;
+  filter11?: Maybe<ProjectFilter>;
+  order10?: Maybe<ProjectOrder>;
+  first10?: Maybe<Scalars['Int']>;
+  offset10?: Maybe<Scalars['Int']>;
+  filter12?: Maybe<ProjectFilter>;
+  filter13?: Maybe<ColumnFilter>;
+  filter14?: Maybe<DeveloperFilter>;
+  order11?: Maybe<DeveloperOrder>;
+  first11?: Maybe<Scalars['Int']>;
+  offset11?: Maybe<Scalars['Int']>;
+  filter15?: Maybe<DeveloperFilter>;
+  order12?: Maybe<DeveloperOrder>;
+  first12?: Maybe<Scalars['Int']>;
+  offset12?: Maybe<Scalars['Int']>;
+  filter16?: Maybe<CommentFilter>;
+  order13?: Maybe<CommentOrder>;
+  first13?: Maybe<Scalars['Int']>;
+  offset13?: Maybe<Scalars['Int']>;
+  filter17?: Maybe<TaskFilter>;
+  order14?: Maybe<TaskOrder>;
+  first14?: Maybe<Scalars['Int']>;
+  offset14?: Maybe<Scalars['Int']>;
+  filter18?: Maybe<UserFilter>;
+  order15?: Maybe<UserOrder>;
+  first15?: Maybe<Scalars['Int']>;
+  offset15?: Maybe<Scalars['Int']>;
+  filter19?: Maybe<TaskFilter>;
+  order16?: Maybe<TaskOrder>;
+  first16?: Maybe<Scalars['Int']>;
+  offset16?: Maybe<Scalars['Int']>;
+  filter20?: Maybe<BoardFilter>;
+  order17?: Maybe<BoardOrder>;
+  first17?: Maybe<Scalars['Int']>;
+  offset17?: Maybe<Scalars['Int']>;
+  filter21?: Maybe<DeveloperFilter>;
+  order18?: Maybe<DeveloperOrder>;
+  first18?: Maybe<Scalars['Int']>;
+  offset18?: Maybe<Scalars['Int']>;
+  filter22?: Maybe<ProjectFilter>;
+  filter23?: Maybe<ProjectFilter>;
+  filter24?: Maybe<UserFilter>;
+  order19?: Maybe<UserOrder>;
+  first19?: Maybe<Scalars['Int']>;
+  offset19?: Maybe<Scalars['Int']>;
+  filter25?: Maybe<TagFilter>;
+  order20?: Maybe<TagOrder>;
+  first20?: Maybe<Scalars['Int']>;
+  offset20?: Maybe<Scalars['Int']>;
+  filter26?: Maybe<TaskFilter>;
+  order21?: Maybe<TaskOrder>;
+  first21?: Maybe<Scalars['Int']>;
+  offset21?: Maybe<Scalars['Int']>;
+  filter27?: Maybe<TaskFilter>;
+  order22?: Maybe<TaskOrder>;
+  first22?: Maybe<Scalars['Int']>;
+  offset22?: Maybe<Scalars['Int']>;
+  filter28?: Maybe<DeveloperFilter>;
+  order23?: Maybe<DeveloperOrder>;
+  first23?: Maybe<Scalars['Int']>;
+  offset23?: Maybe<Scalars['Int']>;
+  filter29?: Maybe<TagFilter>;
+  order24?: Maybe<TagOrder>;
+  first24?: Maybe<Scalars['Int']>;
+  offset24?: Maybe<Scalars['Int']>;
+  filter30?: Maybe<ProjectFilter>;
+  order25?: Maybe<ProjectOrder>;
+  first25?: Maybe<Scalars['Int']>;
+  offset25?: Maybe<Scalars['Int']>;
+  input: UpdateProjectInput;
+};
+
+
+export type UpdateProjectMutation = (
+  { __typename?: 'Mutation' }
+  & { updateProject: Maybe<(
+    { __typename?: 'UpdateProjectPayload' }
+    & Pick<UpdateProjectPayload, 'numUids'>
+    & { project: Maybe<Array<Maybe<(
+      { __typename?: 'Project' }
+      & Pick<Project, 'id' | 'title' | 'description'>
+      & { hosts: Array<Maybe<(
+        { __typename?: 'User' }
+        & Pick<User, 'id' | 'username' | 'password' | 'location'>
+        & { developer: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
           & { project: (
@@ -4040,78 +4443,46 @@ export type UpdateDeveloperMutation = (
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        )>>>, comments: Maybe<Array<Maybe<(
-          { __typename?: 'Comment' }
-          & Pick<Comment, 'id' | 'content'>
-          & { task: (
+        )>>>, host: Maybe<Array<Maybe<(
+          { __typename?: 'Project' }
+          & Pick<Project, 'id' | 'title' | 'description'>
+          & { hosts: Array<Maybe<(
+            { __typename?: 'User' }
+            & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          )>>, tags: Maybe<Array<Maybe<(
+            { __typename?: 'Tag' }
+            & Pick<Tag, 'id' | 'title'>
+          )>>>, tasks: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          ), developer: (
+          )>>>, boards: Maybe<Array<Maybe<(
+            { __typename?: 'Board' }
+            & Pick<Board, 'id' | 'title' | 'order'>
+          )>>>, developers: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          ) }
+          )>>> }
+        )>>>, stars: Maybe<Array<Maybe<(
+          { __typename?: 'Task' }
+          & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          & { project: (
+            { __typename?: 'Project' }
+            & Pick<Project, 'id' | 'title' | 'description'>
+          ), column: Maybe<(
+            { __typename?: 'Column' }
+            & Pick<Column, 'id' | 'title'>
+          )>, developers: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>>, likes: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>>, comments: Maybe<Array<Maybe<(
+            { __typename?: 'Comment' }
+            & Pick<Comment, 'id' | 'content'>
+          )>>> }
         )>>> }
-      )>>> }
-    )>>> }
-  )> }
-);
-
-export type UpdateProjectMutationVariables = {
-  filter?: Maybe<TaskFilter>;
-  order?: Maybe<TaskOrder>;
-  first?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  filter1?: Maybe<BoardFilter>;
-  order1?: Maybe<BoardOrder>;
-  first1?: Maybe<Scalars['Int']>;
-  offset1?: Maybe<Scalars['Int']>;
-  filter2?: Maybe<DeveloperFilter>;
-  order2?: Maybe<DeveloperOrder>;
-  first2?: Maybe<Scalars['Int']>;
-  offset2?: Maybe<Scalars['Int']>;
-  filter3?: Maybe<ProjectFilter>;
-  filter4?: Maybe<ProjectFilter>;
-  filter5?: Maybe<UserFilter>;
-  order3?: Maybe<UserOrder>;
-  first3?: Maybe<Scalars['Int']>;
-  offset3?: Maybe<Scalars['Int']>;
-  filter6?: Maybe<TagFilter>;
-  order4?: Maybe<TagOrder>;
-  first4?: Maybe<Scalars['Int']>;
-  offset4?: Maybe<Scalars['Int']>;
-  filter7?: Maybe<TaskFilter>;
-  order5?: Maybe<TaskOrder>;
-  first5?: Maybe<Scalars['Int']>;
-  offset5?: Maybe<Scalars['Int']>;
-  filter8?: Maybe<TaskFilter>;
-  order6?: Maybe<TaskOrder>;
-  first6?: Maybe<Scalars['Int']>;
-  offset6?: Maybe<Scalars['Int']>;
-  filter9?: Maybe<DeveloperFilter>;
-  order7?: Maybe<DeveloperOrder>;
-  first7?: Maybe<Scalars['Int']>;
-  offset7?: Maybe<Scalars['Int']>;
-  filter10?: Maybe<TagFilter>;
-  order8?: Maybe<TagOrder>;
-  first8?: Maybe<Scalars['Int']>;
-  offset8?: Maybe<Scalars['Int']>;
-  filter11?: Maybe<ProjectFilter>;
-  order9?: Maybe<ProjectOrder>;
-  first9?: Maybe<Scalars['Int']>;
-  offset9?: Maybe<Scalars['Int']>;
-  input: UpdateProjectInput;
-};
-
-
-export type UpdateProjectMutation = (
-  { __typename?: 'Mutation' }
-  & { updateProject: Maybe<(
-    { __typename?: 'UpdateProjectPayload' }
-    & Pick<UpdateProjectPayload, 'numUids'>
-    & { project: Maybe<Array<Maybe<(
-      { __typename?: 'Project' }
-      & Pick<Project, 'id' | 'title' | 'description'>
-      & { tags: Maybe<Array<Maybe<(
+      )>>, tags: Maybe<Array<Maybe<(
         { __typename?: 'Tag' }
         & Pick<Tag, 'id' | 'title'>
         & { project: (
@@ -4153,72 +4524,88 @@ export type UpdateProjectMutation = (
 );
 
 export type UpdateTagMutationVariables = {
-  filter?: Maybe<ProjectFilter>;
-  filter1?: Maybe<DeveloperFilter>;
+  filter?: Maybe<DeveloperFilter>;
   order?: Maybe<DeveloperOrder>;
   first?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  filter2?: Maybe<TagFilter>;
-  order1?: Maybe<TagOrder>;
+  filter1?: Maybe<ProjectFilter>;
+  order1?: Maybe<ProjectOrder>;
   first1?: Maybe<Scalars['Int']>;
   offset1?: Maybe<Scalars['Int']>;
-  filter3?: Maybe<ProjectFilter>;
-  filter4?: Maybe<ColumnFilter>;
-  filter5?: Maybe<DeveloperFilter>;
-  order2?: Maybe<DeveloperOrder>;
+  filter2?: Maybe<TaskFilter>;
+  order2?: Maybe<TaskOrder>;
   first2?: Maybe<Scalars['Int']>;
   offset2?: Maybe<Scalars['Int']>;
-  filter6?: Maybe<DeveloperFilter>;
-  order3?: Maybe<DeveloperOrder>;
+  filter3?: Maybe<UserFilter>;
+  order3?: Maybe<UserOrder>;
   first3?: Maybe<Scalars['Int']>;
   offset3?: Maybe<Scalars['Int']>;
-  filter7?: Maybe<CommentFilter>;
-  order4?: Maybe<CommentOrder>;
+  filter4?: Maybe<ProjectFilter>;
+  filter5?: Maybe<DeveloperFilter>;
+  order4?: Maybe<DeveloperOrder>;
   first4?: Maybe<Scalars['Int']>;
   offset4?: Maybe<Scalars['Int']>;
-  filter8?: Maybe<TaskFilter>;
-  order5?: Maybe<TaskOrder>;
+  filter6?: Maybe<TagFilter>;
+  order5?: Maybe<TagOrder>;
   first5?: Maybe<Scalars['Int']>;
   offset5?: Maybe<Scalars['Int']>;
-  filter9?: Maybe<ProjectFilter>;
-  filter10?: Maybe<ColumnFilter>;
-  order6?: Maybe<ColumnOrder>;
+  filter7?: Maybe<ProjectFilter>;
+  filter8?: Maybe<ColumnFilter>;
+  filter9?: Maybe<DeveloperFilter>;
+  order6?: Maybe<DeveloperOrder>;
   first6?: Maybe<Scalars['Int']>;
   offset6?: Maybe<Scalars['Int']>;
-  filter11?: Maybe<BoardFilter>;
-  order7?: Maybe<BoardOrder>;
+  filter10?: Maybe<DeveloperFilter>;
+  order7?: Maybe<DeveloperOrder>;
   first7?: Maybe<Scalars['Int']>;
   offset7?: Maybe<Scalars['Int']>;
-  filter12?: Maybe<ProjectFilter>;
-  filter13?: Maybe<UserFilter>;
-  order8?: Maybe<UserOrder>;
+  filter11?: Maybe<CommentFilter>;
+  order8?: Maybe<CommentOrder>;
   first8?: Maybe<Scalars['Int']>;
   offset8?: Maybe<Scalars['Int']>;
-  filter14?: Maybe<TagFilter>;
-  order9?: Maybe<TagOrder>;
+  filter12?: Maybe<TaskFilter>;
+  order9?: Maybe<TaskOrder>;
   first9?: Maybe<Scalars['Int']>;
   offset9?: Maybe<Scalars['Int']>;
-  filter15?: Maybe<TaskFilter>;
-  order10?: Maybe<TaskOrder>;
+  filter13?: Maybe<ProjectFilter>;
+  filter14?: Maybe<ColumnFilter>;
+  order10?: Maybe<ColumnOrder>;
   first10?: Maybe<Scalars['Int']>;
   offset10?: Maybe<Scalars['Int']>;
-  filter16?: Maybe<TaskFilter>;
-  order11?: Maybe<TaskOrder>;
+  filter15?: Maybe<BoardFilter>;
+  order11?: Maybe<BoardOrder>;
   first11?: Maybe<Scalars['Int']>;
   offset11?: Maybe<Scalars['Int']>;
-  filter17?: Maybe<DeveloperFilter>;
-  order12?: Maybe<DeveloperOrder>;
+  filter16?: Maybe<ProjectFilter>;
+  filter17?: Maybe<UserFilter>;
+  order12?: Maybe<UserOrder>;
   first12?: Maybe<Scalars['Int']>;
   offset12?: Maybe<Scalars['Int']>;
-  filter18?: Maybe<ProjectFilter>;
-  filter19?: Maybe<DeveloperFilter>;
-  order13?: Maybe<DeveloperOrder>;
+  filter18?: Maybe<TagFilter>;
+  order13?: Maybe<TagOrder>;
   first13?: Maybe<Scalars['Int']>;
   offset13?: Maybe<Scalars['Int']>;
-  filter20?: Maybe<TagFilter>;
-  order14?: Maybe<TagOrder>;
+  filter19?: Maybe<TaskFilter>;
+  order14?: Maybe<TaskOrder>;
   first14?: Maybe<Scalars['Int']>;
   offset14?: Maybe<Scalars['Int']>;
+  filter20?: Maybe<TaskFilter>;
+  order15?: Maybe<TaskOrder>;
+  first15?: Maybe<Scalars['Int']>;
+  offset15?: Maybe<Scalars['Int']>;
+  filter21?: Maybe<DeveloperFilter>;
+  order16?: Maybe<DeveloperOrder>;
+  first16?: Maybe<Scalars['Int']>;
+  offset16?: Maybe<Scalars['Int']>;
+  filter22?: Maybe<ProjectFilter>;
+  filter23?: Maybe<DeveloperFilter>;
+  order17?: Maybe<DeveloperOrder>;
+  first17?: Maybe<Scalars['Int']>;
+  offset17?: Maybe<Scalars['Int']>;
+  filter24?: Maybe<TagFilter>;
+  order18?: Maybe<TagOrder>;
+  first18?: Maybe<Scalars['Int']>;
+  offset18?: Maybe<Scalars['Int']>;
   input: UpdateTagInput;
 };
 
@@ -4234,7 +4621,20 @@ export type UpdateTagMutation = (
       & { project: (
         { __typename?: 'Project' }
         & Pick<Project, 'id' | 'title' | 'description'>
-        & { tags: Maybe<Array<Maybe<(
+        & { hosts: Array<Maybe<(
+          { __typename?: 'User' }
+          & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          & { developer: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>>, host: Maybe<Array<Maybe<(
+            { __typename?: 'Project' }
+            & Pick<Project, 'id' | 'title' | 'description'>
+          )>>>, stars: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        )>>, tags: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
           & { project: (
@@ -4302,149 +4702,169 @@ export type UpdateTagMutation = (
 );
 
 export type UpdateTaskMutationVariables = {
-  filter?: Maybe<ProjectFilter>;
-  filter1?: Maybe<DeveloperFilter>;
+  filter?: Maybe<DeveloperFilter>;
   order?: Maybe<DeveloperOrder>;
   first?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  filter2?: Maybe<TagFilter>;
-  order1?: Maybe<TagOrder>;
+  filter1?: Maybe<ProjectFilter>;
+  order1?: Maybe<ProjectOrder>;
   first1?: Maybe<Scalars['Int']>;
   offset1?: Maybe<Scalars['Int']>;
-  filter3?: Maybe<ProjectFilter>;
-  filter4?: Maybe<ColumnFilter>;
-  filter5?: Maybe<DeveloperFilter>;
-  order2?: Maybe<DeveloperOrder>;
+  filter2?: Maybe<TaskFilter>;
+  order2?: Maybe<TaskOrder>;
   first2?: Maybe<Scalars['Int']>;
   offset2?: Maybe<Scalars['Int']>;
-  filter6?: Maybe<DeveloperFilter>;
-  order3?: Maybe<DeveloperOrder>;
+  filter3?: Maybe<UserFilter>;
+  order3?: Maybe<UserOrder>;
   first3?: Maybe<Scalars['Int']>;
   offset3?: Maybe<Scalars['Int']>;
-  filter7?: Maybe<CommentFilter>;
-  order4?: Maybe<CommentOrder>;
+  filter4?: Maybe<ProjectFilter>;
+  filter5?: Maybe<DeveloperFilter>;
+  order4?: Maybe<DeveloperOrder>;
   first4?: Maybe<Scalars['Int']>;
   offset4?: Maybe<Scalars['Int']>;
-  filter8?: Maybe<TaskFilter>;
-  order5?: Maybe<TaskOrder>;
+  filter6?: Maybe<TagFilter>;
+  order5?: Maybe<TagOrder>;
   first5?: Maybe<Scalars['Int']>;
   offset5?: Maybe<Scalars['Int']>;
-  filter9?: Maybe<ProjectFilter>;
-  filter10?: Maybe<ColumnFilter>;
-  order6?: Maybe<ColumnOrder>;
+  filter7?: Maybe<ProjectFilter>;
+  filter8?: Maybe<ColumnFilter>;
+  filter9?: Maybe<DeveloperFilter>;
+  order6?: Maybe<DeveloperOrder>;
   first6?: Maybe<Scalars['Int']>;
   offset6?: Maybe<Scalars['Int']>;
-  filter11?: Maybe<BoardFilter>;
-  order7?: Maybe<BoardOrder>;
+  filter10?: Maybe<DeveloperFilter>;
+  order7?: Maybe<DeveloperOrder>;
   first7?: Maybe<Scalars['Int']>;
   offset7?: Maybe<Scalars['Int']>;
-  filter12?: Maybe<ProjectFilter>;
-  filter13?: Maybe<UserFilter>;
-  order8?: Maybe<UserOrder>;
+  filter11?: Maybe<CommentFilter>;
+  order8?: Maybe<CommentOrder>;
   first8?: Maybe<Scalars['Int']>;
   offset8?: Maybe<Scalars['Int']>;
-  filter14?: Maybe<TagFilter>;
-  order9?: Maybe<TagOrder>;
+  filter12?: Maybe<TaskFilter>;
+  order9?: Maybe<TaskOrder>;
   first9?: Maybe<Scalars['Int']>;
   offset9?: Maybe<Scalars['Int']>;
-  filter15?: Maybe<TaskFilter>;
-  order10?: Maybe<TaskOrder>;
+  filter13?: Maybe<ProjectFilter>;
+  filter14?: Maybe<ColumnFilter>;
+  order10?: Maybe<ColumnOrder>;
   first10?: Maybe<Scalars['Int']>;
   offset10?: Maybe<Scalars['Int']>;
-  filter16?: Maybe<TaskFilter>;
-  order11?: Maybe<TaskOrder>;
+  filter15?: Maybe<BoardFilter>;
+  order11?: Maybe<BoardOrder>;
   first11?: Maybe<Scalars['Int']>;
   offset11?: Maybe<Scalars['Int']>;
-  filter17?: Maybe<DeveloperFilter>;
-  order12?: Maybe<DeveloperOrder>;
+  filter16?: Maybe<ProjectFilter>;
+  filter17?: Maybe<UserFilter>;
+  order12?: Maybe<UserOrder>;
   first12?: Maybe<Scalars['Int']>;
   offset12?: Maybe<Scalars['Int']>;
-  filter18?: Maybe<ProjectFilter>;
-  filter19?: Maybe<ProjectFilter>;
-  filter20?: Maybe<ColumnFilter>;
-  order13?: Maybe<ColumnOrder>;
+  filter18?: Maybe<TagFilter>;
+  order13?: Maybe<TagOrder>;
   first13?: Maybe<Scalars['Int']>;
   offset13?: Maybe<Scalars['Int']>;
-  filter21?: Maybe<BoardFilter>;
-  filter22?: Maybe<TaskFilter>;
+  filter19?: Maybe<TaskFilter>;
   order14?: Maybe<TaskOrder>;
   first14?: Maybe<Scalars['Int']>;
   offset14?: Maybe<Scalars['Int']>;
-  filter23?: Maybe<ColumnFilter>;
-  filter24?: Maybe<DeveloperFilter>;
-  order15?: Maybe<DeveloperOrder>;
+  filter20?: Maybe<TaskFilter>;
+  order15?: Maybe<TaskOrder>;
   first15?: Maybe<Scalars['Int']>;
   offset15?: Maybe<Scalars['Int']>;
-  filter25?: Maybe<ProjectFilter>;
-  filter26?: Maybe<DeveloperFilter>;
+  filter21?: Maybe<DeveloperFilter>;
   order16?: Maybe<DeveloperOrder>;
   first16?: Maybe<Scalars['Int']>;
   offset16?: Maybe<Scalars['Int']>;
-  filter27?: Maybe<TaskFilter>;
-  order17?: Maybe<TaskOrder>;
+  filter22?: Maybe<ProjectFilter>;
+  filter23?: Maybe<ProjectFilter>;
+  filter24?: Maybe<ColumnFilter>;
+  order17?: Maybe<ColumnOrder>;
   first17?: Maybe<Scalars['Int']>;
   offset17?: Maybe<Scalars['Int']>;
-  filter28?: Maybe<UserFilter>;
-  order18?: Maybe<UserOrder>;
+  filter25?: Maybe<BoardFilter>;
+  filter26?: Maybe<TaskFilter>;
+  order18?: Maybe<TaskOrder>;
   first18?: Maybe<Scalars['Int']>;
   offset18?: Maybe<Scalars['Int']>;
-  filter29?: Maybe<TagFilter>;
-  order19?: Maybe<TagOrder>;
+  filter27?: Maybe<ColumnFilter>;
+  filter28?: Maybe<DeveloperFilter>;
+  order19?: Maybe<DeveloperOrder>;
   first19?: Maybe<Scalars['Int']>;
   offset19?: Maybe<Scalars['Int']>;
-  filter30?: Maybe<TaskFilter>;
-  order20?: Maybe<TaskOrder>;
+  filter29?: Maybe<ProjectFilter>;
+  filter30?: Maybe<DeveloperFilter>;
+  order20?: Maybe<DeveloperOrder>;
   first20?: Maybe<Scalars['Int']>;
   offset20?: Maybe<Scalars['Int']>;
   filter31?: Maybe<ProjectFilter>;
-  filter32?: Maybe<ColumnFilter>;
-  filter33?: Maybe<DeveloperFilter>;
-  order21?: Maybe<DeveloperOrder>;
+  order21?: Maybe<ProjectOrder>;
   first21?: Maybe<Scalars['Int']>;
   offset21?: Maybe<Scalars['Int']>;
-  filter34?: Maybe<DeveloperFilter>;
-  order22?: Maybe<DeveloperOrder>;
+  filter32?: Maybe<TaskFilter>;
+  order22?: Maybe<TaskOrder>;
   first22?: Maybe<Scalars['Int']>;
   offset22?: Maybe<Scalars['Int']>;
-  filter35?: Maybe<CommentFilter>;
-  order23?: Maybe<CommentOrder>;
+  filter33?: Maybe<UserFilter>;
+  order23?: Maybe<UserOrder>;
   first23?: Maybe<Scalars['Int']>;
   offset23?: Maybe<Scalars['Int']>;
-  filter36?: Maybe<TaskFilter>;
-  order24?: Maybe<TaskOrder>;
+  filter34?: Maybe<TagFilter>;
+  order24?: Maybe<TagOrder>;
   first24?: Maybe<Scalars['Int']>;
   offset24?: Maybe<Scalars['Int']>;
-  filter37?: Maybe<DeveloperFilter>;
-  order25?: Maybe<DeveloperOrder>;
+  filter35?: Maybe<TaskFilter>;
+  order25?: Maybe<TaskOrder>;
   first25?: Maybe<Scalars['Int']>;
   offset25?: Maybe<Scalars['Int']>;
-  filter38?: Maybe<TaskFilter>;
-  filter39?: Maybe<ProjectFilter>;
-  filter40?: Maybe<UserFilter>;
-  order26?: Maybe<UserOrder>;
+  filter36?: Maybe<ProjectFilter>;
+  filter37?: Maybe<ColumnFilter>;
+  filter38?: Maybe<DeveloperFilter>;
+  order26?: Maybe<DeveloperOrder>;
   first26?: Maybe<Scalars['Int']>;
   offset26?: Maybe<Scalars['Int']>;
-  filter41?: Maybe<TagFilter>;
-  order27?: Maybe<TagOrder>;
+  filter39?: Maybe<DeveloperFilter>;
+  order27?: Maybe<DeveloperOrder>;
   first27?: Maybe<Scalars['Int']>;
   offset27?: Maybe<Scalars['Int']>;
-  filter42?: Maybe<TaskFilter>;
-  order28?: Maybe<TaskOrder>;
+  filter40?: Maybe<CommentFilter>;
+  order28?: Maybe<CommentOrder>;
   first28?: Maybe<Scalars['Int']>;
   offset28?: Maybe<Scalars['Int']>;
-  filter43?: Maybe<TaskFilter>;
+  filter41?: Maybe<TaskFilter>;
   order29?: Maybe<TaskOrder>;
   first29?: Maybe<Scalars['Int']>;
   offset29?: Maybe<Scalars['Int']>;
-  filter44?: Maybe<DeveloperFilter>;
-  filter45?: Maybe<CommentFilter>;
-  order30?: Maybe<CommentOrder>;
+  filter42?: Maybe<DeveloperFilter>;
+  order30?: Maybe<DeveloperOrder>;
   first30?: Maybe<Scalars['Int']>;
   offset30?: Maybe<Scalars['Int']>;
-  filter46?: Maybe<TaskFilter>;
-  order31?: Maybe<TaskOrder>;
+  filter43?: Maybe<TaskFilter>;
+  filter44?: Maybe<ProjectFilter>;
+  filter45?: Maybe<UserFilter>;
+  order31?: Maybe<UserOrder>;
   first31?: Maybe<Scalars['Int']>;
   offset31?: Maybe<Scalars['Int']>;
+  filter46?: Maybe<TagFilter>;
+  order32?: Maybe<TagOrder>;
+  first32?: Maybe<Scalars['Int']>;
+  offset32?: Maybe<Scalars['Int']>;
+  filter47?: Maybe<TaskFilter>;
+  order33?: Maybe<TaskOrder>;
+  first33?: Maybe<Scalars['Int']>;
+  offset33?: Maybe<Scalars['Int']>;
+  filter48?: Maybe<TaskFilter>;
+  order34?: Maybe<TaskOrder>;
+  first34?: Maybe<Scalars['Int']>;
+  offset34?: Maybe<Scalars['Int']>;
+  filter49?: Maybe<DeveloperFilter>;
+  filter50?: Maybe<CommentFilter>;
+  order35?: Maybe<CommentOrder>;
+  first35?: Maybe<Scalars['Int']>;
+  offset35?: Maybe<Scalars['Int']>;
+  filter51?: Maybe<TaskFilter>;
+  order36?: Maybe<TaskOrder>;
+  first36?: Maybe<Scalars['Int']>;
+  offset36?: Maybe<Scalars['Int']>;
   input: UpdateTaskInput;
 };
 
@@ -4460,7 +4880,20 @@ export type UpdateTaskMutation = (
       & { project: (
         { __typename?: 'Project' }
         & Pick<Project, 'id' | 'title' | 'description'>
-        & { tags: Maybe<Array<Maybe<(
+        & { hosts: Array<Maybe<(
+          { __typename?: 'User' }
+          & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          & { developer: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>>, host: Maybe<Array<Maybe<(
+            { __typename?: 'Project' }
+            & Pick<Project, 'id' | 'title' | 'description'>
+          )>>>, stars: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        )>>, tags: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
           & { project: (
@@ -4548,9 +4981,12 @@ export type UpdateTaskMutation = (
         ), user: Maybe<Array<Maybe<(
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          & { roles: Maybe<Array<Maybe<(
+          & { developer: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>>, host: Maybe<Array<Maybe<(
+            { __typename?: 'Project' }
+            & Pick<Project, 'id' | 'title' | 'description'>
           )>>>, stars: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
@@ -4613,84 +5049,92 @@ export type UpdateTaskMutation = (
 );
 
 export type UpdateUserMutationVariables = {
-  filter?: Maybe<TagFilter>;
-  order?: Maybe<TagOrder>;
+  filter?: Maybe<UserFilter>;
+  order?: Maybe<UserOrder>;
   first?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  filter1?: Maybe<TaskFilter>;
-  order1?: Maybe<TaskOrder>;
+  filter1?: Maybe<TagFilter>;
+  order1?: Maybe<TagOrder>;
   first1?: Maybe<Scalars['Int']>;
   offset1?: Maybe<Scalars['Int']>;
-  filter2?: Maybe<BoardFilter>;
-  order2?: Maybe<BoardOrder>;
+  filter2?: Maybe<TaskFilter>;
+  order2?: Maybe<TaskOrder>;
   first2?: Maybe<Scalars['Int']>;
   offset2?: Maybe<Scalars['Int']>;
-  filter3?: Maybe<DeveloperFilter>;
-  order3?: Maybe<DeveloperOrder>;
+  filter3?: Maybe<BoardFilter>;
+  order3?: Maybe<BoardOrder>;
   first3?: Maybe<Scalars['Int']>;
   offset3?: Maybe<Scalars['Int']>;
-  filter4?: Maybe<ProjectFilter>;
-  filter5?: Maybe<TaskFilter>;
-  order4?: Maybe<TaskOrder>;
+  filter4?: Maybe<DeveloperFilter>;
+  order4?: Maybe<DeveloperOrder>;
   first4?: Maybe<Scalars['Int']>;
   offset4?: Maybe<Scalars['Int']>;
-  filter6?: Maybe<UserFilter>;
-  order5?: Maybe<UserOrder>;
+  filter5?: Maybe<ProjectFilter>;
+  filter6?: Maybe<ProjectFilter>;
+  order5?: Maybe<ProjectOrder>;
   first5?: Maybe<Scalars['Int']>;
   offset5?: Maybe<Scalars['Int']>;
-  filter7?: Maybe<ProjectFilter>;
-  filter8?: Maybe<DeveloperFilter>;
-  order6?: Maybe<DeveloperOrder>;
+  filter7?: Maybe<TaskFilter>;
+  order6?: Maybe<TaskOrder>;
   first6?: Maybe<Scalars['Int']>;
   offset6?: Maybe<Scalars['Int']>;
-  filter9?: Maybe<TagFilter>;
-  order7?: Maybe<TagOrder>;
+  filter8?: Maybe<UserFilter>;
+  order7?: Maybe<UserOrder>;
   first7?: Maybe<Scalars['Int']>;
   offset7?: Maybe<Scalars['Int']>;
-  filter10?: Maybe<ProjectFilter>;
-  filter11?: Maybe<ColumnFilter>;
-  filter12?: Maybe<DeveloperFilter>;
+  filter9?: Maybe<ProjectFilter>;
+  filter10?: Maybe<DeveloperFilter>;
   order8?: Maybe<DeveloperOrder>;
   first8?: Maybe<Scalars['Int']>;
   offset8?: Maybe<Scalars['Int']>;
-  filter13?: Maybe<DeveloperFilter>;
-  order9?: Maybe<DeveloperOrder>;
+  filter11?: Maybe<TagFilter>;
+  order9?: Maybe<TagOrder>;
   first9?: Maybe<Scalars['Int']>;
   offset9?: Maybe<Scalars['Int']>;
-  filter14?: Maybe<CommentFilter>;
-  order10?: Maybe<CommentOrder>;
+  filter12?: Maybe<ProjectFilter>;
+  filter13?: Maybe<ColumnFilter>;
+  filter14?: Maybe<DeveloperFilter>;
+  order10?: Maybe<DeveloperOrder>;
   first10?: Maybe<Scalars['Int']>;
   offset10?: Maybe<Scalars['Int']>;
-  filter15?: Maybe<TaskFilter>;
-  order11?: Maybe<TaskOrder>;
+  filter15?: Maybe<DeveloperFilter>;
+  order11?: Maybe<DeveloperOrder>;
   first11?: Maybe<Scalars['Int']>;
   offset11?: Maybe<Scalars['Int']>;
-  filter16?: Maybe<ProjectFilter>;
-  filter17?: Maybe<ColumnFilter>;
-  filter18?: Maybe<DeveloperFilter>;
-  order12?: Maybe<DeveloperOrder>;
+  filter16?: Maybe<CommentFilter>;
+  order12?: Maybe<CommentOrder>;
   first12?: Maybe<Scalars['Int']>;
   offset12?: Maybe<Scalars['Int']>;
-  filter19?: Maybe<DeveloperFilter>;
-  order13?: Maybe<DeveloperOrder>;
+  filter17?: Maybe<TaskFilter>;
+  order13?: Maybe<TaskOrder>;
   first13?: Maybe<Scalars['Int']>;
   offset13?: Maybe<Scalars['Int']>;
-  filter20?: Maybe<CommentFilter>;
-  order14?: Maybe<CommentOrder>;
+  filter18?: Maybe<ProjectFilter>;
+  filter19?: Maybe<ColumnFilter>;
+  filter20?: Maybe<DeveloperFilter>;
+  order14?: Maybe<DeveloperOrder>;
   first14?: Maybe<Scalars['Int']>;
   offset14?: Maybe<Scalars['Int']>;
-  filter21?: Maybe<TaskFilter>;
-  order15?: Maybe<TaskOrder>;
+  filter21?: Maybe<DeveloperFilter>;
+  order15?: Maybe<DeveloperOrder>;
   first15?: Maybe<Scalars['Int']>;
   offset15?: Maybe<Scalars['Int']>;
-  filter22?: Maybe<DeveloperFilter>;
-  order16?: Maybe<DeveloperOrder>;
+  filter22?: Maybe<CommentFilter>;
+  order16?: Maybe<CommentOrder>;
   first16?: Maybe<Scalars['Int']>;
   offset16?: Maybe<Scalars['Int']>;
-  filter23?: Maybe<UserFilter>;
-  order17?: Maybe<UserOrder>;
+  filter23?: Maybe<TaskFilter>;
+  order17?: Maybe<TaskOrder>;
   first17?: Maybe<Scalars['Int']>;
   offset17?: Maybe<Scalars['Int']>;
+  filter24?: Maybe<DeveloperFilter>;
+  order18?: Maybe<DeveloperOrder>;
+  first18?: Maybe<Scalars['Int']>;
+  offset18?: Maybe<Scalars['Int']>;
+  filter25?: Maybe<UserFilter>;
+  order19?: Maybe<UserOrder>;
+  first19?: Maybe<Scalars['Int']>;
+  offset19?: Maybe<Scalars['Int']>;
   input: UpdateUserInput;
 };
 
@@ -4703,13 +5147,16 @@ export type UpdateUserMutation = (
     & { user: Maybe<Array<Maybe<(
       { __typename?: 'User' }
       & Pick<User, 'id' | 'username' | 'password' | 'location'>
-      & { roles: Maybe<Array<Maybe<(
+      & { developer: Maybe<Array<Maybe<(
         { __typename?: 'Developer' }
         & Pick<Developer, 'id' | 'name' | 'availability'>
         & { project: (
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
-          & { tags: Maybe<Array<Maybe<(
+          & { hosts: Array<Maybe<(
+            { __typename?: 'User' }
+            & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          )>>, tags: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
           )>>>, tasks: Maybe<Array<Maybe<(
@@ -4725,7 +5172,10 @@ export type UpdateUserMutation = (
         ), user: Maybe<Array<Maybe<(
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          & { stars: Maybe<Array<Maybe<(
+          & { host: Maybe<Array<Maybe<(
+            { __typename?: 'Project' }
+            & Pick<Project, 'id' | 'title' | 'description'>
+          )>>>, stars: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
@@ -4784,59 +5234,126 @@ export type UpdateUserMutation = (
 );
 
 export type GetBoardQueryVariables = {
-  filter?: Maybe<TaskFilter>;
-  order?: Maybe<TaskOrder>;
+  filter?: Maybe<ProjectFilter>;
+  filter1?: Maybe<UserFilter>;
+  order?: Maybe<UserOrder>;
   first?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  filter1?: Maybe<BoardFilter>;
-  order1?: Maybe<BoardOrder>;
+  filter2?: Maybe<TagFilter>;
+  order1?: Maybe<TagOrder>;
   first1?: Maybe<Scalars['Int']>;
   offset1?: Maybe<Scalars['Int']>;
-  filter2?: Maybe<DeveloperFilter>;
-  order2?: Maybe<DeveloperOrder>;
+  filter3?: Maybe<TaskFilter>;
+  order2?: Maybe<TaskOrder>;
   first2?: Maybe<Scalars['Int']>;
   offset2?: Maybe<Scalars['Int']>;
-  filter3?: Maybe<ProjectFilter>;
-  filter4?: Maybe<ProjectFilter>;
-  filter5?: Maybe<UserFilter>;
-  order3?: Maybe<UserOrder>;
+  filter4?: Maybe<TaskFilter>;
+  order3?: Maybe<TaskOrder>;
   first3?: Maybe<Scalars['Int']>;
   offset3?: Maybe<Scalars['Int']>;
-  filter6?: Maybe<TagFilter>;
-  order4?: Maybe<TagOrder>;
+  filter5?: Maybe<DeveloperFilter>;
+  order4?: Maybe<DeveloperOrder>;
   first4?: Maybe<Scalars['Int']>;
   offset4?: Maybe<Scalars['Int']>;
-  filter7?: Maybe<TaskFilter>;
-  order5?: Maybe<TaskOrder>;
+  filter6?: Maybe<UserFilter>;
+  order5?: Maybe<UserOrder>;
   first5?: Maybe<Scalars['Int']>;
   offset5?: Maybe<Scalars['Int']>;
-  filter8?: Maybe<TaskFilter>;
-  order6?: Maybe<TaskOrder>;
+  filter7?: Maybe<TagFilter>;
+  order6?: Maybe<TagOrder>;
   first6?: Maybe<Scalars['Int']>;
   offset6?: Maybe<Scalars['Int']>;
-  filter9?: Maybe<DeveloperFilter>;
-  order7?: Maybe<DeveloperOrder>;
+  filter8?: Maybe<TaskFilter>;
+  order7?: Maybe<TaskOrder>;
   first7?: Maybe<Scalars['Int']>;
   offset7?: Maybe<Scalars['Int']>;
-  filter10?: Maybe<TagFilter>;
-  order8?: Maybe<TagOrder>;
+  filter9?: Maybe<BoardFilter>;
+  order8?: Maybe<BoardOrder>;
   first8?: Maybe<Scalars['Int']>;
   offset8?: Maybe<Scalars['Int']>;
-  filter11?: Maybe<ProjectFilter>;
-  filter12?: Maybe<ProjectFilter>;
-  filter13?: Maybe<TaskFilter>;
-  order9?: Maybe<TaskOrder>;
+  filter10?: Maybe<DeveloperFilter>;
+  order9?: Maybe<DeveloperOrder>;
   first9?: Maybe<Scalars['Int']>;
   offset9?: Maybe<Scalars['Int']>;
-  filter14?: Maybe<ColumnFilter>;
-  order10?: Maybe<ColumnOrder>;
+  filter11?: Maybe<ProjectFilter>;
+  order10?: Maybe<ProjectOrder>;
   first10?: Maybe<Scalars['Int']>;
   offset10?: Maybe<Scalars['Int']>;
-  filter15?: Maybe<BoardFilter>;
-  filter16?: Maybe<ColumnFilter>;
-  order11?: Maybe<ColumnOrder>;
+  filter12?: Maybe<ProjectFilter>;
+  filter13?: Maybe<ColumnFilter>;
+  filter14?: Maybe<DeveloperFilter>;
+  order11?: Maybe<DeveloperOrder>;
   first11?: Maybe<Scalars['Int']>;
   offset11?: Maybe<Scalars['Int']>;
+  filter15?: Maybe<DeveloperFilter>;
+  order12?: Maybe<DeveloperOrder>;
+  first12?: Maybe<Scalars['Int']>;
+  offset12?: Maybe<Scalars['Int']>;
+  filter16?: Maybe<CommentFilter>;
+  order13?: Maybe<CommentOrder>;
+  first13?: Maybe<Scalars['Int']>;
+  offset13?: Maybe<Scalars['Int']>;
+  filter17?: Maybe<TaskFilter>;
+  order14?: Maybe<TaskOrder>;
+  first14?: Maybe<Scalars['Int']>;
+  offset14?: Maybe<Scalars['Int']>;
+  filter18?: Maybe<UserFilter>;
+  order15?: Maybe<UserOrder>;
+  first15?: Maybe<Scalars['Int']>;
+  offset15?: Maybe<Scalars['Int']>;
+  filter19?: Maybe<TaskFilter>;
+  order16?: Maybe<TaskOrder>;
+  first16?: Maybe<Scalars['Int']>;
+  offset16?: Maybe<Scalars['Int']>;
+  filter20?: Maybe<BoardFilter>;
+  order17?: Maybe<BoardOrder>;
+  first17?: Maybe<Scalars['Int']>;
+  offset17?: Maybe<Scalars['Int']>;
+  filter21?: Maybe<DeveloperFilter>;
+  order18?: Maybe<DeveloperOrder>;
+  first18?: Maybe<Scalars['Int']>;
+  offset18?: Maybe<Scalars['Int']>;
+  filter22?: Maybe<ProjectFilter>;
+  filter23?: Maybe<ProjectFilter>;
+  filter24?: Maybe<UserFilter>;
+  order19?: Maybe<UserOrder>;
+  first19?: Maybe<Scalars['Int']>;
+  offset19?: Maybe<Scalars['Int']>;
+  filter25?: Maybe<TagFilter>;
+  order20?: Maybe<TagOrder>;
+  first20?: Maybe<Scalars['Int']>;
+  offset20?: Maybe<Scalars['Int']>;
+  filter26?: Maybe<TaskFilter>;
+  order21?: Maybe<TaskOrder>;
+  first21?: Maybe<Scalars['Int']>;
+  offset21?: Maybe<Scalars['Int']>;
+  filter27?: Maybe<TaskFilter>;
+  order22?: Maybe<TaskOrder>;
+  first22?: Maybe<Scalars['Int']>;
+  offset22?: Maybe<Scalars['Int']>;
+  filter28?: Maybe<DeveloperFilter>;
+  order23?: Maybe<DeveloperOrder>;
+  first23?: Maybe<Scalars['Int']>;
+  offset23?: Maybe<Scalars['Int']>;
+  filter29?: Maybe<TagFilter>;
+  order24?: Maybe<TagOrder>;
+  first24?: Maybe<Scalars['Int']>;
+  offset24?: Maybe<Scalars['Int']>;
+  filter30?: Maybe<ProjectFilter>;
+  filter31?: Maybe<ProjectFilter>;
+  filter32?: Maybe<TaskFilter>;
+  order25?: Maybe<TaskOrder>;
+  first25?: Maybe<Scalars['Int']>;
+  offset25?: Maybe<Scalars['Int']>;
+  filter33?: Maybe<ColumnFilter>;
+  order26?: Maybe<ColumnOrder>;
+  first26?: Maybe<Scalars['Int']>;
+  offset26?: Maybe<Scalars['Int']>;
+  filter34?: Maybe<BoardFilter>;
+  filter35?: Maybe<ColumnFilter>;
+  order27?: Maybe<ColumnOrder>;
+  first27?: Maybe<Scalars['Int']>;
+  offset27?: Maybe<Scalars['Int']>;
   id: Scalars['ID'];
 };
 
@@ -4849,7 +5366,68 @@ export type GetBoardQuery = (
     & { project: (
       { __typename?: 'Project' }
       & Pick<Project, 'id' | 'title' | 'description'>
-      & { tags: Maybe<Array<Maybe<(
+      & { hosts: Array<Maybe<(
+        { __typename?: 'User' }
+        & Pick<User, 'id' | 'username' | 'password' | 'location'>
+        & { developer: Maybe<Array<Maybe<(
+          { __typename?: 'Developer' }
+          & Pick<Developer, 'id' | 'name' | 'availability'>
+          & { project: (
+            { __typename?: 'Project' }
+            & Pick<Project, 'id' | 'title' | 'description'>
+          ), user: Maybe<Array<Maybe<(
+            { __typename?: 'User' }
+            & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          )>>>, tags: Maybe<Array<Maybe<(
+            { __typename?: 'Tag' }
+            & Pick<Tag, 'id' | 'title'>
+          )>>>, tasks: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>>, liked: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        )>>>, host: Maybe<Array<Maybe<(
+          { __typename?: 'Project' }
+          & Pick<Project, 'id' | 'title' | 'description'>
+          & { hosts: Array<Maybe<(
+            { __typename?: 'User' }
+            & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          )>>, tags: Maybe<Array<Maybe<(
+            { __typename?: 'Tag' }
+            & Pick<Tag, 'id' | 'title'>
+          )>>>, tasks: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>>, boards: Maybe<Array<Maybe<(
+            { __typename?: 'Board' }
+            & Pick<Board, 'id' | 'title' | 'order'>
+          )>>>, developers: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>> }
+        )>>>, stars: Maybe<Array<Maybe<(
+          { __typename?: 'Task' }
+          & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          & { project: (
+            { __typename?: 'Project' }
+            & Pick<Project, 'id' | 'title' | 'description'>
+          ), column: Maybe<(
+            { __typename?: 'Column' }
+            & Pick<Column, 'id' | 'title'>
+          )>, developers: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>>, likes: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>>, comments: Maybe<Array<Maybe<(
+            { __typename?: 'Comment' }
+            & Pick<Comment, 'id' | 'content'>
+          )>>> }
+        )>>> }
+      )>>, tags: Maybe<Array<Maybe<(
         { __typename?: 'Tag' }
         & Pick<Tag, 'id' | 'title'>
         & { project: (
@@ -4909,78 +5487,94 @@ export type GetBoardQuery = (
 );
 
 export type GetColumnQueryVariables = {
-  filter?: Maybe<ProjectFilter>;
-  filter1?: Maybe<DeveloperFilter>;
+  filter?: Maybe<DeveloperFilter>;
   order?: Maybe<DeveloperOrder>;
   first?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  filter2?: Maybe<TagFilter>;
-  order1?: Maybe<TagOrder>;
+  filter1?: Maybe<ProjectFilter>;
+  order1?: Maybe<ProjectOrder>;
   first1?: Maybe<Scalars['Int']>;
   offset1?: Maybe<Scalars['Int']>;
-  filter3?: Maybe<ProjectFilter>;
-  filter4?: Maybe<ColumnFilter>;
-  filter5?: Maybe<DeveloperFilter>;
-  order2?: Maybe<DeveloperOrder>;
+  filter2?: Maybe<TaskFilter>;
+  order2?: Maybe<TaskOrder>;
   first2?: Maybe<Scalars['Int']>;
   offset2?: Maybe<Scalars['Int']>;
-  filter6?: Maybe<DeveloperFilter>;
-  order3?: Maybe<DeveloperOrder>;
+  filter3?: Maybe<UserFilter>;
+  order3?: Maybe<UserOrder>;
   first3?: Maybe<Scalars['Int']>;
   offset3?: Maybe<Scalars['Int']>;
-  filter7?: Maybe<CommentFilter>;
-  order4?: Maybe<CommentOrder>;
+  filter4?: Maybe<ProjectFilter>;
+  filter5?: Maybe<DeveloperFilter>;
+  order4?: Maybe<DeveloperOrder>;
   first4?: Maybe<Scalars['Int']>;
   offset4?: Maybe<Scalars['Int']>;
-  filter8?: Maybe<TaskFilter>;
-  order5?: Maybe<TaskOrder>;
+  filter6?: Maybe<TagFilter>;
+  order5?: Maybe<TagOrder>;
   first5?: Maybe<Scalars['Int']>;
   offset5?: Maybe<Scalars['Int']>;
-  filter9?: Maybe<ProjectFilter>;
-  filter10?: Maybe<ColumnFilter>;
-  order6?: Maybe<ColumnOrder>;
+  filter7?: Maybe<ProjectFilter>;
+  filter8?: Maybe<ColumnFilter>;
+  filter9?: Maybe<DeveloperFilter>;
+  order6?: Maybe<DeveloperOrder>;
   first6?: Maybe<Scalars['Int']>;
   offset6?: Maybe<Scalars['Int']>;
-  filter11?: Maybe<BoardFilter>;
-  order7?: Maybe<BoardOrder>;
+  filter10?: Maybe<DeveloperFilter>;
+  order7?: Maybe<DeveloperOrder>;
   first7?: Maybe<Scalars['Int']>;
   offset7?: Maybe<Scalars['Int']>;
-  filter12?: Maybe<ProjectFilter>;
-  filter13?: Maybe<UserFilter>;
-  order8?: Maybe<UserOrder>;
+  filter11?: Maybe<CommentFilter>;
+  order8?: Maybe<CommentOrder>;
   first8?: Maybe<Scalars['Int']>;
   offset8?: Maybe<Scalars['Int']>;
-  filter14?: Maybe<TagFilter>;
-  order9?: Maybe<TagOrder>;
+  filter12?: Maybe<TaskFilter>;
+  order9?: Maybe<TaskOrder>;
   first9?: Maybe<Scalars['Int']>;
   offset9?: Maybe<Scalars['Int']>;
-  filter15?: Maybe<TaskFilter>;
-  order10?: Maybe<TaskOrder>;
+  filter13?: Maybe<ProjectFilter>;
+  filter14?: Maybe<ColumnFilter>;
+  order10?: Maybe<ColumnOrder>;
   first10?: Maybe<Scalars['Int']>;
   offset10?: Maybe<Scalars['Int']>;
-  filter16?: Maybe<TaskFilter>;
-  order11?: Maybe<TaskOrder>;
+  filter15?: Maybe<BoardFilter>;
+  order11?: Maybe<BoardOrder>;
   first11?: Maybe<Scalars['Int']>;
   offset11?: Maybe<Scalars['Int']>;
-  filter17?: Maybe<DeveloperFilter>;
-  order12?: Maybe<DeveloperOrder>;
+  filter16?: Maybe<ProjectFilter>;
+  filter17?: Maybe<UserFilter>;
+  order12?: Maybe<UserOrder>;
   first12?: Maybe<Scalars['Int']>;
   offset12?: Maybe<Scalars['Int']>;
-  filter18?: Maybe<ProjectFilter>;
-  filter19?: Maybe<BoardFilter>;
-  filter20?: Maybe<TaskFilter>;
-  order13?: Maybe<TaskOrder>;
+  filter18?: Maybe<TagFilter>;
+  order13?: Maybe<TagOrder>;
   first13?: Maybe<Scalars['Int']>;
   offset13?: Maybe<Scalars['Int']>;
-  filter21?: Maybe<ColumnFilter>;
-  order14?: Maybe<ColumnOrder>;
+  filter19?: Maybe<TaskFilter>;
+  order14?: Maybe<TaskOrder>;
   first14?: Maybe<Scalars['Int']>;
   offset14?: Maybe<Scalars['Int']>;
-  filter22?: Maybe<BoardFilter>;
-  filter23?: Maybe<TaskFilter>;
+  filter20?: Maybe<TaskFilter>;
   order15?: Maybe<TaskOrder>;
   first15?: Maybe<Scalars['Int']>;
   offset15?: Maybe<Scalars['Int']>;
+  filter21?: Maybe<DeveloperFilter>;
+  order16?: Maybe<DeveloperOrder>;
+  first16?: Maybe<Scalars['Int']>;
+  offset16?: Maybe<Scalars['Int']>;
+  filter22?: Maybe<ProjectFilter>;
+  filter23?: Maybe<BoardFilter>;
+  filter24?: Maybe<TaskFilter>;
+  order17?: Maybe<TaskOrder>;
+  first17?: Maybe<Scalars['Int']>;
+  offset17?: Maybe<Scalars['Int']>;
+  filter25?: Maybe<ColumnFilter>;
+  order18?: Maybe<ColumnOrder>;
+  first18?: Maybe<Scalars['Int']>;
+  offset18?: Maybe<Scalars['Int']>;
+  filter26?: Maybe<BoardFilter>;
+  filter27?: Maybe<TaskFilter>;
+  order19?: Maybe<TaskOrder>;
+  first19?: Maybe<Scalars['Int']>;
+  offset19?: Maybe<Scalars['Int']>;
   id: Scalars['ID'];
 };
 
@@ -4996,7 +5590,20 @@ export type GetColumnQuery = (
       & { project: (
         { __typename?: 'Project' }
         & Pick<Project, 'id' | 'title' | 'description'>
-        & { tags: Maybe<Array<Maybe<(
+        & { hosts: Array<Maybe<(
+          { __typename?: 'User' }
+          & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          & { developer: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>>, host: Maybe<Array<Maybe<(
+            { __typename?: 'Project' }
+            & Pick<Project, 'id' | 'title' | 'description'>
+          )>>>, stars: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        )>>, tags: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
           & { project: (
@@ -5074,147 +5681,167 @@ export type GetColumnQuery = (
 );
 
 export type GetCommentQueryVariables = {
-  filter?: Maybe<ProjectFilter>;
-  filter1?: Maybe<DeveloperFilter>;
+  filter?: Maybe<DeveloperFilter>;
   order?: Maybe<DeveloperOrder>;
   first?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  filter2?: Maybe<TagFilter>;
-  order1?: Maybe<TagOrder>;
+  filter1?: Maybe<ProjectFilter>;
+  order1?: Maybe<ProjectOrder>;
   first1?: Maybe<Scalars['Int']>;
   offset1?: Maybe<Scalars['Int']>;
-  filter3?: Maybe<ProjectFilter>;
-  filter4?: Maybe<ColumnFilter>;
-  filter5?: Maybe<DeveloperFilter>;
-  order2?: Maybe<DeveloperOrder>;
+  filter2?: Maybe<TaskFilter>;
+  order2?: Maybe<TaskOrder>;
   first2?: Maybe<Scalars['Int']>;
   offset2?: Maybe<Scalars['Int']>;
-  filter6?: Maybe<DeveloperFilter>;
-  order3?: Maybe<DeveloperOrder>;
+  filter3?: Maybe<UserFilter>;
+  order3?: Maybe<UserOrder>;
   first3?: Maybe<Scalars['Int']>;
   offset3?: Maybe<Scalars['Int']>;
-  filter7?: Maybe<CommentFilter>;
-  order4?: Maybe<CommentOrder>;
+  filter4?: Maybe<ProjectFilter>;
+  filter5?: Maybe<DeveloperFilter>;
+  order4?: Maybe<DeveloperOrder>;
   first4?: Maybe<Scalars['Int']>;
   offset4?: Maybe<Scalars['Int']>;
-  filter8?: Maybe<TaskFilter>;
-  order5?: Maybe<TaskOrder>;
+  filter6?: Maybe<TagFilter>;
+  order5?: Maybe<TagOrder>;
   first5?: Maybe<Scalars['Int']>;
   offset5?: Maybe<Scalars['Int']>;
-  filter9?: Maybe<ProjectFilter>;
-  filter10?: Maybe<ColumnFilter>;
-  order6?: Maybe<ColumnOrder>;
+  filter7?: Maybe<ProjectFilter>;
+  filter8?: Maybe<ColumnFilter>;
+  filter9?: Maybe<DeveloperFilter>;
+  order6?: Maybe<DeveloperOrder>;
   first6?: Maybe<Scalars['Int']>;
   offset6?: Maybe<Scalars['Int']>;
-  filter11?: Maybe<BoardFilter>;
-  order7?: Maybe<BoardOrder>;
+  filter10?: Maybe<DeveloperFilter>;
+  order7?: Maybe<DeveloperOrder>;
   first7?: Maybe<Scalars['Int']>;
   offset7?: Maybe<Scalars['Int']>;
-  filter12?: Maybe<ProjectFilter>;
-  filter13?: Maybe<UserFilter>;
-  order8?: Maybe<UserOrder>;
+  filter11?: Maybe<CommentFilter>;
+  order8?: Maybe<CommentOrder>;
   first8?: Maybe<Scalars['Int']>;
   offset8?: Maybe<Scalars['Int']>;
-  filter14?: Maybe<TagFilter>;
-  order9?: Maybe<TagOrder>;
+  filter12?: Maybe<TaskFilter>;
+  order9?: Maybe<TaskOrder>;
   first9?: Maybe<Scalars['Int']>;
   offset9?: Maybe<Scalars['Int']>;
-  filter15?: Maybe<TaskFilter>;
-  order10?: Maybe<TaskOrder>;
+  filter13?: Maybe<ProjectFilter>;
+  filter14?: Maybe<ColumnFilter>;
+  order10?: Maybe<ColumnOrder>;
   first10?: Maybe<Scalars['Int']>;
   offset10?: Maybe<Scalars['Int']>;
-  filter16?: Maybe<TaskFilter>;
-  order11?: Maybe<TaskOrder>;
+  filter15?: Maybe<BoardFilter>;
+  order11?: Maybe<BoardOrder>;
   first11?: Maybe<Scalars['Int']>;
   offset11?: Maybe<Scalars['Int']>;
-  filter17?: Maybe<DeveloperFilter>;
-  order12?: Maybe<DeveloperOrder>;
+  filter16?: Maybe<ProjectFilter>;
+  filter17?: Maybe<UserFilter>;
+  order12?: Maybe<UserOrder>;
   first12?: Maybe<Scalars['Int']>;
   offset12?: Maybe<Scalars['Int']>;
-  filter18?: Maybe<ProjectFilter>;
-  filter19?: Maybe<ProjectFilter>;
-  filter20?: Maybe<ColumnFilter>;
-  order13?: Maybe<ColumnOrder>;
+  filter18?: Maybe<TagFilter>;
+  order13?: Maybe<TagOrder>;
   first13?: Maybe<Scalars['Int']>;
   offset13?: Maybe<Scalars['Int']>;
-  filter21?: Maybe<BoardFilter>;
-  filter22?: Maybe<TaskFilter>;
+  filter19?: Maybe<TaskFilter>;
   order14?: Maybe<TaskOrder>;
   first14?: Maybe<Scalars['Int']>;
   offset14?: Maybe<Scalars['Int']>;
-  filter23?: Maybe<ColumnFilter>;
-  filter24?: Maybe<DeveloperFilter>;
-  order15?: Maybe<DeveloperOrder>;
+  filter20?: Maybe<TaskFilter>;
+  order15?: Maybe<TaskOrder>;
   first15?: Maybe<Scalars['Int']>;
   offset15?: Maybe<Scalars['Int']>;
-  filter25?: Maybe<ProjectFilter>;
-  filter26?: Maybe<DeveloperFilter>;
+  filter21?: Maybe<DeveloperFilter>;
   order16?: Maybe<DeveloperOrder>;
   first16?: Maybe<Scalars['Int']>;
   offset16?: Maybe<Scalars['Int']>;
-  filter27?: Maybe<TaskFilter>;
-  order17?: Maybe<TaskOrder>;
+  filter22?: Maybe<ProjectFilter>;
+  filter23?: Maybe<ProjectFilter>;
+  filter24?: Maybe<ColumnFilter>;
+  order17?: Maybe<ColumnOrder>;
   first17?: Maybe<Scalars['Int']>;
   offset17?: Maybe<Scalars['Int']>;
-  filter28?: Maybe<UserFilter>;
-  order18?: Maybe<UserOrder>;
+  filter25?: Maybe<BoardFilter>;
+  filter26?: Maybe<TaskFilter>;
+  order18?: Maybe<TaskOrder>;
   first18?: Maybe<Scalars['Int']>;
   offset18?: Maybe<Scalars['Int']>;
-  filter29?: Maybe<TagFilter>;
-  order19?: Maybe<TagOrder>;
+  filter27?: Maybe<ColumnFilter>;
+  filter28?: Maybe<DeveloperFilter>;
+  order19?: Maybe<DeveloperOrder>;
   first19?: Maybe<Scalars['Int']>;
   offset19?: Maybe<Scalars['Int']>;
-  filter30?: Maybe<TaskFilter>;
-  order20?: Maybe<TaskOrder>;
+  filter29?: Maybe<ProjectFilter>;
+  filter30?: Maybe<DeveloperFilter>;
+  order20?: Maybe<DeveloperOrder>;
   first20?: Maybe<Scalars['Int']>;
   offset20?: Maybe<Scalars['Int']>;
   filter31?: Maybe<ProjectFilter>;
-  filter32?: Maybe<ColumnFilter>;
-  filter33?: Maybe<DeveloperFilter>;
-  order21?: Maybe<DeveloperOrder>;
+  order21?: Maybe<ProjectOrder>;
   first21?: Maybe<Scalars['Int']>;
   offset21?: Maybe<Scalars['Int']>;
-  filter34?: Maybe<DeveloperFilter>;
-  order22?: Maybe<DeveloperOrder>;
+  filter32?: Maybe<TaskFilter>;
+  order22?: Maybe<TaskOrder>;
   first22?: Maybe<Scalars['Int']>;
   offset22?: Maybe<Scalars['Int']>;
-  filter35?: Maybe<CommentFilter>;
-  order23?: Maybe<CommentOrder>;
+  filter33?: Maybe<UserFilter>;
+  order23?: Maybe<UserOrder>;
   first23?: Maybe<Scalars['Int']>;
   offset23?: Maybe<Scalars['Int']>;
-  filter36?: Maybe<TaskFilter>;
-  order24?: Maybe<TaskOrder>;
+  filter34?: Maybe<TagFilter>;
+  order24?: Maybe<TagOrder>;
   first24?: Maybe<Scalars['Int']>;
   offset24?: Maybe<Scalars['Int']>;
-  filter37?: Maybe<DeveloperFilter>;
-  order25?: Maybe<DeveloperOrder>;
+  filter35?: Maybe<TaskFilter>;
+  order25?: Maybe<TaskOrder>;
   first25?: Maybe<Scalars['Int']>;
   offset25?: Maybe<Scalars['Int']>;
-  filter38?: Maybe<TaskFilter>;
-  filter39?: Maybe<ProjectFilter>;
-  filter40?: Maybe<UserFilter>;
-  order26?: Maybe<UserOrder>;
+  filter36?: Maybe<ProjectFilter>;
+  filter37?: Maybe<ColumnFilter>;
+  filter38?: Maybe<DeveloperFilter>;
+  order26?: Maybe<DeveloperOrder>;
   first26?: Maybe<Scalars['Int']>;
   offset26?: Maybe<Scalars['Int']>;
-  filter41?: Maybe<TagFilter>;
-  order27?: Maybe<TagOrder>;
+  filter39?: Maybe<DeveloperFilter>;
+  order27?: Maybe<DeveloperOrder>;
   first27?: Maybe<Scalars['Int']>;
   offset27?: Maybe<Scalars['Int']>;
-  filter42?: Maybe<TaskFilter>;
-  order28?: Maybe<TaskOrder>;
+  filter40?: Maybe<CommentFilter>;
+  order28?: Maybe<CommentOrder>;
   first28?: Maybe<Scalars['Int']>;
   offset28?: Maybe<Scalars['Int']>;
-  filter43?: Maybe<TaskFilter>;
+  filter41?: Maybe<TaskFilter>;
   order29?: Maybe<TaskOrder>;
   first29?: Maybe<Scalars['Int']>;
   offset29?: Maybe<Scalars['Int']>;
-  filter44?: Maybe<DeveloperFilter>;
-  filter45?: Maybe<CommentFilter>;
-  order30?: Maybe<CommentOrder>;
+  filter42?: Maybe<DeveloperFilter>;
+  order30?: Maybe<DeveloperOrder>;
   first30?: Maybe<Scalars['Int']>;
   offset30?: Maybe<Scalars['Int']>;
-  filter46?: Maybe<TaskFilter>;
-  filter47?: Maybe<DeveloperFilter>;
+  filter43?: Maybe<TaskFilter>;
+  filter44?: Maybe<ProjectFilter>;
+  filter45?: Maybe<UserFilter>;
+  order31?: Maybe<UserOrder>;
+  first31?: Maybe<Scalars['Int']>;
+  offset31?: Maybe<Scalars['Int']>;
+  filter46?: Maybe<TagFilter>;
+  order32?: Maybe<TagOrder>;
+  first32?: Maybe<Scalars['Int']>;
+  offset32?: Maybe<Scalars['Int']>;
+  filter47?: Maybe<TaskFilter>;
+  order33?: Maybe<TaskOrder>;
+  first33?: Maybe<Scalars['Int']>;
+  offset33?: Maybe<Scalars['Int']>;
+  filter48?: Maybe<TaskFilter>;
+  order34?: Maybe<TaskOrder>;
+  first34?: Maybe<Scalars['Int']>;
+  offset34?: Maybe<Scalars['Int']>;
+  filter49?: Maybe<DeveloperFilter>;
+  filter50?: Maybe<CommentFilter>;
+  order35?: Maybe<CommentOrder>;
+  first35?: Maybe<Scalars['Int']>;
+  offset35?: Maybe<Scalars['Int']>;
+  filter51?: Maybe<TaskFilter>;
+  filter52?: Maybe<DeveloperFilter>;
   id: Scalars['ID'];
 };
 
@@ -5230,7 +5857,20 @@ export type GetCommentQuery = (
       & { project: (
         { __typename?: 'Project' }
         & Pick<Project, 'id' | 'title' | 'description'>
-        & { tags: Maybe<Array<Maybe<(
+        & { hosts: Array<Maybe<(
+          { __typename?: 'User' }
+          & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          & { developer: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>>, host: Maybe<Array<Maybe<(
+            { __typename?: 'Project' }
+            & Pick<Project, 'id' | 'title' | 'description'>
+          )>>>, stars: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        )>>, tags: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
           & { project: (
@@ -5318,9 +5958,12 @@ export type GetCommentQuery = (
         ), user: Maybe<Array<Maybe<(
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          & { roles: Maybe<Array<Maybe<(
+          & { developer: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>>, host: Maybe<Array<Maybe<(
+            { __typename?: 'Project' }
+            & Pick<Project, 'id' | 'title' | 'description'>
           )>>>, stars: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
@@ -5386,114 +6029,195 @@ export type GetCommentQuery = (
 );
 
 export type GetDeveloperQueryVariables = {
-  filter?: Maybe<TaskFilter>;
-  order?: Maybe<TaskOrder>;
+  filter?: Maybe<ProjectFilter>;
+  filter1?: Maybe<UserFilter>;
+  order?: Maybe<UserOrder>;
   first?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  filter1?: Maybe<BoardFilter>;
-  order1?: Maybe<BoardOrder>;
+  filter2?: Maybe<TagFilter>;
+  order1?: Maybe<TagOrder>;
   first1?: Maybe<Scalars['Int']>;
   offset1?: Maybe<Scalars['Int']>;
-  filter2?: Maybe<DeveloperFilter>;
-  order2?: Maybe<DeveloperOrder>;
+  filter3?: Maybe<TaskFilter>;
+  order2?: Maybe<TaskOrder>;
   first2?: Maybe<Scalars['Int']>;
   offset2?: Maybe<Scalars['Int']>;
-  filter3?: Maybe<ProjectFilter>;
-  filter4?: Maybe<ProjectFilter>;
-  filter5?: Maybe<UserFilter>;
-  order3?: Maybe<UserOrder>;
+  filter4?: Maybe<TaskFilter>;
+  order3?: Maybe<TaskOrder>;
   first3?: Maybe<Scalars['Int']>;
   offset3?: Maybe<Scalars['Int']>;
-  filter6?: Maybe<TagFilter>;
-  order4?: Maybe<TagOrder>;
+  filter5?: Maybe<DeveloperFilter>;
+  order4?: Maybe<DeveloperOrder>;
   first4?: Maybe<Scalars['Int']>;
   offset4?: Maybe<Scalars['Int']>;
-  filter7?: Maybe<TaskFilter>;
-  order5?: Maybe<TaskOrder>;
+  filter6?: Maybe<UserFilter>;
+  order5?: Maybe<UserOrder>;
   first5?: Maybe<Scalars['Int']>;
   offset5?: Maybe<Scalars['Int']>;
-  filter8?: Maybe<TaskFilter>;
-  order6?: Maybe<TaskOrder>;
+  filter7?: Maybe<TagFilter>;
+  order6?: Maybe<TagOrder>;
   first6?: Maybe<Scalars['Int']>;
   offset6?: Maybe<Scalars['Int']>;
-  filter9?: Maybe<DeveloperFilter>;
-  order7?: Maybe<DeveloperOrder>;
+  filter8?: Maybe<TaskFilter>;
+  order7?: Maybe<TaskOrder>;
   first7?: Maybe<Scalars['Int']>;
   offset7?: Maybe<Scalars['Int']>;
-  filter10?: Maybe<TagFilter>;
-  order8?: Maybe<TagOrder>;
+  filter9?: Maybe<BoardFilter>;
+  order8?: Maybe<BoardOrder>;
   first8?: Maybe<Scalars['Int']>;
   offset8?: Maybe<Scalars['Int']>;
-  filter11?: Maybe<ProjectFilter>;
-  filter12?: Maybe<ProjectFilter>;
-  filter13?: Maybe<TaskFilter>;
-  order9?: Maybe<TaskOrder>;
+  filter10?: Maybe<DeveloperFilter>;
+  order9?: Maybe<DeveloperOrder>;
   first9?: Maybe<Scalars['Int']>;
   offset9?: Maybe<Scalars['Int']>;
-  filter14?: Maybe<UserFilter>;
-  order10?: Maybe<UserOrder>;
+  filter11?: Maybe<ProjectFilter>;
+  order10?: Maybe<ProjectOrder>;
   first10?: Maybe<Scalars['Int']>;
   offset10?: Maybe<Scalars['Int']>;
-  filter15?: Maybe<TagFilter>;
-  order11?: Maybe<TagOrder>;
+  filter12?: Maybe<ProjectFilter>;
+  filter13?: Maybe<ColumnFilter>;
+  filter14?: Maybe<DeveloperFilter>;
+  order11?: Maybe<DeveloperOrder>;
   first11?: Maybe<Scalars['Int']>;
   offset11?: Maybe<Scalars['Int']>;
-  filter16?: Maybe<ProjectFilter>;
-  filter17?: Maybe<ColumnFilter>;
-  filter18?: Maybe<DeveloperFilter>;
+  filter15?: Maybe<DeveloperFilter>;
   order12?: Maybe<DeveloperOrder>;
   first12?: Maybe<Scalars['Int']>;
   offset12?: Maybe<Scalars['Int']>;
-  filter19?: Maybe<DeveloperFilter>;
-  order13?: Maybe<DeveloperOrder>;
+  filter16?: Maybe<CommentFilter>;
+  order13?: Maybe<CommentOrder>;
   first13?: Maybe<Scalars['Int']>;
   offset13?: Maybe<Scalars['Int']>;
-  filter20?: Maybe<CommentFilter>;
-  order14?: Maybe<CommentOrder>;
+  filter17?: Maybe<TaskFilter>;
+  order14?: Maybe<TaskOrder>;
   first14?: Maybe<Scalars['Int']>;
   offset14?: Maybe<Scalars['Int']>;
-  filter21?: Maybe<TaskFilter>;
-  order15?: Maybe<TaskOrder>;
+  filter18?: Maybe<UserFilter>;
+  order15?: Maybe<UserOrder>;
   first15?: Maybe<Scalars['Int']>;
   offset15?: Maybe<Scalars['Int']>;
-  filter22?: Maybe<ProjectFilter>;
-  filter23?: Maybe<ColumnFilter>;
-  filter24?: Maybe<DeveloperFilter>;
-  order16?: Maybe<DeveloperOrder>;
+  filter19?: Maybe<TaskFilter>;
+  order16?: Maybe<TaskOrder>;
   first16?: Maybe<Scalars['Int']>;
   offset16?: Maybe<Scalars['Int']>;
-  filter25?: Maybe<DeveloperFilter>;
-  order17?: Maybe<DeveloperOrder>;
+  filter20?: Maybe<BoardFilter>;
+  order17?: Maybe<BoardOrder>;
   first17?: Maybe<Scalars['Int']>;
   offset17?: Maybe<Scalars['Int']>;
-  filter26?: Maybe<CommentFilter>;
-  order18?: Maybe<CommentOrder>;
+  filter21?: Maybe<DeveloperFilter>;
+  order18?: Maybe<DeveloperOrder>;
   first18?: Maybe<Scalars['Int']>;
   offset18?: Maybe<Scalars['Int']>;
-  filter27?: Maybe<TaskFilter>;
-  order19?: Maybe<TaskOrder>;
+  filter22?: Maybe<ProjectFilter>;
+  filter23?: Maybe<ProjectFilter>;
+  filter24?: Maybe<UserFilter>;
+  order19?: Maybe<UserOrder>;
   first19?: Maybe<Scalars['Int']>;
   offset19?: Maybe<Scalars['Int']>;
-  filter28?: Maybe<DeveloperFilter>;
-  order20?: Maybe<DeveloperOrder>;
+  filter25?: Maybe<TagFilter>;
+  order20?: Maybe<TagOrder>;
   first20?: Maybe<Scalars['Int']>;
   offset20?: Maybe<Scalars['Int']>;
-  filter29?: Maybe<UserFilter>;
-  order21?: Maybe<UserOrder>;
+  filter26?: Maybe<TaskFilter>;
+  order21?: Maybe<TaskOrder>;
   first21?: Maybe<Scalars['Int']>;
   offset21?: Maybe<Scalars['Int']>;
-  filter30?: Maybe<TagFilter>;
-  order22?: Maybe<TagOrder>;
+  filter27?: Maybe<TaskFilter>;
+  order22?: Maybe<TaskOrder>;
   first22?: Maybe<Scalars['Int']>;
   offset22?: Maybe<Scalars['Int']>;
-  filter31?: Maybe<TaskFilter>;
-  order23?: Maybe<TaskOrder>;
+  filter28?: Maybe<DeveloperFilter>;
+  order23?: Maybe<DeveloperOrder>;
   first23?: Maybe<Scalars['Int']>;
   offset23?: Maybe<Scalars['Int']>;
-  filter32?: Maybe<TaskFilter>;
-  order24?: Maybe<TaskOrder>;
+  filter29?: Maybe<TagFilter>;
+  order24?: Maybe<TagOrder>;
   first24?: Maybe<Scalars['Int']>;
   offset24?: Maybe<Scalars['Int']>;
+  filter30?: Maybe<ProjectFilter>;
+  filter31?: Maybe<DeveloperFilter>;
+  order25?: Maybe<DeveloperOrder>;
+  first25?: Maybe<Scalars['Int']>;
+  offset25?: Maybe<Scalars['Int']>;
+  filter32?: Maybe<ProjectFilter>;
+  order26?: Maybe<ProjectOrder>;
+  first26?: Maybe<Scalars['Int']>;
+  offset26?: Maybe<Scalars['Int']>;
+  filter33?: Maybe<TaskFilter>;
+  order27?: Maybe<TaskOrder>;
+  first27?: Maybe<Scalars['Int']>;
+  offset27?: Maybe<Scalars['Int']>;
+  filter34?: Maybe<UserFilter>;
+  order28?: Maybe<UserOrder>;
+  first28?: Maybe<Scalars['Int']>;
+  offset28?: Maybe<Scalars['Int']>;
+  filter35?: Maybe<TagFilter>;
+  order29?: Maybe<TagOrder>;
+  first29?: Maybe<Scalars['Int']>;
+  offset29?: Maybe<Scalars['Int']>;
+  filter36?: Maybe<ProjectFilter>;
+  filter37?: Maybe<ProjectFilter>;
+  filter38?: Maybe<ColumnFilter>;
+  order30?: Maybe<ColumnOrder>;
+  first30?: Maybe<Scalars['Int']>;
+  offset30?: Maybe<Scalars['Int']>;
+  filter39?: Maybe<BoardFilter>;
+  filter40?: Maybe<DeveloperFilter>;
+  order31?: Maybe<DeveloperOrder>;
+  first31?: Maybe<Scalars['Int']>;
+  offset31?: Maybe<Scalars['Int']>;
+  filter41?: Maybe<DeveloperFilter>;
+  order32?: Maybe<DeveloperOrder>;
+  first32?: Maybe<Scalars['Int']>;
+  offset32?: Maybe<Scalars['Int']>;
+  filter42?: Maybe<CommentFilter>;
+  order33?: Maybe<CommentOrder>;
+  first33?: Maybe<Scalars['Int']>;
+  offset33?: Maybe<Scalars['Int']>;
+  filter43?: Maybe<TaskFilter>;
+  order34?: Maybe<TaskOrder>;
+  first34?: Maybe<Scalars['Int']>;
+  offset34?: Maybe<Scalars['Int']>;
+  filter44?: Maybe<ColumnFilter>;
+  filter45?: Maybe<TaskFilter>;
+  order35?: Maybe<TaskOrder>;
+  first35?: Maybe<Scalars['Int']>;
+  offset35?: Maybe<Scalars['Int']>;
+  filter46?: Maybe<ProjectFilter>;
+  filter47?: Maybe<ColumnFilter>;
+  filter48?: Maybe<DeveloperFilter>;
+  order36?: Maybe<DeveloperOrder>;
+  first36?: Maybe<Scalars['Int']>;
+  offset36?: Maybe<Scalars['Int']>;
+  filter49?: Maybe<ProjectFilter>;
+  filter50?: Maybe<UserFilter>;
+  order37?: Maybe<UserOrder>;
+  first37?: Maybe<Scalars['Int']>;
+  offset37?: Maybe<Scalars['Int']>;
+  filter51?: Maybe<TagFilter>;
+  order38?: Maybe<TagOrder>;
+  first38?: Maybe<Scalars['Int']>;
+  offset38?: Maybe<Scalars['Int']>;
+  filter52?: Maybe<TaskFilter>;
+  order39?: Maybe<TaskOrder>;
+  first39?: Maybe<Scalars['Int']>;
+  offset39?: Maybe<Scalars['Int']>;
+  filter53?: Maybe<CommentFilter>;
+  order40?: Maybe<CommentOrder>;
+  first40?: Maybe<Scalars['Int']>;
+  offset40?: Maybe<Scalars['Int']>;
+  filter54?: Maybe<TaskFilter>;
+  order41?: Maybe<TaskOrder>;
+  first41?: Maybe<Scalars['Int']>;
+  offset41?: Maybe<Scalars['Int']>;
+  filter55?: Maybe<DeveloperFilter>;
+  order42?: Maybe<DeveloperOrder>;
+  first42?: Maybe<Scalars['Int']>;
+  offset42?: Maybe<Scalars['Int']>;
+  filter56?: Maybe<TaskFilter>;
+  order43?: Maybe<TaskOrder>;
+  first43?: Maybe<Scalars['Int']>;
+  offset43?: Maybe<Scalars['Int']>;
   id: Scalars['ID'];
 };
 
@@ -5506,7 +6230,68 @@ export type GetDeveloperQuery = (
     & { project: (
       { __typename?: 'Project' }
       & Pick<Project, 'id' | 'title' | 'description'>
-      & { tags: Maybe<Array<Maybe<(
+      & { hosts: Array<Maybe<(
+        { __typename?: 'User' }
+        & Pick<User, 'id' | 'username' | 'password' | 'location'>
+        & { developer: Maybe<Array<Maybe<(
+          { __typename?: 'Developer' }
+          & Pick<Developer, 'id' | 'name' | 'availability'>
+          & { project: (
+            { __typename?: 'Project' }
+            & Pick<Project, 'id' | 'title' | 'description'>
+          ), user: Maybe<Array<Maybe<(
+            { __typename?: 'User' }
+            & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          )>>>, tags: Maybe<Array<Maybe<(
+            { __typename?: 'Tag' }
+            & Pick<Tag, 'id' | 'title'>
+          )>>>, tasks: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>>, liked: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        )>>>, host: Maybe<Array<Maybe<(
+          { __typename?: 'Project' }
+          & Pick<Project, 'id' | 'title' | 'description'>
+          & { hosts: Array<Maybe<(
+            { __typename?: 'User' }
+            & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          )>>, tags: Maybe<Array<Maybe<(
+            { __typename?: 'Tag' }
+            & Pick<Tag, 'id' | 'title'>
+          )>>>, tasks: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>>, boards: Maybe<Array<Maybe<(
+            { __typename?: 'Board' }
+            & Pick<Board, 'id' | 'title' | 'order'>
+          )>>>, developers: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>> }
+        )>>>, stars: Maybe<Array<Maybe<(
+          { __typename?: 'Task' }
+          & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          & { project: (
+            { __typename?: 'Project' }
+            & Pick<Project, 'id' | 'title' | 'description'>
+          ), column: Maybe<(
+            { __typename?: 'Column' }
+            & Pick<Column, 'id' | 'title'>
+          )>, developers: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>>, likes: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>>, comments: Maybe<Array<Maybe<(
+            { __typename?: 'Comment' }
+            & Pick<Comment, 'id' | 'content'>
+          )>>> }
+        )>>> }
+      )>>, tags: Maybe<Array<Maybe<(
         { __typename?: 'Tag' }
         & Pick<Tag, 'id' | 'title'>
         & { project: (
@@ -5546,7 +6331,66 @@ export type GetDeveloperQuery = (
     ), user: Maybe<Array<Maybe<(
       { __typename?: 'User' }
       & Pick<User, 'id' | 'username' | 'password' | 'location'>
-      & { roles: Maybe<Array<Maybe<(
+      & { developer: Maybe<Array<Maybe<(
+        { __typename?: 'Developer' }
+        & Pick<Developer, 'id' | 'name' | 'availability'>
+      )>>>, host: Maybe<Array<Maybe<(
+        { __typename?: 'Project' }
+        & Pick<Project, 'id' | 'title' | 'description'>
+      )>>>, stars: Maybe<Array<Maybe<(
+        { __typename?: 'Task' }
+        & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+      )>>> }
+    )>>>, tags: Maybe<Array<Maybe<(
+      { __typename?: 'Tag' }
+      & Pick<Tag, 'id' | 'title'>
+    )>>>, tasks: Maybe<Array<Maybe<(
+      { __typename?: 'Task' }
+      & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+      & { project: (
+        { __typename?: 'Project' }
+        & Pick<Project, 'id' | 'title' | 'description'>
+      ), column: Maybe<(
+        { __typename?: 'Column' }
+        & Pick<Column, 'id' | 'title'>
+        & { board: (
+          { __typename?: 'Board' }
+          & Pick<Board, 'id' | 'title' | 'order'>
+          & { project: (
+            { __typename?: 'Project' }
+            & Pick<Project, 'id' | 'title' | 'description'>
+          ), columns: Maybe<Array<Maybe<(
+            { __typename?: 'Column' }
+            & Pick<Column, 'id' | 'title'>
+          )>>> }
+        ), tasks: Maybe<Array<Maybe<(
+          { __typename?: 'Task' }
+          & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          & { developers: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>>, likes: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>>, comments: Maybe<Array<Maybe<(
+            { __typename?: 'Comment' }
+            & Pick<Comment, 'id' | 'content'>
+          )>>> }
+        )>>> }
+      )> }
+    )>>>, liked: Maybe<Array<Maybe<(
+      { __typename?: 'Task' }
+      & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+      & { project: (
+        { __typename?: 'Project' }
+        & Pick<Project, 'id' | 'title' | 'description'>
+      ), column: Maybe<(
+        { __typename?: 'Column' }
+        & Pick<Column, 'id' | 'title'>
+      )>, developers: Maybe<Array<Maybe<(
+        { __typename?: 'Developer' }
+        & Pick<Developer, 'id' | 'name' | 'availability'>
+      )>>>, likes: Maybe<Array<Maybe<(
         { __typename?: 'Developer' }
         & Pick<Developer, 'id' | 'name' | 'availability'>
         & { project: (
@@ -5555,13 +6399,239 @@ export type GetDeveloperQuery = (
         ), user: Maybe<Array<Maybe<(
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          & { stars: Maybe<Array<Maybe<(
+        )>>>, tags: Maybe<Array<Maybe<(
+          { __typename?: 'Tag' }
+          & Pick<Tag, 'id' | 'title'>
+        )>>>, tasks: Maybe<Array<Maybe<(
+          { __typename?: 'Task' }
+          & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+        )>>>, liked: Maybe<Array<Maybe<(
+          { __typename?: 'Task' }
+          & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          & { comments: Maybe<Array<Maybe<(
+            { __typename?: 'Comment' }
+            & Pick<Comment, 'id' | 'content'>
+          )>>> }
+        )>>> }
+      )>>> }
+    )>>> }
+  )> }
+);
+
+export type GetProjectQueryVariables = {
+  filter?: Maybe<UserFilter>;
+  order?: Maybe<UserOrder>;
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  filter1?: Maybe<TagFilter>;
+  order1?: Maybe<TagOrder>;
+  first1?: Maybe<Scalars['Int']>;
+  offset1?: Maybe<Scalars['Int']>;
+  filter2?: Maybe<TaskFilter>;
+  order2?: Maybe<TaskOrder>;
+  first2?: Maybe<Scalars['Int']>;
+  offset2?: Maybe<Scalars['Int']>;
+  filter3?: Maybe<BoardFilter>;
+  order3?: Maybe<BoardOrder>;
+  first3?: Maybe<Scalars['Int']>;
+  offset3?: Maybe<Scalars['Int']>;
+  filter4?: Maybe<DeveloperFilter>;
+  order4?: Maybe<DeveloperOrder>;
+  first4?: Maybe<Scalars['Int']>;
+  offset4?: Maybe<Scalars['Int']>;
+  filter5?: Maybe<ProjectFilter>;
+  filter6?: Maybe<DeveloperFilter>;
+  order5?: Maybe<DeveloperOrder>;
+  first5?: Maybe<Scalars['Int']>;
+  offset5?: Maybe<Scalars['Int']>;
+  filter7?: Maybe<ProjectFilter>;
+  order6?: Maybe<ProjectOrder>;
+  first6?: Maybe<Scalars['Int']>;
+  offset6?: Maybe<Scalars['Int']>;
+  filter8?: Maybe<TaskFilter>;
+  order7?: Maybe<TaskOrder>;
+  first7?: Maybe<Scalars['Int']>;
+  offset7?: Maybe<Scalars['Int']>;
+  filter9?: Maybe<UserFilter>;
+  order8?: Maybe<UserOrder>;
+  first8?: Maybe<Scalars['Int']>;
+  offset8?: Maybe<Scalars['Int']>;
+  filter10?: Maybe<ProjectFilter>;
+  filter11?: Maybe<DeveloperFilter>;
+  order9?: Maybe<DeveloperOrder>;
+  first9?: Maybe<Scalars['Int']>;
+  offset9?: Maybe<Scalars['Int']>;
+  filter12?: Maybe<TagFilter>;
+  order10?: Maybe<TagOrder>;
+  first10?: Maybe<Scalars['Int']>;
+  offset10?: Maybe<Scalars['Int']>;
+  filter13?: Maybe<ProjectFilter>;
+  filter14?: Maybe<ColumnFilter>;
+  filter15?: Maybe<DeveloperFilter>;
+  order11?: Maybe<DeveloperOrder>;
+  first11?: Maybe<Scalars['Int']>;
+  offset11?: Maybe<Scalars['Int']>;
+  filter16?: Maybe<DeveloperFilter>;
+  order12?: Maybe<DeveloperOrder>;
+  first12?: Maybe<Scalars['Int']>;
+  offset12?: Maybe<Scalars['Int']>;
+  filter17?: Maybe<CommentFilter>;
+  order13?: Maybe<CommentOrder>;
+  first13?: Maybe<Scalars['Int']>;
+  offset13?: Maybe<Scalars['Int']>;
+  filter18?: Maybe<TaskFilter>;
+  order14?: Maybe<TaskOrder>;
+  first14?: Maybe<Scalars['Int']>;
+  offset14?: Maybe<Scalars['Int']>;
+  filter19?: Maybe<ProjectFilter>;
+  filter20?: Maybe<ColumnFilter>;
+  filter21?: Maybe<DeveloperFilter>;
+  order15?: Maybe<DeveloperOrder>;
+  first15?: Maybe<Scalars['Int']>;
+  offset15?: Maybe<Scalars['Int']>;
+  filter22?: Maybe<DeveloperFilter>;
+  order16?: Maybe<DeveloperOrder>;
+  first16?: Maybe<Scalars['Int']>;
+  offset16?: Maybe<Scalars['Int']>;
+  filter23?: Maybe<CommentFilter>;
+  order17?: Maybe<CommentOrder>;
+  first17?: Maybe<Scalars['Int']>;
+  offset17?: Maybe<Scalars['Int']>;
+  filter24?: Maybe<TaskFilter>;
+  order18?: Maybe<TaskOrder>;
+  first18?: Maybe<Scalars['Int']>;
+  offset18?: Maybe<Scalars['Int']>;
+  filter25?: Maybe<DeveloperFilter>;
+  order19?: Maybe<DeveloperOrder>;
+  first19?: Maybe<Scalars['Int']>;
+  offset19?: Maybe<Scalars['Int']>;
+  filter26?: Maybe<TaskFilter>;
+  order20?: Maybe<TaskOrder>;
+  first20?: Maybe<Scalars['Int']>;
+  offset20?: Maybe<Scalars['Int']>;
+  filter27?: Maybe<UserFilter>;
+  order21?: Maybe<UserOrder>;
+  first21?: Maybe<Scalars['Int']>;
+  offset21?: Maybe<Scalars['Int']>;
+  filter28?: Maybe<TagFilter>;
+  order22?: Maybe<TagOrder>;
+  first22?: Maybe<Scalars['Int']>;
+  offset22?: Maybe<Scalars['Int']>;
+  filter29?: Maybe<TaskFilter>;
+  order23?: Maybe<TaskOrder>;
+  first23?: Maybe<Scalars['Int']>;
+  offset23?: Maybe<Scalars['Int']>;
+  filter30?: Maybe<ProjectFilter>;
+  filter31?: Maybe<ColumnFilter>;
+  order24?: Maybe<ColumnOrder>;
+  first24?: Maybe<Scalars['Int']>;
+  offset24?: Maybe<Scalars['Int']>;
+  filter32?: Maybe<BoardFilter>;
+  order25?: Maybe<BoardOrder>;
+  first25?: Maybe<Scalars['Int']>;
+  offset25?: Maybe<Scalars['Int']>;
+  filter33?: Maybe<ProjectFilter>;
+  filter34?: Maybe<UserFilter>;
+  order26?: Maybe<UserOrder>;
+  first26?: Maybe<Scalars['Int']>;
+  offset26?: Maybe<Scalars['Int']>;
+  filter35?: Maybe<TagFilter>;
+  order27?: Maybe<TagOrder>;
+  first27?: Maybe<Scalars['Int']>;
+  offset27?: Maybe<Scalars['Int']>;
+  filter36?: Maybe<TaskFilter>;
+  order28?: Maybe<TaskOrder>;
+  first28?: Maybe<Scalars['Int']>;
+  offset28?: Maybe<Scalars['Int']>;
+  filter37?: Maybe<TaskFilter>;
+  order29?: Maybe<TaskOrder>;
+  first29?: Maybe<Scalars['Int']>;
+  offset29?: Maybe<Scalars['Int']>;
+  filter38?: Maybe<DeveloperFilter>;
+  order30?: Maybe<DeveloperOrder>;
+  first30?: Maybe<Scalars['Int']>;
+  offset30?: Maybe<Scalars['Int']>;
+  filter39?: Maybe<ProjectFilter>;
+  order31?: Maybe<ProjectOrder>;
+  first31?: Maybe<Scalars['Int']>;
+  offset31?: Maybe<Scalars['Int']>;
+  filter40?: Maybe<UserFilter>;
+  order32?: Maybe<UserOrder>;
+  first32?: Maybe<Scalars['Int']>;
+  offset32?: Maybe<Scalars['Int']>;
+  filter41?: Maybe<TagFilter>;
+  order33?: Maybe<TagOrder>;
+  first33?: Maybe<Scalars['Int']>;
+  offset33?: Maybe<Scalars['Int']>;
+  filter42?: Maybe<TaskFilter>;
+  order34?: Maybe<TaskOrder>;
+  first34?: Maybe<Scalars['Int']>;
+  offset34?: Maybe<Scalars['Int']>;
+  filter43?: Maybe<BoardFilter>;
+  order35?: Maybe<BoardOrder>;
+  first35?: Maybe<Scalars['Int']>;
+  offset35?: Maybe<Scalars['Int']>;
+  filter44?: Maybe<DeveloperFilter>;
+  order36?: Maybe<DeveloperOrder>;
+  first36?: Maybe<Scalars['Int']>;
+  offset36?: Maybe<Scalars['Int']>;
+  id: Scalars['ID'];
+};
+
+
+export type GetProjectQuery = (
+  { __typename?: 'Query' }
+  & { getProject: Maybe<(
+    { __typename?: 'Project' }
+    & Pick<Project, 'id' | 'title' | 'description'>
+    & { hosts: Array<Maybe<(
+      { __typename?: 'User' }
+      & Pick<User, 'id' | 'username' | 'password' | 'location'>
+      & { developer: Maybe<Array<Maybe<(
+        { __typename?: 'Developer' }
+        & Pick<Developer, 'id' | 'name' | 'availability'>
+        & { project: (
+          { __typename?: 'Project' }
+          & Pick<Project, 'id' | 'title' | 'description'>
+          & { hosts: Array<Maybe<(
+            { __typename?: 'User' }
+            & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          )>>, tags: Maybe<Array<Maybe<(
+            { __typename?: 'Tag' }
+            & Pick<Tag, 'id' | 'title'>
+          )>>>, tasks: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>>, boards: Maybe<Array<Maybe<(
+            { __typename?: 'Board' }
+            & Pick<Board, 'id' | 'title' | 'order'>
+          )>>>, developers: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>> }
+        ), user: Maybe<Array<Maybe<(
+          { __typename?: 'User' }
+          & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          & { developer: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>>, host: Maybe<Array<Maybe<(
+            { __typename?: 'Project' }
+            & Pick<Project, 'id' | 'title' | 'description'>
+          )>>>, stars: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
         )>>>, tags: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
+          & { project: (
+            { __typename?: 'Project' }
+            & Pick<Project, 'id' | 'title' | 'description'>
+          ), developers: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>> }
         )>>>, tasks: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
@@ -5601,135 +6671,22 @@ export type GetDeveloperQuery = (
             & Pick<Comment, 'id' | 'content'>
           )>>> }
         )>>> }
-      )>>> }
-    )>>>, tags: Maybe<Array<Maybe<(
-      { __typename?: 'Tag' }
-      & Pick<Tag, 'id' | 'title'>
-    )>>>, tasks: Maybe<Array<Maybe<(
-      { __typename?: 'Task' }
-      & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-    )>>>, liked: Maybe<Array<Maybe<(
-      { __typename?: 'Task' }
-      & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-    )>>> }
-  )> }
-);
-
-export type GetProjectQueryVariables = {
-  filter?: Maybe<DeveloperFilter>;
-  order?: Maybe<DeveloperOrder>;
-  first?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  filter1?: Maybe<TagFilter>;
-  order1?: Maybe<TagOrder>;
-  first1?: Maybe<Scalars['Int']>;
-  offset1?: Maybe<Scalars['Int']>;
-  filter2?: Maybe<ProjectFilter>;
-  filter3?: Maybe<ColumnFilter>;
-  filter4?: Maybe<DeveloperFilter>;
-  order2?: Maybe<DeveloperOrder>;
-  first2?: Maybe<Scalars['Int']>;
-  offset2?: Maybe<Scalars['Int']>;
-  filter5?: Maybe<DeveloperFilter>;
-  order3?: Maybe<DeveloperOrder>;
-  first3?: Maybe<Scalars['Int']>;
-  offset3?: Maybe<Scalars['Int']>;
-  filter6?: Maybe<CommentFilter>;
-  order4?: Maybe<CommentOrder>;
-  first4?: Maybe<Scalars['Int']>;
-  offset4?: Maybe<Scalars['Int']>;
-  filter7?: Maybe<TaskFilter>;
-  order5?: Maybe<TaskOrder>;
-  first5?: Maybe<Scalars['Int']>;
-  offset5?: Maybe<Scalars['Int']>;
-  filter8?: Maybe<ProjectFilter>;
-  filter9?: Maybe<ColumnFilter>;
-  order6?: Maybe<ColumnOrder>;
-  first6?: Maybe<Scalars['Int']>;
-  offset6?: Maybe<Scalars['Int']>;
-  filter10?: Maybe<BoardFilter>;
-  order7?: Maybe<BoardOrder>;
-  first7?: Maybe<Scalars['Int']>;
-  offset7?: Maybe<Scalars['Int']>;
-  filter11?: Maybe<ProjectFilter>;
-  filter12?: Maybe<UserFilter>;
-  order8?: Maybe<UserOrder>;
-  first8?: Maybe<Scalars['Int']>;
-  offset8?: Maybe<Scalars['Int']>;
-  filter13?: Maybe<TagFilter>;
-  order9?: Maybe<TagOrder>;
-  first9?: Maybe<Scalars['Int']>;
-  offset9?: Maybe<Scalars['Int']>;
-  filter14?: Maybe<TaskFilter>;
-  order10?: Maybe<TaskOrder>;
-  first10?: Maybe<Scalars['Int']>;
-  offset10?: Maybe<Scalars['Int']>;
-  filter15?: Maybe<TaskFilter>;
-  order11?: Maybe<TaskOrder>;
-  first11?: Maybe<Scalars['Int']>;
-  offset11?: Maybe<Scalars['Int']>;
-  filter16?: Maybe<DeveloperFilter>;
-  order12?: Maybe<DeveloperOrder>;
-  first12?: Maybe<Scalars['Int']>;
-  offset12?: Maybe<Scalars['Int']>;
-  filter17?: Maybe<ProjectFilter>;
-  filter18?: Maybe<TagFilter>;
-  order13?: Maybe<TagOrder>;
-  first13?: Maybe<Scalars['Int']>;
-  offset13?: Maybe<Scalars['Int']>;
-  filter19?: Maybe<TaskFilter>;
-  order14?: Maybe<TaskOrder>;
-  first14?: Maybe<Scalars['Int']>;
-  offset14?: Maybe<Scalars['Int']>;
-  filter20?: Maybe<BoardFilter>;
-  order15?: Maybe<BoardOrder>;
-  first15?: Maybe<Scalars['Int']>;
-  offset15?: Maybe<Scalars['Int']>;
-  filter21?: Maybe<DeveloperFilter>;
-  order16?: Maybe<DeveloperOrder>;
-  first16?: Maybe<Scalars['Int']>;
-  offset16?: Maybe<Scalars['Int']>;
-  id: Scalars['ID'];
-};
-
-
-export type GetProjectQuery = (
-  { __typename?: 'Query' }
-  & { getProject: Maybe<(
-    { __typename?: 'Project' }
-    & Pick<Project, 'id' | 'title' | 'description'>
-    & { tags: Maybe<Array<Maybe<(
-      { __typename?: 'Tag' }
-      & Pick<Tag, 'id' | 'title'>
-      & { project: (
+      )>>>, host: Maybe<Array<Maybe<(
         { __typename?: 'Project' }
         & Pick<Project, 'id' | 'title' | 'description'>
-        & { tags: Maybe<Array<Maybe<(
+        & { hosts: Array<Maybe<(
+          { __typename?: 'User' }
+          & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          & { stars: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        )>>, tags: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
-          & { developers: Maybe<Array<Maybe<(
-            { __typename?: 'Developer' }
-            & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>> }
         )>>>, tasks: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          & { project: (
-            { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: Maybe<(
-            { __typename?: 'Column' }
-            & Pick<Column, 'id' | 'title'>
-          )>, developers: Maybe<Array<Maybe<(
-            { __typename?: 'Developer' }
-            & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, likes: Maybe<Array<Maybe<(
-            { __typename?: 'Developer' }
-            & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, comments: Maybe<Array<Maybe<(
-            { __typename?: 'Comment' }
-            & Pick<Comment, 'id' | 'content'>
-          )>>> }
         )>>>, boards: Maybe<Array<Maybe<(
           { __typename?: 'Board' }
           & Pick<Board, 'id' | 'title' | 'order'>
@@ -5760,7 +6717,10 @@ export type GetProjectQuery = (
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
         )>>> }
-      ) }
+      )>>> }
+    )>>, tags: Maybe<Array<Maybe<(
+      { __typename?: 'Tag' }
+      & Pick<Tag, 'id' | 'title'>
     )>>>, tasks: Maybe<Array<Maybe<(
       { __typename?: 'Task' }
       & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
@@ -5775,49 +6735,116 @@ export type GetProjectQuery = (
 );
 
 export type GetTagQueryVariables = {
-  filter?: Maybe<TaskFilter>;
-  order?: Maybe<TaskOrder>;
+  filter?: Maybe<ProjectFilter>;
+  filter1?: Maybe<UserFilter>;
+  order?: Maybe<UserOrder>;
   first?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  filter1?: Maybe<BoardFilter>;
-  order1?: Maybe<BoardOrder>;
+  filter2?: Maybe<TagFilter>;
+  order1?: Maybe<TagOrder>;
   first1?: Maybe<Scalars['Int']>;
   offset1?: Maybe<Scalars['Int']>;
-  filter2?: Maybe<DeveloperFilter>;
-  order2?: Maybe<DeveloperOrder>;
+  filter3?: Maybe<TaskFilter>;
+  order2?: Maybe<TaskOrder>;
   first2?: Maybe<Scalars['Int']>;
   offset2?: Maybe<Scalars['Int']>;
-  filter3?: Maybe<ProjectFilter>;
-  filter4?: Maybe<ProjectFilter>;
-  filter5?: Maybe<UserFilter>;
-  order3?: Maybe<UserOrder>;
+  filter4?: Maybe<TaskFilter>;
+  order3?: Maybe<TaskOrder>;
   first3?: Maybe<Scalars['Int']>;
   offset3?: Maybe<Scalars['Int']>;
-  filter6?: Maybe<TagFilter>;
-  order4?: Maybe<TagOrder>;
+  filter5?: Maybe<DeveloperFilter>;
+  order4?: Maybe<DeveloperOrder>;
   first4?: Maybe<Scalars['Int']>;
   offset4?: Maybe<Scalars['Int']>;
-  filter7?: Maybe<TaskFilter>;
-  order5?: Maybe<TaskOrder>;
+  filter6?: Maybe<UserFilter>;
+  order5?: Maybe<UserOrder>;
   first5?: Maybe<Scalars['Int']>;
   offset5?: Maybe<Scalars['Int']>;
-  filter8?: Maybe<TaskFilter>;
-  order6?: Maybe<TaskOrder>;
+  filter7?: Maybe<TagFilter>;
+  order6?: Maybe<TagOrder>;
   first6?: Maybe<Scalars['Int']>;
   offset6?: Maybe<Scalars['Int']>;
-  filter9?: Maybe<DeveloperFilter>;
-  order7?: Maybe<DeveloperOrder>;
+  filter8?: Maybe<TaskFilter>;
+  order7?: Maybe<TaskOrder>;
   first7?: Maybe<Scalars['Int']>;
   offset7?: Maybe<Scalars['Int']>;
-  filter10?: Maybe<TagFilter>;
-  order8?: Maybe<TagOrder>;
+  filter9?: Maybe<BoardFilter>;
+  order8?: Maybe<BoardOrder>;
   first8?: Maybe<Scalars['Int']>;
   offset8?: Maybe<Scalars['Int']>;
-  filter11?: Maybe<ProjectFilter>;
-  filter12?: Maybe<DeveloperFilter>;
+  filter10?: Maybe<DeveloperFilter>;
   order9?: Maybe<DeveloperOrder>;
   first9?: Maybe<Scalars['Int']>;
   offset9?: Maybe<Scalars['Int']>;
+  filter11?: Maybe<ProjectFilter>;
+  order10?: Maybe<ProjectOrder>;
+  first10?: Maybe<Scalars['Int']>;
+  offset10?: Maybe<Scalars['Int']>;
+  filter12?: Maybe<ProjectFilter>;
+  filter13?: Maybe<ColumnFilter>;
+  filter14?: Maybe<DeveloperFilter>;
+  order11?: Maybe<DeveloperOrder>;
+  first11?: Maybe<Scalars['Int']>;
+  offset11?: Maybe<Scalars['Int']>;
+  filter15?: Maybe<DeveloperFilter>;
+  order12?: Maybe<DeveloperOrder>;
+  first12?: Maybe<Scalars['Int']>;
+  offset12?: Maybe<Scalars['Int']>;
+  filter16?: Maybe<CommentFilter>;
+  order13?: Maybe<CommentOrder>;
+  first13?: Maybe<Scalars['Int']>;
+  offset13?: Maybe<Scalars['Int']>;
+  filter17?: Maybe<TaskFilter>;
+  order14?: Maybe<TaskOrder>;
+  first14?: Maybe<Scalars['Int']>;
+  offset14?: Maybe<Scalars['Int']>;
+  filter18?: Maybe<UserFilter>;
+  order15?: Maybe<UserOrder>;
+  first15?: Maybe<Scalars['Int']>;
+  offset15?: Maybe<Scalars['Int']>;
+  filter19?: Maybe<TaskFilter>;
+  order16?: Maybe<TaskOrder>;
+  first16?: Maybe<Scalars['Int']>;
+  offset16?: Maybe<Scalars['Int']>;
+  filter20?: Maybe<BoardFilter>;
+  order17?: Maybe<BoardOrder>;
+  first17?: Maybe<Scalars['Int']>;
+  offset17?: Maybe<Scalars['Int']>;
+  filter21?: Maybe<DeveloperFilter>;
+  order18?: Maybe<DeveloperOrder>;
+  first18?: Maybe<Scalars['Int']>;
+  offset18?: Maybe<Scalars['Int']>;
+  filter22?: Maybe<ProjectFilter>;
+  filter23?: Maybe<ProjectFilter>;
+  filter24?: Maybe<UserFilter>;
+  order19?: Maybe<UserOrder>;
+  first19?: Maybe<Scalars['Int']>;
+  offset19?: Maybe<Scalars['Int']>;
+  filter25?: Maybe<TagFilter>;
+  order20?: Maybe<TagOrder>;
+  first20?: Maybe<Scalars['Int']>;
+  offset20?: Maybe<Scalars['Int']>;
+  filter26?: Maybe<TaskFilter>;
+  order21?: Maybe<TaskOrder>;
+  first21?: Maybe<Scalars['Int']>;
+  offset21?: Maybe<Scalars['Int']>;
+  filter27?: Maybe<TaskFilter>;
+  order22?: Maybe<TaskOrder>;
+  first22?: Maybe<Scalars['Int']>;
+  offset22?: Maybe<Scalars['Int']>;
+  filter28?: Maybe<DeveloperFilter>;
+  order23?: Maybe<DeveloperOrder>;
+  first23?: Maybe<Scalars['Int']>;
+  offset23?: Maybe<Scalars['Int']>;
+  filter29?: Maybe<TagFilter>;
+  order24?: Maybe<TagOrder>;
+  first24?: Maybe<Scalars['Int']>;
+  offset24?: Maybe<Scalars['Int']>;
+  filter30?: Maybe<ProjectFilter>;
+  filter31?: Maybe<DeveloperFilter>;
+  order25?: Maybe<DeveloperOrder>;
+  first25?: Maybe<Scalars['Int']>;
+  offset25?: Maybe<Scalars['Int']>;
   id: Scalars['ID'];
 };
 
@@ -5830,7 +6857,68 @@ export type GetTagQuery = (
     & { project: (
       { __typename?: 'Project' }
       & Pick<Project, 'id' | 'title' | 'description'>
-      & { tags: Maybe<Array<Maybe<(
+      & { hosts: Array<Maybe<(
+        { __typename?: 'User' }
+        & Pick<User, 'id' | 'username' | 'password' | 'location'>
+        & { developer: Maybe<Array<Maybe<(
+          { __typename?: 'Developer' }
+          & Pick<Developer, 'id' | 'name' | 'availability'>
+          & { project: (
+            { __typename?: 'Project' }
+            & Pick<Project, 'id' | 'title' | 'description'>
+          ), user: Maybe<Array<Maybe<(
+            { __typename?: 'User' }
+            & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          )>>>, tags: Maybe<Array<Maybe<(
+            { __typename?: 'Tag' }
+            & Pick<Tag, 'id' | 'title'>
+          )>>>, tasks: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>>, liked: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        )>>>, host: Maybe<Array<Maybe<(
+          { __typename?: 'Project' }
+          & Pick<Project, 'id' | 'title' | 'description'>
+          & { hosts: Array<Maybe<(
+            { __typename?: 'User' }
+            & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          )>>, tags: Maybe<Array<Maybe<(
+            { __typename?: 'Tag' }
+            & Pick<Tag, 'id' | 'title'>
+          )>>>, tasks: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>>, boards: Maybe<Array<Maybe<(
+            { __typename?: 'Board' }
+            & Pick<Board, 'id' | 'title' | 'order'>
+          )>>>, developers: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>> }
+        )>>>, stars: Maybe<Array<Maybe<(
+          { __typename?: 'Task' }
+          & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          & { project: (
+            { __typename?: 'Project' }
+            & Pick<Project, 'id' | 'title' | 'description'>
+          ), column: Maybe<(
+            { __typename?: 'Column' }
+            & Pick<Column, 'id' | 'title'>
+          )>, developers: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>>, likes: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>>, comments: Maybe<Array<Maybe<(
+            { __typename?: 'Comment' }
+            & Pick<Comment, 'id' | 'content'>
+          )>>> }
+        )>>> }
+      )>>, tags: Maybe<Array<Maybe<(
         { __typename?: 'Tag' }
         & Pick<Tag, 'id' | 'title'>
         & { project: (
@@ -5875,106 +6963,173 @@ export type GetTagQuery = (
 );
 
 export type GetTaskQueryVariables = {
-  filter?: Maybe<TaskFilter>;
-  order?: Maybe<TaskOrder>;
+  filter?: Maybe<ProjectFilter>;
+  filter1?: Maybe<UserFilter>;
+  order?: Maybe<UserOrder>;
   first?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  filter1?: Maybe<BoardFilter>;
-  order1?: Maybe<BoardOrder>;
+  filter2?: Maybe<TagFilter>;
+  order1?: Maybe<TagOrder>;
   first1?: Maybe<Scalars['Int']>;
   offset1?: Maybe<Scalars['Int']>;
-  filter2?: Maybe<DeveloperFilter>;
-  order2?: Maybe<DeveloperOrder>;
+  filter3?: Maybe<TaskFilter>;
+  order2?: Maybe<TaskOrder>;
   first2?: Maybe<Scalars['Int']>;
   offset2?: Maybe<Scalars['Int']>;
-  filter3?: Maybe<ProjectFilter>;
-  filter4?: Maybe<ProjectFilter>;
-  filter5?: Maybe<UserFilter>;
-  order3?: Maybe<UserOrder>;
+  filter4?: Maybe<TaskFilter>;
+  order3?: Maybe<TaskOrder>;
   first3?: Maybe<Scalars['Int']>;
   offset3?: Maybe<Scalars['Int']>;
-  filter6?: Maybe<TagFilter>;
-  order4?: Maybe<TagOrder>;
+  filter5?: Maybe<DeveloperFilter>;
+  order4?: Maybe<DeveloperOrder>;
   first4?: Maybe<Scalars['Int']>;
   offset4?: Maybe<Scalars['Int']>;
-  filter7?: Maybe<TaskFilter>;
-  order5?: Maybe<TaskOrder>;
+  filter6?: Maybe<UserFilter>;
+  order5?: Maybe<UserOrder>;
   first5?: Maybe<Scalars['Int']>;
   offset5?: Maybe<Scalars['Int']>;
-  filter8?: Maybe<TaskFilter>;
-  order6?: Maybe<TaskOrder>;
+  filter7?: Maybe<TagFilter>;
+  order6?: Maybe<TagOrder>;
   first6?: Maybe<Scalars['Int']>;
   offset6?: Maybe<Scalars['Int']>;
-  filter9?: Maybe<DeveloperFilter>;
-  order7?: Maybe<DeveloperOrder>;
+  filter8?: Maybe<TaskFilter>;
+  order7?: Maybe<TaskOrder>;
   first7?: Maybe<Scalars['Int']>;
   offset7?: Maybe<Scalars['Int']>;
-  filter10?: Maybe<TagFilter>;
-  order8?: Maybe<TagOrder>;
+  filter9?: Maybe<BoardFilter>;
+  order8?: Maybe<BoardOrder>;
   first8?: Maybe<Scalars['Int']>;
   offset8?: Maybe<Scalars['Int']>;
-  filter11?: Maybe<ProjectFilter>;
-  filter12?: Maybe<ProjectFilter>;
-  filter13?: Maybe<BoardFilter>;
-  filter14?: Maybe<TaskFilter>;
-  order9?: Maybe<TaskOrder>;
+  filter10?: Maybe<DeveloperFilter>;
+  order9?: Maybe<DeveloperOrder>;
   first9?: Maybe<Scalars['Int']>;
   offset9?: Maybe<Scalars['Int']>;
-  filter15?: Maybe<ColumnFilter>;
-  order10?: Maybe<ColumnOrder>;
+  filter11?: Maybe<ProjectFilter>;
+  order10?: Maybe<ProjectOrder>;
   first10?: Maybe<Scalars['Int']>;
   offset10?: Maybe<Scalars['Int']>;
-  filter16?: Maybe<BoardFilter>;
-  filter17?: Maybe<ProjectFilter>;
-  filter18?: Maybe<ColumnFilter>;
-  filter19?: Maybe<DeveloperFilter>;
+  filter12?: Maybe<ProjectFilter>;
+  filter13?: Maybe<ColumnFilter>;
+  filter14?: Maybe<DeveloperFilter>;
   order11?: Maybe<DeveloperOrder>;
   first11?: Maybe<Scalars['Int']>;
   offset11?: Maybe<Scalars['Int']>;
-  filter20?: Maybe<ProjectFilter>;
-  filter21?: Maybe<UserFilter>;
-  order12?: Maybe<UserOrder>;
+  filter15?: Maybe<DeveloperFilter>;
+  order12?: Maybe<DeveloperOrder>;
   first12?: Maybe<Scalars['Int']>;
   offset12?: Maybe<Scalars['Int']>;
-  filter22?: Maybe<TagFilter>;
-  order13?: Maybe<TagOrder>;
+  filter16?: Maybe<CommentFilter>;
+  order13?: Maybe<CommentOrder>;
   first13?: Maybe<Scalars['Int']>;
   offset13?: Maybe<Scalars['Int']>;
-  filter23?: Maybe<TaskFilter>;
+  filter17?: Maybe<TaskFilter>;
   order14?: Maybe<TaskOrder>;
   first14?: Maybe<Scalars['Int']>;
   offset14?: Maybe<Scalars['Int']>;
-  filter24?: Maybe<TaskFilter>;
-  order15?: Maybe<TaskOrder>;
+  filter18?: Maybe<UserFilter>;
+  order15?: Maybe<UserOrder>;
   first15?: Maybe<Scalars['Int']>;
   offset15?: Maybe<Scalars['Int']>;
-  filter25?: Maybe<DeveloperFilter>;
-  order16?: Maybe<DeveloperOrder>;
+  filter19?: Maybe<TaskFilter>;
+  order16?: Maybe<TaskOrder>;
   first16?: Maybe<Scalars['Int']>;
   offset16?: Maybe<Scalars['Int']>;
-  filter26?: Maybe<TaskFilter>;
-  filter27?: Maybe<DeveloperFilter>;
-  filter28?: Maybe<CommentFilter>;
-  order17?: Maybe<CommentOrder>;
+  filter20?: Maybe<BoardFilter>;
+  order17?: Maybe<BoardOrder>;
   first17?: Maybe<Scalars['Int']>;
   offset17?: Maybe<Scalars['Int']>;
-  filter29?: Maybe<TaskFilter>;
-  order18?: Maybe<TaskOrder>;
+  filter21?: Maybe<DeveloperFilter>;
+  order18?: Maybe<DeveloperOrder>;
   first18?: Maybe<Scalars['Int']>;
   offset18?: Maybe<Scalars['Int']>;
-  filter30?: Maybe<ColumnFilter>;
-  filter31?: Maybe<DeveloperFilter>;
-  order19?: Maybe<DeveloperOrder>;
+  filter22?: Maybe<ProjectFilter>;
+  filter23?: Maybe<ProjectFilter>;
+  filter24?: Maybe<UserFilter>;
+  order19?: Maybe<UserOrder>;
   first19?: Maybe<Scalars['Int']>;
   offset19?: Maybe<Scalars['Int']>;
-  filter32?: Maybe<DeveloperFilter>;
-  order20?: Maybe<DeveloperOrder>;
+  filter25?: Maybe<TagFilter>;
+  order20?: Maybe<TagOrder>;
   first20?: Maybe<Scalars['Int']>;
   offset20?: Maybe<Scalars['Int']>;
-  filter33?: Maybe<CommentFilter>;
-  order21?: Maybe<CommentOrder>;
+  filter26?: Maybe<TaskFilter>;
+  order21?: Maybe<TaskOrder>;
   first21?: Maybe<Scalars['Int']>;
   offset21?: Maybe<Scalars['Int']>;
+  filter27?: Maybe<TaskFilter>;
+  order22?: Maybe<TaskOrder>;
+  first22?: Maybe<Scalars['Int']>;
+  offset22?: Maybe<Scalars['Int']>;
+  filter28?: Maybe<DeveloperFilter>;
+  order23?: Maybe<DeveloperOrder>;
+  first23?: Maybe<Scalars['Int']>;
+  offset23?: Maybe<Scalars['Int']>;
+  filter29?: Maybe<TagFilter>;
+  order24?: Maybe<TagOrder>;
+  first24?: Maybe<Scalars['Int']>;
+  offset24?: Maybe<Scalars['Int']>;
+  filter30?: Maybe<ProjectFilter>;
+  filter31?: Maybe<ProjectFilter>;
+  filter32?: Maybe<BoardFilter>;
+  filter33?: Maybe<TaskFilter>;
+  order25?: Maybe<TaskOrder>;
+  first25?: Maybe<Scalars['Int']>;
+  offset25?: Maybe<Scalars['Int']>;
+  filter34?: Maybe<ColumnFilter>;
+  order26?: Maybe<ColumnOrder>;
+  first26?: Maybe<Scalars['Int']>;
+  offset26?: Maybe<Scalars['Int']>;
+  filter35?: Maybe<BoardFilter>;
+  filter36?: Maybe<ProjectFilter>;
+  filter37?: Maybe<ColumnFilter>;
+  filter38?: Maybe<DeveloperFilter>;
+  order27?: Maybe<DeveloperOrder>;
+  first27?: Maybe<Scalars['Int']>;
+  offset27?: Maybe<Scalars['Int']>;
+  filter39?: Maybe<ProjectFilter>;
+  filter40?: Maybe<UserFilter>;
+  order28?: Maybe<UserOrder>;
+  first28?: Maybe<Scalars['Int']>;
+  offset28?: Maybe<Scalars['Int']>;
+  filter41?: Maybe<TagFilter>;
+  order29?: Maybe<TagOrder>;
+  first29?: Maybe<Scalars['Int']>;
+  offset29?: Maybe<Scalars['Int']>;
+  filter42?: Maybe<TaskFilter>;
+  order30?: Maybe<TaskOrder>;
+  first30?: Maybe<Scalars['Int']>;
+  offset30?: Maybe<Scalars['Int']>;
+  filter43?: Maybe<TaskFilter>;
+  order31?: Maybe<TaskOrder>;
+  first31?: Maybe<Scalars['Int']>;
+  offset31?: Maybe<Scalars['Int']>;
+  filter44?: Maybe<DeveloperFilter>;
+  order32?: Maybe<DeveloperOrder>;
+  first32?: Maybe<Scalars['Int']>;
+  offset32?: Maybe<Scalars['Int']>;
+  filter45?: Maybe<TaskFilter>;
+  filter46?: Maybe<DeveloperFilter>;
+  filter47?: Maybe<CommentFilter>;
+  order33?: Maybe<CommentOrder>;
+  first33?: Maybe<Scalars['Int']>;
+  offset33?: Maybe<Scalars['Int']>;
+  filter48?: Maybe<TaskFilter>;
+  order34?: Maybe<TaskOrder>;
+  first34?: Maybe<Scalars['Int']>;
+  offset34?: Maybe<Scalars['Int']>;
+  filter49?: Maybe<ColumnFilter>;
+  filter50?: Maybe<DeveloperFilter>;
+  order35?: Maybe<DeveloperOrder>;
+  first35?: Maybe<Scalars['Int']>;
+  offset35?: Maybe<Scalars['Int']>;
+  filter51?: Maybe<DeveloperFilter>;
+  order36?: Maybe<DeveloperOrder>;
+  first36?: Maybe<Scalars['Int']>;
+  offset36?: Maybe<Scalars['Int']>;
+  filter52?: Maybe<CommentFilter>;
+  order37?: Maybe<CommentOrder>;
+  first37?: Maybe<Scalars['Int']>;
+  offset37?: Maybe<Scalars['Int']>;
   id: Scalars['ID'];
 };
 
@@ -5987,7 +7142,68 @@ export type GetTaskQuery = (
     & { project: (
       { __typename?: 'Project' }
       & Pick<Project, 'id' | 'title' | 'description'>
-      & { tags: Maybe<Array<Maybe<(
+      & { hosts: Array<Maybe<(
+        { __typename?: 'User' }
+        & Pick<User, 'id' | 'username' | 'password' | 'location'>
+        & { developer: Maybe<Array<Maybe<(
+          { __typename?: 'Developer' }
+          & Pick<Developer, 'id' | 'name' | 'availability'>
+          & { project: (
+            { __typename?: 'Project' }
+            & Pick<Project, 'id' | 'title' | 'description'>
+          ), user: Maybe<Array<Maybe<(
+            { __typename?: 'User' }
+            & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          )>>>, tags: Maybe<Array<Maybe<(
+            { __typename?: 'Tag' }
+            & Pick<Tag, 'id' | 'title'>
+          )>>>, tasks: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>>, liked: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        )>>>, host: Maybe<Array<Maybe<(
+          { __typename?: 'Project' }
+          & Pick<Project, 'id' | 'title' | 'description'>
+          & { hosts: Array<Maybe<(
+            { __typename?: 'User' }
+            & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          )>>, tags: Maybe<Array<Maybe<(
+            { __typename?: 'Tag' }
+            & Pick<Tag, 'id' | 'title'>
+          )>>>, tasks: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>>, boards: Maybe<Array<Maybe<(
+            { __typename?: 'Board' }
+            & Pick<Board, 'id' | 'title' | 'order'>
+          )>>>, developers: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>> }
+        )>>>, stars: Maybe<Array<Maybe<(
+          { __typename?: 'Task' }
+          & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          & { project: (
+            { __typename?: 'Project' }
+            & Pick<Project, 'id' | 'title' | 'description'>
+          ), column: Maybe<(
+            { __typename?: 'Column' }
+            & Pick<Column, 'id' | 'title'>
+          )>, developers: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>>, likes: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>>, comments: Maybe<Array<Maybe<(
+            { __typename?: 'Comment' }
+            & Pick<Comment, 'id' | 'content'>
+          )>>> }
+        )>>> }
+      )>>, tags: Maybe<Array<Maybe<(
         { __typename?: 'Tag' }
         & Pick<Tag, 'id' | 'title'>
         & { project: (
@@ -6101,110 +7317,154 @@ export type GetTaskQuery = (
 );
 
 export type GetUserQueryVariables = {
-  filter?: Maybe<ProjectFilter>;
-  filter1?: Maybe<DeveloperFilter>;
+  filter?: Maybe<DeveloperFilter>;
   order?: Maybe<DeveloperOrder>;
   first?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  filter2?: Maybe<TagFilter>;
-  order1?: Maybe<TagOrder>;
+  filter1?: Maybe<ProjectFilter>;
+  order1?: Maybe<ProjectOrder>;
   first1?: Maybe<Scalars['Int']>;
   offset1?: Maybe<Scalars['Int']>;
-  filter3?: Maybe<ProjectFilter>;
-  filter4?: Maybe<ColumnFilter>;
-  filter5?: Maybe<DeveloperFilter>;
-  order2?: Maybe<DeveloperOrder>;
+  filter2?: Maybe<TaskFilter>;
+  order2?: Maybe<TaskOrder>;
   first2?: Maybe<Scalars['Int']>;
   offset2?: Maybe<Scalars['Int']>;
-  filter6?: Maybe<DeveloperFilter>;
-  order3?: Maybe<DeveloperOrder>;
+  filter3?: Maybe<UserFilter>;
+  order3?: Maybe<UserOrder>;
   first3?: Maybe<Scalars['Int']>;
   offset3?: Maybe<Scalars['Int']>;
-  filter7?: Maybe<CommentFilter>;
-  order4?: Maybe<CommentOrder>;
+  filter4?: Maybe<ProjectFilter>;
+  filter5?: Maybe<DeveloperFilter>;
+  order4?: Maybe<DeveloperOrder>;
   first4?: Maybe<Scalars['Int']>;
   offset4?: Maybe<Scalars['Int']>;
-  filter8?: Maybe<TaskFilter>;
-  order5?: Maybe<TaskOrder>;
+  filter6?: Maybe<TagFilter>;
+  order5?: Maybe<TagOrder>;
   first5?: Maybe<Scalars['Int']>;
   offset5?: Maybe<Scalars['Int']>;
-  filter9?: Maybe<ProjectFilter>;
-  filter10?: Maybe<ColumnFilter>;
-  order6?: Maybe<ColumnOrder>;
+  filter7?: Maybe<ProjectFilter>;
+  filter8?: Maybe<ColumnFilter>;
+  filter9?: Maybe<DeveloperFilter>;
+  order6?: Maybe<DeveloperOrder>;
   first6?: Maybe<Scalars['Int']>;
   offset6?: Maybe<Scalars['Int']>;
-  filter11?: Maybe<BoardFilter>;
-  order7?: Maybe<BoardOrder>;
+  filter10?: Maybe<DeveloperFilter>;
+  order7?: Maybe<DeveloperOrder>;
   first7?: Maybe<Scalars['Int']>;
   offset7?: Maybe<Scalars['Int']>;
-  filter12?: Maybe<ProjectFilter>;
-  filter13?: Maybe<UserFilter>;
-  order8?: Maybe<UserOrder>;
+  filter11?: Maybe<CommentFilter>;
+  order8?: Maybe<CommentOrder>;
   first8?: Maybe<Scalars['Int']>;
   offset8?: Maybe<Scalars['Int']>;
-  filter14?: Maybe<TagFilter>;
-  order9?: Maybe<TagOrder>;
+  filter12?: Maybe<TaskFilter>;
+  order9?: Maybe<TaskOrder>;
   first9?: Maybe<Scalars['Int']>;
   offset9?: Maybe<Scalars['Int']>;
-  filter15?: Maybe<TaskFilter>;
-  order10?: Maybe<TaskOrder>;
+  filter13?: Maybe<ProjectFilter>;
+  filter14?: Maybe<ColumnFilter>;
+  order10?: Maybe<ColumnOrder>;
   first10?: Maybe<Scalars['Int']>;
   offset10?: Maybe<Scalars['Int']>;
-  filter16?: Maybe<TaskFilter>;
-  order11?: Maybe<TaskOrder>;
+  filter15?: Maybe<BoardFilter>;
+  order11?: Maybe<BoardOrder>;
   first11?: Maybe<Scalars['Int']>;
   offset11?: Maybe<Scalars['Int']>;
-  filter17?: Maybe<DeveloperFilter>;
-  order12?: Maybe<DeveloperOrder>;
+  filter16?: Maybe<ProjectFilter>;
+  filter17?: Maybe<UserFilter>;
+  order12?: Maybe<UserOrder>;
   first12?: Maybe<Scalars['Int']>;
   offset12?: Maybe<Scalars['Int']>;
-  filter18?: Maybe<ProjectFilter>;
-  filter19?: Maybe<TagFilter>;
+  filter18?: Maybe<TagFilter>;
   order13?: Maybe<TagOrder>;
   first13?: Maybe<Scalars['Int']>;
   offset13?: Maybe<Scalars['Int']>;
-  filter20?: Maybe<TaskFilter>;
+  filter19?: Maybe<TaskFilter>;
   order14?: Maybe<TaskOrder>;
   first14?: Maybe<Scalars['Int']>;
   offset14?: Maybe<Scalars['Int']>;
-  filter21?: Maybe<TaskFilter>;
+  filter20?: Maybe<TaskFilter>;
   order15?: Maybe<TaskOrder>;
   first15?: Maybe<Scalars['Int']>;
   offset15?: Maybe<Scalars['Int']>;
-  filter22?: Maybe<DeveloperFilter>;
+  filter21?: Maybe<DeveloperFilter>;
   order16?: Maybe<DeveloperOrder>;
   first16?: Maybe<Scalars['Int']>;
   offset16?: Maybe<Scalars['Int']>;
-  filter23?: Maybe<ProjectFilter>;
-  filter24?: Maybe<ColumnFilter>;
-  filter25?: Maybe<DeveloperFilter>;
-  order17?: Maybe<DeveloperOrder>;
+  filter22?: Maybe<ProjectFilter>;
+  filter23?: Maybe<TagFilter>;
+  order17?: Maybe<TagOrder>;
   first17?: Maybe<Scalars['Int']>;
   offset17?: Maybe<Scalars['Int']>;
-  filter26?: Maybe<DeveloperFilter>;
-  order18?: Maybe<DeveloperOrder>;
+  filter24?: Maybe<TaskFilter>;
+  order18?: Maybe<TaskOrder>;
   first18?: Maybe<Scalars['Int']>;
   offset18?: Maybe<Scalars['Int']>;
-  filter27?: Maybe<CommentFilter>;
-  order19?: Maybe<CommentOrder>;
+  filter25?: Maybe<TaskFilter>;
+  order19?: Maybe<TaskOrder>;
   first19?: Maybe<Scalars['Int']>;
   offset19?: Maybe<Scalars['Int']>;
-  filter28?: Maybe<TaskFilter>;
-  order20?: Maybe<TaskOrder>;
+  filter26?: Maybe<DeveloperFilter>;
+  order20?: Maybe<DeveloperOrder>;
   first20?: Maybe<Scalars['Int']>;
   offset20?: Maybe<Scalars['Int']>;
-  filter29?: Maybe<UserFilter>;
+  filter27?: Maybe<UserFilter>;
   order21?: Maybe<UserOrder>;
   first21?: Maybe<Scalars['Int']>;
   offset21?: Maybe<Scalars['Int']>;
-  filter30?: Maybe<DeveloperFilter>;
-  order22?: Maybe<DeveloperOrder>;
+  filter28?: Maybe<TagFilter>;
+  order22?: Maybe<TagOrder>;
   first22?: Maybe<Scalars['Int']>;
   offset22?: Maybe<Scalars['Int']>;
-  filter31?: Maybe<TaskFilter>;
+  filter29?: Maybe<TaskFilter>;
   order23?: Maybe<TaskOrder>;
   first23?: Maybe<Scalars['Int']>;
   offset23?: Maybe<Scalars['Int']>;
+  filter30?: Maybe<BoardFilter>;
+  order24?: Maybe<BoardOrder>;
+  first24?: Maybe<Scalars['Int']>;
+  offset24?: Maybe<Scalars['Int']>;
+  filter31?: Maybe<DeveloperFilter>;
+  order25?: Maybe<DeveloperOrder>;
+  first25?: Maybe<Scalars['Int']>;
+  offset25?: Maybe<Scalars['Int']>;
+  filter32?: Maybe<ProjectFilter>;
+  order26?: Maybe<ProjectOrder>;
+  first26?: Maybe<Scalars['Int']>;
+  offset26?: Maybe<Scalars['Int']>;
+  filter33?: Maybe<ProjectFilter>;
+  filter34?: Maybe<ColumnFilter>;
+  filter35?: Maybe<DeveloperFilter>;
+  order27?: Maybe<DeveloperOrder>;
+  first27?: Maybe<Scalars['Int']>;
+  offset27?: Maybe<Scalars['Int']>;
+  filter36?: Maybe<DeveloperFilter>;
+  order28?: Maybe<DeveloperOrder>;
+  first28?: Maybe<Scalars['Int']>;
+  offset28?: Maybe<Scalars['Int']>;
+  filter37?: Maybe<CommentFilter>;
+  order29?: Maybe<CommentOrder>;
+  first29?: Maybe<Scalars['Int']>;
+  offset29?: Maybe<Scalars['Int']>;
+  filter38?: Maybe<TaskFilter>;
+  order30?: Maybe<TaskOrder>;
+  first30?: Maybe<Scalars['Int']>;
+  offset30?: Maybe<Scalars['Int']>;
+  filter39?: Maybe<UserFilter>;
+  order31?: Maybe<UserOrder>;
+  first31?: Maybe<Scalars['Int']>;
+  offset31?: Maybe<Scalars['Int']>;
+  filter40?: Maybe<DeveloperFilter>;
+  order32?: Maybe<DeveloperOrder>;
+  first32?: Maybe<Scalars['Int']>;
+  offset32?: Maybe<Scalars['Int']>;
+  filter41?: Maybe<ProjectFilter>;
+  order33?: Maybe<ProjectOrder>;
+  first33?: Maybe<Scalars['Int']>;
+  offset33?: Maybe<Scalars['Int']>;
+  filter42?: Maybe<TaskFilter>;
+  order34?: Maybe<TaskOrder>;
+  first34?: Maybe<Scalars['Int']>;
+  offset34?: Maybe<Scalars['Int']>;
   id: Scalars['ID'];
 };
 
@@ -6214,13 +7474,26 @@ export type GetUserQuery = (
   & { getUser: Maybe<(
     { __typename?: 'User' }
     & Pick<User, 'id' | 'username' | 'password' | 'location'>
-    & { roles: Maybe<Array<Maybe<(
+    & { developer: Maybe<Array<Maybe<(
       { __typename?: 'Developer' }
       & Pick<Developer, 'id' | 'name' | 'availability'>
       & { project: (
         { __typename?: 'Project' }
         & Pick<Project, 'id' | 'title' | 'description'>
-        & { tags: Maybe<Array<Maybe<(
+        & { hosts: Array<Maybe<(
+          { __typename?: 'User' }
+          & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          & { developer: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>>, host: Maybe<Array<Maybe<(
+            { __typename?: 'Project' }
+            & Pick<Project, 'id' | 'title' | 'description'>
+          )>>>, stars: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        )>>, tags: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
           & { project: (
@@ -6282,7 +7555,7 @@ export type GetUserQuery = (
       ), user: Maybe<Array<Maybe<(
         { __typename?: 'User' }
         & Pick<User, 'id' | 'username' | 'password' | 'location'>
-        & { roles: Maybe<Array<Maybe<(
+        & { developer: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
           & { tags: Maybe<Array<Maybe<(
@@ -6294,6 +7567,25 @@ export type GetUserQuery = (
           )>>>, liked: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        )>>>, host: Maybe<Array<Maybe<(
+          { __typename?: 'Project' }
+          & Pick<Project, 'id' | 'title' | 'description'>
+          & { hosts: Array<Maybe<(
+            { __typename?: 'User' }
+            & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          )>>, tags: Maybe<Array<Maybe<(
+            { __typename?: 'Tag' }
+            & Pick<Tag, 'id' | 'title'>
+          )>>>, tasks: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>>, boards: Maybe<Array<Maybe<(
+            { __typename?: 'Board' }
+            & Pick<Board, 'id' | 'title' | 'order'>
+          )>>>, developers: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
         )>>>, stars: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
@@ -6316,6 +7608,9 @@ export type GetUserQuery = (
           )>>> }
         )>>> }
       )>>> }
+    )>>>, host: Maybe<Array<Maybe<(
+      { __typename?: 'Project' }
+      & Pick<Project, 'id' | 'title' | 'description'>
     )>>>, stars: Maybe<Array<Maybe<(
       { __typename?: 'Task' }
       & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
@@ -6324,63 +7619,130 @@ export type GetUserQuery = (
 );
 
 export type QueryBoardQueryVariables = {
-  filter?: Maybe<TaskFilter>;
-  order?: Maybe<TaskOrder>;
+  filter?: Maybe<ProjectFilter>;
+  filter1?: Maybe<UserFilter>;
+  order?: Maybe<UserOrder>;
   first?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  filter1?: Maybe<BoardFilter>;
-  order1?: Maybe<BoardOrder>;
+  filter2?: Maybe<TagFilter>;
+  order1?: Maybe<TagOrder>;
   first1?: Maybe<Scalars['Int']>;
   offset1?: Maybe<Scalars['Int']>;
-  filter2?: Maybe<DeveloperFilter>;
-  order2?: Maybe<DeveloperOrder>;
+  filter3?: Maybe<TaskFilter>;
+  order2?: Maybe<TaskOrder>;
   first2?: Maybe<Scalars['Int']>;
   offset2?: Maybe<Scalars['Int']>;
-  filter3?: Maybe<ProjectFilter>;
-  filter4?: Maybe<ProjectFilter>;
-  filter5?: Maybe<UserFilter>;
-  order3?: Maybe<UserOrder>;
+  filter4?: Maybe<TaskFilter>;
+  order3?: Maybe<TaskOrder>;
   first3?: Maybe<Scalars['Int']>;
   offset3?: Maybe<Scalars['Int']>;
-  filter6?: Maybe<TagFilter>;
-  order4?: Maybe<TagOrder>;
+  filter5?: Maybe<DeveloperFilter>;
+  order4?: Maybe<DeveloperOrder>;
   first4?: Maybe<Scalars['Int']>;
   offset4?: Maybe<Scalars['Int']>;
-  filter7?: Maybe<TaskFilter>;
-  order5?: Maybe<TaskOrder>;
+  filter6?: Maybe<UserFilter>;
+  order5?: Maybe<UserOrder>;
   first5?: Maybe<Scalars['Int']>;
   offset5?: Maybe<Scalars['Int']>;
-  filter8?: Maybe<TaskFilter>;
-  order6?: Maybe<TaskOrder>;
+  filter7?: Maybe<TagFilter>;
+  order6?: Maybe<TagOrder>;
   first6?: Maybe<Scalars['Int']>;
   offset6?: Maybe<Scalars['Int']>;
-  filter9?: Maybe<DeveloperFilter>;
-  order7?: Maybe<DeveloperOrder>;
+  filter8?: Maybe<TaskFilter>;
+  order7?: Maybe<TaskOrder>;
   first7?: Maybe<Scalars['Int']>;
   offset7?: Maybe<Scalars['Int']>;
-  filter10?: Maybe<TagFilter>;
-  order8?: Maybe<TagOrder>;
+  filter9?: Maybe<BoardFilter>;
+  order8?: Maybe<BoardOrder>;
   first8?: Maybe<Scalars['Int']>;
   offset8?: Maybe<Scalars['Int']>;
-  filter11?: Maybe<ProjectFilter>;
-  filter12?: Maybe<ProjectFilter>;
-  filter13?: Maybe<TaskFilter>;
-  order9?: Maybe<TaskOrder>;
+  filter10?: Maybe<DeveloperFilter>;
+  order9?: Maybe<DeveloperOrder>;
   first9?: Maybe<Scalars['Int']>;
   offset9?: Maybe<Scalars['Int']>;
-  filter14?: Maybe<ColumnFilter>;
-  order10?: Maybe<ColumnOrder>;
+  filter11?: Maybe<ProjectFilter>;
+  order10?: Maybe<ProjectOrder>;
   first10?: Maybe<Scalars['Int']>;
   offset10?: Maybe<Scalars['Int']>;
-  filter15?: Maybe<BoardFilter>;
-  filter16?: Maybe<ColumnFilter>;
-  order11?: Maybe<ColumnOrder>;
+  filter12?: Maybe<ProjectFilter>;
+  filter13?: Maybe<ColumnFilter>;
+  filter14?: Maybe<DeveloperFilter>;
+  order11?: Maybe<DeveloperOrder>;
   first11?: Maybe<Scalars['Int']>;
   offset11?: Maybe<Scalars['Int']>;
-  filter17?: Maybe<BoardFilter>;
-  order12?: Maybe<BoardOrder>;
+  filter15?: Maybe<DeveloperFilter>;
+  order12?: Maybe<DeveloperOrder>;
   first12?: Maybe<Scalars['Int']>;
   offset12?: Maybe<Scalars['Int']>;
+  filter16?: Maybe<CommentFilter>;
+  order13?: Maybe<CommentOrder>;
+  first13?: Maybe<Scalars['Int']>;
+  offset13?: Maybe<Scalars['Int']>;
+  filter17?: Maybe<TaskFilter>;
+  order14?: Maybe<TaskOrder>;
+  first14?: Maybe<Scalars['Int']>;
+  offset14?: Maybe<Scalars['Int']>;
+  filter18?: Maybe<UserFilter>;
+  order15?: Maybe<UserOrder>;
+  first15?: Maybe<Scalars['Int']>;
+  offset15?: Maybe<Scalars['Int']>;
+  filter19?: Maybe<TaskFilter>;
+  order16?: Maybe<TaskOrder>;
+  first16?: Maybe<Scalars['Int']>;
+  offset16?: Maybe<Scalars['Int']>;
+  filter20?: Maybe<BoardFilter>;
+  order17?: Maybe<BoardOrder>;
+  first17?: Maybe<Scalars['Int']>;
+  offset17?: Maybe<Scalars['Int']>;
+  filter21?: Maybe<DeveloperFilter>;
+  order18?: Maybe<DeveloperOrder>;
+  first18?: Maybe<Scalars['Int']>;
+  offset18?: Maybe<Scalars['Int']>;
+  filter22?: Maybe<ProjectFilter>;
+  filter23?: Maybe<ProjectFilter>;
+  filter24?: Maybe<UserFilter>;
+  order19?: Maybe<UserOrder>;
+  first19?: Maybe<Scalars['Int']>;
+  offset19?: Maybe<Scalars['Int']>;
+  filter25?: Maybe<TagFilter>;
+  order20?: Maybe<TagOrder>;
+  first20?: Maybe<Scalars['Int']>;
+  offset20?: Maybe<Scalars['Int']>;
+  filter26?: Maybe<TaskFilter>;
+  order21?: Maybe<TaskOrder>;
+  first21?: Maybe<Scalars['Int']>;
+  offset21?: Maybe<Scalars['Int']>;
+  filter27?: Maybe<TaskFilter>;
+  order22?: Maybe<TaskOrder>;
+  first22?: Maybe<Scalars['Int']>;
+  offset22?: Maybe<Scalars['Int']>;
+  filter28?: Maybe<DeveloperFilter>;
+  order23?: Maybe<DeveloperOrder>;
+  first23?: Maybe<Scalars['Int']>;
+  offset23?: Maybe<Scalars['Int']>;
+  filter29?: Maybe<TagFilter>;
+  order24?: Maybe<TagOrder>;
+  first24?: Maybe<Scalars['Int']>;
+  offset24?: Maybe<Scalars['Int']>;
+  filter30?: Maybe<ProjectFilter>;
+  filter31?: Maybe<ProjectFilter>;
+  filter32?: Maybe<TaskFilter>;
+  order25?: Maybe<TaskOrder>;
+  first25?: Maybe<Scalars['Int']>;
+  offset25?: Maybe<Scalars['Int']>;
+  filter33?: Maybe<ColumnFilter>;
+  order26?: Maybe<ColumnOrder>;
+  first26?: Maybe<Scalars['Int']>;
+  offset26?: Maybe<Scalars['Int']>;
+  filter34?: Maybe<BoardFilter>;
+  filter35?: Maybe<ColumnFilter>;
+  order27?: Maybe<ColumnOrder>;
+  first27?: Maybe<Scalars['Int']>;
+  offset27?: Maybe<Scalars['Int']>;
+  filter36?: Maybe<BoardFilter>;
+  order28?: Maybe<BoardOrder>;
+  first28?: Maybe<Scalars['Int']>;
+  offset28?: Maybe<Scalars['Int']>;
 };
 
 
@@ -6392,7 +7754,68 @@ export type QueryBoardQuery = (
     & { project: (
       { __typename?: 'Project' }
       & Pick<Project, 'id' | 'title' | 'description'>
-      & { tags: Maybe<Array<Maybe<(
+      & { hosts: Array<Maybe<(
+        { __typename?: 'User' }
+        & Pick<User, 'id' | 'username' | 'password' | 'location'>
+        & { developer: Maybe<Array<Maybe<(
+          { __typename?: 'Developer' }
+          & Pick<Developer, 'id' | 'name' | 'availability'>
+          & { project: (
+            { __typename?: 'Project' }
+            & Pick<Project, 'id' | 'title' | 'description'>
+          ), user: Maybe<Array<Maybe<(
+            { __typename?: 'User' }
+            & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          )>>>, tags: Maybe<Array<Maybe<(
+            { __typename?: 'Tag' }
+            & Pick<Tag, 'id' | 'title'>
+          )>>>, tasks: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>>, liked: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        )>>>, host: Maybe<Array<Maybe<(
+          { __typename?: 'Project' }
+          & Pick<Project, 'id' | 'title' | 'description'>
+          & { hosts: Array<Maybe<(
+            { __typename?: 'User' }
+            & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          )>>, tags: Maybe<Array<Maybe<(
+            { __typename?: 'Tag' }
+            & Pick<Tag, 'id' | 'title'>
+          )>>>, tasks: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>>, boards: Maybe<Array<Maybe<(
+            { __typename?: 'Board' }
+            & Pick<Board, 'id' | 'title' | 'order'>
+          )>>>, developers: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>> }
+        )>>>, stars: Maybe<Array<Maybe<(
+          { __typename?: 'Task' }
+          & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          & { project: (
+            { __typename?: 'Project' }
+            & Pick<Project, 'id' | 'title' | 'description'>
+          ), column: Maybe<(
+            { __typename?: 'Column' }
+            & Pick<Column, 'id' | 'title'>
+          )>, developers: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>>, likes: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>>, comments: Maybe<Array<Maybe<(
+            { __typename?: 'Comment' }
+            & Pick<Comment, 'id' | 'content'>
+          )>>> }
+        )>>> }
+      )>>, tags: Maybe<Array<Maybe<(
         { __typename?: 'Tag' }
         & Pick<Tag, 'id' | 'title'>
         & { project: (
@@ -6452,82 +7875,98 @@ export type QueryBoardQuery = (
 );
 
 export type QueryColumnQueryVariables = {
-  filter?: Maybe<ProjectFilter>;
-  filter1?: Maybe<DeveloperFilter>;
+  filter?: Maybe<DeveloperFilter>;
   order?: Maybe<DeveloperOrder>;
   first?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  filter2?: Maybe<TagFilter>;
-  order1?: Maybe<TagOrder>;
+  filter1?: Maybe<ProjectFilter>;
+  order1?: Maybe<ProjectOrder>;
   first1?: Maybe<Scalars['Int']>;
   offset1?: Maybe<Scalars['Int']>;
-  filter3?: Maybe<ProjectFilter>;
-  filter4?: Maybe<ColumnFilter>;
-  filter5?: Maybe<DeveloperFilter>;
-  order2?: Maybe<DeveloperOrder>;
+  filter2?: Maybe<TaskFilter>;
+  order2?: Maybe<TaskOrder>;
   first2?: Maybe<Scalars['Int']>;
   offset2?: Maybe<Scalars['Int']>;
-  filter6?: Maybe<DeveloperFilter>;
-  order3?: Maybe<DeveloperOrder>;
+  filter3?: Maybe<UserFilter>;
+  order3?: Maybe<UserOrder>;
   first3?: Maybe<Scalars['Int']>;
   offset3?: Maybe<Scalars['Int']>;
-  filter7?: Maybe<CommentFilter>;
-  order4?: Maybe<CommentOrder>;
+  filter4?: Maybe<ProjectFilter>;
+  filter5?: Maybe<DeveloperFilter>;
+  order4?: Maybe<DeveloperOrder>;
   first4?: Maybe<Scalars['Int']>;
   offset4?: Maybe<Scalars['Int']>;
-  filter8?: Maybe<TaskFilter>;
-  order5?: Maybe<TaskOrder>;
+  filter6?: Maybe<TagFilter>;
+  order5?: Maybe<TagOrder>;
   first5?: Maybe<Scalars['Int']>;
   offset5?: Maybe<Scalars['Int']>;
-  filter9?: Maybe<ProjectFilter>;
-  filter10?: Maybe<ColumnFilter>;
-  order6?: Maybe<ColumnOrder>;
+  filter7?: Maybe<ProjectFilter>;
+  filter8?: Maybe<ColumnFilter>;
+  filter9?: Maybe<DeveloperFilter>;
+  order6?: Maybe<DeveloperOrder>;
   first6?: Maybe<Scalars['Int']>;
   offset6?: Maybe<Scalars['Int']>;
-  filter11?: Maybe<BoardFilter>;
-  order7?: Maybe<BoardOrder>;
+  filter10?: Maybe<DeveloperFilter>;
+  order7?: Maybe<DeveloperOrder>;
   first7?: Maybe<Scalars['Int']>;
   offset7?: Maybe<Scalars['Int']>;
-  filter12?: Maybe<ProjectFilter>;
-  filter13?: Maybe<UserFilter>;
-  order8?: Maybe<UserOrder>;
+  filter11?: Maybe<CommentFilter>;
+  order8?: Maybe<CommentOrder>;
   first8?: Maybe<Scalars['Int']>;
   offset8?: Maybe<Scalars['Int']>;
-  filter14?: Maybe<TagFilter>;
-  order9?: Maybe<TagOrder>;
+  filter12?: Maybe<TaskFilter>;
+  order9?: Maybe<TaskOrder>;
   first9?: Maybe<Scalars['Int']>;
   offset9?: Maybe<Scalars['Int']>;
-  filter15?: Maybe<TaskFilter>;
-  order10?: Maybe<TaskOrder>;
+  filter13?: Maybe<ProjectFilter>;
+  filter14?: Maybe<ColumnFilter>;
+  order10?: Maybe<ColumnOrder>;
   first10?: Maybe<Scalars['Int']>;
   offset10?: Maybe<Scalars['Int']>;
-  filter16?: Maybe<TaskFilter>;
-  order11?: Maybe<TaskOrder>;
+  filter15?: Maybe<BoardFilter>;
+  order11?: Maybe<BoardOrder>;
   first11?: Maybe<Scalars['Int']>;
   offset11?: Maybe<Scalars['Int']>;
-  filter17?: Maybe<DeveloperFilter>;
-  order12?: Maybe<DeveloperOrder>;
+  filter16?: Maybe<ProjectFilter>;
+  filter17?: Maybe<UserFilter>;
+  order12?: Maybe<UserOrder>;
   first12?: Maybe<Scalars['Int']>;
   offset12?: Maybe<Scalars['Int']>;
-  filter18?: Maybe<ProjectFilter>;
-  filter19?: Maybe<BoardFilter>;
-  filter20?: Maybe<TaskFilter>;
-  order13?: Maybe<TaskOrder>;
+  filter18?: Maybe<TagFilter>;
+  order13?: Maybe<TagOrder>;
   first13?: Maybe<Scalars['Int']>;
   offset13?: Maybe<Scalars['Int']>;
-  filter21?: Maybe<ColumnFilter>;
-  order14?: Maybe<ColumnOrder>;
+  filter19?: Maybe<TaskFilter>;
+  order14?: Maybe<TaskOrder>;
   first14?: Maybe<Scalars['Int']>;
   offset14?: Maybe<Scalars['Int']>;
-  filter22?: Maybe<BoardFilter>;
-  filter23?: Maybe<TaskFilter>;
+  filter20?: Maybe<TaskFilter>;
   order15?: Maybe<TaskOrder>;
   first15?: Maybe<Scalars['Int']>;
   offset15?: Maybe<Scalars['Int']>;
-  filter24?: Maybe<ColumnFilter>;
-  order16?: Maybe<ColumnOrder>;
+  filter21?: Maybe<DeveloperFilter>;
+  order16?: Maybe<DeveloperOrder>;
   first16?: Maybe<Scalars['Int']>;
   offset16?: Maybe<Scalars['Int']>;
+  filter22?: Maybe<ProjectFilter>;
+  filter23?: Maybe<BoardFilter>;
+  filter24?: Maybe<TaskFilter>;
+  order17?: Maybe<TaskOrder>;
+  first17?: Maybe<Scalars['Int']>;
+  offset17?: Maybe<Scalars['Int']>;
+  filter25?: Maybe<ColumnFilter>;
+  order18?: Maybe<ColumnOrder>;
+  first18?: Maybe<Scalars['Int']>;
+  offset18?: Maybe<Scalars['Int']>;
+  filter26?: Maybe<BoardFilter>;
+  filter27?: Maybe<TaskFilter>;
+  order19?: Maybe<TaskOrder>;
+  first19?: Maybe<Scalars['Int']>;
+  offset19?: Maybe<Scalars['Int']>;
+  filter28?: Maybe<ColumnFilter>;
+  order20?: Maybe<ColumnOrder>;
+  first20?: Maybe<Scalars['Int']>;
+  offset20?: Maybe<Scalars['Int']>;
 };
 
 
@@ -6542,7 +7981,20 @@ export type QueryColumnQuery = (
       & { project: (
         { __typename?: 'Project' }
         & Pick<Project, 'id' | 'title' | 'description'>
-        & { tags: Maybe<Array<Maybe<(
+        & { hosts: Array<Maybe<(
+          { __typename?: 'User' }
+          & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          & { developer: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>>, host: Maybe<Array<Maybe<(
+            { __typename?: 'Project' }
+            & Pick<Project, 'id' | 'title' | 'description'>
+          )>>>, stars: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        )>>, tags: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
           & { project: (
@@ -6620,151 +8072,171 @@ export type QueryColumnQuery = (
 );
 
 export type QueryCommentQueryVariables = {
-  filter?: Maybe<ProjectFilter>;
-  filter1?: Maybe<DeveloperFilter>;
+  filter?: Maybe<DeveloperFilter>;
   order?: Maybe<DeveloperOrder>;
   first?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  filter2?: Maybe<TagFilter>;
-  order1?: Maybe<TagOrder>;
+  filter1?: Maybe<ProjectFilter>;
+  order1?: Maybe<ProjectOrder>;
   first1?: Maybe<Scalars['Int']>;
   offset1?: Maybe<Scalars['Int']>;
-  filter3?: Maybe<ProjectFilter>;
-  filter4?: Maybe<ColumnFilter>;
-  filter5?: Maybe<DeveloperFilter>;
-  order2?: Maybe<DeveloperOrder>;
+  filter2?: Maybe<TaskFilter>;
+  order2?: Maybe<TaskOrder>;
   first2?: Maybe<Scalars['Int']>;
   offset2?: Maybe<Scalars['Int']>;
-  filter6?: Maybe<DeveloperFilter>;
-  order3?: Maybe<DeveloperOrder>;
+  filter3?: Maybe<UserFilter>;
+  order3?: Maybe<UserOrder>;
   first3?: Maybe<Scalars['Int']>;
   offset3?: Maybe<Scalars['Int']>;
-  filter7?: Maybe<CommentFilter>;
-  order4?: Maybe<CommentOrder>;
+  filter4?: Maybe<ProjectFilter>;
+  filter5?: Maybe<DeveloperFilter>;
+  order4?: Maybe<DeveloperOrder>;
   first4?: Maybe<Scalars['Int']>;
   offset4?: Maybe<Scalars['Int']>;
-  filter8?: Maybe<TaskFilter>;
-  order5?: Maybe<TaskOrder>;
+  filter6?: Maybe<TagFilter>;
+  order5?: Maybe<TagOrder>;
   first5?: Maybe<Scalars['Int']>;
   offset5?: Maybe<Scalars['Int']>;
-  filter9?: Maybe<ProjectFilter>;
-  filter10?: Maybe<ColumnFilter>;
-  order6?: Maybe<ColumnOrder>;
+  filter7?: Maybe<ProjectFilter>;
+  filter8?: Maybe<ColumnFilter>;
+  filter9?: Maybe<DeveloperFilter>;
+  order6?: Maybe<DeveloperOrder>;
   first6?: Maybe<Scalars['Int']>;
   offset6?: Maybe<Scalars['Int']>;
-  filter11?: Maybe<BoardFilter>;
-  order7?: Maybe<BoardOrder>;
+  filter10?: Maybe<DeveloperFilter>;
+  order7?: Maybe<DeveloperOrder>;
   first7?: Maybe<Scalars['Int']>;
   offset7?: Maybe<Scalars['Int']>;
-  filter12?: Maybe<ProjectFilter>;
-  filter13?: Maybe<UserFilter>;
-  order8?: Maybe<UserOrder>;
+  filter11?: Maybe<CommentFilter>;
+  order8?: Maybe<CommentOrder>;
   first8?: Maybe<Scalars['Int']>;
   offset8?: Maybe<Scalars['Int']>;
-  filter14?: Maybe<TagFilter>;
-  order9?: Maybe<TagOrder>;
+  filter12?: Maybe<TaskFilter>;
+  order9?: Maybe<TaskOrder>;
   first9?: Maybe<Scalars['Int']>;
   offset9?: Maybe<Scalars['Int']>;
-  filter15?: Maybe<TaskFilter>;
-  order10?: Maybe<TaskOrder>;
+  filter13?: Maybe<ProjectFilter>;
+  filter14?: Maybe<ColumnFilter>;
+  order10?: Maybe<ColumnOrder>;
   first10?: Maybe<Scalars['Int']>;
   offset10?: Maybe<Scalars['Int']>;
-  filter16?: Maybe<TaskFilter>;
-  order11?: Maybe<TaskOrder>;
+  filter15?: Maybe<BoardFilter>;
+  order11?: Maybe<BoardOrder>;
   first11?: Maybe<Scalars['Int']>;
   offset11?: Maybe<Scalars['Int']>;
-  filter17?: Maybe<DeveloperFilter>;
-  order12?: Maybe<DeveloperOrder>;
+  filter16?: Maybe<ProjectFilter>;
+  filter17?: Maybe<UserFilter>;
+  order12?: Maybe<UserOrder>;
   first12?: Maybe<Scalars['Int']>;
   offset12?: Maybe<Scalars['Int']>;
-  filter18?: Maybe<ProjectFilter>;
-  filter19?: Maybe<ProjectFilter>;
-  filter20?: Maybe<ColumnFilter>;
-  order13?: Maybe<ColumnOrder>;
+  filter18?: Maybe<TagFilter>;
+  order13?: Maybe<TagOrder>;
   first13?: Maybe<Scalars['Int']>;
   offset13?: Maybe<Scalars['Int']>;
-  filter21?: Maybe<BoardFilter>;
-  filter22?: Maybe<TaskFilter>;
+  filter19?: Maybe<TaskFilter>;
   order14?: Maybe<TaskOrder>;
   first14?: Maybe<Scalars['Int']>;
   offset14?: Maybe<Scalars['Int']>;
-  filter23?: Maybe<ColumnFilter>;
-  filter24?: Maybe<DeveloperFilter>;
-  order15?: Maybe<DeveloperOrder>;
+  filter20?: Maybe<TaskFilter>;
+  order15?: Maybe<TaskOrder>;
   first15?: Maybe<Scalars['Int']>;
   offset15?: Maybe<Scalars['Int']>;
-  filter25?: Maybe<ProjectFilter>;
-  filter26?: Maybe<DeveloperFilter>;
+  filter21?: Maybe<DeveloperFilter>;
   order16?: Maybe<DeveloperOrder>;
   first16?: Maybe<Scalars['Int']>;
   offset16?: Maybe<Scalars['Int']>;
-  filter27?: Maybe<TaskFilter>;
-  order17?: Maybe<TaskOrder>;
+  filter22?: Maybe<ProjectFilter>;
+  filter23?: Maybe<ProjectFilter>;
+  filter24?: Maybe<ColumnFilter>;
+  order17?: Maybe<ColumnOrder>;
   first17?: Maybe<Scalars['Int']>;
   offset17?: Maybe<Scalars['Int']>;
-  filter28?: Maybe<UserFilter>;
-  order18?: Maybe<UserOrder>;
+  filter25?: Maybe<BoardFilter>;
+  filter26?: Maybe<TaskFilter>;
+  order18?: Maybe<TaskOrder>;
   first18?: Maybe<Scalars['Int']>;
   offset18?: Maybe<Scalars['Int']>;
-  filter29?: Maybe<TagFilter>;
-  order19?: Maybe<TagOrder>;
+  filter27?: Maybe<ColumnFilter>;
+  filter28?: Maybe<DeveloperFilter>;
+  order19?: Maybe<DeveloperOrder>;
   first19?: Maybe<Scalars['Int']>;
   offset19?: Maybe<Scalars['Int']>;
-  filter30?: Maybe<TaskFilter>;
-  order20?: Maybe<TaskOrder>;
+  filter29?: Maybe<ProjectFilter>;
+  filter30?: Maybe<DeveloperFilter>;
+  order20?: Maybe<DeveloperOrder>;
   first20?: Maybe<Scalars['Int']>;
   offset20?: Maybe<Scalars['Int']>;
   filter31?: Maybe<ProjectFilter>;
-  filter32?: Maybe<ColumnFilter>;
-  filter33?: Maybe<DeveloperFilter>;
-  order21?: Maybe<DeveloperOrder>;
+  order21?: Maybe<ProjectOrder>;
   first21?: Maybe<Scalars['Int']>;
   offset21?: Maybe<Scalars['Int']>;
-  filter34?: Maybe<DeveloperFilter>;
-  order22?: Maybe<DeveloperOrder>;
+  filter32?: Maybe<TaskFilter>;
+  order22?: Maybe<TaskOrder>;
   first22?: Maybe<Scalars['Int']>;
   offset22?: Maybe<Scalars['Int']>;
-  filter35?: Maybe<CommentFilter>;
-  order23?: Maybe<CommentOrder>;
+  filter33?: Maybe<UserFilter>;
+  order23?: Maybe<UserOrder>;
   first23?: Maybe<Scalars['Int']>;
   offset23?: Maybe<Scalars['Int']>;
-  filter36?: Maybe<TaskFilter>;
-  order24?: Maybe<TaskOrder>;
+  filter34?: Maybe<TagFilter>;
+  order24?: Maybe<TagOrder>;
   first24?: Maybe<Scalars['Int']>;
   offset24?: Maybe<Scalars['Int']>;
-  filter37?: Maybe<DeveloperFilter>;
-  order25?: Maybe<DeveloperOrder>;
+  filter35?: Maybe<TaskFilter>;
+  order25?: Maybe<TaskOrder>;
   first25?: Maybe<Scalars['Int']>;
   offset25?: Maybe<Scalars['Int']>;
-  filter38?: Maybe<TaskFilter>;
-  filter39?: Maybe<ProjectFilter>;
-  filter40?: Maybe<UserFilter>;
-  order26?: Maybe<UserOrder>;
+  filter36?: Maybe<ProjectFilter>;
+  filter37?: Maybe<ColumnFilter>;
+  filter38?: Maybe<DeveloperFilter>;
+  order26?: Maybe<DeveloperOrder>;
   first26?: Maybe<Scalars['Int']>;
   offset26?: Maybe<Scalars['Int']>;
-  filter41?: Maybe<TagFilter>;
-  order27?: Maybe<TagOrder>;
+  filter39?: Maybe<DeveloperFilter>;
+  order27?: Maybe<DeveloperOrder>;
   first27?: Maybe<Scalars['Int']>;
   offset27?: Maybe<Scalars['Int']>;
-  filter42?: Maybe<TaskFilter>;
-  order28?: Maybe<TaskOrder>;
+  filter40?: Maybe<CommentFilter>;
+  order28?: Maybe<CommentOrder>;
   first28?: Maybe<Scalars['Int']>;
   offset28?: Maybe<Scalars['Int']>;
-  filter43?: Maybe<TaskFilter>;
+  filter41?: Maybe<TaskFilter>;
   order29?: Maybe<TaskOrder>;
   first29?: Maybe<Scalars['Int']>;
   offset29?: Maybe<Scalars['Int']>;
-  filter44?: Maybe<DeveloperFilter>;
-  filter45?: Maybe<CommentFilter>;
-  order30?: Maybe<CommentOrder>;
+  filter42?: Maybe<DeveloperFilter>;
+  order30?: Maybe<DeveloperOrder>;
   first30?: Maybe<Scalars['Int']>;
   offset30?: Maybe<Scalars['Int']>;
-  filter46?: Maybe<TaskFilter>;
-  filter47?: Maybe<DeveloperFilter>;
-  filter48?: Maybe<CommentFilter>;
-  order31?: Maybe<CommentOrder>;
+  filter43?: Maybe<TaskFilter>;
+  filter44?: Maybe<ProjectFilter>;
+  filter45?: Maybe<UserFilter>;
+  order31?: Maybe<UserOrder>;
   first31?: Maybe<Scalars['Int']>;
   offset31?: Maybe<Scalars['Int']>;
+  filter46?: Maybe<TagFilter>;
+  order32?: Maybe<TagOrder>;
+  first32?: Maybe<Scalars['Int']>;
+  offset32?: Maybe<Scalars['Int']>;
+  filter47?: Maybe<TaskFilter>;
+  order33?: Maybe<TaskOrder>;
+  first33?: Maybe<Scalars['Int']>;
+  offset33?: Maybe<Scalars['Int']>;
+  filter48?: Maybe<TaskFilter>;
+  order34?: Maybe<TaskOrder>;
+  first34?: Maybe<Scalars['Int']>;
+  offset34?: Maybe<Scalars['Int']>;
+  filter49?: Maybe<DeveloperFilter>;
+  filter50?: Maybe<CommentFilter>;
+  order35?: Maybe<CommentOrder>;
+  first35?: Maybe<Scalars['Int']>;
+  offset35?: Maybe<Scalars['Int']>;
+  filter51?: Maybe<TaskFilter>;
+  filter52?: Maybe<DeveloperFilter>;
+  filter53?: Maybe<CommentFilter>;
+  order36?: Maybe<CommentOrder>;
+  first36?: Maybe<Scalars['Int']>;
+  offset36?: Maybe<Scalars['Int']>;
 };
 
 
@@ -6779,7 +8251,20 @@ export type QueryCommentQuery = (
       & { project: (
         { __typename?: 'Project' }
         & Pick<Project, 'id' | 'title' | 'description'>
-        & { tags: Maybe<Array<Maybe<(
+        & { hosts: Array<Maybe<(
+          { __typename?: 'User' }
+          & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          & { developer: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>>, host: Maybe<Array<Maybe<(
+            { __typename?: 'Project' }
+            & Pick<Project, 'id' | 'title' | 'description'>
+          )>>>, stars: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        )>>, tags: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
           & { project: (
@@ -6867,9 +8352,12 @@ export type QueryCommentQuery = (
         ), user: Maybe<Array<Maybe<(
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          & { roles: Maybe<Array<Maybe<(
+          & { developer: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>>, host: Maybe<Array<Maybe<(
+            { __typename?: 'Project' }
+            & Pick<Project, 'id' | 'title' | 'description'>
           )>>>, stars: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
@@ -6935,118 +8423,199 @@ export type QueryCommentQuery = (
 );
 
 export type QueryDeveloperQueryVariables = {
-  filter?: Maybe<TaskFilter>;
-  order?: Maybe<TaskOrder>;
+  filter?: Maybe<ProjectFilter>;
+  filter1?: Maybe<UserFilter>;
+  order?: Maybe<UserOrder>;
   first?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  filter1?: Maybe<BoardFilter>;
-  order1?: Maybe<BoardOrder>;
+  filter2?: Maybe<TagFilter>;
+  order1?: Maybe<TagOrder>;
   first1?: Maybe<Scalars['Int']>;
   offset1?: Maybe<Scalars['Int']>;
-  filter2?: Maybe<DeveloperFilter>;
-  order2?: Maybe<DeveloperOrder>;
+  filter3?: Maybe<TaskFilter>;
+  order2?: Maybe<TaskOrder>;
   first2?: Maybe<Scalars['Int']>;
   offset2?: Maybe<Scalars['Int']>;
-  filter3?: Maybe<ProjectFilter>;
-  filter4?: Maybe<ProjectFilter>;
-  filter5?: Maybe<UserFilter>;
-  order3?: Maybe<UserOrder>;
+  filter4?: Maybe<TaskFilter>;
+  order3?: Maybe<TaskOrder>;
   first3?: Maybe<Scalars['Int']>;
   offset3?: Maybe<Scalars['Int']>;
-  filter6?: Maybe<TagFilter>;
-  order4?: Maybe<TagOrder>;
+  filter5?: Maybe<DeveloperFilter>;
+  order4?: Maybe<DeveloperOrder>;
   first4?: Maybe<Scalars['Int']>;
   offset4?: Maybe<Scalars['Int']>;
-  filter7?: Maybe<TaskFilter>;
-  order5?: Maybe<TaskOrder>;
+  filter6?: Maybe<UserFilter>;
+  order5?: Maybe<UserOrder>;
   first5?: Maybe<Scalars['Int']>;
   offset5?: Maybe<Scalars['Int']>;
-  filter8?: Maybe<TaskFilter>;
-  order6?: Maybe<TaskOrder>;
+  filter7?: Maybe<TagFilter>;
+  order6?: Maybe<TagOrder>;
   first6?: Maybe<Scalars['Int']>;
   offset6?: Maybe<Scalars['Int']>;
-  filter9?: Maybe<DeveloperFilter>;
-  order7?: Maybe<DeveloperOrder>;
+  filter8?: Maybe<TaskFilter>;
+  order7?: Maybe<TaskOrder>;
   first7?: Maybe<Scalars['Int']>;
   offset7?: Maybe<Scalars['Int']>;
-  filter10?: Maybe<TagFilter>;
-  order8?: Maybe<TagOrder>;
+  filter9?: Maybe<BoardFilter>;
+  order8?: Maybe<BoardOrder>;
   first8?: Maybe<Scalars['Int']>;
   offset8?: Maybe<Scalars['Int']>;
-  filter11?: Maybe<ProjectFilter>;
-  filter12?: Maybe<ProjectFilter>;
-  filter13?: Maybe<TaskFilter>;
-  order9?: Maybe<TaskOrder>;
+  filter10?: Maybe<DeveloperFilter>;
+  order9?: Maybe<DeveloperOrder>;
   first9?: Maybe<Scalars['Int']>;
   offset9?: Maybe<Scalars['Int']>;
-  filter14?: Maybe<UserFilter>;
-  order10?: Maybe<UserOrder>;
+  filter11?: Maybe<ProjectFilter>;
+  order10?: Maybe<ProjectOrder>;
   first10?: Maybe<Scalars['Int']>;
   offset10?: Maybe<Scalars['Int']>;
-  filter15?: Maybe<TagFilter>;
-  order11?: Maybe<TagOrder>;
+  filter12?: Maybe<ProjectFilter>;
+  filter13?: Maybe<ColumnFilter>;
+  filter14?: Maybe<DeveloperFilter>;
+  order11?: Maybe<DeveloperOrder>;
   first11?: Maybe<Scalars['Int']>;
   offset11?: Maybe<Scalars['Int']>;
-  filter16?: Maybe<ProjectFilter>;
-  filter17?: Maybe<ColumnFilter>;
-  filter18?: Maybe<DeveloperFilter>;
+  filter15?: Maybe<DeveloperFilter>;
   order12?: Maybe<DeveloperOrder>;
   first12?: Maybe<Scalars['Int']>;
   offset12?: Maybe<Scalars['Int']>;
-  filter19?: Maybe<DeveloperFilter>;
-  order13?: Maybe<DeveloperOrder>;
+  filter16?: Maybe<CommentFilter>;
+  order13?: Maybe<CommentOrder>;
   first13?: Maybe<Scalars['Int']>;
   offset13?: Maybe<Scalars['Int']>;
-  filter20?: Maybe<CommentFilter>;
-  order14?: Maybe<CommentOrder>;
+  filter17?: Maybe<TaskFilter>;
+  order14?: Maybe<TaskOrder>;
   first14?: Maybe<Scalars['Int']>;
   offset14?: Maybe<Scalars['Int']>;
-  filter21?: Maybe<TaskFilter>;
-  order15?: Maybe<TaskOrder>;
+  filter18?: Maybe<UserFilter>;
+  order15?: Maybe<UserOrder>;
   first15?: Maybe<Scalars['Int']>;
   offset15?: Maybe<Scalars['Int']>;
-  filter22?: Maybe<ProjectFilter>;
-  filter23?: Maybe<ColumnFilter>;
-  filter24?: Maybe<DeveloperFilter>;
-  order16?: Maybe<DeveloperOrder>;
+  filter19?: Maybe<TaskFilter>;
+  order16?: Maybe<TaskOrder>;
   first16?: Maybe<Scalars['Int']>;
   offset16?: Maybe<Scalars['Int']>;
-  filter25?: Maybe<DeveloperFilter>;
-  order17?: Maybe<DeveloperOrder>;
+  filter20?: Maybe<BoardFilter>;
+  order17?: Maybe<BoardOrder>;
   first17?: Maybe<Scalars['Int']>;
   offset17?: Maybe<Scalars['Int']>;
-  filter26?: Maybe<CommentFilter>;
-  order18?: Maybe<CommentOrder>;
+  filter21?: Maybe<DeveloperFilter>;
+  order18?: Maybe<DeveloperOrder>;
   first18?: Maybe<Scalars['Int']>;
   offset18?: Maybe<Scalars['Int']>;
-  filter27?: Maybe<TaskFilter>;
-  order19?: Maybe<TaskOrder>;
+  filter22?: Maybe<ProjectFilter>;
+  filter23?: Maybe<ProjectFilter>;
+  filter24?: Maybe<UserFilter>;
+  order19?: Maybe<UserOrder>;
   first19?: Maybe<Scalars['Int']>;
   offset19?: Maybe<Scalars['Int']>;
-  filter28?: Maybe<DeveloperFilter>;
-  order20?: Maybe<DeveloperOrder>;
+  filter25?: Maybe<TagFilter>;
+  order20?: Maybe<TagOrder>;
   first20?: Maybe<Scalars['Int']>;
   offset20?: Maybe<Scalars['Int']>;
-  filter29?: Maybe<UserFilter>;
-  order21?: Maybe<UserOrder>;
+  filter26?: Maybe<TaskFilter>;
+  order21?: Maybe<TaskOrder>;
   first21?: Maybe<Scalars['Int']>;
   offset21?: Maybe<Scalars['Int']>;
-  filter30?: Maybe<TagFilter>;
-  order22?: Maybe<TagOrder>;
+  filter27?: Maybe<TaskFilter>;
+  order22?: Maybe<TaskOrder>;
   first22?: Maybe<Scalars['Int']>;
   offset22?: Maybe<Scalars['Int']>;
-  filter31?: Maybe<TaskFilter>;
-  order23?: Maybe<TaskOrder>;
+  filter28?: Maybe<DeveloperFilter>;
+  order23?: Maybe<DeveloperOrder>;
   first23?: Maybe<Scalars['Int']>;
   offset23?: Maybe<Scalars['Int']>;
-  filter32?: Maybe<TaskFilter>;
-  order24?: Maybe<TaskOrder>;
+  filter29?: Maybe<TagFilter>;
+  order24?: Maybe<TagOrder>;
   first24?: Maybe<Scalars['Int']>;
   offset24?: Maybe<Scalars['Int']>;
-  filter33?: Maybe<DeveloperFilter>;
+  filter30?: Maybe<ProjectFilter>;
+  filter31?: Maybe<DeveloperFilter>;
   order25?: Maybe<DeveloperOrder>;
   first25?: Maybe<Scalars['Int']>;
   offset25?: Maybe<Scalars['Int']>;
+  filter32?: Maybe<ProjectFilter>;
+  order26?: Maybe<ProjectOrder>;
+  first26?: Maybe<Scalars['Int']>;
+  offset26?: Maybe<Scalars['Int']>;
+  filter33?: Maybe<TaskFilter>;
+  order27?: Maybe<TaskOrder>;
+  first27?: Maybe<Scalars['Int']>;
+  offset27?: Maybe<Scalars['Int']>;
+  filter34?: Maybe<UserFilter>;
+  order28?: Maybe<UserOrder>;
+  first28?: Maybe<Scalars['Int']>;
+  offset28?: Maybe<Scalars['Int']>;
+  filter35?: Maybe<TagFilter>;
+  order29?: Maybe<TagOrder>;
+  first29?: Maybe<Scalars['Int']>;
+  offset29?: Maybe<Scalars['Int']>;
+  filter36?: Maybe<ProjectFilter>;
+  filter37?: Maybe<ProjectFilter>;
+  filter38?: Maybe<ColumnFilter>;
+  order30?: Maybe<ColumnOrder>;
+  first30?: Maybe<Scalars['Int']>;
+  offset30?: Maybe<Scalars['Int']>;
+  filter39?: Maybe<BoardFilter>;
+  filter40?: Maybe<DeveloperFilter>;
+  order31?: Maybe<DeveloperOrder>;
+  first31?: Maybe<Scalars['Int']>;
+  offset31?: Maybe<Scalars['Int']>;
+  filter41?: Maybe<DeveloperFilter>;
+  order32?: Maybe<DeveloperOrder>;
+  first32?: Maybe<Scalars['Int']>;
+  offset32?: Maybe<Scalars['Int']>;
+  filter42?: Maybe<CommentFilter>;
+  order33?: Maybe<CommentOrder>;
+  first33?: Maybe<Scalars['Int']>;
+  offset33?: Maybe<Scalars['Int']>;
+  filter43?: Maybe<TaskFilter>;
+  order34?: Maybe<TaskOrder>;
+  first34?: Maybe<Scalars['Int']>;
+  offset34?: Maybe<Scalars['Int']>;
+  filter44?: Maybe<ColumnFilter>;
+  filter45?: Maybe<TaskFilter>;
+  order35?: Maybe<TaskOrder>;
+  first35?: Maybe<Scalars['Int']>;
+  offset35?: Maybe<Scalars['Int']>;
+  filter46?: Maybe<ProjectFilter>;
+  filter47?: Maybe<ColumnFilter>;
+  filter48?: Maybe<DeveloperFilter>;
+  order36?: Maybe<DeveloperOrder>;
+  first36?: Maybe<Scalars['Int']>;
+  offset36?: Maybe<Scalars['Int']>;
+  filter49?: Maybe<ProjectFilter>;
+  filter50?: Maybe<UserFilter>;
+  order37?: Maybe<UserOrder>;
+  first37?: Maybe<Scalars['Int']>;
+  offset37?: Maybe<Scalars['Int']>;
+  filter51?: Maybe<TagFilter>;
+  order38?: Maybe<TagOrder>;
+  first38?: Maybe<Scalars['Int']>;
+  offset38?: Maybe<Scalars['Int']>;
+  filter52?: Maybe<TaskFilter>;
+  order39?: Maybe<TaskOrder>;
+  first39?: Maybe<Scalars['Int']>;
+  offset39?: Maybe<Scalars['Int']>;
+  filter53?: Maybe<CommentFilter>;
+  order40?: Maybe<CommentOrder>;
+  first40?: Maybe<Scalars['Int']>;
+  offset40?: Maybe<Scalars['Int']>;
+  filter54?: Maybe<TaskFilter>;
+  order41?: Maybe<TaskOrder>;
+  first41?: Maybe<Scalars['Int']>;
+  offset41?: Maybe<Scalars['Int']>;
+  filter55?: Maybe<DeveloperFilter>;
+  order42?: Maybe<DeveloperOrder>;
+  first42?: Maybe<Scalars['Int']>;
+  offset42?: Maybe<Scalars['Int']>;
+  filter56?: Maybe<TaskFilter>;
+  order43?: Maybe<TaskOrder>;
+  first43?: Maybe<Scalars['Int']>;
+  offset43?: Maybe<Scalars['Int']>;
+  filter57?: Maybe<DeveloperFilter>;
+  order44?: Maybe<DeveloperOrder>;
+  first44?: Maybe<Scalars['Int']>;
+  offset44?: Maybe<Scalars['Int']>;
 };
 
 
@@ -7058,7 +8627,68 @@ export type QueryDeveloperQuery = (
     & { project: (
       { __typename?: 'Project' }
       & Pick<Project, 'id' | 'title' | 'description'>
-      & { tags: Maybe<Array<Maybe<(
+      & { hosts: Array<Maybe<(
+        { __typename?: 'User' }
+        & Pick<User, 'id' | 'username' | 'password' | 'location'>
+        & { developer: Maybe<Array<Maybe<(
+          { __typename?: 'Developer' }
+          & Pick<Developer, 'id' | 'name' | 'availability'>
+          & { project: (
+            { __typename?: 'Project' }
+            & Pick<Project, 'id' | 'title' | 'description'>
+          ), user: Maybe<Array<Maybe<(
+            { __typename?: 'User' }
+            & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          )>>>, tags: Maybe<Array<Maybe<(
+            { __typename?: 'Tag' }
+            & Pick<Tag, 'id' | 'title'>
+          )>>>, tasks: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>>, liked: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        )>>>, host: Maybe<Array<Maybe<(
+          { __typename?: 'Project' }
+          & Pick<Project, 'id' | 'title' | 'description'>
+          & { hosts: Array<Maybe<(
+            { __typename?: 'User' }
+            & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          )>>, tags: Maybe<Array<Maybe<(
+            { __typename?: 'Tag' }
+            & Pick<Tag, 'id' | 'title'>
+          )>>>, tasks: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>>, boards: Maybe<Array<Maybe<(
+            { __typename?: 'Board' }
+            & Pick<Board, 'id' | 'title' | 'order'>
+          )>>>, developers: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>> }
+        )>>>, stars: Maybe<Array<Maybe<(
+          { __typename?: 'Task' }
+          & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          & { project: (
+            { __typename?: 'Project' }
+            & Pick<Project, 'id' | 'title' | 'description'>
+          ), column: Maybe<(
+            { __typename?: 'Column' }
+            & Pick<Column, 'id' | 'title'>
+          )>, developers: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>>, likes: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>>, comments: Maybe<Array<Maybe<(
+            { __typename?: 'Comment' }
+            & Pick<Comment, 'id' | 'content'>
+          )>>> }
+        )>>> }
+      )>>, tags: Maybe<Array<Maybe<(
         { __typename?: 'Tag' }
         & Pick<Tag, 'id' | 'title'>
         & { project: (
@@ -7098,7 +8728,66 @@ export type QueryDeveloperQuery = (
     ), user: Maybe<Array<Maybe<(
       { __typename?: 'User' }
       & Pick<User, 'id' | 'username' | 'password' | 'location'>
-      & { roles: Maybe<Array<Maybe<(
+      & { developer: Maybe<Array<Maybe<(
+        { __typename?: 'Developer' }
+        & Pick<Developer, 'id' | 'name' | 'availability'>
+      )>>>, host: Maybe<Array<Maybe<(
+        { __typename?: 'Project' }
+        & Pick<Project, 'id' | 'title' | 'description'>
+      )>>>, stars: Maybe<Array<Maybe<(
+        { __typename?: 'Task' }
+        & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+      )>>> }
+    )>>>, tags: Maybe<Array<Maybe<(
+      { __typename?: 'Tag' }
+      & Pick<Tag, 'id' | 'title'>
+    )>>>, tasks: Maybe<Array<Maybe<(
+      { __typename?: 'Task' }
+      & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+      & { project: (
+        { __typename?: 'Project' }
+        & Pick<Project, 'id' | 'title' | 'description'>
+      ), column: Maybe<(
+        { __typename?: 'Column' }
+        & Pick<Column, 'id' | 'title'>
+        & { board: (
+          { __typename?: 'Board' }
+          & Pick<Board, 'id' | 'title' | 'order'>
+          & { project: (
+            { __typename?: 'Project' }
+            & Pick<Project, 'id' | 'title' | 'description'>
+          ), columns: Maybe<Array<Maybe<(
+            { __typename?: 'Column' }
+            & Pick<Column, 'id' | 'title'>
+          )>>> }
+        ), tasks: Maybe<Array<Maybe<(
+          { __typename?: 'Task' }
+          & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          & { developers: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>>, likes: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>>, comments: Maybe<Array<Maybe<(
+            { __typename?: 'Comment' }
+            & Pick<Comment, 'id' | 'content'>
+          )>>> }
+        )>>> }
+      )> }
+    )>>>, liked: Maybe<Array<Maybe<(
+      { __typename?: 'Task' }
+      & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+      & { project: (
+        { __typename?: 'Project' }
+        & Pick<Project, 'id' | 'title' | 'description'>
+      ), column: Maybe<(
+        { __typename?: 'Column' }
+        & Pick<Column, 'id' | 'title'>
+      )>, developers: Maybe<Array<Maybe<(
+        { __typename?: 'Developer' }
+        & Pick<Developer, 'id' | 'name' | 'availability'>
+      )>>>, likes: Maybe<Array<Maybe<(
         { __typename?: 'Developer' }
         & Pick<Developer, 'id' | 'name' | 'availability'>
         & { project: (
@@ -7107,13 +8796,242 @@ export type QueryDeveloperQuery = (
         ), user: Maybe<Array<Maybe<(
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          & { stars: Maybe<Array<Maybe<(
+        )>>>, tags: Maybe<Array<Maybe<(
+          { __typename?: 'Tag' }
+          & Pick<Tag, 'id' | 'title'>
+        )>>>, tasks: Maybe<Array<Maybe<(
+          { __typename?: 'Task' }
+          & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+        )>>>, liked: Maybe<Array<Maybe<(
+          { __typename?: 'Task' }
+          & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          & { comments: Maybe<Array<Maybe<(
+            { __typename?: 'Comment' }
+            & Pick<Comment, 'id' | 'content'>
+          )>>> }
+        )>>> }
+      )>>> }
+    )>>> }
+  )>>> }
+);
+
+export type QueryProjectQueryVariables = {
+  filter?: Maybe<UserFilter>;
+  order?: Maybe<UserOrder>;
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  filter1?: Maybe<TagFilter>;
+  order1?: Maybe<TagOrder>;
+  first1?: Maybe<Scalars['Int']>;
+  offset1?: Maybe<Scalars['Int']>;
+  filter2?: Maybe<TaskFilter>;
+  order2?: Maybe<TaskOrder>;
+  first2?: Maybe<Scalars['Int']>;
+  offset2?: Maybe<Scalars['Int']>;
+  filter3?: Maybe<BoardFilter>;
+  order3?: Maybe<BoardOrder>;
+  first3?: Maybe<Scalars['Int']>;
+  offset3?: Maybe<Scalars['Int']>;
+  filter4?: Maybe<DeveloperFilter>;
+  order4?: Maybe<DeveloperOrder>;
+  first4?: Maybe<Scalars['Int']>;
+  offset4?: Maybe<Scalars['Int']>;
+  filter5?: Maybe<ProjectFilter>;
+  filter6?: Maybe<DeveloperFilter>;
+  order5?: Maybe<DeveloperOrder>;
+  first5?: Maybe<Scalars['Int']>;
+  offset5?: Maybe<Scalars['Int']>;
+  filter7?: Maybe<ProjectFilter>;
+  order6?: Maybe<ProjectOrder>;
+  first6?: Maybe<Scalars['Int']>;
+  offset6?: Maybe<Scalars['Int']>;
+  filter8?: Maybe<TaskFilter>;
+  order7?: Maybe<TaskOrder>;
+  first7?: Maybe<Scalars['Int']>;
+  offset7?: Maybe<Scalars['Int']>;
+  filter9?: Maybe<UserFilter>;
+  order8?: Maybe<UserOrder>;
+  first8?: Maybe<Scalars['Int']>;
+  offset8?: Maybe<Scalars['Int']>;
+  filter10?: Maybe<ProjectFilter>;
+  filter11?: Maybe<DeveloperFilter>;
+  order9?: Maybe<DeveloperOrder>;
+  first9?: Maybe<Scalars['Int']>;
+  offset9?: Maybe<Scalars['Int']>;
+  filter12?: Maybe<TagFilter>;
+  order10?: Maybe<TagOrder>;
+  first10?: Maybe<Scalars['Int']>;
+  offset10?: Maybe<Scalars['Int']>;
+  filter13?: Maybe<ProjectFilter>;
+  filter14?: Maybe<ColumnFilter>;
+  filter15?: Maybe<DeveloperFilter>;
+  order11?: Maybe<DeveloperOrder>;
+  first11?: Maybe<Scalars['Int']>;
+  offset11?: Maybe<Scalars['Int']>;
+  filter16?: Maybe<DeveloperFilter>;
+  order12?: Maybe<DeveloperOrder>;
+  first12?: Maybe<Scalars['Int']>;
+  offset12?: Maybe<Scalars['Int']>;
+  filter17?: Maybe<CommentFilter>;
+  order13?: Maybe<CommentOrder>;
+  first13?: Maybe<Scalars['Int']>;
+  offset13?: Maybe<Scalars['Int']>;
+  filter18?: Maybe<TaskFilter>;
+  order14?: Maybe<TaskOrder>;
+  first14?: Maybe<Scalars['Int']>;
+  offset14?: Maybe<Scalars['Int']>;
+  filter19?: Maybe<ProjectFilter>;
+  filter20?: Maybe<ColumnFilter>;
+  filter21?: Maybe<DeveloperFilter>;
+  order15?: Maybe<DeveloperOrder>;
+  first15?: Maybe<Scalars['Int']>;
+  offset15?: Maybe<Scalars['Int']>;
+  filter22?: Maybe<DeveloperFilter>;
+  order16?: Maybe<DeveloperOrder>;
+  first16?: Maybe<Scalars['Int']>;
+  offset16?: Maybe<Scalars['Int']>;
+  filter23?: Maybe<CommentFilter>;
+  order17?: Maybe<CommentOrder>;
+  first17?: Maybe<Scalars['Int']>;
+  offset17?: Maybe<Scalars['Int']>;
+  filter24?: Maybe<TaskFilter>;
+  order18?: Maybe<TaskOrder>;
+  first18?: Maybe<Scalars['Int']>;
+  offset18?: Maybe<Scalars['Int']>;
+  filter25?: Maybe<DeveloperFilter>;
+  order19?: Maybe<DeveloperOrder>;
+  first19?: Maybe<Scalars['Int']>;
+  offset19?: Maybe<Scalars['Int']>;
+  filter26?: Maybe<TaskFilter>;
+  order20?: Maybe<TaskOrder>;
+  first20?: Maybe<Scalars['Int']>;
+  offset20?: Maybe<Scalars['Int']>;
+  filter27?: Maybe<UserFilter>;
+  order21?: Maybe<UserOrder>;
+  first21?: Maybe<Scalars['Int']>;
+  offset21?: Maybe<Scalars['Int']>;
+  filter28?: Maybe<TagFilter>;
+  order22?: Maybe<TagOrder>;
+  first22?: Maybe<Scalars['Int']>;
+  offset22?: Maybe<Scalars['Int']>;
+  filter29?: Maybe<TaskFilter>;
+  order23?: Maybe<TaskOrder>;
+  first23?: Maybe<Scalars['Int']>;
+  offset23?: Maybe<Scalars['Int']>;
+  filter30?: Maybe<ProjectFilter>;
+  filter31?: Maybe<ColumnFilter>;
+  order24?: Maybe<ColumnOrder>;
+  first24?: Maybe<Scalars['Int']>;
+  offset24?: Maybe<Scalars['Int']>;
+  filter32?: Maybe<BoardFilter>;
+  order25?: Maybe<BoardOrder>;
+  first25?: Maybe<Scalars['Int']>;
+  offset25?: Maybe<Scalars['Int']>;
+  filter33?: Maybe<ProjectFilter>;
+  filter34?: Maybe<UserFilter>;
+  order26?: Maybe<UserOrder>;
+  first26?: Maybe<Scalars['Int']>;
+  offset26?: Maybe<Scalars['Int']>;
+  filter35?: Maybe<TagFilter>;
+  order27?: Maybe<TagOrder>;
+  first27?: Maybe<Scalars['Int']>;
+  offset27?: Maybe<Scalars['Int']>;
+  filter36?: Maybe<TaskFilter>;
+  order28?: Maybe<TaskOrder>;
+  first28?: Maybe<Scalars['Int']>;
+  offset28?: Maybe<Scalars['Int']>;
+  filter37?: Maybe<TaskFilter>;
+  order29?: Maybe<TaskOrder>;
+  first29?: Maybe<Scalars['Int']>;
+  offset29?: Maybe<Scalars['Int']>;
+  filter38?: Maybe<DeveloperFilter>;
+  order30?: Maybe<DeveloperOrder>;
+  first30?: Maybe<Scalars['Int']>;
+  offset30?: Maybe<Scalars['Int']>;
+  filter39?: Maybe<ProjectFilter>;
+  order31?: Maybe<ProjectOrder>;
+  first31?: Maybe<Scalars['Int']>;
+  offset31?: Maybe<Scalars['Int']>;
+  filter40?: Maybe<UserFilter>;
+  order32?: Maybe<UserOrder>;
+  first32?: Maybe<Scalars['Int']>;
+  offset32?: Maybe<Scalars['Int']>;
+  filter41?: Maybe<TagFilter>;
+  order33?: Maybe<TagOrder>;
+  first33?: Maybe<Scalars['Int']>;
+  offset33?: Maybe<Scalars['Int']>;
+  filter42?: Maybe<TaskFilter>;
+  order34?: Maybe<TaskOrder>;
+  first34?: Maybe<Scalars['Int']>;
+  offset34?: Maybe<Scalars['Int']>;
+  filter43?: Maybe<BoardFilter>;
+  order35?: Maybe<BoardOrder>;
+  first35?: Maybe<Scalars['Int']>;
+  offset35?: Maybe<Scalars['Int']>;
+  filter44?: Maybe<DeveloperFilter>;
+  order36?: Maybe<DeveloperOrder>;
+  first36?: Maybe<Scalars['Int']>;
+  offset36?: Maybe<Scalars['Int']>;
+  filter45?: Maybe<ProjectFilter>;
+  order37?: Maybe<ProjectOrder>;
+  first37?: Maybe<Scalars['Int']>;
+  offset37?: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryProjectQuery = (
+  { __typename?: 'Query' }
+  & { queryProject: Maybe<Array<Maybe<(
+    { __typename?: 'Project' }
+    & Pick<Project, 'id' | 'title' | 'description'>
+    & { hosts: Array<Maybe<(
+      { __typename?: 'User' }
+      & Pick<User, 'id' | 'username' | 'password' | 'location'>
+      & { developer: Maybe<Array<Maybe<(
+        { __typename?: 'Developer' }
+        & Pick<Developer, 'id' | 'name' | 'availability'>
+        & { project: (
+          { __typename?: 'Project' }
+          & Pick<Project, 'id' | 'title' | 'description'>
+          & { hosts: Array<Maybe<(
+            { __typename?: 'User' }
+            & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          )>>, tags: Maybe<Array<Maybe<(
+            { __typename?: 'Tag' }
+            & Pick<Tag, 'id' | 'title'>
+          )>>>, tasks: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>>, boards: Maybe<Array<Maybe<(
+            { __typename?: 'Board' }
+            & Pick<Board, 'id' | 'title' | 'order'>
+          )>>>, developers: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>> }
+        ), user: Maybe<Array<Maybe<(
+          { __typename?: 'User' }
+          & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          & { developer: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>>, host: Maybe<Array<Maybe<(
+            { __typename?: 'Project' }
+            & Pick<Project, 'id' | 'title' | 'description'>
+          )>>>, stars: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
         )>>>, tags: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
+          & { project: (
+            { __typename?: 'Project' }
+            & Pick<Project, 'id' | 'title' | 'description'>
+          ), developers: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>> }
         )>>>, tasks: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
@@ -7153,138 +9071,22 @@ export type QueryDeveloperQuery = (
             & Pick<Comment, 'id' | 'content'>
           )>>> }
         )>>> }
-      )>>> }
-    )>>>, tags: Maybe<Array<Maybe<(
-      { __typename?: 'Tag' }
-      & Pick<Tag, 'id' | 'title'>
-    )>>>, tasks: Maybe<Array<Maybe<(
-      { __typename?: 'Task' }
-      & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-    )>>>, liked: Maybe<Array<Maybe<(
-      { __typename?: 'Task' }
-      & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-    )>>> }
-  )>>> }
-);
-
-export type QueryProjectQueryVariables = {
-  filter?: Maybe<DeveloperFilter>;
-  order?: Maybe<DeveloperOrder>;
-  first?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  filter1?: Maybe<TagFilter>;
-  order1?: Maybe<TagOrder>;
-  first1?: Maybe<Scalars['Int']>;
-  offset1?: Maybe<Scalars['Int']>;
-  filter2?: Maybe<ProjectFilter>;
-  filter3?: Maybe<ColumnFilter>;
-  filter4?: Maybe<DeveloperFilter>;
-  order2?: Maybe<DeveloperOrder>;
-  first2?: Maybe<Scalars['Int']>;
-  offset2?: Maybe<Scalars['Int']>;
-  filter5?: Maybe<DeveloperFilter>;
-  order3?: Maybe<DeveloperOrder>;
-  first3?: Maybe<Scalars['Int']>;
-  offset3?: Maybe<Scalars['Int']>;
-  filter6?: Maybe<CommentFilter>;
-  order4?: Maybe<CommentOrder>;
-  first4?: Maybe<Scalars['Int']>;
-  offset4?: Maybe<Scalars['Int']>;
-  filter7?: Maybe<TaskFilter>;
-  order5?: Maybe<TaskOrder>;
-  first5?: Maybe<Scalars['Int']>;
-  offset5?: Maybe<Scalars['Int']>;
-  filter8?: Maybe<ProjectFilter>;
-  filter9?: Maybe<ColumnFilter>;
-  order6?: Maybe<ColumnOrder>;
-  first6?: Maybe<Scalars['Int']>;
-  offset6?: Maybe<Scalars['Int']>;
-  filter10?: Maybe<BoardFilter>;
-  order7?: Maybe<BoardOrder>;
-  first7?: Maybe<Scalars['Int']>;
-  offset7?: Maybe<Scalars['Int']>;
-  filter11?: Maybe<ProjectFilter>;
-  filter12?: Maybe<UserFilter>;
-  order8?: Maybe<UserOrder>;
-  first8?: Maybe<Scalars['Int']>;
-  offset8?: Maybe<Scalars['Int']>;
-  filter13?: Maybe<TagFilter>;
-  order9?: Maybe<TagOrder>;
-  first9?: Maybe<Scalars['Int']>;
-  offset9?: Maybe<Scalars['Int']>;
-  filter14?: Maybe<TaskFilter>;
-  order10?: Maybe<TaskOrder>;
-  first10?: Maybe<Scalars['Int']>;
-  offset10?: Maybe<Scalars['Int']>;
-  filter15?: Maybe<TaskFilter>;
-  order11?: Maybe<TaskOrder>;
-  first11?: Maybe<Scalars['Int']>;
-  offset11?: Maybe<Scalars['Int']>;
-  filter16?: Maybe<DeveloperFilter>;
-  order12?: Maybe<DeveloperOrder>;
-  first12?: Maybe<Scalars['Int']>;
-  offset12?: Maybe<Scalars['Int']>;
-  filter17?: Maybe<ProjectFilter>;
-  filter18?: Maybe<TagFilter>;
-  order13?: Maybe<TagOrder>;
-  first13?: Maybe<Scalars['Int']>;
-  offset13?: Maybe<Scalars['Int']>;
-  filter19?: Maybe<TaskFilter>;
-  order14?: Maybe<TaskOrder>;
-  first14?: Maybe<Scalars['Int']>;
-  offset14?: Maybe<Scalars['Int']>;
-  filter20?: Maybe<BoardFilter>;
-  order15?: Maybe<BoardOrder>;
-  first15?: Maybe<Scalars['Int']>;
-  offset15?: Maybe<Scalars['Int']>;
-  filter21?: Maybe<DeveloperFilter>;
-  order16?: Maybe<DeveloperOrder>;
-  first16?: Maybe<Scalars['Int']>;
-  offset16?: Maybe<Scalars['Int']>;
-  filter22?: Maybe<ProjectFilter>;
-  order17?: Maybe<ProjectOrder>;
-  first17?: Maybe<Scalars['Int']>;
-  offset17?: Maybe<Scalars['Int']>;
-};
-
-
-export type QueryProjectQuery = (
-  { __typename?: 'Query' }
-  & { queryProject: Maybe<Array<Maybe<(
-    { __typename?: 'Project' }
-    & Pick<Project, 'id' | 'title' | 'description'>
-    & { tags: Maybe<Array<Maybe<(
-      { __typename?: 'Tag' }
-      & Pick<Tag, 'id' | 'title'>
-      & { project: (
+      )>>>, host: Maybe<Array<Maybe<(
         { __typename?: 'Project' }
         & Pick<Project, 'id' | 'title' | 'description'>
-        & { tags: Maybe<Array<Maybe<(
+        & { hosts: Array<Maybe<(
+          { __typename?: 'User' }
+          & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          & { stars: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        )>>, tags: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
-          & { developers: Maybe<Array<Maybe<(
-            { __typename?: 'Developer' }
-            & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>> }
         )>>>, tasks: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          & { project: (
-            { __typename?: 'Project' }
-            & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: Maybe<(
-            { __typename?: 'Column' }
-            & Pick<Column, 'id' | 'title'>
-          )>, developers: Maybe<Array<Maybe<(
-            { __typename?: 'Developer' }
-            & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, likes: Maybe<Array<Maybe<(
-            { __typename?: 'Developer' }
-            & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, comments: Maybe<Array<Maybe<(
-            { __typename?: 'Comment' }
-            & Pick<Comment, 'id' | 'content'>
-          )>>> }
         )>>>, boards: Maybe<Array<Maybe<(
           { __typename?: 'Board' }
           & Pick<Board, 'id' | 'title' | 'order'>
@@ -7315,7 +9117,10 @@ export type QueryProjectQuery = (
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
         )>>> }
-      ) }
+      )>>> }
+    )>>, tags: Maybe<Array<Maybe<(
+      { __typename?: 'Tag' }
+      & Pick<Tag, 'id' | 'title'>
     )>>>, tasks: Maybe<Array<Maybe<(
       { __typename?: 'Task' }
       & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
@@ -7330,53 +9135,120 @@ export type QueryProjectQuery = (
 );
 
 export type QueryTagQueryVariables = {
-  filter?: Maybe<TaskFilter>;
-  order?: Maybe<TaskOrder>;
+  filter?: Maybe<ProjectFilter>;
+  filter1?: Maybe<UserFilter>;
+  order?: Maybe<UserOrder>;
   first?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  filter1?: Maybe<BoardFilter>;
-  order1?: Maybe<BoardOrder>;
+  filter2?: Maybe<TagFilter>;
+  order1?: Maybe<TagOrder>;
   first1?: Maybe<Scalars['Int']>;
   offset1?: Maybe<Scalars['Int']>;
-  filter2?: Maybe<DeveloperFilter>;
-  order2?: Maybe<DeveloperOrder>;
+  filter3?: Maybe<TaskFilter>;
+  order2?: Maybe<TaskOrder>;
   first2?: Maybe<Scalars['Int']>;
   offset2?: Maybe<Scalars['Int']>;
-  filter3?: Maybe<ProjectFilter>;
-  filter4?: Maybe<ProjectFilter>;
-  filter5?: Maybe<UserFilter>;
-  order3?: Maybe<UserOrder>;
+  filter4?: Maybe<TaskFilter>;
+  order3?: Maybe<TaskOrder>;
   first3?: Maybe<Scalars['Int']>;
   offset3?: Maybe<Scalars['Int']>;
-  filter6?: Maybe<TagFilter>;
-  order4?: Maybe<TagOrder>;
+  filter5?: Maybe<DeveloperFilter>;
+  order4?: Maybe<DeveloperOrder>;
   first4?: Maybe<Scalars['Int']>;
   offset4?: Maybe<Scalars['Int']>;
-  filter7?: Maybe<TaskFilter>;
-  order5?: Maybe<TaskOrder>;
+  filter6?: Maybe<UserFilter>;
+  order5?: Maybe<UserOrder>;
   first5?: Maybe<Scalars['Int']>;
   offset5?: Maybe<Scalars['Int']>;
-  filter8?: Maybe<TaskFilter>;
-  order6?: Maybe<TaskOrder>;
+  filter7?: Maybe<TagFilter>;
+  order6?: Maybe<TagOrder>;
   first6?: Maybe<Scalars['Int']>;
   offset6?: Maybe<Scalars['Int']>;
-  filter9?: Maybe<DeveloperFilter>;
-  order7?: Maybe<DeveloperOrder>;
+  filter8?: Maybe<TaskFilter>;
+  order7?: Maybe<TaskOrder>;
   first7?: Maybe<Scalars['Int']>;
   offset7?: Maybe<Scalars['Int']>;
-  filter10?: Maybe<TagFilter>;
-  order8?: Maybe<TagOrder>;
+  filter9?: Maybe<BoardFilter>;
+  order8?: Maybe<BoardOrder>;
   first8?: Maybe<Scalars['Int']>;
   offset8?: Maybe<Scalars['Int']>;
-  filter11?: Maybe<ProjectFilter>;
-  filter12?: Maybe<DeveloperFilter>;
+  filter10?: Maybe<DeveloperFilter>;
   order9?: Maybe<DeveloperOrder>;
   first9?: Maybe<Scalars['Int']>;
   offset9?: Maybe<Scalars['Int']>;
-  filter13?: Maybe<TagFilter>;
-  order10?: Maybe<TagOrder>;
+  filter11?: Maybe<ProjectFilter>;
+  order10?: Maybe<ProjectOrder>;
   first10?: Maybe<Scalars['Int']>;
   offset10?: Maybe<Scalars['Int']>;
+  filter12?: Maybe<ProjectFilter>;
+  filter13?: Maybe<ColumnFilter>;
+  filter14?: Maybe<DeveloperFilter>;
+  order11?: Maybe<DeveloperOrder>;
+  first11?: Maybe<Scalars['Int']>;
+  offset11?: Maybe<Scalars['Int']>;
+  filter15?: Maybe<DeveloperFilter>;
+  order12?: Maybe<DeveloperOrder>;
+  first12?: Maybe<Scalars['Int']>;
+  offset12?: Maybe<Scalars['Int']>;
+  filter16?: Maybe<CommentFilter>;
+  order13?: Maybe<CommentOrder>;
+  first13?: Maybe<Scalars['Int']>;
+  offset13?: Maybe<Scalars['Int']>;
+  filter17?: Maybe<TaskFilter>;
+  order14?: Maybe<TaskOrder>;
+  first14?: Maybe<Scalars['Int']>;
+  offset14?: Maybe<Scalars['Int']>;
+  filter18?: Maybe<UserFilter>;
+  order15?: Maybe<UserOrder>;
+  first15?: Maybe<Scalars['Int']>;
+  offset15?: Maybe<Scalars['Int']>;
+  filter19?: Maybe<TaskFilter>;
+  order16?: Maybe<TaskOrder>;
+  first16?: Maybe<Scalars['Int']>;
+  offset16?: Maybe<Scalars['Int']>;
+  filter20?: Maybe<BoardFilter>;
+  order17?: Maybe<BoardOrder>;
+  first17?: Maybe<Scalars['Int']>;
+  offset17?: Maybe<Scalars['Int']>;
+  filter21?: Maybe<DeveloperFilter>;
+  order18?: Maybe<DeveloperOrder>;
+  first18?: Maybe<Scalars['Int']>;
+  offset18?: Maybe<Scalars['Int']>;
+  filter22?: Maybe<ProjectFilter>;
+  filter23?: Maybe<ProjectFilter>;
+  filter24?: Maybe<UserFilter>;
+  order19?: Maybe<UserOrder>;
+  first19?: Maybe<Scalars['Int']>;
+  offset19?: Maybe<Scalars['Int']>;
+  filter25?: Maybe<TagFilter>;
+  order20?: Maybe<TagOrder>;
+  first20?: Maybe<Scalars['Int']>;
+  offset20?: Maybe<Scalars['Int']>;
+  filter26?: Maybe<TaskFilter>;
+  order21?: Maybe<TaskOrder>;
+  first21?: Maybe<Scalars['Int']>;
+  offset21?: Maybe<Scalars['Int']>;
+  filter27?: Maybe<TaskFilter>;
+  order22?: Maybe<TaskOrder>;
+  first22?: Maybe<Scalars['Int']>;
+  offset22?: Maybe<Scalars['Int']>;
+  filter28?: Maybe<DeveloperFilter>;
+  order23?: Maybe<DeveloperOrder>;
+  first23?: Maybe<Scalars['Int']>;
+  offset23?: Maybe<Scalars['Int']>;
+  filter29?: Maybe<TagFilter>;
+  order24?: Maybe<TagOrder>;
+  first24?: Maybe<Scalars['Int']>;
+  offset24?: Maybe<Scalars['Int']>;
+  filter30?: Maybe<ProjectFilter>;
+  filter31?: Maybe<DeveloperFilter>;
+  order25?: Maybe<DeveloperOrder>;
+  first25?: Maybe<Scalars['Int']>;
+  offset25?: Maybe<Scalars['Int']>;
+  filter32?: Maybe<TagFilter>;
+  order26?: Maybe<TagOrder>;
+  first26?: Maybe<Scalars['Int']>;
+  offset26?: Maybe<Scalars['Int']>;
 };
 
 
@@ -7388,7 +9260,68 @@ export type QueryTagQuery = (
     & { project: (
       { __typename?: 'Project' }
       & Pick<Project, 'id' | 'title' | 'description'>
-      & { tags: Maybe<Array<Maybe<(
+      & { hosts: Array<Maybe<(
+        { __typename?: 'User' }
+        & Pick<User, 'id' | 'username' | 'password' | 'location'>
+        & { developer: Maybe<Array<Maybe<(
+          { __typename?: 'Developer' }
+          & Pick<Developer, 'id' | 'name' | 'availability'>
+          & { project: (
+            { __typename?: 'Project' }
+            & Pick<Project, 'id' | 'title' | 'description'>
+          ), user: Maybe<Array<Maybe<(
+            { __typename?: 'User' }
+            & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          )>>>, tags: Maybe<Array<Maybe<(
+            { __typename?: 'Tag' }
+            & Pick<Tag, 'id' | 'title'>
+          )>>>, tasks: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>>, liked: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        )>>>, host: Maybe<Array<Maybe<(
+          { __typename?: 'Project' }
+          & Pick<Project, 'id' | 'title' | 'description'>
+          & { hosts: Array<Maybe<(
+            { __typename?: 'User' }
+            & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          )>>, tags: Maybe<Array<Maybe<(
+            { __typename?: 'Tag' }
+            & Pick<Tag, 'id' | 'title'>
+          )>>>, tasks: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>>, boards: Maybe<Array<Maybe<(
+            { __typename?: 'Board' }
+            & Pick<Board, 'id' | 'title' | 'order'>
+          )>>>, developers: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>> }
+        )>>>, stars: Maybe<Array<Maybe<(
+          { __typename?: 'Task' }
+          & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          & { project: (
+            { __typename?: 'Project' }
+            & Pick<Project, 'id' | 'title' | 'description'>
+          ), column: Maybe<(
+            { __typename?: 'Column' }
+            & Pick<Column, 'id' | 'title'>
+          )>, developers: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>>, likes: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>>, comments: Maybe<Array<Maybe<(
+            { __typename?: 'Comment' }
+            & Pick<Comment, 'id' | 'content'>
+          )>>> }
+        )>>> }
+      )>>, tags: Maybe<Array<Maybe<(
         { __typename?: 'Tag' }
         & Pick<Tag, 'id' | 'title'>
         & { project: (
@@ -7433,110 +9366,177 @@ export type QueryTagQuery = (
 );
 
 export type QueryTaskQueryVariables = {
-  filter?: Maybe<TaskFilter>;
-  order?: Maybe<TaskOrder>;
+  filter?: Maybe<ProjectFilter>;
+  filter1?: Maybe<UserFilter>;
+  order?: Maybe<UserOrder>;
   first?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  filter1?: Maybe<BoardFilter>;
-  order1?: Maybe<BoardOrder>;
+  filter2?: Maybe<TagFilter>;
+  order1?: Maybe<TagOrder>;
   first1?: Maybe<Scalars['Int']>;
   offset1?: Maybe<Scalars['Int']>;
-  filter2?: Maybe<DeveloperFilter>;
-  order2?: Maybe<DeveloperOrder>;
+  filter3?: Maybe<TaskFilter>;
+  order2?: Maybe<TaskOrder>;
   first2?: Maybe<Scalars['Int']>;
   offset2?: Maybe<Scalars['Int']>;
-  filter3?: Maybe<ProjectFilter>;
-  filter4?: Maybe<ProjectFilter>;
-  filter5?: Maybe<UserFilter>;
-  order3?: Maybe<UserOrder>;
+  filter4?: Maybe<TaskFilter>;
+  order3?: Maybe<TaskOrder>;
   first3?: Maybe<Scalars['Int']>;
   offset3?: Maybe<Scalars['Int']>;
-  filter6?: Maybe<TagFilter>;
-  order4?: Maybe<TagOrder>;
+  filter5?: Maybe<DeveloperFilter>;
+  order4?: Maybe<DeveloperOrder>;
   first4?: Maybe<Scalars['Int']>;
   offset4?: Maybe<Scalars['Int']>;
-  filter7?: Maybe<TaskFilter>;
-  order5?: Maybe<TaskOrder>;
+  filter6?: Maybe<UserFilter>;
+  order5?: Maybe<UserOrder>;
   first5?: Maybe<Scalars['Int']>;
   offset5?: Maybe<Scalars['Int']>;
-  filter8?: Maybe<TaskFilter>;
-  order6?: Maybe<TaskOrder>;
+  filter7?: Maybe<TagFilter>;
+  order6?: Maybe<TagOrder>;
   first6?: Maybe<Scalars['Int']>;
   offset6?: Maybe<Scalars['Int']>;
-  filter9?: Maybe<DeveloperFilter>;
-  order7?: Maybe<DeveloperOrder>;
+  filter8?: Maybe<TaskFilter>;
+  order7?: Maybe<TaskOrder>;
   first7?: Maybe<Scalars['Int']>;
   offset7?: Maybe<Scalars['Int']>;
-  filter10?: Maybe<TagFilter>;
-  order8?: Maybe<TagOrder>;
+  filter9?: Maybe<BoardFilter>;
+  order8?: Maybe<BoardOrder>;
   first8?: Maybe<Scalars['Int']>;
   offset8?: Maybe<Scalars['Int']>;
-  filter11?: Maybe<ProjectFilter>;
-  filter12?: Maybe<ProjectFilter>;
-  filter13?: Maybe<BoardFilter>;
-  filter14?: Maybe<TaskFilter>;
-  order9?: Maybe<TaskOrder>;
+  filter10?: Maybe<DeveloperFilter>;
+  order9?: Maybe<DeveloperOrder>;
   first9?: Maybe<Scalars['Int']>;
   offset9?: Maybe<Scalars['Int']>;
-  filter15?: Maybe<ColumnFilter>;
-  order10?: Maybe<ColumnOrder>;
+  filter11?: Maybe<ProjectFilter>;
+  order10?: Maybe<ProjectOrder>;
   first10?: Maybe<Scalars['Int']>;
   offset10?: Maybe<Scalars['Int']>;
-  filter16?: Maybe<BoardFilter>;
-  filter17?: Maybe<ProjectFilter>;
-  filter18?: Maybe<ColumnFilter>;
-  filter19?: Maybe<DeveloperFilter>;
+  filter12?: Maybe<ProjectFilter>;
+  filter13?: Maybe<ColumnFilter>;
+  filter14?: Maybe<DeveloperFilter>;
   order11?: Maybe<DeveloperOrder>;
   first11?: Maybe<Scalars['Int']>;
   offset11?: Maybe<Scalars['Int']>;
-  filter20?: Maybe<ProjectFilter>;
-  filter21?: Maybe<UserFilter>;
-  order12?: Maybe<UserOrder>;
+  filter15?: Maybe<DeveloperFilter>;
+  order12?: Maybe<DeveloperOrder>;
   first12?: Maybe<Scalars['Int']>;
   offset12?: Maybe<Scalars['Int']>;
-  filter22?: Maybe<TagFilter>;
-  order13?: Maybe<TagOrder>;
+  filter16?: Maybe<CommentFilter>;
+  order13?: Maybe<CommentOrder>;
   first13?: Maybe<Scalars['Int']>;
   offset13?: Maybe<Scalars['Int']>;
-  filter23?: Maybe<TaskFilter>;
+  filter17?: Maybe<TaskFilter>;
   order14?: Maybe<TaskOrder>;
   first14?: Maybe<Scalars['Int']>;
   offset14?: Maybe<Scalars['Int']>;
-  filter24?: Maybe<TaskFilter>;
-  order15?: Maybe<TaskOrder>;
+  filter18?: Maybe<UserFilter>;
+  order15?: Maybe<UserOrder>;
   first15?: Maybe<Scalars['Int']>;
   offset15?: Maybe<Scalars['Int']>;
-  filter25?: Maybe<DeveloperFilter>;
-  order16?: Maybe<DeveloperOrder>;
+  filter19?: Maybe<TaskFilter>;
+  order16?: Maybe<TaskOrder>;
   first16?: Maybe<Scalars['Int']>;
   offset16?: Maybe<Scalars['Int']>;
-  filter26?: Maybe<TaskFilter>;
-  filter27?: Maybe<DeveloperFilter>;
-  filter28?: Maybe<CommentFilter>;
-  order17?: Maybe<CommentOrder>;
+  filter20?: Maybe<BoardFilter>;
+  order17?: Maybe<BoardOrder>;
   first17?: Maybe<Scalars['Int']>;
   offset17?: Maybe<Scalars['Int']>;
-  filter29?: Maybe<TaskFilter>;
-  order18?: Maybe<TaskOrder>;
+  filter21?: Maybe<DeveloperFilter>;
+  order18?: Maybe<DeveloperOrder>;
   first18?: Maybe<Scalars['Int']>;
   offset18?: Maybe<Scalars['Int']>;
-  filter30?: Maybe<ColumnFilter>;
-  filter31?: Maybe<DeveloperFilter>;
-  order19?: Maybe<DeveloperOrder>;
+  filter22?: Maybe<ProjectFilter>;
+  filter23?: Maybe<ProjectFilter>;
+  filter24?: Maybe<UserFilter>;
+  order19?: Maybe<UserOrder>;
   first19?: Maybe<Scalars['Int']>;
   offset19?: Maybe<Scalars['Int']>;
-  filter32?: Maybe<DeveloperFilter>;
-  order20?: Maybe<DeveloperOrder>;
+  filter25?: Maybe<TagFilter>;
+  order20?: Maybe<TagOrder>;
   first20?: Maybe<Scalars['Int']>;
   offset20?: Maybe<Scalars['Int']>;
-  filter33?: Maybe<CommentFilter>;
-  order21?: Maybe<CommentOrder>;
+  filter26?: Maybe<TaskFilter>;
+  order21?: Maybe<TaskOrder>;
   first21?: Maybe<Scalars['Int']>;
   offset21?: Maybe<Scalars['Int']>;
-  filter34?: Maybe<TaskFilter>;
+  filter27?: Maybe<TaskFilter>;
   order22?: Maybe<TaskOrder>;
   first22?: Maybe<Scalars['Int']>;
   offset22?: Maybe<Scalars['Int']>;
+  filter28?: Maybe<DeveloperFilter>;
+  order23?: Maybe<DeveloperOrder>;
+  first23?: Maybe<Scalars['Int']>;
+  offset23?: Maybe<Scalars['Int']>;
+  filter29?: Maybe<TagFilter>;
+  order24?: Maybe<TagOrder>;
+  first24?: Maybe<Scalars['Int']>;
+  offset24?: Maybe<Scalars['Int']>;
+  filter30?: Maybe<ProjectFilter>;
+  filter31?: Maybe<ProjectFilter>;
+  filter32?: Maybe<BoardFilter>;
+  filter33?: Maybe<TaskFilter>;
+  order25?: Maybe<TaskOrder>;
+  first25?: Maybe<Scalars['Int']>;
+  offset25?: Maybe<Scalars['Int']>;
+  filter34?: Maybe<ColumnFilter>;
+  order26?: Maybe<ColumnOrder>;
+  first26?: Maybe<Scalars['Int']>;
+  offset26?: Maybe<Scalars['Int']>;
+  filter35?: Maybe<BoardFilter>;
+  filter36?: Maybe<ProjectFilter>;
+  filter37?: Maybe<ColumnFilter>;
+  filter38?: Maybe<DeveloperFilter>;
+  order27?: Maybe<DeveloperOrder>;
+  first27?: Maybe<Scalars['Int']>;
+  offset27?: Maybe<Scalars['Int']>;
+  filter39?: Maybe<ProjectFilter>;
+  filter40?: Maybe<UserFilter>;
+  order28?: Maybe<UserOrder>;
+  first28?: Maybe<Scalars['Int']>;
+  offset28?: Maybe<Scalars['Int']>;
+  filter41?: Maybe<TagFilter>;
+  order29?: Maybe<TagOrder>;
+  first29?: Maybe<Scalars['Int']>;
+  offset29?: Maybe<Scalars['Int']>;
+  filter42?: Maybe<TaskFilter>;
+  order30?: Maybe<TaskOrder>;
+  first30?: Maybe<Scalars['Int']>;
+  offset30?: Maybe<Scalars['Int']>;
+  filter43?: Maybe<TaskFilter>;
+  order31?: Maybe<TaskOrder>;
+  first31?: Maybe<Scalars['Int']>;
+  offset31?: Maybe<Scalars['Int']>;
+  filter44?: Maybe<DeveloperFilter>;
+  order32?: Maybe<DeveloperOrder>;
+  first32?: Maybe<Scalars['Int']>;
+  offset32?: Maybe<Scalars['Int']>;
+  filter45?: Maybe<TaskFilter>;
+  filter46?: Maybe<DeveloperFilter>;
+  filter47?: Maybe<CommentFilter>;
+  order33?: Maybe<CommentOrder>;
+  first33?: Maybe<Scalars['Int']>;
+  offset33?: Maybe<Scalars['Int']>;
+  filter48?: Maybe<TaskFilter>;
+  order34?: Maybe<TaskOrder>;
+  first34?: Maybe<Scalars['Int']>;
+  offset34?: Maybe<Scalars['Int']>;
+  filter49?: Maybe<ColumnFilter>;
+  filter50?: Maybe<DeveloperFilter>;
+  order35?: Maybe<DeveloperOrder>;
+  first35?: Maybe<Scalars['Int']>;
+  offset35?: Maybe<Scalars['Int']>;
+  filter51?: Maybe<DeveloperFilter>;
+  order36?: Maybe<DeveloperOrder>;
+  first36?: Maybe<Scalars['Int']>;
+  offset36?: Maybe<Scalars['Int']>;
+  filter52?: Maybe<CommentFilter>;
+  order37?: Maybe<CommentOrder>;
+  first37?: Maybe<Scalars['Int']>;
+  offset37?: Maybe<Scalars['Int']>;
+  filter53?: Maybe<TaskFilter>;
+  order38?: Maybe<TaskOrder>;
+  first38?: Maybe<Scalars['Int']>;
+  offset38?: Maybe<Scalars['Int']>;
 };
 
 
@@ -7548,7 +9548,68 @@ export type QueryTaskQuery = (
     & { project: (
       { __typename?: 'Project' }
       & Pick<Project, 'id' | 'title' | 'description'>
-      & { tags: Maybe<Array<Maybe<(
+      & { hosts: Array<Maybe<(
+        { __typename?: 'User' }
+        & Pick<User, 'id' | 'username' | 'password' | 'location'>
+        & { developer: Maybe<Array<Maybe<(
+          { __typename?: 'Developer' }
+          & Pick<Developer, 'id' | 'name' | 'availability'>
+          & { project: (
+            { __typename?: 'Project' }
+            & Pick<Project, 'id' | 'title' | 'description'>
+          ), user: Maybe<Array<Maybe<(
+            { __typename?: 'User' }
+            & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          )>>>, tags: Maybe<Array<Maybe<(
+            { __typename?: 'Tag' }
+            & Pick<Tag, 'id' | 'title'>
+          )>>>, tasks: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>>, liked: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        )>>>, host: Maybe<Array<Maybe<(
+          { __typename?: 'Project' }
+          & Pick<Project, 'id' | 'title' | 'description'>
+          & { hosts: Array<Maybe<(
+            { __typename?: 'User' }
+            & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          )>>, tags: Maybe<Array<Maybe<(
+            { __typename?: 'Tag' }
+            & Pick<Tag, 'id' | 'title'>
+          )>>>, tasks: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>>, boards: Maybe<Array<Maybe<(
+            { __typename?: 'Board' }
+            & Pick<Board, 'id' | 'title' | 'order'>
+          )>>>, developers: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>> }
+        )>>>, stars: Maybe<Array<Maybe<(
+          { __typename?: 'Task' }
+          & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          & { project: (
+            { __typename?: 'Project' }
+            & Pick<Project, 'id' | 'title' | 'description'>
+          ), column: Maybe<(
+            { __typename?: 'Column' }
+            & Pick<Column, 'id' | 'title'>
+          )>, developers: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>>, likes: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>>, comments: Maybe<Array<Maybe<(
+            { __typename?: 'Comment' }
+            & Pick<Comment, 'id' | 'content'>
+          )>>> }
+        )>>> }
+      )>>, tags: Maybe<Array<Maybe<(
         { __typename?: 'Tag' }
         & Pick<Tag, 'id' | 'title'>
         & { project: (
@@ -7662,114 +9723,158 @@ export type QueryTaskQuery = (
 );
 
 export type QueryUserQueryVariables = {
-  filter?: Maybe<ProjectFilter>;
-  filter1?: Maybe<DeveloperFilter>;
+  filter?: Maybe<DeveloperFilter>;
   order?: Maybe<DeveloperOrder>;
   first?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  filter2?: Maybe<TagFilter>;
-  order1?: Maybe<TagOrder>;
+  filter1?: Maybe<ProjectFilter>;
+  order1?: Maybe<ProjectOrder>;
   first1?: Maybe<Scalars['Int']>;
   offset1?: Maybe<Scalars['Int']>;
-  filter3?: Maybe<ProjectFilter>;
-  filter4?: Maybe<ColumnFilter>;
-  filter5?: Maybe<DeveloperFilter>;
-  order2?: Maybe<DeveloperOrder>;
+  filter2?: Maybe<TaskFilter>;
+  order2?: Maybe<TaskOrder>;
   first2?: Maybe<Scalars['Int']>;
   offset2?: Maybe<Scalars['Int']>;
-  filter6?: Maybe<DeveloperFilter>;
-  order3?: Maybe<DeveloperOrder>;
+  filter3?: Maybe<UserFilter>;
+  order3?: Maybe<UserOrder>;
   first3?: Maybe<Scalars['Int']>;
   offset3?: Maybe<Scalars['Int']>;
-  filter7?: Maybe<CommentFilter>;
-  order4?: Maybe<CommentOrder>;
+  filter4?: Maybe<ProjectFilter>;
+  filter5?: Maybe<DeveloperFilter>;
+  order4?: Maybe<DeveloperOrder>;
   first4?: Maybe<Scalars['Int']>;
   offset4?: Maybe<Scalars['Int']>;
-  filter8?: Maybe<TaskFilter>;
-  order5?: Maybe<TaskOrder>;
+  filter6?: Maybe<TagFilter>;
+  order5?: Maybe<TagOrder>;
   first5?: Maybe<Scalars['Int']>;
   offset5?: Maybe<Scalars['Int']>;
-  filter9?: Maybe<ProjectFilter>;
-  filter10?: Maybe<ColumnFilter>;
-  order6?: Maybe<ColumnOrder>;
+  filter7?: Maybe<ProjectFilter>;
+  filter8?: Maybe<ColumnFilter>;
+  filter9?: Maybe<DeveloperFilter>;
+  order6?: Maybe<DeveloperOrder>;
   first6?: Maybe<Scalars['Int']>;
   offset6?: Maybe<Scalars['Int']>;
-  filter11?: Maybe<BoardFilter>;
-  order7?: Maybe<BoardOrder>;
+  filter10?: Maybe<DeveloperFilter>;
+  order7?: Maybe<DeveloperOrder>;
   first7?: Maybe<Scalars['Int']>;
   offset7?: Maybe<Scalars['Int']>;
-  filter12?: Maybe<ProjectFilter>;
-  filter13?: Maybe<UserFilter>;
-  order8?: Maybe<UserOrder>;
+  filter11?: Maybe<CommentFilter>;
+  order8?: Maybe<CommentOrder>;
   first8?: Maybe<Scalars['Int']>;
   offset8?: Maybe<Scalars['Int']>;
-  filter14?: Maybe<TagFilter>;
-  order9?: Maybe<TagOrder>;
+  filter12?: Maybe<TaskFilter>;
+  order9?: Maybe<TaskOrder>;
   first9?: Maybe<Scalars['Int']>;
   offset9?: Maybe<Scalars['Int']>;
-  filter15?: Maybe<TaskFilter>;
-  order10?: Maybe<TaskOrder>;
+  filter13?: Maybe<ProjectFilter>;
+  filter14?: Maybe<ColumnFilter>;
+  order10?: Maybe<ColumnOrder>;
   first10?: Maybe<Scalars['Int']>;
   offset10?: Maybe<Scalars['Int']>;
-  filter16?: Maybe<TaskFilter>;
-  order11?: Maybe<TaskOrder>;
+  filter15?: Maybe<BoardFilter>;
+  order11?: Maybe<BoardOrder>;
   first11?: Maybe<Scalars['Int']>;
   offset11?: Maybe<Scalars['Int']>;
-  filter17?: Maybe<DeveloperFilter>;
-  order12?: Maybe<DeveloperOrder>;
+  filter16?: Maybe<ProjectFilter>;
+  filter17?: Maybe<UserFilter>;
+  order12?: Maybe<UserOrder>;
   first12?: Maybe<Scalars['Int']>;
   offset12?: Maybe<Scalars['Int']>;
-  filter18?: Maybe<ProjectFilter>;
-  filter19?: Maybe<TagFilter>;
+  filter18?: Maybe<TagFilter>;
   order13?: Maybe<TagOrder>;
   first13?: Maybe<Scalars['Int']>;
   offset13?: Maybe<Scalars['Int']>;
-  filter20?: Maybe<TaskFilter>;
+  filter19?: Maybe<TaskFilter>;
   order14?: Maybe<TaskOrder>;
   first14?: Maybe<Scalars['Int']>;
   offset14?: Maybe<Scalars['Int']>;
-  filter21?: Maybe<TaskFilter>;
+  filter20?: Maybe<TaskFilter>;
   order15?: Maybe<TaskOrder>;
   first15?: Maybe<Scalars['Int']>;
   offset15?: Maybe<Scalars['Int']>;
-  filter22?: Maybe<DeveloperFilter>;
+  filter21?: Maybe<DeveloperFilter>;
   order16?: Maybe<DeveloperOrder>;
   first16?: Maybe<Scalars['Int']>;
   offset16?: Maybe<Scalars['Int']>;
-  filter23?: Maybe<ProjectFilter>;
-  filter24?: Maybe<ColumnFilter>;
-  filter25?: Maybe<DeveloperFilter>;
-  order17?: Maybe<DeveloperOrder>;
+  filter22?: Maybe<ProjectFilter>;
+  filter23?: Maybe<TagFilter>;
+  order17?: Maybe<TagOrder>;
   first17?: Maybe<Scalars['Int']>;
   offset17?: Maybe<Scalars['Int']>;
-  filter26?: Maybe<DeveloperFilter>;
-  order18?: Maybe<DeveloperOrder>;
+  filter24?: Maybe<TaskFilter>;
+  order18?: Maybe<TaskOrder>;
   first18?: Maybe<Scalars['Int']>;
   offset18?: Maybe<Scalars['Int']>;
-  filter27?: Maybe<CommentFilter>;
-  order19?: Maybe<CommentOrder>;
+  filter25?: Maybe<TaskFilter>;
+  order19?: Maybe<TaskOrder>;
   first19?: Maybe<Scalars['Int']>;
   offset19?: Maybe<Scalars['Int']>;
-  filter28?: Maybe<TaskFilter>;
-  order20?: Maybe<TaskOrder>;
+  filter26?: Maybe<DeveloperFilter>;
+  order20?: Maybe<DeveloperOrder>;
   first20?: Maybe<Scalars['Int']>;
   offset20?: Maybe<Scalars['Int']>;
-  filter29?: Maybe<UserFilter>;
+  filter27?: Maybe<UserFilter>;
   order21?: Maybe<UserOrder>;
   first21?: Maybe<Scalars['Int']>;
   offset21?: Maybe<Scalars['Int']>;
-  filter30?: Maybe<DeveloperFilter>;
-  order22?: Maybe<DeveloperOrder>;
+  filter28?: Maybe<TagFilter>;
+  order22?: Maybe<TagOrder>;
   first22?: Maybe<Scalars['Int']>;
   offset22?: Maybe<Scalars['Int']>;
-  filter31?: Maybe<TaskFilter>;
+  filter29?: Maybe<TaskFilter>;
   order23?: Maybe<TaskOrder>;
   first23?: Maybe<Scalars['Int']>;
   offset23?: Maybe<Scalars['Int']>;
-  filter32?: Maybe<UserFilter>;
-  order24?: Maybe<UserOrder>;
+  filter30?: Maybe<BoardFilter>;
+  order24?: Maybe<BoardOrder>;
   first24?: Maybe<Scalars['Int']>;
   offset24?: Maybe<Scalars['Int']>;
+  filter31?: Maybe<DeveloperFilter>;
+  order25?: Maybe<DeveloperOrder>;
+  first25?: Maybe<Scalars['Int']>;
+  offset25?: Maybe<Scalars['Int']>;
+  filter32?: Maybe<ProjectFilter>;
+  order26?: Maybe<ProjectOrder>;
+  first26?: Maybe<Scalars['Int']>;
+  offset26?: Maybe<Scalars['Int']>;
+  filter33?: Maybe<ProjectFilter>;
+  filter34?: Maybe<ColumnFilter>;
+  filter35?: Maybe<DeveloperFilter>;
+  order27?: Maybe<DeveloperOrder>;
+  first27?: Maybe<Scalars['Int']>;
+  offset27?: Maybe<Scalars['Int']>;
+  filter36?: Maybe<DeveloperFilter>;
+  order28?: Maybe<DeveloperOrder>;
+  first28?: Maybe<Scalars['Int']>;
+  offset28?: Maybe<Scalars['Int']>;
+  filter37?: Maybe<CommentFilter>;
+  order29?: Maybe<CommentOrder>;
+  first29?: Maybe<Scalars['Int']>;
+  offset29?: Maybe<Scalars['Int']>;
+  filter38?: Maybe<TaskFilter>;
+  order30?: Maybe<TaskOrder>;
+  first30?: Maybe<Scalars['Int']>;
+  offset30?: Maybe<Scalars['Int']>;
+  filter39?: Maybe<UserFilter>;
+  order31?: Maybe<UserOrder>;
+  first31?: Maybe<Scalars['Int']>;
+  offset31?: Maybe<Scalars['Int']>;
+  filter40?: Maybe<DeveloperFilter>;
+  order32?: Maybe<DeveloperOrder>;
+  first32?: Maybe<Scalars['Int']>;
+  offset32?: Maybe<Scalars['Int']>;
+  filter41?: Maybe<ProjectFilter>;
+  order33?: Maybe<ProjectOrder>;
+  first33?: Maybe<Scalars['Int']>;
+  offset33?: Maybe<Scalars['Int']>;
+  filter42?: Maybe<TaskFilter>;
+  order34?: Maybe<TaskOrder>;
+  first34?: Maybe<Scalars['Int']>;
+  offset34?: Maybe<Scalars['Int']>;
+  filter43?: Maybe<UserFilter>;
+  order35?: Maybe<UserOrder>;
+  first35?: Maybe<Scalars['Int']>;
+  offset35?: Maybe<Scalars['Int']>;
 };
 
 
@@ -7778,13 +9883,26 @@ export type QueryUserQuery = (
   & { queryUser: Maybe<Array<Maybe<(
     { __typename?: 'User' }
     & Pick<User, 'id' | 'username' | 'password' | 'location'>
-    & { roles: Maybe<Array<Maybe<(
+    & { developer: Maybe<Array<Maybe<(
       { __typename?: 'Developer' }
       & Pick<Developer, 'id' | 'name' | 'availability'>
       & { project: (
         { __typename?: 'Project' }
         & Pick<Project, 'id' | 'title' | 'description'>
-        & { tags: Maybe<Array<Maybe<(
+        & { hosts: Array<Maybe<(
+          { __typename?: 'User' }
+          & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          & { developer: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
+          )>>>, host: Maybe<Array<Maybe<(
+            { __typename?: 'Project' }
+            & Pick<Project, 'id' | 'title' | 'description'>
+          )>>>, stars: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        )>>, tags: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
           & { project: (
@@ -7846,7 +9964,7 @@ export type QueryUserQuery = (
       ), user: Maybe<Array<Maybe<(
         { __typename?: 'User' }
         & Pick<User, 'id' | 'username' | 'password' | 'location'>
-        & { roles: Maybe<Array<Maybe<(
+        & { developer: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
           & { tags: Maybe<Array<Maybe<(
@@ -7858,6 +9976,25 @@ export type QueryUserQuery = (
           )>>>, liked: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>> }
+        )>>>, host: Maybe<Array<Maybe<(
+          { __typename?: 'Project' }
+          & Pick<Project, 'id' | 'title' | 'description'>
+          & { hosts: Array<Maybe<(
+            { __typename?: 'User' }
+            & Pick<User, 'id' | 'username' | 'password' | 'location'>
+          )>>, tags: Maybe<Array<Maybe<(
+            { __typename?: 'Tag' }
+            & Pick<Tag, 'id' | 'title'>
+          )>>>, tasks: Maybe<Array<Maybe<(
+            { __typename?: 'Task' }
+            & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
+          )>>>, boards: Maybe<Array<Maybe<(
+            { __typename?: 'Board' }
+            & Pick<Board, 'id' | 'title' | 'order'>
+          )>>>, developers: Maybe<Array<Maybe<(
+            { __typename?: 'Developer' }
+            & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
         )>>>, stars: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
@@ -7880,6 +10017,9 @@ export type QueryUserQuery = (
           )>>> }
         )>>> }
       )>>> }
+    )>>>, host: Maybe<Array<Maybe<(
+      { __typename?: 'Project' }
+      & Pick<Project, 'id' | 'title' | 'description'>
     )>>>, stars: Maybe<Array<Maybe<(
       { __typename?: 'Task' }
       & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>

@@ -10,6 +10,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const gqlRequest = require('graphql-request');
+exports.addUser = (addUserInput, url) => __awaiter(void 0, void 0, void 0, function* () {
+    const query = `
+        mutation ($addUserInput: [AddUserInput!]!){
+          addUser(input: $addUserInput){
+            user{id}
+          }
+        }
+    `;
+    const payload = yield gqlRequest.request(url, query, { addUserInput });
+    return payload.addUser.user;
+});
 exports.addProject = (addProjectInput, url) => __awaiter(void 0, void 0, void 0, function* () {
     const query = `
         mutation ($addProjectInput: [AddProjectInput!]!){

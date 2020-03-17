@@ -7,12 +7,24 @@ import {
     ProjectFilter,
     UpdateDeveloperPayload,
     UserFilter,
-    DeveloperFilter, Developer
+    DeveloperFilter, Developer, AddUserInput, User, AddUserPayload
 } from '../../api/interfaces/types.d';
 
 const gqlRequest = require('graphql-request');
 
-export const addProject = async (addProjectInput: AddProjectInput[], url: string): Promise<Project> => {
+export const addUser = async (addUserInput: AddUserInput[], url: string): Promise<User[]> => {
+    const query = `
+        mutation ($addUserInput: [AddUserInput!]!){
+          addUser(input: $addUserInput){
+            user{id}
+          }
+        }
+    `;
+    const payload = await gqlRequest.request(url, query, {addUserInput});
+    return payload.addUser.user;
+};
+
+export const addProject = async (addProjectInput: AddProjectInput[], url: string): Promise<Project[]> => {
     const query = `
         mutation ($addProjectInput: [AddProjectInput!]!){
           addProject(input: $addProjectInput){

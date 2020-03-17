@@ -45,9 +45,9 @@ const playSim = async () => {
         if (diceHost <= 3) {
             await host.createProject();
         } else if (diceHost == 5) {
-            host.addNewHost();
-            host.hostsNames.length > maxHosts
-                ? maxHosts = host.hostsNames.length
+            await host.addNewHost();
+            host.hostsIds.length > maxHosts
+                ? maxHosts = host.hostsIds.length
                 : maxHosts === maxHosts
         } else if (diceHost == 9) {
             host.removeHost();
@@ -71,7 +71,7 @@ const playSim = async () => {
     await host.updateProjects();
     console.log('1. Number of projects: ', host.myProjects.length);
     console.log('   Max projects: ', maxProjects);
-    console.log('2. Number of hosts: ', host.hostsNames.length);
+    console.log('2. Number of hosts: ', host.hostsIds.length);
     console.log('   Max hosts: ', maxHosts);
     console.log('Mean projects per host: ', maxProjects / maxHosts);
     console.log('4. Revenue: ', revenue);
