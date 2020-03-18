@@ -1383,10 +1383,10 @@ export type AddBoardMutationVariables = {
 
 export type AddBoardMutation = (
   { __typename?: 'Mutation' }
-  & { addBoard: Maybe<(
+  & { addBoard?: Maybe<(
     { __typename?: 'AddBoardPayload' }
     & Pick<AddBoardPayload, 'numUids'>
-    & { board: Maybe<Array<Maybe<(
+    & { board?: Maybe<Array<Maybe<(
       { __typename?: 'Board' }
       & Pick<Board, 'id' | 'title' | 'order'>
       & { project: (
@@ -1395,82 +1395,82 @@ export type AddBoardMutation = (
         & { hosts: Array<Maybe<(
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          & { developer: Maybe<Array<Maybe<(
+          & { developer?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, host: Maybe<Array<Maybe<(
+          )>>>, host?: Maybe<Array<Maybe<(
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          )>>>, stars: Maybe<Array<Maybe<(
+          )>>>, stars?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        )>>, tags: Maybe<Array<Maybe<(
+        )>>, tags?: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), developers: Maybe<Array<Maybe<(
+          ), developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
-        )>>>, tasks: Maybe<Array<Maybe<(
+        )>>>, tasks?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: Maybe<(
+          ), column?: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          )>, developers: Maybe<Array<Maybe<(
+          )>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, likes: Maybe<Array<Maybe<(
+          )>>>, likes?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, comments: Maybe<Array<Maybe<(
+          )>>>, comments?: Maybe<Array<Maybe<(
             { __typename?: 'Comment' }
             & Pick<Comment, 'id' | 'content'>
           )>>> }
-        )>>>, boards: Maybe<Array<Maybe<(
+        )>>>, boards?: Maybe<Array<Maybe<(
           { __typename?: 'Board' }
           & Pick<Board, 'id' | 'title' | 'order'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), columns: Maybe<Array<Maybe<(
+          ), columns?: Maybe<Array<Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
           )>>> }
-        )>>>, developers: Maybe<Array<Maybe<(
+        )>>>, developers?: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: Maybe<Array<Maybe<(
+          ), user?: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>>, tags: Maybe<Array<Maybe<(
+          )>>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, liked: Maybe<Array<Maybe<(
+          )>>>, liked?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
         )>>> }
-      ), columns: Maybe<Array<Maybe<(
+      ), columns?: Maybe<Array<Maybe<(
         { __typename?: 'Column' }
         & Pick<Column, 'id' | 'title'>
         & { board: (
           { __typename?: 'Board' }
           & Pick<Board, 'id' | 'title' | 'order'>
-        ), tasks: Maybe<Array<Maybe<(
+        ), tasks?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
         )>>> }
@@ -1575,10 +1575,10 @@ export type AddColumnMutationVariables = {
 
 export type AddColumnMutation = (
   { __typename?: 'Mutation' }
-  & { addColumn: Maybe<(
+  & { addColumn?: Maybe<(
     { __typename?: 'AddColumnPayload' }
     & Pick<AddColumnPayload, 'numUids'>
-    & { column: Maybe<Array<Maybe<(
+    & { column?: Maybe<Array<Maybe<(
       { __typename?: 'Column' }
       & Pick<Column, 'id' | 'title'>
       & { board: (
@@ -1590,78 +1590,78 @@ export type AddColumnMutation = (
           & { hosts: Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>, tags: Maybe<Array<Maybe<(
+          )>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, boards: Maybe<Array<Maybe<(
+          )>>>, boards?: Maybe<Array<Maybe<(
             { __typename?: 'Board' }
             & Pick<Board, 'id' | 'title' | 'order'>
-          )>>>, developers: Maybe<Array<Maybe<(
+          )>>>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
-        ), columns: Maybe<Array<Maybe<(
+        ), columns?: Maybe<Array<Maybe<(
           { __typename?: 'Column' }
           & Pick<Column, 'id' | 'title'>
           & { board: (
             { __typename?: 'Board' }
             & Pick<Board, 'id' | 'title' | 'order'>
-          ), tasks: Maybe<Array<Maybe<(
+          ), tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
         )>>> }
-      ), tasks: Maybe<Array<Maybe<(
+      ), tasks?: Maybe<Array<Maybe<(
         { __typename?: 'Task' }
         & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
         & { project: (
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
-        ), column: Maybe<(
+        ), column?: Maybe<(
           { __typename?: 'Column' }
           & Pick<Column, 'id' | 'title'>
-        )>, developers: Maybe<Array<Maybe<(
+        )>, developers?: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: Maybe<Array<Maybe<(
+          ), user?: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>>, tags: Maybe<Array<Maybe<(
+          )>>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, liked: Maybe<Array<Maybe<(
+          )>>>, liked?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        )>>>, likes: Maybe<Array<Maybe<(
+        )>>>, likes?: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: Maybe<Array<Maybe<(
+          ), user?: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>>, tags: Maybe<Array<Maybe<(
+          )>>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, liked: Maybe<Array<Maybe<(
+          )>>>, liked?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        )>>>, comments: Maybe<Array<Maybe<(
+        )>>>, comments?: Maybe<Array<Maybe<(
           { __typename?: 'Comment' }
           & Pick<Comment, 'id' | 'content'>
           & { task: (
@@ -1827,10 +1827,10 @@ export type AddCommentMutationVariables = {
 
 export type AddCommentMutation = (
   { __typename?: 'Mutation' }
-  & { addComment: Maybe<(
+  & { addComment?: Maybe<(
     { __typename?: 'AddCommentPayload' }
     & Pick<AddCommentPayload, 'numUids'>
-    & { comment: Maybe<Array<Maybe<(
+    & { comment?: Maybe<Array<Maybe<(
       { __typename?: 'Comment' }
       & Pick<Comment, 'id' | 'content'>
       & { task: (
@@ -1842,68 +1842,68 @@ export type AddCommentMutation = (
           & { hosts: Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>, tags: Maybe<Array<Maybe<(
+          )>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, boards: Maybe<Array<Maybe<(
+          )>>>, boards?: Maybe<Array<Maybe<(
             { __typename?: 'Board' }
             & Pick<Board, 'id' | 'title' | 'order'>
-          )>>>, developers: Maybe<Array<Maybe<(
+          )>>>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
-        ), column: Maybe<(
+        ), column?: Maybe<(
           { __typename?: 'Column' }
           & Pick<Column, 'id' | 'title'>
           & { board: (
             { __typename?: 'Board' }
             & Pick<Board, 'id' | 'title' | 'order'>
-          ), tasks: Maybe<Array<Maybe<(
+          ), tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        )>, developers: Maybe<Array<Maybe<(
+        )>, developers?: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: Maybe<Array<Maybe<(
+          ), user?: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>>, tags: Maybe<Array<Maybe<(
+          )>>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, liked: Maybe<Array<Maybe<(
+          )>>>, liked?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        )>>>, likes: Maybe<Array<Maybe<(
+        )>>>, likes?: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: Maybe<Array<Maybe<(
+          ), user?: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>>, tags: Maybe<Array<Maybe<(
+          )>>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, liked: Maybe<Array<Maybe<(
+          )>>>, liked?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        )>>>, comments: Maybe<Array<Maybe<(
+        )>>>, comments?: Maybe<Array<Maybe<(
           { __typename?: 'Comment' }
           & Pick<Comment, 'id' | 'content'>
           & { task: (
@@ -1920,64 +1920,64 @@ export type AddCommentMutation = (
         & { project: (
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
-        ), user: Maybe<Array<Maybe<(
+        ), user?: Maybe<Array<Maybe<(
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          & { developer: Maybe<Array<Maybe<(
+          & { developer?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, host: Maybe<Array<Maybe<(
+          )>>>, host?: Maybe<Array<Maybe<(
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          )>>>, stars: Maybe<Array<Maybe<(
+          )>>>, stars?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        )>>>, tags: Maybe<Array<Maybe<(
+        )>>>, tags?: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), developers: Maybe<Array<Maybe<(
+          ), developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
-        )>>>, tasks: Maybe<Array<Maybe<(
+        )>>>, tasks?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: Maybe<(
+          ), column?: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          )>, developers: Maybe<Array<Maybe<(
+          )>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, likes: Maybe<Array<Maybe<(
+          )>>>, likes?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, comments: Maybe<Array<Maybe<(
+          )>>>, comments?: Maybe<Array<Maybe<(
             { __typename?: 'Comment' }
             & Pick<Comment, 'id' | 'content'>
           )>>> }
-        )>>>, liked: Maybe<Array<Maybe<(
+        )>>>, liked?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: Maybe<(
+          ), column?: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          )>, developers: Maybe<Array<Maybe<(
+          )>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, likes: Maybe<Array<Maybe<(
+          )>>>, likes?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, comments: Maybe<Array<Maybe<(
+          )>>>, comments?: Maybe<Array<Maybe<(
             { __typename?: 'Comment' }
             & Pick<Comment, 'id' | 'content'>
           )>>> }
@@ -2134,10 +2134,10 @@ export type AddDeveloperMutationVariables = {
 
 export type AddDeveloperMutation = (
   { __typename?: 'Mutation' }
-  & { addDeveloper: Maybe<(
+  & { addDeveloper?: Maybe<(
     { __typename?: 'AddDeveloperPayload' }
     & Pick<AddDeveloperPayload, 'numUids'>
-    & { developer: Maybe<Array<Maybe<(
+    & { developer?: Maybe<Array<Maybe<(
       { __typename?: 'Developer' }
       & Pick<Developer, 'id' | 'name' | 'availability'>
       & { project: (
@@ -2146,126 +2146,126 @@ export type AddDeveloperMutation = (
         & { hosts: Array<Maybe<(
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          & { developer: Maybe<Array<Maybe<(
+          & { developer?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, host: Maybe<Array<Maybe<(
+          )>>>, host?: Maybe<Array<Maybe<(
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          )>>>, stars: Maybe<Array<Maybe<(
+          )>>>, stars?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        )>>, tags: Maybe<Array<Maybe<(
+        )>>, tags?: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), developers: Maybe<Array<Maybe<(
+          ), developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
-        )>>>, tasks: Maybe<Array<Maybe<(
+        )>>>, tasks?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: Maybe<(
+          ), column?: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          )>, developers: Maybe<Array<Maybe<(
+          )>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, likes: Maybe<Array<Maybe<(
+          )>>>, likes?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, comments: Maybe<Array<Maybe<(
+          )>>>, comments?: Maybe<Array<Maybe<(
             { __typename?: 'Comment' }
             & Pick<Comment, 'id' | 'content'>
           )>>> }
-        )>>>, boards: Maybe<Array<Maybe<(
+        )>>>, boards?: Maybe<Array<Maybe<(
           { __typename?: 'Board' }
           & Pick<Board, 'id' | 'title' | 'order'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), columns: Maybe<Array<Maybe<(
+          ), columns?: Maybe<Array<Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
           )>>> }
-        )>>>, developers: Maybe<Array<Maybe<(
+        )>>>, developers?: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: Maybe<Array<Maybe<(
+          ), user?: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>>, tags: Maybe<Array<Maybe<(
+          )>>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, liked: Maybe<Array<Maybe<(
+          )>>>, liked?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
         )>>> }
-      ), user: Maybe<Array<Maybe<(
+      ), user?: Maybe<Array<Maybe<(
         { __typename?: 'User' }
         & Pick<User, 'id' | 'username' | 'password' | 'location'>
-        & { developer: Maybe<Array<Maybe<(
+        & { developer?: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
-          & { tags: Maybe<Array<Maybe<(
+          & { tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, liked: Maybe<Array<Maybe<(
+          )>>>, liked?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        )>>>, host: Maybe<Array<Maybe<(
+        )>>>, host?: Maybe<Array<Maybe<(
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
           & { hosts: Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>, tags: Maybe<Array<Maybe<(
+          )>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, boards: Maybe<Array<Maybe<(
+          )>>>, boards?: Maybe<Array<Maybe<(
             { __typename?: 'Board' }
             & Pick<Board, 'id' | 'title' | 'order'>
-          )>>>, developers: Maybe<Array<Maybe<(
+          )>>>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
-        )>>>, stars: Maybe<Array<Maybe<(
+        )>>>, stars?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: Maybe<(
+          ), column?: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          )>, developers: Maybe<Array<Maybe<(
+          )>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, likes: Maybe<Array<Maybe<(
+          )>>>, likes?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, comments: Maybe<Array<Maybe<(
+          )>>>, comments?: Maybe<Array<Maybe<(
             { __typename?: 'Comment' }
             & Pick<Comment, 'id' | 'content'>
           )>>> }
@@ -2391,105 +2391,105 @@ export type AddProjectMutationVariables = {
 
 export type AddProjectMutation = (
   { __typename?: 'Mutation' }
-  & { addProject: Maybe<(
+  & { addProject?: Maybe<(
     { __typename?: 'AddProjectPayload' }
     & Pick<AddProjectPayload, 'numUids'>
-    & { project: Maybe<Array<Maybe<(
+    & { project?: Maybe<Array<Maybe<(
       { __typename?: 'Project' }
       & Pick<Project, 'id' | 'title' | 'description'>
       & { hosts: Array<Maybe<(
         { __typename?: 'User' }
         & Pick<User, 'id' | 'username' | 'password' | 'location'>
-        & { developer: Maybe<Array<Maybe<(
+        & { developer?: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: Maybe<Array<Maybe<(
+          ), user?: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>>, tags: Maybe<Array<Maybe<(
+          )>>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, liked: Maybe<Array<Maybe<(
+          )>>>, liked?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        )>>>, host: Maybe<Array<Maybe<(
+        )>>>, host?: Maybe<Array<Maybe<(
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
           & { hosts: Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>, tags: Maybe<Array<Maybe<(
+          )>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, boards: Maybe<Array<Maybe<(
+          )>>>, boards?: Maybe<Array<Maybe<(
             { __typename?: 'Board' }
             & Pick<Board, 'id' | 'title' | 'order'>
-          )>>>, developers: Maybe<Array<Maybe<(
+          )>>>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
-        )>>>, stars: Maybe<Array<Maybe<(
+        )>>>, stars?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: Maybe<(
+          ), column?: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          )>, developers: Maybe<Array<Maybe<(
+          )>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, likes: Maybe<Array<Maybe<(
+          )>>>, likes?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, comments: Maybe<Array<Maybe<(
+          )>>>, comments?: Maybe<Array<Maybe<(
             { __typename?: 'Comment' }
             & Pick<Comment, 'id' | 'content'>
           )>>> }
         )>>> }
-      )>>, tags: Maybe<Array<Maybe<(
+      )>>, tags?: Maybe<Array<Maybe<(
         { __typename?: 'Tag' }
         & Pick<Tag, 'id' | 'title'>
         & { project: (
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
-          & { tasks: Maybe<Array<Maybe<(
+          & { tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, boards: Maybe<Array<Maybe<(
+          )>>>, boards?: Maybe<Array<Maybe<(
             { __typename?: 'Board' }
             & Pick<Board, 'id' | 'title' | 'order'>
-          )>>>, developers: Maybe<Array<Maybe<(
+          )>>>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
-        ), developers: Maybe<Array<Maybe<(
+        ), developers?: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: Maybe<Array<Maybe<(
+          ), user?: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>>, tags: Maybe<Array<Maybe<(
+          )>>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, liked: Maybe<Array<Maybe<(
+          )>>>, liked?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
@@ -2588,10 +2588,10 @@ export type AddTagMutationVariables = {
 
 export type AddTagMutation = (
   { __typename?: 'Mutation' }
-  & { addTag: Maybe<(
+  & { addTag?: Maybe<(
     { __typename?: 'AddTagPayload' }
     & Pick<AddTagPayload, 'numUids'>
-    & { tag: Maybe<Array<Maybe<(
+    & { tag?: Maybe<Array<Maybe<(
       { __typename?: 'Tag' }
       & Pick<Tag, 'id' | 'title'>
       & { project: (
@@ -2600,76 +2600,76 @@ export type AddTagMutation = (
         & { hosts: Array<Maybe<(
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          & { developer: Maybe<Array<Maybe<(
+          & { developer?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, host: Maybe<Array<Maybe<(
+          )>>>, host?: Maybe<Array<Maybe<(
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          )>>>, stars: Maybe<Array<Maybe<(
+          )>>>, stars?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        )>>, tags: Maybe<Array<Maybe<(
+        )>>, tags?: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), developers: Maybe<Array<Maybe<(
+          ), developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
-        )>>>, tasks: Maybe<Array<Maybe<(
+        )>>>, tasks?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: Maybe<(
+          ), column?: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          )>, developers: Maybe<Array<Maybe<(
+          )>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, likes: Maybe<Array<Maybe<(
+          )>>>, likes?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, comments: Maybe<Array<Maybe<(
+          )>>>, comments?: Maybe<Array<Maybe<(
             { __typename?: 'Comment' }
             & Pick<Comment, 'id' | 'content'>
           )>>> }
-        )>>>, boards: Maybe<Array<Maybe<(
+        )>>>, boards?: Maybe<Array<Maybe<(
           { __typename?: 'Board' }
           & Pick<Board, 'id' | 'title' | 'order'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), columns: Maybe<Array<Maybe<(
+          ), columns?: Maybe<Array<Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
           )>>> }
-        )>>>, developers: Maybe<Array<Maybe<(
+        )>>>, developers?: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: Maybe<Array<Maybe<(
+          ), user?: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>>, tags: Maybe<Array<Maybe<(
+          )>>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, liked: Maybe<Array<Maybe<(
+          )>>>, liked?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
         )>>> }
-      ), developers: Maybe<Array<Maybe<(
+      ), developers?: Maybe<Array<Maybe<(
         { __typename?: 'Developer' }
         & Pick<Developer, 'id' | 'name' | 'availability'>
       )>>> }
@@ -2847,10 +2847,10 @@ export type AddTaskMutationVariables = {
 
 export type AddTaskMutation = (
   { __typename?: 'Mutation' }
-  & { addTask: Maybe<(
+  & { addTask?: Maybe<(
     { __typename?: 'AddTaskPayload' }
     & Pick<AddTaskPayload, 'numUids'>
-    & { task: Maybe<Array<Maybe<(
+    & { task?: Maybe<Array<Maybe<(
       { __typename?: 'Task' }
       & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
       & { project: (
@@ -2859,76 +2859,76 @@ export type AddTaskMutation = (
         & { hosts: Array<Maybe<(
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          & { developer: Maybe<Array<Maybe<(
+          & { developer?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, host: Maybe<Array<Maybe<(
+          )>>>, host?: Maybe<Array<Maybe<(
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          )>>>, stars: Maybe<Array<Maybe<(
+          )>>>, stars?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        )>>, tags: Maybe<Array<Maybe<(
+        )>>, tags?: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), developers: Maybe<Array<Maybe<(
+          ), developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
-        )>>>, tasks: Maybe<Array<Maybe<(
+        )>>>, tasks?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: Maybe<(
+          ), column?: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          )>, developers: Maybe<Array<Maybe<(
+          )>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, likes: Maybe<Array<Maybe<(
+          )>>>, likes?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, comments: Maybe<Array<Maybe<(
+          )>>>, comments?: Maybe<Array<Maybe<(
             { __typename?: 'Comment' }
             & Pick<Comment, 'id' | 'content'>
           )>>> }
-        )>>>, boards: Maybe<Array<Maybe<(
+        )>>>, boards?: Maybe<Array<Maybe<(
           { __typename?: 'Board' }
           & Pick<Board, 'id' | 'title' | 'order'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), columns: Maybe<Array<Maybe<(
+          ), columns?: Maybe<Array<Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
           )>>> }
-        )>>>, developers: Maybe<Array<Maybe<(
+        )>>>, developers?: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: Maybe<Array<Maybe<(
+          ), user?: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>>, tags: Maybe<Array<Maybe<(
+          )>>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, liked: Maybe<Array<Maybe<(
+          )>>>, liked?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
         )>>> }
-      ), column: Maybe<(
+      ), column?: Maybe<(
         { __typename?: 'Column' }
         & Pick<Column, 'id' | 'title'>
         & { board: (
@@ -2937,63 +2937,63 @@ export type AddTaskMutation = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), columns: Maybe<Array<Maybe<(
+          ), columns?: Maybe<Array<Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
           )>>> }
-        ), tasks: Maybe<Array<Maybe<(
+        ), tasks?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
         )>>> }
-      )>, developers: Maybe<Array<Maybe<(
+      )>, developers?: Maybe<Array<Maybe<(
         { __typename?: 'Developer' }
         & Pick<Developer, 'id' | 'name' | 'availability'>
-      )>>>, likes: Maybe<Array<Maybe<(
+      )>>>, likes?: Maybe<Array<Maybe<(
         { __typename?: 'Developer' }
         & Pick<Developer, 'id' | 'name' | 'availability'>
         & { project: (
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
-        ), user: Maybe<Array<Maybe<(
+        ), user?: Maybe<Array<Maybe<(
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          & { developer: Maybe<Array<Maybe<(
+          & { developer?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, host: Maybe<Array<Maybe<(
+          )>>>, host?: Maybe<Array<Maybe<(
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          )>>>, stars: Maybe<Array<Maybe<(
+          )>>>, stars?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        )>>>, tags: Maybe<Array<Maybe<(
+        )>>>, tags?: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
-        )>>>, tasks: Maybe<Array<Maybe<(
+        )>>>, tasks?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-        )>>>, liked: Maybe<Array<Maybe<(
+        )>>>, liked?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: Maybe<(
+          ), column?: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          )>, developers: Maybe<Array<Maybe<(
+          )>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, likes: Maybe<Array<Maybe<(
+          )>>>, likes?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, comments: Maybe<Array<Maybe<(
+          )>>>, comments?: Maybe<Array<Maybe<(
             { __typename?: 'Comment' }
             & Pick<Comment, 'id' | 'content'>
           )>>> }
         )>>> }
-      )>>>, comments: Maybe<Array<Maybe<(
+      )>>>, comments?: Maybe<Array<Maybe<(
         { __typename?: 'Comment' }
         & Pick<Comment, 'id' | 'content'>
         & { task: (
@@ -3005,16 +3005,16 @@ export type AddTaskMutation = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: Maybe<Array<Maybe<(
+          ), user?: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>>, tags: Maybe<Array<Maybe<(
+          )>>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, liked: Maybe<Array<Maybe<(
+          )>>>, liked?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
@@ -3117,13 +3117,13 @@ export type AddUserMutationVariables = {
 
 export type AddUserMutation = (
   { __typename?: 'Mutation' }
-  & { addUser: Maybe<(
+  & { addUser?: Maybe<(
     { __typename?: 'AddUserPayload' }
     & Pick<AddUserPayload, 'numUids'>
-    & { user: Maybe<Array<Maybe<(
+    & { user?: Maybe<Array<Maybe<(
       { __typename?: 'User' }
       & Pick<User, 'id' | 'username' | 'password' | 'location'>
-      & { developer: Maybe<Array<Maybe<(
+      & { developer?: Maybe<Array<Maybe<(
         { __typename?: 'Developer' }
         & Pick<Developer, 'id' | 'name' | 'availability'>
         & { project: (
@@ -3132,74 +3132,74 @@ export type AddUserMutation = (
           & { hosts: Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>, tags: Maybe<Array<Maybe<(
+          )>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, boards: Maybe<Array<Maybe<(
+          )>>>, boards?: Maybe<Array<Maybe<(
             { __typename?: 'Board' }
             & Pick<Board, 'id' | 'title' | 'order'>
-          )>>>, developers: Maybe<Array<Maybe<(
+          )>>>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
-        ), user: Maybe<Array<Maybe<(
+        ), user?: Maybe<Array<Maybe<(
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          & { host: Maybe<Array<Maybe<(
+          & { host?: Maybe<Array<Maybe<(
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          )>>>, stars: Maybe<Array<Maybe<(
+          )>>>, stars?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        )>>>, tags: Maybe<Array<Maybe<(
+        )>>>, tags?: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), developers: Maybe<Array<Maybe<(
+          ), developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
-        )>>>, tasks: Maybe<Array<Maybe<(
+        )>>>, tasks?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: Maybe<(
+          ), column?: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          )>, developers: Maybe<Array<Maybe<(
+          )>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, likes: Maybe<Array<Maybe<(
+          )>>>, likes?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, comments: Maybe<Array<Maybe<(
+          )>>>, comments?: Maybe<Array<Maybe<(
             { __typename?: 'Comment' }
             & Pick<Comment, 'id' | 'content'>
           )>>> }
-        )>>>, liked: Maybe<Array<Maybe<(
+        )>>>, liked?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: Maybe<(
+          ), column?: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          )>, developers: Maybe<Array<Maybe<(
+          )>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, likes: Maybe<Array<Maybe<(
+          )>>>, likes?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, comments: Maybe<Array<Maybe<(
+          )>>>, comments?: Maybe<Array<Maybe<(
             { __typename?: 'Comment' }
             & Pick<Comment, 'id' | 'content'>
           )>>> }
@@ -3216,7 +3216,7 @@ export type DeleteBoardMutationVariables = {
 
 export type DeleteBoardMutation = (
   { __typename?: 'Mutation' }
-  & { deleteBoard: Maybe<(
+  & { deleteBoard?: Maybe<(
     { __typename?: 'DeleteBoardPayload' }
     & Pick<DeleteBoardPayload, 'msg' | 'numUids'>
   )> }
@@ -3229,7 +3229,7 @@ export type DeleteColumnMutationVariables = {
 
 export type DeleteColumnMutation = (
   { __typename?: 'Mutation' }
-  & { deleteColumn: Maybe<(
+  & { deleteColumn?: Maybe<(
     { __typename?: 'DeleteColumnPayload' }
     & Pick<DeleteColumnPayload, 'msg' | 'numUids'>
   )> }
@@ -3242,7 +3242,7 @@ export type DeleteCommentMutationVariables = {
 
 export type DeleteCommentMutation = (
   { __typename?: 'Mutation' }
-  & { deleteComment: Maybe<(
+  & { deleteComment?: Maybe<(
     { __typename?: 'DeleteCommentPayload' }
     & Pick<DeleteCommentPayload, 'msg' | 'numUids'>
   )> }
@@ -3255,7 +3255,7 @@ export type DeleteDeveloperMutationVariables = {
 
 export type DeleteDeveloperMutation = (
   { __typename?: 'Mutation' }
-  & { deleteDeveloper: Maybe<(
+  & { deleteDeveloper?: Maybe<(
     { __typename?: 'DeleteDeveloperPayload' }
     & Pick<DeleteDeveloperPayload, 'msg' | 'numUids'>
   )> }
@@ -3268,7 +3268,7 @@ export type DeleteProjectMutationVariables = {
 
 export type DeleteProjectMutation = (
   { __typename?: 'Mutation' }
-  & { deleteProject: Maybe<(
+  & { deleteProject?: Maybe<(
     { __typename?: 'DeleteProjectPayload' }
     & Pick<DeleteProjectPayload, 'msg' | 'numUids'>
   )> }
@@ -3281,7 +3281,7 @@ export type DeleteTagMutationVariables = {
 
 export type DeleteTagMutation = (
   { __typename?: 'Mutation' }
-  & { deleteTag: Maybe<(
+  & { deleteTag?: Maybe<(
     { __typename?: 'DeleteTagPayload' }
     & Pick<DeleteTagPayload, 'msg' | 'numUids'>
   )> }
@@ -3294,7 +3294,7 @@ export type DeleteTaskMutationVariables = {
 
 export type DeleteTaskMutation = (
   { __typename?: 'Mutation' }
-  & { deleteTask: Maybe<(
+  & { deleteTask?: Maybe<(
     { __typename?: 'DeleteTaskPayload' }
     & Pick<DeleteTaskPayload, 'msg' | 'numUids'>
   )> }
@@ -3307,7 +3307,7 @@ export type DeleteUserMutationVariables = {
 
 export type DeleteUserMutation = (
   { __typename?: 'Mutation' }
-  & { deleteUser: Maybe<(
+  & { deleteUser?: Maybe<(
     { __typename?: 'DeleteUserPayload' }
     & Pick<DeleteUserPayload, 'msg' | 'numUids'>
   )> }
@@ -3407,10 +3407,10 @@ export type UpdateBoardMutationVariables = {
 
 export type UpdateBoardMutation = (
   { __typename?: 'Mutation' }
-  & { updateBoard: Maybe<(
+  & { updateBoard?: Maybe<(
     { __typename?: 'UpdateBoardPayload' }
     & Pick<UpdateBoardPayload, 'numUids'>
-    & { board: Maybe<Array<Maybe<(
+    & { board?: Maybe<Array<Maybe<(
       { __typename?: 'Board' }
       & Pick<Board, 'id' | 'title' | 'order'>
       & { project: (
@@ -3419,82 +3419,82 @@ export type UpdateBoardMutation = (
         & { hosts: Array<Maybe<(
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          & { developer: Maybe<Array<Maybe<(
+          & { developer?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, host: Maybe<Array<Maybe<(
+          )>>>, host?: Maybe<Array<Maybe<(
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          )>>>, stars: Maybe<Array<Maybe<(
+          )>>>, stars?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        )>>, tags: Maybe<Array<Maybe<(
+        )>>, tags?: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), developers: Maybe<Array<Maybe<(
+          ), developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
-        )>>>, tasks: Maybe<Array<Maybe<(
+        )>>>, tasks?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: Maybe<(
+          ), column?: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          )>, developers: Maybe<Array<Maybe<(
+          )>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, likes: Maybe<Array<Maybe<(
+          )>>>, likes?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, comments: Maybe<Array<Maybe<(
+          )>>>, comments?: Maybe<Array<Maybe<(
             { __typename?: 'Comment' }
             & Pick<Comment, 'id' | 'content'>
           )>>> }
-        )>>>, boards: Maybe<Array<Maybe<(
+        )>>>, boards?: Maybe<Array<Maybe<(
           { __typename?: 'Board' }
           & Pick<Board, 'id' | 'title' | 'order'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), columns: Maybe<Array<Maybe<(
+          ), columns?: Maybe<Array<Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
           )>>> }
-        )>>>, developers: Maybe<Array<Maybe<(
+        )>>>, developers?: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: Maybe<Array<Maybe<(
+          ), user?: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>>, tags: Maybe<Array<Maybe<(
+          )>>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, liked: Maybe<Array<Maybe<(
+          )>>>, liked?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
         )>>> }
-      ), columns: Maybe<Array<Maybe<(
+      ), columns?: Maybe<Array<Maybe<(
         { __typename?: 'Column' }
         & Pick<Column, 'id' | 'title'>
         & { board: (
           { __typename?: 'Board' }
           & Pick<Board, 'id' | 'title' | 'order'>
-        ), tasks: Maybe<Array<Maybe<(
+        ), tasks?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
         )>>> }
@@ -3599,10 +3599,10 @@ export type UpdateColumnMutationVariables = {
 
 export type UpdateColumnMutation = (
   { __typename?: 'Mutation' }
-  & { updateColumn: Maybe<(
+  & { updateColumn?: Maybe<(
     { __typename?: 'UpdateColumnPayload' }
     & Pick<UpdateColumnPayload, 'numUids'>
-    & { column: Maybe<Array<Maybe<(
+    & { column?: Maybe<Array<Maybe<(
       { __typename?: 'Column' }
       & Pick<Column, 'id' | 'title'>
       & { board: (
@@ -3614,78 +3614,78 @@ export type UpdateColumnMutation = (
           & { hosts: Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>, tags: Maybe<Array<Maybe<(
+          )>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, boards: Maybe<Array<Maybe<(
+          )>>>, boards?: Maybe<Array<Maybe<(
             { __typename?: 'Board' }
             & Pick<Board, 'id' | 'title' | 'order'>
-          )>>>, developers: Maybe<Array<Maybe<(
+          )>>>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
-        ), columns: Maybe<Array<Maybe<(
+        ), columns?: Maybe<Array<Maybe<(
           { __typename?: 'Column' }
           & Pick<Column, 'id' | 'title'>
           & { board: (
             { __typename?: 'Board' }
             & Pick<Board, 'id' | 'title' | 'order'>
-          ), tasks: Maybe<Array<Maybe<(
+          ), tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
         )>>> }
-      ), tasks: Maybe<Array<Maybe<(
+      ), tasks?: Maybe<Array<Maybe<(
         { __typename?: 'Task' }
         & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
         & { project: (
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
-        ), column: Maybe<(
+        ), column?: Maybe<(
           { __typename?: 'Column' }
           & Pick<Column, 'id' | 'title'>
-        )>, developers: Maybe<Array<Maybe<(
+        )>, developers?: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: Maybe<Array<Maybe<(
+          ), user?: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>>, tags: Maybe<Array<Maybe<(
+          )>>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, liked: Maybe<Array<Maybe<(
+          )>>>, liked?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        )>>>, likes: Maybe<Array<Maybe<(
+        )>>>, likes?: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: Maybe<Array<Maybe<(
+          ), user?: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>>, tags: Maybe<Array<Maybe<(
+          )>>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, liked: Maybe<Array<Maybe<(
+          )>>>, liked?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        )>>>, comments: Maybe<Array<Maybe<(
+        )>>>, comments?: Maybe<Array<Maybe<(
           { __typename?: 'Comment' }
           & Pick<Comment, 'id' | 'content'>
           & { task: (
@@ -3851,10 +3851,10 @@ export type UpdateCommentMutationVariables = {
 
 export type UpdateCommentMutation = (
   { __typename?: 'Mutation' }
-  & { updateComment: Maybe<(
+  & { updateComment?: Maybe<(
     { __typename?: 'UpdateCommentPayload' }
     & Pick<UpdateCommentPayload, 'numUids'>
-    & { comment: Maybe<Array<Maybe<(
+    & { comment?: Maybe<Array<Maybe<(
       { __typename?: 'Comment' }
       & Pick<Comment, 'id' | 'content'>
       & { task: (
@@ -3866,68 +3866,68 @@ export type UpdateCommentMutation = (
           & { hosts: Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>, tags: Maybe<Array<Maybe<(
+          )>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, boards: Maybe<Array<Maybe<(
+          )>>>, boards?: Maybe<Array<Maybe<(
             { __typename?: 'Board' }
             & Pick<Board, 'id' | 'title' | 'order'>
-          )>>>, developers: Maybe<Array<Maybe<(
+          )>>>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
-        ), column: Maybe<(
+        ), column?: Maybe<(
           { __typename?: 'Column' }
           & Pick<Column, 'id' | 'title'>
           & { board: (
             { __typename?: 'Board' }
             & Pick<Board, 'id' | 'title' | 'order'>
-          ), tasks: Maybe<Array<Maybe<(
+          ), tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        )>, developers: Maybe<Array<Maybe<(
+        )>, developers?: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: Maybe<Array<Maybe<(
+          ), user?: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>>, tags: Maybe<Array<Maybe<(
+          )>>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, liked: Maybe<Array<Maybe<(
+          )>>>, liked?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        )>>>, likes: Maybe<Array<Maybe<(
+        )>>>, likes?: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: Maybe<Array<Maybe<(
+          ), user?: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>>, tags: Maybe<Array<Maybe<(
+          )>>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, liked: Maybe<Array<Maybe<(
+          )>>>, liked?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        )>>>, comments: Maybe<Array<Maybe<(
+        )>>>, comments?: Maybe<Array<Maybe<(
           { __typename?: 'Comment' }
           & Pick<Comment, 'id' | 'content'>
           & { task: (
@@ -3944,64 +3944,64 @@ export type UpdateCommentMutation = (
         & { project: (
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
-        ), user: Maybe<Array<Maybe<(
+        ), user?: Maybe<Array<Maybe<(
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          & { developer: Maybe<Array<Maybe<(
+          & { developer?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, host: Maybe<Array<Maybe<(
+          )>>>, host?: Maybe<Array<Maybe<(
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          )>>>, stars: Maybe<Array<Maybe<(
+          )>>>, stars?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        )>>>, tags: Maybe<Array<Maybe<(
+        )>>>, tags?: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), developers: Maybe<Array<Maybe<(
+          ), developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
-        )>>>, tasks: Maybe<Array<Maybe<(
+        )>>>, tasks?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: Maybe<(
+          ), column?: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          )>, developers: Maybe<Array<Maybe<(
+          )>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, likes: Maybe<Array<Maybe<(
+          )>>>, likes?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, comments: Maybe<Array<Maybe<(
+          )>>>, comments?: Maybe<Array<Maybe<(
             { __typename?: 'Comment' }
             & Pick<Comment, 'id' | 'content'>
           )>>> }
-        )>>>, liked: Maybe<Array<Maybe<(
+        )>>>, liked?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: Maybe<(
+          ), column?: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          )>, developers: Maybe<Array<Maybe<(
+          )>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, likes: Maybe<Array<Maybe<(
+          )>>>, likes?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, comments: Maybe<Array<Maybe<(
+          )>>>, comments?: Maybe<Array<Maybe<(
             { __typename?: 'Comment' }
             & Pick<Comment, 'id' | 'content'>
           )>>> }
@@ -4158,10 +4158,10 @@ export type UpdateDeveloperMutationVariables = {
 
 export type UpdateDeveloperMutation = (
   { __typename?: 'Mutation' }
-  & { updateDeveloper: Maybe<(
+  & { updateDeveloper?: Maybe<(
     { __typename?: 'UpdateDeveloperPayload' }
     & Pick<UpdateDeveloperPayload, 'numUids'>
-    & { developer: Maybe<Array<Maybe<(
+    & { developer?: Maybe<Array<Maybe<(
       { __typename?: 'Developer' }
       & Pick<Developer, 'id' | 'name' | 'availability'>
       & { project: (
@@ -4170,126 +4170,126 @@ export type UpdateDeveloperMutation = (
         & { hosts: Array<Maybe<(
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          & { developer: Maybe<Array<Maybe<(
+          & { developer?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, host: Maybe<Array<Maybe<(
+          )>>>, host?: Maybe<Array<Maybe<(
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          )>>>, stars: Maybe<Array<Maybe<(
+          )>>>, stars?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        )>>, tags: Maybe<Array<Maybe<(
+        )>>, tags?: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), developers: Maybe<Array<Maybe<(
+          ), developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
-        )>>>, tasks: Maybe<Array<Maybe<(
+        )>>>, tasks?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: Maybe<(
+          ), column?: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          )>, developers: Maybe<Array<Maybe<(
+          )>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, likes: Maybe<Array<Maybe<(
+          )>>>, likes?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, comments: Maybe<Array<Maybe<(
+          )>>>, comments?: Maybe<Array<Maybe<(
             { __typename?: 'Comment' }
             & Pick<Comment, 'id' | 'content'>
           )>>> }
-        )>>>, boards: Maybe<Array<Maybe<(
+        )>>>, boards?: Maybe<Array<Maybe<(
           { __typename?: 'Board' }
           & Pick<Board, 'id' | 'title' | 'order'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), columns: Maybe<Array<Maybe<(
+          ), columns?: Maybe<Array<Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
           )>>> }
-        )>>>, developers: Maybe<Array<Maybe<(
+        )>>>, developers?: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: Maybe<Array<Maybe<(
+          ), user?: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>>, tags: Maybe<Array<Maybe<(
+          )>>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, liked: Maybe<Array<Maybe<(
+          )>>>, liked?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
         )>>> }
-      ), user: Maybe<Array<Maybe<(
+      ), user?: Maybe<Array<Maybe<(
         { __typename?: 'User' }
         & Pick<User, 'id' | 'username' | 'password' | 'location'>
-        & { developer: Maybe<Array<Maybe<(
+        & { developer?: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
-          & { tags: Maybe<Array<Maybe<(
+          & { tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, liked: Maybe<Array<Maybe<(
+          )>>>, liked?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        )>>>, host: Maybe<Array<Maybe<(
+        )>>>, host?: Maybe<Array<Maybe<(
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
           & { hosts: Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>, tags: Maybe<Array<Maybe<(
+          )>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, boards: Maybe<Array<Maybe<(
+          )>>>, boards?: Maybe<Array<Maybe<(
             { __typename?: 'Board' }
             & Pick<Board, 'id' | 'title' | 'order'>
-          )>>>, developers: Maybe<Array<Maybe<(
+          )>>>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
-        )>>>, stars: Maybe<Array<Maybe<(
+        )>>>, stars?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: Maybe<(
+          ), column?: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          )>, developers: Maybe<Array<Maybe<(
+          )>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, likes: Maybe<Array<Maybe<(
+          )>>>, likes?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, comments: Maybe<Array<Maybe<(
+          )>>>, comments?: Maybe<Array<Maybe<(
             { __typename?: 'Comment' }
             & Pick<Comment, 'id' | 'content'>
           )>>> }
@@ -4415,105 +4415,105 @@ export type UpdateProjectMutationVariables = {
 
 export type UpdateProjectMutation = (
   { __typename?: 'Mutation' }
-  & { updateProject: Maybe<(
+  & { updateProject?: Maybe<(
     { __typename?: 'UpdateProjectPayload' }
     & Pick<UpdateProjectPayload, 'numUids'>
-    & { project: Maybe<Array<Maybe<(
+    & { project?: Maybe<Array<Maybe<(
       { __typename?: 'Project' }
       & Pick<Project, 'id' | 'title' | 'description'>
       & { hosts: Array<Maybe<(
         { __typename?: 'User' }
         & Pick<User, 'id' | 'username' | 'password' | 'location'>
-        & { developer: Maybe<Array<Maybe<(
+        & { developer?: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: Maybe<Array<Maybe<(
+          ), user?: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>>, tags: Maybe<Array<Maybe<(
+          )>>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, liked: Maybe<Array<Maybe<(
+          )>>>, liked?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        )>>>, host: Maybe<Array<Maybe<(
+        )>>>, host?: Maybe<Array<Maybe<(
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
           & { hosts: Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>, tags: Maybe<Array<Maybe<(
+          )>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, boards: Maybe<Array<Maybe<(
+          )>>>, boards?: Maybe<Array<Maybe<(
             { __typename?: 'Board' }
             & Pick<Board, 'id' | 'title' | 'order'>
-          )>>>, developers: Maybe<Array<Maybe<(
+          )>>>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
-        )>>>, stars: Maybe<Array<Maybe<(
+        )>>>, stars?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: Maybe<(
+          ), column?: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          )>, developers: Maybe<Array<Maybe<(
+          )>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, likes: Maybe<Array<Maybe<(
+          )>>>, likes?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, comments: Maybe<Array<Maybe<(
+          )>>>, comments?: Maybe<Array<Maybe<(
             { __typename?: 'Comment' }
             & Pick<Comment, 'id' | 'content'>
           )>>> }
         )>>> }
-      )>>, tags: Maybe<Array<Maybe<(
+      )>>, tags?: Maybe<Array<Maybe<(
         { __typename?: 'Tag' }
         & Pick<Tag, 'id' | 'title'>
         & { project: (
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
-          & { tasks: Maybe<Array<Maybe<(
+          & { tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, boards: Maybe<Array<Maybe<(
+          )>>>, boards?: Maybe<Array<Maybe<(
             { __typename?: 'Board' }
             & Pick<Board, 'id' | 'title' | 'order'>
-          )>>>, developers: Maybe<Array<Maybe<(
+          )>>>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
-        ), developers: Maybe<Array<Maybe<(
+        ), developers?: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: Maybe<Array<Maybe<(
+          ), user?: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>>, tags: Maybe<Array<Maybe<(
+          )>>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, liked: Maybe<Array<Maybe<(
+          )>>>, liked?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
@@ -4612,10 +4612,10 @@ export type UpdateTagMutationVariables = {
 
 export type UpdateTagMutation = (
   { __typename?: 'Mutation' }
-  & { updateTag: Maybe<(
+  & { updateTag?: Maybe<(
     { __typename?: 'UpdateTagPayload' }
     & Pick<UpdateTagPayload, 'numUids'>
-    & { tag: Maybe<Array<Maybe<(
+    & { tag?: Maybe<Array<Maybe<(
       { __typename?: 'Tag' }
       & Pick<Tag, 'id' | 'title'>
       & { project: (
@@ -4624,76 +4624,76 @@ export type UpdateTagMutation = (
         & { hosts: Array<Maybe<(
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          & { developer: Maybe<Array<Maybe<(
+          & { developer?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, host: Maybe<Array<Maybe<(
+          )>>>, host?: Maybe<Array<Maybe<(
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          )>>>, stars: Maybe<Array<Maybe<(
+          )>>>, stars?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        )>>, tags: Maybe<Array<Maybe<(
+        )>>, tags?: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), developers: Maybe<Array<Maybe<(
+          ), developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
-        )>>>, tasks: Maybe<Array<Maybe<(
+        )>>>, tasks?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: Maybe<(
+          ), column?: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          )>, developers: Maybe<Array<Maybe<(
+          )>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, likes: Maybe<Array<Maybe<(
+          )>>>, likes?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, comments: Maybe<Array<Maybe<(
+          )>>>, comments?: Maybe<Array<Maybe<(
             { __typename?: 'Comment' }
             & Pick<Comment, 'id' | 'content'>
           )>>> }
-        )>>>, boards: Maybe<Array<Maybe<(
+        )>>>, boards?: Maybe<Array<Maybe<(
           { __typename?: 'Board' }
           & Pick<Board, 'id' | 'title' | 'order'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), columns: Maybe<Array<Maybe<(
+          ), columns?: Maybe<Array<Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
           )>>> }
-        )>>>, developers: Maybe<Array<Maybe<(
+        )>>>, developers?: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: Maybe<Array<Maybe<(
+          ), user?: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>>, tags: Maybe<Array<Maybe<(
+          )>>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, liked: Maybe<Array<Maybe<(
+          )>>>, liked?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
         )>>> }
-      ), developers: Maybe<Array<Maybe<(
+      ), developers?: Maybe<Array<Maybe<(
         { __typename?: 'Developer' }
         & Pick<Developer, 'id' | 'name' | 'availability'>
       )>>> }
@@ -4871,10 +4871,10 @@ export type UpdateTaskMutationVariables = {
 
 export type UpdateTaskMutation = (
   { __typename?: 'Mutation' }
-  & { updateTask: Maybe<(
+  & { updateTask?: Maybe<(
     { __typename?: 'UpdateTaskPayload' }
     & Pick<UpdateTaskPayload, 'numUids'>
-    & { task: Maybe<Array<Maybe<(
+    & { task?: Maybe<Array<Maybe<(
       { __typename?: 'Task' }
       & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
       & { project: (
@@ -4883,76 +4883,76 @@ export type UpdateTaskMutation = (
         & { hosts: Array<Maybe<(
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          & { developer: Maybe<Array<Maybe<(
+          & { developer?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, host: Maybe<Array<Maybe<(
+          )>>>, host?: Maybe<Array<Maybe<(
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          )>>>, stars: Maybe<Array<Maybe<(
+          )>>>, stars?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        )>>, tags: Maybe<Array<Maybe<(
+        )>>, tags?: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), developers: Maybe<Array<Maybe<(
+          ), developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
-        )>>>, tasks: Maybe<Array<Maybe<(
+        )>>>, tasks?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: Maybe<(
+          ), column?: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          )>, developers: Maybe<Array<Maybe<(
+          )>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, likes: Maybe<Array<Maybe<(
+          )>>>, likes?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, comments: Maybe<Array<Maybe<(
+          )>>>, comments?: Maybe<Array<Maybe<(
             { __typename?: 'Comment' }
             & Pick<Comment, 'id' | 'content'>
           )>>> }
-        )>>>, boards: Maybe<Array<Maybe<(
+        )>>>, boards?: Maybe<Array<Maybe<(
           { __typename?: 'Board' }
           & Pick<Board, 'id' | 'title' | 'order'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), columns: Maybe<Array<Maybe<(
+          ), columns?: Maybe<Array<Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
           )>>> }
-        )>>>, developers: Maybe<Array<Maybe<(
+        )>>>, developers?: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: Maybe<Array<Maybe<(
+          ), user?: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>>, tags: Maybe<Array<Maybe<(
+          )>>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, liked: Maybe<Array<Maybe<(
+          )>>>, liked?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
         )>>> }
-      ), column: Maybe<(
+      ), column?: Maybe<(
         { __typename?: 'Column' }
         & Pick<Column, 'id' | 'title'>
         & { board: (
@@ -4961,63 +4961,63 @@ export type UpdateTaskMutation = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), columns: Maybe<Array<Maybe<(
+          ), columns?: Maybe<Array<Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
           )>>> }
-        ), tasks: Maybe<Array<Maybe<(
+        ), tasks?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
         )>>> }
-      )>, developers: Maybe<Array<Maybe<(
+      )>, developers?: Maybe<Array<Maybe<(
         { __typename?: 'Developer' }
         & Pick<Developer, 'id' | 'name' | 'availability'>
-      )>>>, likes: Maybe<Array<Maybe<(
+      )>>>, likes?: Maybe<Array<Maybe<(
         { __typename?: 'Developer' }
         & Pick<Developer, 'id' | 'name' | 'availability'>
         & { project: (
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
-        ), user: Maybe<Array<Maybe<(
+        ), user?: Maybe<Array<Maybe<(
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          & { developer: Maybe<Array<Maybe<(
+          & { developer?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, host: Maybe<Array<Maybe<(
+          )>>>, host?: Maybe<Array<Maybe<(
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          )>>>, stars: Maybe<Array<Maybe<(
+          )>>>, stars?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        )>>>, tags: Maybe<Array<Maybe<(
+        )>>>, tags?: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
-        )>>>, tasks: Maybe<Array<Maybe<(
+        )>>>, tasks?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-        )>>>, liked: Maybe<Array<Maybe<(
+        )>>>, liked?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: Maybe<(
+          ), column?: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          )>, developers: Maybe<Array<Maybe<(
+          )>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, likes: Maybe<Array<Maybe<(
+          )>>>, likes?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, comments: Maybe<Array<Maybe<(
+          )>>>, comments?: Maybe<Array<Maybe<(
             { __typename?: 'Comment' }
             & Pick<Comment, 'id' | 'content'>
           )>>> }
         )>>> }
-      )>>>, comments: Maybe<Array<Maybe<(
+      )>>>, comments?: Maybe<Array<Maybe<(
         { __typename?: 'Comment' }
         & Pick<Comment, 'id' | 'content'>
         & { task: (
@@ -5029,16 +5029,16 @@ export type UpdateTaskMutation = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: Maybe<Array<Maybe<(
+          ), user?: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>>, tags: Maybe<Array<Maybe<(
+          )>>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, liked: Maybe<Array<Maybe<(
+          )>>>, liked?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
@@ -5141,13 +5141,13 @@ export type UpdateUserMutationVariables = {
 
 export type UpdateUserMutation = (
   { __typename?: 'Mutation' }
-  & { updateUser: Maybe<(
+  & { updateUser?: Maybe<(
     { __typename?: 'UpdateUserPayload' }
     & Pick<UpdateUserPayload, 'numUids'>
-    & { user: Maybe<Array<Maybe<(
+    & { user?: Maybe<Array<Maybe<(
       { __typename?: 'User' }
       & Pick<User, 'id' | 'username' | 'password' | 'location'>
-      & { developer: Maybe<Array<Maybe<(
+      & { developer?: Maybe<Array<Maybe<(
         { __typename?: 'Developer' }
         & Pick<Developer, 'id' | 'name' | 'availability'>
         & { project: (
@@ -5156,74 +5156,74 @@ export type UpdateUserMutation = (
           & { hosts: Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>, tags: Maybe<Array<Maybe<(
+          )>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, boards: Maybe<Array<Maybe<(
+          )>>>, boards?: Maybe<Array<Maybe<(
             { __typename?: 'Board' }
             & Pick<Board, 'id' | 'title' | 'order'>
-          )>>>, developers: Maybe<Array<Maybe<(
+          )>>>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
-        ), user: Maybe<Array<Maybe<(
+        ), user?: Maybe<Array<Maybe<(
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          & { host: Maybe<Array<Maybe<(
+          & { host?: Maybe<Array<Maybe<(
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          )>>>, stars: Maybe<Array<Maybe<(
+          )>>>, stars?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        )>>>, tags: Maybe<Array<Maybe<(
+        )>>>, tags?: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), developers: Maybe<Array<Maybe<(
+          ), developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
-        )>>>, tasks: Maybe<Array<Maybe<(
+        )>>>, tasks?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: Maybe<(
+          ), column?: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          )>, developers: Maybe<Array<Maybe<(
+          )>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, likes: Maybe<Array<Maybe<(
+          )>>>, likes?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, comments: Maybe<Array<Maybe<(
+          )>>>, comments?: Maybe<Array<Maybe<(
             { __typename?: 'Comment' }
             & Pick<Comment, 'id' | 'content'>
           )>>> }
-        )>>>, liked: Maybe<Array<Maybe<(
+        )>>>, liked?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: Maybe<(
+          ), column?: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          )>, developers: Maybe<Array<Maybe<(
+          )>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, likes: Maybe<Array<Maybe<(
+          )>>>, likes?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, comments: Maybe<Array<Maybe<(
+          )>>>, comments?: Maybe<Array<Maybe<(
             { __typename?: 'Comment' }
             & Pick<Comment, 'id' | 'content'>
           )>>> }
@@ -5360,7 +5360,7 @@ export type GetBoardQueryVariables = {
 
 export type GetBoardQuery = (
   { __typename?: 'Query' }
-  & { getBoard: Maybe<(
+  & { getBoard?: Maybe<(
     { __typename?: 'Board' }
     & Pick<Board, 'id' | 'title' | 'order'>
     & { project: (
@@ -5369,102 +5369,102 @@ export type GetBoardQuery = (
       & { hosts: Array<Maybe<(
         { __typename?: 'User' }
         & Pick<User, 'id' | 'username' | 'password' | 'location'>
-        & { developer: Maybe<Array<Maybe<(
+        & { developer?: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: Maybe<Array<Maybe<(
+          ), user?: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>>, tags: Maybe<Array<Maybe<(
+          )>>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, liked: Maybe<Array<Maybe<(
+          )>>>, liked?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        )>>>, host: Maybe<Array<Maybe<(
+        )>>>, host?: Maybe<Array<Maybe<(
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
           & { hosts: Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>, tags: Maybe<Array<Maybe<(
+          )>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, boards: Maybe<Array<Maybe<(
+          )>>>, boards?: Maybe<Array<Maybe<(
             { __typename?: 'Board' }
             & Pick<Board, 'id' | 'title' | 'order'>
-          )>>>, developers: Maybe<Array<Maybe<(
+          )>>>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
-        )>>>, stars: Maybe<Array<Maybe<(
+        )>>>, stars?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: Maybe<(
+          ), column?: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          )>, developers: Maybe<Array<Maybe<(
+          )>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, likes: Maybe<Array<Maybe<(
+          )>>>, likes?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, comments: Maybe<Array<Maybe<(
+          )>>>, comments?: Maybe<Array<Maybe<(
             { __typename?: 'Comment' }
             & Pick<Comment, 'id' | 'content'>
           )>>> }
         )>>> }
-      )>>, tags: Maybe<Array<Maybe<(
+      )>>, tags?: Maybe<Array<Maybe<(
         { __typename?: 'Tag' }
         & Pick<Tag, 'id' | 'title'>
         & { project: (
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
-          & { tasks: Maybe<Array<Maybe<(
+          & { tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, boards: Maybe<Array<Maybe<(
+          )>>>, boards?: Maybe<Array<Maybe<(
             { __typename?: 'Board' }
             & Pick<Board, 'id' | 'title' | 'order'>
-          )>>>, developers: Maybe<Array<Maybe<(
+          )>>>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
-        ), developers: Maybe<Array<Maybe<(
+        ), developers?: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: Maybe<Array<Maybe<(
+          ), user?: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>>, tags: Maybe<Array<Maybe<(
+          )>>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, liked: Maybe<Array<Maybe<(
+          )>>>, liked?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
         )>>> }
       )>>> }
-    ), columns: Maybe<Array<Maybe<(
+    ), columns?: Maybe<Array<Maybe<(
       { __typename?: 'Column' }
       & Pick<Column, 'id' | 'title'>
       & { board: (
@@ -5473,10 +5473,10 @@ export type GetBoardQuery = (
         & { project: (
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
-        ), columns: Maybe<Array<Maybe<(
+        ), columns?: Maybe<Array<Maybe<(
           { __typename?: 'Column' }
           & Pick<Column, 'id' | 'title'>
-          & { tasks: Maybe<Array<Maybe<(
+          & { tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
@@ -5581,7 +5581,7 @@ export type GetColumnQueryVariables = {
 
 export type GetColumnQuery = (
   { __typename?: 'Query' }
-  & { getColumn: Maybe<(
+  & { getColumn?: Maybe<(
     { __typename?: 'Column' }
     & Pick<Column, 'id' | 'title'>
     & { board: (
@@ -5593,87 +5593,87 @@ export type GetColumnQuery = (
         & { hosts: Array<Maybe<(
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          & { developer: Maybe<Array<Maybe<(
+          & { developer?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, host: Maybe<Array<Maybe<(
+          )>>>, host?: Maybe<Array<Maybe<(
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          )>>>, stars: Maybe<Array<Maybe<(
+          )>>>, stars?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        )>>, tags: Maybe<Array<Maybe<(
+        )>>, tags?: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), developers: Maybe<Array<Maybe<(
+          ), developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
-        )>>>, tasks: Maybe<Array<Maybe<(
+        )>>>, tasks?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: Maybe<(
+          ), column?: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          )>, developers: Maybe<Array<Maybe<(
+          )>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, likes: Maybe<Array<Maybe<(
+          )>>>, likes?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, comments: Maybe<Array<Maybe<(
+          )>>>, comments?: Maybe<Array<Maybe<(
             { __typename?: 'Comment' }
             & Pick<Comment, 'id' | 'content'>
           )>>> }
-        )>>>, boards: Maybe<Array<Maybe<(
+        )>>>, boards?: Maybe<Array<Maybe<(
           { __typename?: 'Board' }
           & Pick<Board, 'id' | 'title' | 'order'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), columns: Maybe<Array<Maybe<(
+          ), columns?: Maybe<Array<Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
           )>>> }
-        )>>>, developers: Maybe<Array<Maybe<(
+        )>>>, developers?: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: Maybe<Array<Maybe<(
+          ), user?: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>>, tags: Maybe<Array<Maybe<(
+          )>>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, liked: Maybe<Array<Maybe<(
+          )>>>, liked?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
         )>>> }
-      ), columns: Maybe<Array<Maybe<(
+      ), columns?: Maybe<Array<Maybe<(
         { __typename?: 'Column' }
         & Pick<Column, 'id' | 'title'>
         & { board: (
           { __typename?: 'Board' }
           & Pick<Board, 'id' | 'title' | 'order'>
-        ), tasks: Maybe<Array<Maybe<(
+        ), tasks?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
         )>>> }
       )>>> }
-    ), tasks: Maybe<Array<Maybe<(
+    ), tasks?: Maybe<Array<Maybe<(
       { __typename?: 'Task' }
       & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
     )>>> }
@@ -5848,7 +5848,7 @@ export type GetCommentQueryVariables = {
 
 export type GetCommentQuery = (
   { __typename?: 'Query' }
-  & { getComment: Maybe<(
+  & { getComment?: Maybe<(
     { __typename?: 'Comment' }
     & Pick<Comment, 'id' | 'content'>
     & { task: (
@@ -5860,76 +5860,76 @@ export type GetCommentQuery = (
         & { hosts: Array<Maybe<(
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          & { developer: Maybe<Array<Maybe<(
+          & { developer?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, host: Maybe<Array<Maybe<(
+          )>>>, host?: Maybe<Array<Maybe<(
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          )>>>, stars: Maybe<Array<Maybe<(
+          )>>>, stars?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        )>>, tags: Maybe<Array<Maybe<(
+        )>>, tags?: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), developers: Maybe<Array<Maybe<(
+          ), developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
-        )>>>, tasks: Maybe<Array<Maybe<(
+        )>>>, tasks?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: Maybe<(
+          ), column?: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          )>, developers: Maybe<Array<Maybe<(
+          )>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, likes: Maybe<Array<Maybe<(
+          )>>>, likes?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, comments: Maybe<Array<Maybe<(
+          )>>>, comments?: Maybe<Array<Maybe<(
             { __typename?: 'Comment' }
             & Pick<Comment, 'id' | 'content'>
           )>>> }
-        )>>>, boards: Maybe<Array<Maybe<(
+        )>>>, boards?: Maybe<Array<Maybe<(
           { __typename?: 'Board' }
           & Pick<Board, 'id' | 'title' | 'order'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), columns: Maybe<Array<Maybe<(
+          ), columns?: Maybe<Array<Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
           )>>> }
-        )>>>, developers: Maybe<Array<Maybe<(
+        )>>>, developers?: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: Maybe<Array<Maybe<(
+          ), user?: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>>, tags: Maybe<Array<Maybe<(
+          )>>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, liked: Maybe<Array<Maybe<(
+          )>>>, liked?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
         )>>> }
-      ), column: Maybe<(
+      ), column?: Maybe<(
         { __typename?: 'Column' }
         & Pick<Column, 'id' | 'title'>
         & { board: (
@@ -5938,63 +5938,63 @@ export type GetCommentQuery = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), columns: Maybe<Array<Maybe<(
+          ), columns?: Maybe<Array<Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
           )>>> }
-        ), tasks: Maybe<Array<Maybe<(
+        ), tasks?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
         )>>> }
-      )>, developers: Maybe<Array<Maybe<(
+      )>, developers?: Maybe<Array<Maybe<(
         { __typename?: 'Developer' }
         & Pick<Developer, 'id' | 'name' | 'availability'>
-      )>>>, likes: Maybe<Array<Maybe<(
+      )>>>, likes?: Maybe<Array<Maybe<(
         { __typename?: 'Developer' }
         & Pick<Developer, 'id' | 'name' | 'availability'>
         & { project: (
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
-        ), user: Maybe<Array<Maybe<(
+        ), user?: Maybe<Array<Maybe<(
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          & { developer: Maybe<Array<Maybe<(
+          & { developer?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, host: Maybe<Array<Maybe<(
+          )>>>, host?: Maybe<Array<Maybe<(
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          )>>>, stars: Maybe<Array<Maybe<(
+          )>>>, stars?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        )>>>, tags: Maybe<Array<Maybe<(
+        )>>>, tags?: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
-        )>>>, tasks: Maybe<Array<Maybe<(
+        )>>>, tasks?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-        )>>>, liked: Maybe<Array<Maybe<(
+        )>>>, liked?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: Maybe<(
+          ), column?: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          )>, developers: Maybe<Array<Maybe<(
+          )>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, likes: Maybe<Array<Maybe<(
+          )>>>, likes?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, comments: Maybe<Array<Maybe<(
+          )>>>, comments?: Maybe<Array<Maybe<(
             { __typename?: 'Comment' }
             & Pick<Comment, 'id' | 'content'>
           )>>> }
         )>>> }
-      )>>>, comments: Maybe<Array<Maybe<(
+      )>>>, comments?: Maybe<Array<Maybe<(
         { __typename?: 'Comment' }
         & Pick<Comment, 'id' | 'content'>
         & { task: (
@@ -6006,16 +6006,16 @@ export type GetCommentQuery = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: Maybe<Array<Maybe<(
+          ), user?: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>>, tags: Maybe<Array<Maybe<(
+          )>>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, liked: Maybe<Array<Maybe<(
+          )>>>, liked?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
@@ -6224,7 +6224,7 @@ export type GetDeveloperQueryVariables = {
 
 export type GetDeveloperQuery = (
   { __typename?: 'Query' }
-  & { getDeveloper: Maybe<(
+  & { getDeveloper?: Maybe<(
     { __typename?: 'Developer' }
     & Pick<Developer, 'id' | 'name' | 'availability'>
     & { project: (
@@ -6233,124 +6233,124 @@ export type GetDeveloperQuery = (
       & { hosts: Array<Maybe<(
         { __typename?: 'User' }
         & Pick<User, 'id' | 'username' | 'password' | 'location'>
-        & { developer: Maybe<Array<Maybe<(
+        & { developer?: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: Maybe<Array<Maybe<(
+          ), user?: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>>, tags: Maybe<Array<Maybe<(
+          )>>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, liked: Maybe<Array<Maybe<(
+          )>>>, liked?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        )>>>, host: Maybe<Array<Maybe<(
+        )>>>, host?: Maybe<Array<Maybe<(
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
           & { hosts: Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>, tags: Maybe<Array<Maybe<(
+          )>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, boards: Maybe<Array<Maybe<(
+          )>>>, boards?: Maybe<Array<Maybe<(
             { __typename?: 'Board' }
             & Pick<Board, 'id' | 'title' | 'order'>
-          )>>>, developers: Maybe<Array<Maybe<(
+          )>>>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
-        )>>>, stars: Maybe<Array<Maybe<(
+        )>>>, stars?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: Maybe<(
+          ), column?: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          )>, developers: Maybe<Array<Maybe<(
+          )>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, likes: Maybe<Array<Maybe<(
+          )>>>, likes?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, comments: Maybe<Array<Maybe<(
+          )>>>, comments?: Maybe<Array<Maybe<(
             { __typename?: 'Comment' }
             & Pick<Comment, 'id' | 'content'>
           )>>> }
         )>>> }
-      )>>, tags: Maybe<Array<Maybe<(
+      )>>, tags?: Maybe<Array<Maybe<(
         { __typename?: 'Tag' }
         & Pick<Tag, 'id' | 'title'>
         & { project: (
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
-          & { tasks: Maybe<Array<Maybe<(
+          & { tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, boards: Maybe<Array<Maybe<(
+          )>>>, boards?: Maybe<Array<Maybe<(
             { __typename?: 'Board' }
             & Pick<Board, 'id' | 'title' | 'order'>
-          )>>>, developers: Maybe<Array<Maybe<(
+          )>>>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
-        ), developers: Maybe<Array<Maybe<(
+        ), developers?: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: Maybe<Array<Maybe<(
+          ), user?: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>>, tags: Maybe<Array<Maybe<(
+          )>>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, liked: Maybe<Array<Maybe<(
+          )>>>, liked?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
         )>>> }
       )>>> }
-    ), user: Maybe<Array<Maybe<(
+    ), user?: Maybe<Array<Maybe<(
       { __typename?: 'User' }
       & Pick<User, 'id' | 'username' | 'password' | 'location'>
-      & { developer: Maybe<Array<Maybe<(
+      & { developer?: Maybe<Array<Maybe<(
         { __typename?: 'Developer' }
         & Pick<Developer, 'id' | 'name' | 'availability'>
-      )>>>, host: Maybe<Array<Maybe<(
+      )>>>, host?: Maybe<Array<Maybe<(
         { __typename?: 'Project' }
         & Pick<Project, 'id' | 'title' | 'description'>
-      )>>>, stars: Maybe<Array<Maybe<(
+      )>>>, stars?: Maybe<Array<Maybe<(
         { __typename?: 'Task' }
         & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
       )>>> }
-    )>>>, tags: Maybe<Array<Maybe<(
+    )>>>, tags?: Maybe<Array<Maybe<(
       { __typename?: 'Tag' }
       & Pick<Tag, 'id' | 'title'>
-    )>>>, tasks: Maybe<Array<Maybe<(
+    )>>>, tasks?: Maybe<Array<Maybe<(
       { __typename?: 'Task' }
       & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
       & { project: (
         { __typename?: 'Project' }
         & Pick<Project, 'id' | 'title' | 'description'>
-      ), column: Maybe<(
+      ), column?: Maybe<(
         { __typename?: 'Column' }
         & Pick<Column, 'id' | 'title'>
         & { board: (
@@ -6359,56 +6359,56 @@ export type GetDeveloperQuery = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), columns: Maybe<Array<Maybe<(
+          ), columns?: Maybe<Array<Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
           )>>> }
-        ), tasks: Maybe<Array<Maybe<(
+        ), tasks?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          & { developers: Maybe<Array<Maybe<(
+          & { developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, likes: Maybe<Array<Maybe<(
+          )>>>, likes?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, comments: Maybe<Array<Maybe<(
+          )>>>, comments?: Maybe<Array<Maybe<(
             { __typename?: 'Comment' }
             & Pick<Comment, 'id' | 'content'>
           )>>> }
         )>>> }
       )> }
-    )>>>, liked: Maybe<Array<Maybe<(
+    )>>>, liked?: Maybe<Array<Maybe<(
       { __typename?: 'Task' }
       & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
       & { project: (
         { __typename?: 'Project' }
         & Pick<Project, 'id' | 'title' | 'description'>
-      ), column: Maybe<(
+      ), column?: Maybe<(
         { __typename?: 'Column' }
         & Pick<Column, 'id' | 'title'>
-      )>, developers: Maybe<Array<Maybe<(
+      )>, developers?: Maybe<Array<Maybe<(
         { __typename?: 'Developer' }
         & Pick<Developer, 'id' | 'name' | 'availability'>
-      )>>>, likes: Maybe<Array<Maybe<(
+      )>>>, likes?: Maybe<Array<Maybe<(
         { __typename?: 'Developer' }
         & Pick<Developer, 'id' | 'name' | 'availability'>
         & { project: (
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
-        ), user: Maybe<Array<Maybe<(
+        ), user?: Maybe<Array<Maybe<(
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
-        )>>>, tags: Maybe<Array<Maybe<(
+        )>>>, tags?: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
-        )>>>, tasks: Maybe<Array<Maybe<(
+        )>>>, tasks?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-        )>>>, liked: Maybe<Array<Maybe<(
+        )>>>, liked?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          & { comments: Maybe<Array<Maybe<(
+          & { comments?: Maybe<Array<Maybe<(
             { __typename?: 'Comment' }
             & Pick<Comment, 'id' | 'content'>
           )>>> }
@@ -6581,13 +6581,13 @@ export type GetProjectQueryVariables = {
 
 export type GetProjectQuery = (
   { __typename?: 'Query' }
-  & { getProject: Maybe<(
+  & { getProject?: Maybe<(
     { __typename?: 'Project' }
     & Pick<Project, 'id' | 'title' | 'description'>
     & { hosts: Array<Maybe<(
       { __typename?: 'User' }
       & Pick<User, 'id' | 'username' | 'password' | 'location'>
-      & { developer: Maybe<Array<Maybe<(
+      & { developer?: Maybe<Array<Maybe<(
         { __typename?: 'Developer' }
         & Pick<Developer, 'id' | 'name' | 'availability'>
         & { project: (
@@ -6596,138 +6596,138 @@ export type GetProjectQuery = (
           & { hosts: Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>, tags: Maybe<Array<Maybe<(
+          )>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, boards: Maybe<Array<Maybe<(
+          )>>>, boards?: Maybe<Array<Maybe<(
             { __typename?: 'Board' }
             & Pick<Board, 'id' | 'title' | 'order'>
-          )>>>, developers: Maybe<Array<Maybe<(
+          )>>>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
-        ), user: Maybe<Array<Maybe<(
+        ), user?: Maybe<Array<Maybe<(
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          & { developer: Maybe<Array<Maybe<(
+          & { developer?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, host: Maybe<Array<Maybe<(
+          )>>>, host?: Maybe<Array<Maybe<(
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          )>>>, stars: Maybe<Array<Maybe<(
+          )>>>, stars?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        )>>>, tags: Maybe<Array<Maybe<(
+        )>>>, tags?: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), developers: Maybe<Array<Maybe<(
+          ), developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
-        )>>>, tasks: Maybe<Array<Maybe<(
+        )>>>, tasks?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: Maybe<(
+          ), column?: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          )>, developers: Maybe<Array<Maybe<(
+          )>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, likes: Maybe<Array<Maybe<(
+          )>>>, likes?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, comments: Maybe<Array<Maybe<(
+          )>>>, comments?: Maybe<Array<Maybe<(
             { __typename?: 'Comment' }
             & Pick<Comment, 'id' | 'content'>
           )>>> }
-        )>>>, liked: Maybe<Array<Maybe<(
+        )>>>, liked?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: Maybe<(
+          ), column?: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          )>, developers: Maybe<Array<Maybe<(
+          )>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, likes: Maybe<Array<Maybe<(
+          )>>>, likes?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, comments: Maybe<Array<Maybe<(
+          )>>>, comments?: Maybe<Array<Maybe<(
             { __typename?: 'Comment' }
             & Pick<Comment, 'id' | 'content'>
           )>>> }
         )>>> }
-      )>>>, host: Maybe<Array<Maybe<(
+      )>>>, host?: Maybe<Array<Maybe<(
         { __typename?: 'Project' }
         & Pick<Project, 'id' | 'title' | 'description'>
         & { hosts: Array<Maybe<(
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          & { stars: Maybe<Array<Maybe<(
+          & { stars?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        )>>, tags: Maybe<Array<Maybe<(
+        )>>, tags?: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
-        )>>>, tasks: Maybe<Array<Maybe<(
+        )>>>, tasks?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-        )>>>, boards: Maybe<Array<Maybe<(
+        )>>>, boards?: Maybe<Array<Maybe<(
           { __typename?: 'Board' }
           & Pick<Board, 'id' | 'title' | 'order'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), columns: Maybe<Array<Maybe<(
+          ), columns?: Maybe<Array<Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
           )>>> }
-        )>>>, developers: Maybe<Array<Maybe<(
+        )>>>, developers?: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: Maybe<Array<Maybe<(
+          ), user?: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>>, tags: Maybe<Array<Maybe<(
+          )>>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, liked: Maybe<Array<Maybe<(
+          )>>>, liked?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
         )>>> }
       )>>> }
-    )>>, tags: Maybe<Array<Maybe<(
+    )>>, tags?: Maybe<Array<Maybe<(
       { __typename?: 'Tag' }
       & Pick<Tag, 'id' | 'title'>
-    )>>>, tasks: Maybe<Array<Maybe<(
+    )>>>, tasks?: Maybe<Array<Maybe<(
       { __typename?: 'Task' }
       & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-    )>>>, boards: Maybe<Array<Maybe<(
+    )>>>, boards?: Maybe<Array<Maybe<(
       { __typename?: 'Board' }
       & Pick<Board, 'id' | 'title' | 'order'>
-    )>>>, developers: Maybe<Array<Maybe<(
+    )>>>, developers?: Maybe<Array<Maybe<(
       { __typename?: 'Developer' }
       & Pick<Developer, 'id' | 'name' | 'availability'>
     )>>> }
@@ -6851,7 +6851,7 @@ export type GetTagQueryVariables = {
 
 export type GetTagQuery = (
   { __typename?: 'Query' }
-  & { getTag: Maybe<(
+  & { getTag?: Maybe<(
     { __typename?: 'Tag' }
     & Pick<Tag, 'id' | 'title'>
     & { project: (
@@ -6860,102 +6860,102 @@ export type GetTagQuery = (
       & { hosts: Array<Maybe<(
         { __typename?: 'User' }
         & Pick<User, 'id' | 'username' | 'password' | 'location'>
-        & { developer: Maybe<Array<Maybe<(
+        & { developer?: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: Maybe<Array<Maybe<(
+          ), user?: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>>, tags: Maybe<Array<Maybe<(
+          )>>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, liked: Maybe<Array<Maybe<(
+          )>>>, liked?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        )>>>, host: Maybe<Array<Maybe<(
+        )>>>, host?: Maybe<Array<Maybe<(
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
           & { hosts: Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>, tags: Maybe<Array<Maybe<(
+          )>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, boards: Maybe<Array<Maybe<(
+          )>>>, boards?: Maybe<Array<Maybe<(
             { __typename?: 'Board' }
             & Pick<Board, 'id' | 'title' | 'order'>
-          )>>>, developers: Maybe<Array<Maybe<(
+          )>>>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
-        )>>>, stars: Maybe<Array<Maybe<(
+        )>>>, stars?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: Maybe<(
+          ), column?: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          )>, developers: Maybe<Array<Maybe<(
+          )>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, likes: Maybe<Array<Maybe<(
+          )>>>, likes?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, comments: Maybe<Array<Maybe<(
+          )>>>, comments?: Maybe<Array<Maybe<(
             { __typename?: 'Comment' }
             & Pick<Comment, 'id' | 'content'>
           )>>> }
         )>>> }
-      )>>, tags: Maybe<Array<Maybe<(
+      )>>, tags?: Maybe<Array<Maybe<(
         { __typename?: 'Tag' }
         & Pick<Tag, 'id' | 'title'>
         & { project: (
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
-          & { tasks: Maybe<Array<Maybe<(
+          & { tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, boards: Maybe<Array<Maybe<(
+          )>>>, boards?: Maybe<Array<Maybe<(
             { __typename?: 'Board' }
             & Pick<Board, 'id' | 'title' | 'order'>
-          )>>>, developers: Maybe<Array<Maybe<(
+          )>>>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
-        ), developers: Maybe<Array<Maybe<(
+        ), developers?: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: Maybe<Array<Maybe<(
+          ), user?: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>>, tags: Maybe<Array<Maybe<(
+          )>>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, liked: Maybe<Array<Maybe<(
+          )>>>, liked?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
         )>>> }
       )>>> }
-    ), developers: Maybe<Array<Maybe<(
+    ), developers?: Maybe<Array<Maybe<(
       { __typename?: 'Developer' }
       & Pick<Developer, 'id' | 'name' | 'availability'>
     )>>> }
@@ -7136,7 +7136,7 @@ export type GetTaskQueryVariables = {
 
 export type GetTaskQuery = (
   { __typename?: 'Query' }
-  & { getTask: Maybe<(
+  & { getTask?: Maybe<(
     { __typename?: 'Task' }
     & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
     & { project: (
@@ -7145,102 +7145,102 @@ export type GetTaskQuery = (
       & { hosts: Array<Maybe<(
         { __typename?: 'User' }
         & Pick<User, 'id' | 'username' | 'password' | 'location'>
-        & { developer: Maybe<Array<Maybe<(
+        & { developer?: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: Maybe<Array<Maybe<(
+          ), user?: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>>, tags: Maybe<Array<Maybe<(
+          )>>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, liked: Maybe<Array<Maybe<(
+          )>>>, liked?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        )>>>, host: Maybe<Array<Maybe<(
+        )>>>, host?: Maybe<Array<Maybe<(
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
           & { hosts: Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>, tags: Maybe<Array<Maybe<(
+          )>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, boards: Maybe<Array<Maybe<(
+          )>>>, boards?: Maybe<Array<Maybe<(
             { __typename?: 'Board' }
             & Pick<Board, 'id' | 'title' | 'order'>
-          )>>>, developers: Maybe<Array<Maybe<(
+          )>>>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
-        )>>>, stars: Maybe<Array<Maybe<(
+        )>>>, stars?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: Maybe<(
+          ), column?: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          )>, developers: Maybe<Array<Maybe<(
+          )>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, likes: Maybe<Array<Maybe<(
+          )>>>, likes?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, comments: Maybe<Array<Maybe<(
+          )>>>, comments?: Maybe<Array<Maybe<(
             { __typename?: 'Comment' }
             & Pick<Comment, 'id' | 'content'>
           )>>> }
         )>>> }
-      )>>, tags: Maybe<Array<Maybe<(
+      )>>, tags?: Maybe<Array<Maybe<(
         { __typename?: 'Tag' }
         & Pick<Tag, 'id' | 'title'>
         & { project: (
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
-          & { tasks: Maybe<Array<Maybe<(
+          & { tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, boards: Maybe<Array<Maybe<(
+          )>>>, boards?: Maybe<Array<Maybe<(
             { __typename?: 'Board' }
             & Pick<Board, 'id' | 'title' | 'order'>
-          )>>>, developers: Maybe<Array<Maybe<(
+          )>>>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
-        ), developers: Maybe<Array<Maybe<(
+        ), developers?: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: Maybe<Array<Maybe<(
+          ), user?: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>>, tags: Maybe<Array<Maybe<(
+          )>>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, liked: Maybe<Array<Maybe<(
+          )>>>, liked?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
         )>>> }
       )>>> }
-    ), column: Maybe<(
+    ), column?: Maybe<(
       { __typename?: 'Column' }
       & Pick<Column, 'id' | 'title'>
       & { board: (
@@ -7249,49 +7249,49 @@ export type GetTaskQuery = (
         & { project: (
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
-        ), columns: Maybe<Array<Maybe<(
+        ), columns?: Maybe<Array<Maybe<(
           { __typename?: 'Column' }
           & Pick<Column, 'id' | 'title'>
           & { board: (
             { __typename?: 'Board' }
             & Pick<Board, 'id' | 'title' | 'order'>
-          ), tasks: Maybe<Array<Maybe<(
+          ), tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
         )>>> }
-      ), tasks: Maybe<Array<Maybe<(
+      ), tasks?: Maybe<Array<Maybe<(
         { __typename?: 'Task' }
         & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
         & { project: (
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
-        ), column: Maybe<(
+        ), column?: Maybe<(
           { __typename?: 'Column' }
           & Pick<Column, 'id' | 'title'>
-        )>, developers: Maybe<Array<Maybe<(
+        )>, developers?: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
-        )>>>, likes: Maybe<Array<Maybe<(
+        )>>>, likes?: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: Maybe<Array<Maybe<(
+          ), user?: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>>, tags: Maybe<Array<Maybe<(
+          )>>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, liked: Maybe<Array<Maybe<(
+          )>>>, liked?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        )>>>, comments: Maybe<Array<Maybe<(
+        )>>>, comments?: Maybe<Array<Maybe<(
           { __typename?: 'Comment' }
           & Pick<Comment, 'id' | 'content'>
           & { task: (
@@ -7303,13 +7303,13 @@ export type GetTaskQuery = (
           ) }
         )>>> }
       )>>> }
-    )>, developers: Maybe<Array<Maybe<(
+    )>, developers?: Maybe<Array<Maybe<(
       { __typename?: 'Developer' }
       & Pick<Developer, 'id' | 'name' | 'availability'>
-    )>>>, likes: Maybe<Array<Maybe<(
+    )>>>, likes?: Maybe<Array<Maybe<(
       { __typename?: 'Developer' }
       & Pick<Developer, 'id' | 'name' | 'availability'>
-    )>>>, comments: Maybe<Array<Maybe<(
+    )>>>, comments?: Maybe<Array<Maybe<(
       { __typename?: 'Comment' }
       & Pick<Comment, 'id' | 'content'>
     )>>> }
@@ -7471,10 +7471,10 @@ export type GetUserQueryVariables = {
 
 export type GetUserQuery = (
   { __typename?: 'Query' }
-  & { getUser: Maybe<(
+  & { getUser?: Maybe<(
     { __typename?: 'User' }
     & Pick<User, 'id' | 'username' | 'password' | 'location'>
-    & { developer: Maybe<Array<Maybe<(
+    & { developer?: Maybe<Array<Maybe<(
       { __typename?: 'Developer' }
       & Pick<Developer, 'id' | 'name' | 'availability'>
       & { project: (
@@ -7483,135 +7483,135 @@ export type GetUserQuery = (
         & { hosts: Array<Maybe<(
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          & { developer: Maybe<Array<Maybe<(
+          & { developer?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, host: Maybe<Array<Maybe<(
+          )>>>, host?: Maybe<Array<Maybe<(
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          )>>>, stars: Maybe<Array<Maybe<(
+          )>>>, stars?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        )>>, tags: Maybe<Array<Maybe<(
+        )>>, tags?: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), developers: Maybe<Array<Maybe<(
+          ), developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
-        )>>>, tasks: Maybe<Array<Maybe<(
+        )>>>, tasks?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: Maybe<(
+          ), column?: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          )>, developers: Maybe<Array<Maybe<(
+          )>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, likes: Maybe<Array<Maybe<(
+          )>>>, likes?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, comments: Maybe<Array<Maybe<(
+          )>>>, comments?: Maybe<Array<Maybe<(
             { __typename?: 'Comment' }
             & Pick<Comment, 'id' | 'content'>
           )>>> }
-        )>>>, boards: Maybe<Array<Maybe<(
+        )>>>, boards?: Maybe<Array<Maybe<(
           { __typename?: 'Board' }
           & Pick<Board, 'id' | 'title' | 'order'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), columns: Maybe<Array<Maybe<(
+          ), columns?: Maybe<Array<Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
           )>>> }
-        )>>>, developers: Maybe<Array<Maybe<(
+        )>>>, developers?: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: Maybe<Array<Maybe<(
+          ), user?: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>>, tags: Maybe<Array<Maybe<(
+          )>>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, liked: Maybe<Array<Maybe<(
+          )>>>, liked?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
         )>>> }
-      ), user: Maybe<Array<Maybe<(
+      ), user?: Maybe<Array<Maybe<(
         { __typename?: 'User' }
         & Pick<User, 'id' | 'username' | 'password' | 'location'>
-        & { developer: Maybe<Array<Maybe<(
+        & { developer?: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
-          & { tags: Maybe<Array<Maybe<(
+          & { tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, liked: Maybe<Array<Maybe<(
+          )>>>, liked?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        )>>>, host: Maybe<Array<Maybe<(
+        )>>>, host?: Maybe<Array<Maybe<(
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
           & { hosts: Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>, tags: Maybe<Array<Maybe<(
+          )>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, boards: Maybe<Array<Maybe<(
+          )>>>, boards?: Maybe<Array<Maybe<(
             { __typename?: 'Board' }
             & Pick<Board, 'id' | 'title' | 'order'>
-          )>>>, developers: Maybe<Array<Maybe<(
+          )>>>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
-        )>>>, stars: Maybe<Array<Maybe<(
+        )>>>, stars?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: Maybe<(
+          ), column?: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          )>, developers: Maybe<Array<Maybe<(
+          )>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, likes: Maybe<Array<Maybe<(
+          )>>>, likes?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, comments: Maybe<Array<Maybe<(
+          )>>>, comments?: Maybe<Array<Maybe<(
             { __typename?: 'Comment' }
             & Pick<Comment, 'id' | 'content'>
           )>>> }
         )>>> }
       )>>> }
-    )>>>, host: Maybe<Array<Maybe<(
+    )>>>, host?: Maybe<Array<Maybe<(
       { __typename?: 'Project' }
       & Pick<Project, 'id' | 'title' | 'description'>
-    )>>>, stars: Maybe<Array<Maybe<(
+    )>>>, stars?: Maybe<Array<Maybe<(
       { __typename?: 'Task' }
       & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
     )>>> }
@@ -7748,7 +7748,7 @@ export type QueryBoardQueryVariables = {
 
 export type QueryBoardQuery = (
   { __typename?: 'Query' }
-  & { queryBoard: Maybe<Array<Maybe<(
+  & { queryBoard?: Maybe<Array<Maybe<(
     { __typename?: 'Board' }
     & Pick<Board, 'id' | 'title' | 'order'>
     & { project: (
@@ -7757,102 +7757,102 @@ export type QueryBoardQuery = (
       & { hosts: Array<Maybe<(
         { __typename?: 'User' }
         & Pick<User, 'id' | 'username' | 'password' | 'location'>
-        & { developer: Maybe<Array<Maybe<(
+        & { developer?: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: Maybe<Array<Maybe<(
+          ), user?: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>>, tags: Maybe<Array<Maybe<(
+          )>>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, liked: Maybe<Array<Maybe<(
+          )>>>, liked?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        )>>>, host: Maybe<Array<Maybe<(
+        )>>>, host?: Maybe<Array<Maybe<(
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
           & { hosts: Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>, tags: Maybe<Array<Maybe<(
+          )>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, boards: Maybe<Array<Maybe<(
+          )>>>, boards?: Maybe<Array<Maybe<(
             { __typename?: 'Board' }
             & Pick<Board, 'id' | 'title' | 'order'>
-          )>>>, developers: Maybe<Array<Maybe<(
+          )>>>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
-        )>>>, stars: Maybe<Array<Maybe<(
+        )>>>, stars?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: Maybe<(
+          ), column?: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          )>, developers: Maybe<Array<Maybe<(
+          )>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, likes: Maybe<Array<Maybe<(
+          )>>>, likes?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, comments: Maybe<Array<Maybe<(
+          )>>>, comments?: Maybe<Array<Maybe<(
             { __typename?: 'Comment' }
             & Pick<Comment, 'id' | 'content'>
           )>>> }
         )>>> }
-      )>>, tags: Maybe<Array<Maybe<(
+      )>>, tags?: Maybe<Array<Maybe<(
         { __typename?: 'Tag' }
         & Pick<Tag, 'id' | 'title'>
         & { project: (
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
-          & { tasks: Maybe<Array<Maybe<(
+          & { tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, boards: Maybe<Array<Maybe<(
+          )>>>, boards?: Maybe<Array<Maybe<(
             { __typename?: 'Board' }
             & Pick<Board, 'id' | 'title' | 'order'>
-          )>>>, developers: Maybe<Array<Maybe<(
+          )>>>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
-        ), developers: Maybe<Array<Maybe<(
+        ), developers?: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: Maybe<Array<Maybe<(
+          ), user?: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>>, tags: Maybe<Array<Maybe<(
+          )>>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, liked: Maybe<Array<Maybe<(
+          )>>>, liked?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
         )>>> }
       )>>> }
-    ), columns: Maybe<Array<Maybe<(
+    ), columns?: Maybe<Array<Maybe<(
       { __typename?: 'Column' }
       & Pick<Column, 'id' | 'title'>
       & { board: (
@@ -7861,10 +7861,10 @@ export type QueryBoardQuery = (
         & { project: (
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
-        ), columns: Maybe<Array<Maybe<(
+        ), columns?: Maybe<Array<Maybe<(
           { __typename?: 'Column' }
           & Pick<Column, 'id' | 'title'>
-          & { tasks: Maybe<Array<Maybe<(
+          & { tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
@@ -7972,7 +7972,7 @@ export type QueryColumnQueryVariables = {
 
 export type QueryColumnQuery = (
   { __typename?: 'Query' }
-  & { queryColumn: Maybe<Array<Maybe<(
+  & { queryColumn?: Maybe<Array<Maybe<(
     { __typename?: 'Column' }
     & Pick<Column, 'id' | 'title'>
     & { board: (
@@ -7984,87 +7984,87 @@ export type QueryColumnQuery = (
         & { hosts: Array<Maybe<(
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          & { developer: Maybe<Array<Maybe<(
+          & { developer?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, host: Maybe<Array<Maybe<(
+          )>>>, host?: Maybe<Array<Maybe<(
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          )>>>, stars: Maybe<Array<Maybe<(
+          )>>>, stars?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        )>>, tags: Maybe<Array<Maybe<(
+        )>>, tags?: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), developers: Maybe<Array<Maybe<(
+          ), developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
-        )>>>, tasks: Maybe<Array<Maybe<(
+        )>>>, tasks?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: Maybe<(
+          ), column?: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          )>, developers: Maybe<Array<Maybe<(
+          )>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, likes: Maybe<Array<Maybe<(
+          )>>>, likes?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, comments: Maybe<Array<Maybe<(
+          )>>>, comments?: Maybe<Array<Maybe<(
             { __typename?: 'Comment' }
             & Pick<Comment, 'id' | 'content'>
           )>>> }
-        )>>>, boards: Maybe<Array<Maybe<(
+        )>>>, boards?: Maybe<Array<Maybe<(
           { __typename?: 'Board' }
           & Pick<Board, 'id' | 'title' | 'order'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), columns: Maybe<Array<Maybe<(
+          ), columns?: Maybe<Array<Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
           )>>> }
-        )>>>, developers: Maybe<Array<Maybe<(
+        )>>>, developers?: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: Maybe<Array<Maybe<(
+          ), user?: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>>, tags: Maybe<Array<Maybe<(
+          )>>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, liked: Maybe<Array<Maybe<(
+          )>>>, liked?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
         )>>> }
-      ), columns: Maybe<Array<Maybe<(
+      ), columns?: Maybe<Array<Maybe<(
         { __typename?: 'Column' }
         & Pick<Column, 'id' | 'title'>
         & { board: (
           { __typename?: 'Board' }
           & Pick<Board, 'id' | 'title' | 'order'>
-        ), tasks: Maybe<Array<Maybe<(
+        ), tasks?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
         )>>> }
       )>>> }
-    ), tasks: Maybe<Array<Maybe<(
+    ), tasks?: Maybe<Array<Maybe<(
       { __typename?: 'Task' }
       & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
     )>>> }
@@ -8242,7 +8242,7 @@ export type QueryCommentQueryVariables = {
 
 export type QueryCommentQuery = (
   { __typename?: 'Query' }
-  & { queryComment: Maybe<Array<Maybe<(
+  & { queryComment?: Maybe<Array<Maybe<(
     { __typename?: 'Comment' }
     & Pick<Comment, 'id' | 'content'>
     & { task: (
@@ -8254,76 +8254,76 @@ export type QueryCommentQuery = (
         & { hosts: Array<Maybe<(
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          & { developer: Maybe<Array<Maybe<(
+          & { developer?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, host: Maybe<Array<Maybe<(
+          )>>>, host?: Maybe<Array<Maybe<(
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          )>>>, stars: Maybe<Array<Maybe<(
+          )>>>, stars?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        )>>, tags: Maybe<Array<Maybe<(
+        )>>, tags?: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), developers: Maybe<Array<Maybe<(
+          ), developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
-        )>>>, tasks: Maybe<Array<Maybe<(
+        )>>>, tasks?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: Maybe<(
+          ), column?: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          )>, developers: Maybe<Array<Maybe<(
+          )>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, likes: Maybe<Array<Maybe<(
+          )>>>, likes?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, comments: Maybe<Array<Maybe<(
+          )>>>, comments?: Maybe<Array<Maybe<(
             { __typename?: 'Comment' }
             & Pick<Comment, 'id' | 'content'>
           )>>> }
-        )>>>, boards: Maybe<Array<Maybe<(
+        )>>>, boards?: Maybe<Array<Maybe<(
           { __typename?: 'Board' }
           & Pick<Board, 'id' | 'title' | 'order'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), columns: Maybe<Array<Maybe<(
+          ), columns?: Maybe<Array<Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
           )>>> }
-        )>>>, developers: Maybe<Array<Maybe<(
+        )>>>, developers?: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: Maybe<Array<Maybe<(
+          ), user?: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>>, tags: Maybe<Array<Maybe<(
+          )>>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, liked: Maybe<Array<Maybe<(
+          )>>>, liked?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
         )>>> }
-      ), column: Maybe<(
+      ), column?: Maybe<(
         { __typename?: 'Column' }
         & Pick<Column, 'id' | 'title'>
         & { board: (
@@ -8332,63 +8332,63 @@ export type QueryCommentQuery = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), columns: Maybe<Array<Maybe<(
+          ), columns?: Maybe<Array<Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
           )>>> }
-        ), tasks: Maybe<Array<Maybe<(
+        ), tasks?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
         )>>> }
-      )>, developers: Maybe<Array<Maybe<(
+      )>, developers?: Maybe<Array<Maybe<(
         { __typename?: 'Developer' }
         & Pick<Developer, 'id' | 'name' | 'availability'>
-      )>>>, likes: Maybe<Array<Maybe<(
+      )>>>, likes?: Maybe<Array<Maybe<(
         { __typename?: 'Developer' }
         & Pick<Developer, 'id' | 'name' | 'availability'>
         & { project: (
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
-        ), user: Maybe<Array<Maybe<(
+        ), user?: Maybe<Array<Maybe<(
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          & { developer: Maybe<Array<Maybe<(
+          & { developer?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, host: Maybe<Array<Maybe<(
+          )>>>, host?: Maybe<Array<Maybe<(
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          )>>>, stars: Maybe<Array<Maybe<(
+          )>>>, stars?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        )>>>, tags: Maybe<Array<Maybe<(
+        )>>>, tags?: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
-        )>>>, tasks: Maybe<Array<Maybe<(
+        )>>>, tasks?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-        )>>>, liked: Maybe<Array<Maybe<(
+        )>>>, liked?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: Maybe<(
+          ), column?: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          )>, developers: Maybe<Array<Maybe<(
+          )>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, likes: Maybe<Array<Maybe<(
+          )>>>, likes?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, comments: Maybe<Array<Maybe<(
+          )>>>, comments?: Maybe<Array<Maybe<(
             { __typename?: 'Comment' }
             & Pick<Comment, 'id' | 'content'>
           )>>> }
         )>>> }
-      )>>>, comments: Maybe<Array<Maybe<(
+      )>>>, comments?: Maybe<Array<Maybe<(
         { __typename?: 'Comment' }
         & Pick<Comment, 'id' | 'content'>
         & { task: (
@@ -8400,16 +8400,16 @@ export type QueryCommentQuery = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: Maybe<Array<Maybe<(
+          ), user?: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>>, tags: Maybe<Array<Maybe<(
+          )>>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, liked: Maybe<Array<Maybe<(
+          )>>>, liked?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
@@ -8621,7 +8621,7 @@ export type QueryDeveloperQueryVariables = {
 
 export type QueryDeveloperQuery = (
   { __typename?: 'Query' }
-  & { queryDeveloper: Maybe<Array<Maybe<(
+  & { queryDeveloper?: Maybe<Array<Maybe<(
     { __typename?: 'Developer' }
     & Pick<Developer, 'id' | 'name' | 'availability'>
     & { project: (
@@ -8630,124 +8630,124 @@ export type QueryDeveloperQuery = (
       & { hosts: Array<Maybe<(
         { __typename?: 'User' }
         & Pick<User, 'id' | 'username' | 'password' | 'location'>
-        & { developer: Maybe<Array<Maybe<(
+        & { developer?: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: Maybe<Array<Maybe<(
+          ), user?: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>>, tags: Maybe<Array<Maybe<(
+          )>>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, liked: Maybe<Array<Maybe<(
+          )>>>, liked?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        )>>>, host: Maybe<Array<Maybe<(
+        )>>>, host?: Maybe<Array<Maybe<(
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
           & { hosts: Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>, tags: Maybe<Array<Maybe<(
+          )>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, boards: Maybe<Array<Maybe<(
+          )>>>, boards?: Maybe<Array<Maybe<(
             { __typename?: 'Board' }
             & Pick<Board, 'id' | 'title' | 'order'>
-          )>>>, developers: Maybe<Array<Maybe<(
+          )>>>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
-        )>>>, stars: Maybe<Array<Maybe<(
+        )>>>, stars?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: Maybe<(
+          ), column?: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          )>, developers: Maybe<Array<Maybe<(
+          )>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, likes: Maybe<Array<Maybe<(
+          )>>>, likes?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, comments: Maybe<Array<Maybe<(
+          )>>>, comments?: Maybe<Array<Maybe<(
             { __typename?: 'Comment' }
             & Pick<Comment, 'id' | 'content'>
           )>>> }
         )>>> }
-      )>>, tags: Maybe<Array<Maybe<(
+      )>>, tags?: Maybe<Array<Maybe<(
         { __typename?: 'Tag' }
         & Pick<Tag, 'id' | 'title'>
         & { project: (
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
-          & { tasks: Maybe<Array<Maybe<(
+          & { tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, boards: Maybe<Array<Maybe<(
+          )>>>, boards?: Maybe<Array<Maybe<(
             { __typename?: 'Board' }
             & Pick<Board, 'id' | 'title' | 'order'>
-          )>>>, developers: Maybe<Array<Maybe<(
+          )>>>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
-        ), developers: Maybe<Array<Maybe<(
+        ), developers?: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: Maybe<Array<Maybe<(
+          ), user?: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>>, tags: Maybe<Array<Maybe<(
+          )>>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, liked: Maybe<Array<Maybe<(
+          )>>>, liked?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
         )>>> }
       )>>> }
-    ), user: Maybe<Array<Maybe<(
+    ), user?: Maybe<Array<Maybe<(
       { __typename?: 'User' }
       & Pick<User, 'id' | 'username' | 'password' | 'location'>
-      & { developer: Maybe<Array<Maybe<(
+      & { developer?: Maybe<Array<Maybe<(
         { __typename?: 'Developer' }
         & Pick<Developer, 'id' | 'name' | 'availability'>
-      )>>>, host: Maybe<Array<Maybe<(
+      )>>>, host?: Maybe<Array<Maybe<(
         { __typename?: 'Project' }
         & Pick<Project, 'id' | 'title' | 'description'>
-      )>>>, stars: Maybe<Array<Maybe<(
+      )>>>, stars?: Maybe<Array<Maybe<(
         { __typename?: 'Task' }
         & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
       )>>> }
-    )>>>, tags: Maybe<Array<Maybe<(
+    )>>>, tags?: Maybe<Array<Maybe<(
       { __typename?: 'Tag' }
       & Pick<Tag, 'id' | 'title'>
-    )>>>, tasks: Maybe<Array<Maybe<(
+    )>>>, tasks?: Maybe<Array<Maybe<(
       { __typename?: 'Task' }
       & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
       & { project: (
         { __typename?: 'Project' }
         & Pick<Project, 'id' | 'title' | 'description'>
-      ), column: Maybe<(
+      ), column?: Maybe<(
         { __typename?: 'Column' }
         & Pick<Column, 'id' | 'title'>
         & { board: (
@@ -8756,56 +8756,56 @@ export type QueryDeveloperQuery = (
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), columns: Maybe<Array<Maybe<(
+          ), columns?: Maybe<Array<Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
           )>>> }
-        ), tasks: Maybe<Array<Maybe<(
+        ), tasks?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          & { developers: Maybe<Array<Maybe<(
+          & { developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, likes: Maybe<Array<Maybe<(
+          )>>>, likes?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, comments: Maybe<Array<Maybe<(
+          )>>>, comments?: Maybe<Array<Maybe<(
             { __typename?: 'Comment' }
             & Pick<Comment, 'id' | 'content'>
           )>>> }
         )>>> }
       )> }
-    )>>>, liked: Maybe<Array<Maybe<(
+    )>>>, liked?: Maybe<Array<Maybe<(
       { __typename?: 'Task' }
       & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
       & { project: (
         { __typename?: 'Project' }
         & Pick<Project, 'id' | 'title' | 'description'>
-      ), column: Maybe<(
+      ), column?: Maybe<(
         { __typename?: 'Column' }
         & Pick<Column, 'id' | 'title'>
-      )>, developers: Maybe<Array<Maybe<(
+      )>, developers?: Maybe<Array<Maybe<(
         { __typename?: 'Developer' }
         & Pick<Developer, 'id' | 'name' | 'availability'>
-      )>>>, likes: Maybe<Array<Maybe<(
+      )>>>, likes?: Maybe<Array<Maybe<(
         { __typename?: 'Developer' }
         & Pick<Developer, 'id' | 'name' | 'availability'>
         & { project: (
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
-        ), user: Maybe<Array<Maybe<(
+        ), user?: Maybe<Array<Maybe<(
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
-        )>>>, tags: Maybe<Array<Maybe<(
+        )>>>, tags?: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
-        )>>>, tasks: Maybe<Array<Maybe<(
+        )>>>, tasks?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-        )>>>, liked: Maybe<Array<Maybe<(
+        )>>>, liked?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          & { comments: Maybe<Array<Maybe<(
+          & { comments?: Maybe<Array<Maybe<(
             { __typename?: 'Comment' }
             & Pick<Comment, 'id' | 'content'>
           )>>> }
@@ -8981,13 +8981,13 @@ export type QueryProjectQueryVariables = {
 
 export type QueryProjectQuery = (
   { __typename?: 'Query' }
-  & { queryProject: Maybe<Array<Maybe<(
+  & { queryProject?: Maybe<Array<Maybe<(
     { __typename?: 'Project' }
     & Pick<Project, 'id' | 'title' | 'description'>
     & { hosts: Array<Maybe<(
       { __typename?: 'User' }
       & Pick<User, 'id' | 'username' | 'password' | 'location'>
-      & { developer: Maybe<Array<Maybe<(
+      & { developer?: Maybe<Array<Maybe<(
         { __typename?: 'Developer' }
         & Pick<Developer, 'id' | 'name' | 'availability'>
         & { project: (
@@ -8996,138 +8996,138 @@ export type QueryProjectQuery = (
           & { hosts: Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>, tags: Maybe<Array<Maybe<(
+          )>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, boards: Maybe<Array<Maybe<(
+          )>>>, boards?: Maybe<Array<Maybe<(
             { __typename?: 'Board' }
             & Pick<Board, 'id' | 'title' | 'order'>
-          )>>>, developers: Maybe<Array<Maybe<(
+          )>>>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
-        ), user: Maybe<Array<Maybe<(
+        ), user?: Maybe<Array<Maybe<(
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          & { developer: Maybe<Array<Maybe<(
+          & { developer?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, host: Maybe<Array<Maybe<(
+          )>>>, host?: Maybe<Array<Maybe<(
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          )>>>, stars: Maybe<Array<Maybe<(
+          )>>>, stars?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        )>>>, tags: Maybe<Array<Maybe<(
+        )>>>, tags?: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), developers: Maybe<Array<Maybe<(
+          ), developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
-        )>>>, tasks: Maybe<Array<Maybe<(
+        )>>>, tasks?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: Maybe<(
+          ), column?: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          )>, developers: Maybe<Array<Maybe<(
+          )>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, likes: Maybe<Array<Maybe<(
+          )>>>, likes?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, comments: Maybe<Array<Maybe<(
+          )>>>, comments?: Maybe<Array<Maybe<(
             { __typename?: 'Comment' }
             & Pick<Comment, 'id' | 'content'>
           )>>> }
-        )>>>, liked: Maybe<Array<Maybe<(
+        )>>>, liked?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: Maybe<(
+          ), column?: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          )>, developers: Maybe<Array<Maybe<(
+          )>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, likes: Maybe<Array<Maybe<(
+          )>>>, likes?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, comments: Maybe<Array<Maybe<(
+          )>>>, comments?: Maybe<Array<Maybe<(
             { __typename?: 'Comment' }
             & Pick<Comment, 'id' | 'content'>
           )>>> }
         )>>> }
-      )>>>, host: Maybe<Array<Maybe<(
+      )>>>, host?: Maybe<Array<Maybe<(
         { __typename?: 'Project' }
         & Pick<Project, 'id' | 'title' | 'description'>
         & { hosts: Array<Maybe<(
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          & { stars: Maybe<Array<Maybe<(
+          & { stars?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        )>>, tags: Maybe<Array<Maybe<(
+        )>>, tags?: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
-        )>>>, tasks: Maybe<Array<Maybe<(
+        )>>>, tasks?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-        )>>>, boards: Maybe<Array<Maybe<(
+        )>>>, boards?: Maybe<Array<Maybe<(
           { __typename?: 'Board' }
           & Pick<Board, 'id' | 'title' | 'order'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), columns: Maybe<Array<Maybe<(
+          ), columns?: Maybe<Array<Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
           )>>> }
-        )>>>, developers: Maybe<Array<Maybe<(
+        )>>>, developers?: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: Maybe<Array<Maybe<(
+          ), user?: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>>, tags: Maybe<Array<Maybe<(
+          )>>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, liked: Maybe<Array<Maybe<(
+          )>>>, liked?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
         )>>> }
       )>>> }
-    )>>, tags: Maybe<Array<Maybe<(
+    )>>, tags?: Maybe<Array<Maybe<(
       { __typename?: 'Tag' }
       & Pick<Tag, 'id' | 'title'>
-    )>>>, tasks: Maybe<Array<Maybe<(
+    )>>>, tasks?: Maybe<Array<Maybe<(
       { __typename?: 'Task' }
       & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-    )>>>, boards: Maybe<Array<Maybe<(
+    )>>>, boards?: Maybe<Array<Maybe<(
       { __typename?: 'Board' }
       & Pick<Board, 'id' | 'title' | 'order'>
-    )>>>, developers: Maybe<Array<Maybe<(
+    )>>>, developers?: Maybe<Array<Maybe<(
       { __typename?: 'Developer' }
       & Pick<Developer, 'id' | 'name' | 'availability'>
     )>>> }
@@ -9254,7 +9254,7 @@ export type QueryTagQueryVariables = {
 
 export type QueryTagQuery = (
   { __typename?: 'Query' }
-  & { queryTag: Maybe<Array<Maybe<(
+  & { queryTag?: Maybe<Array<Maybe<(
     { __typename?: 'Tag' }
     & Pick<Tag, 'id' | 'title'>
     & { project: (
@@ -9263,102 +9263,102 @@ export type QueryTagQuery = (
       & { hosts: Array<Maybe<(
         { __typename?: 'User' }
         & Pick<User, 'id' | 'username' | 'password' | 'location'>
-        & { developer: Maybe<Array<Maybe<(
+        & { developer?: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: Maybe<Array<Maybe<(
+          ), user?: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>>, tags: Maybe<Array<Maybe<(
+          )>>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, liked: Maybe<Array<Maybe<(
+          )>>>, liked?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        )>>>, host: Maybe<Array<Maybe<(
+        )>>>, host?: Maybe<Array<Maybe<(
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
           & { hosts: Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>, tags: Maybe<Array<Maybe<(
+          )>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, boards: Maybe<Array<Maybe<(
+          )>>>, boards?: Maybe<Array<Maybe<(
             { __typename?: 'Board' }
             & Pick<Board, 'id' | 'title' | 'order'>
-          )>>>, developers: Maybe<Array<Maybe<(
+          )>>>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
-        )>>>, stars: Maybe<Array<Maybe<(
+        )>>>, stars?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: Maybe<(
+          ), column?: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          )>, developers: Maybe<Array<Maybe<(
+          )>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, likes: Maybe<Array<Maybe<(
+          )>>>, likes?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, comments: Maybe<Array<Maybe<(
+          )>>>, comments?: Maybe<Array<Maybe<(
             { __typename?: 'Comment' }
             & Pick<Comment, 'id' | 'content'>
           )>>> }
         )>>> }
-      )>>, tags: Maybe<Array<Maybe<(
+      )>>, tags?: Maybe<Array<Maybe<(
         { __typename?: 'Tag' }
         & Pick<Tag, 'id' | 'title'>
         & { project: (
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
-          & { tasks: Maybe<Array<Maybe<(
+          & { tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, boards: Maybe<Array<Maybe<(
+          )>>>, boards?: Maybe<Array<Maybe<(
             { __typename?: 'Board' }
             & Pick<Board, 'id' | 'title' | 'order'>
-          )>>>, developers: Maybe<Array<Maybe<(
+          )>>>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
-        ), developers: Maybe<Array<Maybe<(
+        ), developers?: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: Maybe<Array<Maybe<(
+          ), user?: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>>, tags: Maybe<Array<Maybe<(
+          )>>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, liked: Maybe<Array<Maybe<(
+          )>>>, liked?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
         )>>> }
       )>>> }
-    ), developers: Maybe<Array<Maybe<(
+    ), developers?: Maybe<Array<Maybe<(
       { __typename?: 'Developer' }
       & Pick<Developer, 'id' | 'name' | 'availability'>
     )>>> }
@@ -9542,7 +9542,7 @@ export type QueryTaskQueryVariables = {
 
 export type QueryTaskQuery = (
   { __typename?: 'Query' }
-  & { queryTask: Maybe<Array<Maybe<(
+  & { queryTask?: Maybe<Array<Maybe<(
     { __typename?: 'Task' }
     & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
     & { project: (
@@ -9551,102 +9551,102 @@ export type QueryTaskQuery = (
       & { hosts: Array<Maybe<(
         { __typename?: 'User' }
         & Pick<User, 'id' | 'username' | 'password' | 'location'>
-        & { developer: Maybe<Array<Maybe<(
+        & { developer?: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: Maybe<Array<Maybe<(
+          ), user?: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>>, tags: Maybe<Array<Maybe<(
+          )>>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, liked: Maybe<Array<Maybe<(
+          )>>>, liked?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        )>>>, host: Maybe<Array<Maybe<(
+        )>>>, host?: Maybe<Array<Maybe<(
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
           & { hosts: Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>, tags: Maybe<Array<Maybe<(
+          )>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, boards: Maybe<Array<Maybe<(
+          )>>>, boards?: Maybe<Array<Maybe<(
             { __typename?: 'Board' }
             & Pick<Board, 'id' | 'title' | 'order'>
-          )>>>, developers: Maybe<Array<Maybe<(
+          )>>>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
-        )>>>, stars: Maybe<Array<Maybe<(
+        )>>>, stars?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: Maybe<(
+          ), column?: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          )>, developers: Maybe<Array<Maybe<(
+          )>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, likes: Maybe<Array<Maybe<(
+          )>>>, likes?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, comments: Maybe<Array<Maybe<(
+          )>>>, comments?: Maybe<Array<Maybe<(
             { __typename?: 'Comment' }
             & Pick<Comment, 'id' | 'content'>
           )>>> }
         )>>> }
-      )>>, tags: Maybe<Array<Maybe<(
+      )>>, tags?: Maybe<Array<Maybe<(
         { __typename?: 'Tag' }
         & Pick<Tag, 'id' | 'title'>
         & { project: (
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
-          & { tasks: Maybe<Array<Maybe<(
+          & { tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, boards: Maybe<Array<Maybe<(
+          )>>>, boards?: Maybe<Array<Maybe<(
             { __typename?: 'Board' }
             & Pick<Board, 'id' | 'title' | 'order'>
-          )>>>, developers: Maybe<Array<Maybe<(
+          )>>>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
-        ), developers: Maybe<Array<Maybe<(
+        ), developers?: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: Maybe<Array<Maybe<(
+          ), user?: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>>, tags: Maybe<Array<Maybe<(
+          )>>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, liked: Maybe<Array<Maybe<(
+          )>>>, liked?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
         )>>> }
       )>>> }
-    ), column: Maybe<(
+    ), column?: Maybe<(
       { __typename?: 'Column' }
       & Pick<Column, 'id' | 'title'>
       & { board: (
@@ -9655,49 +9655,49 @@ export type QueryTaskQuery = (
         & { project: (
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
-        ), columns: Maybe<Array<Maybe<(
+        ), columns?: Maybe<Array<Maybe<(
           { __typename?: 'Column' }
           & Pick<Column, 'id' | 'title'>
           & { board: (
             { __typename?: 'Board' }
             & Pick<Board, 'id' | 'title' | 'order'>
-          ), tasks: Maybe<Array<Maybe<(
+          ), tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
         )>>> }
-      ), tasks: Maybe<Array<Maybe<(
+      ), tasks?: Maybe<Array<Maybe<(
         { __typename?: 'Task' }
         & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
         & { project: (
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
-        ), column: Maybe<(
+        ), column?: Maybe<(
           { __typename?: 'Column' }
           & Pick<Column, 'id' | 'title'>
-        )>, developers: Maybe<Array<Maybe<(
+        )>, developers?: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
-        )>>>, likes: Maybe<Array<Maybe<(
+        )>>>, likes?: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: Maybe<Array<Maybe<(
+          ), user?: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>>, tags: Maybe<Array<Maybe<(
+          )>>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, liked: Maybe<Array<Maybe<(
+          )>>>, liked?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        )>>>, comments: Maybe<Array<Maybe<(
+        )>>>, comments?: Maybe<Array<Maybe<(
           { __typename?: 'Comment' }
           & Pick<Comment, 'id' | 'content'>
           & { task: (
@@ -9709,13 +9709,13 @@ export type QueryTaskQuery = (
           ) }
         )>>> }
       )>>> }
-    )>, developers: Maybe<Array<Maybe<(
+    )>, developers?: Maybe<Array<Maybe<(
       { __typename?: 'Developer' }
       & Pick<Developer, 'id' | 'name' | 'availability'>
-    )>>>, likes: Maybe<Array<Maybe<(
+    )>>>, likes?: Maybe<Array<Maybe<(
       { __typename?: 'Developer' }
       & Pick<Developer, 'id' | 'name' | 'availability'>
-    )>>>, comments: Maybe<Array<Maybe<(
+    )>>>, comments?: Maybe<Array<Maybe<(
       { __typename?: 'Comment' }
       & Pick<Comment, 'id' | 'content'>
     )>>> }
@@ -9880,10 +9880,10 @@ export type QueryUserQueryVariables = {
 
 export type QueryUserQuery = (
   { __typename?: 'Query' }
-  & { queryUser: Maybe<Array<Maybe<(
+  & { queryUser?: Maybe<Array<Maybe<(
     { __typename?: 'User' }
     & Pick<User, 'id' | 'username' | 'password' | 'location'>
-    & { developer: Maybe<Array<Maybe<(
+    & { developer?: Maybe<Array<Maybe<(
       { __typename?: 'Developer' }
       & Pick<Developer, 'id' | 'name' | 'availability'>
       & { project: (
@@ -9892,135 +9892,135 @@ export type QueryUserQuery = (
         & { hosts: Array<Maybe<(
           { __typename?: 'User' }
           & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          & { developer: Maybe<Array<Maybe<(
+          & { developer?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, host: Maybe<Array<Maybe<(
+          )>>>, host?: Maybe<Array<Maybe<(
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          )>>>, stars: Maybe<Array<Maybe<(
+          )>>>, stars?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        )>>, tags: Maybe<Array<Maybe<(
+        )>>, tags?: Maybe<Array<Maybe<(
           { __typename?: 'Tag' }
           & Pick<Tag, 'id' | 'title'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), developers: Maybe<Array<Maybe<(
+          ), developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
-        )>>>, tasks: Maybe<Array<Maybe<(
+        )>>>, tasks?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: Maybe<(
+          ), column?: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          )>, developers: Maybe<Array<Maybe<(
+          )>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, likes: Maybe<Array<Maybe<(
+          )>>>, likes?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, comments: Maybe<Array<Maybe<(
+          )>>>, comments?: Maybe<Array<Maybe<(
             { __typename?: 'Comment' }
             & Pick<Comment, 'id' | 'content'>
           )>>> }
-        )>>>, boards: Maybe<Array<Maybe<(
+        )>>>, boards?: Maybe<Array<Maybe<(
           { __typename?: 'Board' }
           & Pick<Board, 'id' | 'title' | 'order'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), columns: Maybe<Array<Maybe<(
+          ), columns?: Maybe<Array<Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
           )>>> }
-        )>>>, developers: Maybe<Array<Maybe<(
+        )>>>, developers?: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), user: Maybe<Array<Maybe<(
+          ), user?: Maybe<Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>>, tags: Maybe<Array<Maybe<(
+          )>>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, liked: Maybe<Array<Maybe<(
+          )>>>, liked?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
         )>>> }
-      ), user: Maybe<Array<Maybe<(
+      ), user?: Maybe<Array<Maybe<(
         { __typename?: 'User' }
         & Pick<User, 'id' | 'username' | 'password' | 'location'>
-        & { developer: Maybe<Array<Maybe<(
+        & { developer?: Maybe<Array<Maybe<(
           { __typename?: 'Developer' }
           & Pick<Developer, 'id' | 'name' | 'availability'>
-          & { tags: Maybe<Array<Maybe<(
+          & { tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, liked: Maybe<Array<Maybe<(
+          )>>>, liked?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           )>>> }
-        )>>>, host: Maybe<Array<Maybe<(
+        )>>>, host?: Maybe<Array<Maybe<(
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'title' | 'description'>
           & { hosts: Array<Maybe<(
             { __typename?: 'User' }
             & Pick<User, 'id' | 'username' | 'password' | 'location'>
-          )>>, tags: Maybe<Array<Maybe<(
+          )>>, tags?: Maybe<Array<Maybe<(
             { __typename?: 'Tag' }
             & Pick<Tag, 'id' | 'title'>
-          )>>>, tasks: Maybe<Array<Maybe<(
+          )>>>, tasks?: Maybe<Array<Maybe<(
             { __typename?: 'Task' }
             & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
-          )>>>, boards: Maybe<Array<Maybe<(
+          )>>>, boards?: Maybe<Array<Maybe<(
             { __typename?: 'Board' }
             & Pick<Board, 'id' | 'title' | 'order'>
-          )>>>, developers: Maybe<Array<Maybe<(
+          )>>>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
           )>>> }
-        )>>>, stars: Maybe<Array<Maybe<(
+        )>>>, stars?: Maybe<Array<Maybe<(
           { __typename?: 'Task' }
           & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
           & { project: (
             { __typename?: 'Project' }
             & Pick<Project, 'id' | 'title' | 'description'>
-          ), column: Maybe<(
+          ), column?: Maybe<(
             { __typename?: 'Column' }
             & Pick<Column, 'id' | 'title'>
-          )>, developers: Maybe<Array<Maybe<(
+          )>, developers?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, likes: Maybe<Array<Maybe<(
+          )>>>, likes?: Maybe<Array<Maybe<(
             { __typename?: 'Developer' }
             & Pick<Developer, 'id' | 'name' | 'availability'>
-          )>>>, comments: Maybe<Array<Maybe<(
+          )>>>, comments?: Maybe<Array<Maybe<(
             { __typename?: 'Comment' }
             & Pick<Comment, 'id' | 'content'>
           )>>> }
         )>>> }
       )>>> }
-    )>>>, host: Maybe<Array<Maybe<(
+    )>>>, host?: Maybe<Array<Maybe<(
       { __typename?: 'Project' }
       & Pick<Project, 'id' | 'title' | 'description'>
-    )>>>, stars: Maybe<Array<Maybe<(
+    )>>>, stars?: Maybe<Array<Maybe<(
       { __typename?: 'Task' }
       & Pick<Task, 'id' | 'title' | 'hours' | 'deadline' | 'content' | 'priority' | 'complete'>
     )>>> }

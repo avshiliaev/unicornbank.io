@@ -1,0 +1,25 @@
+{
+  "name": "monorepo",
+  "version": "1.0.0",
+  "description": "### 1. Download schema from endpoint Graphql CLI",
+  "main": "index.js",
+  "scripts": {
+    "generate": "graphql get-schema && gqlg --schemaFilePath ./api/schema/schema.graphql --destDirPath ./api/schema/documents --depthLimit 5 && graphql-codegen --overwrite"
+  },
+  "dependencies": {
+    "@graphql-codegen/cli": "^1.11.2",
+    "@graphql-codegen/typescript": "^1.11.2",
+    "@graphql-codegen/typescript-operations": "^1.11.2",
+    "gql-generator": "^1.0.12"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/lagerist_app/monorepo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/lagerist_app/monorepo/issues"
+  },
+  "homepage": "https://gitlab.com/lagerist_app/monorepo#readme"
+}

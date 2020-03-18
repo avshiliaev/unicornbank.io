@@ -1,37 +1,48 @@
-import {AddProjectInput} from '../api/interfaces/types.d';
+import {AddProjectInput} from '../../../server_/api/interfaces/types.d';
 import {queryProjects} from './actions/queries';
 import {addProject, addUser, deleteProject} from './actions/mutations';
 import {v4 as uuidv4} from 'uuid';
+
+const random = require('random');
+const poisson = random.poisson();
 
 export class Developer {
 
     url: string;
     devIds: string[] = [];
-    maxDevsToCome = 10;
+    maxDevsToCome = 100;
 
     constructor(url: string) {
         this.url = url;
     }
 
+    // From 0 to N
+    simulateGrowth(value: number) {
+        const rand = poisson();
+        const result = Math.floor(rand * value);
+        return result > 0 ? result : 1
+    }
+
+    simulateChurn(value: number) {
+        return Math.floor(value * random.uniform(0, 0.3))
+    }
+
     speedUpLeadsGenereation() {
-        const speedUp = this.getRandomInt(5);
+        const speedUp = this.simulateGrowth(this.maxDevsToCome);
         this.maxDevsToCome += speedUp;
     }
 
-    getRandomInt(max: number) {
-        return Math.floor(Math.random() * Math.floor(max)) + 1;
-    }
 
     async addNewDev() {
-        const numberDev = this.getRandomInt(this.maxDevsToCome);
+        const numberDev = this.simulateGrowth(this.maxDevsToCome);
         const newDevs = [...Array(numberDev)].map(() => ({username: uuidv4(), password: 'pass', location: 'loc'}));
         const newDevsIds = await addUser(newDevs, this.url);
         this.devIds = this.devIds.concat(newDevsIds.map(user => user.id))
     }
 
     removeDev() {
-        if (this.devIds.length > 3) {
-            const toDelete = this.devIds.slice(0, this.getRandomInt(this.devIds.length));
+        if (this.devIds.length > 10) {
+            const toDelete = this.devIds.slice(0, this.simulateChurn(this.devIds.length));
             this.devIds = this.devIds.filter(dev => !toDelete.includes(dev))
         }
     }
@@ -43,23 +54,30 @@ export class Host {
     url: string;
     allProjects: string[] = [];
     hostsIds: string[] = [];
-    maxHostsToCome = 5;
+    maxHostsToCome = 10;
 
     constructor(url: string) {
         this.url = url;
     }
 
-    getRandomInt(max: number) {
-        return Math.floor(Math.random() * Math.floor(max)) + 1;
+    // From 0 to N
+    simulateGrowth(value: number) {
+        const rand = poisson();
+        const result = Math.floor(rand * value);
+        return result > 0 ? result : 1
+    }
+
+    simulateChurn(value: number) {
+        return Math.floor(value * random.uniform(0, 0.3))
     }
 
     speedUpLeadsGenereation() {
-        const speedUp = this.getRandomInt(3);
+        const speedUp = this.simulateGrowth(this.maxHostsToCome);
         this.maxHostsToCome += speedUp;
     }
 
     async addNewHost() {
-        const numberHosts = this.getRandomInt(this.maxHostsToCome);
+        const numberHosts = this.simulateGrowth(this.maxHostsToCome);
         const newHosts = [...Array(numberHosts)].map(() => ({username: uuidv4(), password: 'pass', location: 'loc'}));
         const newHostsIds = await addUser(newHosts, this.url);
         this.hostsIds = this.hostsIds.concat(newHostsIds.map(user => user.id))
@@ -67,8 +85,8 @@ export class Host {
 
     // Keep always min one host
     removeHost() {
-        if (this.hostsIds.length > 3) {
-            const toDelete = this.hostsIds.slice(0, this.getRandomInt(this.hostsIds.length));
+        if (this.hostsIds.length > 10) {
+            const toDelete = this.hostsIds.slice(0, this.simulateChurn(this.hostsIds.length));
             this.hostsIds = this.hostsIds.filter(host => !toDelete.includes(host))
         }
     }
@@ -80,7 +98,7 @@ export class Host {
 
     async createProject() {
         if (this.hostsIds.length > 1) {
-            const activeHosts = this.hostsIds.slice(0, this.getRandomInt(this.hostsIds.length));
+            const activeHosts = this.hostsIds.slice(0, this.simulateGrowth(this.hostsIds.length));
             const generateProject = (hostId: string): AddProjectInput => {
                 return {title: 'title', description: 'descr', hosts: [{id: hostId}]}
             };
@@ -92,8 +110,8 @@ export class Host {
     async deleteRandom() {
         // Delete random number of all projects
         if (this.allProjects.length < 0) {
-            const toDelete = this.allProjects.slice(0, this.getRandomInt(this.allProjects.length));
-            await deleteProject(toDelete, this.url)
+            const toDelete = this.allProjects.slice(0, this.simulateGrowth(this.allProjects.length));
+            await deleteProject(toDelete, this.url);
             this.allProjects = this.allProjects.filter((proj) => !toDelete.indexOf(proj))
         }
     }
