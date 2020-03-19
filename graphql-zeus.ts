@@ -5590,11 +5590,20 @@ const handleFetchResponse = (
 };
 
 const apiFetch = (options: fetchOptions) => (query: string, variables: Record<string, any> = {}) => {
-    let fetchFunction = fetch;
+    let fetchFunction;
     let queryString = query;
     let fetchOptions = options[1] || {};
+    try {
+        fetchFunction = require('node-fetch');
+    } catch (error) {
+        throw new Error("Please install 'node-fetch' to use zeus in nodejs environment");
+    }
     if (fetchOptions.method && fetchOptions.method === 'GET') {
-      queryString = encodeURIComponent(query);
+      try {
+          queryString = require('querystring').stringify(query);
+      } catch (error) {
+          throw new Error("Something gone wrong 'querystring' is a part of nodejs environment");
+      }
       return fetchFunction(`${options[0]}?query=${queryString}`, fetchOptions)
         .then(handleFetchResponse)
         .then((response: GraphQLResponse) => {

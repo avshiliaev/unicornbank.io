@@ -22,6 +22,7 @@
     "@nestjs/common": "^6.0.0",
     "@nestjs/core": "^6.0.0",
     "@nestjs/platform-express": "^6.0.0",
+    "fetch": "^1.1.0",
     "graphql-request": "^1.8.2",
     "reflect-metadata": "^0.1.12",
     "rimraf": "^2.6.2",

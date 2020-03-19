@@ -7,7 +7,6 @@ export class AppController {
 
   @Get()
   async getHello() {
-    const payload = await this.appService.getHello();
-    return payload;
+    return await this.appService.getProjects();
   }
 }
