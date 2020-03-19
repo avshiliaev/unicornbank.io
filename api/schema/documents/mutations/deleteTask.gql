@@ -1,6 +1,0 @@
-mutation deleteTask($filter: TaskFilter!){
-    deleteTask(filter: $filter){
-        msg
-        numUids
-    }
-}

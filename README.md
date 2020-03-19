@@ -1,5 +1,7 @@
 # Generate
 
+`graphql get-schema && gqlg --schemaFilePath api/schema/schema.graphql --destDirPath ./api/schema/documents --depthLimit 5 && graphql-codegen --overwrite`
+
 ### 1. Download schema from endpoint
 Graphql CLI
 

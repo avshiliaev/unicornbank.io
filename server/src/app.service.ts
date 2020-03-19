@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Chain } from '../../graphql-zeus';
+import { Chain } from '../../sdk/graphql-zeus';
 
 @Injectable()
 export class AppService {

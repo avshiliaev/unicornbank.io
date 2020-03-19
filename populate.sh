@@ -7,6 +7,7 @@ USERS=$(curl 'localhost:8080/graphql' -H 'Content-Type: application/json' \
     "query": "mutation addUser($input: [AddUserInput!]!){addUser(input: $input){user{id, username}}}",
     "variables": {
       "input": [
+        {"username": "thehost", "password":"thehost", "location":"Berlin"},
         {"username": "superrust", "password":"superrust", "location":"Frankfurt"},
         {"username": "rusty", "password":"rusty", "location":"Munich"},
         {"username": "cargo", "password":"cargo", "location":"Hamburg"},
@@ -19,6 +20,7 @@ USER0=$(echo "$USERS" | jq '.data.addUser.user[] | select(.username == "superrus
 USER1=$(echo "$USERS" | jq '.data.addUser.user[] | select(.username == "rusty")' )
 USER2=$(echo "$USERS" | jq '.data.addUser.user[] | select(.username == "cargo")' )
 HEREIAM=$(echo "$USERS" | jq '.data.addUser.user[] | select(.username == "hisuperhi")' )
+THEHOST=$(echo "$USERS" | jq '.data.addUser.user[] | select(.username == "thehost")' )
 
 # shellcheck disable=SC2016
 curl 'localhost:8080/graphql' -H 'Content-Type: application/json' \
@@ -36,6 +38,7 @@ curl 'localhost:8080/graphql' -H 'Content-Type: application/json' \
             {"name":"rusty_crusty", "availability":10, "user": ['"$USER1"']},
             {"name":"cargoo", "availability":56, "user": ['"$USER2"']}
           ],
+          "hosts": ['"$THEHOST"'],
           "tasks": [
             {
               "title": "Installation",
@@ -73,7 +76,8 @@ curl 'localhost:8080/graphql' -H 'Content-Type: application/json' \
             {"name":"anonymRust", "availability":2, "user": ['"$USER0"']},
             {"name":"rusty_crusty", "availability":2, "user": ['"$USER1"']},
             {"name":"cargoo", "availability":12, "user": ['"$USER2"']}
-          ]
+          ],
+          "hosts": ['"$THEHOST"']
         },
         {
           "title": "Understanding Ownership",
@@ -83,7 +87,8 @@ curl 'localhost:8080/graphql' -H 'Content-Type: application/json' \
           "developers":[
             {"name":"anonymRust", "availability":2, "user": ['"$USER0"']},
             {"name":"cargoo", "availability":33, "user": ['"$USER2"']}
-          ]
+          ],
+          "hosts": ['"$THEHOST"']
         },
         {
           "title": "Enums and Pattern Matching",
@@ -93,7 +98,8 @@ curl 'localhost:8080/graphql' -H 'Content-Type: application/json' \
           "developers":[
             {"name":"anonymRust", "availability":2, "user": ['"$USER0"']},
             {"name":"cargoo", "availability":33, "user": ['"$USER2"']}
-          ]
+          ],
+          "hosts": ['"$THEHOST"']
         }
       ]
     }

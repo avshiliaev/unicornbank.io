@@ -1,6 +1,0 @@
-mutation deleteProject($filter: ProjectFilter!){
-    deleteProject(filter: $filter){
-        msg
-        numUids
-    }
-}

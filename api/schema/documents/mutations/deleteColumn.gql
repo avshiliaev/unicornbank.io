@@ -1,6 +1,0 @@
-mutation deleteColumn($filter: ColumnFilter!){
-    deleteColumn(filter: $filter){
-        msg
-        numUids
-    }
-}
