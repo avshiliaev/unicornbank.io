@@ -4,13 +4,16 @@
   "description": "### 1. Download schema from endpoint Graphql CLI",
   "main": "index.js",
   "scripts": {
-    "generate": "graphql get-schema && gqlg --schemaFilePath ./api/schema/schema.graphql --destDirPath ./api/schema/documents --depthLimit 5 && graphql-codegen --overwrite"
+    "generate": "graphql get-schema && gqlg --schemaFilePath api/schema/schema.graphql --destDirPath ./api/schema/documents --depthLimit 5 && graphql-codegen --overwrite",
+    "zeus": "zeus ./api/schema/schema.graphql ./"
   },
   "dependencies": {
     "@graphql-codegen/cli": "^1.11.2",
-    "@graphql-codegen/typescript": "^1.11.2",
-    "@graphql-codegen/typescript-operations": "^1.11.2",
-    "gql-generator": "^1.0.12"
+    "@graphql-codegen/typescript": "^1.13.1",
+    "@graphql-codegen/typescript-graphql-request": "^1.13.1",
+    "@graphql-codegen/typescript-operations": "^1.13.1",
+    "gql-generator": "^1.0.12",
+    "graphql-zeus": "^2.6.3"
   },
   "repository": {
     "type": "git",

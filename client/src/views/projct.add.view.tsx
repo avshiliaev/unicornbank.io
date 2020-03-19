@@ -2,7 +2,7 @@ import React, {Fragment} from 'react';
 import {useMutation} from '@apollo/react-hooks';
 import {ADD_PROJECTS} from './docs/projects.documents';
 import ProjectsForm from '../components/projects.form';
-import {QueryProjectQuery} from '../../../server/api/interfaces/types.d';
+import {QueryProjectQuery} from '../../../api/interfaces/types.d';
 import {GET_PROJECT} from './docs/project.document';
 
 const ProjctAddView = ({windowSize}) => {

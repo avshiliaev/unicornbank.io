@@ -2,7 +2,7 @@ import React, {Fragment} from 'react';
 import {useQuery} from '@apollo/react-hooks';
 import {GET_PROJECT} from './docs/project.document';
 import TasksTable from '../components/tasks.table';
-import {GetProjectQuery} from '../../../server/api/interfaces/types.d';
+import {GetProjectQuery} from '../../../api/interfaces/types.d';
 
 const ProjectDetailView = ({windowSize, id}) => {
 

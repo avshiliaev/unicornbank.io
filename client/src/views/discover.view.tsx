@@ -2,7 +2,7 @@ import React, {Fragment} from 'react';
 import {useQuery} from '@apollo/react-hooks';
 import ProjectsList from '../components/projects.list';
 import {GET_PROJECT} from './docs/project.document';
-import {QueryProjectQuery} from '../../../server/api/interfaces/types.d';
+import {QueryProjectQuery} from '../../../api/interfaces/types.d';
 
 
 const DiscoverView = ({windowSize}) => {
