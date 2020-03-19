@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-docker stop $(docker ps -a -q)
-docker rm $(docker ps -a -q)
+# docker stop $(docker ps -a -q)
+# docker rm $(docker ps -a -q)
 
 docker run -d -it -p 8080:8080 dgraph/standalone:v2.0.0-rc1
 sleep 20
