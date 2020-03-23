@@ -2,7 +2,6 @@ import React from 'react';
 import {InMemoryCache} from 'apollo-cache-inmemory';
 import {cleanup, fireEvent, renderApollo, waitForElement} from '../../../test-utils';
 import ProjectsForm from '../../components/projects.form';
-import {ADD_PROJECTS} from '../docs/projects.documents';
 
 describe('Projects Add Container', () => {
     // automatically unmount and cleanup DOM after the test is finished.
@@ -22,7 +21,7 @@ describe('Projects Add Container', () => {
         let mocks = [
             {
                 request: {
-                    query: ADD_PROJECTS,
+                    query: 'ADD_PROJECTS',
                     variables: {input: [{title: 'test project', description: 'test description'}]}
                 },
                 result: {

@@ -2,7 +2,6 @@ import React from 'react';
 import {InMemoryCache} from 'apollo-cache-inmemory';
 import {cleanup, renderApollo, waitForElement,} from '../../../test-utils';
 import ProjectsAllView from "../projects.all.view";
-import {GET_PROJECTS_OF_USER} from '../docs/projects.documents';
 
 const mockProjects = {
     data: {
@@ -47,7 +46,7 @@ describe('Projects Query Container', () => {
         const cache = new InMemoryCache({addTypename: false});
         const mocks = [
             {
-                request: {query: GET_PROJECTS_OF_USER, variables: {filter: {username: {eq: userName}}}},
+                request: {query: 'GET_PROJECTS_OF_USER', variables: {filter: {username: {eq: userName}}}},
                 result: mockProjects,
             },
         ];
