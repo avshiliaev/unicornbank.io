@@ -4,9 +4,9 @@ import SiderBasic from '../components/layout/sider.basic';
 import HeaderBasic from '../components/layout/header.basic';
 import LogoIcon from '../components/logo.icon';
 import HeaderMenu from '../components/header.menu';
-import ProfileIcon from '../components/profile.icon';
 import ProjectHomeRoute from '../routes/project.home.route';
 import { Router } from '@reach/router';
+import ProfileIconView from '../views/profile.icon.view';
 
 const { Content } = Layout;
 
@@ -18,7 +18,7 @@ const ProjectPage = (props) => {
         windowSize={props.windowSize}
         slotLeft={<Avatar size={30} style={{ backgroundColor: '#fff' }} icon={<LogoIcon/>}/>}
         slotMiddle={<HeaderMenu windowSize={props.windowSize}/>}
-        slotRight={<ProfileIcon size={30} onClick={() => console.log('clicked')}/>}
+        slotRight={<ProfileIconView size={30}/>}
       />
       <Layout>
         {props.windowSize.large ? <SiderBasic/> : <div/>}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Col, Row, Tag } from 'antd';
 import FlexContainer from '../components/layout/flex.container';
-import ProfileIcon from '../components/profile.icon';
+import ProfileIconView from './profile.icon.view';
 
 const ProfileStatisticsView = ({ windowSize, userName }) => {
 
@@ -44,7 +44,7 @@ const ProfileStatisticsView = ({ windowSize, userName }) => {
         xl={{ span: 24, order: 2 }}
       >
         <FlexContainer justify={windowSize.large ? 'center' : 'start'} align='center'>
-          <ProfileIcon onClick={onClick} size={64}/>
+          <ProfileIconView size={64}/>
         </FlexContainer>
 
       </Col>

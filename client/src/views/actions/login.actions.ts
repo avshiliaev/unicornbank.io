@@ -13,15 +13,11 @@ const logInAction = (state: UserState) => {
   }
 };
 
-const logOutAction = (state: UserState) => {
+const logOutAction = () => {
   return async dispatch => {
     // const newTask = await tasksService.createNew(content);
     dispatch({
-      type: 'LOG_OUT',
-      data: {
-        isLoggedIn: false,
-        userName: ''
-      }
+      type: 'LOG_OUT'
     })
   }
 };

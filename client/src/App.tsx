@@ -6,11 +6,11 @@ import LoginPage from './pages/login.page';
 import { Location } from '@reach/router';
 import { connect } from 'react-redux';
 
-const App = (props) => {
+const App = ({ user }) => {
 
   const IsLoggedIn = ({ windowSize, location }) => {
-    return props.user.isLoggedIn
-      ? <Pages windowSize={windowSize} userName={props.user.userName} location={location}/>
+    return user.isLoggedIn
+      ? <Pages windowSize={windowSize} userName={user.userName} location={location}/>
       : <LoginPage windowSize={windowSize}/>;
   };
 

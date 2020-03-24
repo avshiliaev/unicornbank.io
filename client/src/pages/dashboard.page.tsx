@@ -5,10 +5,10 @@ import HeaderBasic from '../components/layout/header.basic';
 import FooterBasic from '../components/layout/footer.basic';
 import LogoIcon from '../components/logo.icon';
 import HeaderMenu from '../components/header.menu';
-import ProfileIcon from '../components/profile.icon';
 import DashboardOverviewRoute from '../routes/dashboard.overview.route';
 import DashboardDiscoverRoute from '../routes/dashboard.discover.route';
 import DashboardNewRoute from '../routes/dashboard.new.route';
+import ProfileIconView from '../views/profile.icon.view';
 
 const { Content } = Layout;
 
@@ -20,7 +20,7 @@ const DashboardPage = (props) => {
         windowSize={props.windowSize}
         slotLeft={<Avatar size={30} style={{ backgroundColor: '#fff' }} icon={<LogoIcon/>}/>}
         slotMiddle={<HeaderMenu windowSize={props.windowSize}/>}
-        slotRight={<ProfileIcon size={30} onClick={() => console.log('clicked')}/>}
+        slotRight={<ProfileIconView size={30}/>}
       />
       <Layout>
         <Content style={{ padding: props.windowSize.large ? 16 : 0 }}>
