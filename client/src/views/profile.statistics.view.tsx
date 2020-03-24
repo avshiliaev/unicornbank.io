@@ -2,16 +2,11 @@ import React from 'react';
 import { Col, Row, Tag } from 'antd';
 import FlexContainer from '../components/layout/flex.container';
 import ProfileIcon from '../components/profile.icon';
-import { useApolloClient } from '@apollo/react-hooks';
 
 const ProfileStatisticsView = ({ windowSize, userName }) => {
 
-  const client = useApolloClient();
-
   const onClick = async () => {
-    client.writeData({ data: { isLoggedIn: false } });
-    localStorage.clear();
-    // await localStorage.removeItem('token');
+    console.log('Logout');
   };
 
   const Tags = () => {
