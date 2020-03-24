@@ -1,13 +1,13 @@
 import { UserState } from '../../reducers/user.reducer';
 
-const logInAction = (state: UserState) => {
+const logInAction = (newState: UserState) => {
   return async dispatch => {
-    // const newTask = await tasksService.createNew(content);
+    await localStorage.setItem('userName', newState.userName);
     dispatch({
       type: 'LOG_IN',
       data: {
         isLoggedIn: true,
-        userName: state.userName
+        userName: localStorage.getItem('userName')
       }
     })
   }
@@ -15,7 +15,7 @@ const logInAction = (state: UserState) => {
 
 const logOutAction = () => {
   return async dispatch => {
-    // const newTask = await tasksService.createNew(content);
+    localStorage.removeItem('userName');
     dispatch({
       type: 'LOG_OUT'
     })
