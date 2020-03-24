@@ -4,14 +4,15 @@ import './App.css';
 import { useMedia } from 'react-use-media';
 import LoginPage from './pages/login.page';
 import { Location } from '@reach/router';
+import { connect } from 'react-redux';
 
-function IsLoggedIn({ windowSize, location }) {
-  const data = { isLoggedIn: true, userName: 'testTest' };
-  return data.isLoggedIn ? <Pages windowSize={windowSize} userName={data.userName} location={location}/> :
-    <LoginPage windowSize={windowSize}/>;
-}
+const App = (props) => {
 
-const App: React.FC = () => {
+  const IsLoggedIn = ({ windowSize, location }) => {
+    return props.user.isLoggedIn
+      ? <Pages windowSize={windowSize} userName={props.user.userName} location={location}/>
+      : <LoginPage windowSize={windowSize}/>;
+  };
 
   // TODO: window size into the store!
   const breakpoints = {
@@ -44,4 +45,12 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+
+export default connect(
+  mapStateToProps,
+)(App);

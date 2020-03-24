@@ -3,6 +3,7 @@ import { Button, Checkbox, Col, Form, Input, Layout, Row } from 'antd';
 import FlexContainer from '../components/layout/flex.container';
 import { connect } from 'react-redux';
 import { logInAction } from './actions/login.actions';
+import { UserState } from '../reducers/user.reducer';
 
 const { Content } = Layout;
 
@@ -17,7 +18,8 @@ const LoginView = ({windowSize, logInAction}) => {
   };
 
   const onFinish = async (values) => {
-    logInAction(values.username)
+    const state: UserState = {userName: values.username, isLoggedIn: true}
+    logInAction(state)
   };
 
   const onFinishFailed = errorInfo => {
