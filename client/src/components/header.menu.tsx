@@ -10,7 +10,7 @@ const HeaderMenu = ({ windowSize }) => {
       mode='horizontal'
       defaultSelectedKeys={['1']}
       style={{
-        lineHeight: '61px',
+        lineHeight: windowSize.large ? '61px' : '53px',
       }}
     >
       <Menu.Item key="1">
