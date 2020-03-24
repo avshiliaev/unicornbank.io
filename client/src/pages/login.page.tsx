@@ -1,15 +1,19 @@
 import React from 'react';
-import { Layout } from 'antd';
 import LoginView from '../views/login.view';
+import { connect } from 'react-redux';
 
-const { Content } = Layout;
-
-const LoginPage = (props) => {
+const LoginPage = ({ windowSize, path }) => {
 
   return (
-    <LoginView windowSize={props.windowSize}/>
+    <LoginView windowSize={windowSize}/>
   );
 };
 
-export default LoginPage;
+const mapStateToProps = (state) => {
+  return {
+    windowSize: state.windowSize.greaterThan,
+  };
+};
+
+export default connect(mapStateToProps)(LoginPage);
 

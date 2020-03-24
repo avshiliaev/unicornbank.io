@@ -9,32 +9,42 @@ import DashboardOverviewRoute from '../routes/dashboard.overview.route';
 import DashboardDiscoverRoute from '../routes/dashboard.discover.route';
 import DashboardNewRoute from '../routes/dashboard.new.route';
 import ProfileIconView from '../views/profile.icon.view';
+import { connect } from 'react-redux';
 
 const { Content } = Layout;
 
-const DashboardPage = (props) => {
+const DashboardPage = ({ windowSize, user, path }) => {
+
+  const userName = user.userName;
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <HeaderBasic
-        windowSize={props.windowSize}
+        windowSize={windowSize}
         slotLeft={<Avatar size={30} style={{ backgroundColor: '#fff' }} icon={<LogoIcon/>}/>}
-        slotMiddle={<HeaderMenu windowSize={props.windowSize}/>}
+        slotMiddle={<HeaderMenu windowSize={windowSize}/>}
         slotRight={<ProfileIconView size={30}/>}
       />
       <Layout>
-        <Content style={{ padding: props.windowSize.large ? 16 : 0 }}>
+        <Content style={{ padding: windowSize.large ? 16 : 0 }}>
           <Router primary={false} component={Fragment}>
-            <DashboardOverviewRoute path="/" windowSize={props.windowSize} userName={props.userName}/>
-            <DashboardDiscoverRoute path="discover" windowSize={props.windowSize}
-                                    userName={props.userName}/>
-            <DashboardNewRoute path="new" windowSize={props.windowSize}/>
+            <DashboardOverviewRoute path="/" windowSize={windowSize} userName={userName}/>
+            <DashboardDiscoverRoute path="discover" windowSize={windowSize}
+                                    userName={userName}/>
+            <DashboardNewRoute path="new" windowSize={windowSize}/>
           </Router>
         </Content>
-        <FooterBasic windowSize={props.windowSize}/>
+        <FooterBasic windowSize={windowSize}/>
       </Layout>
     </Layout>
   );
 };
 
-export default DashboardPage;
+const mapStateToProps = (state) => {
+  return {
+    windowSize: state.windowSize.greaterThan,
+    user: state.user,
+  };
+};
+
+export default connect(mapStateToProps)(DashboardPage);

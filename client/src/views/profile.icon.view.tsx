@@ -4,11 +4,10 @@ import { UserOutlined } from '@ant-design/icons';
 import { logOutAction } from './actions/login.actions';
 import { connect } from 'react-redux';
 
-const ProfileIconView = ({ size, logOutAction, user }) => {
+const ProfileIconView = ({ size, logOutAction }) => {
 
   const onClick = () => {
     logOutAction();
-    console.log(user)
   };
 
   return (
@@ -20,7 +19,7 @@ const ProfileIconView = ({ size, logOutAction, user }) => {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user,
+    user: state.user
   };
 };
 

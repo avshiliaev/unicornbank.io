@@ -7,6 +7,7 @@ import HeaderMenu from '../components/header.menu';
 import ProjectHomeRoute from '../routes/project.home.route';
 import { Router } from '@reach/router';
 import ProfileIconView from '../views/profile.icon.view';
+import { connect } from 'react-redux';
 
 const { Content } = Layout;
 
@@ -32,4 +33,11 @@ const ProjectPage = (props) => {
   );
 };
 
-export default ProjectPage;
+const mapStateToProps = (state) => {
+  return {
+    windowSize: state.windowSize.greaterThan,
+    user: state.user,
+  };
+};
+
+export default connect(mapStateToProps)(ProjectPage);
