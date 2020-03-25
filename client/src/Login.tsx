@@ -11,14 +11,6 @@ const Login = (props) => {
 
   const { windowSize, logInAction } = props;
 
-  const layout = {
-    labelCol: { span: 8 },
-    wrapperCol: { span: 16 },
-  };
-  const tailLayout = {
-    wrapperCol: { offset: 8, span: 16 },
-  };
-
   const onFinish = async (values) => {
     const state: UserState = { userName: values.username, isLoggedIn: true };
     logInAction(state);
@@ -41,7 +33,6 @@ const Login = (props) => {
             <div style={{ background: '#fff', padding: 24 }}>
               <FlexContainer justify={'center'} align={'center'}>
                 <Form
-                  {...layout}
                   name="basic"
                   initialValues={{ remember: true }}
                   onFinish={onFinish}
@@ -55,11 +46,11 @@ const Login = (props) => {
                     <Input/>
                   </Form.Item>
 
-                  <Form.Item {...tailLayout} name="remember" valuePropName="checked">
+                  <Form.Item name="remember" valuePropName="checked">
                     <Checkbox>Remember me</Checkbox>
                   </Form.Item>
 
-                  <Form.Item {...tailLayout}>
+                  <Form.Item>
                     <Button type="primary" htmlType="submit">
                       Submit
                     </Button>
