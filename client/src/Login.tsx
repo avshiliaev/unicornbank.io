@@ -1,15 +1,15 @@
 import React from 'react';
-import { Button, Checkbox, Col, Form, Input, Layout, Row } from 'antd';
-import FlexContainer from '../components/layout/flex.container';
 import { connect } from 'react-redux';
-import { logInAction } from './actions/login.actions';
-import { UserState } from '../reducers/user.reducer';
+import { UserState } from './reducers/user.reducer';
+import { Button, Checkbox, Col, Form, Input, Layout, Row } from 'antd';
+import FlexContainer from './components/layout/flex.container';
+import { logInAction } from './views/actions/login.actions';
 
 const { Content } = Layout;
 
-const LoginView = (props) => {
+const Login = (props) => {
 
-  const {windowSize, logInAction} = props;
+  const { windowSize, logInAction } = props;
 
   const layout = {
     labelCol: { span: 8 },
@@ -20,8 +20,8 @@ const LoginView = (props) => {
   };
 
   const onFinish = async (values) => {
-    const state: UserState = {userName: values.username, isLoggedIn: true}
-    logInAction(state)
+    const state: UserState = { userName: values.username, isLoggedIn: true };
+    logInAction(state);
   };
 
   const onFinishFailed = errorInfo => {
@@ -76,8 +76,7 @@ const LoginView = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user,
-    windowSize: state.windowSize.greaterThan
+    windowSize: state.windowSize.greaterThan,
   };
 };
 
@@ -85,8 +84,5 @@ const mapDispatchToProps = {
   logInAction,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(LoginView);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
 

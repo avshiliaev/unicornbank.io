@@ -4,12 +4,12 @@ import store from './store';
 import { connect, Provider } from 'react-redux';
 import './index.css';
 import App from './App';
-import LoginPage from './pages/login.page';
+import Login from './Login';
 
 const LoginGuard = ({ user }) => {
   return user.isLoggedIn
     ? <App/>
-    : <LoginPage/>;
+    : <Login/>;
 };
 
 const mapStateToProps = (state) => {
