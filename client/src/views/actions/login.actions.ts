@@ -7,19 +7,19 @@ const logInAction = (newState: UserState) => {
       type: 'LOG_IN',
       data: {
         isLoggedIn: true,
-        userName: localStorage.getItem('userName')
-      }
-    })
-  }
+        userName: localStorage.getItem('userName'),
+      },
+    });
+  };
 };
 
 const logOutAction = () => {
   return async dispatch => {
     localStorage.removeItem('userName');
     dispatch({
-      type: 'LOG_OUT'
-    })
-  }
+      type: 'LOG_OUT',
+    });
+  };
 };
 
-export {logInAction, logOutAction};
+export { logInAction, logOutAction };

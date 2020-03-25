@@ -1,15 +1,10 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
-import { initProjectsDev } from './actions/project.actions';
 import ProjectsList from '../components/projects.list';
 
 const ProjectsAllView = (props) => {
 
-  const { windowSize, projects, user, initProjectsDev } = props;
-
-  useEffect(() => {
-    initProjectsDev(user.userName);
-  }, []);
+  const { windowSize, projects } = props;
 
   return (
     <Fragment>
@@ -26,11 +21,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = {
-  initProjectsDev,
-};
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  {},
 )(ProjectsAllView);
