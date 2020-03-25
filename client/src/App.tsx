@@ -1,26 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Pages from './pages';
 import './App.css';
 import LoginPage from './pages/login.page';
-import { Location } from '@reach/router';
 import { connect } from 'react-redux';
+import { initProjectsDev } from './views/actions/project.actions';
 
 // https://github.com/reduxjs/react-redux/issues/159
-const App = ({ user }) => {
+const App = ({ user, initProjectsDev }) => {
 
-  const IsLoggedIn = ({ location }) => {
-    return user.isLoggedIn
-      ? <Pages/>
-      : <LoginPage path="login"/>;
-  };
+  useEffect(() => {
+    user.isLoggedIn
+      ? initProjectsDev(user.userName)
+      : console.log('not logged in');
+  }, []);
 
-  return (
-    <Location>
-      {props => {
-        return (<IsLoggedIn location={props.location.pathname}/>);
-      }}
-    </Location>
-  );
+  return user.isLoggedIn
+    ? <Pages/>
+    : <LoginPage path="login"/>;
 };
 
 const mapStateToProps = (state) => {
@@ -29,4 +25,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = {
+  initProjectsDev,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
