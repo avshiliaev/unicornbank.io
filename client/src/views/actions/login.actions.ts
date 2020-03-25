@@ -18,6 +18,10 @@ const logOutAction = () => {
     localStorage.removeItem('userName');
     dispatch({
       type: 'LOG_OUT',
+      data: {
+        isLoggedIn: false,
+        userName: ''
+      },
     });
   };
 };

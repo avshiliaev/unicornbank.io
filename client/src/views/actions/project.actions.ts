@@ -34,7 +34,7 @@ const initProjectsDev = (userName) => {
       },
     );
     const theUser = payload.queryUser[0];
-    const asDeveloper = theUser.developer.map(dev => dev.project);
+    const asDeveloper = theUser?.developer.map(dev => dev.project);
     dispatch({
       type: 'INIT_PROJECTS_DEV',
       data: asDeveloper,

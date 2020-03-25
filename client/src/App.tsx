@@ -9,9 +9,9 @@ import { initProjectsDev } from './views/actions/project.actions';
 const App = ({ user, initProjectsDev }) => {
 
   useEffect(() => {
-    user.isLoggedIn
-      ? initProjectsDev(user.userName)
-      : console.log('not logged in');
+    if (user.isLoggedIn) {
+      initProjectsDev(user.userName);
+    }
   }, []);
 
   return user.isLoggedIn
