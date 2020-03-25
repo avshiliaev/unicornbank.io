@@ -2,24 +2,20 @@ import React from 'react';
 import { Avatar, Badge, Empty, List } from 'antd';
 import ActionIcon from './action.icon';
 import ProjectDeleteView from '../views/project.delete.view';
-import { Project } from '../../../sdk/graphql-zeus';
+import { Project } from '../sdk/graphql-zeus';
 
-const ProjectAvatar = ({ text }) => {
-
-  function getRandomInt(max) {
-    return Math.floor(Math.random() * Math.floor(max));
-  }
-
-  const colorList = ['#f56a00', '#7265e6', '#ffbf00', '#00a2ae'];
+const ProjectAvatar = ({ badgeNumber, text }) => {
 
   return (
-    <Badge count={getRandomInt(6)}>
-      <Avatar style={{ backgroundColor: colorList[getRandomInt(4)] }}>{text}</Avatar>
+    <Badge count={badgeNumber}>
+      <Avatar style={{ backgroundColor: '#00a2ae' }}>{text}</Avatar>
     </Badge>
   );
 };
 
 const ProjectsList = ({ projects, windowSize }) => {
+
+  console.log('render');
 
   if (projects.length === 0) {
     return (
@@ -48,7 +44,7 @@ const ProjectsList = ({ projects, windowSize }) => {
             windowSize.large ? <ProjectDeleteView project={project}/> : <div>Del</div>,
           ]}>
             <List.Item.Meta
-              avatar={<ProjectAvatar text={ava}/>}
+              avatar={<ProjectAvatar text={ava} badgeNumber={project.tasks.length}/>}
               title={<a href={link}>{project.title}</a>}
               description={project.description}
             />

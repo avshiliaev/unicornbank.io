@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import ProjctAddView from '../views/projct.add.view';
 import FlexGridDashboard from '../components/layout/flex.grid.dashboard';
 
-const DashboardNewRoute = ({ windowSize, ...rest }) => {
+const DashboardNewRoute = ({ windowSize, path }) => {
 
   return (
     <Fragment>
@@ -10,7 +10,7 @@ const DashboardNewRoute = ({ windowSize, ...rest }) => {
         windowSize={windowSize}
         slotOne={<div>Slot One</div>}
         slotTwo={<div>Slot Two</div>}
-        mainContent={<ProjctAddView windowSize={windowSize}/>}
+        mainContent={<ProjctAddView/>}
       />
     </Fragment>
   );

@@ -1,6 +1,6 @@
 import React from 'react';
 import { List } from 'antd';
-import { Task } from '../../../sdk/graphql-zeus';
+import { Task } from '../sdk/graphql-zeus';
 
 const TasksTable = ({ tasks }) => {
 

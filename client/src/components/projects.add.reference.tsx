@@ -1,7 +1,11 @@
 import React from 'react';
 import { Button } from 'antd';
+import { connect } from 'react-redux';
 
-const ProjectsAddReference = () => {
+const ProjectsAddReference = (props) => {
+
+  const {windowSize, userName} = props;
+
   return (
     <div>
       <Button block>
@@ -11,4 +15,11 @@ const ProjectsAddReference = () => {
   );
 };
 
-export default ProjectsAddReference;
+const mapStateToProps = (state) => {
+  return {
+    windowSize: state.windowSize.greaterThan,
+    user: state.user,
+  };
+};
+
+export default connect(mapStateToProps)(ProjectsAddReference);

@@ -3,13 +3,13 @@ import ProjectDetailView from '../views/project.detail.view';
 import FlexGridProject from '../components/layout/flex.grid.project';
 import BreadCrumbBasic from '../components/layout/breadcrumb.basic';
 
-const ProjectHomeRoute = ({ windowSize, id, ...rest }) => {
+const ProjectHomeRoute = ({ windowSize, id, path }) => {
 
   return (
     <FlexGridProject
       breadCrumbs={<BreadCrumbBasic/>}
       windowSize={windowSize}
-      slotOne={<ProjectDetailView windowSize={windowSize} id={id}/>}
+      slotOne={<ProjectDetailView id={id}/>}
       slotTwo={(<div>Right Column</div>)}
     />
   );

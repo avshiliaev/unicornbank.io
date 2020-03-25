@@ -7,7 +7,9 @@ import { UserState } from '../reducers/user.reducer';
 
 const { Content } = Layout;
 
-const LoginView = ({windowSize, logInAction}) => {
+const LoginView = (props) => {
+
+  const {windowSize, logInAction} = props;
 
   const layout = {
     labelCol: { span: 8 },
@@ -75,6 +77,7 @@ const LoginView = ({windowSize, logInAction}) => {
 const mapStateToProps = (state) => {
   return {
     user: state.user,
+    windowSize: state.windowSize.greaterThan
   };
 };
 

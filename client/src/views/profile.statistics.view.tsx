@@ -2,8 +2,11 @@ import React from 'react';
 import { Col, Row, Tag } from 'antd';
 import FlexContainer from '../components/layout/flex.container';
 import ProfileIconView from './profile.icon.view';
+import { connect } from 'react-redux';
 
-const ProfileStatisticsView = ({ windowSize, userName }) => {
+const ProfileStatisticsView = (props) => {
+
+  const { windowSize, user } = props;
 
   const onClick = async () => {
     console.log('Logout');
@@ -33,7 +36,7 @@ const ProfileStatisticsView = ({ windowSize, userName }) => {
         xl={{ span: 24, order: 1 }}
       >
         <FlexContainer justify={windowSize.large ? 'center' : 'start'} align='center'>
-          <h2 style={{ paddingLeft: 16, paddingRight: 16 }}>{userName}</h2>
+          <h2 style={{ paddingLeft: 16, paddingRight: 16 }}>{user.userName}</h2>
         </FlexContainer>
       </Col>
       <Col
@@ -58,4 +61,11 @@ const ProfileStatisticsView = ({ windowSize, userName }) => {
   );
 };
 
-export default ProfileStatisticsView;
+const mapStateToProps = (state) => {
+  return {
+    windowSize: state.windowSize.greaterThan,
+    user: state.user,
+  };
+};
+
+export default connect(mapStateToProps)(ProfileStatisticsView);

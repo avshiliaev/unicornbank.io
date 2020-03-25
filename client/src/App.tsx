@@ -5,6 +5,7 @@ import LoginPage from './pages/login.page';
 import { Location } from '@reach/router';
 import { connect } from 'react-redux';
 
+// https://github.com/reduxjs/react-redux/issues/159
 const App = ({ user }) => {
 
   const IsLoggedIn = ({ location }) => {

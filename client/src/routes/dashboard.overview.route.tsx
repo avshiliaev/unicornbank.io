@@ -4,15 +4,15 @@ import ProfileStatisticsView from '../views/profile.statistics.view';
 import ProjectsAddReference from '../components/projects.add.reference';
 import ProjectsAllView from '../views/projects.all.view';
 
-const DashboardOverviewRoute = ({ windowSize, userName, ...rest }) => {
+const DashboardOverviewRoute = ({ path, windowSize }) => {
 
   return (
     <Fragment>
       <FlexGridDashboard
         windowSize={windowSize}
-        slotOne={<ProfileStatisticsView windowSize={windowSize} userName={userName}/>}
+        slotOne={<ProfileStatisticsView/>}
         slotTwo={<ProjectsAddReference/>}
-        mainContent={<ProjectsAllView userName={userName} windowSize={windowSize}/>}
+        mainContent={<ProjectsAllView/>}
       />
     </Fragment>
   );

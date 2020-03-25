@@ -15,8 +15,6 @@ const { Content } = Layout;
 
 const DashboardPage = ({ windowSize, user, path }) => {
 
-  const userName = user.userName;
-
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <HeaderBasic
@@ -28,10 +26,9 @@ const DashboardPage = ({ windowSize, user, path }) => {
       <Layout>
         <Content style={{ padding: windowSize.large ? 16 : 0 }}>
           <Router primary={false} component={Fragment}>
-            <DashboardOverviewRoute path="/" windowSize={windowSize} userName={userName}/>
-            <DashboardDiscoverRoute path="discover" windowSize={windowSize}
-                                    userName={userName}/>
-            <DashboardNewRoute path="new" windowSize={windowSize}/>
+            <DashboardOverviewRoute windowSize={windowSize} path="/"/>
+            <DashboardDiscoverRoute windowSize={windowSize} path="discover"/>
+            <DashboardNewRoute windowSize={windowSize} path="new"/>
           </Router>
         </Content>
         <FooterBasic windowSize={windowSize}/>

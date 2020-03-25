@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import FlexGridDashboard from '../components/layout/flex.grid.dashboard';
 import DiscoverView from '../views/discover.view';
 
-const DashboardDiscoverRoute = ({ windowSize, ...rest }) => {
+const DashboardDiscoverRoute = ({ windowSize, path }) => {
 
   return (
     <Fragment>
