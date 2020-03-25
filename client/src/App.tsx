@@ -1,22 +1,23 @@
 import React, { useEffect } from 'react';
-import Pages from './pages';
-import './App.css';
-import LoginPage from './pages/login.page';
 import { connect } from 'react-redux';
 import { initProjectsDev } from './views/actions/project.actions';
+import { Router } from '@reach/router';
+import DashboardPage from './pages/dashboard.page';
+import ProjectPage from './pages/project.page';
 
 // https://github.com/reduxjs/react-redux/issues/159
 const App = ({ user, initProjectsDev }) => {
 
   useEffect(() => {
-    if (user.isLoggedIn) {
-      initProjectsDev(user.userName);
-    }
+    initProjectsDev(user.userName);
   }, []);
 
-  return user.isLoggedIn
-    ? <Pages/>
-    : <LoginPage path="login"/>;
+  return (
+    <Router>
+      <DashboardPage path="dashboard/*"/>
+      <ProjectPage path="project/:id/*"/>
+    </Router>
+  );
 };
 
 const mapStateToProps = (state) => {
@@ -29,4 +30,7 @@ const mapDispatchToProps = {
   initProjectsDev,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(App);

@@ -2,7 +2,7 @@ import React from 'react';
 import LoginView from '../views/login.view';
 import { connect } from 'react-redux';
 
-const LoginPage = ({ windowSize, path }) => {
+const LoginPage = ({ windowSize }) => {
 
   return (
     <LoginView windowSize={windowSize}/>
