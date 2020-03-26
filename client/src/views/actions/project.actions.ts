@@ -9,10 +9,16 @@ const initProjectsDev = (userId: string) => {
         getUser: [
           { id: userId },
           {
-            id: true,
             host: [
               {},
-              { title: true },
+              {
+                id: true,
+                title: true,
+                description: true,
+                tasks: [{}, { id: true }],
+                developers: [{}, { id: true }],
+                tags: [{}, { id: true }],
+              },
             ],
             developer: [
               {},
@@ -22,6 +28,7 @@ const initProjectsDev = (userId: string) => {
                   {
                     id: true,
                     title: true,
+                    description: true,
                     tasks: [{}, { id: true }],
                     developers: [{}, { id: true }],
                     tags: [{}, { id: true }],
@@ -35,9 +42,15 @@ const initProjectsDev = (userId: string) => {
     );
     const theUser = payload.getUser;
     const asDeveloper = theUser.developer.map(dev => dev.project);
+    const asHost = theUser.host;
+
+    const data = {
+      asDeveloper,
+      asHost,
+    };
     dispatch({
       type: 'INIT_PROJECTS_DEV',
-      data: asDeveloper,
+      data,
     });
   };
 };

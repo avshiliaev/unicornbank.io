@@ -2,7 +2,7 @@ import React from 'react';
 import { Avatar, Badge, Empty, List } from 'antd';
 import ActionIcon from './action.icon';
 import ProjectDeleteView from '../views/project.delete.view';
-import { Project } from '../sdk/graphql-zeus';
+import { ProjectState } from '../reducers/project.reducer';
 
 const ProjectAvatar = ({ badgeNumber, text }) => {
 
@@ -23,13 +23,14 @@ const ProjectsList = ({ projects, windowSize }) => {
     );
   }
 
-  const projectsList: Project[] = projects;
+  const projectsList: ProjectState = projects;
+  const asDeveloper = projectsList.asDeveloper;
 
   return (
     <List
       header={windowSize.large ? (<h4>Projects</h4>) : 'Projects'}
       itemLayout={!windowSize.large ? 'vertical' : 'horizontal'}
-      dataSource={projectsList}
+      dataSource={asDeveloper}
       renderItem={project => {
         const link = `/project/${project.id}`;
         const ava = project.title.charAt(0);

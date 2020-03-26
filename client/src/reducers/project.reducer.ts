@@ -1,8 +1,13 @@
 import { Project } from '../sdk/graphql-zeus';
 
-const projectsInitialState: Project[] = [];
+export interface ProjectState {
+  asDeveloper: Project[],
+  asHost: Project[]
+}
 
-const projectReducer = (state: Project[] = projectsInitialState, action): Project[] => {
+const projectsInitialState: ProjectState = { asDeveloper: [], asHost: [] };
+
+const projectReducer = (state: ProjectState = projectsInitialState, action): ProjectState => {
   switch (action.type) {
     case 'INIT_PROJECTS_DEV':
       return action.data;
