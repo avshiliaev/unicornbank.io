@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { UserState } from './reducers/user.reducer';
 import { Button, Checkbox, Col, Form, Input, Layout, Row } from 'antd';
 import FlexContainer from './components/layout/flex.container';
 import { logInAction } from './views/actions/login.actions';
@@ -12,7 +11,7 @@ const Login = (props) => {
   const { windowSize, logInAction } = props;
 
   const onFinish = async (values) => {
-    const state: UserState = { userName: values.username, isLoggedIn: true };
+    const state = { userName: values.username, isLoggedIn: true };
     logInAction(state);
   };
 

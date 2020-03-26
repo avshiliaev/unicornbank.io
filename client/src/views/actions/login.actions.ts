@@ -1,9 +1,8 @@
-import { UserState } from '../../reducers/user.reducer';
 import { Chain } from '../../sdk/graphql-zeus';
 
 const chain = Chain('http://localhost:8080/graphql');
 
-const logInAction = (newState: UserState) => {
+const logInAction = (newState: { userName: string, isLoggedIn: boolean }) => {
   return async dispatch => {
     const payload = await chain.query(
       {
@@ -13,14 +12,18 @@ const logInAction = (newState: UserState) => {
         ],
       },
     );
-    // TODO: make better check!
-    if (!!payload.queryUser.length) {
-      await localStorage.setItem('userName', payload.queryUser[0].username);
+
+    // TODO: make better check?
+    const user = payload.queryUser.find(u => u !== undefined);
+    if (!!user) {
+      await localStorage.setItem('userName', user.username);
+      await localStorage.setItem('userId', user.id);
       dispatch({
         type: 'LOG_IN',
         data: {
           isLoggedIn: true,
           userName: localStorage.getItem('userName'),
+          userId: localStorage.getItem('userId'),
         },
       });
     }
@@ -34,7 +37,8 @@ const logOutAction = () => {
       type: 'LOG_OUT',
       data: {
         isLoggedIn: false,
-        userName: '',
+        userName: undefined,
+        userId: undefined,
       },
     });
   };
