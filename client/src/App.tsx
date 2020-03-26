@@ -9,7 +9,7 @@ import ProjectPage from './pages/project.page';
 const App = ({ user, initProjectsDev }) => {
 
   useEffect(() => {
-    initProjectsDev(user.userName);
+    initProjectsDev(user.userId);
   }, []);
 
   return (

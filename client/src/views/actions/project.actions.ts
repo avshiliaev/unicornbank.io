@@ -2,12 +2,12 @@ import { Chain } from '../../sdk/graphql-zeus';
 
 const chain = Chain('http://localhost:8080/graphql');
 
-const initProjectsDev = (userName) => {
+const initProjectsDev = (userId: string) => {
   return async dispatch => {
     const payload = await chain.query(
       {
-        queryUser: [
-          { filter: { username: { eq: userName } } },
+        getUser: [
+          { id: userId },
           {
             id: true,
             host: [
@@ -33,7 +33,7 @@ const initProjectsDev = (userName) => {
         ],
       },
     );
-    const theUser = payload.queryUser[0];
+    const theUser = payload.getUser;
     const asDeveloper = theUser.developer.map(dev => dev.project);
     dispatch({
       type: 'INIT_PROJECTS_DEV',
