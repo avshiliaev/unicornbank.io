@@ -8,23 +8,32 @@ const FlexGridDashboard = ({ windowSize, slotOne, slotTwo, mainContent }) => {
       justify="start"
     >
       <Col xs={24} sm={24} md={24} lg={8} xl={6} xxl={4}>
-        <Row gutter={[{ xs: 0, sm: 0, md: 0, lg: 16 }, 16]} justify="start">
-          <Col span={24}>
+        <Row
+          gutter={
+            [
+              { xs: 0, sm: 0, md: 0, lg: 16 },
+              { xs: 0, sm: 0, md: 0, lg: 16 },
+            ]
+          }
+          justify="start"
+        >
+          <Col xs={24} sm={12} md={12} lg={24} xl={24} xxl={24}>
             <div style={{ background: '#fff', padding: 24, marginTop: windowSize.large ? 'auto' : '64px' }}>
               {slotOne}
             </div>
           </Col>
-        </Row>
-        <Row gutter={[{ xs: 0, sm: 0, md: 0, lg: 16 }, 0]} justify="start">
-          <Col span={24}>
-            <div style={{ background: '#fff', padding: 24 }}>
+          <Col xs={0} sm={12} md={12} lg={24} xl={24} xxl={24}>
+            <div style={{ background: '#fff', padding: 24, marginTop: windowSize.large ? 'auto' : '64px' }}>
               {slotTwo}
             </div>
           </Col>
         </Row>
       </Col>
       <Col xs={24} sm={24} md={24} lg={16} xl={18} xxl={12}>
-        <Row gutter={[{ xs: 0, sm: 0, md: 0, lg: 16 }, 0]} justify="start">
+        <Row
+          gutter={[{ xs: 0, sm: 0, md: 0, lg: 16 }, 0]}
+          justify="start"
+        >
           <Col span={24}>
             <div style={{ background: '#fff', padding: 24 }}>
               <div>{mainContent}</div>

@@ -39,7 +39,6 @@ const HeaderBasic = ({ windowSize, slotLeft, slotMiddle, slotRight }) => {
       <Header style={
         {
           background: '#fff',
-          // paddingLeft: 24,
           position: 'fixed',
           zIndex: 999,
           width: '100%',
@@ -47,9 +46,15 @@ const HeaderBasic = ({ windowSize, slotLeft, slotMiddle, slotRight }) => {
           height: '55px',
         }
       }>
-        <div>
-          {slotMiddle}
-        </div>
+        <Row align="middle" gutter={[{ xs: 0, sm: 0, md: 0, lg: 16 }, 0]}>
+          <Col span={24}>
+            <Row justify="center" align="middle" gutter={[{ xs: 0, sm: 0, md: 0, lg: 16 }, 0]}>
+              <Col>
+                {slotMiddle}
+              </Col>
+            </Row>
+          </Col>
+        </Row>
       </Header>
     );
 

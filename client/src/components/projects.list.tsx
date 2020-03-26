@@ -1,8 +1,46 @@
-import React from 'react';
-import { Avatar, Badge, Empty, List } from 'antd';
+import React, { useState } from 'react';
+import { Avatar, Badge, Col, List, Radio, Row, Select } from 'antd';
 import ActionIcon from './action.icon';
 import ProjectDeleteView from '../views/project.delete.view';
 import { ProjectState } from '../reducers/project.reducer';
+
+const { Option } = Select;
+
+const Selector = ({ onChange, windowSize, numbers }) => {
+
+  const opened = () => {
+    return numbers.asDeveloper >= numbers.asHost
+      ? 'asDeveloper'
+      : 'asHost';
+  };
+
+  return (
+    <Row
+      gutter={[0, 16]}
+      justify="start"
+    >
+      <Col xs={0} sm={12} md={12} lg={12} xl={12} xxl={12}>
+        <Row justify="start" align="middle">
+          <Col>
+            <h4>Projects</h4>
+          </Col>
+        </Row>
+      </Col>
+      <Col xs={24} sm={12} md={12} lg={12} xl={12} xxl={12}>
+        <Row justify={windowSize.small ? 'end' : 'center'} align="middle">
+          <Col>
+            <Radio.Group
+              defaultValue={'asDeveloper'}
+              onChange={(event) => onChange(event.target.value)}>
+              <Radio.Button value="asDeveloper">Developer: {numbers.asDeveloper}</Radio.Button>
+              <Radio.Button value="asHost">Maintainer: {numbers.asHost}</Radio.Button>
+            </Radio.Group>
+          </Col>
+        </Row>
+      </Col>
+    </Row>
+  );
+};
 
 const ProjectAvatar = ({ badgeNumber, text }) => {
 
@@ -15,22 +53,19 @@ const ProjectAvatar = ({ badgeNumber, text }) => {
 
 const ProjectsList = ({ projects, windowSize }) => {
 
-  console.log('render');
+  const projectsState: ProjectState = projects;
+  const numbers = {
+    asDeveloper: projectsState.asDeveloper.length,
+    asHost: projectsState.asHost.length,
+  };
 
-  if (projects.length === 0) {
-    return (
-      <Empty/>
-    );
-  }
-
-  const projectsList: ProjectState = projects;
-  const asDeveloper = projectsList.asDeveloper;
+  const [toDisplay, setToDisplay] = useState('asDeveloper');
 
   return (
     <List
-      header={windowSize.large ? (<h4>Projects</h4>) : 'Projects'}
+      header={<Selector windowSize={windowSize} numbers={numbers} onChange={(val) => setToDisplay(val)}/>}
       itemLayout={!windowSize.large ? 'vertical' : 'horizontal'}
-      dataSource={asDeveloper}
+      dataSource={toDisplay === 'asDeveloper' ? projectsState.asDeveloper : projectsState.asHost}
       renderItem={project => {
         const link = `/project/${project.id}`;
         const ava = project.title.charAt(0);
