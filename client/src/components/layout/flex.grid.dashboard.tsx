@@ -4,14 +4,14 @@ import { Col, Row } from 'antd';
 const FlexGridDashboard = ({ windowSize, slotOne, slotTwo, mainContent }) => {
   return (
     <Row
-      gutter={[{ xs: 0, sm: 0, md: 0, lg: 16 }, 16]}
+      gutter={[{ xs: 0, sm: 16, md: 16, lg: 16 }, 16]}
       justify="start"
     >
       <Col xs={24} sm={24} md={24} lg={8} xl={6} xxl={4}>
         <Row
           gutter={
             [
-              { xs: 0, sm: 0, md: 0, lg: 16 },
+              { xs: 0, sm: 16, md: 16, lg: 16 },
               { xs: 0, sm: 0, md: 0, lg: 16 },
             ]
           }

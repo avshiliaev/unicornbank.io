@@ -18,23 +18,30 @@ const StickyFooter = () => {
         paddingBottom: '24px',
       }
     }>
-      <Row align="middle" gutter={[{ xs: 0, sm: 0, md: 0, lg: 16 }, 0]}>
-        <Col span={8}>
-          <Row justify="center" align="middle" gutter={[{ xs: 0, sm: 0, md: 0, lg: 16 }, 0]}>
+      <Row align="middle">
+        <Col span={6}>
+          <Row justify="center" align="middle">
             <Col>
               <ContainerTwoTone style={{ fontSize: '24px' }}/>
             </Col>
           </Row>
         </Col>
-        <Col span={8}>
-          <Row justify="center" align="middle" gutter={[{ xs: 0, sm: 0, md: 0, lg: 16 }, 0]}>
+        <Col span={6}>
+          <Row justify="center" align="middle">
             <Col>
               <MessageOutlined style={{ fontSize: '24px' }}/>
             </Col>
           </Row>
         </Col>
-        <Col span={8}>
-          <Row justify="center" align="middle" gutter={[{ xs: 0, sm: 0, md: 0, lg: 16 }, 0]}>
+        <Col span={6}>
+          <Row justify="center" align="middle">
+            <Col>
+              <PieChartOutlined style={{ fontSize: '24px' }}/>
+            </Col>
+          </Row>
+        </Col>
+        <Col span={6}>
+          <Row justify="center" align="middle">
             <Col>
               <PieChartOutlined style={{ fontSize: '24px' }}/>
             </Col>
