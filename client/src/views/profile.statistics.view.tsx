@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Row, Tag } from 'antd';
+import { Col, Row } from 'antd';
 import FlexContainer from '../components/layout/flex.container';
 import ProfileIconView from './profile.icon.view';
 import { connect } from 'react-redux';
@@ -8,20 +8,11 @@ const ProfileStatisticsView = (props) => {
 
   const { windowSize, user } = props;
 
-  const onClick = async () => {
-    console.log('Logout');
-  };
-
   const Tags = () => {
 
     return (
       <div>
-        <Tag style={{ marginBottom: 6 }}>backend</Tag>
-        <Tag style={{ marginBottom: 6 }}>docker</Tag>
-        <Tag style={{ marginBottom: 6 }}>frontend</Tag>
-        <Tag style={{ marginBottom: 6 }}>oracle</Tag>
-        <Tag style={{ marginBottom: 6 }}>graphql</Tag>
-        <Tag style={{ marginBottom: 6 }}>nosql</Tag>
+        Some user info
       </div>
     );
   };

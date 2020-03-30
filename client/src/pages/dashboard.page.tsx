@@ -13,7 +13,7 @@ import { connect } from 'react-redux';
 
 const { Content } = Layout;
 
-const DashboardPage = ({ windowSize, user, path }) => {
+const DashboardPage = ({ windowSize, path }) => {
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
@@ -24,7 +24,7 @@ const DashboardPage = ({ windowSize, user, path }) => {
         slotRight={<ProfileIconView size={30}/>}
       />
       <Layout>
-        <Content style={{ padding: windowSize.large ? 16 : 0 }}>
+        <Content style={{ margin: windowSize.large ? 16 : 0 }}>
           <Router primary={false} component={Fragment}>
             <DashboardOverviewRoute windowSize={windowSize} path="/"/>
             <DashboardDiscoverRoute windowSize={windowSize} path="discover"/>
