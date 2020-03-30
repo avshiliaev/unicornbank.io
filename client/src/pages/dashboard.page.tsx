@@ -8,12 +8,12 @@ import HeaderMenu from '../components/header.menu';
 import DashboardOverviewRoute from '../routes/dashboard.overview.route';
 import DashboardDiscoverRoute from '../routes/dashboard.discover.route';
 import DashboardNewRoute from '../routes/dashboard.new.route';
-import ProfileIconView from '../views/profile.icon.view';
 import { connect } from 'react-redux';
+import ProfileIcon from '../components/profile.icon';
 
 const { Content } = Layout;
 
-const DashboardPage = ({ windowSize, path }) => {
+const DashboardPage = ({ windowSize, path, user }) => {
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
@@ -21,7 +21,7 @@ const DashboardPage = ({ windowSize, path }) => {
         windowSize={windowSize}
         slotLeft={<Avatar size={30} style={{ backgroundColor: '#fff' }} icon={<LogoIcon/>}/>}
         slotMiddle={<HeaderMenu windowSize={windowSize}/>}
-        slotRight={<ProfileIconView size={30}/>}
+        slotRight={<ProfileIcon size={30} id={user.userId}/>}
       />
       <Layout>
         <Content style={{ margin: windowSize.large ? 16 : 0 }}>

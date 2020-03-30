@@ -1,8 +1,8 @@
 import React from 'react';
 import { Col, Row } from 'antd';
 import FlexContainer from '../components/layout/flex.container';
-import ProfileIconView from './profile.icon.view';
 import { connect } from 'react-redux';
+import ProfileIcon from '../components/profile.icon';
 
 const ProfileStatisticsView = (props) => {
 
@@ -38,7 +38,7 @@ const ProfileStatisticsView = (props) => {
         xl={{ span: 24, order: 2 }}
       >
         <FlexContainer justify={windowSize.large ? 'center' : 'start'} align='center'>
-          <ProfileIconView size={64}/>
+          <ProfileIcon size={64} id={user.userId}/>
         </FlexContainer>
 
       </Col>

@@ -4,6 +4,7 @@ import { initProjectsDev } from './views/actions/project.actions';
 import { Router } from '@reach/router';
 import DashboardPage from './pages/dashboard.page';
 import ProjectPage from './pages/project.page';
+import UserPage from './pages/user.page';
 
 // https://github.com/reduxjs/react-redux/issues/159
 const App = ({ user, initProjectsDev }) => {
@@ -16,6 +17,7 @@ const App = ({ user, initProjectsDev }) => {
     <Router>
       <DashboardPage path="dashboard/*"/>
       <ProjectPage path="project/:id/*"/>
+      <UserPage path="user/:id/*"/>
     </Router>
   );
 };
