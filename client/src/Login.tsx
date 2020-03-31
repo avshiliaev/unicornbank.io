@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Button, Checkbox, Col, Form, Input, Layout, Row } from 'antd';
 import FlexContainer from './components/layout/flex.container';
-import { logInAction } from './views/actions/login.actions';
+import { logInAction } from './actions/login.actions';
 
 const { Content } = Layout;
 

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Avatar, Badge, Col, List, Radio, Row, Select } from 'antd';
 import ActionIcon from './action.icon';
-import ProjectDeleteView from '../views/project.delete.view';
 import { ProjectState } from '../reducers/project.reducer';
 
 const { Option } = Select;
@@ -77,7 +76,7 @@ const ProjectsList = ({ projects, windowSize }) => {
           <List.Item actions={[
             <ActionIcon text={numberWorkers} type="team" action={openWorkers}/>,
             <ActionIcon text={numberTasks} type="container" action={openTasks}/>,
-            windowSize.large ? <ProjectDeleteView project={project}/> : <div>Del</div>,
+            <div>Del</div>,
           ]}>
             <List.Item.Meta
               avatar={<ProjectAvatar text={ava} badgeNumber={project.tasks.length}/>}

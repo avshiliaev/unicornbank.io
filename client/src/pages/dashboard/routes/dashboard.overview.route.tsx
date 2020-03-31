@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import FlexGridDashboard from '../../../components/layout/flex.grid.dashboard';
+import ProjectsAddReference from '../../../components/projects.add.reference';
 import { Col, Row } from 'antd';
-import FlexContainer from '../components/layout/flex.container';
+import FlexContainer from '../../../components/layout/flex.container';
+import ProfileIcon from '../../../components/profile.icon';
 import { connect } from 'react-redux';
-import ProfileIcon from '../components/profile.icon';
+import ProjectsList from '../../../components/projects.list';
 
-const ProfileStatisticsView = (props) => {
-
-  const { windowSize, user } = props;
+const ProfileStatisticsView = ({ windowSize, user }) => {
 
   const Tags = () => {
 
@@ -52,11 +53,26 @@ const ProfileStatisticsView = (props) => {
   );
 };
 
+const DashboardOverviewRoute = ({ user, windowSize, projects, ...rest }) => {
+
+  return (
+    <Fragment>
+      <FlexGridDashboard
+        windowSize={windowSize}
+        slotOne={<ProfileStatisticsView user={user} windowSize={windowSize}/>}
+        slotTwo={<ProjectsAddReference/>}
+        mainContent={<ProjectsList projects={projects} windowSize={windowSize}/>}
+      />
+    </Fragment>
+  );
+};
+
 const mapStateToProps = (state) => {
   return {
     windowSize: state.windowSize.greaterThan,
     user: state.user,
+    projects: state.projects,
   };
 };
 
-export default connect(mapStateToProps)(ProfileStatisticsView);
+export default connect(mapStateToProps)(DashboardOverviewRoute);

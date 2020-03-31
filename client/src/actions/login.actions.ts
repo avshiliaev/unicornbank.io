@@ -1,4 +1,4 @@
-import { Chain } from '../../sdk/graphql-zeus';
+import { Chain } from '../sdk/graphql-zeus';
 
 const chain = Chain('http://localhost:8080/graphql');
 

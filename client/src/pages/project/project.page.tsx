@@ -1,13 +1,13 @@
 import React, { Fragment } from 'react';
 import { Avatar, Layout } from 'antd';
-import SiderBasic from '../components/layout/sider.basic';
-import HeaderBasic from '../components/layout/header.basic';
-import LogoIcon from '../components/logo.icon';
-import HeaderMenu from '../components/header.menu';
-import ProjectHomeRoute from '../routes/project.home.route';
+import SiderBasic from '../../components/layout/sider.basic';
+import HeaderBasic from '../../components/layout/header.basic';
+import LogoIcon from '../../components/logo.icon';
+import HeaderMenu from '../../components/header.menu';
+import ProjectHomeRoute from './routes/project.home.route';
 import { Router } from '@reach/router';
 import { connect } from 'react-redux';
-import ProfileIcon from '../components/profile.icon';
+import ProfileIcon from '../../components/profile.icon';
 
 const { Content } = Layout;
 
@@ -25,7 +25,7 @@ const ProjectPage = (props) => {
         {props.windowSize.large ? <SiderBasic/> : <div/>}
         <Content style={{ padding: props.windowSize.large ? 16 : 0 }}>
           <Router primary={false} component={Fragment}>
-            <ProjectHomeRoute path='/' windowSize={props.windowSize} id={props.id}/>
+            <ProjectHomeRoute path='/' id={props.id}/>
           </Router>
         </Content>
       </Layout>
