@@ -1,19 +1,21 @@
-import React, { Fragment } from 'react';
-import { Router } from '@reach/router';
+import React, { useEffect } from 'react';
 import { Avatar, Layout } from 'antd';
 import HeaderBasic from '../../components/layout/header.basic';
 import FooterBasic from '../../components/layout/footer.basic';
 import LogoIcon from '../../components/logo.icon';
 import HeaderMenu from '../../components/header.menu';
-import DashboardOverviewRoute from './routes/dashboard.overview.route';
-import DashboardDiscoverRoute from './routes/dashboard.discover.route';
-import DashboardNewRoute from './routes/dashboard.new.route';
 import { connect } from 'react-redux';
 import ProfileIcon from '../../components/profile.icon';
+import { initProjectsDev } from '../../reducers/project.reducer';
+import DashboardPageRoutes from './routes';
 
 const { Content } = Layout;
 
-const DashboardPage = ({ windowSize, path, user }) => {
+const DashboardPage = ({ windowSize, user, initProjectsDev, ...rest }) => {
+
+  useEffect(() => {
+    initProjectsDev(user.userId);
+  }, []);
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
@@ -25,11 +27,7 @@ const DashboardPage = ({ windowSize, path, user }) => {
       />
       <Layout>
         <Content style={{ margin: windowSize.large ? 16 : 0 }}>
-          <Router primary={false} component={Fragment}>
-            <DashboardOverviewRoute path="/"/>
-            <DashboardDiscoverRoute path="discover"/>
-            <DashboardNewRoute path="new"/>
-          </Router>
+          <DashboardPageRoutes/>
         </Content>
         <FooterBasic windowSize={windowSize}/>
       </Layout>
@@ -44,4 +42,12 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(DashboardPage);
+const mapDispatchToProps = {
+  initProjectsDev,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(DashboardPage);
+

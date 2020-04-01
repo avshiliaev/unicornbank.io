@@ -1,25 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { Router } from '@reach/router';
-import DashboardPage from './pages/dashboard/dashboard.page';
-import ProjectPage from './pages/project/project.page';
-import UserPage from './pages/user/user.page';
-import { initProjectsDev } from './reducers/project.reducer';
+import Login from './Login';
+import Pages from './pages';
 
-// https://github.com/reduxjs/react-redux/issues/159
-const App = ({ user, initProjectsDev }) => {
-
-  useEffect(() => {
-    initProjectsDev(user.userId);
-  }, []);
-
-  return (
-    <Router>
-      <DashboardPage path="dashboard/*"/>
-      <ProjectPage path="project/:id/*"/>
-      <UserPage path="user/:id/*"/>
-    </Router>
-  );
+const App = ({ user }) => {
+  return user.isLoggedIn
+    ? <Pages/>
+    : <Login/>;
 };
 
 const mapStateToProps = (state) => {
@@ -28,11 +15,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = {
-  initProjectsDev,
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(App);
+export default connect(mapStateToProps)(App);

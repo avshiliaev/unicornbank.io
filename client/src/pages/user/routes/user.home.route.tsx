@@ -11,7 +11,7 @@ const LogOutView = ({ logOutAction }) => {
   );
 };
 
-const UserHomeRoute = ({ windowSize, logOutAction, id, path }) => {
+const UserHomeRoute = ({ windowSize, logOutAction, user, path }) => {
 
   return (
     <Fragment>
@@ -19,10 +19,17 @@ const UserHomeRoute = ({ windowSize, logOutAction, id, path }) => {
         windowSize={windowSize}
         slotOne={<div>Slot One</div>}
         slotTwo={<LogOutView logOutAction={logOutAction}/>}
-        mainContent={<div>{id}</div>}
+        mainContent={<div>{user.userId}</div>}
       />
     </Fragment>
   );
+};
+
+const mapStateToProps = (state) => {
+  return {
+    windowSize: state.windowSize.greaterThan,
+    user: state.user,
+  };
 };
 
 const mapDispatchToProps = {
@@ -30,6 +37,6 @@ const mapDispatchToProps = {
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 )(UserHomeRoute);
