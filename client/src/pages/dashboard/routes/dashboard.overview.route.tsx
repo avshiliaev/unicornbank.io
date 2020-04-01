@@ -7,7 +7,7 @@ import ProfileIcon from '../../../components/profile.icon';
 import { connect } from 'react-redux';
 import ProjectsList from '../../../components/projects.list';
 
-const ProfileStatisticsView = ({ windowSize, user }) => {
+const ProfileStatistics = ({ windowSize, user }) => {
 
   const Tags = () => {
 
@@ -59,7 +59,7 @@ const DashboardOverviewRoute = ({ user, windowSize, projectsOverview, ...rest })
     <Fragment>
       <FlexGridDashboard
         windowSize={windowSize}
-        slotOne={<ProfileStatisticsView user={user} windowSize={windowSize}/>}
+        slotOne={<ProfileStatistics user={user} windowSize={windowSize}/>}
         slotTwo={<ProjectsAddReference/>}
         mainContent={<ProjectsList projectsOverview={projectsOverview} windowSize={windowSize}/>}
       />

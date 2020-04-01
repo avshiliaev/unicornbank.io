@@ -3,22 +3,26 @@ import FlexGridProject from '../../../components/layout/flex.grid.project';
 import BreadCrumbBasic from '../../../components/layout/breadcrumb.basic';
 import { connect } from 'react-redux';
 
-const ProjectDetailView = ({ windowSize, id }) => {
+const TasksOverview = ({ windowSize, id }) => {
   return (
     <Fragment>
-      <div>TasksTable</div>
+      <div>{JSON.stringify(id)}</div>
     </Fragment>
-
   );
 };
 
-const ProjectHomeRoute = ({ windowSize, project, ...rest }) => {
+const ProjectHomeRoute = ({ windowSize, location, ...rest }) => {
+
+  const getId = (location) => {
+    const pathString = location.pathname.split('/');
+    return pathString[pathString.length - 1];
+  };
 
   return (
     <FlexGridProject
       breadCrumbs={<BreadCrumbBasic/>}
       windowSize={windowSize}
-      slotOne={<ProjectDetailView windowSize={windowSize} id={project.id}/>}
+      slotOne={<TasksOverview windowSize={windowSize} id={getId(location)}/>}
       slotTwo={(<div>Right Column</div>)}
     />
   );
@@ -28,7 +32,7 @@ const mapStateToProps = (state) => {
   return {
     windowSize: state.windowSize.greaterThan,
     user: state.user,
-    project: state.project,
+    location: state.router.location,
   };
 };
 

@@ -4,7 +4,7 @@ import { Button } from 'antd';
 import { connect } from 'react-redux';
 import { logOutAction } from '../../../reducers/user.reducer';
 
-const LogOutView = ({ logOutAction }) => {
+const LogOutButton = ({ logOutAction }) => {
 
   return (
     <Button onClick={() => logOutAction()}>Log Out</Button>
@@ -18,7 +18,7 @@ const UserHomeRoute = ({ windowSize, logOutAction, user, path }) => {
       <FlexGridDashboard
         windowSize={windowSize}
         slotOne={<div>Slot One</div>}
-        slotTwo={<LogOutView logOutAction={logOutAction}/>}
+        slotTwo={<LogOutButton logOutAction={logOutAction}/>}
         mainContent={<div>{user.userId}</div>}
       />
     </Fragment>
