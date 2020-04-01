@@ -11,15 +11,22 @@ const LogOutButton = ({ logOutAction }) => {
   );
 };
 
-const UserHomeRoute = ({ windowSize, logOutAction, user, path }) => {
+const UserHomeRoute = ({ windowSize, logOutAction, location, user, path }) => {
+
+  const getId = (location) => {
+    const pathString = location.pathname.split('/');
+    return pathString[pathString.length - 1];
+  };
+
+  const id = getId(location);
 
   return (
     <Fragment>
       <FlexGridDashboard
         windowSize={windowSize}
-        slotOne={<div>Slot One</div>}
+        slotOne={id === user.userId ? (<div>This is me</div>) : (<div>This is NOT me</div>)}
         slotTwo={<LogOutButton logOutAction={logOutAction}/>}
-        mainContent={<div>{user.userId}</div>}
+        mainContent={<div>{id}</div>}
       />
     </Fragment>
   );
@@ -29,6 +36,7 @@ const mapStateToProps = (state) => {
   return {
     windowSize: state.windowSize.greaterThan,
     user: state.user,
+    location: state.router.location,
   };
 };
 

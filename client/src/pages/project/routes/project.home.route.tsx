@@ -20,7 +20,7 @@ const ProjectHomeRoute = ({ windowSize, location, ...rest }) => {
 
   return (
     <FlexGridProject
-      breadCrumbs={<BreadCrumbBasic/>}
+      breadCrumbs={<BreadCrumbBasic location={location}/>}
       windowSize={windowSize}
       slotOne={<TasksOverview windowSize={windowSize} id={getId(location)}/>}
       slotTwo={(<div>Right Column</div>)}
