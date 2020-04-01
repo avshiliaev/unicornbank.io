@@ -53,7 +53,7 @@ const ProfileStatisticsView = ({ windowSize, user }) => {
   );
 };
 
-const DashboardOverviewRoute = ({ user, windowSize, projects, ...rest }) => {
+const DashboardOverviewRoute = ({ user, windowSize, projectsOverview, ...rest }) => {
 
   return (
     <Fragment>
@@ -61,7 +61,7 @@ const DashboardOverviewRoute = ({ user, windowSize, projects, ...rest }) => {
         windowSize={windowSize}
         slotOne={<ProfileStatisticsView user={user} windowSize={windowSize}/>}
         slotTwo={<ProjectsAddReference/>}
-        mainContent={<ProjectsList projects={projects} windowSize={windowSize}/>}
+        mainContent={<ProjectsList projectsOverview={projectsOverview} windowSize={windowSize}/>}
       />
     </Fragment>
   );
@@ -71,7 +71,7 @@ const mapStateToProps = (state) => {
   return {
     windowSize: state.windowSize.greaterThan,
     user: state.user,
-    projects: state.projects,
+    projectsOverview: state.projectsOverview,
   };
 };
 

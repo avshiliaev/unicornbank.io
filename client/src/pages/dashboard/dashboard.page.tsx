@@ -6,15 +6,14 @@ import LogoIcon from '../../components/logo.icon';
 import HeaderMenu from '../../components/header.menu';
 import { connect } from 'react-redux';
 import ProfileIcon from '../../components/profile.icon';
-import { initProjectsDev } from '../../reducers/project.reducer';
-import DashboardPageRoutes from './routes';
+import { initProjectsOverview } from '../../reducers/projects.overview.reducer';
 
 const { Content } = Layout;
 
-const DashboardPage = ({ windowSize, user, initProjectsDev, ...rest }) => {
+const DashboardPage = ({ windowSize, user, initProjectsOverview, children, ...rest }) => {
 
   useEffect(() => {
-    initProjectsDev(user.userId);
+    initProjectsOverview(user.userId);
   }, []);
 
   return (
@@ -27,7 +26,7 @@ const DashboardPage = ({ windowSize, user, initProjectsDev, ...rest }) => {
       />
       <Layout>
         <Content style={{ margin: windowSize.large ? 16 : 0 }}>
-          <DashboardPageRoutes/>
+          {children}
         </Content>
         <FooterBasic windowSize={windowSize}/>
       </Layout>
@@ -43,7 +42,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  initProjectsDev,
+  initProjectsOverview,
 };
 
 export default connect(

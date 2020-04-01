@@ -4,10 +4,12 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import userReducer from './reducers/user.reducer';
 import { createResponsiveStateReducer, responsiveStoreEnhancer } from 'redux-responsive';
 import projectReducer from './reducers/project.reducer';
+import projectsOverviewReducer from './reducers/projects.overview.reducer';
 
 const reducer = combineReducers({
   user: userReducer,
-  projects: projectReducer,
+  projectsOverview: projectsOverviewReducer,
+  project: projectReducer,
   windowSize: createResponsiveStateReducer({
     extraSmall: 480,
     small: 576,

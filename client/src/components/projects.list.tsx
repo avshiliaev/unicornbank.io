@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Avatar, Badge, Col, List, Radio, Row, Select } from 'antd';
 import ActionIcon from './action.icon';
-import { ProjectState } from '../reducers/project.reducer';
+import { ProjectsOverviewState } from '../reducers/projects.overview.reducer';
 
 const { Option } = Select;
 
@@ -50,9 +50,9 @@ const ProjectAvatar = ({ badgeNumber, text }) => {
   );
 };
 
-const ProjectsList = ({ projects, windowSize }) => {
+const ProjectsList = ({ projectsOverview, windowSize }) => {
 
-  const projectsState: ProjectState = projects;
+  const projectsState: ProjectsOverviewState = projectsOverview;
   const numbers = {
     asDeveloper: projectsState.asDeveloper.length,
     asHost: projectsState.asHost.length,

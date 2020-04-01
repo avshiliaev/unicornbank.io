@@ -6,13 +6,12 @@ import LogoIcon from '../../components/logo.icon';
 import HeaderMenu from '../../components/header.menu';
 import { connect } from 'react-redux';
 import ProfileIcon from '../../components/profile.icon';
-import ProjectPageRoutes from './routes';
 
 const { Content } = Layout;
 
 const ProjectPage = (props) => {
 
-  const { windowSize, id, user } = props;
+  const { windowSize, id, user, children } = props;
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
@@ -25,7 +24,7 @@ const ProjectPage = (props) => {
       <Layout>
         {windowSize.large ? <SiderBasic/> : <div/>}
         <Content style={{ padding: windowSize.large ? 16 : 0 }}>
-          <ProjectPageRoutes id={id}/>
+          {children}
         </Content>
       </Layout>
     </Layout>

@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Login from './Login';
-import Pages from './pages';
+import AppRoutes from './app.routes';
 
 const App = ({ user }) => {
   return user.isLoggedIn
-    ? <Pages/>
+    ? <AppRoutes/>
     : <Login/>;
 };
 
