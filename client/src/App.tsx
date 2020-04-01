@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { initProjectsDev } from './actions/project.actions';
 import { Router } from '@reach/router';
 import DashboardPage from './pages/dashboard/dashboard.page';
 import ProjectPage from './pages/project/project.page';
 import UserPage from './pages/user/user.page';
+import { initProjectsDev } from './reducers/project.reducer';
 
 // https://github.com/reduxjs/react-redux/issues/159
 const App = ({ user, initProjectsDev }) => {

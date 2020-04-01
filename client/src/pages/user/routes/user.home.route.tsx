@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
 import FlexGridDashboard from '../../../components/layout/flex.grid.dashboard';
 import { Button } from 'antd';
-import { logOutAction } from '../../../actions/login.actions';
 import { connect } from 'react-redux';
+import { logOutAction } from '../../../reducers/user.reducer';
 
 const LogOutView = ({ logOutAction }) => {
 
