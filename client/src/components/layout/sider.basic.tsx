@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Menu } from 'antd';
+import { Col, Layout, Menu, Row } from 'antd';
 
 
 const { Sider } = Layout;
@@ -8,7 +8,7 @@ const { Sider } = Layout;
 const SiderBasic = ({children}) => {
 
   return (
-    <Sider width={200}>
+    <Sider width={200} style={{background: '#fff',}}>
       {children}
     </Sider>
   );

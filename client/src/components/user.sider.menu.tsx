@@ -14,7 +14,7 @@ const UserSiderMenu = ({ location }) => {
       mode="inline"
       defaultSelectedKeys={['1']}
       defaultOpenKeys={['sub1']}
-      style={{ height: '100%', borderRight: 0 }}
+      style={{ height: '100%', borderRight: 0, marginTop: 16 }}
     >
       <Menu.Item key="1">
         <Link to="home">

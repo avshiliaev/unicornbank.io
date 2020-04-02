@@ -6,7 +6,7 @@ const BreadCrumbBasic = ({ location }) => {
   const path = location.pathname.split('/');
   return (
     <Breadcrumb>
-      <Breadcrumb.Item href="/dashboard">
+      <Breadcrumb.Item href="/dashboard/home">
         <HomeOutlined/>
       </Breadcrumb.Item>
       {path.map(p => (<Breadcrumb.Item key={p}>{p}</Breadcrumb.Item>))}

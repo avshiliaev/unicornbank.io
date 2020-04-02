@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Avatar, Badge, Col, List, Radio, Row, Select } from 'antd';
 import ActionIcon from './action.icon';
 import { ProjectsOverviewState } from '../reducers/projects.overview.reducer';
+import { Link } from '@reach/router';
 
 const { Option } = Select;
 
@@ -66,7 +67,7 @@ const ProjectsList = ({ projectsOverview, windowSize }) => {
       itemLayout={!windowSize.large ? 'vertical' : 'horizontal'}
       dataSource={toDisplay === 'asDeveloper' ? projectsState.asDeveloper : projectsState.asHost}
       renderItem={project => {
-        const link = `/project/${project.id}`;
+        const link = `/project/${project.id}/home`;
         const ava = project.title.charAt(0);
         const openTasks = () => console.log('tasks');
         const numberTasks = `tasks: ${project.tasks.length}`;
@@ -80,7 +81,7 @@ const ProjectsList = ({ projectsOverview, windowSize }) => {
           ]}>
             <List.Item.Meta
               avatar={<ProjectAvatar text={ava} badgeNumber={project.tasks.length}/>}
-              title={<a href={link}>{project.title}</a>}
+              title={<Link to={link}>{project.title}</Link>}
               description={project.description}
             />
           </List.Item>
