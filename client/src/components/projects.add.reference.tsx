@@ -1,25 +1,16 @@
 import React from 'react';
 import { Button } from 'antd';
-import { connect } from 'react-redux';
+import { Link } from '@reach/router';
 
-const ProjectsAddReference = (props) => {
-
-  const {windowSize, userName} = props;
+const ProjectsAddReference = () => {
 
   return (
     <div>
       <Button block>
-        <a href={'dashboard/new'}>Add project</a>
+        <Link to='/dashboard/new'>Add project</Link>
       </Button>
     </div>
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    windowSize: state.windowSize.greaterThan,
-    user: state.user,
-  };
-};
-
-export default connect(mapStateToProps)(ProjectsAddReference);
+export default ProjectsAddReference;

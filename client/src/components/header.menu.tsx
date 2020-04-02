@@ -1,5 +1,6 @@
 import React from 'react';
 import { Menu } from 'antd';
+import { Link } from '@reach/router';
 
 const HeaderMenu = ({ windowSize }) => {
 
@@ -14,10 +15,14 @@ const HeaderMenu = ({ windowSize }) => {
       }}
     >
       <Menu.Item key="1">
-        <a href='/dashboard'>My projects</a>
+        <Link to="/dashboard/home">
+          <span>My projects</span>
+        </Link>
       </Menu.Item>
       <Menu.Item key="2">
-        <a href='/dashboard/discover'>Discover</a>
+        <Link to="/dashboard/discover">
+          <span>Discover</span>
+        </Link>
       </Menu.Item>
     </Menu>
   );

@@ -9,30 +9,21 @@ import DashboardOverviewRoute from './pages/dashboard/routes/dashboard.overview.
 import DashboardDiscoverRoute from './pages/dashboard/routes/dashboard.discover.route';
 import DashboardNewRoute from './pages/dashboard/routes/dashboard.new.route';
 
-const Root = ({ children, path }) => {
-
-  return (
-    <div>{children}</div>
-  );
-};
-
 const AppRoutes = () => {
 
   return (
     <Router>
-      <Root path='/'>
-        <DashboardPage path="dashboard">
-          <DashboardOverviewRoute path="/"/>
-          <DashboardDiscoverRoute path="discover"/>
-          <DashboardNewRoute path="new"/>
-        </DashboardPage>
-        <ProjectPage path="project/:id">
-          <ProjectHomeRoute path="/"/>
-        </ProjectPage>
-        <UserPage path="user/:id">
-          <UserHomeRoute path="/"/>
-        </UserPage>
-      </Root>
+      <DashboardPage path="dashboard">
+        <DashboardOverviewRoute path="home"/>
+        <DashboardDiscoverRoute path="discover"/>
+        <DashboardNewRoute path="new"/>
+      </DashboardPage>
+      <ProjectPage path="project/:id">
+        <ProjectHomeRoute path="home"/>
+      </ProjectPage>
+      <UserPage path="user/:id">
+        <UserHomeRoute path="home"/>
+      </UserPage>
     </Router>
   );
 };

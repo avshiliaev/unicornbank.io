@@ -6,10 +6,11 @@ import LogoIcon from '../../components/logo.icon';
 import HeaderMenu from '../../components/header.menu';
 import { connect } from 'react-redux';
 import ProfileIcon from '../../components/profile.icon';
+import UserSiderMenu from '../../components/user.sider.menu';
 
 const { Content } = Layout;
 
-const UserPage = ({ windowSize, user, children, ...rest }) => {
+const UserPage = ({ windowSize, user, children, location, ...rest }) => {
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
@@ -20,7 +21,7 @@ const UserPage = ({ windowSize, user, children, ...rest }) => {
         slotRight={<ProfileIcon id={user.userId} size={30}/>}
       />
       <Layout>
-        {windowSize.large ? <SiderBasic/> : <div/>}
+        {windowSize.large ? <SiderBasic><UserSiderMenu location={location}/></SiderBasic> : <div/>}
         <Content style={{ padding: windowSize.large ? 16 : 0 }}>
           {children}
         </Content>
@@ -33,6 +34,7 @@ const mapStateToProps = (state) => {
   return {
     windowSize: state.windowSize.greaterThan,
     user: state.user,
+    location: state.router
   };
 };
 

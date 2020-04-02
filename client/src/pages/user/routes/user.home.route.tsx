@@ -11,11 +11,11 @@ const LogOutButton = ({ logOutAction }) => {
   );
 };
 
-const UserHomeRoute = ({ windowSize, logOutAction, location, user, path }) => {
+const UserHomeRoute = ({ windowSize, logOutAction, location, user, ...rest }) => {
 
   const getId = (location) => {
     const pathString = location.pathname.split('/');
-    return pathString[pathString.length - 1];
+    return pathString[2];
   };
 
   const id = getId(location);

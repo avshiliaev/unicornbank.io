@@ -6,6 +6,7 @@ import LogoIcon from '../../components/logo.icon';
 import HeaderMenu from '../../components/header.menu';
 import { connect } from 'react-redux';
 import ProfileIcon from '../../components/profile.icon';
+import ProjectSiderMenu from '../../components/project.sider.menu';
 
 const { Content } = Layout;
 
@@ -22,7 +23,7 @@ const ProjectPage = (props) => {
         slotRight={<ProfileIcon id={user.userId} size={30}/>}
       />
       <Layout>
-        {windowSize.large ? <SiderBasic/> : <div/>}
+        {windowSize.large ? <SiderBasic><ProjectSiderMenu/></SiderBasic> : <div/>}
         <Content style={{ padding: windowSize.large ? 16 : 0 }}>
           {children}
         </Content>
