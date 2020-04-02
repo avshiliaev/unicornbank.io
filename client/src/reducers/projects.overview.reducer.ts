@@ -1,4 +1,4 @@
-import { Chain, Project } from '../sdk/graphql-zeus';
+import { AddProjectInput, Chain, Project } from '../sdk/graphql-zeus';
 
 const chain = Chain('http://localhost:8080/graphql');
 
@@ -60,7 +60,36 @@ const initProjectsOverview = (userId: string) => {
   };
 };
 
-export { initProjectsOverview };
+const addProjectAsHost = (addProjectInput: AddProjectInput) => {
+  return async dispatch => {
+    const payload = await chain.mutation(
+      {
+        addProject: [
+          { input: [addProjectInput] },
+          {
+            project: [
+              {},
+              {
+                id: true,
+                title: true,
+                description: true,
+                tasks: [{}, { id: true }],
+                developers: [{}, { id: true }],
+                tags: [{}, { id: true }],
+              },
+            ],
+          },
+        ],
+      },
+    );
+    dispatch({
+      type: 'ADD_PROJECT_AS_HOST',
+      data: payload.addProject.project,
+    });
+  };
+};
+
+export { initProjectsOverview, addProjectAsHost };
 
 const projectsOverviewInitialState: ProjectsOverviewState = { asDeveloper: [], asHost: [] };
 
@@ -71,6 +100,8 @@ const projectsOverviewReducer = (
   switch (action.type) {
     case 'INIT_PROJECTS_DEV':
       return action.data;
+    case 'ADD_PROJECT_AS_HOST':
+      return { ...state, asHost: [...action.data, ...state.asHost] };
     default:
       return state;
   }
