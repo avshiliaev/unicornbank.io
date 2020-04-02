@@ -1,6 +1,7 @@
 import React from 'react';
 import { List } from 'antd';
 import { Task } from '../sdk/graphql-zeus';
+import { Link } from '@reach/router';
 
 const TasksTable = ({ tasks }) => {
 
@@ -13,7 +14,7 @@ const TasksTable = ({ tasks }) => {
       renderItem={item => (
         <List.Item>
           <List.Item.Meta
-            title={<a href="https://ant.design">{item.title}</a>}
+            title={<Link to={'../tasks/' + item.id}>{item.title}</Link>}
             description={item.content}
           />
         </List.Item>

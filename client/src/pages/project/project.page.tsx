@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Avatar, Layout } from 'antd';
 import SiderBasic from '../../components/layout/sider.basic';
 import HeaderBasic from '../../components/layout/header.basic';
@@ -7,12 +7,17 @@ import HeaderMenu from '../../components/header.menu';
 import { connect } from 'react-redux';
 import ProfileIcon from '../../components/profile.icon';
 import ProjectSiderMenu from '../../components/project.sider.menu';
+import { getProject } from '../../reducers/project.reducer';
 
 const { Content } = Layout;
 
 const ProjectPage = (props) => {
 
-  const { windowSize, id, user, children } = props;
+  const { windowSize, id, user, children, getProject } = props;
+
+  useEffect(() => {
+    getProject(id);
+  }, []);
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
@@ -39,4 +44,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(ProjectPage);
+const mapDispatchToProps = {
+  getProject,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectPage);
