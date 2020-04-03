@@ -3,9 +3,9 @@ import FlexGridDashboard from '../../../components/layout/flex.grid.dashboard';
 import { Button } from 'antd';
 import { connect } from 'react-redux';
 import { logOutAction } from '../../../reducers/auth.reducer';
+import { User } from '../../../sdk/graphql-zeus';
 
 const LogOutButton = ({ logOutAction }) => {
-
   return (
     <Button onClick={() => logOutAction()}>Log Out</Button>
   );
@@ -13,16 +13,25 @@ const LogOutButton = ({ logOutAction }) => {
 
 const UserHomeRoute = ({ windowSize, logOutAction, location, auth, user, ...rest }) => {
 
-  return (
-    <Fragment>
-      <FlexGridDashboard
-        windowSize={windowSize}
-        slotOne={user.id === auth.userId ? (<div>This is me</div>) : (<div>This is NOT me</div>)}
-        slotTwo={<LogOutButton logOutAction={logOutAction}/>}
-        mainContent={<div>{user.id}</div>}
-      />
-    </Fragment>
-  );
+  const theUser: User = user;
+
+  return theUser.id !== undefined
+    ? (
+      <Fragment>
+        <FlexGridDashboard
+          windowSize={windowSize}
+          slotOne={user.id === auth.userId ? (<div>This is me</div>) : (<div>This is NOT me</div>)}
+          slotTwo={<LogOutButton logOutAction={logOutAction}/>}
+          mainContent={
+            <div>
+              <div>Maintainer: {theUser.host.length}</div>
+              <div>Developer: {theUser.developer.map(dev => dev.project).length}</div>
+            </div>
+          }
+        />
+      </Fragment>
+    )
+    : <div/>;
 };
 
 const mapStateToProps = (state) => {

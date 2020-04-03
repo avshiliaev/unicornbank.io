@@ -58,11 +58,10 @@ type Developer {
 type User {
     id: ID!
     username: String! @search(by: [hash])
-    password: String!
     location: String!
     developer: [Developer] @hasInverse(field: user)
     host: [Project] @hasInverse(field: hosts)
-    stars: [Task]
+    stars: [Project]
 }
 
 type Project {

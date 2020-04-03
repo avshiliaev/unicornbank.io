@@ -11,6 +11,10 @@ const getUser = (userId: string) => {
           {
             id: true,
             username: true,
+            location: true,
+            stars: [{}, { id: true }],
+            host: [{}, { id: true }],
+            developer: [{}, { id: true, project: [{}, { id: true }] }],
           },
         ],
       },
@@ -18,6 +22,35 @@ const getUser = (userId: string) => {
     dispatch({
       type: 'GET_USER',
       data: payload.getUser,
+    });
+  };
+};
+
+const toggleStar = (userId: string, setStars: [{ id: string }]) => {
+  return async dispatch => {
+    const payload = await chain.mutation(
+      {
+        updateUser: [
+          { input: { filter: { id: [userId] }, set: { stars: setStars } } },
+          {
+            user: [
+              {},
+              {
+                id: true,
+                username: true,
+                location: true,
+                stars: [{}, { id: true }],
+                host: [{}, { id: true }],
+                developer: [{}, { id: true, project: [{}, { id: true }] }],
+              },
+            ],
+          },
+        ],
+      },
+    );
+    dispatch({
+      type: 'TOGGLE_STAR',
+      data: payload.updateUser,
     });
   };
 };

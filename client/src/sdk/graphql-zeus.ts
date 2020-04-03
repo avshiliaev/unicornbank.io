@@ -91,11 +91,10 @@ task?: [{	filter?:ValueTypes["TaskFilter"],	order?:ValueTypes["TaskOrder"],	firs
 }>;
 	["AddUserInput"]: {
 	username:string,
-	password:string,
 	location:string,
 	developer?:(ValueTypes["DeveloperRef"] | undefined)[],
 	host?:(ValueTypes["ProjectRef"] | undefined)[],
-	stars?:(ValueTypes["TaskRef"] | undefined)[]
+	stars?:(ValueTypes["ProjectRef"] | undefined)[]
 };
 	["AddUserPayload"]: AliasType<{
 user?: [{	filter?:ValueTypes["UserFilter"],	order?:ValueTypes["UserOrder"],	first?:number,	offset?:number},ValueTypes["User"]],
@@ -571,11 +570,10 @@ user?: [{	filter?:ValueTypes["UserFilter"],	order?:ValueTypes["UserOrder"],	firs
 	["User"]: AliasType<{
 	id?:true,
 	username?:true,
-	password?:true,
 	location?:true,
 developer?: [{	filter?:ValueTypes["DeveloperFilter"],	order?:ValueTypes["DeveloperOrder"],	first?:number,	offset?:number},ValueTypes["Developer"]],
 host?: [{	filter?:ValueTypes["ProjectFilter"],	order?:ValueTypes["ProjectOrder"],	first?:number,	offset?:number},ValueTypes["Project"]],
-stars?: [{	filter?:ValueTypes["TaskFilter"],	order?:ValueTypes["TaskOrder"],	first?:number,	offset?:number},ValueTypes["Task"]]
+stars?: [{	filter?:ValueTypes["ProjectFilter"],	order?:ValueTypes["ProjectOrder"],	first?:number,	offset?:number},ValueTypes["Project"]]
 		__typename?: true
 }>;
 	["UserFilter"]: {
@@ -593,20 +591,18 @@ stars?: [{	filter?:ValueTypes["TaskFilter"],	order?:ValueTypes["TaskOrder"],	fir
 	["UserOrderable"]:UserOrderable;
 	["UserPatch"]: {
 	username?:string,
-	password?:string,
 	location?:string,
 	developer?:(ValueTypes["DeveloperRef"] | undefined)[],
 	host?:(ValueTypes["ProjectRef"] | undefined)[],
-	stars?:(ValueTypes["TaskRef"] | undefined)[]
+	stars?:(ValueTypes["ProjectRef"] | undefined)[]
 };
 	["UserRef"]: {
 	id?:string,
 	username?:string,
-	password?:string,
 	location?:string,
 	developer?:(ValueTypes["DeveloperRef"] | undefined)[],
 	host?:(ValueTypes["ProjectRef"] | undefined)[],
-	stars?:(ValueTypes["TaskRef"] | undefined)[]
+	stars?:(ValueTypes["ProjectRef"] | undefined)[]
 }
   }
 
@@ -700,11 +696,10 @@ export type PartialObjects = {
 	},
 	["AddUserInput"]: {
 	username:string,
-	password:string,
 	location:string,
 	developer?:(PartialObjects["DeveloperRef"] | undefined)[],
 	host?:(PartialObjects["ProjectRef"] | undefined)[],
-	stars?:(PartialObjects["TaskRef"] | undefined)[]
+	stars?:(PartialObjects["ProjectRef"] | undefined)[]
 },
 	["AddUserPayload"]: {
 		__typename?: "AddUserPayload";
@@ -1181,11 +1176,10 @@ export type PartialObjects = {
 		__typename?: "User";
 			id?:string,
 			username?:string,
-			password?:string,
 			location?:string,
 			developer?:(PartialObjects["Developer"] | undefined)[],
 			host?:(PartialObjects["Project"] | undefined)[],
-			stars?:(PartialObjects["Task"] | undefined)[]
+			stars?:(PartialObjects["Project"] | undefined)[]
 	},
 	["UserFilter"]: {
 	id?:string[],
@@ -1202,26 +1196,24 @@ export type PartialObjects = {
 	["UserOrderable"]:UserOrderable,
 	["UserPatch"]: {
 	username?:string,
-	password?:string,
 	location?:string,
 	developer?:(PartialObjects["DeveloperRef"] | undefined)[],
 	host?:(PartialObjects["ProjectRef"] | undefined)[],
-	stars?:(PartialObjects["TaskRef"] | undefined)[]
+	stars?:(PartialObjects["ProjectRef"] | undefined)[]
 },
 	["UserRef"]: {
 	id?:string,
 	username?:string,
-	password?:string,
 	location?:string,
 	developer?:(PartialObjects["DeveloperRef"] | undefined)[],
 	host?:(PartialObjects["ProjectRef"] | undefined)[],
-	stars?:(PartialObjects["TaskRef"] | undefined)[]
+	stars?:(PartialObjects["ProjectRef"] | undefined)[]
 }
   }
 
 // source: http://localhost:8080/graphql
 
-// timestamp: Thu Mar 19 2020 11:48:47 GMT+0100 (Central European Standard Time)
+// timestamp: Fri Apr 03 2020 11:18:47 GMT+0200 (Central European Summer Time)
 
 
 
@@ -1334,11 +1326,10 @@ export type AddTaskPayload = {
 
 export type AddUserInput = {
 		username:string,
-	password:string,
 	location:string,
 	developer?:(DeveloperRef | undefined)[],
 	host?:(ProjectRef | undefined)[],
-	stars?:(TaskRef | undefined)[]
+	stars?:(ProjectRef | undefined)[]
 }
 
 export type AddUserPayload = {
@@ -1930,11 +1921,10 @@ export type User = {
 	__typename?: "User",
 	id:string,
 	username:string,
-	password:string,
 	location:string,
 	developer?:(Developer | undefined)[],
 	host?:(Project | undefined)[],
-	stars?:(Task | undefined)[]
+	stars?:(Project | undefined)[]
 }
 
 export type UserFilter = {
@@ -1953,27 +1943,24 @@ export type UserOrder = {
 
 export enum UserOrderable {
 	username = "username",
-	password = "password",
 	location = "location"
 }
 
 export type UserPatch = {
 		username?:string,
-	password?:string,
 	location?:string,
 	developer?:(DeveloperRef | undefined)[],
 	host?:(ProjectRef | undefined)[],
-	stars?:(TaskRef | undefined)[]
+	stars?:(ProjectRef | undefined)[]
 }
 
 export type UserRef = {
 		id?:string,
 	username?:string,
-	password?:string,
 	location?:string,
 	developer?:(DeveloperRef | undefined)[],
 	host?:(ProjectRef | undefined)[],
-	stars?:(TaskRef | undefined)[]
+	stars?:(ProjectRef | undefined)[]
 }
 
 export const AllTypesProps: Record<string,any> = {
@@ -2146,7 +2133,7 @@ export const AllTypesProps: Record<string,any> = {
 			arrayRequired:false,
 			required:true
 		},
-		auth:{
+		user:{
 			type:"UserRef",
 			array:true,
 			arrayRequired:false,
@@ -2422,12 +2409,6 @@ export const AllTypesProps: Record<string,any> = {
 			arrayRequired:false,
 			required:true
 		},
-		password:{
-			type:"String",
-			array:false,
-			arrayRequired:false,
-			required:true
-		},
 		location:{
 			type:"String",
 			array:false,
@@ -2447,14 +2428,14 @@ export const AllTypesProps: Record<string,any> = {
 			required:false
 		},
 		stars:{
-			type:"TaskRef",
+			type:"ProjectRef",
 			array:true,
 			arrayRequired:false,
 			required:false
 		}
 	},
 	AddUserPayload:{
-		auth:{
+		user:{
 			filter:{
 				type:"UserFilter",
 				array:false,
@@ -2868,7 +2849,7 @@ export const AllTypesProps: Record<string,any> = {
 				required:false
 			}
 		},
-		auth:{
+		user:{
 			filter:{
 				type:"UserFilter",
 				array:false,
@@ -3045,7 +3026,7 @@ export const AllTypesProps: Record<string,any> = {
 			arrayRequired:false,
 			required:false
 		},
-		auth:{
+		user:{
 			type:"UserRef",
 			array:true,
 			arrayRequired:false,
@@ -3095,7 +3076,7 @@ export const AllTypesProps: Record<string,any> = {
 			arrayRequired:false,
 			required:false
 		},
-		auth:{
+		user:{
 			type:"UserRef",
 			array:true,
 			arrayRequired:false,
@@ -4773,7 +4754,7 @@ export const AllTypesProps: Record<string,any> = {
 		}
 	},
 	UpdateUserPayload:{
-		auth:{
+		user:{
 			filter:{
 				type:"UserFilter",
 				array:false,
@@ -4855,13 +4836,13 @@ export const AllTypesProps: Record<string,any> = {
 		},
 		stars:{
 			filter:{
-				type:"TaskFilter",
+				type:"ProjectFilter",
 				array:false,
 				arrayRequired:false,
 				required:false
 			},
 			order:{
-				type:"TaskOrder",
+				type:"ProjectOrder",
 				array:false,
 				arrayRequired:false,
 				required:false
@@ -4940,12 +4921,6 @@ export const AllTypesProps: Record<string,any> = {
 			arrayRequired:false,
 			required:false
 		},
-		password:{
-			type:"String",
-			array:false,
-			arrayRequired:false,
-			required:false
-		},
 		location:{
 			type:"String",
 			array:false,
@@ -4965,7 +4940,7 @@ export const AllTypesProps: Record<string,any> = {
 			required:false
 		},
 		stars:{
-			type:"TaskRef",
+			type:"ProjectRef",
 			array:true,
 			arrayRequired:false,
 			required:false
@@ -4984,12 +4959,6 @@ export const AllTypesProps: Record<string,any> = {
 			arrayRequired:false,
 			required:false
 		},
-		password:{
-			type:"String",
-			array:false,
-			arrayRequired:false,
-			required:false
-		},
 		location:{
 			type:"String",
 			array:false,
@@ -5009,7 +4978,7 @@ export const AllTypesProps: Record<string,any> = {
 			required:false
 		},
 		stars:{
-			type:"TaskRef",
+			type:"ProjectRef",
 			array:true,
 			arrayRequired:false,
 			required:false
@@ -5047,7 +5016,7 @@ export const ReturnTypes: Record<string,any> = {
 		numUids:"Int"
 	},
 	AddUserPayload:{
-		auth:"User",
+		user:"User",
 		numUids:"Int"
 	},
 	Board:{
@@ -5106,7 +5075,7 @@ export const ReturnTypes: Record<string,any> = {
 		project:"Project",
 		name:"String",
 		availability:"Int",
-		auth:"User",
+		user:"User",
 		tags:"Tag",
 		tasks:"Task",
 		liked:"Task"
@@ -5214,17 +5183,16 @@ export const ReturnTypes: Record<string,any> = {
 		numUids:"Int"
 	},
 	UpdateUserPayload:{
-		auth:"User",
+		user:"User",
 		numUids:"Int"
 	},
 	User:{
 		id:"ID",
 		username:"String",
-		password:"String",
 		location:"String",
 		developer:"Developer",
 		host:"Project",
-		stars:"Task"
+		stars:"Project"
 	}
 }
 
@@ -5673,3 +5641,4 @@ export const Selectors = {
   query: ZeusSelect<ValueTypes["Query"]>(),
 mutation: ZeusSelect<ValueTypes["Mutation"]>()
 };
+  

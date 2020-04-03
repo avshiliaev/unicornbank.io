@@ -7,11 +7,11 @@ USERS=$(curl 'localhost:8080/graphql' -H 'Content-Type: application/json' \
     "query": "mutation addUser($input: [AddUserInput!]!){addUser(input: $input){user{id, username}}}",
     "variables": {
       "input": [
-        {"username": "thehost", "password":"thehost", "location":"Berlin"},
-        {"username": "superrust", "password":"superrust", "location":"Frankfurt"},
-        {"username": "rusty", "password":"rusty", "location":"Munich"},
-        {"username": "cargo", "password":"cargo", "location":"Hamburg"},
-        {"username": "hisuperhi", "password":"hisuperhi", "location":"Cologne"}
+        {"username": "thehost", "location":"Berlin"},
+        {"username": "superrust", "location":"Frankfurt"},
+        {"username": "rusty", "location":"Munich"},
+        {"username": "cargo", "location":"Hamburg"},
+        {"username": "hisuperhi", "location":"Cologne"}
       ]
     }
   }' )

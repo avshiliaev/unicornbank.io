@@ -1,13 +1,13 @@
 # source: http://localhost:8080/graphql
-# timestamp: Thu Mar 19 2020 11:48:47 GMT+0100 (Central European Standard Time)
-
-directive @hasInverse(field: String!) on FIELD_DEFINITION
-
-directive @search(by: [DgraphIndex!]) on FIELD_DEFINITION
+# timestamp: Fri Apr 03 2020 11:18:47 GMT+0200 (Central European Summer Time)
 
 directive @dgraph(type: String, pred: String) on OBJECT | INTERFACE | FIELD_DEFINITION
 
 directive @id on FIELD_DEFINITION
+
+directive @hasInverse(field: String!) on FIELD_DEFINITION
+
+directive @search(by: [DgraphIndex!]) on FIELD_DEFINITION
 
 input AddBoardInput {
   project: ProjectRef!
@@ -105,11 +105,10 @@ type AddTaskPayload {
 
 input AddUserInput {
   username: String!
-  password: String!
   location: String!
   developer: [DeveloperRef]
   host: [ProjectRef]
-  stars: [TaskRef]
+  stars: [ProjectRef]
 }
 
 type AddUserPayload {
@@ -674,11 +673,10 @@ type UpdateUserPayload {
 type User {
   id: ID!
   username: String!
-  password: String!
   location: String!
   developer(filter: DeveloperFilter, order: DeveloperOrder, first: Int, offset: Int): [Developer]
   host(filter: ProjectFilter, order: ProjectOrder, first: Int, offset: Int): [Project]
-  stars(filter: TaskFilter, order: TaskOrder, first: Int, offset: Int): [Task]
+  stars(filter: ProjectFilter, order: ProjectOrder, first: Int, offset: Int): [Project]
 }
 
 input UserFilter {
@@ -697,25 +695,22 @@ input UserOrder {
 
 enum UserOrderable {
   username
-  password
   location
 }
 
 input UserPatch {
   username: String
-  password: String
   location: String
   developer: [DeveloperRef]
   host: [ProjectRef]
-  stars: [TaskRef]
+  stars: [ProjectRef]
 }
 
 input UserRef {
   id: ID
   username: String
-  password: String
   location: String
   developer: [DeveloperRef]
   host: [ProjectRef]
-  stars: [TaskRef]
+  stars: [ProjectRef]
 }

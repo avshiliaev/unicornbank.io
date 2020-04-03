@@ -1,19 +1,24 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import FlexGridProject from '../../../components/layout/flex.grid.project';
 import BreadCrumbBasic from '../../../components/layout/breadcrumb.basic';
 import { connect } from 'react-redux';
 import TasksTable from '../../../components/tasks.table';
+import { Project } from '../../../sdk/graphql-zeus';
 
 const ProjectHomeRoute = ({ windowSize, location, project, ...rest }) => {
 
-  return (
-    <FlexGridProject
-      breadCrumbs={<BreadCrumbBasic location={location}/>}
-      windowSize={windowSize}
-      slotOne={<TasksTable tasks={project.tasks}/>}
-      slotTwo={(<div>Right Column</div>)}
-    />
-  );
+  const theProject: Project = project;
+
+  return theProject.id !== undefined
+    ? (
+      <FlexGridProject
+        breadCrumbs={<BreadCrumbBasic location={location}/>}
+        windowSize={windowSize}
+        slotOne={<TasksTable tasks={theProject.tasks}/>}
+        slotTwo={(<div>Right Column</div>)}
+      />
+    )
+    : <div/>;
 };
 
 const mapStateToProps = (state) => {
@@ -21,7 +26,7 @@ const mapStateToProps = (state) => {
     windowSize: state.windowSize.greaterThan,
     auth: state.auth,
     location: state.router.location,
-    project: state.project
+    project: state.project,
   };
 };
 
