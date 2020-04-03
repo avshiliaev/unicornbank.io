@@ -29,7 +29,7 @@ const DashboardNewRoute = ({ windowSize, addProjectAsHost, user, ...rest }) => {
 const mapStateToProps = (state) => {
   return {
     windowSize: state.windowSize.greaterThan,
-    user: state.user,
+    auth: state.auth,
     // project: state.project,
   };
 };

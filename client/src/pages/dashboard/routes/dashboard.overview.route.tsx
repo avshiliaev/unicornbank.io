@@ -7,7 +7,7 @@ import ProfileIcon from '../../../components/profile.icon';
 import { connect } from 'react-redux';
 import ProjectsList from '../../../components/projects.list';
 
-const ProfileStatistics = ({ windowSize, user }) => {
+const ProfileStatistics = ({ windowSize, auth }) => {
 
   const Tags = () => {
 
@@ -28,7 +28,7 @@ const ProfileStatistics = ({ windowSize, user }) => {
         xl={{ span: 24, order: 1 }}
       >
         <FlexContainer justify={windowSize.large ? 'center' : 'start'} align='center'>
-          <h2 style={{ paddingLeft: 16, paddingRight: 16 }}>{user.userName}</h2>
+          <h2 style={{ paddingLeft: 16, paddingRight: 16 }}>{auth.userName}</h2>
         </FlexContainer>
       </Col>
       <Col
@@ -39,7 +39,7 @@ const ProfileStatistics = ({ windowSize, user }) => {
         xl={{ span: 24, order: 2 }}
       >
         <FlexContainer justify={windowSize.large ? 'center' : 'start'} align='center'>
-          <ProfileIcon size={64} id={user.userId}/>
+          <ProfileIcon size={64} id={auth.userId}/>
         </FlexContainer>
 
       </Col>
@@ -53,13 +53,13 @@ const ProfileStatistics = ({ windowSize, user }) => {
   );
 };
 
-const DashboardOverviewRoute = ({ user, windowSize, projectsOverview, ...rest }) => {
+const DashboardOverviewRoute = ({ auth, windowSize, projectsOverview, ...rest }) => {
 
   return (
     <Fragment>
       <FlexGridDashboard
         windowSize={windowSize}
-        slotOne={<ProfileStatistics user={user} windowSize={windowSize}/>}
+        slotOne={<ProfileStatistics auth={auth} windowSize={windowSize}/>}
         slotTwo={<ProjectsAddReference/>}
         mainContent={<ProjectsList projectsOverview={projectsOverview} windowSize={windowSize}/>}
       />
@@ -70,7 +70,7 @@ const DashboardOverviewRoute = ({ user, windowSize, projectsOverview, ...rest })
 const mapStateToProps = (state) => {
   return {
     windowSize: state.windowSize.greaterThan,
-    user: state.user,
+    auth: state.auth,
     projectsOverview: state.projectsOverview,
   };
 };

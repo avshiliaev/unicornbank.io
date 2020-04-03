@@ -3,15 +3,15 @@ import { connect } from 'react-redux';
 import Login from './Login';
 import AppRoutes from './app.routes';
 
-const App = ({ user }) => {
-  return user.isLoggedIn
+const App = ({ auth }) => {
+  return auth.isLoggedIn
     ? <AppRoutes/>
     : <Login/>;
 };
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user,
+    auth: state.auth,
   };
 };
 

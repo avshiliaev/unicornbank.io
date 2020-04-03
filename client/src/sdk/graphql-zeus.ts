@@ -2146,7 +2146,7 @@ export const AllTypesProps: Record<string,any> = {
 			arrayRequired:false,
 			required:true
 		},
-		user:{
+		auth:{
 			type:"UserRef",
 			array:true,
 			arrayRequired:false,
@@ -2454,7 +2454,7 @@ export const AllTypesProps: Record<string,any> = {
 		}
 	},
 	AddUserPayload:{
-		user:{
+		auth:{
 			filter:{
 				type:"UserFilter",
 				array:false,
@@ -2868,7 +2868,7 @@ export const AllTypesProps: Record<string,any> = {
 				required:false
 			}
 		},
-		user:{
+		auth:{
 			filter:{
 				type:"UserFilter",
 				array:false,
@@ -3045,7 +3045,7 @@ export const AllTypesProps: Record<string,any> = {
 			arrayRequired:false,
 			required:false
 		},
-		user:{
+		auth:{
 			type:"UserRef",
 			array:true,
 			arrayRequired:false,
@@ -3095,7 +3095,7 @@ export const AllTypesProps: Record<string,any> = {
 			arrayRequired:false,
 			required:false
 		},
-		user:{
+		auth:{
 			type:"UserRef",
 			array:true,
 			arrayRequired:false,
@@ -4773,7 +4773,7 @@ export const AllTypesProps: Record<string,any> = {
 		}
 	},
 	UpdateUserPayload:{
-		user:{
+		auth:{
 			filter:{
 				type:"UserFilter",
 				array:false,
@@ -5047,7 +5047,7 @@ export const ReturnTypes: Record<string,any> = {
 		numUids:"Int"
 	},
 	AddUserPayload:{
-		user:"User",
+		auth:"User",
 		numUids:"Int"
 	},
 	Board:{
@@ -5106,7 +5106,7 @@ export const ReturnTypes: Record<string,any> = {
 		project:"Project",
 		name:"String",
 		availability:"Int",
-		user:"User",
+		auth:"User",
 		tags:"Tag",
 		tasks:"Task",
 		liked:"Task"
@@ -5214,7 +5214,7 @@ export const ReturnTypes: Record<string,any> = {
 		numUids:"Int"
 	},
 	UpdateUserPayload:{
-		user:"User",
+		auth:"User",
 		numUids:"Int"
 	},
 	User:{
@@ -5673,4 +5673,3 @@ export const Selectors = {
   query: ZeusSelect<ValueTypes["Query"]>(),
 mutation: ZeusSelect<ValueTypes["Mutation"]>()
 };
-  

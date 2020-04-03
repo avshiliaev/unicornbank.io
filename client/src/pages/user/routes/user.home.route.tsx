@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import FlexGridDashboard from '../../../components/layout/flex.grid.dashboard';
 import { Button } from 'antd';
 import { connect } from 'react-redux';
-import { logOutAction } from '../../../reducers/user.reducer';
+import { logOutAction } from '../../../reducers/auth.reducer';
 
 const LogOutButton = ({ logOutAction }) => {
 
@@ -11,22 +11,15 @@ const LogOutButton = ({ logOutAction }) => {
   );
 };
 
-const UserHomeRoute = ({ windowSize, logOutAction, location, user, ...rest }) => {
-
-  const getId = (location) => {
-    const pathString = location.pathname.split('/');
-    return pathString[2];
-  };
-
-  const id = getId(location);
+const UserHomeRoute = ({ windowSize, logOutAction, location, auth, user, ...rest }) => {
 
   return (
     <Fragment>
       <FlexGridDashboard
         windowSize={windowSize}
-        slotOne={id === user.userId ? (<div>This is me</div>) : (<div>This is NOT me</div>)}
+        slotOne={user.id === auth.userId ? (<div>This is me</div>) : (<div>This is NOT me</div>)}
         slotTwo={<LogOutButton logOutAction={logOutAction}/>}
-        mainContent={<div>{id}</div>}
+        mainContent={<div>{user.id}</div>}
       />
     </Fragment>
   );
@@ -35,6 +28,7 @@ const UserHomeRoute = ({ windowSize, logOutAction, location, user, ...rest }) =>
 const mapStateToProps = (state) => {
   return {
     windowSize: state.windowSize.greaterThan,
+    auth: state.auth,
     user: state.user,
     location: state.router.location,
   };

@@ -10,10 +10,10 @@ import { initProjectsOverview } from '../../reducers/projects.overview.reducer';
 
 const { Content } = Layout;
 
-const DashboardPage = ({ windowSize, user, initProjectsOverview, children, ...rest }) => {
+const DashboardPage = ({ windowSize, auth, initProjectsOverview, children, ...rest }) => {
 
   useEffect(() => {
-    initProjectsOverview(user.userId);
+    initProjectsOverview(auth.userId);
   }, []);
 
   return (
@@ -22,7 +22,7 @@ const DashboardPage = ({ windowSize, user, initProjectsOverview, children, ...re
         windowSize={windowSize}
         slotLeft={<Avatar size={30} style={{ backgroundColor: '#fff' }} icon={<LogoIcon/>}/>}
         slotMiddle={<HeaderMenu windowSize={windowSize}/>}
-        slotRight={<ProfileIcon size={30} id={user.userId}/>}
+        slotRight={<ProfileIcon size={30} id={auth.userId}/>}
       />
       <Layout>
         <Content style={{ margin: windowSize.large ? 16 : 0 }}>
@@ -37,7 +37,7 @@ const DashboardPage = ({ windowSize, user, initProjectsOverview, children, ...re
 const mapStateToProps = (state) => {
   return {
     windowSize: state.windowSize.greaterThan,
-    user: state.user,
+    auth: state.auth,
   };
 };
 

@@ -1,12 +1,13 @@
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import userReducer from './reducers/user.reducer';
+import authReducer from './reducers/auth.reducer';
 import { createResponsiveStateReducer, responsiveStoreEnhancer } from 'redux-responsive';
 import projectReducer from './reducers/project.reducer';
 import projectsOverviewReducer from './reducers/projects.overview.reducer';
 import { createReduxHistoryContext, reachify } from 'redux-first-history';
 import { createBrowserHistory } from 'history';
+import userReducer from './reducers/user.reducer';
 
 const { createReduxHistory, routerMiddleware, routerReducer } = createReduxHistoryContext({
   history: createBrowserHistory(),
@@ -14,9 +15,10 @@ const { createReduxHistory, routerMiddleware, routerReducer } = createReduxHisto
 });
 
 const reducer = combineReducers({
-  user: userReducer,
+  auth: authReducer,
   projectsOverview: projectsOverviewReducer,
   project: projectReducer,
+  user: userReducer,
   router: routerReducer,
   windowSize: createResponsiveStateReducer({
     extraSmall: 480,

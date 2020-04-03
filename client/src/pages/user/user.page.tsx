@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Avatar, Layout } from 'antd';
 import SiderBasic from '../../components/layout/sider.basic';
 import HeaderBasic from '../../components/layout/header.basic';
@@ -7,10 +7,17 @@ import HeaderMenu from '../../components/header.menu';
 import { connect } from 'react-redux';
 import ProfileIcon from '../../components/profile.icon';
 import UserSiderMenu from '../../components/user.sider.menu';
+import { getUser } from '../../reducers/user.reducer';
 
 const { Content } = Layout;
 
-const UserPage = ({ windowSize, user, children, location, ...rest }) => {
+const UserPage = (props) => {
+
+  const { windowSize, auth, getUser, children, location, id } = props;
+
+  useEffect(() => {
+    getUser(id);
+  }, []);
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
@@ -18,7 +25,7 @@ const UserPage = ({ windowSize, user, children, location, ...rest }) => {
         windowSize={windowSize}
         slotLeft={<Avatar size={30} style={{ backgroundColor: '#fff' }} icon={<LogoIcon/>}/>}
         slotMiddle={<HeaderMenu windowSize={windowSize}/>}
-        slotRight={<ProfileIcon id={user.userId} size={30}/>}
+        slotRight={<ProfileIcon id={auth.userId} size={30}/>}
       />
       <Layout>
         {windowSize.large ? <SiderBasic><UserSiderMenu location={location}/></SiderBasic> : <div/>}
@@ -33,9 +40,13 @@ const UserPage = ({ windowSize, user, children, location, ...rest }) => {
 const mapStateToProps = (state) => {
   return {
     windowSize: state.windowSize.greaterThan,
-    user: state.user,
-    location: state.router
+    auth: state.auth,
+    location: state.router,
   };
 };
 
-export default connect(mapStateToProps)(UserPage);
+const mapDispatchToProps = {
+  getUser,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserPage);

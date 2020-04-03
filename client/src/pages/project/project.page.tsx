@@ -13,7 +13,7 @@ const { Content } = Layout;
 
 const ProjectPage = (props) => {
 
-  const { windowSize, id, user, children, getProject } = props;
+  const { windowSize, id, auth, children, getProject } = props;
 
   useEffect(() => {
     getProject(id);
@@ -25,7 +25,7 @@ const ProjectPage = (props) => {
         windowSize={windowSize}
         slotLeft={<Avatar size={30} style={{ backgroundColor: '#fff' }} icon={<LogoIcon/>}/>}
         slotMiddle={<HeaderMenu windowSize={windowSize}/>}
-        slotRight={<ProfileIcon id={user.userId} size={30}/>}
+        slotRight={<ProfileIcon id={auth.userId} size={30}/>}
       />
       <Layout>
         {windowSize.large ? <SiderBasic><ProjectSiderMenu/></SiderBasic> : <div/>}
@@ -40,7 +40,7 @@ const ProjectPage = (props) => {
 const mapStateToProps = (state) => {
   return {
     windowSize: state.windowSize.greaterThan,
-    user: state.user,
+    auth: state.auth,
   };
 };
 
