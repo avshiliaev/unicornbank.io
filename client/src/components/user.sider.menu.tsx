@@ -5,9 +5,7 @@ import { Link } from '@reach/router';
 
 const { SubMenu } = Menu;
 
-const UserSiderMenu = ({ location }) => {
-
-  const path = location.pathname;
+const UserSiderMenu = () => {
 
   return (
     <Menu

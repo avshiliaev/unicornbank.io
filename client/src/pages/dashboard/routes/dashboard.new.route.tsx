@@ -29,7 +29,6 @@ const mapStateToProps = (state) => {
   return {
     windowSize: state.windowSize.greaterThan,
     auth: state.auth,
-    // project: state.project,
   };
 };
 
