@@ -5,13 +5,12 @@ import ProjectsForm from '../../../components/projects.form';
 import { AddProjectInput } from '../../../sdk/graphql-zeus';
 import { addProjectAsHost } from '../../../reducers/projects.overview.reducer';
 
-const DashboardNewRoute = ({ windowSize, addProjectAsHost, user, ...rest }) => {
+const DashboardNewRoute = ({ windowSize, addProjectAsHost, auth, ...rest }) => {
 
   const formOnFinish = async (value) => {
     const { title, description } = value;
-    const addProjectInout: AddProjectInput = { title, description, hosts: [{ id: user.userId }] };
+    const addProjectInout: AddProjectInput = { title, description, hosts: [{ id: auth.userId }] };
     await addProjectAsHost(addProjectInout);
-
   };
 
   return (

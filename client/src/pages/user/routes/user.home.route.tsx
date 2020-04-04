@@ -11,25 +11,52 @@ const LogOutButton = ({ logOutAction }) => {
   );
 };
 
+const MyProfile = ({ windowSize, theUser, logOutAction }) => {
+
+  return (
+    <Fragment>
+      <FlexGridDashboard
+        windowSize={windowSize}
+        slotOne={<div>This is me</div>}
+        slotTwo={<LogOutButton logOutAction={logOutAction}/>}
+        mainContent={
+          <div>
+            <div>Maintainer: {theUser.host.length}</div>
+            <div>Developer: {theUser.developer.map(dev => dev.project).length}</div>
+          </div>
+        }
+      />
+    </Fragment>
+  );
+};
+
+const OtherProfile = ({ windowSize, theUser }) => {
+
+  return (
+    <Fragment>
+      <FlexGridDashboard
+        windowSize={windowSize}
+        slotOne={<div>This is NOT me</div>}
+        slotTwo={<div>Slot two</div>}
+        mainContent={<div>{theUser.username}</div>}
+      />
+    </Fragment>
+  );
+};
+
 const UserHomeRoute = ({ windowSize, logOutAction, location, auth, user, ...rest }) => {
 
   const theUser: User = user;
 
   return theUser.id !== undefined
     ? (
-      <Fragment>
-        <FlexGridDashboard
+      theUser.id === auth.userId
+        ? <MyProfile
           windowSize={windowSize}
-          slotOne={user.id === auth.userId ? (<div>This is me</div>) : (<div>This is NOT me</div>)}
-          slotTwo={<LogOutButton logOutAction={logOutAction}/>}
-          mainContent={
-            <div>
-              <div>Maintainer: {theUser.host.length}</div>
-              <div>Developer: {theUser.developer.map(dev => dev.project).length}</div>
-            </div>
-          }
+          theUser={theUser}
+          logOutAction={logOutAction}
         />
-      </Fragment>
+        : <OtherProfile windowSize={windowSize} theUser={theUser}/>
     )
     : <div/>;
 };

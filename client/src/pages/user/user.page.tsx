@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Avatar, Layout } from 'antd';
 import SiderBasic from '../../components/layout/sider.basic';
 import HeaderBasic from '../../components/layout/header.basic';
@@ -15,9 +15,7 @@ const UserPage = (props) => {
 
   const { windowSize, auth, getUser, children, location, id } = props;
 
-  useEffect(() => {
-    getUser(id);
-  }, []);
+  getUser(id);
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
