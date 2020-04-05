@@ -26,7 +26,7 @@ const UserPage = (props) => {
         slotRight={<ProfileIcon id={auth.userId} size={30}/>}
       />
       <Layout>
-        {windowSize.large ? <SiderBasic><UserSiderMenu/></SiderBasic> : <div/>}
+        <SiderBasic windowSize={windowSize}><UserSiderMenu/></SiderBasic>
         <Content style={{ padding: windowSize.large ? 16 : 0 }}>
           {children}
         </Content>

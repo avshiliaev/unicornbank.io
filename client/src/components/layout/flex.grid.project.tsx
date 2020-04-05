@@ -40,7 +40,7 @@ const FlexGridProject = ({ windowSize, slotOne, slotTwo, breadCrumbs }) => {
   const gutter = { xs: 0, sm: 0, md: 0, lg: 16 };
 
   const upperFlex = {
-    colOne: { xs: 24, sm: 24, md: 24, lg: 24, xl: 24, xxl: 24 },
+    colOne: { xs: 0, sm: 0, md: 0, lg: 24, xl: 24, xxl: 24 },
     colTwo: { xs: 24, sm: 24, md: 24, lg: 24, xl: 18, xxl: 16 },
     colThree: { xs: 0, sm: 0, md: 0, lg: 0, xl: 6, xxl: 8 },
   };

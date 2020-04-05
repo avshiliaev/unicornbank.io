@@ -24,6 +24,7 @@ const Selector = ({ onChange, windowSize, numbers }) => {
         <Row justify={windowSize.small ? 'end' : 'center'} align="middle">
           <Col>
             <Radio.Group
+              size="small"
               defaultValue={'asDeveloper'}
               onChange={(event) => onChange(event.target.value)}>
               <Radio.Button value="asDeveloper">Developer: {numbers.asDeveloper}</Radio.Button>

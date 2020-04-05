@@ -1,14 +1,12 @@
 import React from 'react';
-import { Col, Layout, Menu, Row } from 'antd';
-
+import { Layout } from 'antd';
 
 const { Sider } = Layout;
 
-
-const SiderBasic = ({children}) => {
+const SiderBasic = ({ children }) => {
 
   return (
-    <Sider width={200} style={{background: '#fff',}}>
+    <Sider width={200} theme={'light'}>
       {children}
     </Sider>
   );
