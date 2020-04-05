@@ -8,12 +8,6 @@ const { Option } = Select;
 
 const Selector = ({ onChange, windowSize, numbers }) => {
 
-  const opened = () => {
-    return numbers.asDeveloper >= numbers.asHost
-      ? 'asDeveloper'
-      : 'asHost';
-  };
-
   return (
     <Row
       gutter={[0, 16]}
@@ -34,6 +28,7 @@ const Selector = ({ onChange, windowSize, numbers }) => {
               onChange={(event) => onChange(event.target.value)}>
               <Radio.Button value="asDeveloper">Developer: {numbers.asDeveloper}</Radio.Button>
               <Radio.Button value="asHost">Maintainer: {numbers.asHost}</Radio.Button>
+              <Radio.Button value="starred">Starred: {numbers.starred}</Radio.Button>
             </Radio.Group>
           </Col>
         </Row>
@@ -57,6 +52,7 @@ const ProjectsList = ({ projectsOverview, windowSize }) => {
   const numbers = {
     asDeveloper: projectsState.asDeveloper.length,
     asHost: projectsState.asHost.length,
+    starred: projectsState.starred.length,
   };
 
   const [toDisplay, setToDisplay] = useState('asDeveloper');
@@ -65,7 +61,11 @@ const ProjectsList = ({ projectsOverview, windowSize }) => {
     <List
       header={<Selector windowSize={windowSize} numbers={numbers} onChange={(val) => setToDisplay(val)}/>}
       itemLayout={!windowSize.large ? 'vertical' : 'horizontal'}
-      dataSource={toDisplay === 'asDeveloper' ? projectsState.asDeveloper : projectsState.asHost}
+      dataSource={
+        toDisplay === 'asDeveloper' ? projectsState.asDeveloper :
+          toDisplay === 'asHost' ? projectsState.asHost :
+            toDisplay === 'starred' && projectsState.starred
+      }
       renderItem={project => {
         const link = `/project/${project.id}/home`;
         const ava = project.title.charAt(0);

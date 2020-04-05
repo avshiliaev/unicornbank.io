@@ -8,7 +8,6 @@ import projectsOverviewReducer from './reducers/projects.overview.reducer';
 import { createReduxHistoryContext, reachify } from 'redux-first-history';
 import { createBrowserHistory } from 'history';
 import userReducer from './reducers/user.reducer';
-import starsReducer from './reducers/stars.reducer';
 
 const { createReduxHistory, routerMiddleware, routerReducer } = createReduxHistoryContext({
   history: createBrowserHistory(),
@@ -19,7 +18,6 @@ const reducer = combineReducers({
   auth: authReducer,
   projectsOverview: projectsOverviewReducer,
   project: projectReducer,
-  stars: starsReducer,
   user: userReducer,
   router: routerReducer,
   windowSize: createResponsiveStateReducer({
