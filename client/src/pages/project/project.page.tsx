@@ -13,7 +13,7 @@ const { Content } = Layout;
 
 const ProjectPage = (props) => {
 
-  const { windowSize, id, auth, children, getProject } = props;
+  const { windowSize, id, auth, children, getProject, stars } = props;
 
   useEffect(() => {
     getProject(id);
@@ -41,6 +41,7 @@ const mapStateToProps = (state) => {
   return {
     windowSize: state.windowSize.greaterThan,
     auth: state.auth,
+    stars: state.stars
   };
 };
 

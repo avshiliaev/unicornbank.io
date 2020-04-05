@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Avatar, Layout } from 'antd';
+import { Avatar, Layout, Space } from 'antd';
 import HeaderBasic from '../../components/layout/header.basic';
 import FooterBasic from '../../components/layout/footer.basic';
 import LogoIcon from '../../components/logo.icon';
@@ -7,10 +7,11 @@ import HeaderMenu from '../../components/header.menu';
 import { connect } from 'react-redux';
 import ProfileIcon from '../../components/profile.icon';
 import { initProjectsOverview } from '../../reducers/projects.overview.reducer';
+import ActionIcon from '../../components/action.icon';
 
 const { Content } = Layout;
 
-const DashboardPage = ({ windowSize, auth, initProjectsOverview, children, ...rest }) => {
+const DashboardPage = ({ windowSize, auth, initProjectsOverview, children, stars, ...rest }) => {
 
   useEffect(() => {
     initProjectsOverview(auth.userId);
@@ -22,7 +23,12 @@ const DashboardPage = ({ windowSize, auth, initProjectsOverview, children, ...re
         windowSize={windowSize}
         slotLeft={<Avatar size={30} style={{ backgroundColor: '#fff' }} icon={<LogoIcon/>}/>}
         slotMiddle={<HeaderMenu windowSize={windowSize}/>}
-        slotRight={<ProfileIcon size={30} id={auth.userId}/>}
+        slotRight={
+          <Space>
+            <ActionIcon text={'starred: ' + stars.length} action={() => console.log(stars)} key={'1'}/>
+            <ProfileIcon size={30} id={auth.userId} key={'2'}/>
+          </Space>
+        }
       />
       <Layout>
         <Content style={{ margin: windowSize.large ? 16 : 0 }}>
@@ -38,6 +44,7 @@ const mapStateToProps = (state) => {
   return {
     windowSize: state.windowSize.greaterThan,
     auth: state.auth,
+    stars: state.stars,
   };
 };
 

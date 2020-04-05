@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ActionIcon = ({ type, text, action }) => {
+const ActionIcon = ({ text, action }) => {
   return (
     <div onClick={() => action()}>
             <span>

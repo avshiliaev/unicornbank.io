@@ -75,8 +75,8 @@ const ProjectsList = ({ projectsOverview, windowSize }) => {
         const numberWorkers = `team: ${project.developers.length}`;
         return (
           <List.Item actions={[
-            <ActionIcon text={numberWorkers} type="team" action={openWorkers}/>,
-            <ActionIcon text={numberTasks} type="container" action={openTasks}/>,
+            <ActionIcon text={numberWorkers} action={openWorkers}/>,
+            <ActionIcon text={numberTasks} action={openTasks}/>,
             <div>Del</div>,
           ]}>
             <List.Item.Meta

@@ -26,7 +26,7 @@ const UserPage = (props) => {
         slotRight={<ProfileIcon id={auth.userId} size={30}/>}
       />
       <Layout>
-        {windowSize.large ? <SiderBasic><UserSiderMenu location={location}/></SiderBasic> : <div/>}
+        {windowSize.large ? <SiderBasic><UserSiderMenu/></SiderBasic> : <div/>}
         <Content style={{ padding: windowSize.large ? 16 : 0 }}>
           {children}
         </Content>
@@ -40,6 +40,7 @@ const mapStateToProps = (state) => {
     windowSize: state.windowSize.greaterThan,
     auth: state.auth,
     location: state.router,
+    stars: state.stars
   };
 };
 
