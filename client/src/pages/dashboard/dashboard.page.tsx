@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Avatar, Layout } from 'antd';
 import HeaderBasic from '../../components/layout/header.basic';
-import FooterBasic from '../../components/layout/footer.basic';
+import FooterMobile from '../../components/layout/footer.mobile';
 import LogoIcon from '../../components/logo.icon';
 import HeaderMenu from '../../components/header.menu';
 import { connect } from 'react-redux';
@@ -10,7 +10,7 @@ import { initProjectsOverview } from '../../reducers/projects.overview.reducer';
 
 const { Content } = Layout;
 
-const DashboardPage = ({ windowSize, auth, initProjectsOverview, children, stars, ...rest }) => {
+const DashboardPage = ({ windowSize, auth, initProjectsOverview, children, ...rest }) => {
 
   useEffect(() => {
     initProjectsOverview(auth.userId);
@@ -28,7 +28,7 @@ const DashboardPage = ({ windowSize, auth, initProjectsOverview, children, stars
         <Content style={{ margin: windowSize.large ? 16 : 0 }}>
           {children}
         </Content>
-        <FooterBasic windowSize={windowSize}/>
+        {!windowSize.large && <FooterMobile auth={auth}/>}
       </Layout>
     </Layout>
   );

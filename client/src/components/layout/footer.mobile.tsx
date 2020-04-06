@@ -1,11 +1,12 @@
 import React from 'react';
 import CSS from 'csstype';
-import { BackTop, Col, Layout, Row } from 'antd';
+import { BackTop, Col, Layout, Menu, Row } from 'antd';
 import { ContainerTwoTone, MessageOutlined, UserOutlined } from '@ant-design/icons';
+import { Link } from '@reach/router';
 
 const { Footer } = Layout;
 
-const StickyFooter = () => {
+const FooterMobile = ({auth}) => {
 
   const headerShadow = '0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19)';
 
@@ -29,21 +30,27 @@ const StickyFooter = () => {
         <Col span={8}>
           <Row justify="start" align="middle">
             <Col>
-              <ContainerTwoTone style={iconStyles}/>
+              <Link to="/dashboard/home">
+                <ContainerTwoTone style={iconStyles}/>
+              </Link>
             </Col>
           </Row>
         </Col>
         <Col span={8}>
           <Row justify="center" align="middle">
             <Col>
-              <MessageOutlined style={iconStyles}/>
+              <Link to={`/user/${auth.userId}/messages`}>
+                <MessageOutlined style={iconStyles}/>
+              </Link>
             </Col>
           </Row>
         </Col>
         <Col span={8}>
           <Row justify="end" align="middle">
             <Col>
-              <UserOutlined style={iconStyles}/>
+              <Link to={`/user/${auth.userId}/home`}>
+                <UserOutlined style={iconStyles}/>
+              </Link>
             </Col>
           </Row>
         </Col>
@@ -53,14 +60,4 @@ const StickyFooter = () => {
   );
 };
 
-const FooterBasic = ({ windowSize }) => {
-  return windowSize.large
-    ? (
-      <Footer style={{ textAlign: 'center' }}>Lagerist ©2020</Footer>
-    )
-    : (
-      <StickyFooter/>
-    );
-};
-
-export default FooterBasic;
+export default FooterMobile;

@@ -6,15 +6,17 @@ import LogoIcon from '../../components/logo.icon';
 import HeaderMenu from '../../components/header.menu';
 import { connect } from 'react-redux';
 import ProfileIcon from '../../components/profile.icon';
-import ProjectSiderMenu from '../../components/project.sider.menu';
 import { getProject } from '../../reducers/project.reducer';
-import UserSiderMenu from '../../components/user.sider.menu';
+import ProjectSiderMenu from '../../components/project.sider.menu';
+import BasicDrawer from '../../components/layout/drawer.basic';
+import FooterBasic from '../../components/layout/footer.mobile';
+import FooterMobile from '../../components/layout/footer.mobile';
 
 const { Content } = Layout;
 
 const ProjectPage = (props) => {
 
-  const { windowSize, id, auth, children, getProject, stars } = props;
+  const { windowSize, id, auth, children, getProject } = props;
 
   useEffect(() => {
     getProject(id);
@@ -24,15 +26,24 @@ const ProjectPage = (props) => {
     <Layout style={{ minHeight: '100vh' }}>
       <HeaderBasic
         windowSize={windowSize}
-        slotLeft={<Avatar size={30} style={{ backgroundColor: '#fff' }} icon={<LogoIcon/>}/>}
+        slotLeft={
+          windowSize.large
+            ? <Avatar size={30} style={{ backgroundColor: '#fff' }} icon={<LogoIcon/>}/>
+            : <BasicDrawer><ProjectSiderMenu/></BasicDrawer>
+        }
         slotMiddle={<HeaderMenu windowSize={windowSize}/>}
         slotRight={<ProfileIcon id={auth.userId} size={30}/>}
       />
       <Layout>
-        {windowSize.large ? <SiderBasic><UserSiderMenu/></SiderBasic> : <div/>}
+        {
+          windowSize.large
+            ? <SiderBasic><ProjectSiderMenu/></SiderBasic>
+            : <div/>
+        }
         <Content style={{ padding: windowSize.large ? 16 : 0 }}>
           {children}
         </Content>
+        {!windowSize.large && <FooterMobile auth={auth}/>}
       </Layout>
     </Layout>
   );
@@ -42,7 +53,6 @@ const mapStateToProps = (state) => {
   return {
     windowSize: state.windowSize.greaterThan,
     auth: state.auth,
-    stars: state.stars
   };
 };
 

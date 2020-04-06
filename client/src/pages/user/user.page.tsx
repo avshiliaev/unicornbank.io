@@ -8,6 +8,8 @@ import { connect } from 'react-redux';
 import ProfileIcon from '../../components/profile.icon';
 import UserSiderMenu from '../../components/user.sider.menu';
 import { getUser } from '../../reducers/user.reducer';
+import BasicDrawer from '../../components/layout/drawer.basic';
+import FooterMobile from '../../components/layout/footer.mobile';
 
 const { Content } = Layout;
 
@@ -21,15 +23,24 @@ const UserPage = (props) => {
     <Layout style={{ minHeight: '100vh' }}>
       <HeaderBasic
         windowSize={windowSize}
-        slotLeft={<Avatar size={30} style={{ backgroundColor: '#fff' }} icon={<LogoIcon/>}/>}
+        slotLeft={
+          windowSize.large
+            ? <Avatar size={30} style={{ backgroundColor: '#fff' }} icon={<LogoIcon/>}/>
+            : <BasicDrawer><UserSiderMenu/></BasicDrawer>
+        }
         slotMiddle={<HeaderMenu windowSize={windowSize}/>}
         slotRight={<ProfileIcon id={auth.userId} size={30}/>}
       />
       <Layout>
-        <SiderBasic windowSize={windowSize}><UserSiderMenu/></SiderBasic>
+        {
+          windowSize.large
+            ? <SiderBasic><UserSiderMenu/></SiderBasic>
+            : <div/>
+        }
         <Content style={{ padding: windowSize.large ? 16 : 0 }}>
           {children}
         </Content>
+        {!windowSize.large && <FooterMobile auth={auth}/>}
       </Layout>
     </Layout>
   );
@@ -40,7 +51,6 @@ const mapStateToProps = (state) => {
     windowSize: state.windowSize.greaterThan,
     auth: state.auth,
     location: state.router,
-    stars: state.stars
   };
 };
 

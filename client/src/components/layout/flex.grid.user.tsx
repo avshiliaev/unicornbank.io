@@ -35,7 +35,7 @@ const RightColContent = ({ slotTwo, gutter }) => {
   );
 };
 
-const FlexGridProject = ({ windowSize, slotOne, slotTwo, breadCrumbs }) => {
+const FlexGridUser = ({ windowSize, slotOne, slotTwo, breadCrumbs }) => {
 
   const gutter = { xs: 0, sm: 0, md: 0, lg: 16 };
 
@@ -82,4 +82,4 @@ const FlexGridProject = ({ windowSize, slotOne, slotTwo, breadCrumbs }) => {
   );
 };
 
-export default FlexGridProject;
+export default FlexGridUser;

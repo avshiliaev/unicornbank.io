@@ -6,7 +6,7 @@ const LeftColContent = ({ slotOne, slotTwo, windowSize, flexGrid, gutter }) => {
 
   const contentStyle: CSS.Properties = {
     background: '#fff',
-    marginTop: windowSize.large ? 'auto' : '64px',
+    // marginTop: windowSize.large ? 'auto' : '64px',
   };
 
   return (

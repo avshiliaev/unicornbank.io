@@ -1,9 +1,10 @@
 import React, { Fragment } from 'react';
-import FlexGridDashboard from '../../../components/layout/flex.grid.dashboard';
 import { Button } from 'antd';
 import { connect } from 'react-redux';
 import { logOutAction } from '../../../reducers/auth.reducer';
 import { User } from '../../../sdk/graphql-zeus';
+import FlexGridUser from '../../../components/layout/flex.grid.user';
+import BreadCrumbBasic from '../../../components/layout/breadcrumb.basic';
 
 const LogOutButton = ({ logOutAction }) => {
   return (
@@ -11,18 +12,19 @@ const LogOutButton = ({ logOutAction }) => {
   );
 };
 
-const MyProfile = ({ windowSize, theUser, logOutAction }) => {
+const MyProfile = ({ windowSize, theUser, logOutAction, location }) => {
 
   return (
     <Fragment>
-      <FlexGridDashboard
+      <FlexGridUser
         windowSize={windowSize}
-        slotOne={<div>This is me</div>}
-        slotTwo={<LogOutButton logOutAction={logOutAction}/>}
-        mainContent={
+        breadCrumbs={<BreadCrumbBasic location={location}/>}
+        slotOne={<div>
+          <LogOutButton logOutAction={logOutAction}/>
+        </div>}
+        slotTwo={
           <div>
-            <div>Maintainer: {theUser.host.length}</div>
-            <div>Developer: {theUser.developer.map(dev => dev.project).length}</div>
+            RightCol
           </div>
         }
       />
@@ -30,15 +32,15 @@ const MyProfile = ({ windowSize, theUser, logOutAction }) => {
   );
 };
 
-const OtherProfile = ({ windowSize, theUser }) => {
+const OtherProfile = ({ windowSize, theUser, location }) => {
 
   return (
     <Fragment>
-      <FlexGridDashboard
+      <FlexGridUser
         windowSize={windowSize}
+        breadCrumbs={<BreadCrumbBasic location={location}/>}
         slotOne={<div>This is NOT me</div>}
-        slotTwo={<div>Slot two</div>}
-        mainContent={<div>{theUser.username}</div>}
+        slotTwo={<div>{theUser.username}</div>}
       />
     </Fragment>
   );
@@ -52,11 +54,12 @@ const UserHomeRoute = ({ windowSize, logOutAction, location, auth, user, ...rest
     ? (
       theUser.id === auth.userId
         ? <MyProfile
+          location={location}
           windowSize={windowSize}
           theUser={theUser}
           logOutAction={logOutAction}
         />
-        : <OtherProfile windowSize={windowSize} theUser={theUser}/>
+        : <OtherProfile windowSize={windowSize} theUser={theUser} location={location}/>
     )
     : <div/>;
 };
