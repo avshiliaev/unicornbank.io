@@ -1,22 +1,22 @@
 import React, { useEffect } from 'react';
-import { Avatar, Layout } from 'antd';
+import { Button, Layout, Space } from 'antd';
 import SiderBasic from '../../components/layout/sider.basic';
 import HeaderBasic from '../../components/layout/header.basic';
-import LogoIcon from '../../components/logo.icon';
-import HeaderMenu from '../../components/header.menu';
+import AppLogo from '../../components/logo.icon';
 import { connect } from 'react-redux';
 import ProfileIcon from '../../components/profile.icon';
 import { getProject } from '../../reducers/project.reducer';
 import ProjectSiderMenu from '../../components/project.sider.menu';
 import BasicDrawer from '../../components/layout/drawer.basic';
-import FooterBasic from '../../components/layout/footer.mobile';
 import FooterMobile from '../../components/layout/footer.mobile';
+import { Link } from '@reach/router';
+import HeaderMenu from '../../components/header.menu';
 
 const { Content } = Layout;
 
 const ProjectPage = (props) => {
 
-  const { windowSize, id, auth, children, getProject } = props;
+  const { windowSize, id, auth, children, getProject, location } = props;
 
   useEffect(() => {
     getProject(id);
@@ -26,24 +26,18 @@ const ProjectPage = (props) => {
     <Layout style={{ minHeight: '100vh' }}>
       <HeaderBasic
         windowSize={windowSize}
-        slotLeft={
-          windowSize.large
-            ? <Avatar size={30} style={{ backgroundColor: '#fff' }} icon={<LogoIcon/>}/>
-            : <BasicDrawer><ProjectSiderMenu/></BasicDrawer>
+        slotLeft={windowSize.large ? <AppLogo/> : <BasicDrawer><ProjectSiderMenu/></BasicDrawer>}
+        slotMiddle={
+          <HeaderMenu windowSize={windowSize} location={location}/>
         }
-        slotMiddle={<HeaderMenu windowSize={windowSize}/>}
         slotRight={<ProfileIcon id={auth.userId} size={30}/>}
       />
       <Layout>
-        {
-          windowSize.large
-            ? <SiderBasic><ProjectSiderMenu/></SiderBasic>
-            : <div/>
-        }
+        {windowSize.large ? <SiderBasic><ProjectSiderMenu/></SiderBasic> : <div/>}
         <Content style={{ padding: windowSize.large ? 16 : 0 }}>
           {children}
         </Content>
-        {!windowSize.large && <FooterMobile auth={auth}/>}
+        {!windowSize.large && <FooterMobile auth={auth} location={location}/>}
       </Layout>
     </Layout>
   );
@@ -53,6 +47,7 @@ const mapStateToProps = (state) => {
   return {
     windowSize: state.windowSize.greaterThan,
     auth: state.auth,
+    location: state.router.location,
   };
 };
 

@@ -2,24 +2,23 @@ import React from 'react';
 import { Menu } from 'antd';
 import { Link } from '@reach/router';
 
-const HeaderMenu = ({ windowSize }) => {
+const HeaderMenu = ({ windowSize, location }) => {
 
   return (
     <Menu
       theme="light"
-      // mode={windowSize.large ? 'horizontal' : 'inline'}
       mode='horizontal'
-      defaultSelectedKeys={['1']}
+      selectedKeys={[location.pathname]}
       style={{
         lineHeight: windowSize.large ? '61px' : '53px',
       }}
     >
-      <Menu.Item key="1">
+      <Menu.Item key="/dashboard/home">
         <Link to="/dashboard/home">
           <span>My projects</span>
         </Link>
       </Menu.Item>
-      <Menu.Item key="2">
+      <Menu.Item key="/dashboard/discover">
         <Link to="/dashboard/discover">
           <span>Discover</span>
         </Link>

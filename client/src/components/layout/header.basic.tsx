@@ -13,6 +13,7 @@ const HeaderBasic = ({ windowSize, slotLeft, slotMiddle, slotRight }) => {
         backgroundColor: '#fff',
         zIndex: 999,
         boxShadow: headerShadow,
+        height: !windowSize.large && '60px',
         paddingRight: 16,
         paddingLeft: 16,
       }

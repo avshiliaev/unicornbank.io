@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import FlexGridDashboard from '../../../components/layout/flex.grid.dashboard';
 import ProjectsAddReference from '../../../components/projects.add.reference';
-import { Col, Row } from 'antd';
+import { Badge, Col, Row } from 'antd';
 import FlexContainer from '../../../components/layout/flex.container';
 import ProfileIcon from '../../../components/profile.icon';
 import { connect } from 'react-redux';
@@ -9,11 +9,15 @@ import ProjectsList from '../../../components/projects.list';
 
 const ProfileStatistics = ({ windowSize, auth }) => {
 
-  const Tags = () => {
+  const Achievements = () => {
 
     return (
       <div>
-        Some user info
+        <Badge status="success" />
+        <Badge status="error" />
+        <Badge status="default" />
+        <Badge status="processing" />
+        <Badge status="warning" />
       </div>
     );
   };
@@ -45,8 +49,8 @@ const ProfileStatistics = ({ windowSize, auth }) => {
       </Col>
       <Col xs={24} sm={24} md={24} lg={24} xl={24} order={3}>
         <div style={{ marginTop: 16 }}>
-          {windowSize.large ? (<h4>Skills</h4>) : (<div/>)}
-          <Tags/>
+          {windowSize.large ? (<h4>Achievements</h4>) : (<div/>)}
+          <Achievements/>
         </div>
       </Col>
     </Row>

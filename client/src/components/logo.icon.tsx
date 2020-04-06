@@ -1,4 +1,5 @@
 import React from 'react';
+import { Avatar } from 'antd';
 
 const LogoIcon = () => {
 
@@ -38,4 +39,9 @@ const LogoIcon = () => {
   );
 };
 
-export default LogoIcon;
+const AppLogo = () => {
+
+  return <Avatar size={30} style={{ backgroundColor: '#fff' }} icon={<LogoIcon/>}/>;
+};
+
+export default AppLogo;

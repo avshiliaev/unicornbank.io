@@ -1,12 +1,12 @@
 import React from 'react';
 import CSS from 'csstype';
 import { BackTop, Col, Layout, Menu, Row } from 'antd';
-import { ContainerTwoTone, MessageOutlined, UserOutlined } from '@ant-design/icons';
+import { ContainerOutlined, MessageOutlined, UserOutlined } from '@ant-design/icons';
 import { Link } from '@reach/router';
 
 const { Footer } = Layout;
 
-const FooterMobile = ({auth}) => {
+const FooterMobile = ({auth, location}) => {
 
   const headerShadow = '0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19)';
 
@@ -23,7 +23,7 @@ const FooterMobile = ({auth}) => {
         bottom: '0',
         boxShadow: headerShadow,
         height: `${footerHeight}px`,
-        paddingTop: `${paddingTop}px`,
+        paddingTop: `${paddingTop}px`
       }
     }>
       <Row align="middle">
@@ -31,7 +31,9 @@ const FooterMobile = ({auth}) => {
           <Row justify="start" align="middle">
             <Col>
               <Link to="/dashboard/home">
-                <ContainerTwoTone style={iconStyles}/>
+                <ContainerOutlined style={
+                  {...iconStyles, color: location.pathname === "/dashboard/home" ? '#1890ff' : 'grey'}
+                }/>
               </Link>
             </Col>
           </Row>
@@ -40,7 +42,9 @@ const FooterMobile = ({auth}) => {
           <Row justify="center" align="middle">
             <Col>
               <Link to={`/user/${auth.userId}/messages`}>
-                <MessageOutlined style={iconStyles}/>
+                <MessageOutlined style={
+                  {...iconStyles, color: location.pathname === `/user/${auth.userId}/messages` ? '#1890ff' : 'grey'}
+                }/>
               </Link>
             </Col>
           </Row>
@@ -49,7 +53,9 @@ const FooterMobile = ({auth}) => {
           <Row justify="end" align="middle">
             <Col>
               <Link to={`/user/${auth.userId}/home`}>
-                <UserOutlined style={iconStyles}/>
+                <UserOutlined style={
+                  {...iconStyles, color: location.pathname === `/user/${auth.userId}/home` ? '#1890ff' : 'grey'}
+                }/>
               </Link>
             </Col>
           </Row>
