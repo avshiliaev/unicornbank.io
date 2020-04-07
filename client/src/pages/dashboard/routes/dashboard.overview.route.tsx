@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
+import { connect } from 'react-redux';
 import FlexGridDashboard from '../../../components/layout/flex.grid.dashboard';
 import ProjectsAddReference from '../../../components/projects.add.reference';
 import { Badge, Col, Row } from 'antd';
 import FlexContainer from '../../../components/layout/flex.container';
 import ProfileIcon from '../../../components/profile.icon';
-import { connect } from 'react-redux';
 import ProjectsList from '../../../components/projects.list';
 
 const ProfileStatistics = ({ windowSize, auth }) => {
@@ -13,11 +13,11 @@ const ProfileStatistics = ({ windowSize, auth }) => {
 
     return (
       <div>
-        <Badge status="success" />
-        <Badge status="error" />
-        <Badge status="default" />
-        <Badge status="processing" />
-        <Badge status="warning" />
+        <Badge status="success"/>
+        <Badge status="error"/>
+        <Badge status="default"/>
+        <Badge status="processing"/>
+        <Badge status="warning"/>
       </div>
     );
   };

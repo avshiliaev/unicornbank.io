@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
-import { Button } from 'antd';
 import { connect } from 'react-redux';
+import { Button } from 'antd';
 import { logOutAction } from '../../../reducers/auth.reducer';
 import { User } from '../../../sdk/graphql-zeus';
 import FlexGridUser from '../../../components/layout/flex.grid.user';

@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
-import FlexGridDashboard from '../../../components/layout/flex.grid.dashboard';
 import { connect } from 'react-redux';
+import FlexGridDashboard from '../../../components/layout/flex.grid.dashboard';
 import ProjectsForm from '../../../components/projects.form';
 import { AddProjectInput } from '../../../sdk/graphql-zeus';
 import { addProjectAsHost } from '../../../reducers/projects.overview.reducer';

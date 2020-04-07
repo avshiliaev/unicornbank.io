@@ -1,7 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import FlexGridProject from '../../../components/layout/flex.grid.project';
 import BreadCrumbBasic from '../../../components/layout/breadcrumb.basic';
-import { connect } from 'react-redux';
 import TasksTable from '../../../components/tasks.table';
 import { Project } from '../../../sdk/graphql-zeus';
 

@@ -1,10 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Layout } from 'antd';
 import SiderBasic from '../../components/layout/sider.basic';
 import HeaderBasic from '../../components/layout/header.basic';
 import AppLogo from '../../components/logo.icon';
 import HeaderMenu from '../../components/header.menu';
-import { connect } from 'react-redux';
 import ProfileIcon from '../../components/profile.icon';
 import UserSiderMenu from '../../components/user.sider.menu';
 import { getUser } from '../../reducers/user.reducer';
@@ -13,9 +13,7 @@ import FooterMobile from '../../components/layout/footer.mobile';
 
 const { Content } = Layout;
 
-const UserPage = (props) => {
-
-  const { windowSize, auth, getUser, children, location, id } = props;
+const UserPage = ({ windowSize, auth, getUser, children, location, id }) => {
 
   getUser(id);
 

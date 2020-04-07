@@ -1,22 +1,19 @@
 import React, { useEffect } from 'react';
-import { Button, Layout, Space } from 'antd';
+import { connect } from 'react-redux';
+import { Layout } from 'antd';
 import SiderBasic from '../../components/layout/sider.basic';
 import HeaderBasic from '../../components/layout/header.basic';
 import AppLogo from '../../components/logo.icon';
-import { connect } from 'react-redux';
 import ProfileIcon from '../../components/profile.icon';
 import { getProject } from '../../reducers/project.reducer';
 import ProjectSiderMenu from '../../components/project.sider.menu';
 import BasicDrawer from '../../components/layout/drawer.basic';
 import FooterMobile from '../../components/layout/footer.mobile';
-import { Link } from '@reach/router';
 import HeaderMenu from '../../components/header.menu';
 
 const { Content } = Layout;
 
-const ProjectPage = (props) => {
-
-  const { windowSize, id, auth, children, getProject, location } = props;
+const ProjectPage = ({ windowSize, id, auth, children, getProject, location }) => {
 
   useEffect(() => {
     getProject(id);

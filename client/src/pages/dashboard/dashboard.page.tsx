@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 import { Layout } from 'antd';
 import HeaderBasic from '../../components/layout/header.basic';
 import FooterMobile from '../../components/layout/footer.mobile';
 import AppLogo from '../../components/logo.icon';
-import { connect } from 'react-redux';
 import ProfileIcon from '../../components/profile.icon';
 import { initProjectsOverview } from '../../reducers/projects.overview.reducer';
 import HeaderMenu from '../../components/header.menu';
