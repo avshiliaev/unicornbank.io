@@ -13,7 +13,7 @@ import HeaderMenu from '../../components/header.menu';
 
 const { Content } = Layout;
 
-const ProjectPage = ({ windowSize, id, auth, children, getProject, location }) => {
+const ProjectPage = ({ windowSize, id, auth, children, getProject, location, ...rest }) => {
 
   useEffect(() => {
     getProject(id);

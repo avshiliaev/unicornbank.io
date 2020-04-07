@@ -13,7 +13,7 @@ import FooterMobile from '../../components/layout/footer.mobile';
 
 const { Content } = Layout;
 
-const UserPage = ({ windowSize, auth, getUser, children, location, id }) => {
+const UserPage = ({ windowSize, auth, getUser, children, location, id, ...rest }) => {
 
   getUser(id);
 
