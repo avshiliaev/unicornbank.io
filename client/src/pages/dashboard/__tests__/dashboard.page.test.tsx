@@ -1,10 +1,13 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
-import { shallow } from 'enzyme';
 import { cleanup } from '../../../../test-utils';
 import DashboardPage from '../dashboard.page';
-import HeaderBasic from '../../../components/layout/header.basic';
+import { UserState } from '../../../reducers/auth.reducer';
+import { shallow } from 'enzyme';
+
+// https://www.robinwieruch.de/react-connected-component-test
+// https://hackernoon.com/testing-react-components-with-jest-and-enzyme-41d592c174f
 
 /*
 Everything you pass into mockStore will be your Redux store's initial state.
@@ -14,24 +17,44 @@ component to render without any problems.
 const mockStore = configureStore([]);
 describe('My Connected React-Redux Component', () => {
   afterEach(cleanup);
-  let store;
-  beforeEach(() => {
-    store = mockStore({
-      windowSize: {},
-      auth: {},
-      location: {},
-    });
 
-  });
   it('renders without error', () => {
 
-    const component = shallow(
+    const Body = () => {
+      return (
+        <div>Body</div>
+      );
+    };
+
+    const auth: UserState = { isLoggedIn: true, userId: '1', userName: 'testUser' };
+
+    const store = mockStore({
+      windowSize: {
+        greaterThan: {
+          extraSmall: false,
+          small: false,
+          medium: false,
+          large: true,
+          extraLarge: false,
+        },
+      },
+      auth,
+      router: {
+        location: {},
+      },
+    });
+
+    const wrapper = shallow(
       <Provider store={store}>
-        <DashboardPage/>
+        <DashboardPage>
+          <Body/>
+        </DashboardPage>
       </Provider>,
     );
 
-    expect(component).toBeTruthy();
+    expect(wrapper).toMatchSnapshot();
 
   });
 });
+
+
