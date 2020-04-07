@@ -1,44 +1,37 @@
 import React from 'react';
-import Enzyme, { shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { Provider } from 'react-redux';
+import configureStore from 'redux-mock-store';
+import { shallow } from 'enzyme';
+import { cleanup } from '../../../../test-utils';
 import DashboardPage from '../dashboard.page';
+import HeaderBasic from '../../../components/layout/header.basic';
 
-Enzyme.configure({ adapter: new Adapter() });
-
-function setup() {
-  const props = {
-    addTodo: jest.fn(),
-  };
-
-  const enzymeWrapper = shallow(<DashboardPage {...props} />);
-
-  return {
-    props,
-    enzymeWrapper,
-  };
-}
-
-describe('components', () => {
-  describe('DashboardPage', () => {
-    it('should render self and subcomponents', () => {
-      const { enzymeWrapper } = setup();
-
-      expect(enzymeWrapper.find('header').hasClass('header')).toBe(true);
-
-      expect(enzymeWrapper.find('h1').text()).toBe('todos');
-
-      const todoInputProps = enzymeWrapper.find('TodoTextInput').props();
-      expect(todoInputProps.newTodo).toBe(true);
-      expect(todoInputProps.placeholder).toEqual('What needs to be done?');
+/*
+Everything you pass into mockStore will be your Redux store's initial state.
+So make sure you provide everything that's needed by your connected React
+component to render without any problems.
+ */
+const mockStore = configureStore([]);
+describe('My Connected React-Redux Component', () => {
+  afterEach(cleanup);
+  let store;
+  beforeEach(() => {
+    store = mockStore({
+      windowSize: {},
+      auth: {},
+      location: {},
     });
 
-    it('should call addTodo if length of text is greater than 0', () => {
-      const { enzymeWrapper, props } = setup();
-      const input = enzymeWrapper.find('TodoTextInput');
-      input.props().onSave('');
-      expect(props.addTodo.mock.calls.length).toBe(0);
-      input.props().onSave('Use Redux');
-      expect(props.addTodo.mock.calls.length).toBe(1);
-    });
+  });
+  it('renders without error', () => {
+
+    const component = shallow(
+      <Provider store={store}>
+        <DashboardPage/>
+      </Provider>,
+    );
+
+    expect(component).toBeTruthy();
+
   });
 });
