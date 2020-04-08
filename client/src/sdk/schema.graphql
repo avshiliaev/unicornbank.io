@@ -1,13 +1,13 @@
 # source: http://localhost:8080/graphql
-# timestamp: Sun Apr 05 2020 22:07:16 GMT+0200 (Central European Summer Time)
-
-directive @hasInverse(field: String!) on FIELD_DEFINITION
+# timestamp: Wed Apr 08 2020 21:06:15 GMT+0200 (Central European Summer Time)
 
 directive @search(by: [DgraphIndex!]) on FIELD_DEFINITION
 
 directive @dgraph(type: String, pred: String) on OBJECT | INTERFACE | FIELD_DEFINITION
 
 directive @id on FIELD_DEFINITION
+
+directive @hasInverse(field: String!) on FIELD_DEFINITION
 
 input AddBoardInput {
   project: ProjectRef!
