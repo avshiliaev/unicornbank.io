@@ -1,18 +1,31 @@
-import { getProject } from '../project.reducer';
-import projectService from '../../services/project.services';
+import projectReducer from '../project.reducer';
 
-describe('async actions', () => {
+describe('projectReducer', () => {
+  it('should return the initial state', () => {
+    expect(projectReducer(undefined, {})).toEqual({});
+  });
 
-  it('GET_PROJECT', async () => {
-    const id = '0x1';
+  it('should handle GET_PROJECT', () => {
+    const projectOne = { id: '1', title: '1' };
+    const projectTwo = { id: '2', title: '2' };
 
-    projectService.queryProject = jest.fn().mockReturnValue({ id });
+    expect(
+      projectReducer(
+        {},
+        {
+          type: 'GET_PROJECT',
+          data: projectOne,
+        }),
+    ).toEqual(projectOne);
 
-    const dispatch = jest.fn();
-    await getProject('0x9')(dispatch);
-    expect(dispatch).toHaveBeenLastCalledWith({
-      type: 'GET_PROJECT',
-      data: { id },
-    });
+    expect(
+      projectReducer(
+        projectOne,
+        {
+          type: 'GET_PROJECT',
+          data: projectTwo,
+        },
+      ),
+    ).toEqual(projectTwo);
   });
 });
