@@ -1,7 +1,8 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import { cleanup } from '../../../../test-utils';
 import HeaderBasic from '../header.basic';
+import toJson from 'enzyme-to-json';
 
 describe('Header', () => {
   // automatically unmount and cleanup DOM after the test is finished.
@@ -9,7 +10,7 @@ describe('Header', () => {
 
   it('renders without error', () => {
 
-    const header = shallow(
+    const wrapper = shallow(
       <HeaderBasic
         windowSize={{ large: true }}
         slotLeft={(<div>Left</div>)}
@@ -17,9 +18,11 @@ describe('Header', () => {
         slotRight={(<div>Right</div>)}
       />,
     );
-    expect(header.contains(<div>Left</div>)).toBeTruthy();
-    expect(header.contains(<div>Middle</div>)).toBeTruthy();
-    expect(header.contains(<div>Right</div>)).toBeTruthy();
+    expect(wrapper.contains(<div>Left</div>)).toBeTruthy();
+    expect(wrapper.contains(<div>Middle</div>)).toBeTruthy();
+    expect(wrapper.contains(<div>Right</div>)).toBeTruthy();
+
+    expect(toJson(wrapper)).toMatchSnapshot()
 
   });
 });

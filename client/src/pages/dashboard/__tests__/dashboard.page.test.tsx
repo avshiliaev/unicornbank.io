@@ -4,6 +4,7 @@ import configureStore from 'redux-mock-store';
 import { cleanup } from '../../../../test-utils';
 import DashboardPage from '../dashboard.page';
 import { mount } from 'enzyme';
+import thunk from 'redux-thunk';
 
 // https://www.robinwieruch.de/react-connected-component-test
 // https://hackernoon.com/testing-react-components-with-jest-and-enzyme-41d592c174f
@@ -14,13 +15,22 @@ Everything you pass into mockStore will be your Redux store's initial state.
 So make sure you provide everything that's needed by your connected React
 component to render without any problems.
  */
-const mockStore = configureStore([]);
+
+jest.mock('react', () => ({
+  ...jest.requireActual('react'),
+  useEffect: (f) => f(),
+}));
+
 describe('My Connected React-Redux Component', () => {
-  afterEach(cleanup);
 
-  it('renders without error', () => {
+  let mockStore;
+  let store;
+  let props;
 
-    const store = mockStore({
+  beforeEach(() => {
+
+    mockStore = configureStore([thunk]);
+    store = mockStore({
       windowSize: {
         greaterThan: {
           extraSmall: false,
@@ -36,9 +46,15 @@ describe('My Connected React-Redux Component', () => {
       },
     });
 
-    const props = {
+    props = {
       initProjectsOverview: jest.fn(),
     };
+
+  });
+
+  afterEach(cleanup);
+
+  it('renders without error', async () => {
 
     const wrapper = mount(
       <Provider store={store}>
@@ -48,7 +64,9 @@ describe('My Connected React-Redux Component', () => {
       </Provider>,
     );
 
-    expect(wrapper).toBeTruthy();
+    wrapper.update();
+
+    expect(props.initProjectsOverview).toHaveBeenCalledTimes(1)
 
   });
 });
