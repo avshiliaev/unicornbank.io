@@ -1,44 +1,12 @@
-import { AddProjectInput, Chain, Project } from '../sdk/graphql-zeus';
-
-const chain = Chain('http://localhost:8080/graphql');
-
-const projectFragment = {
-  id: true,
-  description: true,
-  tasks: [
-    {},
-    {
-      id: true,
-      title: true,
-      content: true,
-    },
-  ],
-};
+import { Project } from '../sdk/graphql-zeus';
+import projectService from '../services/project.services';
 
 const getProject = (projectId: string) => {
   return async dispatch => {
-    const payload = await chain.query(
-      {
-        getProject: [
-          { id: projectId },
-          {
-            id: true,
-            description: true,
-            tasks: [
-              {},
-              {
-                id: true,
-                title: true,
-                content: true,
-              },
-            ],
-          },
-        ],
-      },
-    );
+    const project = await projectService.queryProject(projectId);
     dispatch({
       type: 'GET_PROJECT',
-      data: payload.getProject,
+      data: project,
     });
   };
 };
