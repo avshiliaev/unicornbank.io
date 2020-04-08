@@ -6,37 +6,24 @@ import DashboardPage from '../dashboard.page';
 import { mount } from 'enzyme';
 import thunk from 'redux-thunk';
 
-// https://www.robinwieruch.de/react-connected-component-test
-// https://hackernoon.com/testing-react-components-with-jest-and-enzyme-41d592c174f
-// jestjs.io/en/
-
-/*
-Everything you pass into mockStore will be your Redux store's initial state.
-So make sure you provide everything that's needed by your connected React
-component to render without any problems.
- */
-
 jest.mock('react', () => ({
   ...jest.requireActual('react'),
-  useEffect: (f) => f(),
+  useEffect: (f) => console.debug('USE_EFFECT'),
 }));
 
-describe('My Connected React-Redux Component', () => {
+describe('DashboardPage ', () => {
 
-  let mockStore;
-  let store;
-  let props;
+  afterEach(cleanup);
 
-  beforeEach(() => {
+  it('renders without error on mobile', async () => {
 
-    mockStore = configureStore([thunk]);
-    store = mockStore({
+    const initialState = {
       windowSize: {
         greaterThan: {
           extraSmall: false,
-          small: false,
+          small: true,
           medium: false,
-          large: true,
+          large: false,
           extraLarge: false,
         },
       },
@@ -44,17 +31,14 @@ describe('My Connected React-Redux Component', () => {
       router: {
         location: { pathname: '/dashboard/home' },
       },
-    });
-
-    props = {
-      initProjectsOverview: jest.fn(),
     };
 
-  });
+    const mockStore = configureStore([thunk]);
+    const store = mockStore({ ...initialState });
 
-  afterEach(cleanup);
-
-  it('renders without error', async () => {
+    const props = {
+      initProjectsOverview: jest.fn(),
+    };
 
     const wrapper = mount(
       <Provider store={store}>
@@ -64,11 +48,18 @@ describe('My Connected React-Redux Component', () => {
       </Provider>,
     );
 
-    wrapper.update();
+    expect(wrapper.find('Header')).toHaveLength(1);
+    expect(wrapper.find('AppLogo')).toHaveLength(1);
+    expect(wrapper.find('HeaderMenu')).toHaveLength(1);
+    expect(wrapper.find('Content')).toHaveLength(1);
+    expect(wrapper.find('Layout')).toHaveLength(2);
+    expect(wrapper.find('FooterMobile')).toHaveLength(1);
 
-    expect(props.initProjectsOverview).toHaveBeenCalledTimes(1)
+    // console.debug(wrapper.props().children.props)
+    expect(wrapper.props().store.getState()).toEqual(initialState);
 
   });
+
 });
 
 
