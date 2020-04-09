@@ -29,10 +29,10 @@ const initProjectsOverview = (userId: string) => {
 
 const addProjectAsHost = (addProjectInput: AddProjectInput) => {
   return async dispatch => {
-    const theProject = await projectOverviewService.addProject(addProjectInput);
+    const projects = await projectOverviewService.addProject(addProjectInput);
     dispatch({
       type: 'ADD_PROJECT_AS_HOST',
-      data: theProject,
+      data: projects,
     });
   };
 };
