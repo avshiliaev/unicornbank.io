@@ -1,6 +1,5 @@
-import { AddProjectInput, Chain, Project } from '../sdk/graphql-zeus';
-
-const chain = Chain('http://localhost:8080/graphql');
+import { AddProjectInput, Project } from '../sdk/graphql-zeus';
+import projectOverviewService from '../services/projects.overview.service';
 
 export interface ProjectsOverviewState {
   asDeveloper: Project[],
@@ -10,54 +9,8 @@ export interface ProjectsOverviewState {
 
 const initProjectsOverview = (userId: string) => {
   return async dispatch => {
-    const payload = await chain.query(
-      {
-        getUser: [
-          { id: userId },
-          {
-            host: [
-              {},
-              {
-                id: true,
-                title: true,
-                description: true,
-                tasks: [{}, { id: true }],
-                developers: [{}, { id: true }],
-                tags: [{}, { id: true }],
-              },
-            ],
-            stars: [
-              {},
-              {
-                id: true,
-                title: true,
-                description: true,
-                tasks: [{}, { id: true }],
-                developers: [{}, { id: true }],
-                tags: [{}, { id: true }],
-              }
-            ],
-            developer: [
-              {},
-              {
-                project: [
-                  {},
-                  {
-                    id: true,
-                    title: true,
-                    description: true,
-                    tasks: [{}, { id: true }],
-                    developers: [{}, { id: true }],
-                    tags: [{}, { id: true }],
-                  },
-                ],
-              },
-            ],
-          },
-        ],
-      },
-    );
-    const theUser = payload.getUser;
+
+    const theUser = await projectOverviewService.queryProjects(userId);
     const asDeveloper = theUser.developer.map(dev => dev.project);
     const asHost = theUser.host;
     const starred = theUser.stars;
@@ -65,7 +18,7 @@ const initProjectsOverview = (userId: string) => {
     const data = {
       asDeveloper,
       asHost,
-      starred
+      starred,
     };
     dispatch({
       type: 'INIT_PROJECTS_DEV',
@@ -76,54 +29,20 @@ const initProjectsOverview = (userId: string) => {
 
 const addProjectAsHost = (addProjectInput: AddProjectInput) => {
   return async dispatch => {
-    const payload = await chain.mutation(
-      {
-        addProject: [
-          { input: [addProjectInput] },
-          {
-            project: [
-              {},
-              {
-                id: true,
-                title: true,
-                description: true,
-                tasks: [{}, { id: true }],
-                developers: [{}, { id: true }],
-                tags: [{}, { id: true }],
-              },
-            ],
-          },
-        ],
-      },
-    );
+    const theProject = await projectOverviewService.addProject(addProjectInput);
     dispatch({
       type: 'ADD_PROJECT_AS_HOST',
-      data: payload.addProject.project,
+      data: theProject,
     });
   };
 };
 
 const toggleStar = (userId: string, setStars: [{ id: string }]) => {
   return async dispatch => {
-    const payload = await chain.mutation(
-      {
-        updateUser: [
-          { input: { filter: { id: [userId] }, set: { stars: setStars } } },
-          {
-            user: [
-              {},
-              {
-                id: true,
-                stars: [{}, { id: true }],
-              },
-            ],
-          },
-        ],
-      },
-    );
+    const stars = await projectOverviewService.starProject(userId, setStars);
     dispatch({
       type: 'TOGGLE_STARS',
-      data: payload.updateUser.user[0].stars,
+      data: stars,
     });
   };
 };

@@ -1,6 +1,4 @@
-import { Chain } from '../sdk/graphql-zeus';
-
-const chain = Chain('http://localhost:8080/graphql');
+import authService from '../services/auth.service';
 
 export interface UserState {
   isLoggedIn: boolean,
@@ -10,17 +8,10 @@ export interface UserState {
 
 const logInAction = (newState: { userName: string, isLoggedIn: boolean }) => {
   return async dispatch => {
-    const payload = await chain.query(
-      {
-        queryUser: [
-          { filter: { username: { eq: newState.userName } } },
-          { id: true, username: true },
-        ],
-      },
-    );
+    const isUser = await authService.queryUser(newState.userName);
 
     // TODO: make better check?
-    const user = payload.queryUser.find(u => u !== undefined);
+    const user = isUser.find(u => u !== undefined);
     if (!!user) {
       await localStorage.setItem('userName', user.username);
       await localStorage.setItem('userId', user.id);
@@ -49,7 +40,6 @@ const logOutAction = () => {
     });
   };
 };
-
 
 export { logInAction, logOutAction };
 

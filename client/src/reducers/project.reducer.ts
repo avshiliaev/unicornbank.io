@@ -1,5 +1,5 @@
 import { Project } from '../sdk/graphql-zeus';
-import projectService from '../services/project.services';
+import projectService from '../services/project.detail.service';
 
 const getProject = (projectId: string) => {
   return async dispatch => {

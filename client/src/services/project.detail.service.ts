@@ -1,8 +1,10 @@
 import { Chain } from '../sdk/graphql-zeus';
 
-const chain = Chain('http://localhost:8080/graphql');
+const url = 'http://localhost:8080/graphql';
 
 const queryProject = async (projectId: string) => {
+
+  const chain = Chain(url);
   const payload = await chain.query(
     {
       getProject: [

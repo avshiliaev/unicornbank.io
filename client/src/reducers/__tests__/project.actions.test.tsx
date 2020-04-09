@@ -1,5 +1,5 @@
 import { getProject } from '../project.reducer';
-import projectService from '../../services/project.services';
+import projectService from '../../services/project.detail.service';
 
 describe('async actions', () => {
 
