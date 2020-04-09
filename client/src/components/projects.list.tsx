@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Avatar, Badge, Button, Col, List, Radio, Row, Select } from 'antd';
+import { Avatar, Badge, Button, Col, List, Row, Select } from 'antd';
 import ActionIcon from './action.icon';
 import { ProjectsOverviewState } from '../reducers/projects.overview.reducer';
 import { Link } from '@reach/router';
-import { CodeOutlined, StarOutlined, FundProjectionScreenOutlined } from '@ant-design/icons';
+import { CodeOutlined, FundProjectionScreenOutlined, StarOutlined } from '@ant-design/icons';
 
 const { Option } = Select;
 
@@ -24,13 +24,16 @@ const Selector = ({ onClick, windowSize, numbers }) => {
       <Col xs={24} sm={12} md={12} lg={12} xl={12} xxl={12}>
         <Row justify={windowSize.small ? 'end' : 'center'} align="middle" gutter={16}>
           <Col>
-            <Button shape="circle" icon={<CodeOutlined />} onClick={() => onClick('asDeveloper')}/>
+            <Button shape="round" onClick={() => onClick('all')}>all</Button>
           </Col>
           <Col>
-            <Button shape="circle" icon={<FundProjectionScreenOutlined />} onClick={() => onClick('asHost')}/>
+            <Button shape="circle" icon={<CodeOutlined/>} onClick={() => onClick('asDeveloper')}/>
           </Col>
           <Col>
-            <Button shape="circle" icon={<StarOutlined />} onClick={() => onClick('starred')}/>
+            <Button shape="circle" icon={<FundProjectionScreenOutlined/>} onClick={() => onClick('asHost')}/>
+          </Col>
+          <Col>
+            <Button shape="circle" icon={<StarOutlined/>} onClick={() => onClick('starred')}/>
           </Col>
         </Row>
       </Col>
@@ -56,7 +59,7 @@ const ProjectsList = ({ projectsOverview, windowSize }) => {
     starred: projectsState.starred.length,
   };
 
-  const [toDisplay, setToDisplay] = useState('asDeveloper');
+  const [toDisplay, setToDisplay] = useState('all');
 
   return (
     <div>
@@ -66,7 +69,12 @@ const ProjectsList = ({ projectsOverview, windowSize }) => {
         dataSource={
           toDisplay === 'asDeveloper' ? projectsState.asDeveloper :
             toDisplay === 'asHost' ? projectsState.asHost :
-              toDisplay === 'starred' && projectsState.starred
+              toDisplay === 'starred' ? projectsState.starred :
+                toDisplay === 'all' && [
+                  ...projectsState.asDeveloper,
+                  ...projectsState.asHost,
+                  ...projectsState.starred,
+                ]
         }
         renderItem={project => {
           const link = `/project/${project.id}/home`;
