@@ -1,64 +1,6 @@
-
-
-type Comment {
-    id: ID!
-    task: Task!
-    developer: Developer!
-    content: String!
-}
-
-type Tag {
-    id: ID!
-    title: String!
-    project: Project!
-    developers: [Developer]
-}
-
-type Task {
-    id: ID!
-    project: Project!
-    column: Column
-    title: String! @search(by: [hash])
-    developers: [Developer]
-    hours: Int!
-    deadline: String!
-    content: String!
-    priority: Int!
-    complete: Boolean!
-    likes: [Developer] @hasInverse(field: liked)
-    comments: [Comment] @hasInverse(field: task)
-}
-
-type Column {
-    id: ID!
-    board: Board!
-    title: String!
-    tasks: [Task] @hasInverse(field: column)
-}
-
-type Board {
-    id: ID!
-    project: Project!
-    title: String!
-    columns: [Column] @hasInverse(field: board)
-    order: [String]
-}
-
-type Developer {
-    id: ID!
-    project: Project!
-    name: String! @search(by: [hash])
-    availability: Int!
-    user: [User] @hasInverse(field: developer)
-    tags: [Tag] @hasInverse(field: developers)
-    tasks: [Task] @hasInverse(field: developers)
-    liked: [Task]
-}
-
 type User {
     id: ID!
     username: String! @search(by: [hash])
-    location: String!
     developer: [Developer] @hasInverse(field: user)
     host: [Project] @hasInverse(field: hosts)
     stars: [Project]
@@ -67,10 +9,34 @@ type User {
 type Project {
     id: ID!
     title: String! @search(by: [hash])
-    hosts: [User]! @hasInverse(field: host)
     description: String!
-    tags: [Tag] @hasInverse(field: project)
-    tasks: [Task] @hasInverse(field: project)
-    boards: [Board] @hasInverse(field: project)
+    hosts: [User]! @hasInverse(field: host)
     developers: [Developer] @hasInverse(field: project)
+    entities: [Entity] @hasInverse(field: project)
 }
+
+enum EntityStatus {
+    READY
+    PENDING
+    FAIL
+}
+
+type Entity {
+    id: ID!
+    project: Project!
+    title: String! @search(by: [hash])
+    description: String!
+    developers: [Developer]
+    status: EntityStatus!
+}
+
+type Developer {
+    id: ID!
+    project: Project!
+    name: String! @search(by: [hash])
+    user: [User] @hasInverse(field: developer)
+    entities: [Entity] @hasInverse(field: developers)
+}
+
+
+

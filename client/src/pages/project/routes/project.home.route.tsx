@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import FlexGridProject from '../../../components/layout/flex.grid.project';
 import BreadCrumbBasic from '../../../components/layout/breadcrumb.basic';
-import TasksTable from '../../../components/tasks.table';
+import EntitiesTable from '../../../components/entities.table';
 import { Project } from '../../../sdk/graphql-zeus';
 
 const ProjectHomeRoute = ({ windowSize, location, project, ...rest }) => {
@@ -14,7 +14,7 @@ const ProjectHomeRoute = ({ windowSize, location, project, ...rest }) => {
       <FlexGridProject
         breadCrumbs={<BreadCrumbBasic location={location}/>}
         windowSize={windowSize}
-        slotOne={<TasksTable tasks={theProject.tasks}/>}
+        slotOne={<EntitiesTable entities={theProject.entities}/>}
         slotTwo={(<div>Right Column</div>)}
       />
     )

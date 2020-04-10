@@ -79,18 +79,18 @@ const ProjectsList = ({ projectsOverview, windowSize }) => {
         renderItem={project => {
           const link = `/project/${project.id}/home`;
           const ava = project.title.charAt(0);
-          const openTasks = () => console.log('tasks');
-          const numberTasks = `tasks: ${project.tasks.length}`;
+          const openEntities = () => console.log('entities');
+          const numberEntities = `entities: ${project.entities.length}`;
           const openWorkers = () => console.log('developers');
           const numberWorkers = `team: ${project.developers.length}`;
           return (
             <List.Item actions={[
               <ActionIcon text={numberWorkers} action={openWorkers}/>,
-              <ActionIcon text={numberTasks} action={openTasks}/>,
+              <ActionIcon text={numberEntities} action={openEntities}/>,
               <div>Del</div>,
             ]}>
               <List.Item.Meta
-                avatar={<ProjectAvatar text={ava} badgeNumber={project.tasks.length}/>}
+                avatar={<ProjectAvatar text={ava} badgeNumber={project.entities.length}/>}
                 title={<Link to={link}>{project.title}</Link>}
                 description={project.description}
               />

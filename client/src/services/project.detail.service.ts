@@ -13,16 +13,12 @@ const queryProject = async (projectId: string) => {
           id: true,
           title: true,
           description: true,
-          tasks: [
+          entities: [
             {},
             {
               id: true,
               title: true,
-              content: true,
-              hours: true,
-              priority: true,
-              complete: true,
-              deadline: true,
+              status: true
             },
           ],
         },

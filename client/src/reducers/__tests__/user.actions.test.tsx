@@ -8,11 +8,10 @@ describe('async actions', () => {
     const mockUser: User = {
       id: '0x1',
       username: 'name',
-      location: 'l',
       host: [{ id: 'host', title: 't', description: 'd' }],
       stars: [{ id: 'stars', title: 't', description: 'd' }],
       developer: [
-        { id: 'id', name: 'name', availability: 10, project: { id: 'developer', title: 't', description: 'd' } }
+        { id: 'id', name: 'name', project: { id: 'developer', title: 't', description: 'd' } }
         ],
     };
 

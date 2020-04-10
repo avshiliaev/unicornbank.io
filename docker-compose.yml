@@ -1,0 +1,49 @@
+version: '3.3'
+
+services:
+
+  consul-srv:
+    image: progrium/consul:latest
+    container_name: consul-srv
+    command: -server -bootstrap -rejoin
+    ports:
+      - "8500:8500"
+
+  rabbit-srv:
+    image: rabbitmq:3-management
+    container_name: rabbit-srv
+    depends_on:
+      - consul-srv
+    expose:
+      - "5672"
+    ports:
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: password
+
+  producer-srv:
+    build: ./producer
+    container_name: producer-srv
+    environment:
+      - MICRO_REGISTRY=consul
+      - MICRO_REGISTRY_ADDRESS=consul-srv:8500
+      - MICRO_BROKER=rabbitmq
+      - MICRO_BROKER_ADDRESS=amqp://admin:password@rabbit-srv:5672/
+    depends_on:
+      - consul-srv
+      - rabbit-srv
+    command: bash -c "./wait-for-it.sh rabbit-srv:5672 -- producer"
+
+  consumer-srv:
+    build: ./consumer
+    container_name: consumer-srv
+    environment:
+      - MICRO_REGISTRY=consul
+      - MICRO_REGISTRY_ADDRESS=consul-srv:8500
+      - MICRO_BROKER=rabbitmq
+      - MICRO_BROKER_ADDRESS=amqp://admin:password@rabbit-srv:5672/
+    depends_on:
+      - consul-srv
+      - rabbit-srv
+    command: bash -c "./wait-for-it.sh rabbit-srv:5672 -- consumer"

@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import { cleanup } from '../../../../test-utils';
 import HeaderBasic from '../header.basic';
 import toJson from 'enzyme-to-json';

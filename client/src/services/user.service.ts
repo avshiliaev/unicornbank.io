@@ -12,7 +12,6 @@ const getUser = async (userId: string) => {
         {
           id: true,
           username: true,
-          location: true,
           stars: [{}, { id: true }],
           host: [{}, { id: true }],
           developer: [{}, { id: true, project: [{}, { id: true }] }],

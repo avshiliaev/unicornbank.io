@@ -1,4 +1,4 @@
-# Generate
+# GQL Generator
 
 `graphql get-schema && gqlg --schemaFilePath api/schema/schema.graphql --destDirPath ./api/schema/documents --depthLimit 5 && graphql-codegen --overwrite`
 
@@ -34,3 +34,38 @@ package.json:
 
 ``npm run generate``
 
+# Microservices
+
+## Go Modules
+
+https://blog.golang.org/using-go-modules
+
+## Protobuf generator
+https://developers.google.com/protocol-buffers/docs/reference/go-generated
+
+```shell script
+#!/usr/bin/env bash
+
+protoc --proto_path="$GOPATH"/src:. --micro_out=. --go_out=. proto/pubsub.proto
+```
+
+### Problems
+
+https://stackoverflow.com/a/57730314/10202443
+
+## PubSub
+
+https://itnext.io/micro-in-action-part4-pub-sub-564f3b054ecd
+
+**With address**
+
+http://adityar.com/go-micro-pub-sub
+
+## RabbitMQ
+
+Dashboard: 
+localhost:15672
+
+## Consul
+
+http://localhost:8500/ui/

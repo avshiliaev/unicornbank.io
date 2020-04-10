@@ -27,9 +27,9 @@ const ProjectSiderMenu = () => {
         </Link>
       </Menu.Item>
       <Menu.Item key="3">
-        <Link to="tasks">
+        <Link to="entities">
           <ContainerOutlined/>
-          <span>Tasks</span>
+          <span>Entities</span>
         </Link>
       </Menu.Item>
     </Menu>
