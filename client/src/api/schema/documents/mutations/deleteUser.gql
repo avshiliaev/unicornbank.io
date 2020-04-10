@@ -1,5 +1,0 @@
-mutation deleteUser($filter: UserFilter!){
-    deleteUser(filter: $filter){
-        msg
-    }
-}

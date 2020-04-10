@@ -1,62 +1,106 @@
-import React from 'react';
-import {Project} from '../api/interfaces/types.d';
-import {Avatar, Badge, Empty, List} from 'antd';
-import ProjectsDelete from '../containers/projects/projects.delete';
+import React, { useState } from 'react';
+import { Avatar, Badge, Button, Col, List, Row, Select } from 'antd';
 import ActionIcon from './action.icon';
+import { ProjectsOverviewState } from '../reducers/projects.overview.reducer';
+import { Link } from '@reach/router';
+import { CodeOutlined, FundProjectionScreenOutlined, StarOutlined } from '@ant-design/icons';
 
-const ProjectAvatar = ({text}) => {
+const { Option } = Select;
 
-    function getRandomInt(max) {
-        return Math.floor(Math.random() * Math.floor(max));
-    }
+const Selector = ({ onClick, windowSize, numbers }) => {
 
-    const colorList = ['#f56a00', '#7265e6', '#ffbf00', '#00a2ae'];
-
-    return (
-        <Badge count={getRandomInt(6)}>
-            <Avatar style={{backgroundColor: colorList[getRandomInt(4)]}}>{text}</Avatar>
-        </Badge>
-    )
+  return (
+    <Row
+      gutter={[0, 16]}
+      justify="start"
+    >
+      <Col xs={0} sm={12} md={12} lg={12} xl={12} xxl={12}>
+        <Row justify="start" align="middle">
+          <Col>
+            <h4>Projects</h4>
+          </Col>
+        </Row>
+      </Col>
+      <Col xs={24} sm={12} md={12} lg={12} xl={12} xxl={12}>
+        <Row justify={windowSize.small ? 'end' : 'center'} align="middle" gutter={16}>
+          <Col>
+            <Button shape="round" onClick={() => onClick('all')}>all</Button>
+          </Col>
+          <Col>
+            <Button shape="circle" icon={<CodeOutlined/>} onClick={() => onClick('asDeveloper')}/>
+          </Col>
+          <Col>
+            <Button shape="circle" icon={<FundProjectionScreenOutlined/>} onClick={() => onClick('asHost')}/>
+          </Col>
+          <Col>
+            <Button shape="circle" icon={<StarOutlined/>} onClick={() => onClick('starred')}/>
+          </Col>
+        </Row>
+      </Col>
+    </Row>
+  );
 };
 
-const ProjectsList = ({projects, large}) => {
+const ProjectAvatar = ({ badgeNumber, text }) => {
 
-    if (projects.length === 0) {
-        return (
-            <Empty/>
-        )
-    }
+  return (
+    <Badge count={badgeNumber}>
+      <Avatar style={{ backgroundColor: '#00a2ae' }}>{text}</Avatar>
+    </Badge>
+  );
+};
 
-    const projectsList: Project[] = projects;
+const ProjectsList = ({ projectsOverview, windowSize }) => {
 
-    return (
-        <List
-            header={large ? (<h4>Projects</h4>) : 'Projects'}
-            itemLayout={!large ? "vertical" : 'horizontal'}
-            dataSource={projectsList}
-            renderItem={project => {
-                const link = `/projects/${project.id}`;
-                const ava = project.title.charAt(0);
-                const openTasks = () => console.log('tasks');
-                const numberTasks = `tasks: ${project.tasks.length}`;
-                const openWorkers = () => console.log('workers');
-                const numberWorkers = `team: ${project.workers.length}`;
-                return (
-                    <List.Item actions={[
-                        <ActionIcon text={numberWorkers} type="team" action={openWorkers}/>,
-                        <ActionIcon text={numberTasks} type="container" action={openTasks}/>,
-                        large ? <ProjectsDelete project={project}/> : <div>Del</div>
-                    ]}>
-                        <List.Item.Meta
-                            avatar={<ProjectAvatar text={ava}/>}
-                            title={<a href={link}>{project.title}</a>}
-                            description={project.description}
-                        />
-                    </List.Item>
-                )
-            }}
-        />
-    )
+  const projectsState: ProjectsOverviewState = projectsOverview;
+  const numbers = {
+    asDeveloper: projectsState.asDeveloper.length,
+    asHost: projectsState.asHost.length,
+    starred: projectsState.starred.length,
+  };
+
+  const [toDisplay, setToDisplay] = useState('all');
+
+  return (
+    <div>
+      <Selector windowSize={windowSize} numbers={numbers} onClick={setToDisplay}/>
+      <List
+        itemLayout={!windowSize.large ? 'vertical' : 'horizontal'}
+        dataSource={
+          toDisplay === 'asDeveloper' ? projectsState.asDeveloper :
+            toDisplay === 'asHost' ? projectsState.asHost :
+              toDisplay === 'starred' ? projectsState.starred :
+                toDisplay === 'all' && [
+                  ...projectsState.asDeveloper,
+                  ...projectsState.asHost,
+                  ...projectsState.starred,
+                ]
+        }
+        renderItem={project => {
+          const link = `/project/${project.id}/home`;
+          const ava = project.title.charAt(0);
+          const openTasks = () => console.log('tasks');
+          const numberTasks = `tasks: ${project.tasks.length}`;
+          const openWorkers = () => console.log('developers');
+          const numberWorkers = `team: ${project.developers.length}`;
+          return (
+            <List.Item actions={[
+              <ActionIcon text={numberWorkers} action={openWorkers}/>,
+              <ActionIcon text={numberTasks} action={openTasks}/>,
+              <div>Del</div>,
+            ]}>
+              <List.Item.Meta
+                avatar={<ProjectAvatar text={ava} badgeNumber={project.tasks.length}/>}
+                title={<Link to={link}>{project.title}</Link>}
+                description={project.description}
+              />
+            </List.Item>
+          );
+        }}
+      />
+    </div>
+
+  );
 };
 
 export default ProjectsList;

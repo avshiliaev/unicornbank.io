@@ -1,15 +1,14 @@
 import React from 'react';
-import {Icon} from 'antd';
 
-const ActionIcon = ({type, text, action}) => {
-    return (
-        <div onClick={() => action()}>
+const ActionIcon = ({ text, action }) => {
+  return (
+    <div onClick={() => action()}>
             <span>
-                <Icon type={type} style={{marginRight: 8}}/>
-                {text}
+                <div style={{ marginRight: 8 }}/>
+              {text}
             </span>
-        </div>
-    )
+    </div>
+  );
 };
 
 export default ActionIcon;

@@ -1,0 +1,27 @@
+{
+  "name": "monorepo",
+  "version": "1.0.0",
+  "description": "### 1. Download schema from endpoint Graphql CLI",
+  "main": "index.js",
+  "scripts": {
+    "zeus": "graphql get-schema && zeus client/src/sdk/schema.graphql client/src/sdk/ --node --ts"
+  },
+  "dependencies": {
+    "@graphql-codegen/cli": "^1.11.2",
+    "@graphql-codegen/typescript": "^1.13.1",
+    "@graphql-codegen/typescript-graphql-request": "^1.13.1",
+    "@graphql-codegen/typescript-operations": "^1.13.1",
+    "gql-generator": "^1.0.12",
+    "graphql-zeus": "^2.6.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/lagerist_app/monorepo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/lagerist_app/monorepo/issues"
+  },
+  "homepage": "https://gitlab.com/lagerist_app/monorepo#readme"
+}

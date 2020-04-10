@@ -1,5 +1,0 @@
-mutation deleteBoard($filter: BoardFilter!){
-    deleteBoard(filter: $filter){
-        msg
-    }
-}
