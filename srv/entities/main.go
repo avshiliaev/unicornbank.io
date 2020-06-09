@@ -12,8 +12,8 @@ import (
 )
 
 var (
-	subTopic = "go.micro.topic.jobInit"
-	pubTopic = "go.micro.topic.jobDone"
+	subTopic = "go.micro.topic.createEntity"
+	pubTopic = "go.micro.topic.entityCreated"
 )
 
 func pub(pubTo string, header string, body string) {
@@ -26,13 +26,12 @@ func pub(pubTo string, header string, body string) {
 	if err := broker.Publish(pubTo, msg); err != nil {
 		log.Printf("[pub] failed: %v", err)
 	} else {
-		fmt.Printf("done message: %v\n", header)
+		fmt.Printf("[pub] dispatched: %v\n", header)
 	}
 }
 
 func sub(subTo string, pubTo string, publish func(pubTo string, header string, body string)) {
 	_, err := broker.Subscribe(subTo, func(p broker.Event) error {
-		time.Sleep(time.Second * 5)
 
 		subMsgHeader := p.Message().Header["id"]
 

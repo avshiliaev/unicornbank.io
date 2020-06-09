@@ -22,6 +22,19 @@ services:
       RABBITMQ_DEFAULT_USER: admin
       RABBITMQ_DEFAULT_PASS: password
 
+  web-srv:
+    build: srv/web
+    container_name: web-srv
+    environment:
+      - MICRO_REGISTRY=consul
+      - MICRO_REGISTRY_ADDRESS=consul-srv:8500
+      - MICRO_BROKER=rabbitmq
+      - MICRO_BROKER_ADDRESS=amqp://admin:password@rabbit-srv:5672/
+    depends_on:
+      - consul-srv
+      - rabbit-srv
+    command: bash -c "./wait-for-it.sh rabbit-srv:5672 -- web"
+
   projects-srv:
     build: srv/projects
     container_name: projects-srv
