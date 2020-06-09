@@ -1,7 +1,7 @@
 FROM golang
 
-COPY . /go/src/lagerist.io/srv/consumer
-WORKDIR /go/src/lagerist.io/srv/consumer
+COPY . /go/src/lagerist.io/srv/entities
+WORKDIR /go/src/lagerist.io/srv/entities
 
 RUN go get ./...
 RUN go build

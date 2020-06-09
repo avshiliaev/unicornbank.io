@@ -1,4 +1,4 @@
-module lagerist.io/srv/consumer
+module lagerist.io/srv/projects
 
 go 1.14
 

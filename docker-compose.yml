@@ -22,9 +22,9 @@ services:
       RABBITMQ_DEFAULT_USER: admin
       RABBITMQ_DEFAULT_PASS: password
 
-  producer-srv:
-    build: ./producer
-    container_name: producer-srv
+  projects-srv:
+    build: srv/projects
+    container_name: projects-srv
     environment:
       - MICRO_REGISTRY=consul
       - MICRO_REGISTRY_ADDRESS=consul-srv:8500
@@ -33,11 +33,11 @@ services:
     depends_on:
       - consul-srv
       - rabbit-srv
-    command: bash -c "./wait-for-it.sh rabbit-srv:5672 -- producer"
+    command: bash -c "./wait-for-it.sh rabbit-srv:5672 -- projects"
 
-  consumer-srv:
-    build: ./consumer
-    container_name: consumer-srv
+  entities-srv:
+    build: srv/entities
+    container_name: entities-srv
     environment:
       - MICRO_REGISTRY=consul
       - MICRO_REGISTRY_ADDRESS=consul-srv:8500
@@ -46,4 +46,4 @@ services:
     depends_on:
       - consul-srv
       - rabbit-srv
-    command: bash -c "./wait-for-it.sh rabbit-srv:5672 -- consumer"
+    command: bash -c "./wait-for-it.sh rabbit-srv:5672 -- entities"

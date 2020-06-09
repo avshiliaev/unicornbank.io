@@ -69,3 +69,17 @@ localhost:15672
 ## Consul
 
 http://localhost:8500/ui/
+
+# Go Micro
+
+## In root of the project
+
+`go install github.com/micro/micro/v2`
+
+`go get github.com/micro/micro/v2/cmd/protoc-gen-micro@master`
+
+`protoc --proto_path=$GOPATH/src:. --micro_out=. --go_out=. api/proto/greeter.proto`
+
+## Writing a service
+
+https://micro.mu/docs/writing-a-go-service.html

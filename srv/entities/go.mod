@@ -1,4 +1,4 @@
-module lagerist.io/srv/producer
+module lagerist.io/srv/entities
 
 go 1.14
 
