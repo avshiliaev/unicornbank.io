@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+option go_package = "proto;entities";
+
+service Entities {
+  rpc CreateEntity(Request) returns (Response) {}
+}
+
+message Request {
+  string title = 1;
+}
+
+message Response {
+  string msg = 2;
+}

@@ -1,60 +1,36 @@
 package main
 
 import (
+	"context"
 	"fmt"
-	"log"
-	"time"
 
-	"github.com/micro/go-micro/v2/broker"
-	"github.com/micro/go-micro/v2/config/cmd"
-	_ "github.com/micro/go-plugins/broker/rabbitmq/v2"
-	_ "github.com/micro/go-plugins/registry/consul/v2"
+	micro "github.com/micro/go-micro/v2"
+	proto "lagerist.io/srv/projects/proto"
 )
 
-var (
-	subTopic = "go.micro.topic.createProject"
-	pubTopic = "go.micro.topic.projectCreated"
-)
+type Projects struct{}
 
-func pub(pubTo string, header string, body string) {
-	msg := &broker.Message{
-		Header: map[string]string{
-			"id": fmt.Sprintf("%v", header),
-		},
-		Body: []byte(fmt.Sprintf("%v: %s", body, time.Now().String())),
-	}
-	if err := broker.Publish(pubTo, msg); err != nil {
-		log.Printf("[pub] failed: %v", err)
-	} else {
-		fmt.Printf("[pub] processed: %v\n", header)
-	}
-}
-
-func sub(subTo string, pubTo string, publish func(pubTo string, header string, body string)) {
-	_, err := broker.Subscribe(subTo, func(p broker.Event) error {
-
-		subMsgHeader := p.Message().Header["id"]
-
-		publish(pubTo, subMsgHeader, "Done")
-
-		return nil
-	})
-	if err != nil {
-		fmt.Println(err)
-	}
+func (g *Projects) CreateProject(ctx context.Context, req *proto.Request, rsp *proto.Response) error {
+	rsp.Msg = "created project: " + req.Title
+	return nil
 }
 
 func main() {
-	cmd.Init()
+	// Create a new service. Optionally include some options here.
+	service := micro.NewService(
+		micro.Name("lagerist.io.srv.projects"),
+	)
 
-	if err := broker.Init(); err != nil {
-		log.Fatalf("Broker Init error: %v", err)
+	// Init will parse the command line flags.
+	service.Init()
+
+	// Register handler
+	if err := proto.RegisterProjectsHandler(service.Server(), new(Projects)); err != nil {
+		fmt.Println(err)
 	}
-	if err := broker.Connect(); err != nil {
-		log.Fatalf("Broker Connect error: %v", err)
+
+	// Run the server
+	if err := service.Run(); err != nil {
+		fmt.Println(err)
 	}
-
-	sub(subTopic, pubTopic, pub)
-
-	select {}
 }
