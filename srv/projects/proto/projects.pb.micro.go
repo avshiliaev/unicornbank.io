@@ -42,7 +42,7 @@ func NewProjectsEndpoints() []*api.Endpoint {
 // Client API for Projects service
 
 type ProjectsService interface {
-	CreateProject(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
+	CreateProject(ctx context.Context, in *ProjectsRequest, opts ...client.CallOption) (*ProjectsResponse, error)
 }
 
 type projectsService struct {
@@ -57,9 +57,9 @@ func NewProjectsService(name string, c client.Client) ProjectsService {
 	}
 }
 
-func (c *projectsService) CreateProject(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error) {
+func (c *projectsService) CreateProject(ctx context.Context, in *ProjectsRequest, opts ...client.CallOption) (*ProjectsResponse, error) {
 	req := c.c.NewRequest(c.name, "Projects.CreateProject", in)
-	out := new(Response)
+	out := new(ProjectsResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -70,12 +70,12 @@ func (c *projectsService) CreateProject(ctx context.Context, in *Request, opts .
 // Server API for Projects service
 
 type ProjectsHandler interface {
-	CreateProject(context.Context, *Request, *Response) error
+	CreateProject(context.Context, *ProjectsRequest, *ProjectsResponse) error
 }
 
 func RegisterProjectsHandler(s server.Server, hdlr ProjectsHandler, opts ...server.HandlerOption) error {
 	type projects interface {
-		CreateProject(ctx context.Context, in *Request, out *Response) error
+		CreateProject(ctx context.Context, in *ProjectsRequest, out *ProjectsResponse) error
 	}
 	type Projects struct {
 		projects
@@ -88,6 +88,6 @@ type projectsHandler struct {
 	ProjectsHandler
 }
 
-func (h *projectsHandler) CreateProject(ctx context.Context, in *Request, out *Response) error {
+func (h *projectsHandler) CreateProject(ctx context.Context, in *ProjectsRequest, out *ProjectsResponse) error {
 	return h.ProjectsHandler.CreateProject(ctx, in, out)
 }

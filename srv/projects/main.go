@@ -6,11 +6,14 @@ import (
 
 	micro "github.com/micro/go-micro/v2"
 	proto "lagerist.io/srv/projects/proto"
+
+	_ "github.com/micro/go-plugins/broker/rabbitmq/v2"
+	_ "github.com/micro/go-plugins/registry/consul/v2"
 )
 
 type Projects struct{}
 
-func (g *Projects) CreateProject(ctx context.Context, req *proto.Request, rsp *proto.Response) error {
+func (g *Projects) CreateProject(ctx context.Context, req *proto.ProjectsRequest, rsp *proto.ProjectsResponse) error {
 	rsp.Msg = "created project: " + req.Title
 	return nil
 }
@@ -18,7 +21,7 @@ func (g *Projects) CreateProject(ctx context.Context, req *proto.Request, rsp *p
 func main() {
 	// Create a new service. Optionally include some options here.
 	service := micro.NewService(
-		micro.Name("lagerist.io.srv.projects"),
+		micro.Name("lagerist-io-srv-projects"),
 	)
 
 	// Init will parse the command line flags.

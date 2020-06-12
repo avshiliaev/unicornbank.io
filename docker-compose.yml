@@ -25,6 +25,8 @@ services:
   gateway-srv:
     build: srv/gateway
     container_name: gateway-srv
+    ports:
+      - "5003:5003"
     environment:
       - MICRO_REGISTRY=consul
       - MICRO_REGISTRY_ADDRESS=consul-srv:8500
