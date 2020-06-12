@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+option go_package = "proto;queries";
+
+service Queries {
+  rpc QueryingSomething(QueriesRequest) returns (QueriesResponse) {}
+}
+
+message QueriesRequest {
+  string title = 1;
+}
+
+message QueriesResponse {
+  string msg = 2;
+}

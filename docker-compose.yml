@@ -59,3 +59,29 @@ services:
       - consul-srv
       - rabbit-srv
     command: bash -c "./wait-for-it.sh rabbit-srv:5672 -- entities"
+
+  processing-srv:
+    build: srv/processing
+    container_name: processing-srv
+    environment:
+      - MICRO_REGISTRY=consul
+      - MICRO_REGISTRY_ADDRESS=consul-srv:8500
+      - MICRO_BROKER=rabbitmq
+      - MICRO_BROKER_ADDRESS=amqp://admin:password@rabbit-srv:5672/
+    depends_on:
+      - consul-srv
+      - rabbit-srv
+    command: bash -c "./wait-for-it.sh rabbit-srv:5672 -- processing"
+
+  queries-srv:
+    build: srv/queries
+    container_name: queries-srv
+    environment:
+      - MICRO_REGISTRY=consul
+      - MICRO_REGISTRY_ADDRESS=consul-srv:8500
+      - MICRO_BROKER=rabbitmq
+      - MICRO_BROKER_ADDRESS=amqp://admin:password@rabbit-srv:5672/
+    depends_on:
+      - consul-srv
+      - rabbit-srv
+    command: bash -c "./wait-for-it.sh rabbit-srv:5672 -- queries"
