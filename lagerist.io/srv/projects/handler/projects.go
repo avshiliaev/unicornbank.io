@@ -2,8 +2,8 @@ package handler
 
 import (
 	"context"
-
 	log "github.com/micro/go-micro/v2/logger"
+	"lagerist.io/srv/projects/models"
 
 	projects "lagerist.io/srv/projects/proto/projects"
 )
@@ -11,9 +11,12 @@ import (
 type Projects struct{}
 
 // Call is a single request handler called via client.Call or the generated client code
-func (e *Projects) Call(ctx context.Context, req *projects.Request, rsp *projects.Response) error {
+func (e *Projects) Create(ctx context.Context, req *projects.Request, rsp *projects.Response) error {
 	log.Info("Received Projects.Call request")
-	rsp.Msg = "Hello " + req.Name
+
+	models.Create(req.Title)
+
+	rsp.Msg = "created " + req.Title
 	return nil
 }
 

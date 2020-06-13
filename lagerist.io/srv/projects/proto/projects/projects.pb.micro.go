@@ -42,7 +42,7 @@ func NewProjectsEndpoints() []*api.Endpoint {
 // Client API for Projects service
 
 type ProjectsService interface {
-	Call(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
+	Create(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
 	Stream(ctx context.Context, in *StreamingRequest, opts ...client.CallOption) (Projects_StreamService, error)
 	PingPong(ctx context.Context, opts ...client.CallOption) (Projects_PingPongService, error)
 }
@@ -59,8 +59,8 @@ func NewProjectsService(name string, c client.Client) ProjectsService {
 	}
 }
 
-func (c *projectsService) Call(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error) {
-	req := c.c.NewRequest(c.name, "Projects.Call", in)
+func (c *projectsService) Create(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error) {
+	req := c.c.NewRequest(c.name, "Projects.Create", in)
 	out := new(Response)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -172,14 +172,14 @@ func (x *projectsServicePingPong) Recv() (*Pong, error) {
 // Server API for Projects service
 
 type ProjectsHandler interface {
-	Call(context.Context, *Request, *Response) error
+	Create(context.Context, *Request, *Response) error
 	Stream(context.Context, *StreamingRequest, Projects_StreamStream) error
 	PingPong(context.Context, Projects_PingPongStream) error
 }
 
 func RegisterProjectsHandler(s server.Server, hdlr ProjectsHandler, opts ...server.HandlerOption) error {
 	type projects interface {
-		Call(ctx context.Context, in *Request, out *Response) error
+		Create(ctx context.Context, in *Request, out *Response) error
 		Stream(ctx context.Context, stream server.Stream) error
 		PingPong(ctx context.Context, stream server.Stream) error
 	}
@@ -194,8 +194,8 @@ type projectsHandler struct {
 	ProjectsHandler
 }
 
-func (h *projectsHandler) Call(ctx context.Context, in *Request, out *Response) error {
-	return h.ProjectsHandler.Call(ctx, in, out)
+func (h *projectsHandler) Create(ctx context.Context, in *Request, out *Response) error {
+	return h.ProjectsHandler.Create(ctx, in, out)
 }
 
 func (h *projectsHandler) Stream(ctx context.Context, stream server.Stream) error {

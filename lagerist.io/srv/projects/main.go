@@ -4,7 +4,10 @@ import (
 	"github.com/micro/go-micro/v2"
 	log "github.com/micro/go-micro/v2/logger"
 	"lagerist.io/srv/projects/handler"
+	"lagerist.io/srv/projects/models"
 	"lagerist.io/srv/projects/subscriber"
+
+	_ "github.com/jinzhu/gorm/dialects/sqlite"
 
 	projects "lagerist.io/srv/projects/proto/projects"
 )
@@ -18,6 +21,9 @@ func main() {
 
 	// Initialise service
 	service.Init()
+
+	// Initialise a database connection and migrate the schema
+	models.Migrate()
 
 	// Register Handler
 	projects.RegisterProjectsHandler(service.Server(), new(handler.Projects))
