@@ -2,6 +2,12 @@ package models
 
 import (
 	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/sqlite"
+)
+
+var (
+	dialect = "sqlite3"
+	args = "test.db"
 )
 
 type ProjectModel struct {
@@ -10,7 +16,7 @@ type ProjectModel struct {
 }
 
 func Migrate() {
-	db, err := gorm.Open("sqlite3", "test.db")
+	db, err := gorm.Open(dialect, args)
 	if err != nil {
 		panic("failed to connect database")
 	}
@@ -19,7 +25,7 @@ func Migrate() {
 }
 
 func Create(title string) {
-	db, err := gorm.Open("sqlite3", "test.db")
+	db, err := gorm.Open(dialect, args)
 	if err != nil {
 		panic("failed to connect database")
 	}

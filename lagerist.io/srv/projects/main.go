@@ -5,11 +5,8 @@ import (
 	log "github.com/micro/go-micro/v2/logger"
 	"lagerist.io/srv/projects/handler"
 	"lagerist.io/srv/projects/models"
-	"lagerist.io/srv/projects/subscriber"
-
-	_ "github.com/jinzhu/gorm/dialects/sqlite"
-
 	projects "lagerist.io/srv/projects/proto/projects"
+	"lagerist.io/srv/projects/subscriber"
 )
 
 func main() {

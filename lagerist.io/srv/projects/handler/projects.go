@@ -4,7 +4,6 @@ import (
 	"context"
 	log "github.com/micro/go-micro/v2/logger"
 	"lagerist.io/srv/projects/models"
-
 	projects "lagerist.io/srv/projects/proto/projects"
 )
 
@@ -15,6 +14,7 @@ func (e *Projects) Create(ctx context.Context, req *projects.Request, rsp *proje
 	log.Info("Received Projects.Call request")
 
 	models.Create(req.Title)
+	// Emit an event here?
 
 	rsp.Msg = "created " + req.Title
 	return nil
