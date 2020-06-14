@@ -5,32 +5,32 @@ import SiderBasic from '../../components/layout/sider.basic';
 import HeaderBasic from '../../components/layout/header.basic';
 import AppLogo from '../../components/logo.icon';
 import ProfileIcon from '../../components/profile.icon';
-import { getProject } from '../../reducers/project.reducer';
-import ProjectSiderMenu from '../../components/project.sider.menu';
+import { getAccount } from '../../reducers/account.reducer';
+import AccountSiderMenu from '../../components/account.sider.menu';
 import BasicDrawer from '../../components/layout/drawer.basic';
 import FooterMobile from '../../components/layout/footer.mobile';
 import HeaderMenu from '../../components/header.menu';
 
 const { Content } = Layout;
 
-const ProjectPage = ({ windowSize, id, auth, children, getProject, location, ...rest }) => {
+const AccountPage = ({ windowSize, id, auth, children, getAccount, location, ...rest }) => {
 
   useEffect(() => {
-    getProject(id);
+    getAccount(id);
   }, []);
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <HeaderBasic
         windowSize={windowSize}
-        slotLeft={windowSize.large ? <AppLogo/> : <BasicDrawer><ProjectSiderMenu/></BasicDrawer>}
+        slotLeft={windowSize.large ? <AppLogo/> : <BasicDrawer><AccountSiderMenu/></BasicDrawer>}
         slotMiddle={
           <HeaderMenu windowSize={windowSize} location={location}/>
         }
         slotRight={<ProfileIcon id={auth.userId} size={30}/>}
       />
       <Layout>
-        {windowSize.large ? <SiderBasic><ProjectSiderMenu/></SiderBasic> : <div/>}
+        {windowSize.large ? <SiderBasic><AccountSiderMenu/></SiderBasic> : <div/>}
         <Content style={{ padding: windowSize.large ? 16 : 0 }}>
           {children}
         </Content>
@@ -49,7 +49,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  getProject,
+  getAccount,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProjectPage);
+export default connect(mapStateToProps, mapDispatchToProps)(AccountPage);

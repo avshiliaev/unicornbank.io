@@ -37,7 +37,7 @@ describe('DashboardPage ', () => {
     const store = mockStore({ ...initialState });
 
     const props = {
-      initProjectsOverview: jest.fn(),
+      initAccountsOverview: jest.fn(),
     };
 
     const wrapper = mount(

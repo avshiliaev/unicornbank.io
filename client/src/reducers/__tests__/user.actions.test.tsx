@@ -1,18 +1,30 @@
 import userService from '../../services/user.service';
 import { getUser } from '../user.reducer';
-import { User } from '../../sdk/graphql-zeus';
+import { UserInterface } from '../../interfaces/user.interface';
 
 describe('async actions', () => {
 
   it('GET_USER', async () => {
-    const mockUser: User = {
+    const mockUser: UserInterface = {
       id: '0x1',
       username: 'name',
-      host: [{ id: 'host', title: 't', description: 'd' }],
-      stars: [{ id: 'stars', title: 't', description: 'd' }],
-      developer: [
-        { id: 'id', name: 'name', project: { id: 'developer', title: 't', description: 'd' } }
-        ],
+      accounts: [
+        {
+          id: 'id',
+          title: 'test',
+          description: 'test',
+          transactions: [
+            {
+              id: 'id',
+              title: 'test',
+            },
+            {
+              id: 'id',
+              title: 'test',
+            },
+          ],
+        },
+      ],
     };
 
     userService.getUser = jest.fn().mockReturnValue(mockUser);

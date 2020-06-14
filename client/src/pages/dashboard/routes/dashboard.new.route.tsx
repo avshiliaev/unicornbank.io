@@ -1,16 +1,16 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import FlexGridDashboard from '../../../components/layout/flex.grid.dashboard';
-import ProjectsForm from '../../../components/projects.form';
-import { AddProjectInput } from '../../../sdk/graphql-zeus';
-import { addProjectAsHost } from '../../../reducers/projects.overview.reducer';
+import AccountsForm from '../../../components/accounts.form';
+import { addAccountAsHost } from '../../../reducers/accounts.overview.reducer';
+import { AccountInterface } from '../../../interfaces/account.interface';
 
-const DashboardNewRoute = ({ windowSize, addProjectAsHost, auth, ...rest }) => {
+const DashboardNewRoute = ({ windowSize, addAccountAsHost, auth, ...rest }) => {
 
   const formOnFinish = async (value) => {
     const { title, description } = value;
-    const addProjectInout: AddProjectInput = { title, description, hosts: [{ id: auth.userId }] };
-    await addProjectAsHost(addProjectInout);
+    const addAccountInput: AccountInterface = { title, description, transactions: [] };
+    await addAccountAsHost(addAccountInput);
   };
 
   return (
@@ -19,7 +19,7 @@ const DashboardNewRoute = ({ windowSize, addProjectAsHost, auth, ...rest }) => {
         windowSize={windowSize}
         slotOne={<div>Slot One</div>}
         slotTwo={<div>Slot Two</div>}
-        mainContent={<ProjectsForm onFinish={formOnFinish}/>}
+        mainContent={<AccountsForm onFinish={formOnFinish}/>}
       />
     </Fragment>
   );
@@ -33,7 +33,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  addProjectAsHost,
+  addAccountAsHost,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DashboardNewRoute);

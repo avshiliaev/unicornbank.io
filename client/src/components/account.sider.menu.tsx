@@ -1,11 +1,11 @@
-import { Menu } from 'antd';
 import React from 'react';
+import { Menu } from 'antd';
 import { ContainerOutlined, PieChartOutlined, UserOutlined } from '@ant-design/icons';
 import { Link } from '@reach/router';
 
 const { SubMenu } = Menu;
 
-const ProjectSiderMenu = () => {
+const AccountSiderMenu = () => {
 
   return (
     <Menu
@@ -27,13 +27,13 @@ const ProjectSiderMenu = () => {
         </Link>
       </Menu.Item>
       <Menu.Item key="3">
-        <Link to="entities">
+        <Link to="transactions">
           <ContainerOutlined/>
-          <span>Entities</span>
+          <span>Transactions</span>
         </Link>
       </Menu.Item>
     </Menu>
   );
 };
 
-export default ProjectSiderMenu;
+export default AccountSiderMenu;

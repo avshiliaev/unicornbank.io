@@ -2,15 +2,15 @@ import React from 'react';
 import { Button } from 'antd';
 import { Link } from '@reach/router';
 
-const ProjectsAddReference = () => {
+const AccountsAddReference = () => {
 
   return (
     <div>
       <Button block>
-        <Link to='/dashboard/new'>Add project</Link>
+        <Link to='/dashboard/new'>Add account</Link>
       </Button>
     </div>
   );
 };
 
-export default ProjectsAddReference;
+export default AccountsAddReference;

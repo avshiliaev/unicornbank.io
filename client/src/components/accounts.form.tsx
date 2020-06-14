@@ -3,7 +3,7 @@ import { Button, Form, Input } from 'antd';
 
 const { TextArea } = Input;
 
-const ProjectsForm = ({ onFinish }) => {
+const AccountsForm = ({ onFinish }) => {
 
   const onFinishFailed = errorInfo => {
     console.log('Failed:', errorInfo);
@@ -52,4 +52,4 @@ const ProjectsForm = ({ onFinish }) => {
   );
 };
 
-export default ProjectsForm;
+export default AccountsForm;

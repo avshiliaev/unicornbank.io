@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import FlexGridDashboard from '../../../components/layout/flex.grid.dashboard';
-import ProjectsAddReference from '../../../components/projects.add.reference';
+import AccountsAddReference from '../../../components/accounts.add.reference';
 import { Badge, Col, Row } from 'antd';
 import FlexContainer from '../../../components/layout/flex.container';
 import ProfileIcon from '../../../components/profile.icon';
-import ProjectsList from '../../../components/projects.list';
+import AccountsList from '../../../components/accounts.list';
 
 const ProfileStatistics = ({ windowSize, auth }) => {
 
@@ -57,15 +57,15 @@ const ProfileStatistics = ({ windowSize, auth }) => {
   );
 };
 
-const DashboardOverviewRoute = ({ auth, windowSize, projectsOverview, ...rest }) => {
+const DashboardOverviewRoute = ({ auth, windowSize, accountsOverview, ...rest }) => {
 
   return (
     <Fragment>
       <FlexGridDashboard
         windowSize={windowSize}
         slotOne={<ProfileStatistics auth={auth} windowSize={windowSize}/>}
-        slotTwo={<ProjectsAddReference/>}
-        mainContent={<ProjectsList projectsOverview={projectsOverview} windowSize={windowSize}/>}
+        slotTwo={<AccountsAddReference/>}
+        mainContent={<AccountsList accountsOverview={accountsOverview} windowSize={windowSize}/>}
       />
     </Fragment>
   );
@@ -75,7 +75,7 @@ const mapStateToProps = (state) => {
   return {
     windowSize: state.windowSize.greaterThan,
     auth: state.auth,
-    projectsOverview: state.projectsOverview,
+    accountsOverview: state.accountsOverview,
   };
 };
 

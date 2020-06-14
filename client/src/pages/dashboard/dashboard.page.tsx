@@ -5,15 +5,15 @@ import HeaderBasic from '../../components/layout/header.basic';
 import FooterMobile from '../../components/layout/footer.mobile';
 import AppLogo from '../../components/logo.icon';
 import ProfileIcon from '../../components/profile.icon';
-import { initProjectsOverview } from '../../reducers/projects.overview.reducer';
+import { initAccountsOverview } from '../../reducers/accounts.overview.reducer';
 import HeaderMenu from '../../components/header.menu';
 
 const { Content } = Layout;
 
-const DashboardPage = ({ windowSize, auth, initProjectsOverview, children, location, ...rest }) => {
+const DashboardPage = ({ windowSize, auth, initAccountsOverview, children, location, ...rest }) => {
 
   useEffect(() => {
-    initProjectsOverview(auth.userId);
+    initAccountsOverview(auth.userId);
   }, []);
 
   return (
@@ -45,7 +45,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  initProjectsOverview,
+  initAccountsOverview,
 };
 
 export default connect(

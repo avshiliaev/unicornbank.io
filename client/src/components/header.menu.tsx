@@ -15,7 +15,7 @@ const HeaderMenu = ({ windowSize, location }) => {
     >
       <Menu.Item key="/dashboard/home">
         <Link to="/dashboard/home">
-          <span>My projects</span>
+          <span>My Accounts</span>
         </Link>
       </Menu.Item>
       <Menu.Item key="/dashboard/discover">

@@ -1,19 +1,15 @@
-import { Chain } from '../sdk/graphql-zeus';
+import { UserInterface } from '../interfaces/user.interface';
 
 const url = 'http://localhost:8080/graphql';
 
-const queryUser = async (userName: string) => {
+const queryUser = async (userName: string): Promise<UserInterface> => {
 
-  const chain = Chain(url);
-  const payload = await chain.query(
-    {
-      queryUser: [
-        { filter: { username: { eq: userName } } },
-        { id: true, username: true },
-      ],
-    },
-  );
-  return payload.queryUser;
+  const payload: UserInterface = {
+    id: 'test',
+    username: userName,
+  };
+
+  return Promise.resolve(payload);
 };
 
 const authService = {
