@@ -8,18 +8,14 @@ service Accounts {
 	rpc PingPong(stream Ping) returns (stream Pong) {}
 }
 
-// Example message
-message Event {
+// Events
+message NewAccountEvent {
 	// unique id
 	string id = 1;
 	// unix timestamp
 	int64 timestamp = 2;
-	// message
-	string message = 3;
-}
-
-message Message {
-	string say = 1;
+	// title
+	string title = 3;
 }
 
 message Request {

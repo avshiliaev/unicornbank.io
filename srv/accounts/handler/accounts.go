@@ -15,10 +15,15 @@ type Accounts struct {
 
 // Call is a single request handler called via client.Call or the generated client code
 func (e *Accounts) Create(ctx context.Context, req *accounts.Request, rsp *accounts.Response) error {
-	log.Info("Received Accounts.Call request")
+	log.Info("Received Accounts.Create request")
 
 	models.Create(req.Title)
-	publisher.Pub(e.Client, "go.micro.service.processing", "accountCreated")
+
+	topic := "go.micro.service.newAccount"
+	title := req.Title
+	if err := publisher.PubNewAccount(e.Client, topic, title); err != nil {
+		return err
+	}
 	rsp.Msg = "created " + req.Title
 
 	return nil

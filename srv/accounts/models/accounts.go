@@ -7,7 +7,7 @@ import (
 
 var (
 	dialect = "sqlite3"
-	args = "test.db"
+	args = "accounts.db"
 )
 
 type AccountsModel struct {

@@ -8,8 +8,14 @@ service Processing {
 	rpc PingPong(stream Ping) returns (stream Pong) {}
 }
 
-message Message {
-	string say = 1;
+// Events
+message NewAccountEvent {
+	// unique id
+	string id = 1;
+	// unix timestamp
+	int64 timestamp = 2;
+	// title
+	string title = 3;
 }
 
 message Request {

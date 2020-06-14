@@ -25,10 +25,15 @@ func main() {
 	// Register Handler
 	h := new(handler.Accounts)
 	h.Client = service.Client()
-	accounts.RegisterAccountsHandler(service.Server(), h)
+	if err := accounts.RegisterAccountsHandler(service.Server(), h); err != nil {
+		log.Fatal(err)
+	}
 
 	// Register Struct as Subscriber
-	micro.RegisterSubscriber("go.micro.service.accounts", service.Server(), new(subscriber.Accounts))
+	subTopic := "go.micro.service.accounts"
+	if err := micro.RegisterSubscriber(subTopic, service.Server(), new(subscriber.Accounts)); err != nil {
+		log.Fatal(err)
+	}
 
 	// Run service
 	if err := service.Run(); err != nil {

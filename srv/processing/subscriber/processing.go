@@ -9,12 +9,12 @@ import (
 
 type Processing struct{}
 
-func (e *Processing) Handle(ctx context.Context, msg *processing.Message) error {
-	log.Info("Handler Received message: ", msg.Say)
+func (e *Processing) Handle(ctx context.Context, msg *processing.NewAccountEvent) error {
+	log.Info("Handler Received message: ", msg.Title)
 	return nil
 }
 
-func Handler(ctx context.Context, msg *processing.Message) error {
-	log.Info("Function Received message: ", msg.Say)
+func Handler(ctx context.Context, msg *processing.NewAccountEvent) error {
+	log.Info("Function Received message: ", msg.Title)
 	return nil
 }

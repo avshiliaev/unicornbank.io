@@ -7,10 +7,14 @@ import (
 	accounts "unicornbank.io/srv/accounts/proto/accounts"
 )
 
-func Pub(client client.Client, topic string, body string) error {
+func PubNewAccount(client client.Client, topic string, title string) error {
 
 	p := micro.NewEvent(topic, client)
-	if err := p.Publish(context.TODO(), &accounts.Message{Say: body}); err != nil {
+	if err := p.Publish(context.TODO(), &accounts.NewAccountEvent{
+		Id:        "uuid",
+		Timestamp: 123456789,
+		Title:     title,
+	}); err != nil {
 		return err
 	}
 

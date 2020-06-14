@@ -19,10 +19,15 @@ func main() {
 	service.Init()
 
 	// Register Handler
-	processing.RegisterProcessingHandler(service.Server(), new(handler.Processing))
+	if err := processing.RegisterProcessingHandler(service.Server(), new(handler.Processing)); err != nil {
+		log.Fatal(err)
+	}
 
 	// Register Struct as Subscriber
-	micro.RegisterSubscriber("go.micro.service.processing", service.Server(), new(subscriber.Processing))
+	subTopic := "go.micro.service.newAccount"
+	if err := micro.RegisterSubscriber(subTopic, service.Server(), new(subscriber.Processing)); err != nil {
+		log.Fatal(err)
+	}
 
 	// Run service
 	if err := service.Run(); err != nil {
