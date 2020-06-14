@@ -2,12 +2,6 @@ syntax = "proto3";
 
 package go.micro.service.accounts;
 
-service Accounts {
-	rpc Create(Request) returns (Response) {}
-	rpc Stream(StreamingRequest) returns (stream StreamingResponse) {}
-	rpc PingPong(stream Ping) returns (stream Pong) {}
-}
-
 // Events
 message NewAccountEvent {
 	// unique id
@@ -16,6 +10,16 @@ message NewAccountEvent {
 	int64 timestamp = 2;
 	// title
 	string title = 3;
+}
+message GenericEvent {
+	string msg = 1;
+}
+
+// gRPC
+service Accounts {
+	rpc Create(Request) returns (Response) {}
+	rpc Stream(StreamingRequest) returns (stream StreamingResponse) {}
+	rpc PingPong(stream Ping) returns (stream Pong) {}
 }
 
 message Request {

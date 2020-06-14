@@ -8,21 +8,31 @@ import (
 	"unicornbank.io/srv/transactions/subscriber"
 )
 
+var (
+	serviceName    = "go.micro.api.transactions"
+	serviceVersion = "0.0.1"
+	subTopicOne    = "go.micro.service.generic"
+)
+
 func main() {
 	// New Service
 	service := micro.NewService(
-		micro.Name("go.micro.api.transactions"),
-		micro.Version("latest"),
+		micro.Name(serviceName),
+		micro.Version(serviceVersion),
 	)
 
 	// Initialise service
 	service.Init()
 
 	// Register Handler
-	transactions.RegisterTransactionsHandler(service.Server(), new(handler.Transactions))
+	if err := transactions.RegisterTransactionsHandler(service.Server(), new(handler.Transactions)); err != nil {
+		log.Fatal(err)
+	}
 
 	// Register Struct as Subscriber
-	micro.RegisterSubscriber("go.micro.service.transactions", service.Server(), new(subscriber.Transactions))
+	if err := micro.RegisterSubscriber(subTopicOne, service.Server(), new(subscriber.Transactions)); err != nil {
+		log.Fatal(err)
+	}
 
 	// Run service
 	if err := service.Run(); err != nil {

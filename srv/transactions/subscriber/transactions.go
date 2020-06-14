@@ -8,12 +8,12 @@ import (
 
 type Transactions struct{}
 
-func (e *Transactions) Handle(ctx context.Context, msg *transactions.Message) error {
-	log.Info("Handler Received message: ", msg.Say)
+func (e *Transactions) Handle(ctx context.Context, msg *transactions.GenericEvent) error {
+	log.Info("Handler Received message: ", msg.Msg)
 	return nil
 }
 
-func Handler(ctx context.Context, msg *transactions.Message) error {
-	log.Info("Function Received message: ", msg.Say)
+func Handler(ctx context.Context, msg *transactions.GenericEvent) error {
+	log.Info("Function Received message: ", msg.Msg)
 	return nil
 }

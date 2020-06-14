@@ -1,15 +1,15 @@
 syntax = "proto3";
 
-package go.micro.service.transactions;
+package go.micro.service.queries;
 
-service Transactions {
+service Queries {
 	rpc Call(Request) returns (Response) {}
 	rpc Stream(StreamingRequest) returns (stream StreamingResponse) {}
 	rpc PingPong(stream Ping) returns (stream Pong) {}
 }
 
-message GenericEvent {
-	string msg = 1;
+message Message {
+	string say = 1;
 }
 
 message Request {

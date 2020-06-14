@@ -4,7 +4,7 @@ import (
 	"context"
 	log "github.com/micro/go-micro/v2/logger"
 
-	processing "lagerist.io/srv/processing/proto/processing"
+	processing "unicornbank.io/srv/processing/proto/processing"
 )
 
 type Processing struct{}

@@ -9,11 +9,17 @@ import (
 	"unicornbank.io/srv/accounts/subscriber"
 )
 
+var (
+	serviceName    = "go.micro.api.accounts"
+	serviceVersion = "0.0.1"
+	subTopicOne    = "go.micro.service.generic"
+)
+
 func main() {
 	// New Service
 	service := micro.NewService(
-		micro.Name("go.micro.api.accounts"),
-		micro.Version("latest"),
+		micro.Name(serviceName),
+		micro.Version(serviceVersion),
 	)
 
 	// Initialise service
@@ -30,8 +36,7 @@ func main() {
 	}
 
 	// Register Struct as Subscriber
-	subTopic := "go.micro.service.accounts"
-	if err := micro.RegisterSubscriber(subTopic, service.Server(), new(subscriber.Accounts)); err != nil {
+	if err := micro.RegisterSubscriber(subTopicOne, service.Server(), new(subscriber.Accounts)); err != nil {
 		log.Fatal(err)
 	}
 

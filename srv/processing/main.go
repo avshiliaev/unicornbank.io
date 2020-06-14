@@ -3,16 +3,22 @@ package main
 import (
 	"github.com/micro/go-micro/v2"
 	log "github.com/micro/go-micro/v2/logger"
-	"lagerist.io/srv/processing/handler"
-	processing "lagerist.io/srv/processing/proto/processing"
-	"lagerist.io/srv/processing/subscriber"
+	"unicornbank.io/srv/processing/handler"
+	processing "unicornbank.io/srv/processing/proto/processing"
+	"unicornbank.io/srv/processing/subscriber"
+)
+
+var (
+	serviceName    = "go.micro.api.processing"
+	serviceVersion = "0.0.1"
+	subTopicOne    = "go.micro.service.newAccount"
 )
 
 func main() {
 	// New Service
 	service := micro.NewService(
-		micro.Name("go.micro.api.processing"),
-		micro.Version("latest"),
+		micro.Name(serviceName),
+		micro.Version(serviceVersion),
 	)
 
 	// Initialise service
@@ -24,8 +30,7 @@ func main() {
 	}
 
 	// Register Struct as Subscriber
-	subTopic := "go.micro.service.newAccount"
-	if err := micro.RegisterSubscriber(subTopic, service.Server(), new(subscriber.Processing)); err != nil {
+	if err := micro.RegisterSubscriber(subTopicOne, service.Server(), new(subscriber.Processing)); err != nil {
 		log.Fatal(err)
 	}
 
