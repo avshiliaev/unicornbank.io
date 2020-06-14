@@ -3,7 +3,6 @@ package subscriber
 import (
 	"context"
 	log "github.com/micro/go-micro/v2/logger"
-
 	accounts "unicornbank.io/srv/accounts/proto/accounts"
 )
 

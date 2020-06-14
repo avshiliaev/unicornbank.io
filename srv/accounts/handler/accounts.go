@@ -2,21 +2,25 @@ package handler
 
 import (
 	"context"
+	"github.com/micro/go-micro/v2/client"
 	log "github.com/micro/go-micro/v2/logger"
 	"unicornbank.io/srv/accounts/models"
 	accounts "unicornbank.io/srv/accounts/proto/accounts"
+	"unicornbank.io/srv/accounts/publisher"
 )
 
-type Accounts struct{}
+type Accounts struct {
+	Client client.Client
+}
 
 // Call is a single request handler called via client.Call or the generated client code
 func (e *Accounts) Create(ctx context.Context, req *accounts.Request, rsp *accounts.Response) error {
 	log.Info("Received Accounts.Call request")
 
 	models.Create(req.Title)
-	// Emit an event here?
-
+	publisher.Pub(e.Client, "go.micro.service.processing", "accountCreated")
 	rsp.Msg = "created " + req.Title
+
 	return nil
 }
 

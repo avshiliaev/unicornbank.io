@@ -23,7 +23,9 @@ func main() {
 	models.Migrate()
 
 	// Register Handler
-	accounts.RegisterAccountsHandler(service.Server(), new(handler.Accounts))
+	h := new(handler.Accounts)
+	h.Client = service.Client()
+	accounts.RegisterAccountsHandler(service.Server(), h)
 
 	// Register Struct as Subscriber
 	micro.RegisterSubscriber("go.micro.service.accounts", service.Server(), new(subscriber.Accounts))
