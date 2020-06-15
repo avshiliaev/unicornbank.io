@@ -8,13 +8,12 @@ import (
 	processing "unicornbank.io/srv/processing/proto/processing"
 )
 
-func NewAccountProcessed(client client.Client, topic string, Uuid string, title string, status string) error {
+func PubAccountApproval(client client.Client, topic string, Uuid string, title string, status string) error {
 
 	p := micro.NewEvent(topic, client)
-	if err := p.Publish(context.TODO(), &processing.NewAccountProcessed{
+	if err := p.Publish(context.TODO(), &processing.AccountApproval{
 		Uuid:      Uuid,
 		Timestamp: time.Now().Unix(),
-		Title:     title,
 		Status:    status,
 	}); err != nil {
 		return err

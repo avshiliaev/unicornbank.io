@@ -10,9 +10,10 @@ import (
 )
 
 var (
-	serviceName    = "go.micro.api.queries"
-	serviceVersion = "0.0.1"
-	subTopicOne    = "go.micro.service.generic"
+	serviceName           = "go.micro.api.queries"
+	serviceVersion        = "0.0.1"
+	subAccountUpdated     = "go.micro.service.account.updated"
+	subTransactionUpdated = "go.micro.service.transaction.updated"
 )
 
 func main() {
@@ -36,7 +37,10 @@ func main() {
 	}
 
 	// Register Struct as Subscriber
-	if err := micro.RegisterSubscriber(subTopicOne, service.Server(), new(subscriber.Queries)); err != nil {
+	if err := micro.RegisterSubscriber(subAccountUpdated, service.Server(), new(subscriber.AccountUpdated)); err != nil {
+		log.Fatal(err)
+	}
+	if err := micro.RegisterSubscriber(subTransactionUpdated, service.Server(), new(subscriber.TransactionUpdated)); err != nil {
 		log.Fatal(err)
 	}
 

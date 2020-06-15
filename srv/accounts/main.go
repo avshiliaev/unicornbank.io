@@ -10,9 +10,10 @@ import (
 )
 
 var (
-	serviceName    = "go.micro.api.accounts"
-	serviceVersion = "0.0.1"
-	subTopicOne    = "go.micro.service.generic"
+	serviceName        = "go.micro.api.accounts"
+	serviceVersion     = "0.0.1"
+	subAccountApproval = "go.micro.service.account.approval"
+	pubAccountUpdated  = "go.micro.service.account.updated"
 )
 
 func main() {
@@ -31,12 +32,15 @@ func main() {
 	// Register Handler
 	h := new(handler.Accounts)
 	h.Client = service.Client()
+	h.PubAccountUpdated = pubAccountUpdated
 	if err := accounts.RegisterAccountsHandler(service.Server(), h); err != nil {
 		log.Fatal(err)
 	}
 
 	// Register Struct as Subscriber
-	if err := micro.RegisterSubscriber(subTopicOne, service.Server(), new(subscriber.Accounts)); err != nil {
+	s := new(subscriber.AccountApproval)
+	s.PubAccountUpdated = pubAccountUpdated
+	if err := micro.RegisterSubscriber(subAccountApproval, service.Server(), s); err != nil {
 		log.Fatal(err)
 	}
 

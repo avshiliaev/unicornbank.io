@@ -3,6 +3,18 @@ syntax = "proto3";
 package go.micro.service.queries;
 
 // Events
+message AccountUpdated {
+	string Uuid = 1;
+	int64 timestamp = 2;
+	string title = 3;
+	string status = 4;
+}
+message TransactionUpdated {
+	string Uuid = 1;
+	int64 timestamp = 2;
+	string title = 3;
+	string status = 4;
+}
 message GenericEvent {
 	string msg = 1;
 }
