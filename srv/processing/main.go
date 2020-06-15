@@ -3,16 +3,14 @@ package main
 import (
 	"github.com/micro/go-micro/v2"
 	log "github.com/micro/go-micro/v2/logger"
-	"unicornbank.io/srv/processing/handler"
 	"unicornbank.io/srv/processing/models"
-	processing "unicornbank.io/srv/processing/proto/processing"
 	"unicornbank.io/srv/processing/subscriber"
 )
 
 var (
 	serviceName        = "go.micro.api.processing"
 	serviceVersion     = "0.0.1"
-	subAccountUpdated  = "go.micro.service.account.updated"
+	subAccountCreated  = "go.micro.service.account.created"
 	pubAccountApproval = "go.micro.service.account.approval"
 )
 
@@ -29,18 +27,11 @@ func main() {
 	// Initialise a database connection and migrate the schema
 	models.Migrate()
 
-	// Register Handler
-	h := new(handler.Processing)
-	h.Client = service.Client()
-	if err := processing.RegisterProcessingHandler(service.Server(), h); err != nil {
-		log.Fatal(err)
-	}
-
 	// Register Struct as Subscriber
-	s := new(subscriber.AccountUpdated)
+	s := new(subscriber.AccountCreated)
 	s.Client = service.Client()
 	s.PubAccountApproval = pubAccountApproval
-	if err := micro.RegisterSubscriber(subAccountUpdated, service.Server(), s); err != nil {
+	if err := micro.RegisterSubscriber(subAccountCreated, service.Server(), s); err != nil {
 		log.Fatal(err)
 	}
 

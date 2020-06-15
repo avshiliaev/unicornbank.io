@@ -12,8 +12,8 @@ import (
 var (
 	serviceName           = "go.micro.api.queries"
 	serviceVersion        = "0.0.1"
+	subAccountCreated     = "go.micro.service.account.created"
 	subAccountUpdated     = "go.micro.service.account.updated"
-	subTransactionUpdated = "go.micro.service.transaction.updated"
 )
 
 func main() {
@@ -31,16 +31,15 @@ func main() {
 
 	// Register Handler
 	h := new(handler.Queries)
-	h.Client = service.Client()
 	if err := queries.RegisterQueriesHandler(service.Server(), h); err != nil {
 		log.Fatal(err)
 	}
 
 	// Register Struct as Subscriber
-	if err := micro.RegisterSubscriber(subAccountUpdated, service.Server(), new(subscriber.AccountUpdated)); err != nil {
+	if err := micro.RegisterSubscriber(subAccountCreated, service.Server(), new(subscriber.AccountCreated)); err != nil {
 		log.Fatal(err)
 	}
-	if err := micro.RegisterSubscriber(subTransactionUpdated, service.Server(), new(subscriber.TransactionUpdated)); err != nil {
+	if err := micro.RegisterSubscriber(subAccountUpdated, service.Server(), new(subscriber.AccountUpdated)); err != nil {
 		log.Fatal(err)
 	}
 

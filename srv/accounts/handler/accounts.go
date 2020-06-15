@@ -12,7 +12,7 @@ import (
 
 type Accounts struct {
 	Client client.Client
-	PubAccountUpdated string
+	PubAccountCreated string
 }
 
 // Call is a single request handler called via client.Call or the generated client code
@@ -23,7 +23,7 @@ func (e *Accounts) Create(ctx context.Context, req *accounts.Request, rsp *accou
 	title := req.Title
 	models.Create(uuID, title)
 
-	topic := e.PubAccountUpdated
+	topic := e.PubAccountCreated
 	status := "pending"
 	if err := publisher.PubAccountUpdated(e.Client, topic, uuID, title, status); err != nil {
 		return err

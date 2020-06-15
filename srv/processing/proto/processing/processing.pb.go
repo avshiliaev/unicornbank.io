@@ -26,7 +26,7 @@ const (
 const _ = proto.ProtoPackageIsVersion4
 
 // Events
-type AccountUpdated struct {
+type AccountCreated struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -37,8 +37,8 @@ type AccountUpdated struct {
 	Status    string `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
 }
 
-func (x *AccountUpdated) Reset() {
-	*x = AccountUpdated{}
+func (x *AccountCreated) Reset() {
+	*x = AccountCreated{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_proto_processing_processing_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -46,13 +46,13 @@ func (x *AccountUpdated) Reset() {
 	}
 }
 
-func (x *AccountUpdated) String() string {
+func (x *AccountCreated) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AccountUpdated) ProtoMessage() {}
+func (*AccountCreated) ProtoMessage() {}
 
-func (x *AccountUpdated) ProtoReflect() protoreflect.Message {
+func (x *AccountCreated) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_processing_processing_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -64,33 +64,33 @@ func (x *AccountUpdated) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AccountUpdated.ProtoReflect.Descriptor instead.
-func (*AccountUpdated) Descriptor() ([]byte, []int) {
+// Deprecated: Use AccountCreated.ProtoReflect.Descriptor instead.
+func (*AccountCreated) Descriptor() ([]byte, []int) {
 	return file_proto_processing_processing_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *AccountUpdated) GetUuid() string {
+func (x *AccountCreated) GetUuid() string {
 	if x != nil {
 		return x.Uuid
 	}
 	return ""
 }
 
-func (x *AccountUpdated) GetTimestamp() int64 {
+func (x *AccountCreated) GetTimestamp() int64 {
 	if x != nil {
 		return x.Timestamp
 	}
 	return 0
 }
 
-func (x *AccountUpdated) GetTitle() string {
+func (x *AccountCreated) GetTitle() string {
 	if x != nil {
 		return x.Title
 	}
 	return ""
 }
 
-func (x *AccountUpdated) GetStatus() string {
+func (x *AccountCreated) GetStatus() string {
 	if x != nil {
 		return x.Status
 	}
@@ -496,7 +496,7 @@ var file_proto_processing_processing_proto_rawDesc = []byte{
 	0x6e, 0x67, 0x2f, 0x70, 0x72, 0x6f, 0x63, 0x65, 0x73, 0x73, 0x69, 0x6e, 0x67, 0x2e, 0x70, 0x72,
 	0x6f, 0x74, 0x6f, 0x12, 0x1b, 0x67, 0x6f, 0x2e, 0x6d, 0x69, 0x63, 0x72, 0x6f, 0x2e, 0x73, 0x65,
 	0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x63, 0x65, 0x73, 0x73, 0x69, 0x6e, 0x67,
-	0x22, 0x70, 0x0a, 0x0e, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x55, 0x70, 0x64, 0x61, 0x74,
+	0x22, 0x70, 0x0a, 0x0e, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x43, 0x72, 0x65, 0x61, 0x74,
 	0x65, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x55, 0x75, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
 	0x52, 0x04, 0x55, 0x75, 0x69, 0x64, 0x12, 0x1c, 0x0a, 0x09, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74,
 	0x61, 0x6d, 0x70, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x74, 0x69, 0x6d, 0x65, 0x73,
@@ -560,7 +560,7 @@ func file_proto_processing_processing_proto_rawDescGZIP() []byte {
 
 var file_proto_processing_processing_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_proto_processing_processing_proto_goTypes = []interface{}{
-	(*AccountUpdated)(nil),    // 0: go.micro.service.processing.AccountUpdated
+	(*AccountCreated)(nil),    // 0: go.micro.service.processing.AccountCreated
 	(*AccountApproval)(nil),   // 1: go.micro.service.processing.AccountApproval
 	(*GenericEvent)(nil),      // 2: go.micro.service.processing.GenericEvent
 	(*Request)(nil),           // 3: go.micro.service.processing.Request
@@ -591,7 +591,7 @@ func file_proto_processing_processing_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_proto_processing_processing_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AccountUpdated); i {
+			switch v := v.(*AccountCreated); i {
 			case 0:
 				return &v.state
 			case 1:

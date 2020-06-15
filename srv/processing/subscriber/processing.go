@@ -9,24 +9,23 @@ import (
 	"unicornbank.io/srv/processing/publisher"
 )
 
-type AccountUpdated struct {
+type AccountCreated struct {
 	Client client.Client
 	PubAccountApproval string
 }
 
-func (e *AccountUpdated) Handle(ctx context.Context, msg *processing.AccountUpdated) error {
+func (e *AccountCreated) Handle(ctx context.Context, msg *processing.AccountCreated) error {
 	log.Info("Handler Received message: ", msg.Uuid)
 
 	uuId := msg.Uuid
-	title := msg.Title
 	var status string
 
 	// TODO business logic injected here
 	status = "approved"
-	models.Create(uuId, title, status)
+	models.Create(uuId, status)
 
 	topic := e.PubAccountApproval
-	if err := publisher.PubAccountApproval(e.Client, topic, uuId, title, status); err != nil {
+	if err := publisher.PubAccountApproval(e.Client, topic, uuId, status); err != nil {
 		return err
 	}
 

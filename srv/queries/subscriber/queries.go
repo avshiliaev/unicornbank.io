@@ -6,16 +6,16 @@ import (
 	queries "unicornbank.io/srv/queries/proto/queries"
 )
 
-type AccountUpdated struct{}
+type AccountCreated struct{}
 
-func (e *AccountUpdated) Handle(ctx context.Context, msg *queries.AccountUpdated) error {
+func (e *AccountCreated) Handle(ctx context.Context, msg *queries.TransactionUpdated) error {
 	log.Info("Account: ", msg.Uuid, ", status: ", msg.Status)
 	return nil
 }
 
-type TransactionUpdated struct{}
+type AccountUpdated struct{}
 
-func (e *TransactionUpdated) Handle(ctx context.Context, msg *queries.TransactionUpdated) error {
-	log.Info("Transaction: ", msg.Uuid, ", status: ", msg.Status)
+func (e *AccountUpdated) Handle(ctx context.Context, msg *queries.AccountUpdated) error {
+	log.Info("Account: ", msg.Uuid, ", status: ", msg.Status)
 	return nil
 }

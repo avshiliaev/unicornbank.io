@@ -13,6 +13,7 @@ var (
 	serviceName        = "go.micro.api.accounts"
 	serviceVersion     = "0.0.1"
 	subAccountApproval = "go.micro.service.account.approval"
+	pubAccountCreated  = "go.micro.service.account.created"
 	pubAccountUpdated  = "go.micro.service.account.updated"
 )
 
@@ -32,7 +33,7 @@ func main() {
 	// Register Handler
 	h := new(handler.Accounts)
 	h.Client = service.Client()
-	h.PubAccountUpdated = pubAccountUpdated
+	h.PubAccountCreated = pubAccountCreated
 	if err := accounts.RegisterAccountsHandler(service.Server(), h); err != nil {
 		log.Fatal(err)
 	}
