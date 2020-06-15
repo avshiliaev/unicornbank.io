@@ -7,12 +7,14 @@ import (
 
 var (
 	dialect = "sqlite3"
-	args = "processing.db"
+	args = "accounts.db"
 )
 
-type ProcessingModel struct {
+type AccountsModel struct {
 	gorm.Model
+	Uuid string
 	Title string
+	Status string
 }
 
 func Migrate() {
@@ -21,14 +23,15 @@ func Migrate() {
 		panic("failed to connect database")
 	}
 	defer db.Close()
-	db.AutoMigrate(&ProcessingModel{})
+	db.AutoMigrate(&AccountsModel{})
 }
 
-func Create(title string) {
+func Create(uuid string, title string, status string) {
 	db, err := gorm.Open(dialect, args)
 	if err != nil {
 		panic("failed to connect database")
 	}
 	defer db.Close()
-	db.Create(&ProcessingModel{Title: title})
+	account := AccountsModel{Title: title, Uuid: uuid, Status: status}
+	db.Save(&account)
 }

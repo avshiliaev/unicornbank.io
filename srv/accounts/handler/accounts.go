@@ -2,7 +2,7 @@ package handler
 
 import (
 	"context"
-	"fmt"
+	"github.com/google/uuid"
 	"github.com/micro/go-micro/v2/client"
 	log "github.com/micro/go-micro/v2/logger"
 	"unicornbank.io/srv/accounts/models"
@@ -18,16 +18,16 @@ type Accounts struct {
 func (e *Accounts) Create(ctx context.Context, req *accounts.Request, rsp *accounts.Response) error {
 	log.Info("Received Accounts.Create request")
 
-	fmt.Println(ctx)
-
-	models.Create(req.Title)
+	uuID := uuid.New().String()
+	title := req.Title
+	models.Create(uuID, title)
 
 	topic := "go.micro.service.newAccount"
-	title := req.Title
-	if err := publisher.PubNewAccount(e.Client, topic, title); err != nil {
+	if err := publisher.PubNewAccountCreated(e.Client, topic, uuID, title); err != nil {
 		return err
 	}
-	rsp.Msg = "created " + req.Title
+
+	rsp.Msg = "created " + title
 
 	return nil
 }

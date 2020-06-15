@@ -29,7 +29,9 @@ func main() {
 	models.Migrate()
 
 	// Register Handler
-	if err := transactions.RegisterTransactionsHandler(service.Server(), new(handler.Transactions)); err != nil {
+	h := new(handler.Transactions)
+	h.Client = service.Client()
+	if err := transactions.RegisterTransactionsHandler(service.Server(), h); err != nil {
 		log.Fatal(err)
 	}
 

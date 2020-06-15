@@ -2,13 +2,14 @@ package handler
 
 import (
 	"context"
-
+	"github.com/micro/go-micro/v2/client"
 	log "github.com/micro/go-micro/v2/logger"
-
 	processing "unicornbank.io/srv/processing/proto/processing"
 )
 
-type Processing struct{}
+type Processing struct {
+	Client client.Client
+}
 
 // Call is a single request handler called via client.Call or the generated client code
 func (e *Processing) Call(ctx context.Context, req *processing.Request, rsp *processing.Response) error {

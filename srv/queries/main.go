@@ -29,7 +29,9 @@ func main() {
 	models.Migrate()
 
 	// Register Handler
-	if err := queries.RegisterQueriesHandler(service.Server(), new(handler.Queries)); err != nil {
+	h := new(handler.Queries)
+	h.Client = service.Client()
+	if err := queries.RegisterQueriesHandler(service.Server(), h); err != nil {
 		log.Fatal(err)
 	}
 

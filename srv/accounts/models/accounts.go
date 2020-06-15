@@ -12,6 +12,7 @@ var (
 
 type AccountsModel struct {
 	gorm.Model
+	Uuid string
 	Title string
 }
 
@@ -24,11 +25,12 @@ func Migrate() {
 	db.AutoMigrate(&AccountsModel{})
 }
 
-func Create(title string) {
+func Create(uuid string, title string) {
 	db, err := gorm.Open(dialect, args)
 	if err != nil {
 		panic("failed to connect database")
 	}
 	defer db.Close()
-	db.Create(&AccountsModel{Title: title})
+	account := AccountsModel{Title: title, Uuid: uuid}
+	db.Save(&account)
 }
