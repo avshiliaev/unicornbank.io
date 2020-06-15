@@ -4,6 +4,7 @@ import (
 	"github.com/micro/go-micro/v2"
 	log "github.com/micro/go-micro/v2/logger"
 	"unicornbank.io/srv/transactions/handler"
+	"unicornbank.io/srv/transactions/models"
 	transactions "unicornbank.io/srv/transactions/proto/transactions"
 	"unicornbank.io/srv/transactions/subscriber"
 )
@@ -23,6 +24,9 @@ func main() {
 
 	// Initialise service
 	service.Init()
+
+	// Initialise a database connection and migrate the schema
+	models.Migrate()
 
 	// Register Handler
 	if err := transactions.RegisterTransactionsHandler(service.Server(), new(handler.Transactions)); err != nil {

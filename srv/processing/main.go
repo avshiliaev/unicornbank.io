@@ -4,6 +4,7 @@ import (
 	"github.com/micro/go-micro/v2"
 	log "github.com/micro/go-micro/v2/logger"
 	"unicornbank.io/srv/processing/handler"
+	"unicornbank.io/srv/processing/models"
 	processing "unicornbank.io/srv/processing/proto/processing"
 	"unicornbank.io/srv/processing/subscriber"
 )
@@ -23,6 +24,9 @@ func main() {
 
 	// Initialise service
 	service.Init()
+
+	// Initialise a database connection and migrate the schema
+	models.Migrate()
 
 	// Register Handler
 	if err := processing.RegisterProcessingHandler(service.Server(), new(handler.Processing)); err != nil {

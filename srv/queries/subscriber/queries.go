@@ -9,12 +9,12 @@ import (
 
 type Queries struct{}
 
-func (e *Queries) Handle(ctx context.Context, msg *queries.Message) error {
-	log.Info("Handler Received message: ", msg.Say)
+func (e *Queries) Handle(ctx context.Context, msg *queries.GenericEvent) error {
+	log.Info("Handler Received message: ", msg.Msg)
 	return nil
 }
 
-func Handler(ctx context.Context, msg *queries.Message) error {
-	log.Info("Function Received message: ", msg.Say)
+func Handler(ctx context.Context, msg *queries.GenericEvent) error {
+	log.Info("Function Received message: ", msg.Msg)
 	return nil
 }

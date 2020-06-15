@@ -2,6 +2,7 @@ package handler
 
 import (
 	"context"
+	"fmt"
 	"github.com/micro/go-micro/v2/client"
 	log "github.com/micro/go-micro/v2/logger"
 	"unicornbank.io/srv/accounts/models"
@@ -16,6 +17,8 @@ type Accounts struct {
 // Call is a single request handler called via client.Call or the generated client code
 func (e *Accounts) Create(ctx context.Context, req *accounts.Request, rsp *accounts.Response) error {
 	log.Info("Received Accounts.Create request")
+
+	fmt.Println(ctx)
 
 	models.Create(req.Title)
 
