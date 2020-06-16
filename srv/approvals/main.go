@@ -3,12 +3,12 @@ package main
 import (
 	"github.com/micro/go-micro/v2"
 	log "github.com/micro/go-micro/v2/logger"
-	"unicornbank.io/srv/processing/models"
-	"unicornbank.io/srv/processing/subscriber"
+	"unicornbank.io/srv/approvals/models"
+	"unicornbank.io/srv/approvals/subscriber"
 )
 
 var (
-	serviceName        = "go.micro.api.processing"
+	serviceName        = "go.micro.api.approvals"
 	serviceVersion     = "0.0.1"
 	subAccountCreated  = "go.micro.service.account.created"
 	pubAccountApproval = "go.micro.service.account.approval"

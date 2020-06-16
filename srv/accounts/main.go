@@ -12,7 +12,9 @@ import (
 var (
 	serviceName        = "go.micro.api.accounts"
 	serviceVersion     = "0.0.1"
+	// Subscribe to
 	subAccountApproval = "go.micro.service.account.approval"
+	// Publish to
 	pubAccountCreated  = "go.micro.service.account.created"
 	pubAccountUpdated  = "go.micro.service.account.updated"
 )
@@ -38,7 +40,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	// Register Struct as Subscriber
+	// Register Subscriber
 	s := new(subscriber.AccountApproval)
 	s.PubAccountUpdated = pubAccountUpdated
 	if err := micro.RegisterSubscriber(subAccountApproval, service.Server(), s); err != nil {

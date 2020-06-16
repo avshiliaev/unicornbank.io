@@ -2,11 +2,13 @@ package subscriber
 
 import (
 	"context"
+	"github.com/micro/go-micro/v2"
 	"github.com/micro/go-micro/v2/client"
 	log "github.com/micro/go-micro/v2/logger"
+	"time"
+
 	// "unicornbank.io/srv/accounts/models"
 	accounts "unicornbank.io/srv/accounts/proto/accounts"
-	"unicornbank.io/srv/accounts/publisher"
 )
 
 type AccountApproval struct {
@@ -19,14 +21,21 @@ func (e *AccountApproval) Handle(ctx context.Context, msg *accounts.AccountAppro
 
 	uuId := msg.Uuid
 	var status string
-	status = "approved"
+	status = msg.Status
 
 	// TODO: Update in self database and get the rest of the info
 	// models.Update(uuId, title, status)
 	title := "TITLE"
 
 	topic := e.PubAccountUpdated
-	if err := publisher.PubAccountUpdated(e.Client, topic, uuId, title, status); err != nil {
+	AccountUpdated := accounts.AccountCreatedOrUpdated{
+		Uuid:      uuId,
+		Timestamp: time.Now().Unix(),
+		Title:     title,
+		Status:    status,
+	}
+	p := micro.NewEvent(topic, e.Client)
+	if err := p.Publish(context.TODO(), &AccountUpdated); err != nil {
 		return err
 	}
 

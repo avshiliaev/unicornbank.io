@@ -5,13 +5,13 @@ MODIFY=Mgithub.com/micro/go-micro/api/proto/api.proto=github.com/micro/go-micro/
 .PHONY: proto
 proto:
     
-	protoc --proto_path=. --micro_out=${MODIFY}:. --go_out=${MODIFY}:. proto/processing/processing.proto
+	protoc --proto_path=. --micro_out=${MODIFY}:. --go_out=${MODIFY}:. proto/approvals/approvals.proto
     
 
 .PHONY: build
 build: proto
 
-	go build -o processing *.go
+	go build -o approvals *.go
 
 .PHONY: test
 test:
@@ -19,4 +19,4 @@ test:
 
 .PHONY: docker
 docker:
-	docker build . -t processing:latest
+	docker build . -t approvals:latest

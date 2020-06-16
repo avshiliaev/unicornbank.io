@@ -1,11 +1,11 @@
-# Accounts Service
+# Billings Service
 
-This is the Accounts service
+This is the Billings service
 
 Generated with
 
 ```
-micro new --namespace=go.micro --type=service lagerist.io/srv/accounts
+micro new --namespace=go.micro --type=service srv/billings
 ```
 
 ## Getting Started
@@ -16,9 +16,9 @@ micro new --namespace=go.micro --type=service lagerist.io/srv/accounts
 
 ## Configuration
 
-- FQDN: go.micro.service.accounts
+- FQDN: go.micro.service.billings
 - Type: service
-- Alias: accounts
+- Alias: billings
 
 ## Dependencies
 
@@ -46,7 +46,7 @@ make build
 
 Run the service
 ```
-./accounts-service
+./billings-service
 ```
 
 Build a docker image

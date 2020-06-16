@@ -10,9 +10,13 @@ import (
 )
 
 var (
-	serviceName    = "go.micro.api.transactions"
-	serviceVersion = "0.0.1"
-	subTopicOne    = "go.micro.service.generic"
+	serviceName        = "go.micro.api.transactions"
+	serviceVersion     = "0.0.1"
+	// Subscribe to
+	subTransactionProcessed = "go.micro.service.transaction.processed"
+	// Publish to
+	pubTransactionPlaced  = "go.micro.service.transaction.placed"
+	pubTransactionUpdated  = "go.micro.service.transaction.updated"
 )
 
 func main() {
@@ -31,12 +35,15 @@ func main() {
 	// Register Handler
 	h := new(handler.Transactions)
 	h.Client = service.Client()
+	h.PubTransactionPlaced = pubTransactionPlaced
 	if err := transactions.RegisterTransactionsHandler(service.Server(), h); err != nil {
 		log.Fatal(err)
 	}
 
-	// Register Struct as Subscriber
-	if err := micro.RegisterSubscriber(subTopicOne, service.Server(), new(subscriber.Transactions)); err != nil {
+	// Register Subscriber
+	s := new(subscriber.TransactionProcessed)
+	s.PubTransactionUpdated = pubTransactionUpdated
+	if err := micro.RegisterSubscriber(subTransactionProcessed, service.Server(), s); err != nil {
 		log.Fatal(err)
 	}
 

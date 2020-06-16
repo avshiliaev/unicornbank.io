@@ -1,4 +1,4 @@
-module unicornbank.io/srv/processing
+module unicornbank.io/srv/approvals
 
 go 1.13
 

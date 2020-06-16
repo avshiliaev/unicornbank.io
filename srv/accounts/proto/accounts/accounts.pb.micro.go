@@ -43,8 +43,6 @@ func NewAccountsEndpoints() []*api.Endpoint {
 
 type AccountsService interface {
 	Create(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
-	Stream(ctx context.Context, in *StreamingRequest, opts ...client.CallOption) (Accounts_StreamService, error)
-	PingPong(ctx context.Context, opts ...client.CallOption) (Accounts_PingPongService, error)
 }
 
 type accountsService struct {
@@ -69,119 +67,15 @@ func (c *accountsService) Create(ctx context.Context, in *Request, opts ...clien
 	return out, nil
 }
 
-func (c *accountsService) Stream(ctx context.Context, in *StreamingRequest, opts ...client.CallOption) (Accounts_StreamService, error) {
-	req := c.c.NewRequest(c.name, "Accounts.Stream", &StreamingRequest{})
-	stream, err := c.c.Stream(ctx, req, opts...)
-	if err != nil {
-		return nil, err
-	}
-	if err := stream.Send(in); err != nil {
-		return nil, err
-	}
-	return &accountsServiceStream{stream}, nil
-}
-
-type Accounts_StreamService interface {
-	Context() context.Context
-	SendMsg(interface{}) error
-	RecvMsg(interface{}) error
-	Close() error
-	Recv() (*StreamingResponse, error)
-}
-
-type accountsServiceStream struct {
-	stream client.Stream
-}
-
-func (x *accountsServiceStream) Close() error {
-	return x.stream.Close()
-}
-
-func (x *accountsServiceStream) Context() context.Context {
-	return x.stream.Context()
-}
-
-func (x *accountsServiceStream) SendMsg(m interface{}) error {
-	return x.stream.Send(m)
-}
-
-func (x *accountsServiceStream) RecvMsg(m interface{}) error {
-	return x.stream.Recv(m)
-}
-
-func (x *accountsServiceStream) Recv() (*StreamingResponse, error) {
-	m := new(StreamingResponse)
-	err := x.stream.Recv(m)
-	if err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-func (c *accountsService) PingPong(ctx context.Context, opts ...client.CallOption) (Accounts_PingPongService, error) {
-	req := c.c.NewRequest(c.name, "Accounts.PingPong", &Ping{})
-	stream, err := c.c.Stream(ctx, req, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &accountsServicePingPong{stream}, nil
-}
-
-type Accounts_PingPongService interface {
-	Context() context.Context
-	SendMsg(interface{}) error
-	RecvMsg(interface{}) error
-	Close() error
-	Send(*Ping) error
-	Recv() (*Pong, error)
-}
-
-type accountsServicePingPong struct {
-	stream client.Stream
-}
-
-func (x *accountsServicePingPong) Close() error {
-	return x.stream.Close()
-}
-
-func (x *accountsServicePingPong) Context() context.Context {
-	return x.stream.Context()
-}
-
-func (x *accountsServicePingPong) SendMsg(m interface{}) error {
-	return x.stream.Send(m)
-}
-
-func (x *accountsServicePingPong) RecvMsg(m interface{}) error {
-	return x.stream.Recv(m)
-}
-
-func (x *accountsServicePingPong) Send(m *Ping) error {
-	return x.stream.Send(m)
-}
-
-func (x *accountsServicePingPong) Recv() (*Pong, error) {
-	m := new(Pong)
-	err := x.stream.Recv(m)
-	if err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
 // Server API for Accounts service
 
 type AccountsHandler interface {
 	Create(context.Context, *Request, *Response) error
-	Stream(context.Context, *StreamingRequest, Accounts_StreamStream) error
-	PingPong(context.Context, Accounts_PingPongStream) error
 }
 
 func RegisterAccountsHandler(s server.Server, hdlr AccountsHandler, opts ...server.HandlerOption) error {
 	type accounts interface {
 		Create(ctx context.Context, in *Request, out *Response) error
-		Stream(ctx context.Context, stream server.Stream) error
-		PingPong(ctx context.Context, stream server.Stream) error
 	}
 	type Accounts struct {
 		accounts
@@ -196,89 +90,4 @@ type accountsHandler struct {
 
 func (h *accountsHandler) Create(ctx context.Context, in *Request, out *Response) error {
 	return h.AccountsHandler.Create(ctx, in, out)
-}
-
-func (h *accountsHandler) Stream(ctx context.Context, stream server.Stream) error {
-	m := new(StreamingRequest)
-	if err := stream.Recv(m); err != nil {
-		return err
-	}
-	return h.AccountsHandler.Stream(ctx, m, &accountsStreamStream{stream})
-}
-
-type Accounts_StreamStream interface {
-	Context() context.Context
-	SendMsg(interface{}) error
-	RecvMsg(interface{}) error
-	Close() error
-	Send(*StreamingResponse) error
-}
-
-type accountsStreamStream struct {
-	stream server.Stream
-}
-
-func (x *accountsStreamStream) Close() error {
-	return x.stream.Close()
-}
-
-func (x *accountsStreamStream) Context() context.Context {
-	return x.stream.Context()
-}
-
-func (x *accountsStreamStream) SendMsg(m interface{}) error {
-	return x.stream.Send(m)
-}
-
-func (x *accountsStreamStream) RecvMsg(m interface{}) error {
-	return x.stream.Recv(m)
-}
-
-func (x *accountsStreamStream) Send(m *StreamingResponse) error {
-	return x.stream.Send(m)
-}
-
-func (h *accountsHandler) PingPong(ctx context.Context, stream server.Stream) error {
-	return h.AccountsHandler.PingPong(ctx, &accountsPingPongStream{stream})
-}
-
-type Accounts_PingPongStream interface {
-	Context() context.Context
-	SendMsg(interface{}) error
-	RecvMsg(interface{}) error
-	Close() error
-	Send(*Pong) error
-	Recv() (*Ping, error)
-}
-
-type accountsPingPongStream struct {
-	stream server.Stream
-}
-
-func (x *accountsPingPongStream) Close() error {
-	return x.stream.Close()
-}
-
-func (x *accountsPingPongStream) Context() context.Context {
-	return x.stream.Context()
-}
-
-func (x *accountsPingPongStream) SendMsg(m interface{}) error {
-	return x.stream.Send(m)
-}
-
-func (x *accountsPingPongStream) RecvMsg(m interface{}) error {
-	return x.stream.Recv(m)
-}
-
-func (x *accountsPingPongStream) Send(m *Pong) error {
-	return x.stream.Send(m)
-}
-
-func (x *accountsPingPongStream) Recv() (*Ping, error) {
-	m := new(Ping)
-	if err := x.stream.Recv(m); err != nil {
-		return nil, err
-	}
-	return m, nil
 }

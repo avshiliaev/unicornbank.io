@@ -42,9 +42,7 @@ func NewTransactionsEndpoints() []*api.Endpoint {
 // Client API for Transactions service
 
 type TransactionsService interface {
-	Call(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
-	Stream(ctx context.Context, in *StreamingRequest, opts ...client.CallOption) (Transactions_StreamService, error)
-	PingPong(ctx context.Context, opts ...client.CallOption) (Transactions_PingPongService, error)
+	Create(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
 }
 
 type transactionsService struct {
@@ -59,8 +57,8 @@ func NewTransactionsService(name string, c client.Client) TransactionsService {
 	}
 }
 
-func (c *transactionsService) Call(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error) {
-	req := c.c.NewRequest(c.name, "Transactions.Call", in)
+func (c *transactionsService) Create(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error) {
+	req := c.c.NewRequest(c.name, "Transactions.Create", in)
 	out := new(Response)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -69,119 +67,15 @@ func (c *transactionsService) Call(ctx context.Context, in *Request, opts ...cli
 	return out, nil
 }
 
-func (c *transactionsService) Stream(ctx context.Context, in *StreamingRequest, opts ...client.CallOption) (Transactions_StreamService, error) {
-	req := c.c.NewRequest(c.name, "Transactions.Stream", &StreamingRequest{})
-	stream, err := c.c.Stream(ctx, req, opts...)
-	if err != nil {
-		return nil, err
-	}
-	if err := stream.Send(in); err != nil {
-		return nil, err
-	}
-	return &transactionsServiceStream{stream}, nil
-}
-
-type Transactions_StreamService interface {
-	Context() context.Context
-	SendMsg(interface{}) error
-	RecvMsg(interface{}) error
-	Close() error
-	Recv() (*StreamingResponse, error)
-}
-
-type transactionsServiceStream struct {
-	stream client.Stream
-}
-
-func (x *transactionsServiceStream) Close() error {
-	return x.stream.Close()
-}
-
-func (x *transactionsServiceStream) Context() context.Context {
-	return x.stream.Context()
-}
-
-func (x *transactionsServiceStream) SendMsg(m interface{}) error {
-	return x.stream.Send(m)
-}
-
-func (x *transactionsServiceStream) RecvMsg(m interface{}) error {
-	return x.stream.Recv(m)
-}
-
-func (x *transactionsServiceStream) Recv() (*StreamingResponse, error) {
-	m := new(StreamingResponse)
-	err := x.stream.Recv(m)
-	if err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-func (c *transactionsService) PingPong(ctx context.Context, opts ...client.CallOption) (Transactions_PingPongService, error) {
-	req := c.c.NewRequest(c.name, "Transactions.PingPong", &Ping{})
-	stream, err := c.c.Stream(ctx, req, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &transactionsServicePingPong{stream}, nil
-}
-
-type Transactions_PingPongService interface {
-	Context() context.Context
-	SendMsg(interface{}) error
-	RecvMsg(interface{}) error
-	Close() error
-	Send(*Ping) error
-	Recv() (*Pong, error)
-}
-
-type transactionsServicePingPong struct {
-	stream client.Stream
-}
-
-func (x *transactionsServicePingPong) Close() error {
-	return x.stream.Close()
-}
-
-func (x *transactionsServicePingPong) Context() context.Context {
-	return x.stream.Context()
-}
-
-func (x *transactionsServicePingPong) SendMsg(m interface{}) error {
-	return x.stream.Send(m)
-}
-
-func (x *transactionsServicePingPong) RecvMsg(m interface{}) error {
-	return x.stream.Recv(m)
-}
-
-func (x *transactionsServicePingPong) Send(m *Ping) error {
-	return x.stream.Send(m)
-}
-
-func (x *transactionsServicePingPong) Recv() (*Pong, error) {
-	m := new(Pong)
-	err := x.stream.Recv(m)
-	if err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
 // Server API for Transactions service
 
 type TransactionsHandler interface {
-	Call(context.Context, *Request, *Response) error
-	Stream(context.Context, *StreamingRequest, Transactions_StreamStream) error
-	PingPong(context.Context, Transactions_PingPongStream) error
+	Create(context.Context, *Request, *Response) error
 }
 
 func RegisterTransactionsHandler(s server.Server, hdlr TransactionsHandler, opts ...server.HandlerOption) error {
 	type transactions interface {
-		Call(ctx context.Context, in *Request, out *Response) error
-		Stream(ctx context.Context, stream server.Stream) error
-		PingPong(ctx context.Context, stream server.Stream) error
+		Create(ctx context.Context, in *Request, out *Response) error
 	}
 	type Transactions struct {
 		transactions
@@ -194,91 +88,6 @@ type transactionsHandler struct {
 	TransactionsHandler
 }
 
-func (h *transactionsHandler) Call(ctx context.Context, in *Request, out *Response) error {
-	return h.TransactionsHandler.Call(ctx, in, out)
-}
-
-func (h *transactionsHandler) Stream(ctx context.Context, stream server.Stream) error {
-	m := new(StreamingRequest)
-	if err := stream.Recv(m); err != nil {
-		return err
-	}
-	return h.TransactionsHandler.Stream(ctx, m, &transactionsStreamStream{stream})
-}
-
-type Transactions_StreamStream interface {
-	Context() context.Context
-	SendMsg(interface{}) error
-	RecvMsg(interface{}) error
-	Close() error
-	Send(*StreamingResponse) error
-}
-
-type transactionsStreamStream struct {
-	stream server.Stream
-}
-
-func (x *transactionsStreamStream) Close() error {
-	return x.stream.Close()
-}
-
-func (x *transactionsStreamStream) Context() context.Context {
-	return x.stream.Context()
-}
-
-func (x *transactionsStreamStream) SendMsg(m interface{}) error {
-	return x.stream.Send(m)
-}
-
-func (x *transactionsStreamStream) RecvMsg(m interface{}) error {
-	return x.stream.Recv(m)
-}
-
-func (x *transactionsStreamStream) Send(m *StreamingResponse) error {
-	return x.stream.Send(m)
-}
-
-func (h *transactionsHandler) PingPong(ctx context.Context, stream server.Stream) error {
-	return h.TransactionsHandler.PingPong(ctx, &transactionsPingPongStream{stream})
-}
-
-type Transactions_PingPongStream interface {
-	Context() context.Context
-	SendMsg(interface{}) error
-	RecvMsg(interface{}) error
-	Close() error
-	Send(*Pong) error
-	Recv() (*Ping, error)
-}
-
-type transactionsPingPongStream struct {
-	stream server.Stream
-}
-
-func (x *transactionsPingPongStream) Close() error {
-	return x.stream.Close()
-}
-
-func (x *transactionsPingPongStream) Context() context.Context {
-	return x.stream.Context()
-}
-
-func (x *transactionsPingPongStream) SendMsg(m interface{}) error {
-	return x.stream.Send(m)
-}
-
-func (x *transactionsPingPongStream) RecvMsg(m interface{}) error {
-	return x.stream.Recv(m)
-}
-
-func (x *transactionsPingPongStream) Send(m *Pong) error {
-	return x.stream.Send(m)
-}
-
-func (x *transactionsPingPongStream) Recv() (*Ping, error) {
-	m := new(Ping)
-	if err := x.stream.Recv(m); err != nil {
-		return nil, err
-	}
-	return m, nil
+func (h *transactionsHandler) Create(ctx context.Context, in *Request, out *Response) error {
+	return h.TransactionsHandler.Create(ctx, in, out)
 }

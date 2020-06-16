@@ -12,8 +12,12 @@ import (
 var (
 	serviceName           = "go.micro.api.queries"
 	serviceVersion        = "0.0.1"
+	// Sub to account updates
 	subAccountCreated     = "go.micro.service.account.created"
 	subAccountUpdated     = "go.micro.service.account.updated"
+	// Sub to transaction updates
+	subTransactionPlaced  = "go.micro.service.transaction.created"
+	subTransactionUpdated = "go.micro.service.transaction.updated"
 )
 
 func main() {
@@ -40,6 +44,12 @@ func main() {
 		log.Fatal(err)
 	}
 	if err := micro.RegisterSubscriber(subAccountUpdated, service.Server(), new(subscriber.AccountUpdated)); err != nil {
+		log.Fatal(err)
+	}
+	if err := micro.RegisterSubscriber(subTransactionPlaced, service.Server(), new(subscriber.TransactionPlaced)); err != nil {
+		log.Fatal(err)
+	}
+	if err := micro.RegisterSubscriber(subTransactionUpdated, service.Server(), new(subscriber.TransactionUpdated)); err != nil {
 		log.Fatal(err)
 	}
 

@@ -21,7 +21,7 @@ services:
     container_name: transactions-srv
     command: /root/transactions
 
-  processing-srv:
-    build: srv/processing
-    container_name: processing-srv
-    command: /root/processing
+  approvals-srv:
+    build: srv/approvals
+    container_name: approvals-srv
+    command: /root/approvals

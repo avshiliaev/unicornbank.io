@@ -2,19 +2,20 @@ package subscriber
 
 import (
 	"context"
+	"github.com/micro/go-micro/v2"
 	"github.com/micro/go-micro/v2/client"
 	log "github.com/micro/go-micro/v2/logger"
-	"unicornbank.io/srv/processing/models"
-	processing "unicornbank.io/srv/processing/proto/processing"
-	"unicornbank.io/srv/processing/publisher"
+	"time"
+	"unicornbank.io/srv/approvals/models"
+	approvals "unicornbank.io/srv/approvals/proto/approvals"
 )
 
 type AccountCreated struct {
-	Client client.Client
+	Client             client.Client
 	PubAccountApproval string
 }
 
-func (e *AccountCreated) Handle(ctx context.Context, msg *processing.AccountCreated) error {
+func (e *AccountCreated) Handle(ctx context.Context, msg *approvals.AccountCreated) error {
 	log.Info("Handler Received message: ", msg.Uuid)
 
 	uuId := msg.Uuid
@@ -25,7 +26,12 @@ func (e *AccountCreated) Handle(ctx context.Context, msg *processing.AccountCrea
 	models.Create(uuId, status)
 
 	topic := e.PubAccountApproval
-	if err := publisher.PubAccountApproval(e.Client, topic, uuId, status); err != nil {
+	p := micro.NewEvent(topic, e.Client)
+	if err := p.Publish(context.TODO(), &approvals.AccountApproval{
+		Uuid:      uuId,
+		Timestamp: time.Now().Unix(),
+		Status:    status,
+	}); err != nil {
 		return err
 	}
 
