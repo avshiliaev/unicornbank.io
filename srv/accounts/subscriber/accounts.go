@@ -6,8 +6,6 @@ import (
 	"github.com/micro/go-micro/v2/client"
 	log "github.com/micro/go-micro/v2/logger"
 	"time"
-
-	// "unicornbank.io/srv/accounts/models"
 	accounts "unicornbank.io/srv/accounts/proto/accounts"
 )
 
@@ -26,6 +24,8 @@ func (e *AccountApproval) Handle(ctx context.Context, msg *accounts.AccountAppro
 	// TODO: Update in self database and get the rest of the info
 	// models.Update(uuId, title, status)
 	title := "TITLE"
+	var balance float32
+	balance = 0.0
 
 	topic := e.PubAccountUpdated
 	AccountUpdated := accounts.AccountCreatedOrUpdated{
@@ -33,6 +33,7 @@ func (e *AccountApproval) Handle(ctx context.Context, msg *accounts.AccountAppro
 		Timestamp: time.Now().Unix(),
 		Title:     title,
 		Status:    status,
+		Balance:   balance,
 	}
 	p := micro.NewEvent(topic, e.Client)
 	if err := p.Publish(context.TODO(), &AccountUpdated); err != nil {

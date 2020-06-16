@@ -8,6 +8,7 @@ message AccountCreatedOrUpdated {
   int64 timestamp = 2;
   string title = 3;
   string status = 4;
+  float balance = 5;
 }
 message AccountApproval {
   string Uuid = 1;

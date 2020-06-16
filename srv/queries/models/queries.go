@@ -12,9 +12,10 @@ var (
 
 type AccountsModel struct {
 	gorm.Model
-	Uuid   string
-	Title  string
-	Status string
+	Uuid    string
+	Title   string
+	Status  string
+	Balance float32
 }
 
 type TransactionsModel struct {
@@ -35,18 +36,18 @@ func Migrate() {
 	db.AutoMigrate(&TransactionsModel{})
 }
 
-func CreateAccount(uuid string, title string, status string) {
+func CreateAccount(uuid string, title string, status string, balance float32) {
 	db, err := gorm.Open(dialect, args)
 	if err != nil {
 		panic("failed to connect database")
 	}
 	defer db.Close()
-	account := AccountsModel{Title: title, Uuid: uuid, Status: status}
+	account := AccountsModel{Title: title, Uuid: uuid, Balance: balance, Status: status}
 	db.Save(&account)
 }
 
 // Update all fields: we DO NOT know here what was updated!
-func UpdateAccount(uuid string, title string, status string) {
+func UpdateAccount(uuid string, title string, status string, balance float32) {
 	db, err := gorm.Open(dialect, args)
 	if err != nil {
 		panic("failed to connect database")
@@ -57,6 +58,7 @@ func UpdateAccount(uuid string, title string, status string) {
 	// TODO Need a destructuring here or something
 	account.Title = title
 	account.Status = status
+	account.Balance = balance
 	db.Save(&account)
 }
 

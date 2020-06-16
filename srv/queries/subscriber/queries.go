@@ -11,7 +11,7 @@ type AccountCreated struct{}
 
 func (e *AccountCreated) Handle(ctx context.Context, msg *queries.AccountCreated) error {
 	log.Info("Account: ", msg.Uuid, ", status: ", msg.Status)
-	models.CreateAccount(msg.Uuid, msg.Title, msg.Status)
+	models.CreateAccount(msg.Uuid, msg.Title, msg.Status, msg.Balance)
 	return nil
 }
 
@@ -19,7 +19,7 @@ type AccountUpdated struct{}
 
 func (e *AccountUpdated) Handle(ctx context.Context, msg *queries.AccountUpdated) error {
 	log.Info("Account: ", msg.Uuid, ", status: ", msg.Status)
-	models.UpdateAccount(msg.Uuid, msg.Title, msg.Status)
+	models.UpdateAccount(msg.Uuid, msg.Title, msg.Status, msg.Balance)
 	return nil
 }
 

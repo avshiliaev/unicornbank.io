@@ -20,9 +20,11 @@ type Accounts struct {
 func (e *Accounts) Create(ctx context.Context, req *accounts.Request, rsp *accounts.Response) error {
 	log.Info("Received Accounts.Create request")
 
-	uuID := uuid.New().String()
 	title := req.Title
-	models.Create(uuID, title)
+	uuID := uuid.New().String()
+	var balance float32
+	balance = 0.0
+	models.Create(uuID, title, balance)
 
 	topic := e.PubAccountCreated
 	AccountCreated := accounts.AccountCreatedOrUpdated{
@@ -30,6 +32,7 @@ func (e *Accounts) Create(ctx context.Context, req *accounts.Request, rsp *accou
 		Timestamp: time.Now().Unix(),
 		Title:     title,
 		Status:    "pending",
+		Balance:   balance,
 	}
 	p := micro.NewEvent(topic, e.Client)
 	if err := p.Publish(context.TODO(), &AccountCreated); err != nil {
