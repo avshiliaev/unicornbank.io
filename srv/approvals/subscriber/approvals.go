@@ -15,27 +15,24 @@ type AccountCreated struct {
 	PubAccountApproval string
 }
 
-func (e *AccountCreated) Handle(ctx context.Context, msg *approvals.AccountCreated) error {
-	log.Info("Handler Received message: ", msg.Uuid)
+func (e *AccountCreated) Handle(ctx context.Context, accountCreated *approvals.AccountCreated) error {
+	log.Info("Handler Received message: ", accountCreated.Uuid)
 
-	uuId := msg.Uuid
-	var status string
-
-	// TODO business logic injected here
-	status = "approved"
-	models.Create(uuId, status)
+	status := "approved"
+	accountApproved := approvals.AccountApproval{
+		Uuid:      accountCreated.Uuid,
+		Timestamp: time.Now().Unix(),
+		Status:    status,
+	}
+	models.Create(&accountApproved)
 
 	topic := e.PubAccountApproval
 	p := micro.NewEvent(topic, e.Client)
-	if err := p.Publish(context.TODO(), &approvals.AccountApproval{
-		Uuid:      uuId,
-		Timestamp: time.Now().Unix(),
-		Status:    status,
-	}); err != nil {
+	if err := p.Publish(context.TODO(), &accountApproved); err != nil {
 		return err
 	}
 
-	log.Info("Account: ", uuId, " approved!")
+	log.Info("Account: ", accountApproved.Uuid, " approved!")
 
 	return nil
 }

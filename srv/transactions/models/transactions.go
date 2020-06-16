@@ -3,6 +3,7 @@ package models
 import (
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
+	transactions "unicornbank.io/srv/transactions/proto/transactions"
 )
 
 var (
@@ -15,6 +16,7 @@ type TransactionModel struct {
 	Uuid    string
 	Account string
 	Amount  float32
+	Status  string
 }
 
 func Migrate() {
@@ -26,12 +28,47 @@ func Migrate() {
 	db.AutoMigrate(&TransactionModel{})
 }
 
-func Create(uuid string, account string, amount float32) {
+func Get(uuid string) TransactionModel {
 	db, err := gorm.Open(dialect, args)
 	if err != nil {
 		panic("failed to connect database")
 	}
 	defer db.Close()
-	transaction := TransactionModel{Account: account, Uuid: uuid, Amount: amount}
+	transaction := TransactionModel{
+		Uuid: uuid,
+	}
+	db.Take(&transaction)
+
+	return transaction
+}
+
+func Create(transactionPlaced *transactions.TransactionPlacedOrUpdated) {
+	db, err := gorm.Open(dialect, args)
+	if err != nil {
+		panic("failed to connect database")
+	}
+	defer db.Close()
+	transaction := TransactionModel{
+		Uuid:    transactionPlaced.Uuid,
+		Account: transactionPlaced.Account,
+		Amount:  transactionPlaced.Amount,
+		Status:  transactionPlaced.Status,
+	}
+	db.Save(&transaction)
+}
+
+func Update(transactionUpdated *transactions.TransactionPlacedOrUpdated) {
+	db, err := gorm.Open(dialect, args)
+	if err != nil {
+		panic("failed to connect database")
+	}
+	defer db.Close()
+	transaction := TransactionModel{
+		Uuid: transactionUpdated.Uuid,
+	}
+	db.Take(&transaction)
+	transaction.Account = transactionUpdated.Account
+	transaction.Amount = transactionUpdated.Amount
+	transaction.Status = transactionUpdated.Status
 	db.Save(&transaction)
 }

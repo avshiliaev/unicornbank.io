@@ -20,25 +20,22 @@ type Transactions struct {
 func (e *Transactions) Create(ctx context.Context, req *transactions.Request, rsp *transactions.Response) error {
 	log.Info("Received Transactions.Create request")
 
-	uuID := uuid.New().String()
-	account := req.Account
-	amount := req.Amount
-	models.Create(uuID, account, amount)
-
-	topic := e.PubTransactionPlaced
-	AccountCreated := transactions.TransactionPlacedOrUpdated{
-		Uuid:      uuID,
+	transactionPlaced := transactions.TransactionPlacedOrUpdated{
+		Uuid:      uuid.New().String(),
 		Timestamp: time.Now().Unix(),
 		Status:    "pending",
-		Account:   account,
-		Amount:    amount,
+		Account:   req.Account,
+		Amount:    req.Amount,
 	}
+	models.Create(&transactionPlaced)
+
+	topic := e.PubTransactionPlaced
 	p := micro.NewEvent(topic, e.Client)
-	if err := p.Publish(context.TODO(), &AccountCreated); err != nil {
+	if err := p.Publish(context.TODO(), &transactionPlaced); err != nil {
 		return err
 	}
 
-	rsp.Msg = "created " + uuID
+	rsp.Msg = "created " + transactionPlaced.Uuid
 
 	return nil
 }

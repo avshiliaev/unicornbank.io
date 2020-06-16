@@ -3,6 +3,7 @@ package models
 import (
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
+	approvals "unicornbank.io/srv/approvals/proto/approvals"
 )
 
 var (
@@ -25,12 +26,15 @@ func Migrate() {
 	db.AutoMigrate(&ApprovalsModel{})
 }
 
-func Create(uuid string, status string) {
+func Create(accountApproved *approvals.AccountApproval) {
 	db, err := gorm.Open(dialect, args)
 	if err != nil {
 		panic("failed to connect database")
 	}
 	defer db.Close()
-	account := ApprovalsModel{Uuid: uuid, Status: status}
+	account := ApprovalsModel{
+		Uuid: accountApproved.Uuid,
+		Status: accountApproved.Status,
+	}
 	db.Save(&account)
 }

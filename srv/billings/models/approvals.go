@@ -3,6 +3,7 @@ package models
 import (
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
+	billings "unicornbank.io/srv/billings/proto/billings"
 )
 
 var (
@@ -25,12 +26,15 @@ func Migrate() {
 	db.AutoMigrate(&BillingsModel{})
 }
 
-func Create(uuid string, status string) {
+func Create(transactionProcessed *billings.TransactionProcessed) {
 	db, err := gorm.Open(dialect, args)
 	if err != nil {
 		panic("failed to connect database")
 	}
 	defer db.Close()
-	billing := BillingsModel{Uuid: uuid, Status: status}
+	billing := BillingsModel{
+		Uuid: transactionProcessed.Uuid,
+		Status: transactionProcessed.Status,
+	}
 	db.Save(&billing)
 }

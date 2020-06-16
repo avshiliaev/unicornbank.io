@@ -3,6 +3,7 @@ package models
 import (
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
+	queries "unicornbank.io/srv/queries/proto/queries"
 )
 
 var (
@@ -36,53 +37,61 @@ func Migrate() {
 	db.AutoMigrate(&TransactionsModel{})
 }
 
-func CreateAccount(uuid string, title string, status string, balance float32) {
+func CreateAccount(accountCreated *queries.AccountCreated) {
 	db, err := gorm.Open(dialect, args)
 	if err != nil {
 		panic("failed to connect database")
 	}
 	defer db.Close()
-	account := AccountsModel{Title: title, Uuid: uuid, Balance: balance, Status: status}
+	account := AccountsModel{
+		Uuid:    accountCreated.Uuid,
+		Title:   accountCreated.Title,
+		Status:  accountCreated.Status,
+		Balance: accountCreated.Balance,
+	}
 	db.Save(&account)
 }
 
 // Update all fields: we DO NOT know here what was updated!
-func UpdateAccount(uuid string, title string, status string, balance float32) {
+func UpdateAccount(accountUpdated *queries.AccountUpdated) {
 	db, err := gorm.Open(dialect, args)
 	if err != nil {
 		panic("failed to connect database")
 	}
 	defer db.Close()
-	account := AccountsModel{Uuid: uuid}
+	account := AccountsModel{Uuid: accountUpdated.Uuid}
 	db.Take(&account)
-	// TODO Need a destructuring here or something
-	account.Title = title
-	account.Status = status
-	account.Balance = balance
+	account.Title = accountUpdated.Title
+	account.Status = accountUpdated.Status
+	account.Balance = accountUpdated.Balance
 	db.Save(&account)
 }
 
-func CreateTransaction(uuid string, account string, amount float32, status string) {
+func CreateTransaction(transactionPlaced *queries.TransactionPlaced) {
 	db, err := gorm.Open(dialect, args)
 	if err != nil {
 		panic("failed to connect database")
 	}
 	defer db.Close()
-	transaction := TransactionsModel{Account: account, Uuid: uuid, Amount: amount, Status: status}
+	transaction := TransactionsModel{
+		Uuid:    transactionPlaced.Uuid,
+		Account: transactionPlaced.Account,
+		Amount:  transactionPlaced.Amount,
+		Status:  transactionPlaced.Status,
+	}
 	db.Save(&transaction)
 }
 
 // Update all fields (which can be updated at least): we DO NOT know here what was updated!
-func UpdateTransaction(uuid string, amount float32, status string) {
+func UpdateTransaction(transactionUpdated *queries.TransactionUpdated) {
 	db, err := gorm.Open(dialect, args)
 	if err != nil {
 		panic("failed to connect database")
 	}
 	defer db.Close()
-	transaction := TransactionsModel{Uuid: uuid}
+	transaction := TransactionsModel{Uuid: transactionUpdated.Uuid}
 	db.Take(&transaction)
-	// TODO Need a destructuring here or something
-	transaction.Status = status
-	transaction.Amount = amount
+	transaction.Status = transactionUpdated.Status
+	transaction.Amount = transactionUpdated.Amount
 	db.Save(&transaction)
 }

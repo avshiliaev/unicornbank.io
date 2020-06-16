@@ -6,6 +6,7 @@ import (
 	"github.com/micro/go-micro/v2/client"
 	log "github.com/micro/go-micro/v2/logger"
 	"time"
+	"unicornbank.io/srv/accounts/models"
 	accounts "unicornbank.io/srv/accounts/proto/accounts"
 )
 
@@ -17,30 +18,24 @@ type AccountApproval struct {
 func (e *AccountApproval) Handle(ctx context.Context, msg *accounts.AccountApproval) error {
 	log.Info("Handler Received message: ", msg.Uuid)
 
-	uuId := msg.Uuid
-	var status string
-	status = msg.Status
+	accountApproved := models.Get(msg.Uuid)
 
-	// TODO: Update in self database and get the rest of the info
-	// models.Update(uuId, title, status)
-	title := "TITLE"
-	var balance float32
-	balance = 0.0
+	accountUpdated := accounts.AccountCreatedOrUpdated{
+		Uuid:      accountApproved.Uuid,
+		Timestamp: time.Now().Unix(),
+		Title:     accountApproved.Title,
+		Status:    msg.Status,
+		Balance:   accountApproved.Balance,
+	}
+	models.Update(&accountUpdated)
 
 	topic := e.PubAccountUpdated
-	AccountUpdated := accounts.AccountCreatedOrUpdated{
-		Uuid:      uuId,
-		Timestamp: time.Now().Unix(),
-		Title:     title,
-		Status:    status,
-		Balance:   balance,
-	}
 	p := micro.NewEvent(topic, e.Client)
-	if err := p.Publish(context.TODO(), &AccountUpdated); err != nil {
+	if err := p.Publish(context.TODO(), &accountUpdated); err != nil {
 		return err
 	}
 
-	log.Info("Account: ", uuId, " updated!")
+	log.Info("Account: ", accountUpdated.Uuid, " updated!")
 
 	return nil
 }

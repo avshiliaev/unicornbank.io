@@ -16,7 +16,7 @@ var (
 	subAccountCreated     = "go.micro.service.account.created"
 	subAccountUpdated     = "go.micro.service.account.updated"
 	// Sub to transaction updates
-	subTransactionPlaced  = "go.micro.service.transaction.created"
+	subTransactionPlaced  = "go.micro.service.transaction.placed"
 	subTransactionUpdated = "go.micro.service.transaction.updated"
 )
 
