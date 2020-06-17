@@ -63,12 +63,10 @@ func Update(accountUpdated *accounts.AccountCreatedOrUpdated) {
 		panic("failed to connect database")
 	}
 	defer db.Close()
-	account := AccountsModel{
-		Uuid: accountUpdated.Uuid,
-	}
-	db.Take(&account)
-	account.Title = accountUpdated.Title
-	account.Balance = accountUpdated.Balance
-	account.Status = accountUpdated.Status
-	db.Save(&account)
+
+	var account AccountsModel
+	db.First(&account, "Uuid = ?", accountUpdated.Uuid)
+
+	db.Model(&account).Update("Status", accountUpdated.Status)
+
 }

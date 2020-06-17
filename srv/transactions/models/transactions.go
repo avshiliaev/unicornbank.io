@@ -63,10 +63,8 @@ func Update(transactionUpdated *transactions.TransactionPlacedOrUpdated) {
 		panic("failed to connect database")
 	}
 	defer db.Close()
-	transaction := TransactionModel{
-		Uuid: transactionUpdated.Uuid,
-	}
-	db.Take(&transaction)
+	var transaction TransactionModel
+	db.Where("uuid=?", transactionUpdated.Uuid).Find(&transaction)
 	transaction.Account = transactionUpdated.Account
 	transaction.Amount = transactionUpdated.Amount
 	transaction.Status = transactionUpdated.Status

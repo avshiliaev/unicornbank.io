@@ -59,8 +59,8 @@ func UpdateAccount(accountUpdated *queries.AccountUpdated) {
 		panic("failed to connect database")
 	}
 	defer db.Close()
-	account := AccountsModel{Uuid: accountUpdated.Uuid}
-	db.Take(&account)
+	var account AccountsModel
+	db.Where("uuid=?", accountUpdated.Uuid).Find(&account)
 	account.Title = accountUpdated.Title
 	account.Status = accountUpdated.Status
 	account.Balance = accountUpdated.Balance
@@ -89,8 +89,8 @@ func UpdateTransaction(transactionUpdated *queries.TransactionUpdated) {
 		panic("failed to connect database")
 	}
 	defer db.Close()
-	transaction := TransactionsModel{Uuid: transactionUpdated.Uuid}
-	db.Take(&transaction)
+	var transaction TransactionsModel
+	db.Where("uuid=?", transactionUpdated.Uuid).Find(&transaction)
 	transaction.Status = transactionUpdated.Status
 	transaction.Amount = transactionUpdated.Amount
 	db.Save(&transaction)
