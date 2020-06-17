@@ -61,7 +61,7 @@ func GetAccount(uuid string) AccountsModel {
 	account := AccountsModel{
 		Uuid: uuid,
 	}
-	db.Take(&account)
+	db.Find(&account)
 
 	return account
 }
@@ -99,7 +99,7 @@ func GetTransaction(uuid string) TransactionsModel {
 	transaction := TransactionsModel{
 		Uuid: uuid,
 	}
-	db.Take(&transaction)
+	db.Find(&transaction)
 
 	return transaction
 }

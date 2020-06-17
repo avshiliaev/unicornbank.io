@@ -37,7 +37,7 @@ func Get(uuid string) AccountsModel {
 	account := AccountsModel{
 		Uuid: uuid,
 	}
-	db.Take(&account)
+	db.Find(&account)
 
 	return account
 }

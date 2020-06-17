@@ -37,7 +37,7 @@ func Get(uuid string) TransactionModel {
 	transaction := TransactionModel{
 		Uuid: uuid,
 	}
-	db.Take(&transaction)
+	db.Find(&transaction)
 
 	return transaction
 }
