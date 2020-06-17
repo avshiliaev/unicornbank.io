@@ -13,8 +13,8 @@ var (
 	serviceName    = "go.micro.api.accounts"
 	serviceVersion = "0.0.1"
 	// Subscribe to
-	subAccountApproval      = "go.micro.service.account.approval"
-	subTransactionProcessed = "go.micro.service.transaction.processed"
+	subAccountApproval   = "go.micro.service.account.approval"
+	subTransactionPlaced = "go.micro.service.transaction.placed"
 	// Publish to
 	pubAccountCreated = "go.micro.service.account.created"
 	pubAccountUpdated = "go.micro.service.account.updated"
@@ -47,9 +47,9 @@ func main() {
 	if err := micro.RegisterSubscriber(subAccountApproval, service.Server(), accApprovSub); err != nil {
 		log.Fatal(err)
 	}
-	transProcSub := new(subscriber.TransactionProcessed)
+	transProcSub := new(subscriber.TransactionPlaced)
 	transProcSub.PubAccountUpdated = pubAccountUpdated
-	if err := micro.RegisterSubscriber(subTransactionProcessed, service.Server(), transProcSub); err != nil {
+	if err := micro.RegisterSubscriber(subTransactionPlaced, service.Server(), transProcSub); err != nil {
 		log.Fatal(err)
 	}
 

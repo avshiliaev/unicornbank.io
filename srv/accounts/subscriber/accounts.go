@@ -41,17 +41,18 @@ func (e *AccountApproval) Handle(ctx context.Context, msg *accounts.AccountAppro
 	return nil
 }
 
-type TransactionProcessed struct {
+type TransactionPlaced struct {
 	Client            client.Client
 	PubAccountUpdated string
 }
 
-func (e *TransactionProcessed) Handle(ctx context.Context, transactionProcessed *accounts.TransactionProcessed) error {
-	log.Info("Handler Received message: ", transactionProcessed.Uuid)
+// TODO a good place for the saga pattern:
+// The transaction is deducted RIGHT away, but then can be compensated if not processed by billing
+func (e *TransactionPlaced) Handle(ctx context.Context, transactionPlaced *accounts.TransactionPlaced) error {
+	log.Info("Handler Received message: ", transactionPlaced.Uuid)
 
-	// TODO do only if transaction is successfully processed!
-	accountDeducted := models.Get(transactionProcessed.Account)
-	accountDeducted.Balance = accountDeducted.Balance - transactionProcessed.Amount
+	accountDeducted := models.Get(transactionPlaced.Account)
+	accountDeducted.Balance = accountDeducted.Balance - transactionPlaced.Amount
 	models.Update(&accountDeducted)
 
 	accountUpdated := accounts.AccountCreatedOrUpdated{

@@ -15,7 +15,7 @@ message AccountApproval {
   int64 timestamp = 2;
   string status = 4;
 }
-message TransactionProcessed {
+message TransactionPlaced {
   string account = 1;
   string Uuid = 2;
   int64 timestamp = 3;
