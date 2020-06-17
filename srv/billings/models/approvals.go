@@ -26,7 +26,7 @@ func Migrate() {
 	db.AutoMigrate(&BillingsModel{})
 }
 
-func Create(transactionProcessed *billings.TransactionProcessed) {
+func Create(transactionProcessed *billings.TransactionProcessedType) {
 	db, err := gorm.Open(dialect, args)
 	if err != nil {
 		panic("failed to connect database")

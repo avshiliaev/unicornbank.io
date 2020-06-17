@@ -42,7 +42,7 @@ func Get(uuid string) AccountsModel {
 	return account
 }
 
-func Create(accountCreated *accounts.AccountCreatedOrUpdated) {
+func Create(accountCreated *accounts.AccountType) {
 	db, err := gorm.Open(dialect, args)
 	if err != nil {
 		panic("failed to connect database")

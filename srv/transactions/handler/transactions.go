@@ -6,7 +6,6 @@ import (
 	"github.com/micro/go-micro/v2"
 	"github.com/micro/go-micro/v2/client"
 	log "github.com/micro/go-micro/v2/logger"
-	"time"
 	"unicornbank.io/srv/transactions/models"
 	transactions "unicornbank.io/srv/transactions/proto/transactions"
 )
@@ -17,15 +16,16 @@ type Transactions struct {
 }
 
 // Call is a single request handler called via client.Call or the generated client code
-func (e *Transactions) Create(ctx context.Context, req *transactions.Request, rsp *transactions.Response) error {
+func (e *Transactions) Create(
+	ctx context.Context, req *transactions.TransactionRequestType, rsp *transactions.TransactionType,
+) error {
 	log.Info("Received Transactions.Create request")
 
-	transactionPlaced := transactions.TransactionPlacedOrUpdated{
-		Uuid:      uuid.New().String(),
-		Timestamp: time.Now().Unix(),
-		Status:    "pending",
-		Account:   req.Account,
-		Amount:    req.Amount,
+	transactionPlaced := transactions.TransactionType{
+		Uuid:    uuid.New().String(),
+		Status:  "pending",
+		Account: req.Account,
+		Amount:  req.Amount,
 	}
 	models.Create(&transactionPlaced)
 
@@ -35,7 +35,10 @@ func (e *Transactions) Create(ctx context.Context, req *transactions.Request, rs
 		return err
 	}
 
-	rsp.Msg = "created " + transactionPlaced.Uuid
+	rsp.Uuid = transactionPlaced.Uuid
+	rsp.Status = transactionPlaced.Status
+	rsp.Account = transactionPlaced.Account
+	rsp.Amount = transactionPlaced.Amount
 
 	return nil
 }

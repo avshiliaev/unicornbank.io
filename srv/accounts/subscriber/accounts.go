@@ -5,7 +5,6 @@ import (
 	"github.com/micro/go-micro/v2"
 	"github.com/micro/go-micro/v2/client"
 	log "github.com/micro/go-micro/v2/logger"
-	"time"
 	"unicornbank.io/srv/accounts/models"
 	accounts "unicornbank.io/srv/accounts/proto/accounts"
 )
@@ -15,19 +14,18 @@ type AccountApproval struct {
 	PubAccountUpdated string
 }
 
-func (e *AccountApproval) Handle(ctx context.Context, msg *accounts.AccountApproval) error {
+func (e *AccountApproval) Handle(ctx context.Context, msg *accounts.AccountApprovalType) error {
 	log.Info("Handler Received message: ", msg.Uuid)
 
 	account := models.Get(msg.Uuid)
 	account.Status = msg.Status
 	models.Update(&account)
 
-	accountUpdated := accounts.AccountCreatedOrUpdated{
-		Uuid:      account.Uuid,
-		Title:     account.Title,
-		Status:    account.Status,
-		Balance:   account.Balance,
-		Timestamp: time.Now().Unix(),
+	accountUpdated := accounts.AccountType{
+		Uuid:    account.Uuid,
+		Title:   account.Title,
+		Status:  account.Status,
+		Balance: account.Balance,
 	}
 
 	topic := e.PubAccountUpdated
@@ -48,19 +46,18 @@ type TransactionPlaced struct {
 
 // TODO a good place for the saga pattern:
 // The transaction is deducted RIGHT away, but then can be compensated if not processed by billing
-func (e *TransactionPlaced) Handle(ctx context.Context, transactionPlaced *accounts.TransactionPlaced) error {
+func (e *TransactionPlaced) Handle(ctx context.Context, transactionPlaced *accounts.TransactionType) error {
 	log.Info("Handler Received message: ", transactionPlaced.Uuid)
 
 	account := models.Get(transactionPlaced.Account)
 	account.Balance = account.Balance + transactionPlaced.Amount
 	models.Update(&account)
 
-	accountUpdated := accounts.AccountCreatedOrUpdated{
-		Uuid:      account.Uuid,
-		Title:     account.Title,
-		Status:    account.Status,
-		Balance:   account.Balance,
-		Timestamp: time.Now().Unix(),
+	accountUpdated := accounts.AccountType{
+		Uuid:    account.Uuid,
+		Title:   account.Title,
+		Status:  account.Status,
+		Balance: account.Balance,
 	}
 
 	topic := e.PubAccountUpdated

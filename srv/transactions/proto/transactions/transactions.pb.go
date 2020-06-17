@@ -26,20 +26,19 @@ const (
 const _ = proto.ProtoPackageIsVersion4
 
 // Events
-type TransactionPlacedOrUpdated struct {
+type TransactionType struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Account   string  `protobuf:"bytes,1,opt,name=account,proto3" json:"account,omitempty"`
-	Uuid      string  `protobuf:"bytes,2,opt,name=Uuid,proto3" json:"Uuid,omitempty"`
-	Timestamp int64   `protobuf:"varint,3,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
-	Status    string  `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
-	Amount    float32 `protobuf:"fixed32,5,opt,name=amount,proto3" json:"amount,omitempty"`
+	Account string  `protobuf:"bytes,1,opt,name=account,proto3" json:"account,omitempty"`
+	Uuid    string  `protobuf:"bytes,2,opt,name=uuid,proto3" json:"uuid,omitempty"`
+	Status  string  `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"`
+	Amount  float32 `protobuf:"fixed32,4,opt,name=amount,proto3" json:"amount,omitempty"`
 }
 
-func (x *TransactionPlacedOrUpdated) Reset() {
-	*x = TransactionPlacedOrUpdated{}
+func (x *TransactionType) Reset() {
+	*x = TransactionType{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_proto_transactions_transactions_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -47,13 +46,13 @@ func (x *TransactionPlacedOrUpdated) Reset() {
 	}
 }
 
-func (x *TransactionPlacedOrUpdated) String() string {
+func (x *TransactionType) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*TransactionPlacedOrUpdated) ProtoMessage() {}
+func (*TransactionType) ProtoMessage() {}
 
-func (x *TransactionPlacedOrUpdated) ProtoReflect() protoreflect.Message {
+func (x *TransactionType) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_transactions_transactions_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -65,60 +64,50 @@ func (x *TransactionPlacedOrUpdated) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use TransactionPlacedOrUpdated.ProtoReflect.Descriptor instead.
-func (*TransactionPlacedOrUpdated) Descriptor() ([]byte, []int) {
+// Deprecated: Use TransactionType.ProtoReflect.Descriptor instead.
+func (*TransactionType) Descriptor() ([]byte, []int) {
 	return file_proto_transactions_transactions_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *TransactionPlacedOrUpdated) GetAccount() string {
+func (x *TransactionType) GetAccount() string {
 	if x != nil {
 		return x.Account
 	}
 	return ""
 }
 
-func (x *TransactionPlacedOrUpdated) GetUuid() string {
+func (x *TransactionType) GetUuid() string {
 	if x != nil {
 		return x.Uuid
 	}
 	return ""
 }
 
-func (x *TransactionPlacedOrUpdated) GetTimestamp() int64 {
-	if x != nil {
-		return x.Timestamp
-	}
-	return 0
-}
-
-func (x *TransactionPlacedOrUpdated) GetStatus() string {
+func (x *TransactionType) GetStatus() string {
 	if x != nil {
 		return x.Status
 	}
 	return ""
 }
 
-func (x *TransactionPlacedOrUpdated) GetAmount() float32 {
+func (x *TransactionType) GetAmount() float32 {
 	if x != nil {
 		return x.Amount
 	}
 	return 0
 }
 
-type TransactionProcessed struct {
+type TransactionRequestType struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Account   string  `protobuf:"bytes,1,opt,name=account,proto3" json:"account,omitempty"`
-	Uuid      string  `protobuf:"bytes,2,opt,name=Uuid,proto3" json:"Uuid,omitempty"`
-	Timestamp int64   `protobuf:"varint,3,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
-	Status    string  `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
-	Amount    float32 `protobuf:"fixed32,5,opt,name=amount,proto3" json:"amount,omitempty"`
+	Account string  `protobuf:"bytes,1,opt,name=account,proto3" json:"account,omitempty"`
+	Amount  float32 `protobuf:"fixed32,2,opt,name=amount,proto3" json:"amount,omitempty"`
 }
 
-func (x *TransactionProcessed) Reset() {
-	*x = TransactionProcessed{}
+func (x *TransactionRequestType) Reset() {
+	*x = TransactionRequestType{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_proto_transactions_transactions_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -126,13 +115,13 @@ func (x *TransactionProcessed) Reset() {
 	}
 }
 
-func (x *TransactionProcessed) String() string {
+func (x *TransactionRequestType) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*TransactionProcessed) ProtoMessage() {}
+func (*TransactionRequestType) ProtoMessage() {}
 
-func (x *TransactionProcessed) ProtoReflect() protoreflect.Message {
+func (x *TransactionRequestType) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_transactions_transactions_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -144,191 +133,21 @@ func (x *TransactionProcessed) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use TransactionProcessed.ProtoReflect.Descriptor instead.
-func (*TransactionProcessed) Descriptor() ([]byte, []int) {
+// Deprecated: Use TransactionRequestType.ProtoReflect.Descriptor instead.
+func (*TransactionRequestType) Descriptor() ([]byte, []int) {
 	return file_proto_transactions_transactions_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *TransactionProcessed) GetAccount() string {
+func (x *TransactionRequestType) GetAccount() string {
 	if x != nil {
 		return x.Account
 	}
 	return ""
 }
 
-func (x *TransactionProcessed) GetUuid() string {
-	if x != nil {
-		return x.Uuid
-	}
-	return ""
-}
-
-func (x *TransactionProcessed) GetTimestamp() int64 {
-	if x != nil {
-		return x.Timestamp
-	}
-	return 0
-}
-
-func (x *TransactionProcessed) GetStatus() string {
-	if x != nil {
-		return x.Status
-	}
-	return ""
-}
-
-func (x *TransactionProcessed) GetAmount() float32 {
+func (x *TransactionRequestType) GetAmount() float32 {
 	if x != nil {
 		return x.Amount
-	}
-	return 0
-}
-
-type Request struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Account string  `protobuf:"bytes,1,opt,name=account,proto3" json:"account,omitempty"`
-	Amount  float32 `protobuf:"fixed32,2,opt,name=amount,proto3" json:"amount,omitempty"`
-}
-
-func (x *Request) Reset() {
-	*x = Request{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_transactions_transactions_proto_msgTypes[2]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *Request) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Request) ProtoMessage() {}
-
-func (x *Request) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_transactions_transactions_proto_msgTypes[2]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use Request.ProtoReflect.Descriptor instead.
-func (*Request) Descriptor() ([]byte, []int) {
-	return file_proto_transactions_transactions_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *Request) GetAccount() string {
-	if x != nil {
-		return x.Account
-	}
-	return ""
-}
-
-func (x *Request) GetAmount() float32 {
-	if x != nil {
-		return x.Amount
-	}
-	return 0
-}
-
-type Response struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Msg string `protobuf:"bytes,1,opt,name=msg,proto3" json:"msg,omitempty"`
-}
-
-func (x *Response) Reset() {
-	*x = Response{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_transactions_transactions_proto_msgTypes[3]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *Response) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Response) ProtoMessage() {}
-
-func (x *Response) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_transactions_transactions_proto_msgTypes[3]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use Response.ProtoReflect.Descriptor instead.
-func (*Response) Descriptor() ([]byte, []int) {
-	return file_proto_transactions_transactions_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *Response) GetMsg() string {
-	if x != nil {
-		return x.Msg
-	}
-	return ""
-}
-
-type StreamingRequest struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Count int64 `protobuf:"varint,1,opt,name=count,proto3" json:"count,omitempty"`
-}
-
-func (x *StreamingRequest) Reset() {
-	*x = StreamingRequest{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_transactions_transactions_proto_msgTypes[4]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *StreamingRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*StreamingRequest) ProtoMessage() {}
-
-func (x *StreamingRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_transactions_transactions_proto_msgTypes[4]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use StreamingRequest.ProtoReflect.Descriptor instead.
-func (*StreamingRequest) Descriptor() ([]byte, []int) {
-	return file_proto_transactions_transactions_proto_rawDescGZIP(), []int{4}
-}
-
-func (x *StreamingRequest) GetCount() int64 {
-	if x != nil {
-		return x.Count
 	}
 	return 0
 }
@@ -338,43 +157,27 @@ var File_proto_transactions_transactions_proto protoreflect.FileDescriptor
 var file_proto_transactions_transactions_proto_rawDesc = []byte{
 	0x0a, 0x25, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74,
 	0x69, 0x6f, 0x6e, 0x73, 0x2f, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e,
-	0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x1d, 0x67, 0x6f, 0x2e, 0x6d, 0x69, 0x63, 0x72,
-	0x6f, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61,
-	0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x22, 0x98, 0x01, 0x0a, 0x1a, 0x54, 0x72, 0x61, 0x6e, 0x73,
-	0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x6c, 0x61, 0x63, 0x65, 0x64, 0x4f, 0x72, 0x55, 0x70,
-	0x64, 0x61, 0x74, 0x65, 0x64, 0x12, 0x18, 0x0a, 0x07, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74,
-	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x12,
-	0x12, 0x0a, 0x04, 0x55, 0x75, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x55,
-	0x75, 0x69, 0x64, 0x12, 0x1c, 0x0a, 0x09, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70,
-	0x18, 0x03, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d,
-	0x70, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x04, 0x20, 0x01, 0x28,
-	0x09, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x16, 0x0a, 0x06, 0x61, 0x6d, 0x6f,
-	0x75, 0x6e, 0x74, 0x18, 0x05, 0x20, 0x01, 0x28, 0x02, 0x52, 0x06, 0x61, 0x6d, 0x6f, 0x75, 0x6e,
-	0x74, 0x22, 0x92, 0x01, 0x0a, 0x14, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f,
-	0x6e, 0x50, 0x72, 0x6f, 0x63, 0x65, 0x73, 0x73, 0x65, 0x64, 0x12, 0x18, 0x0a, 0x07, 0x61, 0x63,
+	0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x6f, 0x0a, 0x0f, 0x54, 0x72, 0x61, 0x6e, 0x73,
+	0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x54, 0x79, 0x70, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x61, 0x63,
 	0x63, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x61, 0x63, 0x63,
-	0x6f, 0x75, 0x6e, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x55, 0x75, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01,
-	0x28, 0x09, 0x52, 0x04, 0x55, 0x75, 0x69, 0x64, 0x12, 0x1c, 0x0a, 0x09, 0x74, 0x69, 0x6d, 0x65,
-	0x73, 0x74, 0x61, 0x6d, 0x70, 0x18, 0x03, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x74, 0x69, 0x6d,
-	0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73,
-	0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x16,
-	0x0a, 0x06, 0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x05, 0x20, 0x01, 0x28, 0x02, 0x52, 0x06,
-	0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x22, 0x3b, 0x0a, 0x07, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
-	0x74, 0x12, 0x18, 0x0a, 0x07, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x01, 0x20, 0x01,
-	0x28, 0x09, 0x52, 0x07, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x16, 0x0a, 0x06, 0x61,
-	0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x02, 0x52, 0x06, 0x61, 0x6d, 0x6f,
-	0x75, 0x6e, 0x74, 0x22, 0x1c, 0x0a, 0x08, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
-	0x10, 0x0a, 0x03, 0x6d, 0x73, 0x67, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6d, 0x73,
-	0x67, 0x22, 0x28, 0x0a, 0x10, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x69, 0x6e, 0x67, 0x52, 0x65,
-	0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x14, 0x0a, 0x05, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x01,
-	0x20, 0x01, 0x28, 0x03, 0x52, 0x05, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x32, 0x6b, 0x0a, 0x0c, 0x54,
-	0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x5b, 0x0a, 0x06, 0x43,
-	0x72, 0x65, 0x61, 0x74, 0x65, 0x12, 0x26, 0x2e, 0x67, 0x6f, 0x2e, 0x6d, 0x69, 0x63, 0x72, 0x6f,
-	0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63,
-	0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x27, 0x2e,
-	0x67, 0x6f, 0x2e, 0x6d, 0x69, 0x63, 0x72, 0x6f, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65,
-	0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x52, 0x65,
-	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x6f, 0x75, 0x6e, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x75, 0x75, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x04, 0x75, 0x75, 0x69, 0x64, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74,
+	0x75, 0x73, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73,
+	0x12, 0x16, 0x0a, 0x06, 0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x02,
+	0x52, 0x06, 0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x22, 0x4a, 0x0a, 0x16, 0x54, 0x72, 0x61, 0x6e,
+	0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x54, 0x79,
+	0x70, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x07, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x16, 0x0a, 0x06,
+	0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x02, 0x52, 0x06, 0x61, 0x6d,
+	0x6f, 0x75, 0x6e, 0x74, 0x32, 0x45, 0x0a, 0x0c, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74,
+	0x69, 0x6f, 0x6e, 0x73, 0x12, 0x35, 0x0a, 0x06, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x12, 0x17,
+	0x2e, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x54, 0x79, 0x70, 0x65, 0x1a, 0x10, 0x2e, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x61,
+	0x63, 0x74, 0x69, 0x6f, 0x6e, 0x54, 0x79, 0x70, 0x65, 0x22, 0x00, 0x42, 0x32, 0x5a, 0x30, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e,
+	0x73, 0x3b, 0x67, 0x6f, 0x5f, 0x6d, 0x69, 0x63, 0x72, 0x6f, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69,
+	0x63, 0x65, 0x5f, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x62,
+	0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -389,17 +192,14 @@ func file_proto_transactions_transactions_proto_rawDescGZIP() []byte {
 	return file_proto_transactions_transactions_proto_rawDescData
 }
 
-var file_proto_transactions_transactions_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_proto_transactions_transactions_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_proto_transactions_transactions_proto_goTypes = []interface{}{
-	(*TransactionPlacedOrUpdated)(nil), // 0: go.micro.service.transactions.TransactionPlacedOrUpdated
-	(*TransactionProcessed)(nil),       // 1: go.micro.service.transactions.TransactionProcessed
-	(*Request)(nil),                    // 2: go.micro.service.transactions.Request
-	(*Response)(nil),                   // 3: go.micro.service.transactions.Response
-	(*StreamingRequest)(nil),           // 4: go.micro.service.transactions.StreamingRequest
+	(*TransactionType)(nil),        // 0: TransactionType
+	(*TransactionRequestType)(nil), // 1: TransactionRequestType
 }
 var file_proto_transactions_transactions_proto_depIdxs = []int32{
-	2, // 0: go.micro.service.transactions.Transactions.Create:input_type -> go.micro.service.transactions.Request
-	3, // 1: go.micro.service.transactions.Transactions.Create:output_type -> go.micro.service.transactions.Response
+	1, // 0: Transactions.Create:input_type -> TransactionRequestType
+	0, // 1: Transactions.Create:output_type -> TransactionType
 	1, // [1:2] is the sub-list for method output_type
 	0, // [0:1] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
@@ -414,7 +214,7 @@ func file_proto_transactions_transactions_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_proto_transactions_transactions_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*TransactionPlacedOrUpdated); i {
+			switch v := v.(*TransactionType); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -426,43 +226,7 @@ func file_proto_transactions_transactions_proto_init() {
 			}
 		}
 		file_proto_transactions_transactions_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*TransactionProcessed); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_proto_transactions_transactions_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Request); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_proto_transactions_transactions_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Response); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_proto_transactions_transactions_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StreamingRequest); i {
+			switch v := v.(*TransactionRequestType); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -480,7 +244,7 @@ func file_proto_transactions_transactions_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_proto_transactions_transactions_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

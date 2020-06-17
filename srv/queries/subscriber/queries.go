@@ -9,7 +9,7 @@ import (
 
 type AccountCreated struct{}
 
-func (e *AccountCreated) Handle(ctx context.Context, accountCreated *queries.AccountCreated) error {
+func (e *AccountCreated) Handle(ctx context.Context, accountCreated *queries.AccountType) error {
 	log.Info("Account: ", accountCreated.Uuid, ", status: ", accountCreated.Status)
 	models.CreateAccount(accountCreated)
 	return nil
@@ -17,7 +17,7 @@ func (e *AccountCreated) Handle(ctx context.Context, accountCreated *queries.Acc
 
 type AccountUpdated struct{}
 
-func (e *AccountUpdated) Handle(ctx context.Context, msg *queries.AccountUpdated) error {
+func (e *AccountUpdated) Handle(ctx context.Context, msg *queries.AccountType) error {
 	log.Info("Account: ", msg.Uuid, ", status: ", msg.Status)
 	updatedAccount := models.GetAccount(msg.Uuid)
 	updatedAccount.Status = msg.Status
@@ -29,7 +29,7 @@ func (e *AccountUpdated) Handle(ctx context.Context, msg *queries.AccountUpdated
 
 type TransactionPlaced struct{}
 
-func (e *TransactionPlaced) Handle(ctx context.Context, transactionPlaced *queries.TransactionPlaced) error {
+func (e *TransactionPlaced) Handle(ctx context.Context, transactionPlaced *queries.TransactionType) error {
 	log.Info("Account: ", transactionPlaced.Uuid, ", status: ", transactionPlaced.Status)
 	models.CreateTransaction(transactionPlaced)
 	return nil
@@ -37,7 +37,7 @@ func (e *TransactionPlaced) Handle(ctx context.Context, transactionPlaced *queri
 
 type TransactionUpdated struct{}
 
-func (e *TransactionUpdated) Handle(ctx context.Context, msg *queries.TransactionUpdated) error {
+func (e *TransactionUpdated) Handle(ctx context.Context, msg *queries.TransactionType) error {
 	log.Info("Transaction: ", msg.Uuid, ", status: ", msg.Status)
 	updatedTransaction := models.GetTransaction(msg.Uuid)
 	updatedTransaction.Account = msg.Account

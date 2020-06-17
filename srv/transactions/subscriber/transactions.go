@@ -5,7 +5,6 @@ import (
 	"github.com/micro/go-micro/v2"
 	"github.com/micro/go-micro/v2/client"
 	log "github.com/micro/go-micro/v2/logger"
-	"time"
 	"unicornbank.io/srv/transactions/models"
 	transactions "unicornbank.io/srv/transactions/proto/transactions"
 )
@@ -15,16 +14,15 @@ type TransactionProcessed struct {
 	PubTransactionUpdated string
 }
 
-func (e *TransactionProcessed) Handle(ctx context.Context, msg *transactions.TransactionProcessed) error {
+func (e *TransactionProcessed) Handle(ctx context.Context, msg *transactions.TransactionType) error {
 	log.Info("Handler Received message: ", msg.Uuid)
 
 	transactionProcessed := models.Get(msg.Uuid)
 	transactionProcessed.Status = msg.Status
 	models.Update(&transactionProcessed)
 
-	transactionUpdated := transactions.TransactionPlacedOrUpdated{
+	transactionUpdated := transactions.TransactionType{
 		Uuid:      transactionProcessed.Uuid,
-		Timestamp: time.Now().Unix(),
 		Account:   transactionProcessed.Account,
 		Amount:    transactionProcessed.Amount,
 		Status:    transactionProcessed.Status,

@@ -37,7 +37,7 @@ func Migrate() {
 	db.AutoMigrate(&TransactionsModel{})
 }
 
-func CreateAccount(accountCreated *queries.AccountCreated) {
+func CreateAccount(accountCreated *queries.AccountType) {
 	db, err := gorm.Open(dialect, args)
 	if err != nil {
 		panic("failed to connect database")
@@ -75,7 +75,7 @@ func UpdateAccount(accountUpdated *AccountsModel) {
 	db.Save(&accountUpdated)
 }
 
-func CreateTransaction(transactionPlaced *queries.TransactionPlaced) {
+func CreateTransaction(transactionPlaced *queries.TransactionType) {
 	db, err := gorm.Open(dialect, args)
 	if err != nil {
 		panic("failed to connect database")

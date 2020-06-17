@@ -42,7 +42,7 @@ func Get(uuid string) TransactionModel {
 	return transaction
 }
 
-func Create(transactionPlaced *transactions.TransactionPlacedOrUpdated) {
+func Create(transactionPlaced *transactions.TransactionType) {
 	db, err := gorm.Open(dialect, args)
 	if err != nil {
 		panic("failed to connect database")

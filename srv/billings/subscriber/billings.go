@@ -5,7 +5,6 @@ import (
 	"github.com/micro/go-micro/v2"
 	"github.com/micro/go-micro/v2/client"
 	log "github.com/micro/go-micro/v2/logger"
-	"time"
 	"unicornbank.io/srv/billings/models"
 	billings "unicornbank.io/srv/billings/proto/billings"
 )
@@ -15,13 +14,12 @@ type TransactionPlaced struct {
 	PubTransactionProcessed string
 }
 
-func (e *TransactionPlaced) Handle(ctx context.Context, transactionPlaced *billings.TransactionPlaced) error {
+func (e *TransactionPlaced) Handle(ctx context.Context, transactionPlaced *billings.TransactionType) error {
 	log.Info("Handler Received message: ", transactionPlaced.Uuid)
 
 	status := "processed"
-	transactionProcessed := billings.TransactionProcessed{
+	transactionProcessed := billings.TransactionProcessedType{
 		Uuid:      transactionPlaced.Uuid,
-		Timestamp: time.Now().Unix(),
 		Status:    status,
 	}
 	models.Create(&transactionProcessed)

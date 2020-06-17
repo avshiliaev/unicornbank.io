@@ -26,7 +26,7 @@ func Migrate() {
 	db.AutoMigrate(&ApprovalsModel{})
 }
 
-func Create(accountApproved *approvals.AccountApproval) {
+func Create(accountApproved *approvals.AccountApprovalType) {
 	db, err := gorm.Open(dialect, args)
 	if err != nil {
 		panic("failed to connect database")

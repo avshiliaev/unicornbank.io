@@ -1,63 +1,28 @@
 syntax = "proto3";
 
-package go.micro.service.queries;
+option go_package = "proto/queries;go_micro_service_queries";
 
 // Events
-message AccountCreated {
-	string Uuid = 1;
-	int64 timestamp = 2;
-	string title = 3;
-	string status = 4;
-	float balance = 5;
+message AccountType {
+	string uuid = 1;
+	string title = 2;
+	string status = 3;
+	float balance = 4;
 }
-message AccountUpdated {
-	string Uuid = 1;
-	int64 timestamp = 2;
-	string title = 3;
-	string status = 4;
-	float balance = 5;
-}
-message TransactionPlaced {
+message TransactionType {
 	string account = 1;
-	string Uuid = 2;
-	int64 timestamp = 3;
-	string status = 4;
-	float amount = 5;
+	string uuid = 2;
+	string status = 3;
+	float amount = 4;
 }
-message TransactionUpdated {
-	string account = 1;
-	string Uuid = 2;
-	int64 timestamp = 3;
-	string status = 4;
-	float amount = 5;
-}
-
 service Queries {
-	rpc Call(Request) returns (Response) {}
-	rpc Stream(StreamingRequest) returns (stream StreamingResponse) {}
-	rpc PingPong(stream Ping) returns (stream Pong) {}
+	rpc GetMany(Request) returns (Response) {}
 }
 
 message Request {
-	string name = 1;
+	string userId = 1;
 }
 
 message Response {
-	string msg = 1;
-}
-
-message StreamingRequest {
-	int64 count = 1;
-}
-
-message StreamingResponse {
-	int64 count = 1;
-}
-
-message Ping {
-	int64 stroke = 1;
-}
-
-message Pong {
-	int64 stroke = 1;
+	string userId = 1;
 }
