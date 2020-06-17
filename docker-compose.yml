@@ -1,0 +1,27 @@
+version: '3.3'
+
+services:
+
+  server:
+    command: server
+    image: micro/micro
+    container_name: server
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+      - "8082:8082"
+
+  accounts-srv:
+    build: srv/accounts
+    container_name: accounts-srv
+    command: /root/accounts
+
+  transactions-srv:
+    build: srv/transactions
+    container_name: transactions-srv
+    command: /root/transactions
+
+  approvals-srv:
+    build: srv/approvals
+    container_name: approvals-srv
+    command: /root/approvals
