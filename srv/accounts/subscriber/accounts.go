@@ -18,15 +18,15 @@ type AccountApproval struct {
 func (e *AccountApproval) Handle(ctx context.Context, msg *accounts.AccountApproval) error {
 	log.Info("Handler Received message: ", msg.Uuid)
 
-	accountApproved := models.Get(msg.Uuid)
-	accountApproved.Status = msg.Status
-	models.Update(&accountApproved)
+	account := models.Get(msg.Uuid)
+	account.Status = msg.Status
+	models.Update(&account)
 
 	accountUpdated := accounts.AccountCreatedOrUpdated{
-		Uuid:      accountApproved.Uuid,
-		Title:     accountApproved.Title,
-		Status:    accountApproved.Status,
-		Balance:   accountApproved.Balance,
+		Uuid:      account.Uuid,
+		Title:     account.Title,
+		Status:    account.Status,
+		Balance:   account.Balance,
 		Timestamp: time.Now().Unix(),
 	}
 
@@ -51,16 +51,16 @@ type TransactionPlaced struct {
 func (e *TransactionPlaced) Handle(ctx context.Context, transactionPlaced *accounts.TransactionPlaced) error {
 	log.Info("Handler Received message: ", transactionPlaced.Uuid)
 
-	accountDeducted := models.Get(transactionPlaced.Account)
-	accountDeducted.Balance = accountDeducted.Balance - transactionPlaced.Amount
-	models.Update(&accountDeducted)
+	account := models.Get(transactionPlaced.Account)
+	account.Balance = account.Balance + transactionPlaced.Amount
+	models.Update(&account)
 
 	accountUpdated := accounts.AccountCreatedOrUpdated{
-		Uuid:      accountDeducted.Uuid,
+		Uuid:      account.Uuid,
+		Title:     account.Title,
+		Status:    account.Status,
+		Balance:   account.Balance,
 		Timestamp: time.Now().Unix(),
-		Title:     accountDeducted.Title,
-		Status:    accountDeducted.Status,
-		Balance:   accountDeducted.Balance,
 	}
 
 	topic := e.PubAccountUpdated
