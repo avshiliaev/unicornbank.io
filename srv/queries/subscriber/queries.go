@@ -17,9 +17,13 @@ func (e *AccountCreated) Handle(ctx context.Context, accountCreated *queries.Acc
 
 type AccountUpdated struct{}
 
-func (e *AccountUpdated) Handle(ctx context.Context, accountUpdated *queries.AccountUpdated) error {
-	log.Info("Account: ", accountUpdated.Uuid, ", status: ", accountUpdated.Status)
-	models.UpdateAccount(accountUpdated)
+func (e *AccountUpdated) Handle(ctx context.Context, msg *queries.AccountUpdated) error {
+	log.Info("Account: ", msg.Uuid, ", status: ", msg.Status)
+	updatedAccount := models.GetAccount(msg.Uuid)
+	updatedAccount.Status = msg.Status
+	updatedAccount.Balance = msg.Balance
+	updatedAccount.Title = msg.Title
+	models.UpdateAccount(&updatedAccount)
 	return nil
 }
 
@@ -33,8 +37,12 @@ func (e *TransactionPlaced) Handle(ctx context.Context, transactionPlaced *queri
 
 type TransactionUpdated struct{}
 
-func (e *TransactionUpdated) Handle(ctx context.Context, transactionUpdated *queries.TransactionUpdated) error {
-	log.Info("Account: ", transactionUpdated.Uuid, ", status: ", transactionUpdated.Status)
-	models.UpdateTransaction(transactionUpdated)
+func (e *TransactionUpdated) Handle(ctx context.Context, msg *queries.TransactionUpdated) error {
+	log.Info("Transaction: ", msg.Uuid, ", status: ", msg.Status)
+	updatedTransaction := models.GetTransaction(msg.Uuid)
+	updatedTransaction.Account = msg.Account
+	updatedTransaction.Amount = msg.Amount
+	updatedTransaction.Status = msg.Status
+	models.UpdateTransaction(&updatedTransaction)
 	return nil
 }

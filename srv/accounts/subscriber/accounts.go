@@ -19,15 +19,16 @@ func (e *AccountApproval) Handle(ctx context.Context, msg *accounts.AccountAppro
 	log.Info("Handler Received message: ", msg.Uuid)
 
 	accountApproved := models.Get(msg.Uuid)
+	accountApproved.Status = msg.Status
+	models.Update(&accountApproved)
 
 	accountUpdated := accounts.AccountCreatedOrUpdated{
 		Uuid:      accountApproved.Uuid,
-		Timestamp: msg.Timestamp,
 		Title:     accountApproved.Title,
-		Status:    msg.Status,
+		Status:    accountApproved.Status,
 		Balance:   accountApproved.Balance,
+		Timestamp: time.Now().Unix(),
 	}
-	models.Update(&accountUpdated)
 
 	topic := e.PubAccountUpdated
 	p := micro.NewEvent(topic, e.Client)
@@ -50,17 +51,16 @@ func (e *TransactionProcessed) Handle(ctx context.Context, transactionProcessed 
 
 	// TODO do only if transaction is successfully processed!
 	accountDeducted := models.Get(transactionProcessed.Account)
-
-	log.Info("deduct from THIS account!: ", accountDeducted)
+	accountDeducted.Balance = accountDeducted.Balance - transactionProcessed.Amount
+	models.Update(&accountDeducted)
 
 	accountUpdated := accounts.AccountCreatedOrUpdated{
 		Uuid:      accountDeducted.Uuid,
 		Timestamp: time.Now().Unix(),
 		Title:     accountDeducted.Title,
 		Status:    accountDeducted.Status,
-		Balance:   accountDeducted.Balance - transactionProcessed.Amount,
+		Balance:   accountDeducted.Balance,
 	}
-	models.Update(&accountUpdated)
 
 	topic := e.PubAccountUpdated
 	p := micro.NewEvent(topic, e.Client)

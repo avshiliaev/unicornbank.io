@@ -57,16 +57,11 @@ func Create(accountCreated *accounts.AccountCreatedOrUpdated) {
 	db.Save(&account)
 }
 
-func Update(accountUpdated *accounts.AccountCreatedOrUpdated) {
+func Update(accountUpdated *AccountsModel) {
 	db, err := gorm.Open(dialect, args)
 	if err != nil {
 		panic("failed to connect database")
 	}
 	defer db.Close()
-
-	var account AccountsModel
-	db.First(&account, "Uuid = ?", accountUpdated.Uuid)
-
-	db.Model(&account).Update("Status", accountUpdated.Status)
-
+	db.Save(&accountUpdated)
 }

@@ -19,15 +19,16 @@ func (e *TransactionProcessed) Handle(ctx context.Context, msg *transactions.Tra
 	log.Info("Handler Received message: ", msg.Uuid)
 
 	transactionProcessed := models.Get(msg.Uuid)
+	transactionProcessed.Status = msg.Status
+	models.Update(&transactionProcessed)
 
 	transactionUpdated := transactions.TransactionPlacedOrUpdated{
 		Uuid:      transactionProcessed.Uuid,
 		Timestamp: time.Now().Unix(),
 		Account:   transactionProcessed.Account,
 		Amount:    transactionProcessed.Amount,
-		Status:    msg.Status,
+		Status:    transactionProcessed.Status,
 	}
-	models.Update(&transactionUpdated)
 
 	topic := e.PubTransactionUpdated
 	p := micro.NewEvent(topic, e.Client)

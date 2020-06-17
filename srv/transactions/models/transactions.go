@@ -57,16 +57,11 @@ func Create(transactionPlaced *transactions.TransactionPlacedOrUpdated) {
 	db.Save(&transaction)
 }
 
-func Update(transactionUpdated *transactions.TransactionPlacedOrUpdated) {
+func Update(transactionUpdated *TransactionModel) {
 	db, err := gorm.Open(dialect, args)
 	if err != nil {
 		panic("failed to connect database")
 	}
 	defer db.Close()
-	var transaction TransactionModel
-	db.Where("uuid=?", transactionUpdated.Uuid).Find(&transaction)
-	transaction.Account = transactionUpdated.Account
-	transaction.Amount = transactionUpdated.Amount
-	transaction.Status = transactionUpdated.Status
-	db.Save(&transaction)
+	db.Save(&transactionUpdated)
 }

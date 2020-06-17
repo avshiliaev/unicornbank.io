@@ -52,19 +52,27 @@ func CreateAccount(accountCreated *queries.AccountCreated) {
 	db.Save(&account)
 }
 
-// Update all fields: we DO NOT know here what was updated!
-func UpdateAccount(accountUpdated *queries.AccountUpdated) {
+func GetAccount(uuid string) AccountsModel {
 	db, err := gorm.Open(dialect, args)
 	if err != nil {
 		panic("failed to connect database")
 	}
 	defer db.Close()
-	var account AccountsModel
-	db.Where("uuid=?", accountUpdated.Uuid).Find(&account)
-	account.Title = accountUpdated.Title
-	account.Status = accountUpdated.Status
-	account.Balance = accountUpdated.Balance
-	db.Save(&account)
+	account := AccountsModel{
+		Uuid: uuid,
+	}
+	db.Take(&account)
+
+	return account
+}
+
+func UpdateAccount(accountUpdated *AccountsModel) {
+	db, err := gorm.Open(dialect, args)
+	if err != nil {
+		panic("failed to connect database")
+	}
+	defer db.Close()
+	db.Save(&accountUpdated)
 }
 
 func CreateTransaction(transactionPlaced *queries.TransactionPlaced) {
@@ -82,16 +90,25 @@ func CreateTransaction(transactionPlaced *queries.TransactionPlaced) {
 	db.Save(&transaction)
 }
 
-// Update all fields (which can be updated at least): we DO NOT know here what was updated!
-func UpdateTransaction(transactionUpdated *queries.TransactionUpdated) {
+func GetTransaction(uuid string) TransactionsModel {
 	db, err := gorm.Open(dialect, args)
 	if err != nil {
 		panic("failed to connect database")
 	}
 	defer db.Close()
-	var transaction TransactionsModel
-	db.Where("uuid=?", transactionUpdated.Uuid).Find(&transaction)
-	transaction.Status = transactionUpdated.Status
-	transaction.Amount = transactionUpdated.Amount
-	db.Save(&transaction)
+	transaction := TransactionsModel{
+		Uuid: uuid,
+	}
+	db.Take(&transaction)
+
+	return transaction
+}
+
+func UpdateTransaction(transactionUpdated *TransactionsModel) {
+	db, err := gorm.Open(dialect, args)
+	if err != nil {
+		panic("failed to connect database")
+	}
+	defer db.Close()
+	db.Save(&transactionUpdated)
 }
