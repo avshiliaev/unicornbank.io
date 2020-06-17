@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package go.micro.service.billings;
+
+// Events
+message TransactionPlaced {
+	string account = 1;
+	string Uuid = 2;
+	int64 timestamp = 3;
+	string status = 4;
+	float amount = 5;
+}
+message TransactionProcessed {
+	string account = 1;
+	string Uuid = 2;
+	int64 timestamp = 3;
+	string status = 4;
+	float amount = 5;
+}

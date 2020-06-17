@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+package go.micro.service.queries;
+
+// Events
+message AccountCreated {
+	string Uuid = 1;
+	int64 timestamp = 2;
+	string title = 3;
+	string status = 4;
+	float balance = 5;
+}
+message AccountUpdated {
+	string Uuid = 1;
+	int64 timestamp = 2;
+	string title = 3;
+	string status = 4;
+	float balance = 5;
+}
+message TransactionPlaced {
+	string account = 1;
+	string Uuid = 2;
+	int64 timestamp = 3;
+	string status = 4;
+	float amount = 5;
+}
+message TransactionUpdated {
+	string account = 1;
+	string Uuid = 2;
+	int64 timestamp = 3;
+	string status = 4;
+	float amount = 5;
+}
+
+service Queries {
+	rpc Call(Request) returns (Response) {}
+	rpc Stream(StreamingRequest) returns (stream StreamingResponse) {}
+	rpc PingPong(stream Ping) returns (stream Pong) {}
+}
+
+message Request {
+	string name = 1;
+}
+
+message Response {
+	string msg = 1;
+}
+
+message StreamingRequest {
+	int64 count = 1;
+}
+
+message StreamingResponse {
+	int64 count = 1;
+}
+
+message Ping {
+	int64 stroke = 1;
+}
+
+message Pong {
+	int64 stroke = 1;
+}

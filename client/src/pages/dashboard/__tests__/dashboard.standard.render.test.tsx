@@ -37,7 +37,7 @@ it('can render and update a counter', () => {
   });
 
   const props = {
-    initProjectsOverview: jest.fn(),
+    initAccountsOverview: jest.fn(),
   };
 
   // Test first render and componentDidMount

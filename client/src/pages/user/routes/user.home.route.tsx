@@ -2,9 +2,9 @@ import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Button } from 'antd';
 import { logOutAction } from '../../../reducers/auth.reducer';
-import { User } from '../../../sdk/graphql-zeus';
 import FlexGridUser from '../../../components/layout/flex.grid.user';
 import BreadCrumbBasic from '../../../components/layout/breadcrumb.basic';
+import { UserInterface } from '../../../interfaces/user.interface';
 
 const LogOutButton = ({ logOutAction }) => {
   return (
@@ -48,7 +48,7 @@ const OtherProfile = ({ windowSize, theUser, location }) => {
 
 const UserHomeRoute = ({ windowSize, logOutAction, location, auth, user, ...rest }) => {
 
-  const theUser: User = user;
+  const theUser: UserInterface = user;
 
   return theUser.id !== undefined
     ? (

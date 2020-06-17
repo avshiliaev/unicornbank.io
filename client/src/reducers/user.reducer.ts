@@ -1,5 +1,5 @@
-import { User } from '../sdk/graphql-zeus';
 import userService from '../services/user.service';
+import { UserInterface } from '../interfaces/user.interface';
 
 const getUser = (userId: string) => {
   return async dispatch => {
@@ -13,7 +13,7 @@ const getUser = (userId: string) => {
 
 export { getUser };
 
-const userReducer = (state: User | Object, action): User | Object => {
+const userReducer = (state: UserInterface | Object, action): UserInterface | Object => {
   switch (action.type) {
     case 'GET_USER':
       return { ...state, ...action.data };

@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package go.micro.service.accounts;
+
+// Events
+message AccountCreatedOrUpdated {
+  string Uuid = 1;
+  int64 timestamp = 2;
+  string title = 3;
+  string status = 4;
+  float balance = 5;
+}
+message AccountApproval {
+  string Uuid = 1;
+  int64 timestamp = 2;
+  string status = 4;
+}
+message TransactionPlaced {
+  string account = 1;
+  string Uuid = 2;
+  int64 timestamp = 3;
+  string status = 4;
+  float amount = 5;
+}
+
+// gRPC
+service Accounts {
+  rpc Create(Request) returns (Response) {}
+}
+
+message Request {
+  string title = 1;
+}
+
+message Response {
+  string msg = 1;
+}
+

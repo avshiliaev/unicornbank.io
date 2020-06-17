@@ -9,12 +9,9 @@ export interface UserState {
 const logInAction = (newState: { userName: string, isLoggedIn: boolean }) => {
   return async dispatch => {
     const isUser = await authService.queryUser(newState.userName);
-
-    // TODO: make better check?
-    const user = isUser.find(u => u !== undefined);
-    if (!!user) {
-      await localStorage.setItem('userName', user.username);
-      await localStorage.setItem('userId', user.id);
+    if (!!isUser) {
+      await localStorage.setItem('userName', isUser.username);
+      await localStorage.setItem('userId', isUser.id);
       dispatch({
         type: 'LOG_IN',
         data: {
