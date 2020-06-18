@@ -16,13 +16,14 @@ func (e *Queries) GetUserState(
 ) error {
 	log.Info("Received Queries.GetUserState request")
 	accountsDB := models.GetAllAccounts(req.UserId)
-	accountsResponse := make([]*queries.AccountType, len(accountsDB))
+	accountsResponse := make([]*queries.AccountResponseType, len(accountsDB))
 	for i, account := range accountsDB {
-		accountsResponse[i] = &queries.AccountType{
-			Uuid:    account.Uuid,
-			Status:  account.Status,
-			Title:   account.Title,
-			Balance: account.Balance,
+		accountsResponse[i] = &queries.AccountResponseType{
+			Uuid:         account.Uuid,
+			Status:       account.Status,
+			Title:        account.Title,
+			Balance:      account.Balance,
+			Transactions: make([]*queries.TransactionType, 0),
 		}
 	}
 	rsp.UserId = req.UserId
@@ -33,7 +34,7 @@ func (e *Queries) GetUserState(
 func (e *Queries) GetAccountDetail(
 	ctx context.Context,
 	req *queries.AccountDetailRequest,
-	rsp *queries.AccountType,
+	rsp *queries.AccountResponseType,
 ) error {
 	log.Info("Received Queries.GetAccountDetail request")
 	account := models.GetAccount(req.Uuid)
@@ -42,6 +43,7 @@ func (e *Queries) GetAccountDetail(
 	rsp.Status = account.Status
 	rsp.Title = account.Title
 	rsp.Balance = account.Balance
+	rsp.Transactions = make([]*queries.TransactionType, 0)
 
 	return nil
 }

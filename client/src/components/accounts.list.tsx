@@ -64,7 +64,7 @@ const AccountsList = ({ accountsOverview, windowSize }) => {
           const link = `/account/${account.uuid}/home`;
           const ava = account.title.charAt(0);
           const openTransactions = () => console.log('transactions');
-          const numberTransactions = `transactions: ${account.transactions.length}`;
+          const numberTransactions = `transactions: ${account.transactions?.length}`;
           const openWorkers = () => console.log('developers');
           return (
             <List.Item actions={[
@@ -73,7 +73,7 @@ const AccountsList = ({ accountsOverview, windowSize }) => {
               <div>Del</div>,
             ]}>
               <List.Item.Meta
-                avatar={<AccountAvatar text={ava} badgeNumber={account.transactions.length}/>}
+                avatar={<AccountAvatar text={ava} badgeNumber={account.transactions?.length}/>}
                 title={<Link to={link}>{account.title}</Link>}
                 description={account.status}
               />

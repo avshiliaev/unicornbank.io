@@ -43,7 +43,7 @@ func NewQueriesEndpoints() []*api.Endpoint {
 
 type QueriesService interface {
 	GetUserState(ctx context.Context, in *UserStateRequest, opts ...client.CallOption) (*UserStateResponse, error)
-	GetAccountDetail(ctx context.Context, in *AccountDetailRequest, opts ...client.CallOption) (*AccountType, error)
+	GetAccountDetail(ctx context.Context, in *AccountDetailRequest, opts ...client.CallOption) (*AccountResponseType, error)
 }
 
 type queriesService struct {
@@ -68,9 +68,9 @@ func (c *queriesService) GetUserState(ctx context.Context, in *UserStateRequest,
 	return out, nil
 }
 
-func (c *queriesService) GetAccountDetail(ctx context.Context, in *AccountDetailRequest, opts ...client.CallOption) (*AccountType, error) {
+func (c *queriesService) GetAccountDetail(ctx context.Context, in *AccountDetailRequest, opts ...client.CallOption) (*AccountResponseType, error) {
 	req := c.c.NewRequest(c.name, "Queries.GetAccountDetail", in)
-	out := new(AccountType)
+	out := new(AccountResponseType)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -82,13 +82,13 @@ func (c *queriesService) GetAccountDetail(ctx context.Context, in *AccountDetail
 
 type QueriesHandler interface {
 	GetUserState(context.Context, *UserStateRequest, *UserStateResponse) error
-	GetAccountDetail(context.Context, *AccountDetailRequest, *AccountType) error
+	GetAccountDetail(context.Context, *AccountDetailRequest, *AccountResponseType) error
 }
 
 func RegisterQueriesHandler(s server.Server, hdlr QueriesHandler, opts ...server.HandlerOption) error {
 	type queries interface {
 		GetUserState(ctx context.Context, in *UserStateRequest, out *UserStateResponse) error
-		GetAccountDetail(ctx context.Context, in *AccountDetailRequest, out *AccountType) error
+		GetAccountDetail(ctx context.Context, in *AccountDetailRequest, out *AccountResponseType) error
 	}
 	type Queries struct {
 		queries
@@ -105,6 +105,6 @@ func (h *queriesHandler) GetUserState(ctx context.Context, in *UserStateRequest,
 	return h.QueriesHandler.GetUserState(ctx, in, out)
 }
 
-func (h *queriesHandler) GetAccountDetail(ctx context.Context, in *AccountDetailRequest, out *AccountType) error {
+func (h *queriesHandler) GetAccountDetail(ctx context.Context, in *AccountDetailRequest, out *AccountResponseType) error {
 	return h.QueriesHandler.GetAccountDetail(ctx, in, out)
 }

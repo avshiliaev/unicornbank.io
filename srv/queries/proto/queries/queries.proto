@@ -15,18 +15,25 @@ message TransactionType {
 	string status = 3;
 	float amount = 4;
 }
+// gRPC
 service Queries {
 	rpc GetUserState(UserStateRequest) returns (UserStateResponse) {}
-	rpc GetAccountDetail(AccountDetailRequest) returns (AccountType) {}
+	rpc GetAccountDetail(AccountDetailRequest) returns (AccountResponseType) {}
 }
-
+message AccountResponseType {
+	string uuid = 1;
+	string title = 2;
+	string status = 3;
+	float balance = 4;
+	repeated TransactionType transactions = 5;
+}
 message UserStateRequest {
 	string userId = 1;
 }
 
 message UserStateResponse {
 	string userId = 1;
-	repeated AccountType accounts = 2;
+	repeated AccountResponseType accounts = 2;
 }
 
 message AccountDetailRequest {
