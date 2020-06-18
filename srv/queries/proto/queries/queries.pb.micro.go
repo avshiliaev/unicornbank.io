@@ -42,7 +42,8 @@ func NewQueriesEndpoints() []*api.Endpoint {
 // Client API for Queries service
 
 type QueriesService interface {
-	Get(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
+	GetUserState(ctx context.Context, in *UserStateRequest, opts ...client.CallOption) (*UserStateResponse, error)
+	GetAccountDetail(ctx context.Context, in *AccountDetailRequest, opts ...client.CallOption) (*AccountType, error)
 }
 
 type queriesService struct {
@@ -57,9 +58,19 @@ func NewQueriesService(name string, c client.Client) QueriesService {
 	}
 }
 
-func (c *queriesService) Get(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error) {
-	req := c.c.NewRequest(c.name, "Queries.Get", in)
-	out := new(Response)
+func (c *queriesService) GetUserState(ctx context.Context, in *UserStateRequest, opts ...client.CallOption) (*UserStateResponse, error) {
+	req := c.c.NewRequest(c.name, "Queries.GetUserState", in)
+	out := new(UserStateResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *queriesService) GetAccountDetail(ctx context.Context, in *AccountDetailRequest, opts ...client.CallOption) (*AccountType, error) {
+	req := c.c.NewRequest(c.name, "Queries.GetAccountDetail", in)
+	out := new(AccountType)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -70,12 +81,14 @@ func (c *queriesService) Get(ctx context.Context, in *Request, opts ...client.Ca
 // Server API for Queries service
 
 type QueriesHandler interface {
-	Get(context.Context, *Request, *Response) error
+	GetUserState(context.Context, *UserStateRequest, *UserStateResponse) error
+	GetAccountDetail(context.Context, *AccountDetailRequest, *AccountType) error
 }
 
 func RegisterQueriesHandler(s server.Server, hdlr QueriesHandler, opts ...server.HandlerOption) error {
 	type queries interface {
-		Get(ctx context.Context, in *Request, out *Response) error
+		GetUserState(ctx context.Context, in *UserStateRequest, out *UserStateResponse) error
+		GetAccountDetail(ctx context.Context, in *AccountDetailRequest, out *AccountType) error
 	}
 	type Queries struct {
 		queries
@@ -88,6 +101,10 @@ type queriesHandler struct {
 	QueriesHandler
 }
 
-func (h *queriesHandler) Get(ctx context.Context, in *Request, out *Response) error {
-	return h.QueriesHandler.Get(ctx, in, out)
+func (h *queriesHandler) GetUserState(ctx context.Context, in *UserStateRequest, out *UserStateResponse) error {
+	return h.QueriesHandler.GetUserState(ctx, in, out)
+}
+
+func (h *queriesHandler) GetAccountDetail(ctx context.Context, in *AccountDetailRequest, out *AccountType) error {
+	return h.QueriesHandler.GetAccountDetail(ctx, in, out)
 }

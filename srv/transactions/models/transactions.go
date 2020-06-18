@@ -34,10 +34,8 @@ func Get(uuid string) TransactionModel {
 		panic("failed to connect database")
 	}
 	defer db.Close()
-	transaction := TransactionModel{
-		Uuid: uuid,
-	}
-	db.Find(&transaction)
+	var transaction TransactionModel
+	db.Where("uuid = ?", uuid).Find(&transaction)
 
 	return transaction
 }

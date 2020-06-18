@@ -16,14 +16,19 @@ message TransactionType {
 	float amount = 4;
 }
 service Queries {
-	rpc Get(Request) returns (Response) {}
+	rpc GetUserState(UserStateRequest) returns (UserStateResponse) {}
+	rpc GetAccountDetail(AccountDetailRequest) returns (AccountType) {}
 }
 
-message Request {
+message UserStateRequest {
 	string userId = 1;
 }
 
-message Response {
+message UserStateResponse {
 	string userId = 1;
 	repeated AccountType accounts = 2;
+}
+
+message AccountDetailRequest {
+	string uuid = 1;
 }

@@ -34,10 +34,8 @@ func Get(uuid string) AccountsModel {
 		panic("failed to connect database")
 	}
 	defer db.Close()
-	account := AccountsModel{
-		Uuid: uuid,
-	}
-	db.Find(&account)
+	var account AccountsModel
+	db.Where("uuid = ?", uuid).Find(&account)
 
 	return account
 }

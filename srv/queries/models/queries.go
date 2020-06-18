@@ -58,10 +58,8 @@ func GetAccount(uuid string) AccountsModel {
 		panic("failed to connect database")
 	}
 	defer db.Close()
-	account := AccountsModel{
-		Uuid: uuid,
-	}
-	db.Find(&account)
+	var account AccountsModel
+	db.Where("uuid = ?", uuid).Find(&account)
 
 	return account
 }
@@ -108,10 +106,8 @@ func GetTransaction(uuid string) TransactionsModel {
 		panic("failed to connect database")
 	}
 	defer db.Close()
-	transaction := TransactionsModel{
-		Uuid: uuid,
-	}
-	db.Find(&transaction)
+	var transaction TransactionsModel
+	db.Where("uuid = ?", uuid).Find(&transaction)
 
 	return transaction
 }

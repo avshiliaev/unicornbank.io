@@ -9,8 +9,12 @@ import (
 
 type Queries struct{}
 
-func (e *Queries) Get(ctx context.Context, req *queries.Request, rsp *queries.Response) error {
-	log.Info("Received Queries.Get request")
+func (e *Queries) GetUserState(
+	ctx context.Context,
+	req *queries.UserStateRequest,
+	rsp *queries.UserStateResponse,
+) error {
+	log.Info("Received Queries.GetUserState request")
 	accountsDB := models.GetAllAccounts(req.UserId)
 	accountsResponse := make([]*queries.AccountType, len(accountsDB))
 	for i, account := range accountsDB {
@@ -23,5 +27,21 @@ func (e *Queries) Get(ctx context.Context, req *queries.Request, rsp *queries.Re
 	}
 	rsp.UserId = req.UserId
 	rsp.Accounts = accountsResponse
+	return nil
+}
+
+func (e *Queries) GetAccountDetail(
+	ctx context.Context,
+	req *queries.AccountDetailRequest,
+	rsp *queries.AccountType,
+) error {
+	log.Info("Received Queries.GetAccountDetail request")
+	account := models.GetAccount(req.Uuid)
+
+	rsp.Uuid = account.Uuid
+	rsp.Status = account.Status
+	rsp.Title = account.Title
+	rsp.Balance = account.Balance
+
 	return nil
 }
