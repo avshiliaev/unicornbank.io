@@ -19,8 +19,10 @@ func (e *TransactionPlaced) Handle(ctx context.Context, transactionPlaced *billi
 
 	status := "processed"
 	transactionProcessed := billings.TransactionProcessedType{
-		Uuid:      transactionPlaced.Uuid,
-		Status:    status,
+		Uuid:    transactionPlaced.Uuid,
+		Status:  status,
+		Account: transactionPlaced.Account,
+		Amount:  transactionPlaced.Amount,
 	}
 	models.Create(&transactionProcessed)
 
