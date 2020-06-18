@@ -14,8 +14,8 @@ const TransactionsTable = ({ transactions }) => {
       renderItem={item => (
         <List.Item>
           <List.Item.Meta
-            title={<Link to={'../transactions/' + item.id}>{item.title}</Link>}
-            description={item.description}
+            title={<Link to={'../transactions/' + item.uuid}>{item.amount}</Link>}
+            description={item.status}
           />
         </List.Item>
       )}

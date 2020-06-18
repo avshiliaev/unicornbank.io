@@ -61,7 +61,7 @@ const AccountsList = ({ accountsOverview, windowSize }) => {
         itemLayout={!windowSize.large ? 'vertical' : 'horizontal'}
         dataSource={accountsState}
         renderItem={account => {
-          const link = `/account/${account.id}/home`;
+          const link = `/account/${account.uuid}/home`;
           const ava = account.title.charAt(0);
           const openTransactions = () => console.log('transactions');
           const numberTransactions = `transactions: ${account.transactions.length}`;
@@ -75,7 +75,7 @@ const AccountsList = ({ accountsOverview, windowSize }) => {
               <List.Item.Meta
                 avatar={<AccountAvatar text={ava} badgeNumber={account.transactions.length}/>}
                 title={<Link to={link}>{account.title}</Link>}
-                description={account.description}
+                description={account.status}
               />
             </List.Item>
           );

@@ -1,8 +1,9 @@
 import { TransactionInterface } from './transaction.interface';
 
 export interface AccountInterface {
-  id?: string;
+  uuid?: string;
   title: string;
-  description: string;
+  status: string;
+  balance: number;
   transactions?: TransactionInterface[]
 }

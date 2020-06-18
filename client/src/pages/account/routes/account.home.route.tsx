@@ -9,7 +9,7 @@ const AccountHomeRoute = ({ windowSize, location, account, ...rest }) => {
 
   const theAccount: AccountInterface = account;
 
-  return theAccount.id !== undefined
+  return theAccount.uuid !== undefined
     ? (
       <FlexGridAccount
         breadCrumbs={<BreadCrumbBasic location={location}/>}

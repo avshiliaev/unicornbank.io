@@ -1,5 +1,6 @@
 export interface TransactionInterface {
-  id: string;
-  title: string;
-  description?: string;
+  uuid: string;
+  account: string;
+  status: string;
+  amount: number
 }
