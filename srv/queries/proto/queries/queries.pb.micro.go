@@ -42,7 +42,7 @@ func NewQueriesEndpoints() []*api.Endpoint {
 // Client API for Queries service
 
 type QueriesService interface {
-	GetMany(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
+	Get(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
 }
 
 type queriesService struct {
@@ -57,8 +57,8 @@ func NewQueriesService(name string, c client.Client) QueriesService {
 	}
 }
 
-func (c *queriesService) GetMany(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error) {
-	req := c.c.NewRequest(c.name, "Queries.GetMany", in)
+func (c *queriesService) Get(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error) {
+	req := c.c.NewRequest(c.name, "Queries.Get", in)
 	out := new(Response)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -70,12 +70,12 @@ func (c *queriesService) GetMany(ctx context.Context, in *Request, opts ...clien
 // Server API for Queries service
 
 type QueriesHandler interface {
-	GetMany(context.Context, *Request, *Response) error
+	Get(context.Context, *Request, *Response) error
 }
 
 func RegisterQueriesHandler(s server.Server, hdlr QueriesHandler, opts ...server.HandlerOption) error {
 	type queries interface {
-		GetMany(ctx context.Context, in *Request, out *Response) error
+		Get(ctx context.Context, in *Request, out *Response) error
 	}
 	type Queries struct {
 		queries
@@ -88,6 +88,6 @@ type queriesHandler struct {
 	QueriesHandler
 }
 
-func (h *queriesHandler) GetMany(ctx context.Context, in *Request, out *Response) error {
-	return h.QueriesHandler.GetMany(ctx, in, out)
+func (h *queriesHandler) Get(ctx context.Context, in *Request, out *Response) error {
+	return h.QueriesHandler.Get(ctx, in, out)
 }

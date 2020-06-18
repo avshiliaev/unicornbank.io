@@ -16,7 +16,7 @@ message TransactionType {
 	float amount = 4;
 }
 service Queries {
-	rpc GetMany(Request) returns (Response) {}
+	rpc Get(Request) returns (Response) {}
 }
 
 message Request {
@@ -25,4 +25,5 @@ message Request {
 
 message Response {
 	string userId = 1;
+	repeated AccountType accounts = 2;
 }

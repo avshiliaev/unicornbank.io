@@ -66,6 +66,18 @@ func GetAccount(uuid string) AccountsModel {
 	return account
 }
 
+func GetAllAccounts(userId string) []AccountsModel {
+	db, err := gorm.Open(dialect, args)
+	if err != nil {
+		panic("failed to connect database")
+	}
+	defer db.Close()
+	var accounts []AccountsModel
+	db.Find(&accounts)
+
+	return accounts
+}
+
 func UpdateAccount(accountUpdated *AccountsModel) {
 	db, err := gorm.Open(dialect, args)
 	if err != nil {
