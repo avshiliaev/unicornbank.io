@@ -7,8 +7,10 @@ go 1.13
 replace google.golang.org/grpc => google.golang.org/grpc v1.26.0
 
 require (
-	github.com/golang/protobuf v1.4.2
-	github.com/jinzhu/gorm v1.9.13
+	github.com/golang/protobuf v1.4.2 // indirect
+	github.com/gorilla/websocket v1.4.1
+	github.com/joho/godotenv v1.3.0
 	github.com/micro/go-micro/v2 v2.9.0
-	google.golang.org/protobuf v1.24.0
+	go.mongodb.org/mongo-driver v1.3.4
+	google.golang.org/protobuf v1.24.0 // indirect
 )

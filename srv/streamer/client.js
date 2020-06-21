@@ -2,11 +2,11 @@ const WebSocket = require('ws')
 
 const ws = new WebSocket('ws://localhost:8082/stream/stream')
 
-const request = {foo: "bar"}
+const request = "username"
 
 ws.on('open', function open () {
   console.log('connected')
-  ws.send(JSON.stringify(request))
+  ws.send(request)
 })
 
 ws.on('close', function close () {
