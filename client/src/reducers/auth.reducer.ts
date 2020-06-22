@@ -1,4 +1,5 @@
 import authService from '../services/auth.service';
+import Constants from './constants';
 
 export interface UserState {
   isLoggedIn: boolean,
@@ -13,7 +14,7 @@ const logInAction = (newState: { userName: string, isLoggedIn: boolean }) => {
       await localStorage.setItem('userName', isUser.username);
       await localStorage.setItem('userId', isUser.id);
       dispatch({
-        type: 'LOG_IN',
+        type: Constants.LOG_IN,
         data: {
           isLoggedIn: true,
           userName: localStorage.getItem('userName'),
@@ -28,7 +29,7 @@ const logOutAction = () => {
   return async dispatch => {
     localStorage.removeItem('userName');
     dispatch({
-      type: 'LOG_OUT',
+      type: Constants.LOG_OUT,
       data: {
         isLoggedIn: false,
         userName: undefined,
@@ -46,9 +47,9 @@ const userInitialState: UserState = !!localStorage.getItem('userName')
 
 const authReducer = (state: UserState = userInitialState, action): UserState => {
   switch (action.type) {
-    case 'LOG_IN':
+    case Constants.LOG_IN:
       return { ...state, isLoggedIn: true, userName: action.data.userName, userId: action.data.userId };
-    case 'LOG_OUT':
+    case Constants.LOG_OUT:
       return { ...state, isLoggedIn: false, userName: undefined, userId: undefined };
     default:
       return state;

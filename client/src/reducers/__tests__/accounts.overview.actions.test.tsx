@@ -1,35 +1,16 @@
 import accountOverviewService from '../../services/accounts.overview.service';
 import { addAccountAsHost, initAccountsOverview } from '../accounts.overview.reducer';
 import { AccountInterface } from '../../interfaces/account.interface';
+import Constants from '../constants';
 
 describe('async actions', () => {
 
-  it('INIT_ACCOUNTS', async () => {
+  it(Constants.INIT_ACCOUNT, async () => {
     const mockPayload: AccountInterface[] = [
-      {
-        id: 'id',
-        title: 'test',
-        description: 'test',
-        transactions: [
-          {
-            id: 'id',
-            title: 'test',
-          },
-        ],
-      },
+      { uuid: '0x1', title: 't', balance: 0, status: 'approved' }
     ];
     const desiredData: AccountInterface[] = [
-      {
-        id: 'id',
-        title: 'test',
-        description: 'test',
-        transactions: [
-          {
-            id: 'id',
-            title: 'test',
-          },
-        ],
-      },
+      { uuid: '0x1', title: 't', balance: 0, status: 'approved' }
     ];
 
     accountOverviewService.queryAccounts = jest.fn().mockReturnValue(mockPayload);
@@ -37,20 +18,20 @@ describe('async actions', () => {
     const dispatch = jest.fn();
     await initAccountsOverview('0x1')(dispatch);
     expect(dispatch).toHaveBeenLastCalledWith({
-      type: 'INIT_ACCOUNTS',
+      type: Constants.INIT_ACCOUNT,
       data: desiredData,
     });
   });
 
-  it('ADD_ACCOUNT', async () => {
-    const addAccountInput: AccountInterface = { title: 'title', description: 'description' };
+  it(Constants.ADD_ACCOUNT, async () => {
+    const addAccountInput: AccountInterface = { uuid: '0x1', title: 't', balance: 0, status: 'approved' };
 
     accountOverviewService.addAccount = jest.fn().mockReturnValue([addAccountInput]);
 
     const dispatch = jest.fn();
     await addAccountAsHost(addAccountInput)(dispatch);
     expect(dispatch).toHaveBeenLastCalledWith({
-      type: 'ADD_ACCOUNT',
+      type: Constants.ADD_ACCOUNT,
       data: [addAccountInput],
     });
   });

@@ -1,0 +1,11 @@
+const Constants = {
+  GET_ACCOUNT: 'GET_ACCOUNT',
+  INIT_ACCOUNTS: 'INIT_ACCOUNTS',
+  INIT_ACCOUNT: 'INIT_ACCOUNT',
+  ADD_ACCOUNT: 'ADD_ACCOUNT',
+  LOG_IN: 'LOG_IN',
+  LOG_OUT: 'LOG_OUT',
+  GET_USER: 'GET_USER',
+}
+
+export default Constants;

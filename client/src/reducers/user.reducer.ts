@@ -1,11 +1,12 @@
 import userService from '../services/user.service';
 import { UserInterface } from '../interfaces/user.interface';
+import Constants from './constants';
 
 const getUser = (userId: string) => {
   return async dispatch => {
     const theUser = await userService.getUser(userId);
     dispatch({
-      type: 'GET_USER',
+      type: Constants.GET_USER,
       data: theUser,
     });
   };
@@ -15,7 +16,7 @@ export { getUser };
 
 const userReducer = (state: UserInterface | Object, action): UserInterface | Object => {
   switch (action.type) {
-    case 'GET_USER':
+    case Constants.GET_USER:
       return { ...state, ...action.data };
     default:
       return { ...state };
