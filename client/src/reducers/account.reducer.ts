@@ -1,14 +1,10 @@
-import accountService from '../services/account.detail.service';
 import { AccountInterface } from '../interfaces/account.interface';
 import Constants from './constants';
 
-const getAccount = (accountId: string) => {
-  return async dispatch => {
-    const account = await accountService.queryAccount(accountId);
-    dispatch({
-      type: Constants.GET_ACCOUNT,
-      data: account,
-    });
+const getAccount = (account: AccountInterface) => {
+  return {
+    type: Constants.GET_ACCOUNT,
+    data: account,
   };
 };
 

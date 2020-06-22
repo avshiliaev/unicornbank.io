@@ -13,7 +13,7 @@ const { Content } = Layout;
 const DashboardPage = ({ windowSize, auth, initAccountsOverview, children, location, ...rest }) => {
 
   useEffect(() => {
-    initAccountsOverview(auth.userId);
+    // initAccountsOverview(auth.userId);
   }, []);
 
   return (

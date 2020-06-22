@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Avatar, Badge, Button, Col, List, Row } from 'antd';
+import { Avatar, Badge, Button, Col, Empty, List, Row } from 'antd';
 import ActionIcon from './action.icon';
 import { Link } from '@reach/router';
 import { CodeOutlined, FundProjectionScreenOutlined, StarOutlined } from '@ant-design/icons';
@@ -54,7 +54,7 @@ const AccountsList = ({ accountsOverview, windowSize }) => {
 
   const [toDisplay, setToDisplay] = useState('all');
 
-  return (
+  return accountsState.length != 0 ? (
     <div>
       <Selector windowSize={windowSize} onClick={setToDisplay}/>
       <List
@@ -83,7 +83,7 @@ const AccountsList = ({ accountsOverview, windowSize }) => {
       />
     </div>
 
-  );
+  ) : (<Empty></Empty>)
 };
 
 export default AccountsList;

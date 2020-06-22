@@ -1,14 +1,12 @@
-import userService from '../services/user.service';
 import { UserInterface } from '../interfaces/user.interface';
 import Constants from './constants';
 
-const getUser = (userId: string) => {
-  return async dispatch => {
-    const theUser = await userService.getUser(userId);
-    dispatch({
-      type: Constants.GET_USER,
-      data: theUser,
-    });
+// const theUser = await userService.getUser(userId);
+
+const getUser = (user: UserInterface) => {
+  return {
+    type: Constants.GET_USER,
+    data: user,
   };
 };
 

@@ -5,3 +5,9 @@ export interface UserInterface {
   username: string;
   accounts?: AccountInterface[]
 }
+
+export interface UserStateInterface {
+  isLoggedIn: boolean,
+  userId: string | undefined,
+  userName: string | undefined
+}

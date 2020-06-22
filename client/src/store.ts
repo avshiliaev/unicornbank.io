@@ -8,13 +8,15 @@ import accountsOverviewReducer from './reducers/accounts.overview.reducer';
 import { createReduxHistoryContext, reachify } from 'redux-first-history';
 import { createBrowserHistory } from 'history';
 import userReducer from './reducers/user.reducer';
+import createSagaMiddleware from 'redux-saga';
+import { getAccountsSaga } from './sagas/accounts.sagas';
 
 const { createReduxHistory, routerMiddleware, routerReducer } = createReduxHistoryContext({
   history: createBrowserHistory(),
-  //others options if needed
 });
+const sagaMiddleware = createSagaMiddleware();
 
-const reducer = combineReducers({
+const rootReducer = combineReducers({
   auth: authReducer,
   accountsOverview: accountsOverviewReducer,
   account: accountReducer,
@@ -30,12 +32,13 @@ const reducer = combineReducers({
 });
 
 const store = createStore(
-  reducer,
+  rootReducer,
   composeWithDevTools(
     responsiveStoreEnhancer,
-    applyMiddleware(thunk, routerMiddleware),
+    applyMiddleware(sagaMiddleware, routerMiddleware),
   ),
 );
+sagaMiddleware.run(getAccountsSaga);
 
 export const history = createReduxHistory(store);
 export const reachHistory = reachify(history);

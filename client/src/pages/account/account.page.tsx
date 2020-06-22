@@ -16,7 +16,7 @@ const { Content } = Layout;
 const AccountPage = ({ windowSize, id, auth, children, getAccount, location, ...rest }) => {
 
   useEffect(() => {
-    getAccount(id);
+    // getAccount(id);
   }, []);
 
   return (
