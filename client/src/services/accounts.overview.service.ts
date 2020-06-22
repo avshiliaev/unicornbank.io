@@ -1,4 +1,5 @@
 import { AccountInterface } from '../interfaces/account.interface';
+import { UserInterface } from '../interfaces/user.interface';
 
 export async function http<T>(
   request: RequestInit,
@@ -8,14 +9,9 @@ export async function http<T>(
   return await response.json();
 }
 
-interface UserStateI {
-  userId: string;
-  accounts: AccountInterface[]
-}
+const queryAccounts = (userId: string): Promise<UserInterface> => {
 
-const queryAccounts = async (userId: string): Promise<AccountInterface[]> => {
-
-  const payload: UserStateI = await http<UserStateI>(
+  return http<UserInterface>(
     {
       method: 'POST',
       headers: new Headers({
@@ -26,7 +22,6 @@ const queryAccounts = async (userId: string): Promise<AccountInterface[]> => {
     },
   );
 
-  return Promise.resolve(payload.accounts);
 };
 
 const addAccount = async (addAccountInput: AccountInterface): Promise<AccountInterface> => {
