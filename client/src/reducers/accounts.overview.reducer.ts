@@ -1,9 +1,23 @@
 import { AccountInterface } from '../interfaces/account.interface';
 import Constants from './constants';
 
-const initAccountsOverview = (accounts: AccountInterface[]) => {
+const initAccounts = (accounts: AccountInterface[]) => {
   return {
     type: Constants.INIT_ACCOUNTS,
+    data: accounts,
+  };
+};
+
+const initAccountsSuccess = (accounts: AccountInterface[]) => {
+  return {
+    type: Constants.INIT_ACCOUNTS_SUCCESS,
+    data: accounts,
+  };
+};
+
+const initAccountsError = (accounts: AccountInterface[]) => {
+  return {
+    type: Constants.INIT_ACCOUNTS_ERROR,
     data: accounts,
   };
 };
@@ -15,7 +29,12 @@ const addAccountAsHost = (account: AccountInterface) => {
   };
 };
 
-export { initAccountsOverview, addAccountAsHost };
+export {
+  initAccounts,
+  initAccountsSuccess,
+  initAccountsError,
+  addAccountAsHost,
+};
 
 const accountsOverviewInitialState: AccountInterface[] = [];
 
