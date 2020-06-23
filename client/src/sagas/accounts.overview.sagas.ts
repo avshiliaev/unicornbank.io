@@ -1,7 +1,7 @@
-import { all, put, takeLatest } from 'redux-saga/effects';
-import Constants from '../reducers/constants';
+import { put, takeLatest } from 'redux-saga/effects';
+import { ActionTypes } from '../constants';
 import { UserInterface } from '../interfaces/user.interface';
-import { AccountAction, AccountsOverviewAction } from '../interfaces/account.interface';
+import { AccountsOverviewAction } from '../interfaces/account.interface';
 
 function* getAccountsSaga(action) {
   const { userId } = action;
@@ -18,29 +18,29 @@ function* getAccountsSaga(action) {
     // Again yield will wait for Promise to resolve
     const data: UserInterface = yield response.json();
     const actionSuccess: AccountsOverviewAction = {
-      type: Constants.INIT_ACCOUNTS_SUCCESS,
+      type: ActionTypes.QUERY_ACCOUNTS_SUCCESS,
       state: {
         loading: false,
         error: false,
         data: data.accounts,
-      }
-    }
+      },
+    };
     yield put(actionSuccess);
   } catch (error) {
     const actionError: AccountsOverviewAction = {
-      type: Constants.INIT_ACCOUNTS_ERROR,
+      type: ActionTypes.QUERY_ACCOUNTS_ERROR,
       state: {
         loading: false,
         error: true,
-        data: []
-      }
-    }
+        data: [],
+      },
+    };
     yield put(actionError);
   }
 }
 
 export function* getAccountsWatcher() {
-  yield takeLatest(Constants.INIT_ACCOUNTS, getAccountsSaga);
+  yield takeLatest(ActionTypes.QUERY_ACCOUNTS, getAccountsSaga);
 }
 
 

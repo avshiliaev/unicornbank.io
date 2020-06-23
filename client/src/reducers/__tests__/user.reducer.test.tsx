@@ -1,5 +1,5 @@
 import userReducer from '../user.reducer';
-import Constants from '../constants';
+import ActionTypes from '../../constants';
 
 describe('userReducer', () => {
   it('should return the initial state', () => {
@@ -14,7 +14,7 @@ describe('userReducer', () => {
       userReducer(
         {},
         {
-          type: Constants.GET_USER,
+          type: ActionTypes.GET_USER,
           data: userOne,
         }),
     ).toEqual(userOne);
@@ -23,7 +23,7 @@ describe('userReducer', () => {
       userReducer(
         userOne,
         {
-          type: Constants.GET_USER,
+          type: ActionTypes.GET_USER,
           data: userTwo,
         },
       ),

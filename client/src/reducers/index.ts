@@ -11,19 +11,21 @@ const { routerReducer } = createReduxHistoryContext({
   history: createBrowserHistory(),
 });
 
+const breakPoints = {
+  extraSmall: 480,
+  small: 576,
+  medium: 768,
+  large: 992,
+  extraLarge: 1200,
+};
+
 const rootReducer = combineReducers({
   auth: authReducer,
   accountsOverview: accountsOverviewReducer,
   account: accountReducer,
   user: userReducer,
   router: routerReducer,
-  windowSize: createResponsiveStateReducer({
-    extraSmall: 480,
-    small: 576,
-    medium: 768,
-    large: 992,
-    extraLarge: 1200,
-  }),
+  windowSize: createResponsiveStateReducer(breakPoints),
 });
 
 export default rootReducer;

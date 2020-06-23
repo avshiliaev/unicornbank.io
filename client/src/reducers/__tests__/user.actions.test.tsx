@@ -1,11 +1,11 @@
 import userService from '../../services/user.service';
 import { getUser } from '../user.reducer';
 import { UserInterface } from '../../interfaces/user.interface';
-import Constants from '../constants';
+import ActionTypes from '../../constants';
 
 describe('async actions', () => {
 
-  it(Constants.GET_USER, async () => {
+  it(ActionTypes.GET_USER, async () => {
     const mockUser: UserInterface = {
       id: '0x1',
       username: 'name',
@@ -19,7 +19,7 @@ describe('async actions', () => {
     const dispatch = jest.fn();
     await getUser('0x1')(dispatch);
     expect(dispatch).toHaveBeenLastCalledWith({
-      type: Constants.GET_USER,
+      type: ActionTypes.GET_USER,
       data: mockUser,
     });
   });

@@ -6,8 +6,15 @@ export interface UserInterface {
   accounts?: AccountInterface[]
 }
 
-export interface UserStateInterface {
-  isLoggedIn: boolean,
-  userId: string | undefined,
-  userName: string | undefined
+export interface UserReducerState {
+  loading: boolean,
+  error: boolean,
+  data?: UserInterface
 }
+
+export interface UserAction {
+  type: string,
+  params?: any
+  state: UserReducerState,
+}
+

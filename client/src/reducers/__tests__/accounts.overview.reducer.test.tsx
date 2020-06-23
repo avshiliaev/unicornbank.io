@@ -1,6 +1,6 @@
 import accountsOverviewReducer from '../accounts.overview.reducer';
 import { AccountInterface } from '../../interfaces/account.interface';
-import Constants from '../constants';
+import ActionTypes from '../../constants';
 
 const testInitState: AccountInterface[] = [];
 
@@ -23,7 +23,7 @@ describe('accountsOverviewReducer', () => {
       accountsOverviewReducer(
         testInitState,
         {
-          type: Constants.INIT_ACCOUNT,
+          type: ActionTypes.INIT_ACCOUNT,
           data: stateOne,
         }),
     ).toEqual(stateOne);
@@ -32,7 +32,7 @@ describe('accountsOverviewReducer', () => {
       accountsOverviewReducer(
         stateOne,
         {
-          type: Constants.INIT_ACCOUNT,
+          type: ActionTypes.INIT_ACCOUNT,
           data: stateTwo,
         },
       ),
@@ -51,7 +51,7 @@ describe('accountsOverviewReducer', () => {
       accountsOverviewReducer(
         testInitState,
         {
-          type: Constants.INIT_ACCOUNT,
+          type: ActionTypes.INIT_ACCOUNT,
           data: stateOne,
         }),
     ).toEqual(stateOne);
@@ -60,7 +60,7 @@ describe('accountsOverviewReducer', () => {
       accountsOverviewReducer(
         stateOne,
         {
-          type: Constants.ADD_ACCOUNT,
+          type: ActionTypes.ADD_ACCOUNT,
           data: newAccount,
         }),
     ).toEqual(stateTwo);

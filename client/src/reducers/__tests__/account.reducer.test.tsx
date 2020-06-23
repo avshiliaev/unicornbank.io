@@ -1,6 +1,6 @@
 import accountReducer from '../account.reducer';
 import { AccountInterface } from '../../interfaces/account.interface';
-import Constants from '../constants';
+import ActionTypes from '../../constants';
 
 describe('accountReducer', () => {
   it('should return the initial state', () => {
@@ -15,7 +15,7 @@ describe('accountReducer', () => {
       accountReducer(
         {},
         {
-          type: Constants.GET_ACCOUNT,
+          type: ActionTypes.GET_ACCOUNT,
           data: accountOne,
         }),
     ).toEqual(accountOne);
@@ -24,7 +24,7 @@ describe('accountReducer', () => {
       accountReducer(
         accountOne,
         {
-          type: Constants.GET_ACCOUNT,
+          type: ActionTypes.GET_ACCOUNT,
           data: accountTwo,
         },
       ),
