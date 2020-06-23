@@ -1,5 +1,5 @@
 import React from 'react';
-import { List } from 'antd';
+import { Badge, List } from 'antd';
 import { Link } from '@reach/router';
 import { TransactionInterface } from '../interfaces/transaction.interface';
 
@@ -15,7 +15,7 @@ const TransactionsTable = ({ transactions }) => {
         <List.Item>
           <List.Item.Meta
             title={<Link to={'../transactions/' + item.uuid}>{item.amount}</Link>}
-            description={item.status}
+            description={<Badge status="success" />}
           />
         </List.Item>
       )}

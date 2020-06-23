@@ -4,8 +4,8 @@ import { responsiveStoreEnhancer } from 'redux-responsive';
 import { createReduxHistoryContext, reachify } from 'redux-first-history';
 import { createBrowserHistory } from 'history';
 import createSagaMiddleware from 'redux-saga';
-import rootSaga from './sagas/accounts.sagas';
 import rootReducer from './reducers';
+import rootSaga from './sagas';
 
 const { createReduxHistory, routerMiddleware } = createReduxHistoryContext({
   history: createBrowserHistory(),
@@ -21,7 +21,5 @@ const store = createStore(
 );
 sagaMiddleware.run(rootSaga);
 
-export const history = createReduxHistory(store);
-export const reachHistory = reachify(history);
-
+export const reachHistory = reachify(createReduxHistory(store));
 export default store;
