@@ -1,13 +1,15 @@
 import { put, takeLatest } from 'redux-saga/effects';
-import { ActionTypes } from '../constants';
+import { ActionTypes, ApiEndpoints } from '../constants';
 import { AuthAction, AuthInterface } from '../interfaces/auth.interface';
+
+const url = 'http://localhost:8080'
 
 function* logInSaga(action: AuthAction) {
   const { username } = action.params;
   try {
     // yield will wait for Promise to resolve
     const response = yield fetch(
-      'http://localhost:8080/auth/logIn',
+      url + ApiEndpoints.LOG_IN,
       {
         method: 'POST',
         headers: {

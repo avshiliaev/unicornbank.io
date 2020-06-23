@@ -1,12 +1,14 @@
 import { put, takeLatest } from 'redux-saga/effects';
-import { ActionTypes } from '../constants';
+import { ActionTypes, ApiEndpoints } from '../constants';
 import { UserAction, UserInterface } from '../interfaces/user.interface';
+
+const url = 'http://localhost:8080'
 
 function* getUserSaga(action: UserAction) {
   const { userId } = action.params;
   try {
     // yield will wait for Promise to resolve
-    const response = yield fetch('http://localhost:8080/queries/getUser', {
+    const response = yield fetch(url + ApiEndpoints.GET_USER, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -37,8 +39,8 @@ function* getUserSaga(action: UserAction) {
   }
 }
 
-export function* getAccountDetailWatcher() {
-  yield takeLatest(ActionTypes.GET_ACCOUNT_DETAIL, getUserSaga);
+export function* getUserWatcher() {
+  yield takeLatest(ActionTypes.GET_USER, getUserSaga);
 }
 
 

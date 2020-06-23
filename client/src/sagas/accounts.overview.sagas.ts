@@ -1,20 +1,23 @@
 import { put, takeLatest } from 'redux-saga/effects';
-import { ActionTypes } from '../constants';
+import { ActionTypes, ApiEndpoints } from '../constants';
 import { UserInterface } from '../interfaces/user.interface';
 import { AccountsOverviewAction } from '../interfaces/account.interface';
+
+const url = 'http://localhost:8080';
 
 function* getAccountsSaga(action) {
   const { userId } = action;
   try {
     // yield will wait for Promise to resolve
-    const response = yield fetch('http://localhost:8080/queries/getUserState', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ userId }),
-    });
+    const response = yield fetch(url + ApiEndpoints.QUERY_ACCOUNTS,
+      {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userId }),
+      });
     // Again yield will wait for Promise to resolve
     const data: UserInterface = yield response.json();
     const actionSuccess: AccountsOverviewAction = {

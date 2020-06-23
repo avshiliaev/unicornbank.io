@@ -29,7 +29,12 @@ const ActionTypes = {
 };
 
 const ApiEndpoints = {
-
+  QUERY_ACCOUNTS: '/queries/getUserState',
+  GET_ACCOUNT_DETAIL: '/queries/getAccountDetail',
+  ADD_ACCOUNT: '',
+  LOG_IN: '/auth/logIn',
+  LOG_OUT: '/auth/logOut',
+  GET_USER: '/queries/getUser',
 }
 
-export { ActionTypes };
+export { ActionTypes, ApiEndpoints };

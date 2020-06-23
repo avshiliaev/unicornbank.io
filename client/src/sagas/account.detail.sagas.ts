@@ -1,12 +1,14 @@
 import { put, takeLatest } from 'redux-saga/effects';
-import { ActionTypes } from '../constants';
+import { ActionTypes, ApiEndpoints } from '../constants';
 import { AccountAction, AccountInterface } from '../interfaces/account.interface';
+
+const url = 'http://localhost:8080'
 
 function* getAccountDetailSaga(action: AccountAction) {
   const { accountId } = action.params;
   try {
     // yield will wait for Promise to resolve
-    const response = yield fetch('http://localhost:8080/queries/getAccountDetail', {
+    const response = yield fetch(url + ApiEndpoints.GET_ACCOUNT_DETAIL, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
