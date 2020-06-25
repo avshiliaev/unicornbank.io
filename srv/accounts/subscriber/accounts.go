@@ -16,13 +16,13 @@ type AccountApproval struct {
 	Coll              *mongo.Collection
 }
 
-func (e *AccountApproval) Handle(ctx context.Context, msg *accounts.AccountApprovalType) error {
+func (e *AccountApproval) Handle(ctx context.Context, msg *accounts.AccountType) error {
 	log.Info("Handler Received message: ", msg.Uuid)
 
-	accountUpdated := mongodb.GetOne(msg.Uuid, e.Coll)
+	accountUpdated := mongodb.GetOne(msg.Uuid, ctx, e.Coll)
 	accountUpdated.Status = msg.Status
 
-	mongodb.UpdateReplaceOne(accountUpdated, e.Coll)
+	mongodb.UpdateReplaceOne(accountUpdated, ctx, e.Coll)
 
 	topic := e.PubAccountUpdated
 	p := micro.NewEvent(topic, e.Client)
@@ -46,10 +46,10 @@ type TransactionPlaced struct {
 func (e *TransactionPlaced) Handle(ctx context.Context, transactionPlaced *accounts.TransactionType) error {
 	log.Info("Handler Received message: ", transactionPlaced.Uuid)
 
-	account := mongodb.GetOne(transactionPlaced.Account, e.Coll)
+	account := mongodb.GetOne(transactionPlaced.Account, ctx, e.Coll)
 	account.Balance = account.Balance + transactionPlaced.Amount
 
-	mongodb.UpdateReplaceOne(account, e.Coll)
+	mongodb.UpdateReplaceOne(account, ctx, e.Coll)
 
 	accountUpdated := accounts.AccountType{
 		Uuid:    account.Uuid,

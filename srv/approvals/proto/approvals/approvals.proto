@@ -9,7 +9,3 @@ message AccountType {
   string status = 3;
   float balance = 4;
 }
-message AccountApprovalType {
-  string uuid = 1;
-  string status = 2;
-}

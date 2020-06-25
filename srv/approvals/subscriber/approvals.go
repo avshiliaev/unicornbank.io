@@ -18,7 +18,7 @@ func (e *AccountCreated) Handle(ctx context.Context, accountCreated *approvals.A
 	log.Info("Handler Received message: ", accountCreated.Uuid)
 
 	status := "approved"
-	accountApproved := approvals.AccountApprovalType{
+	accountApproved := approvals.AccountType{
 		Uuid:   accountCreated.Uuid,
 		Status: status,
 	}

@@ -31,11 +31,13 @@ func main() {
 	// Initialise service
 	service.Init()
 
+	// Load .env file
 	if err := godotenv.Load(); err != nil {
 		log.Fatal("Init", err)
 	}
 
-	coll := mongodb.Collection()
+	// MongoDB connection
+	coll := mongodb.AccountsCollection()
 
 	// Register Handler
 	handle := handler.Accounts{
@@ -43,23 +45,34 @@ func main() {
 		PubAccountCreated: pubAccountCreated,
 		Coll:              coll,
 	}
-	if err := accounts.RegisterAccountsHandler(service.Server(), &handle); err != nil {
+	if err := accounts.RegisterAccountsHandler(
+		service.Server(),
+		&handle,
+	); err != nil {
 		log.Fatal(err)
 	}
 
-	// Register Subscriber
+	// Register Subscribers
 	subApproval := subscriber.AccountApproval{
 		PubAccountUpdated: pubAccountUpdated,
 		Coll:              coll,
 	}
-	if err := micro.RegisterSubscriber(subAccountApproval, service.Server(), &subApproval); err != nil {
+	if err := micro.RegisterSubscriber(
+		subAccountApproval,
+		service.Server(),
+		&subApproval,
+	); err != nil {
 		log.Fatal(err)
 	}
 	subTransProc := subscriber.TransactionPlaced{
 		PubAccountUpdated: pubAccountUpdated,
 		Coll:              coll,
 	}
-	if err := micro.RegisterSubscriber(subTransactionPlaced, service.Server(), &subTransProc); err != nil {
+	if err := micro.RegisterSubscriber(
+		subTransactionPlaced,
+		service.Server(),
+		&subTransProc,
+	); err != nil {
 		log.Fatal(err)
 	}
 

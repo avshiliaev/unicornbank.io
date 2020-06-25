@@ -18,7 +18,7 @@ type Accounts struct {
 }
 
 // Call is a single request handler called via client.Call or the generated client code
-func (e *Accounts) Create(ctx context.Context, req *accounts.RequestType, rsp *accounts.ResponseType) error {
+func (e *Accounts) Create(ctx context.Context, req *accounts.AccountType, rsp *accounts.AccountType) error {
 
 	log.Info("Received Accounts.Create request")
 
@@ -29,7 +29,7 @@ func (e *Accounts) Create(ctx context.Context, req *accounts.RequestType, rsp *a
 		Balance: float32(0.0),
 	}
 
-	mongodb.CreateOne(&account, e.Coll)
+	mongodb.CreateOne(&account, ctx, e.Coll)
 
 	topic := e.PubAccountCreated
 	p := micro.NewEvent(topic, e.Client)

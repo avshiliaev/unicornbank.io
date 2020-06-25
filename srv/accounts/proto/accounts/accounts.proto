@@ -9,10 +9,6 @@ message AccountType {
   string status = 3;
   float balance = 4;
 }
-message AccountApprovalType {
-  string uuid = 1;
-  string status = 2;
-}
 message TransactionType {
   string account = 1;
   string uuid = 2;
@@ -22,13 +18,5 @@ message TransactionType {
 
 // gRPC
 service Accounts {
-  rpc Create(RequestType) returns (ResponseType) {}
-}
-
-message RequestType {
-  string title = 1;
-}
-
-message ResponseType {
-  string uuid = 1;
+  rpc Create(AccountType) returns (AccountType) {}
 }

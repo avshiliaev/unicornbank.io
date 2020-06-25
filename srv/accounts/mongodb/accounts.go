@@ -29,7 +29,7 @@ type AccountsModel struct {
 	Status  string             `bson:"status,omitempty"`
 }
 
-func Collection() *mongo.Collection {
+func AccountsCollection() *mongo.Collection {
 
 	uri := os.Getenv("MONGO_URI")
 	db := os.Getenv("MONGO_DATABASE")
@@ -43,7 +43,7 @@ func Collection() *mongo.Collection {
 	return collection
 }
 
-func CreateOne(acc *accounts.AccountType, coll *mongo.Collection) *mongo.InsertOneResult {
+func CreateOne(acc *accounts.AccountType, ctx context.Context, coll *mongo.Collection) *mongo.InsertOneResult {
 
 	account := AccountsModel{
 		Uuid:    acc.Uuid,
@@ -51,7 +51,6 @@ func CreateOne(acc *accounts.AccountType, coll *mongo.Collection) *mongo.InsertO
 		Status:  acc.Status,
 		Balance: acc.Balance,
 	}
-	ctx := context.Background()
 	result, err := coll.InsertOne(ctx, &account)
 	if err != nil {
 		log.Print(err)
@@ -59,24 +58,11 @@ func CreateOne(acc *accounts.AccountType, coll *mongo.Collection) *mongo.InsertO
 	return result
 }
 
-func QueryAll(param string, coll *mongo.Collection, ctx context.Context) []AccountsModel {
+func GetOne(uuid string, ctx context.Context, coll *mongo.Collection) *accounts.AccountType {
 
-	var result []AccountsModel
-	cursor, err := coll.Find(ctx, bson.M{"param": bson.D{{"$eq", param}}})
-	if err != nil {
-		log.Print(err)
-	}
-	if err = cursor.All(ctx, &result); err != nil {
-		log.Print(err)
-	}
-	return result
-}
-
-func GetOne(uuid string, coll *mongo.Collection) *accounts.AccountType {
-
+	filter := AccountsModel{Uuid: uuid}
 	var result AccountsModel
-	ctx := context.Background()
-	if err := coll.FindOne(ctx, bson.M{"uuid": uuid}).Decode(&result); err != nil {
+	if err := coll.FindOne(ctx, filter).Decode(&result); err != nil {
 		log.Fatal(err)
 	}
 	acc := accounts.AccountType{
@@ -88,62 +74,22 @@ func GetOne(uuid string, coll *mongo.Collection) *accounts.AccountType {
 	return &acc
 }
 
-func UpdateOne(acc *accounts.AccountType, coll *mongo.Collection) *mongo.UpdateResult {
+func UpdateReplaceOne(acc *accounts.AccountType, ctx context.Context, coll *mongo.Collection) *mongo.UpdateResult {
 
+	filter := AccountsModel{Uuid: acc.Uuid}
 	account := AccountsModel{
 		Uuid:    acc.Uuid,
 		Title:   acc.Title,
 		Status:  acc.Status,
 		Balance: acc.Balance,
 	}
-	ctx := context.Background()
 	result, err := coll.UpdateOne(
 		ctx,
-		bson.M{"uuid": acc.Uuid},
+		filter,
 		bson.D{
 			{"$set", account},
 		},
 	)
-	if err != nil {
-		log.Print(err)
-	}
-	return result
-}
-
-func UpdateReplaceOne(acc *accounts.AccountType, coll *mongo.Collection) *mongo.UpdateResult {
-
-	account := AccountsModel{
-		Uuid:    acc.Uuid,
-		Title:   acc.Title,
-		Status:  acc.Status,
-		Balance: acc.Balance,
-	}
-	ctx := context.Background()
-	result, err := coll.UpdateOne(
-		ctx,
-		bson.M{"uuid": acc.Uuid},
-		bson.D{
-			{"$set", account},
-		},
-	)
-	if err != nil {
-		log.Print(err)
-	}
-	return result
-}
-
-func DeleteOne(uuid string, coll *mongo.Collection) *mongo.DeleteResult {
-	ctx := context.Background()
-	result, err := coll.DeleteOne(ctx, bson.M{"uuid": uuid})
-	if err != nil {
-		log.Print(err)
-	}
-	return result
-}
-
-func DeleteMany(param string, coll *mongo.Collection) *mongo.DeleteResult {
-	ctx := context.Background()
-	result, err := coll.DeleteMany(ctx, bson.M{"param": param})
 	if err != nil {
 		log.Print(err)
 	}
