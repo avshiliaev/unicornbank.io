@@ -5,7 +5,7 @@ import (
 	"github.com/micro/go-micro/v2"
 	"github.com/micro/go-micro/v2/client"
 	log "github.com/micro/go-micro/v2/logger"
-	"unicornbank.io/srv/accounts/models"
+	"unicornbank.io/srv/accounts/mongodb"
 	accounts "unicornbank.io/srv/accounts/proto/accounts"
 )
 
@@ -17,16 +17,12 @@ type AccountApproval struct {
 func (e *AccountApproval) Handle(ctx context.Context, msg *accounts.AccountApprovalType) error {
 	log.Info("Handler Received message: ", msg.Uuid)
 
-	account := models.Get(msg.Uuid)
-	account.Status = msg.Status
-	models.Update(&account)
+	coll, mongoCtx := mongodb.Collection()
 
-	accountUpdated := accounts.AccountType{
-		Uuid:    account.Uuid,
-		Title:   account.Title,
-		Status:  account.Status,
-		Balance: account.Balance,
-	}
+	accountUpdated := mongodb.GetOne(msg.Uuid, coll, mongoCtx)
+	accountUpdated.Status = msg.Status
+
+	mongodb.UpdateOne(msg.Uuid, &accountUpdated, coll, mongoCtx)
 
 	topic := e.PubAccountUpdated
 	p := micro.NewEvent(topic, e.Client)
@@ -49,9 +45,12 @@ type TransactionPlaced struct {
 func (e *TransactionPlaced) Handle(ctx context.Context, transactionPlaced *accounts.TransactionType) error {
 	log.Info("Handler Received message: ", transactionPlaced.Uuid)
 
-	account := models.Get(transactionPlaced.Account)
+	coll, mongoCtx := mongodb.Collection()
+
+	account := mongodb.GetOne(transactionPlaced.Account, coll, mongoCtx)
 	account.Balance = account.Balance + transactionPlaced.Amount
-	models.Update(&account)
+
+	mongodb.UpdateOne(account.Uuid, &account, coll, mongoCtx)
 
 	accountUpdated := accounts.AccountType{
 		Uuid:    account.Uuid,

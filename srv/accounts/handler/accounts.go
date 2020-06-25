@@ -6,7 +6,7 @@ import (
 	"github.com/micro/go-micro/v2"
 	"github.com/micro/go-micro/v2/client"
 	log "github.com/micro/go-micro/v2/logger"
-	"unicornbank.io/srv/accounts/models"
+	"unicornbank.io/srv/accounts/mongodb"
 	accounts "unicornbank.io/srv/accounts/proto/accounts"
 )
 
@@ -20,14 +20,14 @@ func (e *Accounts) Create(ctx context.Context, req *accounts.RequestType, rsp *a
 
 	log.Info("Received Accounts.Create request")
 
-	accountCreated := accounts.AccountType{
-		Uuid:      uuid.New().String(),
-		Title:     req.Title,
-		Status:    "pending",
-		Balance:   float32(0.0),
+	accountCreated := mongodb.AccountsModel{
+		Uuid:    uuid.New().String(),
+		Title:   req.Title,
+		Status:  "pending",
+		Balance: float32(0.0),
 	}
-
-	models.Create(&accountCreated)
+	coll, mongoCtx := mongodb.Collection()
+	mongodb.CreateOne(&accountCreated, coll, mongoCtx)
 
 	topic := e.PubAccountCreated
 	p := micro.NewEvent(topic, e.Client)

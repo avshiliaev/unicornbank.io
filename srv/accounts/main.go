@@ -1,10 +1,10 @@
 package main
 
 import (
+	"github.com/joho/godotenv"
 	"github.com/micro/go-micro/v2"
 	log "github.com/micro/go-micro/v2/logger"
 	"unicornbank.io/srv/accounts/handler"
-	"unicornbank.io/srv/accounts/models"
 	accounts "unicornbank.io/srv/accounts/proto/accounts"
 	"unicornbank.io/srv/accounts/subscriber"
 )
@@ -30,8 +30,9 @@ func main() {
 	// Initialise service
 	service.Init()
 
-	// Initialise a database connection and migrate the schema
-	models.Migrate()
+	if err := godotenv.Load(); err != nil {
+		log.Fatal("Init", err)
+	}
 
 	// Register Handler
 	h := new(handler.Accounts)

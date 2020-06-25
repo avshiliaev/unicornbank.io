@@ -3,7 +3,6 @@ package mongodb
 import (
 	"context"
 	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"log"
@@ -22,11 +21,11 @@ import (
 // https://www.mongodb.com/blog/post/quick-start-golang--mongodb--modeling-documents-with-go-data-structures
 
 type AccountsModel struct {
-	ID      primitive.ObjectID `bson:"_id,omitempty"`
-	Uuid    string             `bson:"uuid,omitempty"`
-	Title   string             `bson:"title,omitempty"`
-	Balance float32            `bson:"balance,omitempty"`
-	Status  string             `bson:"status,omitempty"`
+	// ID      primitive.ObjectID `bson:"_id,omitempty"`
+	Uuid    string  `bson:"uuid,omitempty"`
+	Title   string  `bson:"title,omitempty"`
+	Balance float32 `bson:"balance,omitempty"`
+	Status  string  `bson:"status,omitempty"`
 }
 
 func Collection() (*mongo.Collection, context.Context) {
@@ -45,10 +44,10 @@ func Collection() (*mongo.Collection, context.Context) {
 	return collection, ctx
 }
 
-func CreateOne(acc AccountsModel, coll *mongo.Collection, ctx context.Context) *mongo.InsertOneResult {
+func CreateOne(acc *AccountsModel, coll *mongo.Collection, ctx context.Context) *mongo.InsertOneResult {
 	result, err := coll.InsertOne(ctx, acc)
 	if err != nil {
-		panic(err)
+		log.Print(err)
 	}
 	return result
 }
@@ -58,10 +57,10 @@ func QueryAll(param string, coll *mongo.Collection, ctx context.Context) []Accou
 	var accounts []AccountsModel
 	cursor, err := coll.Find(ctx, bson.M{"param": bson.D{{"$eq", param}}})
 	if err != nil {
-		panic(err)
+		log.Print(err)
 	}
 	if err = cursor.All(ctx, &accounts); err != nil {
-		panic(err)
+		log.Print(err)
 	}
 	return accounts
 }
@@ -70,16 +69,16 @@ func GetOne(uuid string, coll *mongo.Collection, ctx context.Context) AccountsMo
 
 	filterCursor, err := coll.Find(ctx, bson.M{"uuid": uuid})
 	if err != nil {
-		log.Fatal(err)
+		log.Print(err)
 	}
 	var result AccountsModel
 	if err = filterCursor.All(ctx, &result); err != nil {
-		log.Fatal(err)
+		log.Print(err)
 	}
 	return result
 }
 
-func UpdateOne(uuid string, acc AccountsModel, coll *mongo.Collection, ctx context.Context) *mongo.UpdateResult {
+func UpdateOne(uuid string, acc *AccountsModel, coll *mongo.Collection, ctx context.Context) *mongo.UpdateResult {
 	result, err := coll.UpdateOne(
 		ctx,
 		bson.M{"uuid": uuid},
@@ -88,19 +87,19 @@ func UpdateOne(uuid string, acc AccountsModel, coll *mongo.Collection, ctx conte
 		},
 	)
 	if err != nil {
-		log.Fatal(err)
+		log.Print(err)
 	}
 	return result
 }
 
-func UpdateReplaceOne(uuid string, acc AccountsModel, coll *mongo.Collection, ctx context.Context) *mongo.UpdateResult {
+func UpdateReplaceOne(uuid string, acc *AccountsModel, coll *mongo.Collection, ctx context.Context) *mongo.UpdateResult {
 	result, err := coll.ReplaceOne(
 		ctx,
 		bson.M{"uuid": uuid},
 		acc,
 	)
 	if err != nil {
-		log.Fatal(err)
+		log.Print(err)
 	}
 	return result
 }
@@ -108,7 +107,7 @@ func UpdateReplaceOne(uuid string, acc AccountsModel, coll *mongo.Collection, ct
 func DeleteOne(uuid string, coll *mongo.Collection, ctx context.Context) *mongo.DeleteResult {
 	result, err := coll.DeleteOne(ctx, bson.M{"uuid": uuid})
 	if err != nil {
-		log.Fatal(err)
+		log.Print(err)
 	}
 	return result
 }
@@ -116,7 +115,7 @@ func DeleteOne(uuid string, coll *mongo.Collection, ctx context.Context) *mongo.
 func DeleteMany(param string, coll *mongo.Collection, ctx context.Context) *mongo.DeleteResult {
 	result, err := coll.DeleteMany(ctx, bson.M{"param": param})
 	if err != nil {
-		log.Fatal(err)
+		log.Print(err)
 	}
 	return result
 }
