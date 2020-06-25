@@ -42,7 +42,7 @@ func NewAccountsEndpoints() []*api.Endpoint {
 // Client API for Accounts service
 
 type AccountsService interface {
-	Create(ctx context.Context, in *RequestType, opts ...client.CallOption) (*AccountType, error)
+	Create(ctx context.Context, in *RequestType, opts ...client.CallOption) (*ResponseType, error)
 }
 
 type accountsService struct {
@@ -57,9 +57,9 @@ func NewAccountsService(name string, c client.Client) AccountsService {
 	}
 }
 
-func (c *accountsService) Create(ctx context.Context, in *RequestType, opts ...client.CallOption) (*AccountType, error) {
+func (c *accountsService) Create(ctx context.Context, in *RequestType, opts ...client.CallOption) (*ResponseType, error) {
 	req := c.c.NewRequest(c.name, "Accounts.Create", in)
-	out := new(AccountType)
+	out := new(ResponseType)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -70,12 +70,12 @@ func (c *accountsService) Create(ctx context.Context, in *RequestType, opts ...c
 // Server API for Accounts service
 
 type AccountsHandler interface {
-	Create(context.Context, *RequestType, *AccountType) error
+	Create(context.Context, *RequestType, *ResponseType) error
 }
 
 func RegisterAccountsHandler(s server.Server, hdlr AccountsHandler, opts ...server.HandlerOption) error {
 	type accounts interface {
-		Create(ctx context.Context, in *RequestType, out *AccountType) error
+		Create(ctx context.Context, in *RequestType, out *ResponseType) error
 	}
 	type Accounts struct {
 		accounts
@@ -88,6 +88,6 @@ type accountsHandler struct {
 	AccountsHandler
 }
 
-func (h *accountsHandler) Create(ctx context.Context, in *RequestType, out *AccountType) error {
+func (h *accountsHandler) Create(ctx context.Context, in *RequestType, out *ResponseType) error {
 	return h.AccountsHandler.Create(ctx, in, out)
 }

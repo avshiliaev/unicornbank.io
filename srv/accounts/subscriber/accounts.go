@@ -5,6 +5,7 @@ import (
 	"github.com/micro/go-micro/v2"
 	"github.com/micro/go-micro/v2/client"
 	log "github.com/micro/go-micro/v2/logger"
+	"go.mongodb.org/mongo-driver/mongo"
 	"unicornbank.io/srv/accounts/mongodb"
 	accounts "unicornbank.io/srv/accounts/proto/accounts"
 )
@@ -12,17 +13,16 @@ import (
 type AccountApproval struct {
 	Client            client.Client
 	PubAccountUpdated string
+	Coll              *mongo.Collection
 }
 
 func (e *AccountApproval) Handle(ctx context.Context, msg *accounts.AccountApprovalType) error {
 	log.Info("Handler Received message: ", msg.Uuid)
 
-	coll, mongoCtx := mongodb.Collection()
-
-	accountUpdated := mongodb.GetOne(msg.Uuid, coll, mongoCtx)
+	accountUpdated := mongodb.GetOne(msg.Uuid, e.Coll)
 	accountUpdated.Status = msg.Status
 
-	mongodb.UpdateOne(msg.Uuid, &accountUpdated, coll, mongoCtx)
+	mongodb.UpdateReplaceOne(accountUpdated, e.Coll)
 
 	topic := e.PubAccountUpdated
 	p := micro.NewEvent(topic, e.Client)
@@ -38,6 +38,7 @@ func (e *AccountApproval) Handle(ctx context.Context, msg *accounts.AccountAppro
 type TransactionPlaced struct {
 	Client            client.Client
 	PubAccountUpdated string
+	Coll              *mongo.Collection
 }
 
 // TODO a good place for the saga pattern:
@@ -45,12 +46,10 @@ type TransactionPlaced struct {
 func (e *TransactionPlaced) Handle(ctx context.Context, transactionPlaced *accounts.TransactionType) error {
 	log.Info("Handler Received message: ", transactionPlaced.Uuid)
 
-	coll, mongoCtx := mongodb.Collection()
-
-	account := mongodb.GetOne(transactionPlaced.Account, coll, mongoCtx)
+	account := mongodb.GetOne(transactionPlaced.Account, e.Coll)
 	account.Balance = account.Balance + transactionPlaced.Amount
 
-	mongodb.UpdateOne(account.Uuid, &account, coll, mongoCtx)
+	mongodb.UpdateReplaceOne(account, e.Coll)
 
 	accountUpdated := accounts.AccountType{
 		Uuid:    account.Uuid,

@@ -5,6 +5,7 @@ import (
 	"github.com/micro/go-micro/v2"
 	log "github.com/micro/go-micro/v2/logger"
 	"unicornbank.io/srv/accounts/handler"
+	"unicornbank.io/srv/accounts/mongodb"
 	accounts "unicornbank.io/srv/accounts/proto/accounts"
 	"unicornbank.io/srv/accounts/subscriber"
 )
@@ -34,23 +35,31 @@ func main() {
 		log.Fatal("Init", err)
 	}
 
+	coll := mongodb.Collection()
+
 	// Register Handler
-	h := new(handler.Accounts)
-	h.Client = service.Client()
-	h.PubAccountCreated = pubAccountCreated
-	if err := accounts.RegisterAccountsHandler(service.Server(), h); err != nil {
+	handle := handler.Accounts{
+		Client:            service.Client(),
+		PubAccountCreated: pubAccountCreated,
+		Coll:              coll,
+	}
+	if err := accounts.RegisterAccountsHandler(service.Server(), &handle); err != nil {
 		log.Fatal(err)
 	}
 
 	// Register Subscriber
-	accApprovSub := new(subscriber.AccountApproval)
-	accApprovSub.PubAccountUpdated = pubAccountUpdated
-	if err := micro.RegisterSubscriber(subAccountApproval, service.Server(), accApprovSub); err != nil {
+	subApproval := subscriber.AccountApproval{
+		PubAccountUpdated: pubAccountUpdated,
+		Coll:              coll,
+	}
+	if err := micro.RegisterSubscriber(subAccountApproval, service.Server(), &subApproval); err != nil {
 		log.Fatal(err)
 	}
-	transProcSub := new(subscriber.TransactionPlaced)
-	transProcSub.PubAccountUpdated = pubAccountUpdated
-	if err := micro.RegisterSubscriber(subTransactionPlaced, service.Server(), transProcSub); err != nil {
+	subTransProc := subscriber.TransactionPlaced{
+		PubAccountUpdated: pubAccountUpdated,
+		Coll:              coll,
+	}
+	if err := micro.RegisterSubscriber(subTransactionPlaced, service.Server(), &subTransProc); err != nil {
 		log.Fatal(err)
 	}
 
