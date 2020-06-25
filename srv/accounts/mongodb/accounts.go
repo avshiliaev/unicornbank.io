@@ -2,8 +2,8 @@ package mongodb
 
 import (
 	"context"
-	"fmt"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"log"
@@ -22,10 +22,11 @@ import (
 // https://www.mongodb.com/blog/post/quick-start-golang--mongodb--modeling-documents-with-go-data-structures
 
 type AccountsModel struct {
-	Uuid    string
-	Title   string
-	Balance float32
-	Status  string
+	ID      primitive.ObjectID `bson:"_id,omitempty"`
+	Uuid    string             `bson:"uuid,omitempty"`
+	Title   string             `bson:"title,omitempty"`
+	Balance float32            `bson:"balance,omitempty"`
+	Status  string             `bson:"status,omitempty"`
 }
 
 func Collection() (*mongo.Collection, context.Context) {
@@ -44,88 +45,78 @@ func Collection() (*mongo.Collection, context.Context) {
 	return collection, ctx
 }
 
-func CreateOne(acc AccountsModel, coll *mongo.Collection, ctx context.Context) {
-
-	result, _ := coll.InsertOne(ctx, bson.D{
-		{"title", "The Polyglot Developer Podcast"},
-		{"author", "Nic Raboy"},
-		{"tags", bson.A{"development", "programming", "coding"}},
-	})
-
-	fmt.Println(result)
-}
-
-func QueryAll(coll *mongo.Collection, ctx context.Context) {
-
-	// read in batches for big data
-	cursor, err := coll.Find(ctx, bson.M{})
+func CreateOne(acc AccountsModel, coll *mongo.Collection, ctx context.Context) *mongo.InsertOneResult {
+	result, err := coll.InsertOne(ctx, acc)
 	if err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
-	defer cursor.Close(ctx)
-	for cursor.Next(ctx) {
-		var result bson.M
-		if err = cursor.Decode(&result); err != nil {
-			log.Fatal(err)
-		}
-		fmt.Println(result)
-	}
+	return result
 }
 
-func GetOne(uuid string, coll *mongo.Collection, ctx context.Context) {
+func QueryAll(param string, coll *mongo.Collection, ctx context.Context) []AccountsModel {
+
+	var accounts []AccountsModel
+	cursor, err := coll.Find(ctx, bson.M{"param": bson.D{{"$eq", param}}})
+	if err != nil {
+		panic(err)
+	}
+	if err = cursor.All(ctx, &accounts); err != nil {
+		panic(err)
+	}
+	return accounts
+}
+
+func GetOne(uuid string, coll *mongo.Collection, ctx context.Context) AccountsModel {
+
 	filterCursor, err := coll.Find(ctx, bson.M{"uuid": uuid})
 	if err != nil {
 		log.Fatal(err)
 	}
-	var result []bson.M
+	var result AccountsModel
 	if err = filterCursor.All(ctx, &result); err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(result)
+	return result
 }
 
-func UpdateOne(uuid string, coll *mongo.Collection, ctx context.Context) {
+func UpdateOne(uuid string, acc AccountsModel, coll *mongo.Collection, ctx context.Context) *mongo.UpdateResult {
 	result, err := coll.UpdateOne(
 		ctx,
 		bson.M{"uuid": uuid},
 		bson.D{
-			{"$set", bson.D{{"author", "Nic Raboy"}}},
+			{"$set", acc},
 		},
 	)
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Printf("Updated %v Documents!\n", result.ModifiedCount)
+	return result
 }
 
-func UpdateReplaceOne(uuid string, coll *mongo.Collection, ctx context.Context) {
+func UpdateReplaceOne(uuid string, acc AccountsModel, coll *mongo.Collection, ctx context.Context) *mongo.UpdateResult {
 	result, err := coll.ReplaceOne(
 		ctx,
 		bson.M{"uuid": uuid},
-		bson.M{
-			"title":  "The Nic Raboy Show",
-			"author": "Nicolas Raboy",
-		},
+		acc,
 	)
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Printf("Replaced %v Documents!\n", result.ModifiedCount)
+	return result
 }
 
-func DeleteOne(uuid string, coll *mongo.Collection, ctx context.Context) {
+func DeleteOne(uuid string, coll *mongo.Collection, ctx context.Context) *mongo.DeleteResult {
 	result, err := coll.DeleteOne(ctx, bson.M{"uuid": uuid})
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Printf("DeleteOne removed %v document(s)\n", result.DeletedCount)
+	return result
 }
 
-func DeleteMany(param string, coll *mongo.Collection, ctx context.Context) {
+func DeleteMany(param string, coll *mongo.Collection, ctx context.Context) *mongo.DeleteResult {
 	result, err := coll.DeleteMany(ctx, bson.M{"param": param})
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Printf("DeleteMany removed %v document(s)\n", result.DeletedCount)
+	return result
 }
-
