@@ -3,13 +3,14 @@ import { ActionTypes, ApiEndpoints } from '../constants';
 import { UserInterface } from '../interfaces/user.interface';
 import { AccountsOverviewAction } from '../interfaces/account.interface';
 
-const url = 'http://localhost:8080';
+const host = 'http://localhost:8080';
 
 function* getAccountsSaga(action) {
   const { userId } = action;
+  const url = host + ApiEndpoints.QUERY_ACCOUNTS.path();
   try {
     // yield will wait for Promise to resolve
-    const response = yield fetch(url + ApiEndpoints.QUERY_ACCOUNTS,
+    const response = yield fetch(url,
       {
         method: 'POST',
         headers: {

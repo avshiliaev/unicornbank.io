@@ -3,18 +3,18 @@ package main
 import (
 	"github.com/micro/go-micro/v2"
 	log "github.com/micro/go-micro/v2/logger"
-	"unicornbank.io/srv/queries/handler"
-	"unicornbank.io/srv/queries/models"
-	queries "unicornbank.io/srv/queries/proto/queries"
-	"unicornbank.io/srv/queries/subscriber"
+	"unicornbank.io/srv/profiles/handler"
+	"unicornbank.io/srv/profiles/models"
+	profiles "unicornbank.io/srv/profiles/proto/profiles"
+	"unicornbank.io/srv/profiles/subscriber"
 )
 
 var (
-	serviceName           = "go.micro.api.queries"
-	serviceVersion        = "0.0.1"
+	serviceName    = "go.micro.api.profiles"
+	serviceVersion = "0.0.1"
 	// Sub to account updates
-	subAccountCreated     = "go.micro.service.account.created"
-	subAccountUpdated     = "go.micro.service.account.updated"
+	subAccountCreated = "go.micro.service.account.created"
+	subAccountUpdated = "go.micro.service.account.updated"
 	// Sub to transaction updates
 	subTransactionPlaced  = "go.micro.service.transaction.placed"
 	subTransactionUpdated = "go.micro.service.transaction.updated"
@@ -34,8 +34,8 @@ func main() {
 	models.Migrate()
 
 	// Register Handler
-	h := new(handler.Queries)
-	if err := queries.RegisterQueriesHandler(service.Server(), h); err != nil {
+	h := new(handler.Profiles)
+	if err := profiles.RegisterProfilesHandler(service.Server(), h); err != nil {
 		log.Fatal(err)
 	}
 

@@ -2,13 +2,14 @@ import { put, takeLatest } from 'redux-saga/effects';
 import { ActionTypes, ApiEndpoints } from '../constants';
 import { UserAction, UserInterface } from '../interfaces/user.interface';
 
-const url = 'http://localhost:8080'
+const host = 'http://localhost:8080'
 
 function* getUserSaga(action: UserAction) {
   const { userId } = action.params;
+  const url = host + ApiEndpoints.GET_USER.path();
   try {
     // yield will wait for Promise to resolve
-    const response = yield fetch(url + ApiEndpoints.GET_USER, {
+    const response = yield fetch(url, {
       method: 'POST',
       headers: {
         Accept: 'application/json',

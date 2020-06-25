@@ -3,13 +3,13 @@ package subscriber
 import (
 	"context"
 	log "github.com/micro/go-micro/v2/logger"
-	"unicornbank.io/srv/queries/models"
-	queries "unicornbank.io/srv/queries/proto/queries"
+	"unicornbank.io/srv/profiles/models"
+	profiles "unicornbank.io/srv/profiles/proto/profiles"
 )
 
 type AccountCreated struct{}
 
-func (e *AccountCreated) Handle(ctx context.Context, accountCreated *queries.AccountType) error {
+func (e *AccountCreated) Handle(ctx context.Context, accountCreated *profiles.AccountType) error {
 	log.Info("Account: ", accountCreated.Uuid, ", status: ", accountCreated.Status)
 	models.CreateAccount(accountCreated)
 	return nil
@@ -17,7 +17,7 @@ func (e *AccountCreated) Handle(ctx context.Context, accountCreated *queries.Acc
 
 type AccountUpdated struct{}
 
-func (e *AccountUpdated) Handle(ctx context.Context, msg *queries.AccountType) error {
+func (e *AccountUpdated) Handle(ctx context.Context, msg *profiles.AccountType) error {
 	log.Info("Account: ", msg.Uuid, ", status: ", msg.Status)
 	updatedAccount := models.GetAccount(msg.Uuid)
 	updatedAccount.Status = msg.Status
@@ -29,7 +29,7 @@ func (e *AccountUpdated) Handle(ctx context.Context, msg *queries.AccountType) e
 
 type TransactionPlaced struct{}
 
-func (e *TransactionPlaced) Handle(ctx context.Context, transactionPlaced *queries.TransactionType) error {
+func (e *TransactionPlaced) Handle(ctx context.Context, transactionPlaced *profiles.TransactionType) error {
 	log.Info("Account: ", transactionPlaced.Uuid, ", status: ", transactionPlaced.Status)
 	models.CreateTransaction(transactionPlaced)
 	return nil
@@ -37,7 +37,7 @@ func (e *TransactionPlaced) Handle(ctx context.Context, transactionPlaced *queri
 
 type TransactionUpdated struct{}
 
-func (e *TransactionUpdated) Handle(ctx context.Context, msg *queries.TransactionType) error {
+func (e *TransactionUpdated) Handle(ctx context.Context, msg *profiles.TransactionType) error {
 	log.Info("Transaction: ", msg.Uuid, ", status: ", msg.Status)
 	updatedTransaction := models.GetTransaction(msg.Uuid)
 	updatedTransaction.Account = msg.Account

@@ -3,12 +3,12 @@ package models
 import (
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
-	queries "unicornbank.io/srv/queries/proto/queries"
+	profiles "unicornbank.io/srv/profiles/proto/profiles"
 )
 
 var (
 	dialect = "sqlite3"
-	args    = "queries.db"
+	args    = "profiles.db"
 )
 
 type AccountsModel struct {
@@ -37,7 +37,7 @@ func Migrate() {
 	db.AutoMigrate(&TransactionsModel{})
 }
 
-func CreateAccount(accountCreated *queries.AccountType) {
+func CreateAccount(accountCreated *profiles.AccountType) {
 	db, err := gorm.Open(dialect, args)
 	if err != nil {
 		panic("failed to connect database")
@@ -85,7 +85,7 @@ func UpdateAccount(accountUpdated *AccountsModel) {
 	db.Save(&accountUpdated)
 }
 
-func CreateTransaction(transactionPlaced *queries.TransactionType) {
+func CreateTransaction(transactionPlaced *profiles.TransactionType) {
 	db, err := gorm.Open(dialect, args)
 	if err != nil {
 		panic("failed to connect database")

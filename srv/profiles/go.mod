@@ -1,4 +1,4 @@
-module unicornbank.io/srv/queries
+module unicornbank.io/srv/profiles
 
 go 1.13
 

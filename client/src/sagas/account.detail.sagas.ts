@@ -2,13 +2,16 @@ import { put, takeLatest } from 'redux-saga/effects';
 import { ActionTypes, ApiEndpoints } from '../constants';
 import { AccountAction, AccountInterface } from '../interfaces/account.interface';
 
-const url = 'http://localhost:8080'
+const host = 'http://localhost:8080';
 
 function* getAccountDetailSaga(action: AccountAction) {
   const { accountId } = action.params;
+
+  const url = host + ApiEndpoints.GET_ACCOUNT_DETAIL.path();
+
   try {
     // yield will wait for Promise to resolve
-    const response = yield fetch(url + ApiEndpoints.GET_ACCOUNT_DETAIL, {
+    const response = yield fetch(url, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -24,8 +27,8 @@ function* getAccountDetailSaga(action: AccountAction) {
         loading: false,
         error: false,
         data,
-      }
-    }
+      },
+    };
     yield put(actionSuccess);
   } catch (error) {
     const actionError: AccountAction = {
@@ -33,8 +36,8 @@ function* getAccountDetailSaga(action: AccountAction) {
       state: {
         loading: false,
         error: true,
-      }
-    }
+      },
+    };
     yield put(actionError);
   }
 }

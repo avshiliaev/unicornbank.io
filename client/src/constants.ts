@@ -29,12 +29,50 @@ const ActionTypes = {
 };
 
 const ApiEndpoints = {
-  QUERY_ACCOUNTS: '/queries/getUserState',
-  GET_ACCOUNT_DETAIL: '/queries/getAccountDetail',
-  ADD_ACCOUNT: '',
-  LOG_IN: '/auth/logIn',
-  LOG_OUT: '/auth/logOut',
-  GET_USER: '/queries/getUser',
-}
+  // TODO: Difference between:
+  // QUERY_ACCOUNTS and GET_USER
+  GET_USER: {
+    service: '/profiles',
+    handler: '/query',
+    path: function() {
+      return this.service + this.handler
+    },
+  },
+  QUERY_ACCOUNTS: {
+    service: '/profiles',
+    handler: '/query',
+    path: function() {
+      return this.service + this.handler
+    },
+  },
+  GET_ACCOUNT_DETAIL: {
+    service: '/profiles',
+    handler: '/get',
+    path: function() {
+      return this.service + this.handler
+    },
+  },
+  ADD_ACCOUNT: {
+    service: '/accounts',
+    handler: '/create',
+    path: function() {
+      return this.service + this.handler
+    },
+  },
+  LOG_IN: {
+    service: '/auth',
+    handler: '/login',
+    path: function() {
+      return this.service + this.handler
+    },
+  },
+  LOG_OUT: {
+    service: '/auth',
+    handler: '/logout',
+    path: function() {
+      return this.service + this.handler
+    },
+  },
+};
 
 export { ActionTypes, ApiEndpoints };

@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option go_package = "proto/queries;go_micro_service_queries";
+option go_package = "proto/profiles;go_micro_service_profiles";
 
 // Events
 message AccountType {
@@ -16,7 +16,7 @@ message TransactionType {
 	float amount = 4;
 }
 // gRPC
-service Queries {
+service Profiles {
 	rpc GetUserState(UserStateRequest) returns (UserStateResponse) {}
 	rpc GetAccountDetail(AccountDetailRequest) returns (AccountResponseType) {}
 }
