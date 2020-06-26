@@ -9,9 +9,3 @@ message TransactionType {
 	string status = 3;
 	float amount = 4;
 }
-message TransactionProcessedType {
-	string account = 1;
-	string uuid = 2;
-	string status = 3;
-	float amount = 4;
-}

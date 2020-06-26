@@ -12,10 +12,5 @@ message TransactionType {
 
 // gRPC
 service Transactions {
-  rpc Create(TransactionRequestType) returns (TransactionType) {}
-}
-
-message TransactionRequestType {
-  string account = 1;
-  float amount = 2;
+  rpc Create(TransactionType) returns (TransactionType) {}
 }

@@ -5,34 +5,35 @@ import (
 	"github.com/micro/go-micro/v2"
 	"github.com/micro/go-micro/v2/client"
 	log "github.com/micro/go-micro/v2/logger"
-	"unicornbank.io/srv/billings/models"
+	"go.mongodb.org/mongo-driver/mongo"
+	"unicornbank.io/srv/billings/mongodb"
 	billings "unicornbank.io/srv/billings/proto/billings"
 )
 
-type TransactionPlaced struct {
-	Client                  client.Client
-	PubTransactionProcessed string
+type TransactionCreated struct {
+	Client                 client.Client
+	PubTransactionApproval string
+	Coll                   *mongo.Collection
 }
 
-func (e *TransactionPlaced) Handle(ctx context.Context, transactionPlaced *billings.TransactionType) error {
-	log.Info("Handler Received message: ", transactionPlaced.Uuid)
+func (e *TransactionCreated) Handle(ctx context.Context, transactionCreated *billings.TransactionType) error {
+	log.Info("Handler Received message: ", transactionCreated.Uuid)
 
 	status := "processed"
-	transactionProcessed := billings.TransactionProcessedType{
-		Uuid:    transactionPlaced.Uuid,
+	transactionProcessed := billings.TransactionType{
+		Uuid:    transactionCreated.Uuid,
+		Account: transactionCreated.Account,
 		Status:  status,
-		Account: transactionPlaced.Account,
-		Amount:  transactionPlaced.Amount,
 	}
-	models.Create(&transactionProcessed)
+	mongodb.CreateOne(&transactionProcessed, ctx, e.Coll)
 
-	topic := e.PubTransactionProcessed
+	topic := e.PubTransactionApproval
 	p := micro.NewEvent(topic, e.Client)
 	if err := p.Publish(context.TODO(), &transactionProcessed); err != nil {
 		return err
 	}
 
-	log.Info("Transaction: ", transactionProcessed.Uuid, " processed")
+	log.Info("Transaction: ", transactionProcessed.Uuid, " processed!")
 
 	return nil
 }

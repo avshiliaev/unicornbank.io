@@ -3,4 +3,4 @@
 .DS_Store
 *.db
 /srv/streamer/node_modules/
-srv/streamer/.env
+*.env
