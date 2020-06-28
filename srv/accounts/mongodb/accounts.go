@@ -24,7 +24,7 @@ import (
 type AccountsModel struct {
 	ID      primitive.ObjectID `bson:"_id,omitempty"`
 	Uuid    string             `bson:"uuid,omitempty"`
-	Title   string             `bson:"title,omitempty"`
+	Profile string             `bson:"profile,omitempty"`
 	Balance float32            `bson:"balance,omitempty"`
 	Status  string             `bson:"status,omitempty"`
 }
@@ -47,7 +47,7 @@ func CreateOne(acc *accounts.AccountType, ctx context.Context, coll *mongo.Colle
 
 	account := AccountsModel{
 		Uuid:    acc.Uuid,
-		Title:   acc.Title,
+		Profile: acc.Profile,
 		Status:  acc.Status,
 		Balance: acc.Balance,
 	}
@@ -63,12 +63,12 @@ func GetOne(uuid string, ctx context.Context, coll *mongo.Collection) *accounts.
 	filter := AccountsModel{Uuid: uuid}
 	var result AccountsModel
 	if err := coll.FindOne(ctx, filter).Decode(&result); err != nil {
-		log.Fatal(err)
+		log.Print(err)
 	}
 	acc := accounts.AccountType{
-		Uuid: result.Uuid,
-		Title: result.Title,
-		Status: result.Status,
+		Uuid:    result.Uuid,
+		Profile: result.Profile,
+		Status:  result.Status,
 		Balance: result.Balance,
 	}
 	return &acc
@@ -79,7 +79,7 @@ func UpdateReplaceOne(acc *accounts.AccountType, ctx context.Context, coll *mong
 	filter := AccountsModel{Uuid: acc.Uuid}
 	account := AccountsModel{
 		Uuid:    acc.Uuid,
-		Title:   acc.Title,
+		Profile: acc.Profile,
 		Status:  acc.Status,
 		Balance: acc.Balance,
 	}

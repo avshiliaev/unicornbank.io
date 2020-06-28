@@ -24,7 +24,7 @@ func (e *Accounts) Create(ctx context.Context, req *accounts.AccountType, rsp *a
 
 	account := accounts.AccountType{
 		Uuid:    uuid.New().String(),
-		Title:   req.Title,
+		Profile: req.Profile,
 		Status:  "pending",
 		Balance: float32(0.0),
 	}

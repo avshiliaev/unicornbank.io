@@ -3,46 +3,49 @@ package subscriber
 import (
 	"context"
 	log "github.com/micro/go-micro/v2/logger"
-	"unicornbank.io/srv/profiles/models"
+	"go.mongodb.org/mongo-driver/mongo"
+	"unicornbank.io/srv/profiles/mongodb"
 	profiles "unicornbank.io/srv/profiles/proto/profiles"
 )
 
-type AccountCreated struct{}
+// - Accounts -
+type AccountCreated struct {
+	Coll *mongo.Collection
+}
 
 func (e *AccountCreated) Handle(ctx context.Context, accountCreated *profiles.AccountType) error {
 	log.Info("Account: ", accountCreated.Uuid, ", status: ", accountCreated.Status)
-	models.CreateAccount(accountCreated)
+	mongodb.CreateAccount(accountCreated, ctx, e.Coll)
 	return nil
 }
 
-type AccountUpdated struct{}
+type AccountUpdated struct {
+	Coll *mongo.Collection
+}
 
-func (e *AccountUpdated) Handle(ctx context.Context, msg *profiles.AccountType) error {
-	log.Info("Account: ", msg.Uuid, ", status: ", msg.Status)
-	updatedAccount := models.GetAccount(msg.Uuid)
-	updatedAccount.Status = msg.Status
-	updatedAccount.Balance = msg.Balance
-	updatedAccount.Title = msg.Title
-	models.UpdateAccount(&updatedAccount)
+func (e *AccountUpdated) Handle(ctx context.Context, accountUpdated *profiles.AccountType) error {
+	log.Info("Account: ", accountUpdated.Uuid, ", status: ", accountUpdated.Status)
+	mongodb.UpdateAccount(accountUpdated, ctx, e.Coll)
 	return nil
 }
 
-type TransactionPlaced struct{}
+// - Transactions -
+type TransactionPlaced struct {
+	Coll *mongo.Collection
+}
 
 func (e *TransactionPlaced) Handle(ctx context.Context, transactionPlaced *profiles.TransactionType) error {
 	log.Info("Account: ", transactionPlaced.Uuid, ", status: ", transactionPlaced.Status)
-	models.CreateTransaction(transactionPlaced)
+	mongodb.CreateTransaction(transactionPlaced, ctx, e.Coll)
 	return nil
 }
 
-type TransactionUpdated struct{}
+type TransactionUpdated struct {
+	Coll *mongo.Collection
+}
 
-func (e *TransactionUpdated) Handle(ctx context.Context, msg *profiles.TransactionType) error {
-	log.Info("Transaction: ", msg.Uuid, ", status: ", msg.Status)
-	updatedTransaction := models.GetTransaction(msg.Uuid)
-	updatedTransaction.Account = msg.Account
-	updatedTransaction.Amount = msg.Amount
-	updatedTransaction.Status = msg.Status
-	models.UpdateTransaction(&updatedTransaction)
+func (e *TransactionUpdated) Handle(ctx context.Context, transactionUpdated *profiles.TransactionType) error {
+	log.Info("Transaction: ", transactionUpdated.Uuid, ", status: ", transactionUpdated.Status)
+	mongodb.UpdateTransaction(transactionUpdated, ctx, e.Coll)
 	return nil
 }

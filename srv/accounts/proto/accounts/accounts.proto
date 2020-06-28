@@ -5,7 +5,7 @@ option go_package = "proto/accounts;go_micro_service_accounts";
 // Events
 message AccountType {
   string uuid = 1;
-  string title = 2;
+  string profile = 2;
   string status = 3;
   float balance = 4;
 }

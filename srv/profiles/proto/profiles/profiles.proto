@@ -3,39 +3,21 @@ syntax = "proto3";
 option go_package = "proto/profiles;go_micro_service_profiles";
 
 // Events
-message AccountType {
-	string uuid = 1;
-	string title = 2;
-	string status = 3;
-	float balance = 4;
-}
 message TransactionType {
-	string account = 1;
-	string uuid = 2;
-	string status = 3;
-	float amount = 4;
+  string account = 1;
+  string uuid = 2;
+  string status = 3;
+  float amount = 4;
 }
-// gRPC
-service Profiles {
-	rpc GetUserState(UserStateRequest) returns (UserStateResponse) {}
-	rpc GetAccountDetail(AccountDetailRequest) returns (AccountResponseType) {}
+message AccountType {
+  string uuid = 1;
+  string profile = 2;
+  string status = 3;
+  float balance = 4;
+  repeated TransactionType transactions = 5;
 }
-message AccountResponseType {
-	string uuid = 1;
-	string title = 2;
-	string status = 3;
-	float balance = 4;
-	repeated TransactionType transactions = 5;
-}
-message UserStateRequest {
-	string userId = 1;
-}
-
-message UserStateResponse {
-	string userId = 1;
-	repeated AccountResponseType accounts = 2;
-}
-
-message AccountDetailRequest {
-	string uuid = 1;
+message ProfileType {
+  string uuid = 1;
+  string name = 2;
+  repeated AccountType accounts = 3;
 }

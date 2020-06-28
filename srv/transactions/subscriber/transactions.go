@@ -26,7 +26,7 @@ func (e *TransactionProcessed) Handle(ctx context.Context, msg *transactions.Tra
 
 	topic := e.PubTransactionUpdated
 	p := micro.NewEvent(topic, e.Client)
-	if err := p.Publish(context.TODO(), &transactionProcessed); err != nil {
+	if err := p.Publish(context.TODO(), transactionProcessed); err != nil {
 		return err
 	}
 

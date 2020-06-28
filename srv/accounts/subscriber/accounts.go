@@ -23,13 +23,11 @@ func (e *AccountApproval) Handle(ctx context.Context, msg *accounts.AccountType)
 	accountUpdated.Status = msg.Status
 
 	mongodb.UpdateReplaceOne(accountUpdated, ctx, e.Coll)
-
 	topic := e.PubAccountUpdated
 	p := micro.NewEvent(topic, e.Client)
-	if err := p.Publish(context.TODO(), &accountUpdated); err != nil {
+	if err := p.Publish(context.TODO(), accountUpdated); err != nil {
 		return err
 	}
-
 	log.Info("Account: ", accountUpdated.Uuid, " updated!")
 
 	return nil
@@ -53,7 +51,7 @@ func (e *TransactionPlaced) Handle(ctx context.Context, transactionPlaced *accou
 
 	accountUpdated := accounts.AccountType{
 		Uuid:    account.Uuid,
-		Title:   account.Title,
+		Profile: account.Profile,
 		Status:  account.Status,
 		Balance: account.Balance,
 	}

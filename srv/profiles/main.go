@@ -1,11 +1,10 @@
 package main
 
 import (
+	"github.com/joho/godotenv"
 	"github.com/micro/go-micro/v2"
 	log "github.com/micro/go-micro/v2/logger"
-	"unicornbank.io/srv/profiles/handler"
-	"unicornbank.io/srv/profiles/models"
-	profiles "unicornbank.io/srv/profiles/proto/profiles"
+	"unicornbank.io/srv/profiles/mongodb"
 	"unicornbank.io/srv/profiles/subscriber"
 )
 
@@ -30,26 +29,41 @@ func main() {
 	// Initialise service
 	service.Init()
 
-	// Initialise a database connection and migrate the schema
-	models.Migrate()
-
-	// Register Handler
-	h := new(handler.Profiles)
-	if err := profiles.RegisterProfilesHandler(service.Server(), h); err != nil {
-		log.Fatal(err)
+	// Load .env file
+	if err := godotenv.Load(); err != nil {
+		log.Fatal("Init", err)
 	}
 
-	// Register Struct as Subscriber
-	if err := micro.RegisterSubscriber(subAccountCreated, service.Server(), new(subscriber.AccountCreated)); err != nil {
+	// MongoDB connection
+	coll := mongodb.ProfilesCollection()
+
+	// Register Subscribers
+	if err := micro.RegisterSubscriber(
+		subAccountCreated,
+		service.Server(),
+		&subscriber.AccountCreated{Coll: coll},
+	); err != nil {
 		log.Fatal(err)
 	}
-	if err := micro.RegisterSubscriber(subAccountUpdated, service.Server(), new(subscriber.AccountUpdated)); err != nil {
+	if err := micro.RegisterSubscriber(
+		subAccountUpdated,
+		service.Server(),
+		&subscriber.AccountUpdated{Coll: coll},
+	); err != nil {
 		log.Fatal(err)
 	}
-	if err := micro.RegisterSubscriber(subTransactionPlaced, service.Server(), new(subscriber.TransactionPlaced)); err != nil {
+	if err := micro.RegisterSubscriber(
+		subTransactionPlaced,
+		service.Server(),
+		&subscriber.TransactionPlaced{Coll: coll},
+	); err != nil {
 		log.Fatal(err)
 	}
-	if err := micro.RegisterSubscriber(subTransactionUpdated, service.Server(), new(subscriber.TransactionUpdated)); err != nil {
+	if err := micro.RegisterSubscriber(
+		subTransactionUpdated,
+		service.Server(),
+		&subscriber.TransactionUpdated{Coll: coll},
+	); err != nil {
 		log.Fatal(err)
 	}
 
