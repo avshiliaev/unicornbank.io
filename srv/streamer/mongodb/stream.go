@@ -13,14 +13,23 @@ import (
 )
 
 // You will be using this Trainer type later in the program
-type Profile struct {
-	Username string
-	Accounts []string
+type TransactionsModel struct {
+	Account string
+	Uuid    string
+	Status  string
+	Amount  float32
+}
+type AccountsModel struct {
+	Uuid         string
+	Profile      string
+	Balance      float32
+	Status       string
+	Transactions []TransactionsModel
 }
 
 type StreamObject struct {
 	OperationType string
-	FullDocument  Profile
+	FullDocument  []AccountsModel
 }
 
 func Collection() *mongo.Collection {
@@ -42,19 +51,17 @@ func Collection() *mongo.Collection {
 // TODO: Error handling if user not found
 // TODO: Event upon deletion?
 // 		- Is never deleted but marked as archived / closed in Status!
-func findByUsername(username string, coll *mongo.Collection) Profile {
-	// create a value into which the result can be decoded
-	var result Profile
-	filter := bson.D{{
-		"username",
-		bson.D{{
-			"$in",
-			bson.A{username},
-		}},
-	}}
-	if err := coll.FindOne(context.TODO(), filter).Decode(&result); err != nil {
+func findByProfiles(profile string, coll *mongo.Collection, ctx context.Context) []AccountsModel {
+
+	var result []AccountsModel
+	filter, err := coll.Find(ctx, bson.M{"profile": profile})
+	if err != nil {
 		log.Fatal(err)
 	}
+	if err = filter.All(ctx, &result); err != nil {
+		log.Fatal(err)
+	}
+	log.Print(result)
 	return result
 }
 
@@ -64,9 +71,10 @@ func findByUsername(username string, coll *mongo.Collection) Profile {
 func ChangesStream(mt int, message string, ws *websocket.Conn) error {
 
 	coll := Collection()
+	ctx := context.Background()
 
 	// Send initial state of the Profile
-	profile := findByUsername(message, coll)
+	profile := findByProfiles(message, coll, ctx)
 	initialState := StreamObject{
 		OperationType: "init",
 		FullDocument:  profile,
@@ -80,7 +88,7 @@ func ChangesStream(mt int, message string, ws *websocket.Conn) error {
 	pipeline := mongo.Pipeline{bson.D{
 		{"$match", bson.D{
 			{"$or", bson.A{
-				bson.D{{"fullDocument.username", message}},
+				bson.D{{"fullDocument.profile", message}},
 			}},
 		}},
 	}}
@@ -98,7 +106,7 @@ func ChangesStream(mt int, message string, ws *websocket.Conn) error {
 
 		var data bson.M
 		if err := stream.Decode(&data); err != nil {
-			panic(err)
+			log.Print(err)
 		}
 		bytes, _ := json.Marshal(data)
 

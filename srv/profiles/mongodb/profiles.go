@@ -21,7 +21,7 @@ type TransactionsModel struct {
 type AccountsModel struct {
 	ID           primitive.ObjectID  `bson:"_id,omitempty"`
 	Uuid         string              `bson:"uuid,omitempty"`
-	Profile      string              `bson:"title,omitempty"`
+	Profile      string              `bson:"profile,omitempty"`
 	Balance      float32             `bson:"balance,omitempty"`
 	Status       string              `bson:"status,omitempty"`
 	Transactions []TransactionsModel `bson:"transactions,omitempty"`

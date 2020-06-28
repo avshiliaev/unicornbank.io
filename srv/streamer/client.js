@@ -2,7 +2,7 @@ const WebSocket = require('ws')
 
 const ws = new WebSocket('ws://localhost:8082/stream/stream')
 
-const request = "username"
+const request = "wonder"
 
 ws.on('open', function open () {
   console.log('connected')
