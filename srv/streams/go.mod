@@ -1,4 +1,4 @@
-module unicornbank.io/srv/stream
+module unicornbank.io/srv/streams
 
 go 1.13
 

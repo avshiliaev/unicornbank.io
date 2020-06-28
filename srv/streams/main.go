@@ -4,13 +4,13 @@ import (
 	"github.com/joho/godotenv"
 	"github.com/micro/go-micro/v2/web"
 	"log"
-	"unicornbank.io/srv/stream/handler"
+	"unicornbank.io/srv/streams/handler"
 )
 
 func main() {
 	// New web service
 	service := web.NewService(
-		web.Name("go.micro.web.stream"),
+		web.Name("go.micro.web.streams"),
 	)
 
 	if err := service.Init(); err != nil {
@@ -22,7 +22,7 @@ func main() {
 	}
 
 	// Handle websocket connection
-	service.HandleFunc("/stream", handler.WebSocketHandler)
+	service.HandleFunc("/profiles", handler.WebSocketHandler)
 
 	if err := service.Run(); err != nil {
 		log.Fatal("Run: ", err)

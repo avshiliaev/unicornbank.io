@@ -4,7 +4,7 @@ import (
 	"github.com/gorilla/websocket"
 	"log"
 	"net/http"
-	"unicornbank.io/srv/stream/mongodb"
+	"unicornbank.io/srv/streams/mongodb"
 )
 
 var upgrader = websocket.Upgrader{

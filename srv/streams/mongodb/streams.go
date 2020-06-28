@@ -26,7 +26,6 @@ type AccountsModel struct {
 	Status       string              `json:"status"`
 	Transactions []TransactionsModel `json:"transactions"`
 }
-
 type StreamObject struct {
 	OperationType string          `json:"operationType"`
 	FullDocument  []AccountsModel `json:"fullDocument"`
