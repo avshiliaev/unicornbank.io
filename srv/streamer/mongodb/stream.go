@@ -14,22 +14,22 @@ import (
 
 // You will be using this Trainer type later in the program
 type TransactionsModel struct {
-	Account string
-	Uuid    string
-	Status  string
-	Amount  float32
+	Account string  `json:"account"`
+	Uuid    string  `json:"uuid"`
+	Status  string  `json:"status"`
+	Amount  float32 `json:"amount"`
 }
 type AccountsModel struct {
-	Uuid         string
-	Profile      string
-	Balance      float32
-	Status       string
-	Transactions []TransactionsModel
+	Uuid         string              `json:"uuid"`
+	Profile      string              `json:"profile"`
+	Balance      float32             `json:"balance"`
+	Status       string              `json:"status"`
+	Transactions []TransactionsModel `json:"transactions"`
 }
 
 type StreamObject struct {
-	OperationType string
-	FullDocument  []AccountsModel
+	OperationType string          `json:"operationType"`
+	FullDocument  []AccountsModel `json:"fullDocument"`
 }
 
 func Collection() *mongo.Collection {
@@ -61,7 +61,6 @@ func findByProfiles(profile string, coll *mongo.Collection, ctx context.Context)
 	if err = filter.All(ctx, &result); err != nil {
 		log.Fatal(err)
 	}
-	log.Print(result)
 	return result
 }
 
@@ -109,7 +108,6 @@ func ChangesStream(mt int, message string, ws *websocket.Conn) error {
 			log.Print(err)
 		}
 		bytes, _ := json.Marshal(data)
-
 		if err := ws.WriteMessage(mt, bytes); err != nil {
 			break
 		}

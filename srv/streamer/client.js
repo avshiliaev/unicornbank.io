@@ -14,5 +14,7 @@ ws.on('close', function close () {
 })
 
 ws.on('message', function incoming (data) {
-  console.log(`Received: ${data}`)
+  let message = JSON.parse(data)
+  let total = message.operationType
+  console.log(total)
 })
