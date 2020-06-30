@@ -8,8 +8,8 @@ import { AccountInterface } from '../../../interfaces/account.interface';
 const DashboardNewRoute = ({ windowSize, addAccountAsHost, auth, ...rest }) => {
 
   const formOnFinish = async (value) => {
-    const { title } = value;
-    const addAccountInput: AccountInterface = { title, status: '', balance: 0, transactions: [] };
+    const { profile } = value;
+    const addAccountInput: AccountInterface = { profile, status: '', balance: 0, transactions: [] };
     await addAccountAsHost(addAccountInput);
   };
 

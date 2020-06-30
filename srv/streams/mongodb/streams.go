@@ -2,7 +2,6 @@ package mongodb
 
 import (
 	"context"
-	"encoding/json"
 	"github.com/gorilla/websocket"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -20,11 +19,12 @@ type TransactionsModel struct {
 	Amount  float32 `json:"amount"`
 }
 type AccountsModel struct {
-	Uuid         string              `json:"uuid"`
-	Profile      string              `json:"profile"`
-	Balance      float32             `json:"balance"`
-	Status       string              `json:"status"`
-	Transactions []TransactionsModel `json:"transactions"`
+	Uuid              string              `json:"uuid"`
+	Profile           string              `json:"profile"`
+	Balance           float32             `json:"balance"`
+	Status            string              `json:"status"`
+	Transactions      []TransactionsModel `json:"transactions"`
+	TransactionsCount int32               `json:"transactionsCount"`
 }
 type StreamObject struct {
 	OperationType string          `json:"operationType"`
@@ -47,54 +47,76 @@ func Collection() *mongo.Collection {
 	return collection
 }
 
-// TODO: Error handling if user not found
-// TODO: Event upon deletion?
-// 		- Is never deleted but marked as archived / closed in Status!
-func findByProfiles(profile string, coll *mongo.Collection, ctx context.Context) []AccountsModel {
+func InitState(profile string, coll *mongo.Collection, ctx context.Context) StreamObject {
 
-	var result []AccountsModel
-	filter, err := coll.Find(ctx, bson.M{"profile": profile})
+	var accounts []AccountsModel
+	match := bson.D{{"$match", bson.D{{"profile", profile}}}}
+	group := bson.D{{
+		"$project",
+		bson.D{
+			{"uuid", 1},
+			{"profile", 1},
+			{"balance", 1},
+			{"status", 1},
+			{"transactions", 1},
+			{"transactionsCount", bson.D{
+				{"$size", "$transactions"},
+			}},
+		},
+	}}
+	pipeline := mongo.Pipeline{match, group}
+	filterCursor, err := coll.Aggregate(ctx, pipeline)
 	if err != nil {
 		log.Fatal(err)
 	}
-	if err = filter.All(ctx, &result); err != nil {
+	if err = filterCursor.All(ctx, &accounts); err != nil {
 		log.Fatal(err)
 	}
-	return result
+	state := StreamObject{
+		OperationType: "init",
+		FullDocument:  accounts,
+	}
+	return state
 }
 
-// https://developer.mongodb.com/quickstart/golang-change-streams
-// https://docs.mongodb.com/manual/reference/method/db.collection.watch/
-// https://stackoverflow.com/questions/49151104/watch-for-mongodb-change-streams
-func ChangesStream(mt int, message string, ws *websocket.Conn) error {
+func ChangesStream(profile string, detail bool, ws *websocket.Conn) error {
 
 	coll := Collection()
 	ctx := context.Background()
 
-	// Send initial state of the Profile
-	profile := findByProfiles(message, coll, ctx)
-	initialState := StreamObject{
-		OperationType: "init",
-		FullDocument:  profile,
-	}
-	bytes, _ := json.Marshal(initialState)
-	if err := ws.WriteMessage(mt, bytes); err != nil {
+	// Send initial state of the profile's accounts
+	initialState := InitState(profile, coll, ctx)
+	if err := ws.WriteJSON(initialState); err != nil {
 		log.Fatal("Error sending WS: ", err)
 	}
 
-	// https://docs.mongodb.com/manual/reference/operator/aggregation/project/
-	pipeline := mongo.Pipeline{bson.D{
+	// Subscribe to changes stream
+	match := bson.D{
 		{"$match", bson.D{
 			{"$or", bson.A{
-				bson.D{{"fullDocument.profile", message}},
+				bson.D{{"fullDocument.profile", profile}},
 			}},
 		}},
+	}
+	group := bson.D{{
+		"$project",
+		bson.D{
+			{"operationType", 1},
+			{"fullDocument.uuid", 1},
+			{"fullDocument.profile", 1},
+			{"fullDocument.balance", 1},
+			{"fullDocument.status", 1},
+			{"fullDocument.transactions", 1},
+			{"fullDocument.transactionsCount", bson.D{
+				{"$size", "$fullDocument.transactions"},
+			}},
+		},
 	}}
 	fullDoc := options.FullDocument("updateLookup")
 	opts := options.ChangeStreamOptions{
 		FullDocument: &fullDoc,
 	}
-	stream, errChangeStream := coll.Watch(context.TODO(), pipeline, &opts)
+	stream, errChangeStream := coll.Watch(context.TODO(), mongo.Pipeline{match, group}, &opts)
 	if errChangeStream != nil {
 		panic(errChangeStream)
 	}
@@ -106,8 +128,7 @@ func ChangesStream(mt int, message string, ws *websocket.Conn) error {
 		if err := stream.Decode(&data); err != nil {
 			log.Print(err)
 		}
-		bytes, _ := json.Marshal(data)
-		if err := ws.WriteMessage(mt, bytes); err != nil {
+		if err := ws.WriteJSON(data); err != nil {
 			break
 		}
 	}

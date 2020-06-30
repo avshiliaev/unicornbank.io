@@ -7,26 +7,30 @@ import (
 	"unicornbank.io/srv/streams/mongodb"
 )
 
-var upgrader = websocket.Upgrader{
-	CheckOrigin: func(r *http.Request) bool { return true },
+type Msg struct {
+	Profile string `json:"profile"`
+	Detail  bool   `json:"detail"`
 }
 
 func WebSocketHandler(w http.ResponseWriter, r *http.Request) {
-	c, err := upgrader.Upgrade(w, r, nil)
+
+	var upgrader = websocket.Upgrader{
+		CheckOrigin: func(r *http.Request) bool { return true },
+	}
+	client, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		log.Print("upgrade:", err)
 		return
 	}
-	defer c.Close()
+	defer client.Close()
 	for {
-		mt, message, err := c.ReadMessage()
+		m := Msg{}
+		err := client.ReadJSON(&m)
 		if err != nil {
 			log.Println("read:", err)
 			break
 		}
-		log.Printf("recv: %s", message)
-
-		if err := mongodb.ChangesStream(mt, string(message[:]), c); err != nil {
+		if err := mongodb.ChangesStream(m.Profile, m.Detail, client); err != nil {
 			log.Fatal("Error MongoDB!:", err)
 		}
 	}

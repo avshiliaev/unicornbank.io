@@ -27,7 +27,7 @@ const AccountsList = ({ accounts, windowSize }: Props) => {
         dataSource={accounts}
         renderItem={account => {
           const link = `/account/${account.uuid}/home`;
-          const ava = account.title.charAt(0);
+          const ava = account.balance.toString();
           const openTransactions = () => console.log('transactions');
           const numberTransactions = `transactions: ${account.transactions?.length}`;
           return (
@@ -37,7 +37,7 @@ const AccountsList = ({ accounts, windowSize }: Props) => {
             ]}>
               <List.Item.Meta
                 avatar={<AccountAvatar text={ava} badgeNumber={account.transactions?.length}/>}
-                title={<Link to={link}>{account.title}</Link>}
+                title={<Link to={link}>{account.uuid}</Link>}
                 description={account.status}
               />
             </List.Item>
