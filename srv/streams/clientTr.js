@@ -11,5 +11,5 @@ ws.on('close', function close () {
 ws.on('message', function incoming (data) {
   let message = JSON.parse(data)
   let doc = message.payload
-  console.log(doc)
+  console.log(doc.transactions.map(tr => tr.status))
 })

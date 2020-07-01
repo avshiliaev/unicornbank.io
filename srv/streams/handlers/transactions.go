@@ -17,7 +17,7 @@ type TransactionType struct {
 }
 type TransactionsInitAction struct {
 	Type    string   `json:"type"`
-	Payload []bson.M `json:"payload"`
+	Payload bson.M `json:"payload"`
 }
 type TransactionsUpdateAction struct {
 	Type    string `json:"type"`
@@ -54,7 +54,7 @@ func TransactionsHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	action := TransactionsInitAction{
 		Type:    "init",
-		Payload: state,
+		Payload: state[0],
 	}
 	ws.WriteJSON(action)
 
