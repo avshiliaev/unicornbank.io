@@ -24,14 +24,14 @@ type AccountsUpdateAction struct {
 	Payload AccountType `json:"payload"`
 }
 
-var upgrader = websocket.Upgrader{
-	CheckOrigin: func(r *http.Request) bool { return true },
-}
-
 func AccountsHandler(w http.ResponseWriter, r *http.Request) {
 
 	// TODO: sanitize!
 	profile := r.URL.Query().Get("profile")
+
+	var upgrader = websocket.Upgrader{
+		CheckOrigin: func(r *http.Request) bool { return true },
+	}
 
 	// Upgrade connection
 	ws, err := upgrader.Upgrade(w, r, nil)
@@ -58,12 +58,14 @@ func AccountsHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	ws.WriteJSON(action)
 
+	// Initialize stream cursor
 	stream, streamError := mongodb.StreamChanges(pipeline, coll)
 	if streamError != nil {
 		log.Fatal(streamError)
 	}
 	defer stream.Close(context.TODO())
 
+	// Iterate over the stream updates
 	for stream.Next(context.TODO()) {
 
 		var data AccountType
@@ -79,9 +81,4 @@ func AccountsHandler(w http.ResponseWriter, r *http.Request) {
 			break
 		}
 	}
-
-}
-
-func TransactionsHandler(w http.ResponseWriter, r *http.Request) {
-
 }
