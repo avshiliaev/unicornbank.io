@@ -50,10 +50,10 @@ func (e *TransactionPlaced) Handle(ctx context.Context, transactionPlaced *accou
 	mongodb.UpdateReplaceOne(account, ctx, e.Coll)
 
 	accountUpdated := accounts.AccountType{
-		Uuid:    account.Uuid,
+		Balance: account.Balance,
 		Profile: account.Profile,
 		Status:  account.Status,
-		Balance: account.Balance,
+		Uuid:    account.Uuid,
 	}
 
 	topic := e.PubAccountUpdated

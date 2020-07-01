@@ -21,8 +21,8 @@ func (e *AccountCreated) Handle(ctx context.Context, accountCreated *approvals.A
 
 	status := "approved"
 	accountApproved := approvals.AccountType{
-		Uuid:   accountCreated.Uuid,
 		Status: status,
+		Uuid:   accountCreated.Uuid,
 	}
 	mongodb.CreateOne(&accountApproved, ctx, e.Coll)
 

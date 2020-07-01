@@ -23,10 +23,10 @@ import (
 
 type AccountsModel struct {
 	ID      primitive.ObjectID `bson:"_id,omitempty"`
-	Uuid    string             `bson:"uuid,omitempty"`
-	Profile string             `bson:"profile,omitempty"`
 	Balance float32            `bson:"balance,omitempty"`
+	Profile string             `bson:"profile,omitempty"`
 	Status  string             `bson:"status,omitempty"`
+	Uuid    string             `bson:"uuid,omitempty"`
 }
 
 func AccountsCollection() *mongo.Collection {
@@ -46,10 +46,10 @@ func AccountsCollection() *mongo.Collection {
 func CreateOne(acc *accounts.AccountType, ctx context.Context, coll *mongo.Collection) *mongo.InsertOneResult {
 
 	account := AccountsModel{
-		Uuid:    acc.Uuid,
+		Balance: acc.Balance,
 		Profile: acc.Profile,
 		Status:  acc.Status,
-		Balance: acc.Balance,
+		Uuid:    acc.Uuid,
 	}
 	result, err := coll.InsertOne(ctx, &account)
 	if err != nil {
@@ -78,10 +78,10 @@ func UpdateReplaceOne(acc *accounts.AccountType, ctx context.Context, coll *mong
 
 	filter := AccountsModel{Uuid: acc.Uuid}
 	account := AccountsModel{
-		Uuid:    acc.Uuid,
+		Balance: acc.Balance,
 		Profile: acc.Profile,
 		Status:  acc.Status,
-		Balance: acc.Balance,
+		Uuid:    acc.Uuid,
 	}
 	result, err := coll.UpdateOne(
 		ctx,

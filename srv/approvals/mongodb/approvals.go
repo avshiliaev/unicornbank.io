@@ -33,8 +33,8 @@ func AccountsCollection() *mongo.Collection {
 func CreateOne(acc *accounts.AccountType, ctx context.Context, coll *mongo.Collection) *mongo.InsertOneResult {
 
 	account := AccountsModel{
-		Uuid:    acc.Uuid,
 		Status:  acc.Status,
+		Uuid:    acc.Uuid,
 	}
 	result, err := coll.InsertOne(ctx, &account)
 	if err != nil {

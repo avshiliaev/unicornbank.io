@@ -23,10 +23,10 @@ func (e *Accounts) Create(ctx context.Context, req *accounts.AccountType, rsp *a
 	log.Info("Received Accounts.Create request")
 
 	account := accounts.AccountType{
-		Uuid:    uuid.New().String(),
+		Balance: float32(0.0),
 		Profile: req.Profile,
 		Status:  "pending",
-		Balance: float32(0.0),
+		Uuid:    uuid.New().String(),
 	}
 
 	mongodb.CreateOne(&account, ctx, e.Coll)

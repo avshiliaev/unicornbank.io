@@ -7,6 +7,7 @@ import (
 	"github.com/micro/go-micro/v2/client"
 	log "github.com/micro/go-micro/v2/logger"
 	"go.mongodb.org/mongo-driver/mongo"
+	"time"
 	"unicornbank.io/srv/transactions/mongodb"
 	transactions "unicornbank.io/srv/transactions/proto/transactions"
 )
@@ -24,10 +25,12 @@ func (e *Transactions) Create(
 	log.Info("Received Transactions.Create request")
 
 	transaction := transactions.TransactionType{
-		Uuid:    uuid.New().String(),
-		Status:  "pending",
-		Account: req.Account,
-		Amount:  req.Amount,
+		Account:   req.Account,
+		Amount:    req.Amount,
+		Info:      req.Info,
+		Status:    "pending",
+		Timestamp: time.Now().Unix(),
+		Uuid:      uuid.New().String(),
 	}
 	mongodb.CreateOne(&transaction, ctx, e.Coll)
 

@@ -21,9 +21,9 @@ func (e *TransactionCreated) Handle(ctx context.Context, transactionCreated *bil
 
 	status := "processed"
 	transactionProcessed := billings.TransactionType{
-		Uuid:    transactionCreated.Uuid,
 		Account: transactionCreated.Account,
 		Status:  status,
+		Uuid:    transactionCreated.Uuid,
 	}
 	mongodb.CreateOne(&transactionProcessed, ctx, e.Coll)
 

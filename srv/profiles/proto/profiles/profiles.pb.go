@@ -26,93 +26,21 @@ const (
 const _ = proto.ProtoPackageIsVersion4
 
 // Events
-type TransactionType struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Account string  `protobuf:"bytes,1,opt,name=account,proto3" json:"account,omitempty"`
-	Uuid    string  `protobuf:"bytes,2,opt,name=uuid,proto3" json:"uuid,omitempty"`
-	Status  string  `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"`
-	Amount  float32 `protobuf:"fixed32,4,opt,name=amount,proto3" json:"amount,omitempty"`
-}
-
-func (x *TransactionType) Reset() {
-	*x = TransactionType{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_profiles_profiles_proto_msgTypes[0]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *TransactionType) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*TransactionType) ProtoMessage() {}
-
-func (x *TransactionType) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_profiles_profiles_proto_msgTypes[0]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use TransactionType.ProtoReflect.Descriptor instead.
-func (*TransactionType) Descriptor() ([]byte, []int) {
-	return file_proto_profiles_profiles_proto_rawDescGZIP(), []int{0}
-}
-
-func (x *TransactionType) GetAccount() string {
-	if x != nil {
-		return x.Account
-	}
-	return ""
-}
-
-func (x *TransactionType) GetUuid() string {
-	if x != nil {
-		return x.Uuid
-	}
-	return ""
-}
-
-func (x *TransactionType) GetStatus() string {
-	if x != nil {
-		return x.Status
-	}
-	return ""
-}
-
-func (x *TransactionType) GetAmount() float32 {
-	if x != nil {
-		return x.Amount
-	}
-	return 0
-}
-
 type AccountType struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Uuid         string             `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
-	Profile      string             `protobuf:"bytes,2,opt,name=profile,proto3" json:"profile,omitempty"`
-	Status       string             `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"`
-	Balance      float32            `protobuf:"fixed32,4,opt,name=balance,proto3" json:"balance,omitempty"`
-	Transactions []*TransactionType `protobuf:"bytes,5,rep,name=transactions,proto3" json:"transactions,omitempty"`
+	Balance float32 `protobuf:"fixed32,1,opt,name=balance,proto3" json:"balance,omitempty"`
+	Profile string  `protobuf:"bytes,2,opt,name=profile,proto3" json:"profile,omitempty"`
+	Status  string  `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"`
+	Uuid    string  `protobuf:"bytes,4,opt,name=uuid,proto3" json:"uuid,omitempty"`
 }
 
 func (x *AccountType) Reset() {
 	*x = AccountType{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_profiles_profiles_proto_msgTypes[1]
+		mi := &file_proto_profiles_profiles_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -125,7 +53,7 @@ func (x *AccountType) String() string {
 func (*AccountType) ProtoMessage() {}
 
 func (x *AccountType) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_profiles_profiles_proto_msgTypes[1]
+	mi := &file_proto_profiles_profiles_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -138,14 +66,14 @@ func (x *AccountType) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AccountType.ProtoReflect.Descriptor instead.
 func (*AccountType) Descriptor() ([]byte, []int) {
-	return file_proto_profiles_profiles_proto_rawDescGZIP(), []int{1}
+	return file_proto_profiles_profiles_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *AccountType) GetUuid() string {
+func (x *AccountType) GetBalance() float32 {
 	if x != nil {
-		return x.Uuid
+		return x.Balance
 	}
-	return ""
+	return 0
 }
 
 func (x *AccountType) GetProfile() string {
@@ -162,47 +90,43 @@ func (x *AccountType) GetStatus() string {
 	return ""
 }
 
-func (x *AccountType) GetBalance() float32 {
+func (x *AccountType) GetUuid() string {
 	if x != nil {
-		return x.Balance
+		return x.Uuid
 	}
-	return 0
+	return ""
 }
 
-func (x *AccountType) GetTransactions() []*TransactionType {
-	if x != nil {
-		return x.Transactions
-	}
-	return nil
-}
-
-type ProfileType struct {
+type TransactionType struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Uuid     string         `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
-	Name     string         `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Accounts []*AccountType `protobuf:"bytes,3,rep,name=accounts,proto3" json:"accounts,omitempty"`
+	Account   string  `protobuf:"bytes,1,opt,name=account,proto3" json:"account,omitempty"`
+	Amount    float32 `protobuf:"fixed32,2,opt,name=amount,proto3" json:"amount,omitempty"`
+	Info      string  `protobuf:"bytes,3,opt,name=info,proto3" json:"info,omitempty"`
+	Status    string  `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
+	Timestamp int64   `protobuf:"varint,5,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
+	Uuid      string  `protobuf:"bytes,6,opt,name=uuid,proto3" json:"uuid,omitempty"`
 }
 
-func (x *ProfileType) Reset() {
-	*x = ProfileType{}
+func (x *TransactionType) Reset() {
+	*x = TransactionType{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_profiles_profiles_proto_msgTypes[2]
+		mi := &file_proto_profiles_profiles_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
 }
 
-func (x *ProfileType) String() string {
+func (x *TransactionType) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ProfileType) ProtoMessage() {}
+func (*TransactionType) ProtoMessage() {}
 
-func (x *ProfileType) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_profiles_profiles_proto_msgTypes[2]
+func (x *TransactionType) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_profiles_profiles_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -213,30 +137,51 @@ func (x *ProfileType) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ProfileType.ProtoReflect.Descriptor instead.
-func (*ProfileType) Descriptor() ([]byte, []int) {
-	return file_proto_profiles_profiles_proto_rawDescGZIP(), []int{2}
+// Deprecated: Use TransactionType.ProtoReflect.Descriptor instead.
+func (*TransactionType) Descriptor() ([]byte, []int) {
+	return file_proto_profiles_profiles_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *ProfileType) GetUuid() string {
+func (x *TransactionType) GetAccount() string {
+	if x != nil {
+		return x.Account
+	}
+	return ""
+}
+
+func (x *TransactionType) GetAmount() float32 {
+	if x != nil {
+		return x.Amount
+	}
+	return 0
+}
+
+func (x *TransactionType) GetInfo() string {
+	if x != nil {
+		return x.Info
+	}
+	return ""
+}
+
+func (x *TransactionType) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *TransactionType) GetTimestamp() int64 {
+	if x != nil {
+		return x.Timestamp
+	}
+	return 0
+}
+
+func (x *TransactionType) GetUuid() string {
 	if x != nil {
 		return x.Uuid
 	}
 	return ""
-}
-
-func (x *ProfileType) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
-func (x *ProfileType) GetAccounts() []*AccountType {
-	if x != nil {
-		return x.Accounts
-	}
-	return nil
 }
 
 var File_proto_profiles_profiles_proto protoreflect.FileDescriptor
@@ -244,33 +189,27 @@ var File_proto_profiles_profiles_proto protoreflect.FileDescriptor
 var file_proto_profiles_profiles_proto_rawDesc = []byte{
 	0x0a, 0x1d, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x70, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x73,
 	0x2f, 0x70, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22,
-	0x6f, 0x0a, 0x0f, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x54, 0x79,
+	0x6d, 0x0a, 0x0b, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x54, 0x79, 0x70, 0x65, 0x12, 0x18,
+	0x0a, 0x07, 0x62, 0x61, 0x6c, 0x61, 0x6e, 0x63, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x02, 0x52,
+	0x07, 0x62, 0x61, 0x6c, 0x61, 0x6e, 0x63, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x70, 0x72, 0x6f, 0x66,
+	0x69, 0x6c, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x70, 0x72, 0x6f, 0x66, 0x69,
+	0x6c, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x03, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x12, 0x0a, 0x04, 0x75, 0x75,
+	0x69, 0x64, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x75, 0x75, 0x69, 0x64, 0x22, 0xa1,
+	0x01, 0x0a, 0x0f, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x54, 0x79,
 	0x70, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x01, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x07, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x12, 0x0a, 0x04,
-	0x75, 0x75, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x75, 0x75, 0x69, 0x64,
-	0x12, 0x16, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x16, 0x0a, 0x06, 0x61, 0x6d, 0x6f, 0x75,
-	0x6e, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x02, 0x52, 0x06, 0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74,
-	0x22, 0xa3, 0x01, 0x0a, 0x0b, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x54, 0x79, 0x70, 0x65,
-	0x12, 0x12, 0x0a, 0x04, 0x75, 0x75, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04,
-	0x75, 0x75, 0x69, 0x64, 0x12, 0x18, 0x0a, 0x07, 0x70, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x18,
-	0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x70, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x12, 0x16,
-	0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06,
-	0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x18, 0x0a, 0x07, 0x62, 0x61, 0x6c, 0x61, 0x6e, 0x63,
-	0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x02, 0x52, 0x07, 0x62, 0x61, 0x6c, 0x61, 0x6e, 0x63, 0x65,
-	0x12, 0x34, 0x0a, 0x0c, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73,
-	0x18, 0x05, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x10, 0x2e, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63,
-	0x74, 0x69, 0x6f, 0x6e, 0x54, 0x79, 0x70, 0x65, 0x52, 0x0c, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61,
-	0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x22, 0x5f, 0x0a, 0x0b, 0x50, 0x72, 0x6f, 0x66, 0x69, 0x6c,
-	0x65, 0x54, 0x79, 0x70, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x75, 0x75, 0x69, 0x64, 0x18, 0x01, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x04, 0x75, 0x75, 0x69, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d,
-	0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x28, 0x0a,
-	0x08, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x73, 0x18, 0x03, 0x20, 0x03, 0x28, 0x0b, 0x32,
-	0x0c, 0x2e, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x54, 0x79, 0x70, 0x65, 0x52, 0x08, 0x61,
-	0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x73, 0x42, 0x2a, 0x5a, 0x28, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x2f, 0x70, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x73, 0x3b, 0x67, 0x6f, 0x5f, 0x6d, 0x69, 0x63,
-	0x72, 0x6f, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x5f, 0x70, 0x72, 0x6f, 0x66, 0x69,
-	0x6c, 0x65, 0x73, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x01, 0x28, 0x09, 0x52, 0x07, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x16, 0x0a, 0x06,
+	0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x02, 0x52, 0x06, 0x61, 0x6d,
+	0x6f, 0x75, 0x6e, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x69, 0x6e, 0x66, 0x6f, 0x18, 0x03, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x04, 0x69, 0x6e, 0x66, 0x6f, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74,
+	0x75, 0x73, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73,
+	0x12, 0x1c, 0x0a, 0x09, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x18, 0x05, 0x20,
+	0x01, 0x28, 0x03, 0x52, 0x09, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x12, 0x12,
+	0x0a, 0x04, 0x75, 0x75, 0x69, 0x64, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x75, 0x75,
+	0x69, 0x64, 0x42, 0x2a, 0x5a, 0x28, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x70, 0x72, 0x6f, 0x66,
+	0x69, 0x6c, 0x65, 0x73, 0x3b, 0x67, 0x6f, 0x5f, 0x6d, 0x69, 0x63, 0x72, 0x6f, 0x5f, 0x73, 0x65,
+	0x72, 0x76, 0x69, 0x63, 0x65, 0x5f, 0x70, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x73, 0x62, 0x06,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -285,20 +224,17 @@ func file_proto_profiles_profiles_proto_rawDescGZIP() []byte {
 	return file_proto_profiles_profiles_proto_rawDescData
 }
 
-var file_proto_profiles_profiles_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_proto_profiles_profiles_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_proto_profiles_profiles_proto_goTypes = []interface{}{
-	(*TransactionType)(nil), // 0: TransactionType
-	(*AccountType)(nil),     // 1: AccountType
-	(*ProfileType)(nil),     // 2: ProfileType
+	(*AccountType)(nil),     // 0: AccountType
+	(*TransactionType)(nil), // 1: TransactionType
 }
 var file_proto_profiles_profiles_proto_depIdxs = []int32{
-	0, // 0: AccountType.transactions:type_name -> TransactionType
-	1, // 1: ProfileType.accounts:type_name -> AccountType
-	2, // [2:2] is the sub-list for method output_type
-	2, // [2:2] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	0, // [0:0] is the sub-list for method output_type
+	0, // [0:0] is the sub-list for method input_type
+	0, // [0:0] is the sub-list for extension type_name
+	0, // [0:0] is the sub-list for extension extendee
+	0, // [0:0] is the sub-list for field type_name
 }
 
 func init() { file_proto_profiles_profiles_proto_init() }
@@ -308,18 +244,6 @@ func file_proto_profiles_profiles_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_proto_profiles_profiles_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*TransactionType); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_proto_profiles_profiles_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*AccountType); i {
 			case 0:
 				return &v.state
@@ -331,8 +255,8 @@ func file_proto_profiles_profiles_proto_init() {
 				return nil
 			}
 		}
-		file_proto_profiles_profiles_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ProfileType); i {
+		file_proto_profiles_profiles_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*TransactionType); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -350,7 +274,7 @@ func file_proto_profiles_profiles_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_proto_profiles_profiles_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

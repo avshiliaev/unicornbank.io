@@ -43,7 +43,11 @@ func StreamChanges(pipeline []bson.M, coll *mongo.Collection) (*mongo.ChangeStre
 		FullDocument: &fullDoc,
 	}
 	pre := []bson.M{
-		{"$match": bson.M{"operationType": "update"}}, // TODO $or
+		{"$match": bson.M{"$or": bson.A{
+			bson.M{"operationType": "insert"},
+			bson.M{"operationType": "update"},
+			bson.M{"operationType": "replace"},
+		}}},
 		{"$replaceRoot": bson.M{"newRoot": bson.M{"$mergeObjects": bson.A{"$fullDocument", "$$ROOT"}}}},
 	}
 	stages := [][]bson.M{

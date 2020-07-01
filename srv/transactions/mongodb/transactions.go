@@ -12,11 +12,13 @@ import (
 )
 
 type TransactionsModel struct {
-	ID      primitive.ObjectID `bson:"_id,omitempty"`
-	Account string             `bson:"account,omitempty"`
-	Uuid    string             `bson:"uuid,omitempty"`
-	Status  string             `bson:"status,omitempty"`
-	Amount  float32            `bson:"amount,omitempty"`
+	ID        primitive.ObjectID `bson:"_id,omitempty"`
+	Account   string             `bson:"account,omitempty"`
+	Amount    float32            `bson:"amount,omitempty"`
+	Info      string             `bson:"info,omitempty"`
+	Status    string             `bson:"status,omitempty"`
+	Timestamp int64              `bson:"timestamp,omitempty"`
+	Uuid      string             `bson:"uuid,omitempty"`
 }
 
 func TransactionsCollection() *mongo.Collection {
@@ -36,10 +38,12 @@ func TransactionsCollection() *mongo.Collection {
 func CreateOne(tr *transactions.TransactionType, ctx context.Context, coll *mongo.Collection) *mongo.InsertOneResult {
 
 	transaction := TransactionsModel{
-		Account: tr.Account,
-		Uuid:    tr.Uuid,
-		Status:  tr.Status,
-		Amount:  tr.Amount,
+		Account:   tr.Account,
+		Amount:    tr.Amount,
+		Info:      tr.Info,
+		Status:    tr.Status,
+		Timestamp: tr.Timestamp,
+		Uuid:      tr.Uuid,
 	}
 	result, err := coll.InsertOne(ctx, &transaction)
 	if err != nil {
@@ -56,10 +60,12 @@ func GetOne(uuid string, ctx context.Context, coll *mongo.Collection) *transacti
 		log.Fatal(err)
 	}
 	tr := transactions.TransactionType{
-		Account: result.Account,
-		Uuid:    result.Uuid,
-		Status:  result.Status,
-		Amount:  result.Amount,
+		Account:   result.Account,
+		Amount:    result.Amount,
+		Info:      result.Info,
+		Status:    result.Status,
+		Timestamp: result.Timestamp,
+		Uuid:      result.Uuid,
 	}
 	return &tr
 }
@@ -68,10 +74,12 @@ func UpdateReplaceOne(tr *transactions.TransactionType, ctx context.Context, col
 
 	filter := TransactionsModel{Uuid: tr.Uuid}
 	transaction := TransactionsModel{
-		Account: tr.Account,
-		Uuid:    tr.Uuid,
-		Status:  tr.Status,
-		Amount:  tr.Amount,
+		Account:   tr.Account,
+		Amount:    tr.Amount,
+		Info:      tr.Info,
+		Status:    tr.Status,
+		Timestamp: tr.Timestamp,
+		Uuid:      tr.Uuid,
 	}
 	result, err := coll.UpdateOne(
 		ctx,

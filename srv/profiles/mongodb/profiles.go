@@ -12,19 +12,21 @@ import (
 )
 
 type TransactionsModel struct {
-	ID      primitive.ObjectID `bson:"_id,omitempty"`
-	Account string             `bson:"account,omitempty"`
-	Uuid    string             `bson:"uuid,omitempty"`
-	Status  string             `bson:"status,omitempty"`
-	Amount  float32            `bson:"amount,omitempty"`
+	ID        primitive.ObjectID `bson:"_id,omitempty"`
+	Account   string             `bson:"account,omitempty"`
+	Amount    float32            `bson:"amount,omitempty"`
+	Info      string             `bson:"info,omitempty"`
+	Status    string             `bson:"status,omitempty"`
+	Timestamp int64              `bson:"timestamp,omitempty"`
+	Uuid      string             `bson:"uuid,omitempty"`
 }
 type AccountsModel struct {
 	ID           primitive.ObjectID  `bson:"_id,omitempty"`
-	Uuid         string              `bson:"uuid,omitempty"`
-	Profile      string              `bson:"profile,omitempty"`
 	Balance      float32             `bson:"balance,omitempty"`
+	Profile      string              `bson:"profile,omitempty"`
 	Status       string              `bson:"status,omitempty"`
 	Transactions []TransactionsModel `bson:"transactions,omitempty"`
+	Uuid         string              `bson:"uuid,omitempty"`
 }
 
 func ProfilesCollection() *mongo.Collection {
@@ -44,10 +46,10 @@ func ProfilesCollection() *mongo.Collection {
 func CreateAccount(acc *profiles.AccountType, ctx context.Context, coll *mongo.Collection) *mongo.InsertOneResult {
 
 	account := AccountsModel{
-		Uuid:    acc.Uuid,
+		Balance: acc.Balance,
 		Profile: acc.Profile,
 		Status:  acc.Status,
-		Balance: acc.Balance,
+		Uuid:    acc.Uuid,
 	}
 	result, err := coll.InsertOne(ctx, &account)
 	if err != nil {
@@ -60,10 +62,10 @@ func UpdateAccount(acc *profiles.AccountType, ctx context.Context, coll *mongo.C
 
 	filter := AccountsModel{Uuid: acc.Uuid}
 	account := AccountsModel{
-		Uuid:    acc.Uuid,
+		Balance: acc.Balance,
 		Profile: acc.Profile,
 		Status:  acc.Status,
-		Balance: acc.Balance,
+		Uuid:    acc.Uuid,
 	}
 	result, err := coll.UpdateOne(
 		ctx,
@@ -82,12 +84,14 @@ func CreateTransaction(tr *profiles.TransactionType, ctx context.Context, coll *
 
 	filter := AccountsModel{Uuid: tr.Account}
 	transaction := TransactionsModel{
-		Account: tr.Account,
-		Uuid:    tr.Uuid,
-		Status:  tr.Status,
-		Amount:  tr.Amount,
+		Account:   tr.Account,
+		Amount:    tr.Amount,
+		Info:      tr.Info,
+		Status:    tr.Status,
+		Timestamp: tr.Timestamp,
+		Uuid:      tr.Uuid,
 	}
-	change := bson.M{"$push":bson.M{"transactions": transaction}}
+	change := bson.M{"$push": bson.M{"transactions": transaction}}
 	result, err := coll.UpdateOne(
 		ctx,
 		filter,
@@ -102,13 +106,15 @@ func CreateTransaction(tr *profiles.TransactionType, ctx context.Context, coll *
 func UpdateTransaction(tr *profiles.TransactionType, ctx context.Context, coll *mongo.Collection) *mongo.UpdateResult {
 
 	transaction := TransactionsModel{
-		Account: tr.Account,
-		Uuid:    tr.Uuid,
-		Status:  tr.Status,
-		Amount:  tr.Amount,
+		Account:   tr.Account,
+		Amount:    tr.Amount,
+		Info:      tr.Info,
+		Status:    tr.Status,
+		Timestamp: tr.Timestamp,
+		Uuid:      tr.Uuid,
 	}
 	filter := bson.M{
-		"uuid": tr.Account,
+		"uuid":              tr.Account,
 		"transactions.uuid": tr.Uuid,
 	}
 	update := bson.M{

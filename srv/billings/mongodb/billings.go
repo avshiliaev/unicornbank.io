@@ -12,9 +12,9 @@ import (
 
 type TransactionsModel struct {
 	ID      primitive.ObjectID `bson:"_id,omitempty"`
-	Uuid    string             `bson:"uuid,omitempty"`
 	Account string             `bson:"account,omitempty"`
 	Status  string             `bson:"status,omitempty"`
+	Uuid    string             `bson:"uuid,omitempty"`
 }
 
 func TransactionsCollection() *mongo.Collection {
@@ -34,9 +34,9 @@ func TransactionsCollection() *mongo.Collection {
 func CreateOne(tr *billings.TransactionType, ctx context.Context, coll *mongo.Collection) *mongo.InsertOneResult {
 
 	account := TransactionsModel{
-		Uuid:    tr.Uuid,
 		Account: tr.Account,
 		Status:  tr.Status,
+		Uuid:    tr.Uuid,
 	}
 	result, err := coll.InsertOne(ctx, &account)
 	if err != nil {
