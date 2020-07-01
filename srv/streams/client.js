@@ -1,19 +1,8 @@
 const WebSocket = require('ws')
 
-const ws = new WebSocket('ws://localhost:8082/streams/profiles')
+const ws = new WebSocket('ws://localhost:8082/streams/accounts?profile=wonder')
 
-const msg = {
-  profile: 'wonder',
-  detail: true,
-}
 let state = []
-
-ws.on('open', function open () {
-  console.log('connected')
-  ws.send(
-    JSON.stringify(msg),
-  )
-})
 
 ws.on('close', function close () {
   console.log('disconnected')
@@ -21,8 +10,9 @@ ws.on('close', function close () {
 
 ws.on('message', function incoming (data) {
   let message = JSON.parse(data)
-  let doc = message.fullDocument
-  switch (message.operationType) {
+  let doc = message.payload
+  // console.log(message)
+  switch (message.type) {
     case 'init': {
       state = [...doc]
       break
@@ -45,9 +35,11 @@ ws.on('message', function incoming (data) {
   let MockComponent = {
     balance: state.reduce(
       (a, b) => ({ balance: a.balance + b.balance })).balance,
-    transactionsCount: state.reduce((a, b) => ({
-      transactionsCount: a.transactionsCount + b.transactionsCount,
-    })).transactionsCount,
+    trCount: state.reduce(
+      (a, b) => ({
+        trCount: a.transactions.length + b.transactions.length,
+      })).trCount,
+
   }
   console.log(MockComponent)
 })

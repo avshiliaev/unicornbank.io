@@ -2,7 +2,6 @@ package mongodb
 
 import (
 	"context"
-	"github.com/gorilla/websocket"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -11,27 +10,7 @@ import (
 	"time"
 )
 
-// You will be using this Trainer type later in the program
-type TransactionsModel struct {
-	Account string  `json:"account"`
-	Uuid    string  `json:"uuid"`
-	Status  string  `json:"status"`
-	Amount  float32 `json:"amount"`
-}
-type AccountsModel struct {
-	Uuid              string              `json:"uuid"`
-	Profile           string              `json:"profile"`
-	Balance           float32             `json:"balance"`
-	Status            string              `json:"status"`
-	Transactions      []TransactionsModel `json:"transactions"`
-	TransactionsCount int32               `json:"transactionsCount"`
-}
-type StreamObject struct {
-	OperationType string          `json:"operationType"`
-	FullDocument  []AccountsModel `json:"fullDocument"`
-}
-
-func Collection() *mongo.Collection {
+func ProfilesCollection() *mongo.Collection {
 
 	uri := os.Getenv("MONGO_URI")
 	db := os.Getenv("MONGO_DATABASE")
@@ -47,91 +26,59 @@ func Collection() *mongo.Collection {
 	return collection
 }
 
-func InitState(profile string, coll *mongo.Collection, ctx context.Context) StreamObject {
+func AccountsPipeline(profile string) []bson.M {
+	pipeline := []bson.M{
+		{"$match": bson.M{"profile": profile}},
+		{"$project": bson.M{
+			// "_id":     0,
+			"uuid":    1,
+			"profile": 1,
+			"status":  1,
+			"balance": 1,
+			"transactions": bson.M{
+				"$map": bson.M{
+					"input": "$transactions",
+					"as":    "tr",
+					"in":    "$$tr.uuid",
+				},
+			},
+		}},
+	}
+	return pipeline
+}
 
-	var accounts []AccountsModel
-	match := bson.D{{"$match", bson.D{{"profile", profile}}}}
-	group := bson.D{{
-		"$project",
-		bson.D{
-			{"uuid", 1},
-			{"profile", 1},
-			{"balance", 1},
-			{"status", 1},
-			{"transactions", 1},
-			{"transactionsCount", bson.D{
-				{"$size", "$transactions"},
-			}},
-		},
-	}}
-	pipeline := mongo.Pipeline{match, group}
-	filterCursor, err := coll.Aggregate(ctx, pipeline)
+func Aggregate(pipeline []bson.M, coll *mongo.Collection, ctx context.Context) *mongo.Cursor {
+
+	cursor, err := coll.Aggregate(ctx, pipeline)
 	if err != nil {
 		log.Fatal(err)
 	}
-	if err = filterCursor.All(ctx, &accounts); err != nil {
-		log.Fatal(err)
-	}
-	state := StreamObject{
-		OperationType: "init",
-		FullDocument:  accounts,
-	}
-	return state
+	return cursor
 }
 
-func ChangesStream(profile string, detail bool, ws *websocket.Conn) error {
-
-	coll := Collection()
-	ctx := context.Background()
-
-	// Send initial state of the profile's accounts
-	initialState := InitState(profile, coll, ctx)
-	if err := ws.WriteJSON(initialState); err != nil {
-		log.Fatal("Error sending WS: ", err)
-	}
+func StreamChanges(pipeline []bson.M, coll *mongo.Collection) (*mongo.ChangeStream, error) {
 
 	// Subscribe to changes stream
-	match := bson.D{
-		{"$match", bson.D{
-			{"$or", bson.A{
-				bson.D{{"fullDocument.profile", profile}},
-			}},
-		}},
-	}
-	group := bson.D{{
-		"$project",
-		bson.D{
-			{"operationType", 1},
-			{"fullDocument.uuid", 1},
-			{"fullDocument.profile", 1},
-			{"fullDocument.balance", 1},
-			{"fullDocument.status", 1},
-			{"fullDocument.transactions", 1},
-			{"fullDocument.transactionsCount", bson.D{
-				{"$size", "$fullDocument.transactions"},
-			}},
-		},
-	}}
 	fullDoc := options.FullDocument("updateLookup")
 	opts := options.ChangeStreamOptions{
 		FullDocument: &fullDoc,
 	}
-	stream, errChangeStream := coll.Watch(context.TODO(), mongo.Pipeline{match, group}, &opts)
+	pre := []bson.M{
+		{"$match": bson.M{"operationType": "update"}}, // TODO $or
+		{"$replaceRoot": bson.M{"newRoot": bson.M{"$mergeObjects": bson.A{"$fullDocument", "$$ROOT"}}}},
+	}
+	stages := [][]bson.M{
+		pre,
+		pipeline,
+	}
+	var pipelineStream []bson.M
+	for _, r := range stages {
+		pipelineStream = append(pipelineStream, r...)
+	}
+	stream, errChangeStream := coll.Watch(context.TODO(), pipelineStream, &opts)
 	if errChangeStream != nil {
 		panic(errChangeStream)
 	}
-	defer stream.Close(context.TODO())
+	return stream, errChangeStream
 
-	for stream.Next(context.TODO()) {
-
-		var data bson.M
-		if err := stream.Decode(&data); err != nil {
-			log.Print(err)
-		}
-		if err := ws.WriteJSON(data); err != nil {
-			break
-		}
-	}
-
-	return nil
 }

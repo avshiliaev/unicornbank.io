@@ -4,7 +4,7 @@ import (
 	"github.com/joho/godotenv"
 	"github.com/micro/go-micro/v2/web"
 	"log"
-	"unicornbank.io/srv/streams/handler"
+	"unicornbank.io/srv/streams/handlers"
 )
 
 func main() {
@@ -22,7 +22,8 @@ func main() {
 	}
 
 	// Handle websocket connection
-	service.HandleFunc("/profiles", handler.WebSocketHandler)
+	service.HandleFunc("/accounts", handlers.AccountsHandler)
+	service.HandleFunc("/transactions", handlers.TransactionsHandler)
 
 	if err := service.Run(); err != nil {
 		log.Fatal("Run: ", err)
