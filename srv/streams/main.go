@@ -22,8 +22,8 @@ func main() {
 	}
 
 	// Handle websocket connection
-	service.HandleFunc("/accounts", handlers.AccountsHandler)
-	service.HandleFunc("/transactions", handlers.TransactionsHandler)
+	service.HandleFunc("/overview", handlers.OverviewHandler)
+	service.HandleFunc("/detail", handlers.DetailHandler)
 
 	if err := service.Run(); err != nil {
 		log.Fatal("Run: ", err)

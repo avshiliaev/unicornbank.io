@@ -35,7 +35,7 @@ type TransactionPlaced struct {
 }
 
 func (e *TransactionPlaced) Handle(ctx context.Context, transactionPlaced *profiles.TransactionType) error {
-	log.Info("Account: ", transactionPlaced.Uuid, ", status: ", transactionPlaced.Status)
+	log.Info("Transaction: ", transactionPlaced.Uuid, ", status: ", transactionPlaced.Status)
 	mongodb.CreateTransaction(transactionPlaced, ctx, e.Coll)
 	return nil
 }

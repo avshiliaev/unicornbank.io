@@ -1,7 +1,7 @@
 const WebSocket = require('ws')
 
 const ws = new WebSocket(
-  'ws://localhost:8082/streams/accounts?profile=wonder',
+  'ws://localhost:8082/streams/overview?profile=wonder',
 )
 
 let state = []
@@ -36,6 +36,10 @@ ws.on('message', function incoming (data) {
   const mockComponent = (state) => {
     return state != null ? {
       accounts: state.length,
+      pending: state.map(acc => {
+          return acc.transactions !== null ? acc.transactions.length : 0
+        },
+      ),
       balance: state.reduce(
         (a, b) => ({ balance: a.balance + b.balance })).balance,
     } : 'Nothing here yet...'

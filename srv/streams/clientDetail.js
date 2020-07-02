@@ -1,7 +1,7 @@
 const WebSocket = require('ws')
 
 const ws = new WebSocket(
-  'ws://localhost:8082/streams/transactions?account=0c9a391f-b32b-416e-a665-13fa0d612df6',
+  'ws://localhost:8082/streams/detail?account=0c9a391f-b32b-416e-a665-13fa0d612df6',
 )
 
 let state = []
@@ -12,7 +12,7 @@ ws.on('close', function close () {
 
 ws.on('message', async function incoming (data) {
   let message = await JSON.parse(data)
-  let payload = message.payload.transactions
+  let payload = message.payload
 
   switch (message.type) {
     case 'init': {
@@ -26,11 +26,11 @@ ws.on('message', async function incoming (data) {
   }
 
   const mockComponent = (state) => {
-    return state.length > 0 ? {
-      transactions: state.length,
-      balance: state.map(tr => tr.amount).reduce(
-        (a, b) => a + b,
-      ),
+    return state != null ? {
+      balance: state.balance,
+      pending: state.transactions !== null
+        ? state.transactions.filter(tr => tr.status === "pending").length
+        : 0,
     } : 'Nothing here yet...'
   }
   console.log(mockComponent(state))

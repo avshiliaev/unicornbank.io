@@ -3,31 +3,24 @@ package handlers
 import (
 	"context"
 	"github.com/gorilla/websocket"
-	"go.mongodb.org/mongo-driver/bson"
 	"log"
 	"net/http"
 	"unicornbank.io/srv/streams/mongodb"
 )
 
-type TransactionType struct {
-	Account string  `bson:"account,omitempty" json:"account"`
-	Uuid    string  `bson:"uuid,omitempty" json:"uuid"`
-	Status  string  `bson:"status,omitempty" json:"status"`
-	Amount  float32 `bson:"amount,omitempty" json:"amount"`
+type OverviewInitAction struct {
+	Type    string        `json:"type"`
+	Payload []AccountType `json:"payload"`
 }
-type TransactionsInitAction struct {
-	Type    string   `json:"type"`
-	Payload bson.M `json:"payload"`
-}
-type TransactionsUpdateAction struct {
-	Type    string `json:"type"`
-	Payload bson.M `json:"payload"`
+type OverviewUpdateAction struct {
+	Type    string      `json:"type"`
+	Payload AccountType `json:"payload"`
 }
 
-func TransactionsHandler(w http.ResponseWriter, r *http.Request) {
+func OverviewHandler(w http.ResponseWriter, r *http.Request) {
 
 	// TODO: sanitize!
-	account := r.URL.Query().Get("account")
+	profile := r.URL.Query().Get("profile")
 
 	var upgrader = websocket.Upgrader{
 		CheckOrigin: func(r *http.Request) bool { return true },
@@ -43,18 +36,18 @@ func TransactionsHandler(w http.ResponseWriter, r *http.Request) {
 
 	// Prepare mongo connection
 	coll := mongodb.ProfilesCollection()
-	pipeline := mongodb.TransactionsPipeline(account)
+	pipeline := mongodb.OverviewPipeline(profile)
 	ctx := context.Background()
 
 	// Send the initial state
-	var state []bson.M
+	var state []AccountType
 	cursor := mongodb.Aggregate(pipeline, coll, ctx)
 	if err = cursor.All(ctx, &state); err != nil {
 		log.Fatal(err)
 	}
-	action := TransactionsInitAction{
+	action := OverviewInitAction{
 		Type:    "init",
-		Payload: state[0],
+		Payload: state,
 	}
 	ws.WriteJSON(action)
 
@@ -68,12 +61,12 @@ func TransactionsHandler(w http.ResponseWriter, r *http.Request) {
 	// Iterate over the stream updates
 	for stream.Next(context.TODO()) {
 
-		var data bson.M
+		var data AccountType
 		if err := stream.Decode(&data); err != nil {
 			log.Print(err)
 			break
 		}
-		state := TransactionsUpdateAction{
+		state := OverviewUpdateAction{
 			Type:    "update",
 			Payload: data,
 		}

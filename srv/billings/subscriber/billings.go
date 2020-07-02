@@ -6,6 +6,7 @@ import (
 	"github.com/micro/go-micro/v2/client"
 	log "github.com/micro/go-micro/v2/logger"
 	"go.mongodb.org/mongo-driver/mongo"
+	"time"
 	"unicornbank.io/srv/billings/mongodb"
 	billings "unicornbank.io/srv/billings/proto/billings"
 )
@@ -19,6 +20,7 @@ type TransactionCreated struct {
 func (e *TransactionCreated) Handle(ctx context.Context, transactionCreated *billings.TransactionType) error {
 	log.Info("Handler Received message: ", transactionCreated.Uuid)
 
+	time.Sleep(2 * time.Second)
 	status := "processed"
 	transactionProcessed := billings.TransactionType{
 		Account: transactionCreated.Account,

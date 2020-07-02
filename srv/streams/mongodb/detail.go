@@ -2,11 +2,14 @@ package mongodb
 
 import "go.mongodb.org/mongo-driver/bson"
 
-func TransactionsPipeline(account string) []bson.M {
+func DetailPipeline(account string) []bson.M {
 	pipeline := []bson.M{
 		{"$match": bson.M{"uuid": account}},
 		{"$project": bson.M{
-			// "_id":          0,
+			"uuid":         1,
+			"profile":      1,
+			"status":       1,
+			"balance":      1,
 			"transactions": 1,
 		}},
 	}
