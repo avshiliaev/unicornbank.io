@@ -1,27 +1,15 @@
 import { put, takeLatest } from 'redux-saga/effects';
-import { ActionTypes, ApiEndpoints } from '../constants';
+import { ActionTypes } from '../constants';
 import { AuthAction, AuthInterface } from '../interfaces/auth.interface';
-
-const host = 'http://localhost:8080'
 
 function* logInSaga(action: AuthAction) {
   const { username } = action.params;
-  const url = host + ApiEndpoints.LOG_IN.path()
   try {
-    // yield will wait for Promise to resolve
-    const response = yield fetch(
-      url,
-      {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username }),
-      },
-    );
-    // Again yield will wait for Promise to resolve
-    const data: AuthInterface = yield response.json();
+    const data: AuthInterface = {
+      isLoggedIn: true,
+      userId: 'wonder',
+      username: 'wonder',
+    };
     yield localStorage.setItem('username', data.username);
     yield localStorage.setItem('userId', data.userId);
     const actionSuccess: AuthAction = {
@@ -34,25 +22,12 @@ function* logInSaga(action: AuthAction) {
     };
     yield put(actionSuccess);
   } catch (error) {
-    // const actionError: AuthAction = {
-    //   type: ActionTypes.LOG_IN_ERROR,
-    //   state: {
-    //     loading: false,
-    //     error: true,
-    //     isLoggedIn: false,
-    //   },
-    // };
-    const data: AuthInterface = {
-      userId: "2e32",
-      username: "wonder",
-      isLoggedIn: true,
-    }
     const actionError: AuthAction = {
-      type: ActionTypes.LOG_IN_SUCCESS,
+      type: ActionTypes.LOG_IN_ERROR,
       state: {
         loading: false,
-        error: false,
-        ...data,
+        error: true,
+        isLoggedIn: false,
       },
     };
     yield put(actionError);

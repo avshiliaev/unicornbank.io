@@ -29,15 +29,15 @@ const AccountsList = ({ accounts, windowSize }: Props) => {
           const link = `/account/${account.uuid}/home`;
           const ava = account.balance.toString();
           const openTransactions = () => console.log('transactions');
-          const numberTransactions = `transactions: ${account.transactions?.length}`;
+          const numberTransactions = `pending: ${account.transactions?.length}`;
           return (
             <List.Item actions={[
               <ActionIcon text={numberTransactions} action={openTransactions}/>,
-              <Badge status="success" />,
+              <Badge status="success"/>,
             ]}>
               <List.Item.Meta
                 avatar={<AccountAvatar text={ava} badgeNumber={account.transactions?.length}/>}
-                title={<Link to={link}>{"DE34 0932 2356 9305 04"}</Link>}
+                title={<Link to={link}>{'DE34 0932 2356 9305 04'}</Link>}
                 description={account.status}
               />
             </List.Item>
