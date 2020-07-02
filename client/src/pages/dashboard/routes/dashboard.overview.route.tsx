@@ -2,18 +2,18 @@ import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import FlexGridDashboard from '../../../components/layout/flex.grid.dashboard';
 import AccountsAddReference from '../../../components/accounts.add.reference';
-import { Badge, Col, Row, Statistic } from 'antd';
+import { Col, Row, Statistic } from 'antd';
 import FlexContainer from '../../../components/layout/flex.container';
 import ProfileIcon from '../../../components/profile.icon';
 import AccountsList from '../../../components/accounts.list';
 import { AccountsOverviewReducerState } from '../../../interfaces/account.interface';
 
-const ProfileStatistics = ({ windowSize, auth }) => {
+const ProfileStatistics = ({ windowSize, auth, balance }) => {
 
   const Balance = () => {
 
     return (
-      <Statistic title="Total Balance (EUR)" value={23458} precision={2} />
+      <Statistic title="Total Balance (EUR)" value={balance} precision={2}/>
     );
   };
 
@@ -60,20 +60,24 @@ interface Props {
 
 const DashboardOverviewRoute = ({ auth, windowSize, accountsOverview, ...rest }: Props) => {
 
-  return accountsOverview.loading === false
-    ? (
-      <Fragment>
-        <FlexGridDashboard
-          windowSize={windowSize}
-          slotOne={<ProfileStatistics auth={auth} windowSize={windowSize}/>}
-          slotTwo={<AccountsAddReference/>}
-          mainContent={<AccountsList accounts={accountsOverview.data} windowSize={windowSize}/>}
-        />
-      </Fragment>
-    )
-    : (
-      <div>Loading...</div>
-    );
+  let balance = 0;
+  if (accountsOverview.data.length > 0) {
+    balance = accountsOverview.data
+      .map(acc => acc.balance)
+      .reduce((a, b) => a + b);
+  }
+
+  return (
+    <Fragment>
+      <FlexGridDashboard
+        windowSize={windowSize}
+        slotOne={<ProfileStatistics auth={auth} balance={balance} windowSize={windowSize}/>}
+        slotTwo={<AccountsAddReference/>}
+        mainContent={<AccountsList accounts={accountsOverview.data} windowSize={windowSize}/>}
+      />
+    </Fragment>
+  );
+
 };
 
 const mapStateToProps = (state) => {

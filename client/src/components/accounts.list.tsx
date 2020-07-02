@@ -20,7 +20,7 @@ interface Props {
 
 const AccountsList = ({ accounts, windowSize }: Props) => {
 
-  return accounts.length != 0 ? (
+  return accounts.length > 0 ? (
     <div>
       <List
         itemLayout={!windowSize.large ? 'vertical' : 'horizontal'}
@@ -37,7 +37,7 @@ const AccountsList = ({ accounts, windowSize }: Props) => {
             ]}>
               <List.Item.Meta
                 avatar={<AccountAvatar text={ava} badgeNumber={account.transactions?.length}/>}
-                title={<Link to={link}>{account.uuid}</Link>}
+                title={<Link to={link}>{"DE34 0932 2356 9305 04"}</Link>}
                 description={account.status}
               />
             </List.Item>
