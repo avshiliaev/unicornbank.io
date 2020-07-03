@@ -1,35 +1,59 @@
-import { put, takeLatest } from 'redux-saga/effects';
-import { ActionTypes, ApiEndpoints } from '../constants';
-import { AccountAction, AccountInterface } from '../interfaces/account.interface';
+import { call, put, take, takeLatest } from 'redux-saga/effects';
+import { eventChannel } from 'redux-saga';
+import { ActionTypes } from '../constants';
+import { AccountAction } from '../interfaces/account.interface';
+import createWebSocketConnection from '../web.socket';
 
-const host = 'http://localhost:8080';
+function createSocketChannel(socket) {
 
-function* getAccountDetailSaga(action: AccountAction) {
-  const { accountId } = action.params;
+  return eventChannel(emit => {
 
-  const url = host + ApiEndpoints.GET_ACCOUNT_DETAIL.path();
+    const openHandler = () => {
+      console.log('connected');
+    };
+    const messageHandler = (event) => {
+      const action = JSON.parse(event.data);
+      emit(action);
+    };
+    const errorHandler = (errorEvent) => {
+      emit(new Error(errorEvent.reason));
+    };
+
+    socket.onopen = openHandler;
+    socket.onmessage = messageHandler;
+    socket.onerror = errorHandler;
+
+    return () => {
+      socket.off('message', messageHandler);
+    };
+  });
+}
+
+function* getAccountDetailSaga(action) {
+
+  const { params } = action;
+  const path = `/detail?account=${params}`;
+
+  const socket = yield call(createWebSocketConnection, path);
+  const socketChannel = yield call(createSocketChannel, socket);
 
   try {
-    // yield will wait for Promise to resolve
-    const response = yield fetch(url, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ accountId }),
-    });
-    // Again yield will wait for Promise to resolve
-    const data: AccountInterface = yield response.json();
-    const actionSuccess: AccountAction = {
-      type: ActionTypes.GET_ACCOUNT_DETAIL_SUCCESS,
-      state: {
-        loading: false,
-        error: false,
-        data,
-      },
-    };
-    yield put(actionSuccess);
+    while (true) {
+      const action = yield take(socketChannel);
+      const data = action.payload;
+      const type = action.type === 'init'
+        ? ActionTypes.GET_ACCOUNT_DETAIL_SUCCESS
+        : ActionTypes.GET_ACCOUNT_DETAIL_SUCCESS;
+      const actionSuccess: AccountAction = {
+        type,
+        state: {
+          loading: false,
+          error: false,
+          data,
+        },
+      };
+      yield put(actionSuccess);
+    }
   } catch (error) {
     const actionError: AccountAction = {
       type: ActionTypes.GET_ACCOUNT_DETAIL_ERROR,

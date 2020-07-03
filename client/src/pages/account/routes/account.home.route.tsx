@@ -4,6 +4,7 @@ import FlexGridAccount from '../../../components/layout/flex.grid.account';
 import BreadCrumbBasic from '../../../components/layout/breadcrumb.basic';
 import TransactionsTable from '../../../components/transactions.table';
 import { AccountReducerState } from '../../../interfaces/account.interface';
+import CommonBalance from '../../../components/common.balance';
 
 interface Props {
   windowSize: any,
@@ -20,7 +21,7 @@ const AccountHomeRoute = ({ windowSize, location, account, ...rest }: Props) => 
         breadCrumbs={<BreadCrumbBasic location={location}/>}
         windowSize={windowSize}
         slotOne={<TransactionsTable transactions={account.data.transactions}/>}
-        slotTwo={(<div>Right Column</div>)}
+        slotTwo={(<CommonBalance value={account.data.balance}/>)}
       />
     )
     : (

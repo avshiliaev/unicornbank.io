@@ -1,8 +1,8 @@
 import React from 'react';
-import { Avatar, Badge, Empty, List } from 'antd';
-import ActionIcon from './action.icon';
+import { Avatar, Badge, List, Space, Statistic } from 'antd';
 import { Link } from '@reach/router';
 import { AccountInterface } from '../interfaces/account.interface';
+import { CheckCircleOutlined, SyncOutlined } from '@ant-design/icons';
 
 const AccountAvatar = ({ badgeNumber, text }) => {
 
@@ -13,40 +13,59 @@ const AccountAvatar = ({ badgeNumber, text }) => {
   );
 };
 
+const AccountAmount = ({ value }) => {
+  return (
+    <Statistic
+      value={value}
+      precision={2}
+      valueStyle={value > 0 ? { color: '' } : { color: '#cf1322' }}
+      suffix="€"
+    />
+  );
+};
+
+const AccountTitle = ({ status, link, title }) => {
+  return (
+    <Space>
+      <Link to={link}>{title}</Link>
+      {status === 'approved' ? <CheckCircleOutlined/> : <SyncOutlined spin/>}
+    </Space>
+  );
+};
+
 interface Props {
   accounts: AccountInterface[],
-  windowSize: any
+  windowSize: any,
+  loading: boolean,
 }
 
-const AccountsList = ({ accounts, windowSize }: Props) => {
+const AccountsList = ({ accounts, windowSize, loading }: Props) => {
 
-  return accounts.length > 0 ? (
+  return (
     <div>
       <List
+        loading={loading}
         itemLayout={!windowSize.large ? 'vertical' : 'horizontal'}
         dataSource={accounts}
         renderItem={account => {
           const link = `/account/${account.uuid}/home`;
-          const ava = account.balance.toString();
-          const openTransactions = () => console.log('transactions');
-          const numberTransactions = `pending: ${account.transactions?.length}`;
+          const description = 'DE34 0932 2356 9305 04';
+          const status = account.status;
           return (
             <List.Item actions={[
-              <ActionIcon text={numberTransactions} action={openTransactions}/>,
-              <Badge status="success"/>,
+              <AccountAmount value={account.balance}/>,
             ]}>
               <List.Item.Meta
-                avatar={<AccountAvatar text={ava} badgeNumber={account.transactions?.length}/>}
-                title={<Link to={link}>{'DE34 0932 2356 9305 04'}</Link>}
-                description={account.status}
+                avatar={<AccountAvatar text={'G'} badgeNumber={account.transactions?.length}/>}
+                title={<AccountTitle status={account.status} link={link} title={'GiroX Konto+'}/>}
+                description={description}
               />
             </List.Item>
           );
         }}
       />
     </div>
-
-  ) : (<Empty description={'You have no accounts yet'}/>);
+  );
 };
 
 export default AccountsList;
