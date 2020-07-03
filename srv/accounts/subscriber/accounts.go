@@ -5,37 +5,29 @@ import (
 	"github.com/micro/go-micro/v2"
 	"github.com/micro/go-micro/v2/client"
 	log "github.com/micro/go-micro/v2/logger"
-	"time"
-	"unicornbank.io/srv/accounts/models"
+	"go.mongodb.org/mongo-driver/mongo"
+	"unicornbank.io/srv/accounts/mongodb"
 	accounts "unicornbank.io/srv/accounts/proto/accounts"
 )
 
 type AccountApproval struct {
 	Client            client.Client
 	PubAccountUpdated string
+	Coll              *mongo.Collection
 }
 
-func (e *AccountApproval) Handle(ctx context.Context, msg *accounts.AccountApproval) error {
+func (e *AccountApproval) Handle(ctx context.Context, msg *accounts.AccountType) error {
 	log.Info("Handler Received message: ", msg.Uuid)
 
-	account := models.Get(msg.Uuid)
-	account.Status = msg.Status
-	models.Update(&account)
+	accountUpdated := mongodb.GetOne(msg.Uuid, ctx, e.Coll)
+	accountUpdated.Status = msg.Status
 
-	accountUpdated := accounts.AccountCreatedOrUpdated{
-		Uuid:      account.Uuid,
-		Title:     account.Title,
-		Status:    account.Status,
-		Balance:   account.Balance,
-		Timestamp: time.Now().Unix(),
-	}
-
+	mongodb.UpdateReplaceOne(accountUpdated, ctx, e.Coll)
 	topic := e.PubAccountUpdated
 	p := micro.NewEvent(topic, e.Client)
-	if err := p.Publish(context.TODO(), &accountUpdated); err != nil {
+	if err := p.Publish(context.TODO(), accountUpdated); err != nil {
 		return err
 	}
-
 	log.Info("Account: ", accountUpdated.Uuid, " updated!")
 
 	return nil
@@ -44,23 +36,24 @@ func (e *AccountApproval) Handle(ctx context.Context, msg *accounts.AccountAppro
 type TransactionPlaced struct {
 	Client            client.Client
 	PubAccountUpdated string
+	Coll              *mongo.Collection
 }
 
 // TODO a good place for the saga pattern:
 // The transaction is deducted RIGHT away, but then can be compensated if not processed by billing
-func (e *TransactionPlaced) Handle(ctx context.Context, transactionPlaced *accounts.TransactionPlaced) error {
+func (e *TransactionPlaced) Handle(ctx context.Context, transactionPlaced *accounts.TransactionType) error {
 	log.Info("Handler Received message: ", transactionPlaced.Uuid)
 
-	account := models.Get(transactionPlaced.Account)
+	account := mongodb.GetOne(transactionPlaced.Account, ctx, e.Coll)
 	account.Balance = account.Balance + transactionPlaced.Amount
-	models.Update(&account)
 
-	accountUpdated := accounts.AccountCreatedOrUpdated{
-		Uuid:      account.Uuid,
-		Title:     account.Title,
-		Status:    account.Status,
-		Balance:   account.Balance,
-		Timestamp: time.Now().Unix(),
+	mongodb.UpdateReplaceOne(account, ctx, e.Coll)
+
+	accountUpdated := accounts.AccountType{
+		Balance: account.Balance,
+		Profile: account.Profile,
+		Status:  account.Status,
+		Uuid:    account.Uuid,
 	}
 
 	topic := e.PubAccountUpdated

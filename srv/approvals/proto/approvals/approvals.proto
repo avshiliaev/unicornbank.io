@@ -1,17 +1,11 @@
 syntax = "proto3";
 
-package go.micro.service.approvals;
+option go_package = "proto/approvals;go_micro_service_approvals";
 
 // Events
-message AccountCreated {
-  string Uuid = 1;
-  int64 timestamp = 2;
-  string title = 3;
-  string status = 4;
-  float balance = 5;
-}
-message AccountApproval {
-  string Uuid = 1;
-  int64 timestamp = 2;
-  string status = 4;
+message AccountType {
+  float balance = 1;
+  string profile = 2;
+  string status = 3;
+  string uuid = 4;
 }

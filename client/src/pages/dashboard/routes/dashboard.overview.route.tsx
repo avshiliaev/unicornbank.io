@@ -2,25 +2,14 @@ import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import FlexGridDashboard from '../../../components/layout/flex.grid.dashboard';
 import AccountsAddReference from '../../../components/accounts.add.reference';
-import { Badge, Col, Row } from 'antd';
+import { Col, Row } from 'antd';
 import FlexContainer from '../../../components/layout/flex.container';
 import ProfileIcon from '../../../components/profile.icon';
 import AccountsList from '../../../components/accounts.list';
+import { AccountsOverviewReducerState } from '../../../interfaces/account.interface';
+import CommonBalance from '../../../components/common.balance';
 
-const ProfileStatistics = ({ windowSize, auth }) => {
-
-  const Achievements = () => {
-
-    return (
-      <div>
-        <Badge status="success"/>
-        <Badge status="error"/>
-        <Badge status="default"/>
-        <Badge status="processing"/>
-        <Badge status="warning"/>
-      </div>
-    );
-  };
+const ProfileStatistics = ({ windowSize, auth, balance }) => {
 
   return (
     <Row>
@@ -49,26 +38,45 @@ const ProfileStatistics = ({ windowSize, auth }) => {
       </Col>
       <Col xs={24} sm={24} md={24} lg={24} xl={24} order={3}>
         <div style={{ marginTop: 16 }}>
-          {windowSize.large ? (<h4>Achievements</h4>) : (<div/>)}
-          <Achievements/>
+          <CommonBalance value={balance}/>
         </div>
       </Col>
     </Row>
   );
 };
 
-const DashboardOverviewRoute = ({ auth, windowSize, accountsOverview, ...rest }) => {
+interface Props {
+  auth: any,
+  windowSize: any,
+  accountsOverview: AccountsOverviewReducerState,
+  path: any
+}
+
+const DashboardOverviewRoute = ({ auth, windowSize, accountsOverview, ...rest }: Props) => {
+
+  let balance = 0;
+  if (accountsOverview.data.length > 0) {
+    balance = accountsOverview.data
+      .map(acc => acc.balance)
+      .reduce((a, b) => a + b);
+  }
 
   return (
     <Fragment>
       <FlexGridDashboard
         windowSize={windowSize}
-        slotOne={<ProfileStatistics auth={auth} windowSize={windowSize}/>}
+        slotOne={<ProfileStatistics auth={auth} balance={balance} windowSize={windowSize}/>}
         slotTwo={<AccountsAddReference/>}
-        mainContent={<AccountsList accountsOverview={accountsOverview} windowSize={windowSize}/>}
+        mainContent={<AccountsList
+          accounts={accountsOverview.data}
+          windowSize={windowSize}
+          loading={accountsOverview.loading}
+        />
+        }
       />
     </Fragment>
   );
+
 };
 
 const mapStateToProps = (state) => {

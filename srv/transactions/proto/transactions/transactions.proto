@@ -1,37 +1,18 @@
 syntax = "proto3";
 
-package go.micro.service.transactions;
+option go_package = "proto/transactions;go_micro_service_transactions";
 
 // Events
-message TransactionPlacedOrUpdated {
+message TransactionType {
   string account = 1;
-  string Uuid = 2;
-  int64 timestamp = 3;
+  float amount = 2;
+  string info = 3;
   string status = 4;
-  float amount = 5;
-}
-message TransactionProcessed {
-  string account = 1;
-  string Uuid = 2;
-  int64 timestamp = 3;
-  string status = 4;
-  float amount = 5;
+  int64 timestamp = 5;
+  string uuid = 6;
 }
 
 // gRPC
 service Transactions {
-  rpc Create(Request) returns (Response) {}
-}
-
-message Request {
-  string account = 1;
-  float amount = 2;
-}
-
-message Response {
-  string msg = 1;
-}
-
-message StreamingRequest {
-  int64 count = 1;
+  rpc Create(TransactionType) returns (TransactionType) {}
 }

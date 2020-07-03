@@ -41,8 +41,22 @@ const FlexGridAccount = ({ windowSize, slotOne, slotTwo, breadCrumbs }) => {
 
   const upperFlex = {
     colOne: { xs: 0, sm: 0, md: 0, lg: 24, xl: 24, xxl: 24 },
-    colTwo: { xs: 24, sm: 24, md: 24, lg: 24, xl: 18, xxl: 16 },
-    colThree: { xs: 0, sm: 0, md: 0, lg: 0, xl: 6, xxl: 8 },
+    colTwo: {
+      xs: { span: 24, order: 2 },
+      sm: { span: 24, order: 2 },
+      md: { span: 16, order: 1 },
+      lg: { span: 14, order: 1 },
+      xl: { span: 16, order: 1 },
+      xxl: { span: 16, order: 1 },
+    },
+    colThree: {
+      xs: { span: 24, order: 1 },
+      sm: { span: 24, order: 1 },
+      md: { span: 8, order: 2 },
+      lg: { span: 10, order: 2 },
+      xl: { span: 8, order: 2 },
+      xxl: { span: 8, order: 2 },
+    },
   };
 
   return (

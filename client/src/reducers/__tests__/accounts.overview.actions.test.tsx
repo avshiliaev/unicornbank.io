@@ -1,56 +1,36 @@
 import accountOverviewService from '../../services/accounts.overview.service';
-import { addAccountAsHost, initAccountsOverview } from '../accounts.overview.reducer';
+import { addAccountAsHost, initAccounts } from '../accounts.overview.reducer';
 import { AccountInterface } from '../../interfaces/account.interface';
+import ActionTypes from '../../constants';
 
 describe('async actions', () => {
 
-  it('INIT_ACCOUNTS', async () => {
+  it(ActionTypes.INIT_ACCOUNT, async () => {
     const mockPayload: AccountInterface[] = [
-      {
-        id: 'id',
-        title: 'test',
-        description: 'test',
-        transactions: [
-          {
-            id: 'id',
-            title: 'test',
-          },
-        ],
-      },
+      { uuid: '0x1', title: 't', balance: 0, status: 'approved' }
     ];
     const desiredData: AccountInterface[] = [
-      {
-        id: 'id',
-        title: 'test',
-        description: 'test',
-        transactions: [
-          {
-            id: 'id',
-            title: 'test',
-          },
-        ],
-      },
+      { uuid: '0x1', title: 't', balance: 0, status: 'approved' }
     ];
 
     accountOverviewService.queryAccounts = jest.fn().mockReturnValue(mockPayload);
 
-    const dispatch = jest.fn();
-    await initAccountsOverview('0x1')(dispatch);
+    initAccounts('0x1');
     expect(dispatch).toHaveBeenLastCalledWith({
-      type: 'INIT_ACCOUNTS',
+      type: ActionTypes.INIT_ACCOUNT,
       data: desiredData,
     });
   });
 
-  it('ADD_ACCOUNT', async () => {
-    const addAccountInput: AccountInterface = { title: 'title', description: 'description' };
+  it(ActionTypes.ADD_ACCOUNT, async () => {
+    const addAccountInput: AccountInterface = { uuid: '0x1', title: 't', balance: 0, status: 'approved' };
 
     accountOverviewService.addAccount = jest.fn().mockReturnValue([addAccountInput]);
 
     const dispatch = jest.fn();
-    await addAccountAsHost(addAccountInput)(dispatch);
+    await addAccountAsHost(addAccountInput);
     expect(dispatch).toHaveBeenLastCalledWith({
-      type: 'ADD_ACCOUNT',
+      type: ActionTypes.ADD_ACCOUNT,
       data: [addAccountInput],
     });
   });

@@ -2,3 +2,5 @@
 /node_modules
 .DS_Store
 *.db
+/srv/streams/node_modules/
+*.env

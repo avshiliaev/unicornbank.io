@@ -13,7 +13,7 @@ module.exports = {
   // when using React Testing Library and adds special
   // extended assertions to Jest
   setupFilesAfterEnv: [
-    '<rootDir>/src/setupTests.js',
+    '<rootDir>/src/setup.tests.js',
   ],
 
   // Test spec file resolution pattern

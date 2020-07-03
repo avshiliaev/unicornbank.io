@@ -17,16 +17,16 @@ const AccountsForm = ({ onFinish }) => {
       onFinishFailed={onFinishFailed}
     >
       <Form.Item
-        name={'title'}
+        name={'profile'}
         rules={[{
           required: true,
-          message: 'Please input a valid title (max 60 char.)',
+          message: 'Please input a valid profile (max 60 char.)',
           min: 1,
           max: 60,
           whitespace: true,
         }]}>
         <Input
-          placeholder="Title"
+          placeholder="Profile"
         />
       </Form.Item>
       <Form.Item

@@ -1,39 +1,75 @@
-import accountOverviewService from '../services/accounts.overview.service';
-import { AccountInterface } from '../interfaces/account.interface';
+import { AccountInterface, AccountsOverviewAction, AccountsOverviewReducerState } from '../interfaces/account.interface';
+import { ActionTypes } from '../constants';
 
-const initAccountsOverview = (userId: string) => {
-  return async dispatch => {
-    const accounts = await accountOverviewService.queryAccounts(userId);
-    dispatch({
-      type: 'INIT_ACCOUNTS',
-      data: accounts,
-    });
+const initAccounts = (userId: string): AccountsOverviewAction => {
+  return {
+    type: ActionTypes.QUERY_ACCOUNTS,
+    params: userId,
+    state: {
+      loading: true,
+      error: false,
+      data: [],
+    },
   };
 };
 
-const addAccountAsHost = (addAccountInput: AccountInterface) => {
-  return async dispatch => {
-    const account = await accountOverviewService.addAccount(addAccountInput);
-    dispatch({
-      type: 'ADD_ACCOUNT',
-      data: account,
-    });
+const addAccountAsHost = (account: AccountInterface): AccountsOverviewAction => {
+  return {
+    type: ActionTypes.ADD_ACCOUNT,
+    state: {
+      loading: true,
+      error: false,
+      data: [account],
+    },
   };
 };
 
-export { initAccountsOverview, addAccountAsHost };
+export {
+  initAccounts,
+  addAccountAsHost,
+};
 
-const accountsOverviewInitialState: AccountInterface[] = [];
+const accountsOverviewInitialState: AccountsOverviewReducerState = {
+  loading: false,
+  error: false,
+  data: [],
+};
 
 const accountsOverviewReducer = (
-  state: AccountInterface[] = accountsOverviewInitialState,
-  action,
-): AccountInterface[] => {
+  state: AccountsOverviewReducerState = accountsOverviewInitialState,
+  action: AccountsOverviewAction,
+): AccountsOverviewReducerState => {
   switch (action.type) {
-    case 'INIT_ACCOUNTS':
-      return action.data;
-    case 'ADD_ACCOUNT':
-      return [...state, action.data]
+
+    case ActionTypes.QUERY_ACCOUNTS:
+      return { ...state };
+
+    case ActionTypes.QUERY_ACCOUNTS_INIT:
+      // TODO the array gets overwritten!
+      return { ...state, ...action.state };
+
+    case ActionTypes.QUERY_ACCOUNTS_UPDATE:
+      const update = action.state.data[0];
+
+      // Update or add new one
+      if (state.data.filter(a => a.uuid === update.uuid).length > 0) {
+        const data = state.data.map(account => {
+          if (account.uuid === update.uuid) {
+            return { ...account, ...update };
+          }
+          return account;
+        });
+        return { ...state, data };
+      } else {
+        const data = [...state.data, update];
+        return { ...state, data };
+      }
+    case ActionTypes.QUERY_ACCOUNTS_ERROR:
+      return { ...state };
+
+    case ActionTypes.ADD_ACCOUNT:
+      return { ...state, data: [...state.data, ...action.state.data] };
+
     default:
       return state;
   }

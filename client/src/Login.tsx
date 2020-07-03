@@ -11,8 +11,7 @@ const Login = (props) => {
   const { windowSize, logInAction } = props;
 
   const onFinish = async (values) => {
-    const state = { userName: values.username, isLoggedIn: true };
-    logInAction(state);
+    logInAction(values.username);
   };
 
   const onFinishFailed = errorInfo => {

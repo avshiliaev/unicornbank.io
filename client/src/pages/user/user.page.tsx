@@ -15,7 +15,7 @@ const { Content } = Layout;
 
 const UserPage = ({ windowSize, auth, getUser, children, location, id, ...rest }) => {
 
-  getUser(id);
+  // getUser(id);
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
