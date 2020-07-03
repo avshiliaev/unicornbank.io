@@ -1,9 +1,10 @@
 package main
 
 import (
+	"github.com/joho/godotenv"
 	"github.com/micro/go-micro/v2"
 	log "github.com/micro/go-micro/v2/logger"
-	"unicornbank.io/srv/billings/models"
+	"unicornbank.io/srv/billings/mongodb"
 	"unicornbank.io/srv/billings/subscriber"
 )
 
@@ -24,14 +25,21 @@ func main() {
 	// Initialise service
 	service.Init()
 
-	// Initialise a database connection and migrate the schema
-	models.Migrate()
+	// Load .env file
+	if err := godotenv.Load(); err != nil {
+		log.Fatal("Init", err)
+	}
+
+	// MongoDB connection
+	coll := mongodb.TransactionsCollection()
 
 	// Register Struct as Subscriber
-	s := new(subscriber.TransactionPlaced)
-	s.Client = service.Client()
-	s.PubTransactionProcessed = pubTransactionProcessed
-	if err := micro.RegisterSubscriber(subTransactionPlaced, service.Server(), s); err != nil {
+	s := subscriber.TransactionCreated{
+		PubTransactionApproval: pubTransactionProcessed,
+		Client:                 service.Client(),
+		Coll:                   coll,
+	}
+	if err := micro.RegisterSubscriber(subTransactionPlaced, service.Server(), &s); err != nil {
 		log.Fatal(err)
 	}
 

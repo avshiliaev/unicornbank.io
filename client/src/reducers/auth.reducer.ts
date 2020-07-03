@@ -1,55 +1,56 @@
-import authService from '../services/auth.service';
+import { ActionTypes } from '../constants';
+import { AuthAction, AuthReducerState } from '../interfaces/auth.interface';
 
-export interface UserState {
-  isLoggedIn: boolean,
-  userId: string | undefined,
-  userName: string | undefined
-}
-
-const logInAction = (newState: { userName: string, isLoggedIn: boolean }) => {
-  return async dispatch => {
-    const isUser = await authService.queryUser(newState.userName);
-    if (!!isUser) {
-      await localStorage.setItem('userName', isUser.username);
-      await localStorage.setItem('userId', isUser.id);
-      dispatch({
-        type: 'LOG_IN',
-        data: {
-          isLoggedIn: true,
-          userName: localStorage.getItem('userName'),
-          userId: localStorage.getItem('userId'),
-        },
-      });
-    }
+const logInAction = (username: string): AuthAction => {
+  return {
+    type: ActionTypes.LOG_IN,
+    params: username,
+    state: {
+      loading: true,
+      isLoggedIn: false,
+      error: false,
+    },
   };
 };
 
-const logOutAction = () => {
-  return async dispatch => {
-    localStorage.removeItem('userName');
-    dispatch({
-      type: 'LOG_OUT',
-      data: {
-        isLoggedIn: false,
-        userName: undefined,
-        userId: undefined,
-      },
-    });
+const logOutAction = (): AuthAction => {
+  return {
+    type: ActionTypes.LOG_OUT,
+    state: {
+      loading: false,
+      isLoggedIn: false,
+      error: false,
+    },
   };
 };
 
 export { logInAction, logOutAction };
 
-const userInitialState: UserState = !!localStorage.getItem('userName')
-  ? { userName: localStorage.getItem('userName'), isLoggedIn: true, userId: localStorage.getItem('userId') }
-  : { isLoggedIn: false, userName: undefined, userId: undefined };
+const userInitialState: AuthReducerState = !!localStorage.getItem('username')
+  ? {
+    username: localStorage.getItem('username'),
+    isLoggedIn: true,
+    userId: localStorage.getItem('userId'),
+    loading: false,
+    error: false,
+  }
+  : {
+    isLoggedIn: false,
+    loading: false,
+    error: false,
+  };
 
-const authReducer = (state: UserState = userInitialState, action): UserState => {
+const authReducer = (
+  state: AuthReducerState = userInitialState,
+  action: AuthAction,
+): AuthReducerState => {
   switch (action.type) {
-    case 'LOG_IN':
-      return { ...state, isLoggedIn: true, userName: action.data.userName, userId: action.data.userId };
-    case 'LOG_OUT':
-      return { ...state, isLoggedIn: false, userName: undefined, userId: undefined };
+    case ActionTypes.LOG_IN:
+      return action.state;
+    case ActionTypes.LOG_IN_SUCCESS:
+      return action.state;
+    case ActionTypes.LOG_IN_ERROR:
+      return action.state;
     default:
       return state;
   }

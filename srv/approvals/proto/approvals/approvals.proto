@@ -4,12 +4,8 @@ option go_package = "proto/approvals;go_micro_service_approvals";
 
 // Events
 message AccountType {
-  string uuid = 1;
-  string title = 2;
+  float balance = 1;
+  string profile = 2;
   string status = 3;
-  float balance = 4;
-}
-message AccountApprovalType {
-  string uuid = 1;
-  string status = 2;
+  string uuid = 4;
 }

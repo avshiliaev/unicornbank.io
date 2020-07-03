@@ -1,43 +1,25 @@
-import { applyMiddleware, combineReducers, createStore } from 'redux';
-import thunk from 'redux-thunk';
+import { applyMiddleware, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import authReducer from './reducers/auth.reducer';
-import { createResponsiveStateReducer, responsiveStoreEnhancer } from 'redux-responsive';
-import accountReducer from './reducers/account.reducer';
-import accountsOverviewReducer from './reducers/accounts.overview.reducer';
+import { responsiveStoreEnhancer } from 'redux-responsive';
 import { createReduxHistoryContext, reachify } from 'redux-first-history';
 import { createBrowserHistory } from 'history';
-import userReducer from './reducers/user.reducer';
+import createSagaMiddleware from 'redux-saga';
+import rootReducer from './reducers';
+import rootSaga from './sagas';
 
-const { createReduxHistory, routerMiddleware, routerReducer } = createReduxHistoryContext({
+const { createReduxHistory, routerMiddleware } = createReduxHistoryContext({
   history: createBrowserHistory(),
-  //others options if needed
 });
-
-const reducer = combineReducers({
-  auth: authReducer,
-  accountsOverview: accountsOverviewReducer,
-  account: accountReducer,
-  user: userReducer,
-  router: routerReducer,
-  windowSize: createResponsiveStateReducer({
-    extraSmall: 480,
-    small: 576,
-    medium: 768,
-    large: 992,
-    extraLarge: 1200,
-  }),
-});
+const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(
-  reducer,
+  rootReducer,
   composeWithDevTools(
     responsiveStoreEnhancer,
-    applyMiddleware(thunk, routerMiddleware),
+    applyMiddleware(sagaMiddleware, routerMiddleware),
   ),
 );
+sagaMiddleware.run(rootSaga);
 
-export const history = createReduxHistory(store);
-export const reachHistory = reachify(history);
-
+export const reachHistory = reachify(createReduxHistory(store));
 export default store;

@@ -5,24 +5,28 @@ import (
 	"github.com/micro/go-micro/v2"
 	"github.com/micro/go-micro/v2/client"
 	log "github.com/micro/go-micro/v2/logger"
-	"unicornbank.io/srv/approvals/models"
+	"go.mongodb.org/mongo-driver/mongo"
+	"time"
+	"unicornbank.io/srv/approvals/mongodb"
 	approvals "unicornbank.io/srv/approvals/proto/approvals"
 )
 
 type AccountCreated struct {
 	Client             client.Client
 	PubAccountApproval string
+	Coll               *mongo.Collection
 }
 
 func (e *AccountCreated) Handle(ctx context.Context, accountCreated *approvals.AccountType) error {
 	log.Info("Handler Received message: ", accountCreated.Uuid)
 
+	time.Sleep(2 * time.Second)
 	status := "approved"
-	accountApproved := approvals.AccountApprovalType{
-		Uuid:   accountCreated.Uuid,
+	accountApproved := approvals.AccountType{
 		Status: status,
+		Uuid:   accountCreated.Uuid,
 	}
-	models.Create(&accountApproved)
+	mongodb.CreateOne(&accountApproved, ctx, e.Coll)
 
 	topic := e.PubAccountApproval
 	p := micro.NewEvent(topic, e.Client)

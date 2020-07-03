@@ -1,5 +1,6 @@
 import accountsOverviewReducer from '../accounts.overview.reducer';
 import { AccountInterface } from '../../interfaces/account.interface';
+import ActionTypes from '../../constants';
 
 const testInitState: AccountInterface[] = [];
 
@@ -11,64 +12,18 @@ describe('accountsOverviewReducer', () => {
   it('should handle INIT_ACCOUNT', () => {
 
     const stateOne: AccountInterface[] = [
-      {
-        id: 'id',
-        title: 'test',
-        description: 'test',
-        transactions: [
-          {
-            id: 'id',
-            title: 'test',
-          },
-          {
-            id: 'id',
-            title: 'test',
-          },
-        ],
-      },
+      { uuid: '0x1', title: 't', balance: 0, status: 'approved' },
     ];
     const stateTwo: AccountInterface[] = [
-      {
-        id: 'id',
-        title: 'test',
-        description: 'test',
-        transactions: [
-          {
-            id: 'id',
-            title: 'test',
-          },
-          {
-            id: 'id',
-            title: 'test',
-          },
-        ],
-      },
-      {
-        id: 'id',
-        title: 'test',
-        description: 'test',
-        transactions: [
-          {
-            id: 'id',
-            title: 'test',
-          },
-          {
-            id: 'id',
-            title: 'test',
-          },
-          {
-            id: 'id',
-            title: 'test',
-          },
-        ],
-      },
+      { uuid: '1', title: 't', balance: 0, status: 'approved' },
+      { uuid: '2', title: 't', balance: 0, status: 'approved' },
     ];
 
     expect(
       accountsOverviewReducer(
         testInitState,
         {
-          type: 'INIT_ACCOUNT',
+          type: ActionTypes.INIT_ACCOUNT,
           data: stateOne,
         }),
     ).toEqual(stateOne);
@@ -77,7 +32,7 @@ describe('accountsOverviewReducer', () => {
       accountsOverviewReducer(
         stateOne,
         {
-          type: 'INIT_ACCOUNT',
+          type: ActionTypes.INIT_ACCOUNT,
           data: stateTwo,
         },
       ),
@@ -87,48 +42,16 @@ describe('accountsOverviewReducer', () => {
   it('should handle ADD_ACCOUNT', () => {
 
     const stateOne: AccountInterface[] = [
-      {
-        id: 'id',
-        title: 'test',
-        description: 'test',
-        transactions: [
-          {
-            id: 'id',
-            title: 'test',
-          },
-          {
-            id: 'id',
-            title: 'test',
-          },
-        ],
-      },
+      { uuid: '0x1', title: 't', balance: 0, status: 'approved' },
     ];
-    const newAccount = {
-      id: 'id',
-      title: 'test',
-      description: 'test',
-      transactions: [
-        {
-          id: 'id',
-          title: 'test',
-        },
-        {
-          id: 'id',
-          title: 'test',
-        },
-        {
-          id: 'id',
-          title: 'test',
-        },
-      ],
-    };
+    const newAccount = { uuid: '2', title: 't', balance: 0, status: 'approved' };
     const stateTwo: AccountInterface[] = [...stateOne, newAccount];
 
     expect(
       accountsOverviewReducer(
         testInitState,
         {
-          type: 'INIT_ACCOUNT',
+          type: ActionTypes.INIT_ACCOUNT,
           data: stateOne,
         }),
     ).toEqual(stateOne);
@@ -137,7 +60,7 @@ describe('accountsOverviewReducer', () => {
       accountsOverviewReducer(
         stateOne,
         {
-          type: 'ADD_ACCOUNT',
+          type: ActionTypes.ADD_ACCOUNT,
           data: newAccount,
         }),
     ).toEqual(stateTwo);

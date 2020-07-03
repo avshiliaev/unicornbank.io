@@ -3,22 +3,30 @@ import { connect } from 'react-redux';
 import FlexGridAccount from '../../../components/layout/flex.grid.account';
 import BreadCrumbBasic from '../../../components/layout/breadcrumb.basic';
 import TransactionsTable from '../../../components/transactions.table';
-import { AccountInterface } from '../../../interfaces/account.interface';
+import { AccountReducerState } from '../../../interfaces/account.interface';
+import CommonBalance from '../../../components/common.balance';
 
-const AccountHomeRoute = ({ windowSize, location, account, ...rest }) => {
+interface Props {
+  windowSize: any,
+  location: any,
+  account: AccountReducerState,
+  path: any
+}
 
-  const theAccount: AccountInterface = account;
+const AccountHomeRoute = ({ windowSize, location, account, ...rest }: Props) => {
 
-  return theAccount.id !== undefined
+  return account.loading === false
     ? (
       <FlexGridAccount
         breadCrumbs={<BreadCrumbBasic location={location}/>}
         windowSize={windowSize}
-        slotOne={<TransactionsTable transactions={theAccount.transactions}/>}
-        slotTwo={(<div>Right Column</div>)}
+        slotOne={<TransactionsTable transactions={account.data.transactions}/>}
+        slotTwo={(<CommonBalance value={account.data.balance}/>)}
       />
     )
-    : <div/>;
+    : (
+      <div>loading...</div>
+    );
 };
 
 const mapStateToProps = (state) => {

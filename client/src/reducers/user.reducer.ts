@@ -1,22 +1,27 @@
-import userService from '../services/user.service';
-import { UserInterface } from '../interfaces/user.interface';
+import { UserAction, UserInterface, UserReducerState } from '../interfaces/user.interface';
+import { ActionTypes } from '../constants';
 
-const getUser = (userId: string) => {
-  return async dispatch => {
-    const theUser = await userService.getUser(userId);
-    dispatch({
-      type: 'GET_USER',
-      data: theUser,
-    });
+const getUser = (userId: string): UserAction => {
+  return {
+    type: ActionTypes.GET_USER,
+    params: userId,
+    state: {
+      loading: true,
+      error: false,
+    },
   };
 };
 
 export { getUser };
 
-const userReducer = (state: UserInterface | Object, action): UserInterface | Object => {
+const userReducer = (state: UserReducerState, action: UserAction): UserReducerState => {
   switch (action.type) {
-    case 'GET_USER':
-      return { ...state, ...action.data };
+    case ActionTypes.GET_USER:
+      return { ...state, ...action.state };
+    case ActionTypes.GET_USER_SUCCESS:
+      return { ...state, ...action.state };
+    case ActionTypes.GET_USER_ERROR:
+      return { ...state, ...action.state };
     default:
       return { ...state };
   }

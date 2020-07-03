@@ -1,43 +1,8 @@
-import React, { useState } from 'react';
-import { Avatar, Badge, Button, Col, List, Row } from 'antd';
-import ActionIcon from './action.icon';
+import React from 'react';
+import { Avatar, Badge, List, Space, Statistic } from 'antd';
 import { Link } from '@reach/router';
-import { CodeOutlined, FundProjectionScreenOutlined, StarOutlined } from '@ant-design/icons';
 import { AccountInterface } from '../interfaces/account.interface';
-
-const Selector = ({ onClick, windowSize }) => {
-
-  return (
-    <Row
-      gutter={[0, 16]}
-      justify="start"
-    >
-      <Col xs={0} sm={12} md={12} lg={12} xl={12} xxl={12}>
-        <Row justify="start" align="middle">
-          <Col>
-            <h4>Accounts</h4>
-          </Col>
-        </Row>
-      </Col>
-      <Col xs={24} sm={12} md={12} lg={12} xl={12} xxl={12}>
-        <Row justify={windowSize.small ? 'end' : 'center'} align="middle" gutter={16}>
-          <Col>
-            <Button shape="round" onClick={() => onClick('all')}>all</Button>
-          </Col>
-          <Col>
-            <Button shape="circle" icon={<CodeOutlined/>} onClick={() => onClick('asDeveloper')}/>
-          </Col>
-          <Col>
-            <Button shape="circle" icon={<FundProjectionScreenOutlined/>} onClick={() => onClick('asHost')}/>
-          </Col>
-          <Col>
-            <Button shape="circle" icon={<StarOutlined/>} onClick={() => onClick('starred')}/>
-          </Col>
-        </Row>
-      </Col>
-    </Row>
-  );
-};
+import { CheckCircleOutlined, SyncOutlined } from '@ant-design/icons';
 
 const AccountAvatar = ({ badgeNumber, text }) => {
 
@@ -48,41 +13,58 @@ const AccountAvatar = ({ badgeNumber, text }) => {
   );
 };
 
-const AccountsList = ({ accountsOverview, windowSize }) => {
+const AccountAmount = ({ value }) => {
+  return (
+    <Statistic
+      value={value}
+      precision={2}
+      valueStyle={value > 0 ? { color: '' } : { color: '#cf1322' }}
+      suffix="€"
+    />
+  );
+};
 
-  const accountsState: AccountInterface[] = accountsOverview;
+const AccountTitle = ({ status, link, title }) => {
+  return (
+    <Space>
+      <Link to={link}>{title}</Link>
+      {status === 'approved' ? <CheckCircleOutlined/> : <SyncOutlined spin/>}
+    </Space>
+  );
+};
 
-  const [toDisplay, setToDisplay] = useState('all');
+interface Props {
+  accounts: AccountInterface[],
+  windowSize: any,
+  loading: boolean,
+}
+
+const AccountsList = ({ accounts, windowSize, loading }: Props) => {
 
   return (
     <div>
-      <Selector windowSize={windowSize} onClick={setToDisplay}/>
       <List
+        loading={loading}
         itemLayout={!windowSize.large ? 'vertical' : 'horizontal'}
-        dataSource={accountsState}
+        dataSource={accounts}
         renderItem={account => {
-          const link = `/account/${account.id}/home`;
-          const ava = account.title.charAt(0);
-          const openTransactions = () => console.log('transactions');
-          const numberTransactions = `transactions: ${account.transactions.length}`;
-          const openWorkers = () => console.log('developers');
+          const link = `/account/${account.uuid}/home`;
+          const description = 'DE34 0932 2356 9305 04';
+          const status = account.status;
           return (
             <List.Item actions={[
-              <ActionIcon text={3} action={openWorkers}/>,
-              <ActionIcon text={numberTransactions} action={openTransactions}/>,
-              <div>Del</div>,
+              <AccountAmount value={account.balance}/>,
             ]}>
               <List.Item.Meta
-                avatar={<AccountAvatar text={ava} badgeNumber={account.transactions.length}/>}
-                title={<Link to={link}>{account.title}</Link>}
-                description={account.description}
+                avatar={<AccountAvatar text={'G'} badgeNumber={account.transactions?.length}/>}
+                title={<AccountTitle status={account.status} link={link} title={'GiroX Konto+'}/>}
+                description={description}
               />
             </List.Item>
           );
         }}
       />
     </div>
-
   );
 };
 

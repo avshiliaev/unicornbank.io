@@ -1,5 +1,6 @@
 import accountReducer from '../account.reducer';
 import { AccountInterface } from '../../interfaces/account.interface';
+import ActionTypes from '../../constants';
 
 describe('accountReducer', () => {
   it('should return the initial state', () => {
@@ -7,14 +8,14 @@ describe('accountReducer', () => {
   });
 
   it('should handle GET_ACCOUNT', () => {
-    const accountOne: AccountInterface = { id: '1', title: '1', description: "test" };
-    const accountTwo: AccountInterface = { id: '2', title: '2', description: "test" };
+    const accountOne: AccountInterface = { uuid: '1', title: 't', balance: 0, status: 'approved' };
+    const accountTwo: AccountInterface = { uuid: '2', title: 't', balance: 1, status: 'approved' };
 
     expect(
       accountReducer(
         {},
         {
-          type: 'GET_ACCOUNT',
+          type: ActionTypes.GET_ACCOUNT,
           data: accountOne,
         }),
     ).toEqual(accountOne);
@@ -23,7 +24,7 @@ describe('accountReducer', () => {
       accountReducer(
         accountOne,
         {
-          type: 'GET_ACCOUNT',
+          type: ActionTypes.GET_ACCOUNT,
           data: accountTwo,
         },
       ),

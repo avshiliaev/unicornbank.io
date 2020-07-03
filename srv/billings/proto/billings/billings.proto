@@ -5,13 +5,9 @@ option go_package = "proto/billings;go_micro_service_billings";
 // Events
 message TransactionType {
 	string account = 1;
-	string uuid = 2;
-	string status = 3;
-	float amount = 4;
-}
-message TransactionProcessedType {
-	string account = 1;
-	string uuid = 2;
-	string status = 3;
-	float amount = 4;
+	float amount = 2;
+	string info = 3;
+	string status = 4;
+	int64 timestamp = 5;
+	string uuid = 6;
 }

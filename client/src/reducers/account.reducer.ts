@@ -1,25 +1,30 @@
-import accountService from '../services/account.detail.service';
-import { AccountInterface } from '../interfaces/account.interface';
+import { AccountAction, AccountInterface, AccountReducerState } from '../interfaces/account.interface';
+import { ActionTypes } from '../constants';
 
-const getAccount = (accountId: string) => {
-  return async dispatch => {
-    const account = await accountService.queryAccount(accountId);
-    dispatch({
-      type: 'GET_ACCOUNT',
-      data: account,
-    });
+const getAccount = (accountId: string): AccountAction => {
+  return {
+    type: ActionTypes.GET_ACCOUNT_DETAIL,
+    params: accountId,
+    state: {
+      loading: true,
+      error: false,
+    },
   };
 };
 
 export { getAccount };
 
 const accountReducer = (
-  state: AccountInterface | Object,
-  action,
+  state: AccountReducerState,
+  action: AccountAction,
 ): AccountInterface | Object => {
   switch (action.type) {
-    case 'GET_ACCOUNT':
-      return { ...state, ...action.data };
+    case ActionTypes.GET_ACCOUNT_DETAIL:
+      return { ...state, ...action.state };
+    case ActionTypes.GET_ACCOUNT_DETAIL_SUCCESS:
+      return { ...state, ...action.state };
+    case ActionTypes.GET_ACCOUNT_DETAIL_ERROR:
+      return { ...state, ...action.state };
     default:
       return { ...state };
   }
