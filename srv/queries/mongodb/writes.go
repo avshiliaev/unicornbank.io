@@ -26,7 +26,7 @@ func QueriesCollection() *mongo.Collection {
 
 func CreateAccount(acc *queries.AccountEvent, ctx context.Context, coll *mongo.Collection) *mongo.InsertOneResult {
 
-	account := AccountsModel{
+	account := AccountsWrite{
 		Balance: acc.Balance,
 		Profile: acc.Profile,
 		Status:  acc.Status,
@@ -41,8 +41,8 @@ func CreateAccount(acc *queries.AccountEvent, ctx context.Context, coll *mongo.C
 
 func UpdateAccount(acc *queries.AccountEvent, ctx context.Context, coll *mongo.Collection) *mongo.UpdateResult {
 
-	filter := AccountsModel{Uuid: acc.Uuid}
-	account := AccountsModel{
+	filter := AccountsWrite{Uuid: acc.Uuid}
+	account := AccountsWrite{
 		Balance: acc.Balance,
 		Profile: acc.Profile,
 		Status:  acc.Status,
@@ -63,8 +63,8 @@ func UpdateAccount(acc *queries.AccountEvent, ctx context.Context, coll *mongo.C
 
 func CreateTransaction(tr *queries.TransactionEvent, ctx context.Context, coll *mongo.Collection) *mongo.UpdateResult {
 
-	filter := AccountsModel{Uuid: tr.Account}
-	transaction := TransactionsModel{
+	filter := AccountsWrite{Uuid: tr.Account}
+	transaction := TransactionsWrite{
 		Account:   tr.Account,
 		Amount:    tr.Amount,
 		Info:      tr.Info,
@@ -86,7 +86,7 @@ func CreateTransaction(tr *queries.TransactionEvent, ctx context.Context, coll *
 
 func UpdateTransaction(tr *queries.TransactionEvent, ctx context.Context, coll *mongo.Collection) *mongo.UpdateResult {
 
-	transaction := TransactionsModel{
+	transaction := TransactionsWrite{
 		Account:   tr.Account,
 		Amount:    tr.Amount,
 		Info:      tr.Info,

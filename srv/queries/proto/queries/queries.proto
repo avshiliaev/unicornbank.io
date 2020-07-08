@@ -24,7 +24,7 @@ message TransactionDTO {
   float amount = 2;
   string info = 3;
   string status = 4;
-  string timestamp = 5;
+  string time = 5;
   string uuid = 6;
 }
 message AccountDTO {

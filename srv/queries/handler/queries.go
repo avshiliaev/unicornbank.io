@@ -8,24 +8,26 @@ import (
 	queries "unicornbank.io/srv/queries/proto/queries"
 )
 
-type Queries struct{
+type Queries struct {
 	Coll *mongo.Collection
 }
 
 // Stream is a server side stream handler called via client.Stream or the generated client code
 func (e *Queries) AccountsOverview(ctx context.Context, req *queries.AccountsOverviewRequest, stream queries.Queries_AccountsOverviewStream) error {
+
 	log.Infof("Received Queries.Stream AccountsOverviewRequest to profile: %d", req.Profile)
 
 	// Prepare mongo pipeline
 	pipeline := mongodb.OverviewPipeline(req.Profile)
 
 	// Send the initial state
-	var state []*queries.AccountDTO
+	var state []mongodb.AccountsRead
 	cursor := mongodb.Aggregate(pipeline, e.Coll, ctx)
 	_ = cursor.All(ctx, &state)
+	stateNormalized := NormalizeOverviewStream(state)
 	_ = stream.Send(&queries.AccountsOverviewResponse{
 		Type:    "init",
-		Payload: state,
+		Payload: stateNormalized,
 	})
 
 	// Initialize stream cursor
@@ -37,14 +39,17 @@ func (e *Queries) AccountsOverview(ctx context.Context, req *queries.AccountsOve
 
 	// Iterate over the stream updates
 	for mongoStream.Next(context.TODO()) {
-		var data queries.AccountDTO
-		if err := mongoStream.Decode(&data); err != nil {
+		var update mongodb.AccountsRead
+		if err := mongoStream.Decode(&update); err != nil {
 			log.Fatal(err)
 			break
 		}
+		updateNormalized := NormalizeOverviewStream(
+			append(make([]mongodb.AccountsRead, 0), update),
+		)
 		_ = stream.Send(&queries.AccountsOverviewResponse{
 			Type:    "update",
-			Payload: state,
+			Payload: updateNormalized,
 		})
 	}
 
