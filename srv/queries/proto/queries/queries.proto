@@ -50,7 +50,7 @@ message AccountsOverviewResponse {
 }
 
 message AccountDetailRequest {
-  int64 uuid = 1;
+  string uuid = 1;
 }
 
 message AccountDetailResponse {

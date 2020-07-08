@@ -31,3 +31,26 @@ func NormalizeOverviewStream(input []mongodb.AccountsRead) []*queries.AccountDTO
 	}
 	return accounts
 }
+
+func NormalizeDetailStream(input mongodb.AccountsRead) *queries.AccountDTO {
+	transactions := make([]*queries.TransactionDTO, 0)
+	for _, tr := range input.Transactions {
+		next := queries.TransactionDTO{
+			Account: tr.Account,
+			Amount:  tr.Amount,
+			Info:    tr.Info,
+			Status:  tr.Status,
+			Time:    tr.Time.String(),
+			Uuid:    tr.Uuid,
+		}
+		transactions = append(transactions, &next)
+	}
+	account := queries.AccountDTO{
+		Balance:      input.Balance,
+		Profile:      input.Profile,
+		Status:       input.Status,
+		Transactions: transactions,
+		Uuid:         input.Uuid,
+	}
+	return &account
+}

@@ -20,9 +20,9 @@ func OverviewPipeline(profile string) []bson.M {
 	return pipeline
 }
 
-func DetailPipeline(account string) []bson.M {
+func DetailPipeline(uuid string) []bson.M {
 	pipeline := []bson.M{
-		{"$match": bson.M{"uuid": account}},
+		{"$match": bson.M{"uuid": uuid}},
 		// Sort
 		// {"$unwind": "$transactions"},
 		// {"$sort": bson.M{"transactions.timestamp": -1}},
