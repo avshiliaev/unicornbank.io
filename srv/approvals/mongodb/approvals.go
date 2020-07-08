@@ -30,7 +30,7 @@ func AccountsCollection() *mongo.Collection {
 	return collection
 }
 
-func CreateOne(acc *accounts.AccountType, ctx context.Context, coll *mongo.Collection) *mongo.InsertOneResult {
+func CreateOne(acc *accounts.AccountEvent, ctx context.Context, coll *mongo.Collection) *mongo.InsertOneResult {
 
 	account := AccountsModel{
 		Status:  acc.Status,

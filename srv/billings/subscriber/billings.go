@@ -17,12 +17,12 @@ type TransactionCreated struct {
 	Coll                   *mongo.Collection
 }
 
-func (e *TransactionCreated) Handle(ctx context.Context, transactionCreated *billings.TransactionType) error {
+func (e *TransactionCreated) Handle(ctx context.Context, transactionCreated *billings.TransactionEvent) error {
 	log.Info("Handler Received message: ", transactionCreated.Uuid)
 
 	time.Sleep(2 * time.Second)
 	status := "processed"
-	transactionProcessed := billings.TransactionType{
+	transactionProcessed := billings.TransactionEvent{
 		Account: transactionCreated.Account,
 		Status:  status,
 		Uuid:    transactionCreated.Uuid,

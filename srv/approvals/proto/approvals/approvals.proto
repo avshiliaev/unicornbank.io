@@ -3,7 +3,7 @@ syntax = "proto3";
 option go_package = "proto/approvals;go_micro_service_approvals";
 
 // Events
-message AccountType {
+message AccountEvent {
   float balance = 1;
   string profile = 2;
   string status = 3;

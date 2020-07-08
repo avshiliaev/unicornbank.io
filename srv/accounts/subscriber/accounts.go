@@ -16,7 +16,7 @@ type AccountApproval struct {
 	Coll              *mongo.Collection
 }
 
-func (e *AccountApproval) Handle(ctx context.Context, msg *accounts.AccountType) error {
+func (e *AccountApproval) Handle(ctx context.Context, msg *accounts.AccountEvent) error {
 	log.Info("Handler Received message: ", msg.Uuid)
 
 	accountUpdated := mongodb.GetOne(msg.Uuid, ctx, e.Coll)
@@ -41,7 +41,7 @@ type TransactionPlaced struct {
 
 // TODO a good place for the saga pattern:
 // The transaction is deducted RIGHT away, but then can be compensated if not processed by billing
-func (e *TransactionPlaced) Handle(ctx context.Context, transactionPlaced *accounts.TransactionType) error {
+func (e *TransactionPlaced) Handle(ctx context.Context, transactionPlaced *accounts.TransactionEvent) error {
 	log.Info("Handler Received message: ", transactionPlaced.Uuid)
 
 	account := mongodb.GetOne(transactionPlaced.Account, ctx, e.Coll)
@@ -49,7 +49,7 @@ func (e *TransactionPlaced) Handle(ctx context.Context, transactionPlaced *accou
 
 	mongodb.UpdateReplaceOne(account, ctx, e.Coll)
 
-	accountUpdated := accounts.AccountType{
+	accountUpdated := accounts.AccountEvent{
 		Balance: account.Balance,
 		Profile: account.Profile,
 		Status:  account.Status,

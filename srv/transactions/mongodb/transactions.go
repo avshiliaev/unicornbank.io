@@ -35,7 +35,7 @@ func TransactionsCollection() *mongo.Collection {
 	return collection
 }
 
-func CreateOne(tr *transactions.TransactionType, ctx context.Context, coll *mongo.Collection) *mongo.InsertOneResult {
+func CreateOne(tr *transactions.TransactionEvent, ctx context.Context, coll *mongo.Collection) *mongo.InsertOneResult {
 
 	transaction := TransactionsModel{
 		Account:   tr.Account,
@@ -52,14 +52,14 @@ func CreateOne(tr *transactions.TransactionType, ctx context.Context, coll *mong
 	return result
 }
 
-func GetOne(uuid string, ctx context.Context, coll *mongo.Collection) *transactions.TransactionType {
+func GetOne(uuid string, ctx context.Context, coll *mongo.Collection) *transactions.TransactionEvent {
 
 	filter := TransactionsModel{Uuid: uuid}
 	var result TransactionsModel
 	if err := coll.FindOne(ctx, filter).Decode(&result); err != nil {
 		log.Fatal(err)
 	}
-	tr := transactions.TransactionType{
+	tr := transactions.TransactionEvent{
 		Account:   result.Account,
 		Amount:    result.Amount,
 		Info:      result.Info,
@@ -70,7 +70,7 @@ func GetOne(uuid string, ctx context.Context, coll *mongo.Collection) *transacti
 	return &tr
 }
 
-func UpdateReplaceOne(tr *transactions.TransactionType, ctx context.Context, coll *mongo.Collection) *mongo.UpdateResult {
+func UpdateReplaceOne(tr *transactions.TransactionEvent, ctx context.Context, coll *mongo.Collection) *mongo.UpdateResult {
 
 	filter := TransactionsModel{Uuid: tr.Uuid}
 	transaction := TransactionsModel{

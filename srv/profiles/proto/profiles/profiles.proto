@@ -3,13 +3,13 @@ syntax = "proto3";
 option go_package = "proto/profiles;go_micro_service_profiles";
 
 // Events
-message AccountType {
+message AccountEvent {
   float balance = 1;
   string profile = 2;
   string status = 3;
   string uuid = 4;
 }
-message TransactionType {
+message TransactionEvent {
   string account = 1;
   float amount = 2;
   string info = 3;

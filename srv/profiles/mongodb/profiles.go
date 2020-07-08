@@ -43,7 +43,7 @@ func ProfilesCollection() *mongo.Collection {
 	return collection
 }
 
-func CreateAccount(acc *profiles.AccountType, ctx context.Context, coll *mongo.Collection) *mongo.InsertOneResult {
+func CreateAccount(acc *profiles.AccountEvent, ctx context.Context, coll *mongo.Collection) *mongo.InsertOneResult {
 
 	account := AccountsModel{
 		Balance: acc.Balance,
@@ -58,7 +58,7 @@ func CreateAccount(acc *profiles.AccountType, ctx context.Context, coll *mongo.C
 	return result
 }
 
-func UpdateAccount(acc *profiles.AccountType, ctx context.Context, coll *mongo.Collection) *mongo.UpdateResult {
+func UpdateAccount(acc *profiles.AccountEvent, ctx context.Context, coll *mongo.Collection) *mongo.UpdateResult {
 
 	filter := AccountsModel{Uuid: acc.Uuid}
 	account := AccountsModel{
@@ -80,7 +80,7 @@ func UpdateAccount(acc *profiles.AccountType, ctx context.Context, coll *mongo.C
 	return result
 }
 
-func CreateTransaction(tr *profiles.TransactionType, ctx context.Context, coll *mongo.Collection) *mongo.UpdateResult {
+func CreateTransaction(tr *profiles.TransactionEvent, ctx context.Context, coll *mongo.Collection) *mongo.UpdateResult {
 
 	filter := AccountsModel{Uuid: tr.Account}
 	transaction := TransactionsModel{
@@ -103,7 +103,7 @@ func CreateTransaction(tr *profiles.TransactionType, ctx context.Context, coll *
 	return result
 }
 
-func UpdateTransaction(tr *profiles.TransactionType, ctx context.Context, coll *mongo.Collection) *mongo.UpdateResult {
+func UpdateTransaction(tr *profiles.TransactionEvent, ctx context.Context, coll *mongo.Collection) *mongo.UpdateResult {
 
 	transaction := TransactionsModel{
 		Account:   tr.Account,

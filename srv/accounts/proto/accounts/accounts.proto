@@ -3,13 +3,13 @@ syntax = "proto3";
 option go_package = "proto/accounts;go_micro_service_accounts";
 
 // Events
-message AccountType {
+message AccountEvent {
   float balance = 1;
   string profile = 2;
   string status = 3;
   string uuid = 4;
 }
-message TransactionType {
+message TransactionEvent {
   string account = 1;
   float amount = 2;
   string info = 3;
@@ -20,5 +20,5 @@ message TransactionType {
 
 // gRPC
 service Accounts {
-  rpc Create(AccountType) returns (AccountType) {}
+  rpc Create(AccountEvent) returns (AccountEvent) {}
 }

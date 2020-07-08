@@ -3,7 +3,7 @@ syntax = "proto3";
 option go_package = "proto/billings;go_micro_service_billings";
 
 // Events
-message TransactionType {
+message TransactionEvent {
 	string account = 1;
 	float amount = 2;
 	string info = 3;
