@@ -5,13 +5,13 @@ MODIFY=Mgithub.com/micro/go-micro/api/proto/api.proto=github.com/micro/go-micro/
 .PHONY: proto
 proto:
     
-	protoc --proto_path=. --micro_out=${MODIFY}:. --go_out=${MODIFY}:. proto/websocket/websocket.proto
+	protoc --proto_path=. --micro_out=${MODIFY}:. --go_out=${MODIFY}:. proto/wsproxy/wsproxy.proto
     
 
 .PHONY: build
 build: proto
 
-	go build -o websocket-service *.go
+	go build -o wsproxy-service *.go
 
 .PHONY: test
 test:
@@ -19,4 +19,4 @@ test:
 
 .PHONY: docker
 docker:
-	docker build . -t websocket-service:latest
+	docker build . -t wsproxy-service:latest

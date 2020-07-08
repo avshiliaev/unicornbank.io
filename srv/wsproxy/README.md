@@ -1,11 +1,11 @@
-# Websocket Service
+# Wsproxy Service
 
-This is the Websocket service
+This is the Wsproxy service
 
 Generated with
 
 ```
-micro new --namespace=go.micro --type=service srv/websocket-proxy
+micro new --namespace=go.micro --type=service srv/wsproxy
 ```
 
 ## Getting Started
@@ -16,9 +16,9 @@ micro new --namespace=go.micro --type=service srv/websocket-proxy
 
 ## Configuration
 
-- FQDN: go.micro.service.websocket
+- FQDN: go.micro.service.wsproxy
 - Type: service
-- Alias: websocket
+- Alias: wsproxy
 
 ## Dependencies
 
@@ -46,7 +46,7 @@ make build
 
 Run the service
 ```
-./websocket-service
+./wsproxy-service
 ```
 
 Build a docker image
