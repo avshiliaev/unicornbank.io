@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+option go_package = "proto/queries;go_micro_service_queries";
+
+// Events
+message AccountType {
+	float balance = 1;
+	string profile = 2;
+	string status = 3;
+	string uuid = 4;
+}
+message TransactionType {
+	string account = 1;
+	float amount = 2;
+	string info = 3;
+	string status = 4;
+	int64 timestamp = 5;
+	string uuid = 6;
+}
+
+service Queries {
+	rpc AccountsOverviewStream(StreamingRequest) returns (stream StreamingResponse) {}
+	rpc AccountDetailStream(StreamingRequest) returns (stream StreamingResponse) {}
+}
+
+message StreamingRequest {
+	int64 count = 1;
+}
+
+message StreamingResponse {
+	int64 count = 1;
+}
