@@ -39,8 +39,8 @@ func main() {
 	// MongoDB connection
 	coll := mongodb.QueriesCollection()
 
-	// Register Handler
-	queries.RegisterQueriesHandler(service.Server(), new(handler.Queries))
+	// Register Stream Handlers
+	_ = queries.RegisterQueriesHandler(service.Server(), &handler.Queries{Coll: coll})
 
 	// Register Subscribers
 	if err := micro.RegisterSubscriber(
