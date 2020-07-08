@@ -3,132 +3,47 @@ package mongodb
 import (
 	"context"
 	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"log"
-	"os"
-	queries "unicornbank.io/srv/queries/proto/queries"
 )
 
-type TransactionsModel struct {
-	ID        primitive.ObjectID `bson:"_id,omitempty"`
-	Account   string             `bson:"account,omitempty"`
-	Amount    float32            `bson:"amount,omitempty"`
-	Info      string             `bson:"info,omitempty"`
-	Status    string             `bson:"status,omitempty"`
-	Timestamp int64              `bson:"timestamp,omitempty"`
-	Uuid      string             `bson:"uuid,omitempty"`
-}
-type AccountsModel struct {
-	ID           primitive.ObjectID  `bson:"_id,omitempty"`
-	Balance      float32             `bson:"balance,omitempty"`
-	Profile      string              `bson:"profile,omitempty"`
-	Status       string              `bson:"status,omitempty"`
-	Transactions []TransactionsModel `bson:"transactions,omitempty"`
-	Uuid         string              `bson:"uuid,omitempty"`
-}
+func Aggregate(pipeline []bson.M, coll *mongo.Collection, ctx context.Context) *mongo.Cursor {
 
-func QueriesCollection() *mongo.Collection {
-
-	uri := os.Getenv("MONGO_URI")
-	db := os.Getenv("MONGO_DATABASE")
-	coll := os.Getenv("MONGO_COLLECTION")
-
-	client, err := mongo.Connect(context.Background(), options.Client().ApplyURI(uri))
+	cursor, err := coll.Aggregate(ctx, pipeline)
 	if err != nil {
-		log.Print("MongoDB Connected, errors: ", err)
+		log.Fatal(err)
 	}
-	collection := client.Database(db).Collection(coll)
-	return collection
+	return cursor
 }
 
-func CreateAccount(acc *queries.AccountType, ctx context.Context, coll *mongo.Collection) *mongo.InsertOneResult {
+func StreamChanges(pipeline []bson.M, coll *mongo.Collection) (*mongo.ChangeStream, error) {
 
-	account := AccountsModel{
-		Balance: acc.Balance,
-		Profile: acc.Profile,
-		Status:  acc.Status,
-		Uuid:    acc.Uuid,
+	// Subscribe to changes stream
+	fullDoc := options.FullDocument("updateLookup")
+	opts := options.ChangeStreamOptions{
+		FullDocument: &fullDoc,
 	}
-	result, err := coll.InsertOne(ctx, &account)
-	if err != nil {
-		log.Print(err)
+	pre := []bson.M{
+		{"$match": bson.M{"$or": bson.A{
+			bson.M{"operationType": "insert"},
+			bson.M{"operationType": "update"},
+			bson.M{"operationType": "replace"},
+		}}},
+		{"$replaceRoot": bson.M{"newRoot": bson.M{"$mergeObjects": bson.A{"$fullDocument", "$$ROOT"}}}},
 	}
-	return result
-}
+	stages := [][]bson.M{
+		pre,
+		pipeline,
+	}
+	var pipelineStream []bson.M
+	for _, r := range stages {
+		pipelineStream = append(pipelineStream, r...)
+	}
+	stream, errChangeStream := coll.Watch(context.TODO(), pipelineStream, &opts)
+	if errChangeStream != nil {
+		panic(errChangeStream)
+	}
+	return stream, errChangeStream
 
-func UpdateAccount(acc *queries.AccountType, ctx context.Context, coll *mongo.Collection) *mongo.UpdateResult {
-
-	filter := AccountsModel{Uuid: acc.Uuid}
-	account := AccountsModel{
-		Balance: acc.Balance,
-		Profile: acc.Profile,
-		Status:  acc.Status,
-		Uuid:    acc.Uuid,
-	}
-	result, err := coll.UpdateOne(
-		ctx,
-		filter,
-		bson.D{
-			{"$set", account},
-		},
-	)
-	if err != nil {
-		log.Print(err)
-	}
-	return result
-}
-
-func CreateTransaction(tr *queries.TransactionType, ctx context.Context, coll *mongo.Collection) *mongo.UpdateResult {
-
-	filter := AccountsModel{Uuid: tr.Account}
-	transaction := TransactionsModel{
-		Account:   tr.Account,
-		Amount:    tr.Amount,
-		Info:      tr.Info,
-		Status:    tr.Status,
-		Timestamp: tr.Timestamp,
-		Uuid:      tr.Uuid,
-	}
-	change := bson.M{"$push": bson.M{"transactions": transaction}}
-	result, err := coll.UpdateOne(
-		ctx,
-		filter,
-		change,
-	)
-	if err != nil {
-		log.Print(err)
-	}
-	return result
-}
-
-func UpdateTransaction(tr *queries.TransactionType, ctx context.Context, coll *mongo.Collection) *mongo.UpdateResult {
-
-	transaction := TransactionsModel{
-		Account:   tr.Account,
-		Amount:    tr.Amount,
-		Info:      tr.Info,
-		Status:    tr.Status,
-		Timestamp: tr.Timestamp,
-		Uuid:      tr.Uuid,
-	}
-	filter := bson.M{
-		"uuid":              tr.Account,
-		"transactions.uuid": tr.Uuid,
-	}
-	update := bson.M{
-		"$set": bson.M{
-			"transactions.$": transaction,
-		},
-	}
-	result, err := coll.UpdateOne(
-		ctx,
-		filter,
-		update,
-	)
-	if err != nil {
-		log.Print(err)
-	}
-	return result
 }

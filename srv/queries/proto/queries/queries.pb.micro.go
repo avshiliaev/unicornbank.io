@@ -42,8 +42,8 @@ func NewQueriesEndpoints() []*api.Endpoint {
 // Client API for Queries service
 
 type QueriesService interface {
-	AccountsOverviewStream(ctx context.Context, in *StreamingRequest, opts ...client.CallOption) (Queries_AccountsOverviewStreamService, error)
-	AccountDetailStream(ctx context.Context, in *StreamingRequest, opts ...client.CallOption) (Queries_AccountDetailStreamService, error)
+	AccountsOverview(ctx context.Context, in *AccountsOverviewRequest, opts ...client.CallOption) (Queries_AccountsOverviewService, error)
+	AccountDetail(ctx context.Context, in *AccountDetailRequest, opts ...client.CallOption) (Queries_AccountDetailService, error)
 }
 
 type queriesService struct {
@@ -58,8 +58,8 @@ func NewQueriesService(name string, c client.Client) QueriesService {
 	}
 }
 
-func (c *queriesService) AccountsOverviewStream(ctx context.Context, in *StreamingRequest, opts ...client.CallOption) (Queries_AccountsOverviewStreamService, error) {
-	req := c.c.NewRequest(c.name, "Queries.AccountsOverviewStream", &StreamingRequest{})
+func (c *queriesService) AccountsOverview(ctx context.Context, in *AccountsOverviewRequest, opts ...client.CallOption) (Queries_AccountsOverviewService, error) {
+	req := c.c.NewRequest(c.name, "Queries.AccountsOverview", &AccountsOverviewRequest{})
 	stream, err := c.c.Stream(ctx, req, opts...)
 	if err != nil {
 		return nil, err
@@ -67,39 +67,39 @@ func (c *queriesService) AccountsOverviewStream(ctx context.Context, in *Streami
 	if err := stream.Send(in); err != nil {
 		return nil, err
 	}
-	return &queriesServiceAccountsOverviewStream{stream}, nil
+	return &queriesServiceAccountsOverview{stream}, nil
 }
 
-type Queries_AccountsOverviewStreamService interface {
+type Queries_AccountsOverviewService interface {
 	Context() context.Context
 	SendMsg(interface{}) error
 	RecvMsg(interface{}) error
 	Close() error
-	Recv() (*StreamingResponse, error)
+	Recv() (*AccountsOverviewResponse, error)
 }
 
-type queriesServiceAccountsOverviewStream struct {
+type queriesServiceAccountsOverview struct {
 	stream client.Stream
 }
 
-func (x *queriesServiceAccountsOverviewStream) Close() error {
+func (x *queriesServiceAccountsOverview) Close() error {
 	return x.stream.Close()
 }
 
-func (x *queriesServiceAccountsOverviewStream) Context() context.Context {
+func (x *queriesServiceAccountsOverview) Context() context.Context {
 	return x.stream.Context()
 }
 
-func (x *queriesServiceAccountsOverviewStream) SendMsg(m interface{}) error {
+func (x *queriesServiceAccountsOverview) SendMsg(m interface{}) error {
 	return x.stream.Send(m)
 }
 
-func (x *queriesServiceAccountsOverviewStream) RecvMsg(m interface{}) error {
+func (x *queriesServiceAccountsOverview) RecvMsg(m interface{}) error {
 	return x.stream.Recv(m)
 }
 
-func (x *queriesServiceAccountsOverviewStream) Recv() (*StreamingResponse, error) {
-	m := new(StreamingResponse)
+func (x *queriesServiceAccountsOverview) Recv() (*AccountsOverviewResponse, error) {
+	m := new(AccountsOverviewResponse)
 	err := x.stream.Recv(m)
 	if err != nil {
 		return nil, err
@@ -107,8 +107,8 @@ func (x *queriesServiceAccountsOverviewStream) Recv() (*StreamingResponse, error
 	return m, nil
 }
 
-func (c *queriesService) AccountDetailStream(ctx context.Context, in *StreamingRequest, opts ...client.CallOption) (Queries_AccountDetailStreamService, error) {
-	req := c.c.NewRequest(c.name, "Queries.AccountDetailStream", &StreamingRequest{})
+func (c *queriesService) AccountDetail(ctx context.Context, in *AccountDetailRequest, opts ...client.CallOption) (Queries_AccountDetailService, error) {
+	req := c.c.NewRequest(c.name, "Queries.AccountDetail", &AccountDetailRequest{})
 	stream, err := c.c.Stream(ctx, req, opts...)
 	if err != nil {
 		return nil, err
@@ -116,39 +116,39 @@ func (c *queriesService) AccountDetailStream(ctx context.Context, in *StreamingR
 	if err := stream.Send(in); err != nil {
 		return nil, err
 	}
-	return &queriesServiceAccountDetailStream{stream}, nil
+	return &queriesServiceAccountDetail{stream}, nil
 }
 
-type Queries_AccountDetailStreamService interface {
+type Queries_AccountDetailService interface {
 	Context() context.Context
 	SendMsg(interface{}) error
 	RecvMsg(interface{}) error
 	Close() error
-	Recv() (*StreamingResponse, error)
+	Recv() (*AccountDetailResponse, error)
 }
 
-type queriesServiceAccountDetailStream struct {
+type queriesServiceAccountDetail struct {
 	stream client.Stream
 }
 
-func (x *queriesServiceAccountDetailStream) Close() error {
+func (x *queriesServiceAccountDetail) Close() error {
 	return x.stream.Close()
 }
 
-func (x *queriesServiceAccountDetailStream) Context() context.Context {
+func (x *queriesServiceAccountDetail) Context() context.Context {
 	return x.stream.Context()
 }
 
-func (x *queriesServiceAccountDetailStream) SendMsg(m interface{}) error {
+func (x *queriesServiceAccountDetail) SendMsg(m interface{}) error {
 	return x.stream.Send(m)
 }
 
-func (x *queriesServiceAccountDetailStream) RecvMsg(m interface{}) error {
+func (x *queriesServiceAccountDetail) RecvMsg(m interface{}) error {
 	return x.stream.Recv(m)
 }
 
-func (x *queriesServiceAccountDetailStream) Recv() (*StreamingResponse, error) {
-	m := new(StreamingResponse)
+func (x *queriesServiceAccountDetail) Recv() (*AccountDetailResponse, error) {
+	m := new(AccountDetailResponse)
 	err := x.stream.Recv(m)
 	if err != nil {
 		return nil, err
@@ -159,14 +159,14 @@ func (x *queriesServiceAccountDetailStream) Recv() (*StreamingResponse, error) {
 // Server API for Queries service
 
 type QueriesHandler interface {
-	AccountsOverviewStream(context.Context, *StreamingRequest, Queries_AccountsOverviewStreamStream) error
-	AccountDetailStream(context.Context, *StreamingRequest, Queries_AccountDetailStreamStream) error
+	AccountsOverview(context.Context, *AccountsOverviewRequest, Queries_AccountsOverviewStream) error
+	AccountDetail(context.Context, *AccountDetailRequest, Queries_AccountDetailStream) error
 }
 
 func RegisterQueriesHandler(s server.Server, hdlr QueriesHandler, opts ...server.HandlerOption) error {
 	type queries interface {
-		AccountsOverviewStream(ctx context.Context, stream server.Stream) error
-		AccountDetailStream(ctx context.Context, stream server.Stream) error
+		AccountsOverview(ctx context.Context, stream server.Stream) error
+		AccountDetail(ctx context.Context, stream server.Stream) error
 	}
 	type Queries struct {
 		queries
@@ -179,82 +179,82 @@ type queriesHandler struct {
 	QueriesHandler
 }
 
-func (h *queriesHandler) AccountsOverviewStream(ctx context.Context, stream server.Stream) error {
-	m := new(StreamingRequest)
+func (h *queriesHandler) AccountsOverview(ctx context.Context, stream server.Stream) error {
+	m := new(AccountsOverviewRequest)
 	if err := stream.Recv(m); err != nil {
 		return err
 	}
-	return h.QueriesHandler.AccountsOverviewStream(ctx, m, &queriesAccountsOverviewStreamStream{stream})
+	return h.QueriesHandler.AccountsOverview(ctx, m, &queriesAccountsOverviewStream{stream})
 }
 
-type Queries_AccountsOverviewStreamStream interface {
+type Queries_AccountsOverviewStream interface {
 	Context() context.Context
 	SendMsg(interface{}) error
 	RecvMsg(interface{}) error
 	Close() error
-	Send(*StreamingResponse) error
+	Send(*AccountsOverviewResponse) error
 }
 
-type queriesAccountsOverviewStreamStream struct {
+type queriesAccountsOverviewStream struct {
 	stream server.Stream
 }
 
-func (x *queriesAccountsOverviewStreamStream) Close() error {
+func (x *queriesAccountsOverviewStream) Close() error {
 	return x.stream.Close()
 }
 
-func (x *queriesAccountsOverviewStreamStream) Context() context.Context {
+func (x *queriesAccountsOverviewStream) Context() context.Context {
 	return x.stream.Context()
 }
 
-func (x *queriesAccountsOverviewStreamStream) SendMsg(m interface{}) error {
+func (x *queriesAccountsOverviewStream) SendMsg(m interface{}) error {
 	return x.stream.Send(m)
 }
 
-func (x *queriesAccountsOverviewStreamStream) RecvMsg(m interface{}) error {
+func (x *queriesAccountsOverviewStream) RecvMsg(m interface{}) error {
 	return x.stream.Recv(m)
 }
 
-func (x *queriesAccountsOverviewStreamStream) Send(m *StreamingResponse) error {
+func (x *queriesAccountsOverviewStream) Send(m *AccountsOverviewResponse) error {
 	return x.stream.Send(m)
 }
 
-func (h *queriesHandler) AccountDetailStream(ctx context.Context, stream server.Stream) error {
-	m := new(StreamingRequest)
+func (h *queriesHandler) AccountDetail(ctx context.Context, stream server.Stream) error {
+	m := new(AccountDetailRequest)
 	if err := stream.Recv(m); err != nil {
 		return err
 	}
-	return h.QueriesHandler.AccountDetailStream(ctx, m, &queriesAccountDetailStreamStream{stream})
+	return h.QueriesHandler.AccountDetail(ctx, m, &queriesAccountDetailStream{stream})
 }
 
-type Queries_AccountDetailStreamStream interface {
+type Queries_AccountDetailStream interface {
 	Context() context.Context
 	SendMsg(interface{}) error
 	RecvMsg(interface{}) error
 	Close() error
-	Send(*StreamingResponse) error
+	Send(*AccountDetailResponse) error
 }
 
-type queriesAccountDetailStreamStream struct {
+type queriesAccountDetailStream struct {
 	stream server.Stream
 }
 
-func (x *queriesAccountDetailStreamStream) Close() error {
+func (x *queriesAccountDetailStream) Close() error {
 	return x.stream.Close()
 }
 
-func (x *queriesAccountDetailStreamStream) Context() context.Context {
+func (x *queriesAccountDetailStream) Context() context.Context {
 	return x.stream.Context()
 }
 
-func (x *queriesAccountDetailStreamStream) SendMsg(m interface{}) error {
+func (x *queriesAccountDetailStream) SendMsg(m interface{}) error {
 	return x.stream.Send(m)
 }
 
-func (x *queriesAccountDetailStreamStream) RecvMsg(m interface{}) error {
+func (x *queriesAccountDetailStream) RecvMsg(m interface{}) error {
 	return x.stream.Recv(m)
 }
 
-func (x *queriesAccountDetailStreamStream) Send(m *StreamingResponse) error {
+func (x *queriesAccountDetailStream) Send(m *AccountDetailResponse) error {
 	return x.stream.Send(m)
 }
