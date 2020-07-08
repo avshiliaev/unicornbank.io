@@ -13,7 +13,11 @@ type Queries struct {
 }
 
 // Stream is a server side stream handler called via client.Stream or the generated client code
-func (e *Queries) AccountsOverview(ctx context.Context, req *queries.AccountsOverviewRequest, stream queries.Queries_AccountsOverviewStream) error {
+func (e *Queries) AccountsOverview(
+	ctx context.Context,
+	req *queries.AccountsOverviewRequest,
+	stream queries.Queries_AccountsOverviewStream,
+) error {
 
 	log.Infof("Received Queries.Stream AccountsOverviewRequest to profile: %d", req.Profile)
 
@@ -56,7 +60,11 @@ func (e *Queries) AccountsOverview(ctx context.Context, req *queries.AccountsOve
 	return nil
 }
 
-func (e *Queries) AccountDetail(ctx context.Context, req *queries.AccountDetailRequest, stream queries.Queries_AccountDetailStream) error {
+func (e *Queries) AccountDetail(
+	ctx context.Context,
+	req *queries.AccountDetailRequest,
+	stream queries.Queries_AccountDetailStream,
+) error {
 	log.Infof("Received Queries.Stream AccountDetailRequest to uuid: %d", req.Uuid)
 
 	// Prepare mongo pipeline
