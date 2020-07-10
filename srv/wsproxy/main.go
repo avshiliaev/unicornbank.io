@@ -13,6 +13,10 @@ import (
 	wsproxy "srv/wsproxy/proto/wsproxy"
 )
 
+var (
+	proxyToService = "go.micro.api.queries"
+)
+
 var upgrader = websocket.Upgrader{
 	CheckOrigin: func(r *http.Request) bool { return true },
 }
@@ -93,7 +97,7 @@ func main() {
 
 	// New RPC client
 	rpcClient := client.NewClient(client.RequestTimeout(time.Second * 120))
-	cli := wsproxy.NewQueriesService("go.micro.srv.queries", rpcClient)
+	cli := wsproxy.NewQueriesService(proxyToService, rpcClient)
 
 	// Handle websocket connection
 	service.HandleFunc("/overview", func(w http.ResponseWriter, r *http.Request) {
