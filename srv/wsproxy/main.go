@@ -1,5 +1,7 @@
 package main
 
+// https://github.com/micro-in-cn/tutorials/tree/master/examples
+
 import (
 	"context"
 	"io"
@@ -9,6 +11,7 @@ import (
 
 	"github.com/gorilla/websocket"
 	"github.com/micro/go-micro/v2/client"
+	"github.com/micro/go-micro/v2/client/grpc"
 	"github.com/micro/go-micro/v2/web"
 	wsproxy "srv/wsproxy/proto/wsproxy"
 )
@@ -96,16 +99,11 @@ func main() {
 	}
 
 	// New RPC client
-	rpcClient := client.NewClient(client.RequestTimeout(time.Second * 120))
+	rpcClient := grpc.NewClient(client.RequestTimeout(time.Second * 120))
 	cli := wsproxy.NewQueriesService(proxyToService, rpcClient)
 
 	// Handle websocket connection
 	service.HandleFunc("/overview", func(w http.ResponseWriter, r *http.Request) {
-
-		// TODO: sanitize!
-		profile := r.URL.Query().Get("profile")
-
-		log.Print(profile)
 
 		// Upgrade request to websocket
 		conn, err := upgrader.Upgrade(w, r, nil)
