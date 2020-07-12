@@ -1,8 +1,13 @@
 import { call, put, take, takeLatest } from 'redux-saga/effects';
 import { eventChannel } from 'redux-saga';
 import { ActionTypes } from '../constants';
-import { AccountsOverviewAction } from '../interfaces/account.interface';
+import { AccountInterface, AccountsOverviewAction } from '../interfaces/account.interface';
 import createWebSocketConnection from '../web.socket';
+
+interface StreamResponse {
+  type: string,
+  payload: AccountInterface[]
+}
 
 function createSocketChannel(socket) {
 
@@ -12,12 +17,10 @@ function createSocketChannel(socket) {
       console.log('connected');
     };
     const messageHandler = (event) => {
-      const action = JSON.parse(event.data);
+      const action: StreamResponse = JSON.parse(event.data);
       // TODO handle on backend!
-      if (action.payload === null) {
+      if (action.payload === null || action.payload === undefined) {
         action.payload = [];
-      } else if (!Array.isArray(action.payload)) {
-        action.payload = [action.payload];
       }
       emit(action);
     };
@@ -38,14 +41,14 @@ function createSocketChannel(socket) {
 function* getAccountsSaga(action) {
 
   const { params } = action;
-  const path = `/overview?profile=${params}`;
+  const path = `/?profile=${params}`;
 
   const socket = yield call(createWebSocketConnection, path);
   const socketChannel = yield call(createSocketChannel, socket);
 
   try {
     while (true) {
-      const action = yield take(socketChannel);
+      const action: StreamResponse = yield take(socketChannel);
       const data = action.payload;
       const type = action.type === 'init'
         ? ActionTypes.QUERY_ACCOUNTS_INIT

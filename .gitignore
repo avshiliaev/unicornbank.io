@@ -1,6 +1,5 @@
 .idea
-/node_modules
-.DS_Store
+*.DS_Store*
 *.db
-/srv/streams/node_modules/
 *.env
+*node_modules*
