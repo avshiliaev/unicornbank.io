@@ -36,24 +36,15 @@ message AccountDTO {
 }
 
 service Queries {
-	rpc AccountsOverview(AccountsOverviewRequest) returns (stream AccountsOverviewResponse) {}
-	rpc AccountDetail(AccountDetailRequest) returns (stream AccountDetailResponse) {}
+	rpc AccountsOverview(StreamRequest) returns (stream StreamResponse) {}
+	rpc AccountDetail(StreamRequest) returns (stream StreamResponse) {}
 }
 
-message AccountsOverviewRequest {
+message StreamRequest {
 	string profile = 1;
+	string uuid = 2;
 }
-
-message AccountsOverviewResponse {
+message StreamResponse {
 	string type = 1;
 	repeated AccountDTO payload = 2;
-}
-
-message AccountDetailRequest {
-	string uuid = 1;
-}
-
-message AccountDetailResponse {
-	string type = 1;
-	AccountDTO payload = 2;
 }

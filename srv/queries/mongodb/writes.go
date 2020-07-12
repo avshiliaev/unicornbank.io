@@ -7,8 +7,11 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"log"
 	"os"
+	"time"
 	queries "unicornbank.io/srv/queries/proto/queries"
 )
+
+var TimeStringFormat = "02-01-2006 15:04"
 
 func QueriesCollection() *mongo.Collection {
 
@@ -26,7 +29,7 @@ func QueriesCollection() *mongo.Collection {
 
 func CreateAccount(acc *queries.AccountEvent, ctx context.Context, coll *mongo.Collection) *mongo.InsertOneResult {
 
-	account := AccountsWrite{
+	account := AccountsModel{
 		Balance: acc.Balance,
 		Profile: acc.Profile,
 		Status:  acc.Status,
@@ -41,8 +44,8 @@ func CreateAccount(acc *queries.AccountEvent, ctx context.Context, coll *mongo.C
 
 func UpdateAccount(acc *queries.AccountEvent, ctx context.Context, coll *mongo.Collection) *mongo.UpdateResult {
 
-	filter := AccountsWrite{Uuid: acc.Uuid}
-	account := AccountsWrite{
+	filter := AccountsModel{Uuid: acc.Uuid}
+	account := AccountsModel{
 		Balance: acc.Balance,
 		Profile: acc.Profile,
 		Status:  acc.Status,
@@ -63,14 +66,14 @@ func UpdateAccount(acc *queries.AccountEvent, ctx context.Context, coll *mongo.C
 
 func CreateTransaction(tr *queries.TransactionEvent, ctx context.Context, coll *mongo.Collection) *mongo.UpdateResult {
 
-	filter := AccountsWrite{Uuid: tr.Account}
-	transaction := TransactionsWrite{
-		Account:   tr.Account,
-		Amount:    tr.Amount,
-		Info:      tr.Info,
-		Status:    tr.Status,
-		Timestamp: tr.Timestamp,
-		Uuid:      tr.Uuid,
+	filter := AccountsModel{Uuid: tr.Account}
+	transaction := TransactionsModel{
+		Account: tr.Account,
+		Amount:  tr.Amount,
+		Info:    tr.Info,
+		Status:  tr.Status,
+		Time:    time.Unix(tr.Timestamp, 0).Format(TimeStringFormat),
+		Uuid:    tr.Uuid,
 	}
 	change := bson.M{"$push": bson.M{"transactions": transaction}}
 	result, err := coll.UpdateOne(
@@ -86,13 +89,13 @@ func CreateTransaction(tr *queries.TransactionEvent, ctx context.Context, coll *
 
 func UpdateTransaction(tr *queries.TransactionEvent, ctx context.Context, coll *mongo.Collection) *mongo.UpdateResult {
 
-	transaction := TransactionsWrite{
-		Account:   tr.Account,
-		Amount:    tr.Amount,
-		Info:      tr.Info,
-		Status:    tr.Status,
-		Timestamp: tr.Timestamp,
-		Uuid:      tr.Uuid,
+	transaction := TransactionsModel{
+		Account: tr.Account,
+		Amount:  tr.Amount,
+		Info:    tr.Info,
+		Status:  tr.Status,
+		Time:    time.Unix(tr.Timestamp, 0).Format(TimeStringFormat),
+		Uuid:    tr.Uuid,
 	}
 	filter := bson.M{
 		"uuid":              tr.Account,

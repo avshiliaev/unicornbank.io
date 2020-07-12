@@ -15,7 +15,7 @@ type Queries struct {
 // Stream is a server side stream handler called via client.Stream or the generated client code
 func (e *Queries) AccountsOverview(
 	ctx context.Context,
-	req *queries.AccountsOverviewRequest,
+	req *queries.StreamRequest,
 	stream queries.Queries_AccountsOverviewStream,
 ) error {
 
@@ -25,11 +25,11 @@ func (e *Queries) AccountsOverview(
 	pipeline := mongodb.OverviewPipeline(req.Profile)
 
 	// Send the initial state
-	var state []mongodb.AccountsRead
+	var state []mongodb.AccountsModel
 	cursor := mongodb.Aggregate(pipeline, e.Coll, ctx)
 	_ = cursor.All(ctx, &state)
-	stateNormalized := NormalizeOverviewStream(state)
-	_ = stream.Send(&queries.AccountsOverviewResponse{
+	stateNormalized := NormalizeStream(state)
+	_ = stream.Send(&queries.StreamResponse{
 		Type:    "init",
 		Payload: stateNormalized,
 	})
@@ -43,15 +43,15 @@ func (e *Queries) AccountsOverview(
 
 	// Iterate over the stream updates
 	for mongoStream.Next(context.TODO()) {
-		var update mongodb.AccountsRead
+		var update mongodb.AccountsModel
 		if err := mongoStream.Decode(&update); err != nil {
 			log.Fatal(err)
 			break
 		}
-		updateNormalized := NormalizeOverviewStream(
-			append(make([]mongodb.AccountsRead, 0), update),
+		updateNormalized := NormalizeStream(
+			append(make([]mongodb.AccountsModel, 0), update),
 		)
-		_ = stream.Send(&queries.AccountsOverviewResponse{
+		_ = stream.Send(&queries.StreamResponse{
 			Type:    "update",
 			Payload: updateNormalized,
 		})
@@ -62,7 +62,7 @@ func (e *Queries) AccountsOverview(
 
 func (e *Queries) AccountDetail(
 	ctx context.Context,
-	req *queries.AccountDetailRequest,
+	req *queries.StreamRequest,
 	stream queries.Queries_AccountDetailStream,
 ) error {
 	log.Infof("Received Queries.Stream AccountDetailRequest to uuid: %d", req.Uuid)
@@ -71,14 +71,18 @@ func (e *Queries) AccountDetail(
 	pipeline := mongodb.DetailPipeline(req.Uuid)
 
 	// Send the initial state
-	var state mongodb.AccountsRead
+	var state []mongodb.AccountsModel
 	cursor := mongodb.Aggregate(pipeline, e.Coll, ctx)
-	_ = cursor.All(ctx, &state)
-	stateNormalized := NormalizeDetailStream(state)
-	_ = stream.Send(&queries.AccountDetailResponse{
+	if err := cursor.All(ctx, &state); err != nil {
+		log.Info(err)
+	}
+	stateNormalized := NormalizeStream(state)
+	if err := stream.Send(&queries.StreamResponse{
 		Type:    "init",
 		Payload: stateNormalized,
-	})
+	}); err != nil {
+		log.Info(err)
+	}
 
 	// Initialize stream cursor
 	mongoStream, streamError := mongodb.StreamChanges(pipeline, e.Coll)
@@ -89,13 +93,15 @@ func (e *Queries) AccountDetail(
 
 	// Iterate over the stream updates
 	for mongoStream.Next(context.TODO()) {
-		var update mongodb.AccountsRead
+		var update mongodb.AccountsModel
 		if err := mongoStream.Decode(&update); err != nil {
 			log.Fatal(err)
 			break
 		}
-		updateNormalized := NormalizeDetailStream(update)
-		_ = stream.Send(&queries.AccountDetailResponse{
+		updateNormalized := NormalizeStream(
+			append(make([]mongodb.AccountsModel, 0), update),
+		)
+		_ = stream.Send(&queries.StreamResponse{
 			Type:    "update",
 			Payload: updateNormalized,
 		})

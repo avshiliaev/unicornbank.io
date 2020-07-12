@@ -39,25 +39,26 @@ func DetailPipeline(uuid string) []bson.M {
 			"profile": 1,
 			"status":  1,
 			"balance": 1,
-			"transactions": bson.M{
-				"$map": bson.M{
-					"input": "$transactions",
-					"as":    "tr",
-					"in": bson.M{
-						"account": "$$tr.account",
-						"amount":  "$$tr.amount",
-						"info":    "$$tr.info",
-						"status":  "$$tr.status",
-						"time": bson.M{
-							"$dateToString": bson.M{
-								"date":   bson.M{"$toDate": bson.M{"$multiply": bson.A{"$$tr.timestamp", 1000}}},
-								"format": "%d.%m.%Y %H:%M",
-							},
-						},
-						"uuid": "$$tr.uuid",
-					},
-				},
-			},
+			"transactions": 1,
+			// 	"transactions": bson.M{
+			// 		"$map": bson.M{
+			// 			"input": "$transactions",
+			// 			"as":    "tr",
+			// 			"in": bson.M{
+			// 				"account": "$$tr.account",
+			// 				"amount":  "$$tr.amount",
+			// 				"info":    "$$tr.info",
+			// 				"status":  "$$tr.status",
+			// 				"time": bson.M{
+			// 					"$dateToString": bson.M{
+			// 						"date":   bson.M{"$toDate": bson.M{"$multiply": bson.A{"$$tr.timestamp", 1000}}},
+			// 						"format": "%d.%m.%Y %H:%M",
+			// 					},
+			// 				},
+			// 				"uuid": "$$tr.uuid",
+			// 			},
+			// 		},
+			// 	},
 		}},
 	}
 	return pipeline

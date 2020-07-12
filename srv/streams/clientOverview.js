@@ -1,14 +1,10 @@
 const WebSocket = require('ws')
 
 const ws = new WebSocket(
-  'ws://localhost:8082/streams/overview',
+  'ws://localhost:8082/streams?profile=wonder',
 )
 
 let state = []
-
-ws.on('open', function open() {
-  ws.send(JSON.stringify({profile: "wonder"}));
-});
 
 ws.on('close', function close () {
   console.log('disconnected')
@@ -17,5 +13,5 @@ ws.on('close', function close () {
 ws.on('message', function incoming (data) {
   const action = JSON.parse(data);
 
-  console.log(action.payload.map(acc => ({balance: acc.balance, pending: acc.transactions.length})))
+  console.log(action.payload)
 })
