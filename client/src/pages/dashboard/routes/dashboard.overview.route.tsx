@@ -7,9 +7,19 @@ import FlexContainer from '../../../components/layout/flex.container';
 import ProfileIcon from '../../../components/profile.icon';
 import AccountsList from '../../../components/accounts.list';
 import { AccountsOverviewReducerState } from '../../../interfaces/account.interface';
-import CommonBalance from '../../../components/common.balance';
+import BalanceChart from '../../../components/balance.chart';
+import PlannedTransactionsList from '../../../components/planned.transactions.list';
 
-const ProfileStatistics = ({ windowSize, auth, balance }) => {
+const ProfileStatistics = ({ windowSize, auth, accounts }) => {
+
+  let data = [];
+  let balance = 0;
+  if (accounts.length != 0) {
+    data = accounts.map(acc => ({ title: acc.uuid.substring(0, 4), value: Math.abs(acc.balance), type: acc.balance > 0 ? '+' : '-' }));
+    balance = accounts
+      .map(acc => acc.balance)
+      .reduce((a, b) => a + b);
+  }
 
   return (
     <Row>
@@ -38,7 +48,7 @@ const ProfileStatistics = ({ windowSize, auth, balance }) => {
       </Col>
       <Col xs={24} sm={24} md={24} lg={24} xl={24} order={3}>
         <div style={{ marginTop: 16 }}>
-          <CommonBalance value={balance}/>
+          <BalanceChart data={data} balance={balance}/>
         </div>
       </Col>
     </Row>
@@ -53,20 +63,13 @@ interface Props {
 }
 
 const DashboardOverviewRoute = ({ auth, windowSize, accountsOverview, ...rest }: Props) => {
-
-  let balance = 0;
-  if (accountsOverview.data.length > 0) {
-    balance = accountsOverview.data
-      .map(acc => acc.balance)
-      .reduce((a, b) => a + b);
-  }
-
   return (
     <Fragment>
       <FlexGridDashboard
         windowSize={windowSize}
-        slotOne={<ProfileStatistics auth={auth} balance={balance} windowSize={windowSize}/>}
+        slotOne={<ProfileStatistics auth={auth} accounts={accountsOverview.data} windowSize={windowSize}/>}
         slotTwo={<AccountsAddReference/>}
+        slotThree={<PlannedTransactionsList/>}
         mainContent={<AccountsList
           accounts={accountsOverview.data}
           windowSize={windowSize}

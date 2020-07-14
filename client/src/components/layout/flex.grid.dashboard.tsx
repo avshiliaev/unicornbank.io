@@ -68,7 +68,7 @@ const RightColContent = ({ slotThree, gutter }) => {
   );
 };
 
-const FlexGridDashboard = ({ windowSize, slotOne, slotTwo, mainContent }) => {
+const FlexGridDashboard = ({ windowSize, slotOne, slotTwo, slotThree, mainContent }) => {
 
   const gutter = { xs: 0, sm: 0, md: 0, lg: 16 };
 
@@ -118,7 +118,7 @@ const FlexGridDashboard = ({ windowSize, slotOne, slotTwo, mainContent }) => {
       >
         <RightColContent
           gutter={gutter}
-          slotThree={(<div>Slot three</div>)}
+          slotThree={slotThree}
         />
       </Col>
     </Row>
