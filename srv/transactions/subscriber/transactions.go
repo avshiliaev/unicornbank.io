@@ -16,7 +16,7 @@ type TransactionProcessed struct {
 	Coll                  *mongo.Collection
 }
 
-func (e *TransactionProcessed) Handle(ctx context.Context, msg *transactions.TransactionType) error {
+func (e *TransactionProcessed) Handle(ctx context.Context, msg *transactions.TransactionEvent) error {
 	log.Info("Handler Received message: ", msg.Uuid)
 
 	transactionProcessed := mongodb.GetOne(msg.Uuid, ctx, e.Coll)

@@ -17,12 +17,12 @@ type AccountCreated struct {
 	Coll               *mongo.Collection
 }
 
-func (e *AccountCreated) Handle(ctx context.Context, accountCreated *approvals.AccountType) error {
+func (e *AccountCreated) Handle(ctx context.Context, accountCreated *approvals.AccountEvent) error {
 	log.Info("Handler Received message: ", accountCreated.Uuid)
 
 	time.Sleep(2 * time.Second)
 	status := "approved"
-	accountApproved := approvals.AccountType{
+	accountApproved := approvals.AccountEvent{
 		Status: status,
 		Uuid:   accountCreated.Uuid,
 	}

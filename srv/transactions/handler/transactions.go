@@ -20,11 +20,11 @@ type Transactions struct {
 
 // Call is a single request handler called via client.Call or the generated client code
 func (e *Transactions) Create(
-	ctx context.Context, req *transactions.TransactionType, rsp *transactions.TransactionType,
+	ctx context.Context, req *transactions.TransactionEvent, rsp *transactions.TransactionEvent,
 ) error {
 	log.Info("Received Transactions.Create request")
 
-	transaction := transactions.TransactionType{
+	transaction := transactions.TransactionEvent{
 		Account:   req.Account,
 		Amount:    req.Amount,
 		Info:      req.Info,

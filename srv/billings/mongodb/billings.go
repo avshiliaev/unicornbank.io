@@ -31,7 +31,7 @@ func TransactionsCollection() *mongo.Collection {
 	return collection
 }
 
-func CreateOne(tr *billings.TransactionType, ctx context.Context, coll *mongo.Collection) *mongo.InsertOneResult {
+func CreateOne(tr *billings.TransactionEvent, ctx context.Context, coll *mongo.Collection) *mongo.InsertOneResult {
 
 	account := TransactionsModel{
 		Account: tr.Account,
