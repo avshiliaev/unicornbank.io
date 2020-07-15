@@ -1,16 +1,16 @@
 package handler
 
 import (
-	"unicornbank.io/srv/queries/mongodb"
-	queries "unicornbank.io/srv/queries/proto/queries"
+	"unicornbank.io/srv/profiles/mongodb"
+	profiles "unicornbank.io/srv/profiles/proto/profiles"
 )
 
-func NormalizeStream(input []mongodb.AccountsModel) []*queries.AccountDTO {
-	accounts := make([]*queries.AccountDTO, 0)
+func NormalizeStream(input []mongodb.AccountsModel) []*profiles.AccountDTO {
+	accounts := make([]*profiles.AccountDTO, 0)
 	for _, acc := range input {
-		transactions := make([]*queries.TransactionDTO, 0)
+		transactions := make([]*profiles.TransactionDTO, 0)
 		for _, tr := range acc.Transactions {
-			next := queries.TransactionDTO{
+			next := profiles.TransactionDTO{
 				Account: tr.Account,
 				Amount:  tr.Amount,
 				Info:    tr.Info,
@@ -20,7 +20,7 @@ func NormalizeStream(input []mongodb.AccountsModel) []*queries.AccountDTO {
 			}
 			transactions = append(transactions, &next)
 		}
-		next := queries.AccountDTO{
+		next := profiles.AccountDTO{
 			Balance:      acc.Balance,
 			Profile:      acc.Profile,
 			Status:       acc.Status,

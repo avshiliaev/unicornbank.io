@@ -8,12 +8,12 @@ import (
 	"log"
 	"os"
 	"time"
-	queries "unicornbank.io/srv/queries/proto/queries"
+	profiles "unicornbank.io/srv/profiles/proto/profiles"
 )
 
 var TimeStringFormat = "02-01-2006 15:04"
 
-func QueriesCollection() *mongo.Collection {
+func ProfilesCollection() *mongo.Collection {
 
 	uri := os.Getenv("MONGO_URI")
 	db := os.Getenv("MONGO_DATABASE")
@@ -27,7 +27,7 @@ func QueriesCollection() *mongo.Collection {
 	return collection
 }
 
-func CreateAccount(acc *queries.AccountEvent, ctx context.Context, coll *mongo.Collection) *mongo.InsertOneResult {
+func CreateAccount(acc *profiles.AccountEvent, ctx context.Context, coll *mongo.Collection) *mongo.InsertOneResult {
 
 	account := AccountsModel{
 		Balance: acc.Balance,
@@ -42,7 +42,7 @@ func CreateAccount(acc *queries.AccountEvent, ctx context.Context, coll *mongo.C
 	return result
 }
 
-func UpdateAccount(acc *queries.AccountEvent, ctx context.Context, coll *mongo.Collection) *mongo.UpdateResult {
+func UpdateAccount(acc *profiles.AccountEvent, ctx context.Context, coll *mongo.Collection) *mongo.UpdateResult {
 
 	filter := AccountsModel{Uuid: acc.Uuid}
 	account := AccountsModel{
@@ -64,7 +64,7 @@ func UpdateAccount(acc *queries.AccountEvent, ctx context.Context, coll *mongo.C
 	return result
 }
 
-func CreateTransaction(tr *queries.TransactionEvent, ctx context.Context, coll *mongo.Collection) *mongo.UpdateResult {
+func CreateTransaction(tr *profiles.TransactionEvent, ctx context.Context, coll *mongo.Collection) *mongo.UpdateResult {
 
 	filter := AccountsModel{Uuid: tr.Account}
 	transaction := TransactionsModel{
@@ -87,7 +87,7 @@ func CreateTransaction(tr *queries.TransactionEvent, ctx context.Context, coll *
 	return result
 }
 
-func UpdateTransaction(tr *queries.TransactionEvent, ctx context.Context, coll *mongo.Collection) *mongo.UpdateResult {
+func UpdateTransaction(tr *profiles.TransactionEvent, ctx context.Context, coll *mongo.Collection) *mongo.UpdateResult {
 
 	transaction := TransactionsModel{
 		Account: tr.Account,

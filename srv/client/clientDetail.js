@@ -1,7 +1,7 @@
 const WebSocket = require('ws')
 
 const ws = new WebSocket(
-  'ws://localhost:8082/streams?profile=wonder&account=774de7a9-8cdd-46ad-8cd8-51057b1779cc',
+  'ws://localhost:8082/streams/profiles?profile=wonder&account=774de7a9-8cdd-46ad-8cd8-51057b1779cc',
 )
 
 let state = []

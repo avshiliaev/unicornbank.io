@@ -21,17 +21,28 @@ func main() {
 	}
 
 	// Handle websocket connection
-	service.HandleFunc("/", func (w http.ResponseWriter, r *http.Request) {
-		req := wsproxy.StreamRequest{
+	service.HandleFunc("/profiles", func(w http.ResponseWriter, r *http.Request) {
+		req := wsproxy.AccountsStreamRequest{
 			Profile: r.URL.Query().Get("profile"),
-			Uuid: r.URL.Query().Get("account"),
+			Uuid:    r.URL.Query().Get("account"),
 		}
-		stream, err := handlers.CreateGRPCStream(&req)
+		stream, err := handlers.CreateAccountsStream(&req)
 		if err != nil {
 			log.Print(err)
 		}
 		defer stream.Close()
-		handlers.WebSocketHandler(w, r, stream)
+		handlers.ProfilesWebSocketHandler(w, r, stream)
+	})
+	service.HandleFunc("/notifications", func(w http.ResponseWriter, r *http.Request) {
+		req := wsproxy.NotificationsStreamRequest{
+			Profile: r.URL.Query().Get("profile"),
+		}
+		stream, err := handlers.CreateNotificationsStream(&req)
+		if err != nil {
+			log.Print(err)
+		}
+		defer stream.Close()
+		handlers.NotificationsWebSocketHandler(w, r, stream)
 	})
 
 	if err := service.Run(); err != nil {

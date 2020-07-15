@@ -5,13 +5,13 @@ MODIFY=Mgithub.com/micro/go-micro/api/proto/api.proto=github.com/micro/go-micro/
 .PHONY: proto
 proto:
     
-	protoc --proto_path=. --micro_out=${MODIFY}:. --go_out=${MODIFY}:. proto/queries/queries.proto
+	protoc --proto_path=. --micro_out=${MODIFY}:. --go_out=${MODIFY}:. proto/notifications/notifications.proto
     
 
 .PHONY: build
 build: proto
 
-	go build -o queries-service *.go
+	go build -o notifications-service *.go
 
 .PHONY: test
 test:
@@ -19,4 +19,4 @@ test:
 
 .PHONY: docker
 docker:
-	docker build . -t queries-service:latest
+	docker build . -t notifications-service:latest

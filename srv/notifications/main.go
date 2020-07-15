@@ -4,20 +4,18 @@ import (
 	"github.com/joho/godotenv"
 	"github.com/micro/go-micro/v2"
 	log "github.com/micro/go-micro/v2/logger"
-	"unicornbank.io/srv/queries/handler"
-	"unicornbank.io/srv/queries/mongodb"
-	queries "unicornbank.io/srv/queries/proto/queries"
-	"unicornbank.io/srv/queries/subscriber"
+	"unicornbank.io/srv/notifications/handler"
+	"unicornbank.io/srv/notifications/mongodb"
+	notifications "unicornbank.io/srv/notifications/proto/notifications"
+	"unicornbank.io/srv/notifications/subscriber"
 )
 
 var (
-	serviceName    = "go.micro.api.queries"
+	serviceName    = "go.micro.api.notifications"
 	serviceVersion = "0.0.1"
 	// Sub to account updates
-	subAccountCreated = "go.micro.service.account.created"
 	subAccountUpdated = "go.micro.service.account.updated"
 	// Sub to transaction updates
-	subTransactionPlaced  = "go.micro.service.transaction.placed"
 	subTransactionUpdated = "go.micro.service.transaction.updated"
 )
 
@@ -37,30 +35,16 @@ func main() {
 	}
 
 	// MongoDB connection
-	coll := mongodb.QueriesCollection()
+	coll := mongodb.NotificationsCollection()
 
 	// Register Stream Handlers
-	_ = queries.RegisterQueriesHandler(service.Server(), &handler.Queries{Coll: coll})
+	_ = notifications.RegisterNotificationsHandler(service.Server(), &handler.Notifications{Coll: coll})
 
 	// Register Subscribers
-	if err := micro.RegisterSubscriber(
-		subAccountCreated,
-		service.Server(),
-		&subscriber.AccountCreated{Coll: coll},
-	); err != nil {
-		log.Fatal(err)
-	}
 	if err := micro.RegisterSubscriber(
 		subAccountUpdated,
 		service.Server(),
 		&subscriber.AccountUpdated{Coll: coll},
-	); err != nil {
-		log.Fatal(err)
-	}
-	if err := micro.RegisterSubscriber(
-		subTransactionPlaced,
-		service.Server(),
-		&subscriber.TransactionPlaced{Coll: coll},
 	); err != nil {
 		log.Fatal(err)
 	}

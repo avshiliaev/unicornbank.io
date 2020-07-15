@@ -4,22 +4,22 @@ import (
 	"context"
 	log "github.com/micro/go-micro/v2/logger"
 	"go.mongodb.org/mongo-driver/mongo"
-	"unicornbank.io/srv/queries/mongodb"
-	queries "unicornbank.io/srv/queries/proto/queries"
+	"unicornbank.io/srv/profiles/mongodb"
+	profiles "unicornbank.io/srv/profiles/proto/profiles"
 )
 
-type Queries struct {
+type Profiles struct {
 	Coll *mongo.Collection
 }
 
 // Stream is a server side stream handler called via client.Stream or the generated client code
-func (e *Queries) AccountsOverview(
+func (e *Profiles) AccountsOverview(
 	ctx context.Context,
-	req *queries.StreamRequest,
-	stream queries.Queries_AccountsOverviewStream,
+	req *profiles.AccountsStreamRequest,
+	stream profiles.Profiles_AccountsOverviewStream,
 ) error {
 
-	log.Infof("Received Queries.Stream AccountsOverviewRequest to profile: %d", req.Profile)
+	log.Infof("Received Profiles.Stream AccountsOverviewRequest to profile: %d", req.Profile)
 
 	// Prepare mongo pipeline
 	pipeline := mongodb.OverviewPipeline(req.Profile)
@@ -29,7 +29,7 @@ func (e *Queries) AccountsOverview(
 	cursor := mongodb.Aggregate(pipeline, e.Coll, ctx)
 	_ = cursor.All(ctx, &state)
 	stateNormalized := NormalizeStream(state)
-	_ = stream.Send(&queries.StreamResponse{
+	_ = stream.Send(&profiles.AccountsStreamResponse{
 		Type:    "init",
 		Payload: stateNormalized,
 	})
@@ -51,7 +51,7 @@ func (e *Queries) AccountsOverview(
 		updateNormalized := NormalizeStream(
 			append(make([]mongodb.AccountsModel, 0), update),
 		)
-		_ = stream.Send(&queries.StreamResponse{
+		_ = stream.Send(&profiles.AccountsStreamResponse{
 			Type:    "update",
 			Payload: updateNormalized,
 		})
@@ -60,12 +60,12 @@ func (e *Queries) AccountsOverview(
 	return nil
 }
 
-func (e *Queries) AccountDetail(
+func (e *Profiles) AccountDetail(
 	ctx context.Context,
-	req *queries.StreamRequest,
-	stream queries.Queries_AccountDetailStream,
+	req *profiles.AccountsStreamRequest,
+	stream profiles.Profiles_AccountDetailStream,
 ) error {
-	log.Infof("Received Queries.Stream AccountDetailRequest to uuid: %d", req.Uuid)
+	log.Infof("Received Profiles.Stream AccountDetailRequest to uuid: %d", req.Uuid)
 
 	// Prepare mongo pipeline
 	pipeline := mongodb.DetailPipeline(req.Uuid)
@@ -77,7 +77,7 @@ func (e *Queries) AccountDetail(
 		log.Info(err)
 	}
 	stateNormalized := NormalizeStream(state)
-	if err := stream.Send(&queries.StreamResponse{
+	if err := stream.Send(&profiles.AccountsStreamResponse{
 		Type:    "init",
 		Payload: stateNormalized,
 	}); err != nil {
@@ -101,7 +101,7 @@ func (e *Queries) AccountDetail(
 		updateNormalized := NormalizeStream(
 			append(make([]mongodb.AccountsModel, 0), update),
 		)
-		_ = stream.Send(&queries.StreamResponse{
+		_ = stream.Send(&profiles.AccountsStreamResponse{
 			Type:    "update",
 			Payload: updateNormalized,
 		})

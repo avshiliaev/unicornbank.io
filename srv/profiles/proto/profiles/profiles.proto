@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option go_package = "proto/queries;go_micro_service_queries";
+option go_package = "proto/profiles;go_micro_service_profiles";
 
 // Domain Events
 message TransactionEvent {
@@ -35,16 +35,16 @@ message AccountDTO {
   string uuid = 5;
 }
 
-service Queries {
-  rpc AccountsOverview(StreamRequest) returns (stream StreamResponse) {}
-  rpc AccountDetail(StreamRequest) returns (stream StreamResponse) {}
+service Profiles {
+  rpc AccountsOverview(AccountsStreamRequest) returns (stream AccountsStreamResponse) {}
+  rpc AccountDetail(AccountsStreamRequest) returns (stream AccountsStreamResponse) {}
 }
 
-message StreamRequest {
+message AccountsStreamRequest {
   string profile = 1;
   string uuid = 2;
 }
-message StreamResponse {
+message AccountsStreamResponse {
   string type = 1;
   repeated AccountDTO payload = 2;
 }
