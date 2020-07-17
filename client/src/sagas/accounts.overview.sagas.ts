@@ -41,7 +41,7 @@ function createSocketChannel(socket) {
 function* getAccountsSaga(action) {
 
   const { params } = action;
-  const path = `/?profile=${params}`;
+  const path = `/profiles?profile=${params}`;
 
   const socket = yield call(createWebSocketConnection, path);
   const socketChannel = yield call(createSocketChannel, socket);
