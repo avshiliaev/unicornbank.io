@@ -6,34 +6,21 @@ import AccountsList from '../../../components/accounts.list';
 import { AccountsOverviewReducerState } from '../../../interfaces/account.interface';
 import NotificationsList from '../../../components/notifications.list';
 import ProfileStats from '../../../components/profile.stats';
+import { NotificationsReducerState } from '../../../interfaces/notification.interface';
 
 interface Props {
   auth: any,
   windowSize: any,
   accountsOverview: AccountsOverviewReducerState,
+  notifications: NotificationsReducerState,
   path: any
 }
 
-const DashboardOverviewRoute = ({ auth, windowSize, accountsOverview, ...rest }: Props) => {
+const DashboardOverviewRoute = ({ auth, windowSize, accountsOverview, notifications, ...rest }: Props) => {
 
   const balance = accountsOverview.data.length ? accountsOverview.data
     .map(acc => acc.balance)
     .reduce((a, b) => a + b) : 0;
-
-  const notifications = [
-    {
-      title: 'Title',
-      description: 'description',
-    },
-    {
-      title: 'Title',
-      description: 'description',
-    },
-    {
-      title: 'Title',
-      description: 'description',
-    },
-  ];
 
   return (
     <Fragment>
@@ -41,7 +28,7 @@ const DashboardOverviewRoute = ({ auth, windowSize, accountsOverview, ...rest }:
         windowSize={windowSize}
         slotOne={<ProfileStats auth={auth} balance={balance} windowSize={windowSize}/>}
         slotTwo={<AccountsActions/>}
-        slotThree={<NotificationsList notifications={notifications}/>}
+        slotThree={<NotificationsList notifications={notifications.data}/>}
         mainContent={
           <AccountsList
             accounts={accountsOverview.data}
@@ -60,6 +47,7 @@ const mapStateToProps = (state) => {
     windowSize: state.windowSize.greaterThan,
     auth: state.auth,
     accountsOverview: state.accountsOverview,
+    notifications: state.notifications,
   };
 };
 
