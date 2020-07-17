@@ -19,6 +19,9 @@ var (
 	// Publish to
 	pubAccountCreated = "go.micro.service.account.created"
 	pubAccountUpdated = "go.micro.service.account.updated"
+
+	dbName = "accounts"
+	collName = "accounts"
 )
 
 func main() {
@@ -37,7 +40,10 @@ func main() {
 	}
 
 	// MongoDB connection
-	coll := mongodb.AccountsCollection()
+	coll, err := mongodb.MongoCollection(dbName, collName)
+	if err != nil {
+		log.Fatal("Cannot connect to MongoDB")
+	}
 
 	// Register Handler
 	handle := handler.Accounts{

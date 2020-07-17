@@ -11,7 +11,7 @@ proto:
 .PHONY: build
 build: proto
 
-	go build -o transactions *.go
+	go build -o transactions-srv *.go
 
 .PHONY: test
 test:
@@ -19,4 +19,4 @@ test:
 
 .PHONY: docker
 docker:
-	docker build . -t transactions:latest
+	docker build . -t transactions-srv:latest

@@ -17,6 +17,9 @@ var (
 	subAccountUpdated = "go.micro.service.account.updated"
 	// Sub to transaction updates
 	subTransactionUpdated = "go.micro.service.transaction.updated"
+
+	dbName = "notifications"
+	collName = "notifications"
 )
 
 func main() {
@@ -35,7 +38,10 @@ func main() {
 	}
 
 	// MongoDB connection
-	coll := mongodb.NotificationsCollection()
+	coll, err := mongodb.MongoCollection(dbName, collName)
+	if err != nil {
+		log.Fatal("Cannot connect to MongoDB")
+	}
 
 	// Register Stream Handlers
 	_ = notifications.RegisterNotificationsHandler(service.Server(), &handler.Notifications{Coll: coll})

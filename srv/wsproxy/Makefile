@@ -11,7 +11,7 @@ proto:
 .PHONY: build
 build: proto
 
-	go build -o wsproxy-service *.go
+	go build -o wsproxy-srv *.go
 
 .PHONY: test
 test:
@@ -19,4 +19,4 @@ test:
 
 .PHONY: docker
 docker:
-	docker build . -t wsproxy-service:latest
+	docker build . -t wsproxy-srv:latest

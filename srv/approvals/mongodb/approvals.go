@@ -11,30 +11,26 @@ import (
 )
 
 type AccountsModel struct {
-	ID      primitive.ObjectID `bson:"_id,omitempty"`
-	Uuid    string             `bson:"uuid,omitempty"`
-	Status  string             `bson:"status,omitempty"`
+	ID     primitive.ObjectID `bson:"_id,omitempty"`
+	Uuid   string             `bson:"uuid,omitempty"`
+	Status string             `bson:"status,omitempty"`
 }
 
-func AccountsCollection() *mongo.Collection {
-
+func MongoCollection(dbName string, collName string) (*mongo.Collection, error) {
 	uri := os.Getenv("MONGO_URI")
-	db := os.Getenv("MONGO_DATABASE")
-	coll := os.Getenv("MONGO_COLLECTION")
-
 	client, err := mongo.Connect(context.Background(), options.Client().ApplyURI(uri))
-	if err != nil {
-		log.Print("MongoDB Connected, errors: ", err)
+	var collection *mongo.Collection
+	if client != nil {
+		collection = client.Database(dbName).Collection(collName)
 	}
-	collection := client.Database(db).Collection(coll)
-	return collection
+	return collection, err
 }
 
 func CreateOne(acc *accounts.AccountEvent, ctx context.Context, coll *mongo.Collection) *mongo.InsertOneResult {
 
 	account := AccountsModel{
-		Status:  acc.Status,
-		Uuid:    acc.Uuid,
+		Status: acc.Status,
+		Uuid:   acc.Uuid,
 	}
 	result, err := coll.InsertOne(ctx, &account)
 	if err != nil {

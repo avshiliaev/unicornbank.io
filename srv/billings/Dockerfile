@@ -1,3 +1,3 @@
 FROM alpine
-ADD billings-service /billings-service
-ENTRYPOINT [ "/billings-service" ]
+ADD billings-srv /billings-srv
+ENTRYPOINT [ "/billings-srv" ]

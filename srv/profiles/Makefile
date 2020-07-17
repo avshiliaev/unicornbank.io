@@ -11,7 +11,7 @@ proto:
 .PHONY: build
 build: proto
 
-	go build -o profiles-service *.go
+	go build -o profiles-srv *.go
 
 .PHONY: test
 test:
@@ -19,4 +19,4 @@ test:
 
 .PHONY: docker
 docker:
-	docker build . -t profiles-service:latest
+	docker build . -t profiles-srv:latest

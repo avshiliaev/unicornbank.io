@@ -13,6 +13,9 @@ var (
 	serviceVersion     = "0.0.1"
 	subAccountCreated  = "go.micro.service.account.created"
 	pubAccountApproval = "go.micro.service.account.approval"
+
+	dbName = "approvals"
+	collName = "accounts"
 )
 
 func main() {
@@ -31,7 +34,10 @@ func main() {
 	}
 
 	// MongoDB connection
-	coll := mongodb.AccountsCollection()
+	coll, err := mongodb.MongoCollection(dbName, collName)
+	if err != nil {
+		log.Fatal("Cannot connect to MongoDB")
+	}
 
 	// Register Struct as Subscriber
 	s := subscriber.AccountCreated{

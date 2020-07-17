@@ -13,6 +13,9 @@ var (
 	serviceVersion          = "0.0.1"
 	subTransactionPlaced    = "go.micro.service.transaction.placed"
 	pubTransactionProcessed = "go.micro.service.transaction.processed"
+
+	dbName = "billings"
+	collName = "transactions"
 )
 
 func main() {
@@ -31,7 +34,10 @@ func main() {
 	}
 
 	// MongoDB connection
-	coll := mongodb.TransactionsCollection()
+	coll, err := mongodb.MongoCollection(dbName, collName)
+	if err != nil {
+		log.Fatal("Cannot connect to MongoDB")
+	}
 
 	// Register Struct as Subscriber
 	s := subscriber.TransactionCreated{

@@ -11,7 +11,7 @@ proto:
 .PHONY: build
 build: proto
 
-	go build -o billings-service *.go
+	go build -o billings-srv *.go
 
 .PHONY: test
 test:
@@ -19,4 +19,4 @@ test:
 
 .PHONY: docker
 docker:
-	docker build . -t billings-service:latest
+	docker build . -t billings-srv:latest

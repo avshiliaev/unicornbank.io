@@ -1,3 +1,3 @@
 FROM alpine
-ADD wsproxy-service /wsproxy-service
-ENTRYPOINT [ "/wsproxy-service" ]
+ADD wsproxy-srv /wsproxy-srv
+ENTRYPOINT [ "/wsproxy-srv" ]

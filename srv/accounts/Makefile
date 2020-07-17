@@ -11,7 +11,7 @@ proto:
 .PHONY: build
 build: proto
 
-	go build -o accounts *.go
+	go build -o accounts-srv *.go
 
 .PHONY: test
 test:
@@ -19,4 +19,4 @@ test:
 
 .PHONY: docker
 docker:
-	docker build . -t accounts:latest
+	docker build . -t accounts-srv:latest

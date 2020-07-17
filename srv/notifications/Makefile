@@ -11,7 +11,7 @@ proto:
 .PHONY: build
 build: proto
 
-	go build -o notifications-service *.go
+	go build -o notifications-srv *.go
 
 .PHONY: test
 test:
@@ -19,4 +19,4 @@ test:
 
 .PHONY: docker
 docker:
-	docker build . -t notifications-service:latest
+	docker build . -t notifications-srv:latest

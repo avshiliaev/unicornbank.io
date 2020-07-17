@@ -19,6 +19,9 @@ var (
 	// Sub to transaction updates
 	subTransactionPlaced  = "go.micro.service.transaction.placed"
 	subTransactionUpdated = "go.micro.service.transaction.updated"
+
+	dbName = "profiles"
+	collName = "profiles"
 )
 
 func main() {
@@ -37,7 +40,10 @@ func main() {
 	}
 
 	// MongoDB connection
-	coll := mongodb.ProfilesCollection()
+	coll, err := mongodb.MongoCollection(dbName, collName)
+	if err != nil {
+		log.Fatal("Cannot connect to MongoDB")
+	}
 
 	// Register Stream Handlers
 	_ = profiles.RegisterProfilesHandler(service.Server(), &handler.Profiles{Coll: coll})

@@ -11,7 +11,7 @@ proto:
 .PHONY: build
 build: proto
 
-	go build -o approvals *.go
+	go build -o approvals-srv *.go
 
 .PHONY: test
 test:
@@ -19,4 +19,4 @@ test:
 
 .PHONY: docker
 docker:
-	docker build . -t approvals:latest
+	docker build . -t approvals-srv:latest

@@ -14,14 +14,6 @@ services:
   accounts-srv:
     build: srv/accounts
     container_name: accounts-srv
-    command: /root/accounts
-
-  transactions-srv:
-    build: srv/transactions
-    container_name: transactions-srv
-    command: /root/transactions
-
-  approvals-srv:
-    build: srv/approvals
-    container_name: approvals-srv
-    command: /root/approvals
+    command: /accounts-srv
+    environment:
+      - MONGO_URI=$MONGO_URI

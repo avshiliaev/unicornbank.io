@@ -18,6 +18,9 @@ var (
 	// Publish to
 	pubTransactionPlaced  = "go.micro.service.transaction.placed"
 	pubTransactionUpdated = "go.micro.service.transaction.updated"
+
+	dbName = "transactions"
+	collName = "transactions"
 )
 
 func main() {
@@ -36,7 +39,10 @@ func main() {
 	}
 
 	// MongoDB connection
-	coll := mongodb.TransactionsCollection()
+	coll, err := mongodb.MongoCollection(dbName, collName)
+	if err != nil {
+		log.Fatal("Cannot connect to MongoDB")
+	}
 
 	// Register Handler
 	h := handler.Transactions{
