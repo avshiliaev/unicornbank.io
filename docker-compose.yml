@@ -33,4 +33,4 @@ services:
     depends_on:
       - consul-srv
       - rabbit-srv
-    command: bash -c "./wait-for-it.sh rabbit-srv:5672 -- web"
+    command: bash -c "./wait-for-it.sh rabbit-srv:5672 -- ./accounts"

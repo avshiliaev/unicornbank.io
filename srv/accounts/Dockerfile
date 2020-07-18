@@ -10,4 +10,5 @@ FROM alpine:latest
 RUN apk --no-cache add ca-certificates
 WORKDIR /root/
 COPY --from=builder /go/src/unicornbank.io/srv/accounts .
-# CMD ["/root/accounts"]
+
+RUN ["chmod", "+x", "./wait-for-it.sh"]
