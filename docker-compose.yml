@@ -2,18 +2,39 @@ version: '3.3'
 
 services:
 
-  server:
-    command: server
-    image: micro/micro
-    container_name: server
+  consul:
+    command: -server -bootstrap -rejoin
+    image: progrium/consul:latest
+    ports:
+      - "8300:8300"
+      - "8400:8400"
+      - "8500:8500"
+      - "8600:53/udp"
+
+  grpc-gateway:
+    image: micro/micro:latest
+    environment:
+      - MICRO_REGISTRY_ADDRESS=consul:8500
+    command: api
+    links:
+      - consul
     ports:
       - "8080:8080"
-      - "8081:8081"
+
+  web-gateway:
+    image: micro/micro:latest
+    environment:
+      - MICRO_REGISTRY_ADDRESS=consul:8500
+    command: web
+    links:
+      - consul
+    ports:
       - "8082:8082"
 
   accounts-srv:
     build: srv/accounts
     container_name: accounts-srv
-    command: /accounts-srv
+    command: /root/accounts
     environment:
       - MONGO_URI=$MONGO_URI
+      - MICRO_REGISTRY_ADDRESS=consul:8500

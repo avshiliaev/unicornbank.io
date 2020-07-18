@@ -1,41 +1,12 @@
 import { call, put, take, takeLatest } from 'redux-saga/effects';
-import { eventChannel } from 'redux-saga';
 import { ActionTypes } from '../constants';
 import createWebSocketConnection from '../web.socket';
 import { NotificationInterface, NotificationsAction } from '../interfaces/notification.interface';
+import { createSocketChannel } from './api';
 
 interface StreamResponse {
   type: string,
   payload: NotificationInterface[]
-}
-
-function createSocketChannel(socket) {
-
-  return eventChannel(emit => {
-
-    const openHandler = () => {
-      console.log('connected');
-    };
-    const messageHandler = (event) => {
-      const action: StreamResponse = JSON.parse(event.data);
-      // TODO handle on backend!
-      if (action.payload === null || action.payload === undefined) {
-        action.payload = [];
-      }
-      emit(action);
-    };
-    const errorHandler = (errorEvent) => {
-      emit(new Error(errorEvent.reason));
-    };
-
-    socket.onopen = openHandler;
-    socket.onmessage = messageHandler;
-    socket.onerror = errorHandler;
-
-    return () => {
-      socket.off('message', messageHandler);
-    };
-  });
 }
 
 function* getNotificationsSaga(action) {
