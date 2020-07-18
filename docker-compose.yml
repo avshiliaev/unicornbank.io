@@ -2,39 +2,35 @@ version: '3.3'
 
 services:
 
-  consul:
-    command: -server -bootstrap -rejoin
+  consul-srv:
     image: progrium/consul:latest
+    container_name: consul-srv
+    command: -server -bootstrap -rejoin
     ports:
-      - "8300:8300"
-      - "8400:8400"
       - "8500:8500"
-      - "8600:53/udp"
 
-  grpc-gateway:
-    image: micro/micro:latest
-    environment:
-      - MICRO_REGISTRY_ADDRESS=consul:8500
-    command: api
-    links:
-      - consul
+  rabbit-srv:
+    image: rabbitmq:3-management
+    container_name: rabbit-srv
+    depends_on:
+      - consul-srv
+    expose:
+      - "5672"
     ports:
-      - "8080:8080"
-
-  web-gateway:
-    image: micro/micro:latest
+      - "15672:15672"
     environment:
-      - MICRO_REGISTRY_ADDRESS=consul:8500
-    command: web
-    links:
-      - consul
-    ports:
-      - "8082:8082"
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: admin
 
   accounts-srv:
     build: srv/accounts
     container_name: accounts-srv
-    command: /root/accounts
     environment:
-      - MONGO_URI=$MONGO_URI
-      - MICRO_REGISTRY_ADDRESS=consul:8500
+      - MICRO_REGISTRY=consul
+      - MICRO_REGISTRY_ADDRESS=consul-srv:8500
+      - MICRO_BROKER=rabbitmq
+      - MICRO_BROKER_ADDRESS=amqp://admin:admin@rabbit-srv:5672/
+    depends_on:
+      - consul-srv
+      - rabbit-srv
+    command: bash -c "./wait-for-it.sh rabbit-srv:5672 -- web"
