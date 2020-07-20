@@ -2,35 +2,86 @@ version: '3.3'
 
 services:
 
-  consul-srv:
-    image: progrium/consul:latest
-    container_name: consul-srv
-    command: -server -bootstrap -rejoin
-    ports:
-      - "8500:8500"
-
-  rabbit-srv:
-    image: rabbitmq:3-management
-    container_name: rabbit-srv
-    depends_on:
-      - consul-srv
-    expose:
-      - "5672"
-    ports:
-      - "15672:15672"
+  etcd-srv:
+    image: bitnami/etcd:3
+    container_name: etcd-srv
     environment:
-      RABBITMQ_DEFAULT_USER: admin
-      RABBITMQ_DEFAULT_PASS: admin
+      - ALLOW_NONE_AUTHENTICATION=yes
+      - ETCD_ADVERTISE_CLIENT_URLS=http://etcd-srv:2379
+    ports:
+      - '2379:2379'
+      - '2380:2380'
+
+  e3w:
+    image: soyking/e3w:latest
+    volumes:
+      - ./conf/config.default.ini:/app/conf/config.default.ini
+    ports:
+      - "8089:8080"
+    depends_on:
+      - etcd-srv
+
+  nats-srv:
+    image: docker.io/bitnami/nats:2-debian-10
+    ports:
+      - '4222:4222'
+      - '6222:6222'
+      - '8222:8222'
+
+  api-srv:
+    command: --register_interval=5 --register_ttl=10  api --address=0.0.0.0:8080
+    image: micro/micro
+    environment:
+      - MICRO_BROKER=nats
+      - MICRO_BROKER_ADDRESS=nats-srv
+      - MICRO_REGISTRY=etcd
+      - MICRO_REGISTRY_ADDRESS=etcd-srv:2379
+    depends_on:
+      - etcd-srv
+    ports:
+      - "8080:8080"
+
+  proxy-srv:
+    command: --register_interval=5 --register_ttl=10 proxy --address=0.0.0.0:8081
+    image: micro/micro
+    environment:
+      - MICRO_BROKER=nats
+      - MICRO_BROKER_ADDRESS=nats-srv
+      - MICRO_REGISTRY=etcd
+      - MICRO_REGISTRY_ADDRESS=etcd-srv:2379
+    depends_on:
+      - etcd-srv
+    ports:
+      - "8081:8081"
+
+  web-srv:
+    deploy:
+      replicas: 3
+    command:  --register_interval=5 --register_ttl=10 web --address=0.0.0.0:8082
+    image: micro/micro
+    environment:
+      - MICRO_BROKER=nats
+      - MICRO_BROKER_ADDRESS=nats-srv
+      - MICRO_REGISTRY=etcd
+      - MICRO_REGISTRY_ADDRESS=etcd-srv:2379
+    depends_on:
+      - etcd-srv
+    ports:
+      - "8082:8082"
 
   accounts-srv:
     build: srv/accounts
     container_name: accounts-srv
     environment:
-      - MICRO_REGISTRY=consul
-      - MICRO_REGISTRY_ADDRESS=consul-srv:8500
-      - MICRO_BROKER=rabbitmq
-      - MICRO_BROKER_ADDRESS=amqp://admin:admin@rabbit-srv:5672/
+      - MICRO_BROKER=nats
+      - MICRO_BROKER_ADDRESS=nats-srv
+      - MICRO_REGISTRY=etcd
+      - MICRO_REGISTRY_ADDRESS=etcd-srv:2379
     depends_on:
-      - consul-srv
-      - rabbit-srv
-    command: bash -c "./wait-for-it.sh rabbit-srv:5672 -- ./accounts"
+      - etcd-srv
+      - nats-srv
+    command: /root/accounts --register_interval=5 --register_ttl=10
+
+volumes:
+  etcd_data:
+    driver: local
