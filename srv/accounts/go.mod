@@ -11,8 +11,9 @@ require (
 	github.com/google/uuid v1.1.1
 	github.com/joho/godotenv v1.3.0
 	github.com/micro/go-micro/v2 v2.9.1
-	github.com/micro/go-plugins/registry/etcd/v2 v2.9.1
-	github.com/micro/go-plugins/transport/nats/v2 v2.9.1
+	github.com/micro/go-plugins/broker/rabbitmq/v2 v2.9.1
+	github.com/micro/go-plugins/registry/etcdv3/v2 v2.9.1
+	github.com/micro/go-plugins/transport/rabbitmq/v2 v2.9.1
 	go.mongodb.org/mongo-driver v1.3.4
 	google.golang.org/protobuf v1.24.0
 )

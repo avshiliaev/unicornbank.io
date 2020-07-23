@@ -11,7 +11,7 @@ proto:
 .PHONY: build
 build: proto
 
-	go build -o profiles-srv *.go
+	CGO_ENABLED=0 GOOS=linux go build -o profiles-srv .
 
 .PHONY: test
 test:

@@ -11,7 +11,7 @@ proto:
 .PHONY: build
 build: proto
 
-	go build -o transactions-srv *.go
+	CGO_ENABLED=0 GOOS=linux go build -o transactions-srv .
 
 .PHONY: test
 test:

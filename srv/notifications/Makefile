@@ -11,7 +11,7 @@ proto:
 .PHONY: build
 build: proto
 
-	go build -o notifications-srv *.go
+	CGO_ENABLED=0 GOOS=linux go build -o notifications-srv .
 
 .PHONY: test
 test:

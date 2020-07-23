@@ -16,9 +16,8 @@ func main() {
 		web.Name("go.micro.web.streams"),
 	)
 
-	if err := service.Init(); err != nil {
-		log.Fatal("Init", err)
-	}
+	// Initialise service
+	service.Init()
 
 	// Handle websocket connection
 	service.HandleFunc("/profiles", func(w http.ResponseWriter, r *http.Request) {

@@ -25,6 +25,7 @@ var (
 )
 
 func main() {
+
 	// New Service
 	service := micro.NewService(
 		micro.Name(serviceName),
@@ -35,8 +36,8 @@ func main() {
 	service.Init()
 
 	// Load .env file
-	if err := godotenv.Load(); err != nil {
-		log.Fatal("Init", err)
+	if err := godotenv.Load("../../.env"); err != nil {
+		log.Info("Skipping .env file")
 	}
 
 	// MongoDB connection
