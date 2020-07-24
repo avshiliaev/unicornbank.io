@@ -4,6 +4,7 @@ version: '3.3'
 
 services:
 
+  ### Registry ###
   etcd-srv:
     image: bitnami/etcd:3
     container_name: etcd-srv
@@ -16,6 +17,7 @@ services:
     networks:
       - unicornbank-network
 
+  ### Micro Runtime ###
   runtime-srv:
     command: runtime # --address=0.0.0.0:8082
     image: micro/micro:v2.9.2
@@ -27,7 +29,6 @@ services:
       - etcd-srv
     networks:
       - unicornbank-network
-
   api-srv:
     command: api # --namespace=go.micro.api # --handler=api --enable_rpc # --address=0.0.0.0:8080
     image: micro/micro:v2.9.2
@@ -41,7 +42,6 @@ services:
       - "8080:8080"
     networks:
       - unicornbank-network
-
   web-srv:
     command: web # --address=0.0.0.0:8082
     image: micro/micro:v2.9.2
@@ -56,6 +56,7 @@ services:
     networks:
       - unicornbank-network
 
+  ### Services ###
   accounts-srv:
     build: srv/accounts
     container_name: accounts-srv
@@ -70,7 +71,6 @@ services:
       - etcd-srv
     networks:
       - unicornbank-network
-
   approvals-srv:
     build: srv/approvals
     container_name: approvals-srv
@@ -85,7 +85,6 @@ services:
       - etcd-srv
     networks:
       - unicornbank-network
-
   billings-srv:
     build: srv/billings
     container_name: billings-srv
@@ -100,7 +99,6 @@ services:
       - etcd-srv
     networks:
       - unicornbank-network
-
   notifications-srv:
     build: srv/notifications
     container_name: notifications-srv
@@ -115,7 +113,6 @@ services:
       - etcd-srv
     networks:
       - unicornbank-network
-
   profiles-srv:
     build: srv/profiles
     container_name: profiles-srv
@@ -130,7 +127,6 @@ services:
       - etcd-srv
     networks:
       - unicornbank-network
-
   transactions-srv:
     build: srv/transactions
     container_name: transactions-srv
@@ -145,7 +141,6 @@ services:
       - etcd-srv
     networks:
       - unicornbank-network
-
   wsproxy-srv:
     build: srv/wsproxy
     container_name: wsproxy-srv
