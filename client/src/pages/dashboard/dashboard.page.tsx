@@ -7,13 +7,15 @@ import AppLogo from '../../components/logo.icon';
 import ProfileIcon from '../../components/profile.icon';
 import { initAccounts } from '../../reducers/accounts.overview.reducer';
 import HeaderMenu from '../../components/header.menu';
+import { initNotifications } from '../../reducers/notifications.reducer';
 
 const { Content } = Layout;
 
-const DashboardPage = ({ windowSize, auth, initAccounts, children, location, ...rest }) => {
+const DashboardPage = ({ windowSize, auth, initAccounts, initNotifications, children, location, ...rest }) => {
 
   useEffect(() => {
     initAccounts(auth.userId);
+    initNotifications(auth.userId);
   }, []);
 
   return (
@@ -46,6 +48,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   initAccounts,
+  initNotifications,
 };
 
 export default connect(

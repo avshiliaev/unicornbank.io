@@ -1,27 +1,160 @@
 version: '3.3'
 
+# etcdctl --endpoints "http://localhost:2379" get --prefix /micro/registry/
+
 services:
 
-  server:
-    command: server
-    image: micro/micro
-    container_name: server
+  ### Registry ###
+  etcd-srv:
+    image: bitnami/etcd:3
+    container_name: etcd-srv
+    environment:
+      - ALLOW_NONE_AUTHENTICATION=yes
+      - ETCD_ADVERTISE_CLIENT_URLS=http://etcd-srv:2379
+    ports:
+      - '2379:2379'
+      - '2380:2380'
+    networks:
+      - unicornbank-network
+
+  ### Micro Runtime ###
+  runtime-srv:
+    command: runtime # --address=0.0.0.0:8082
+    image: micro/micro:v2.9.2
+    environment:
+      - MICRO_LOG_LEVEL=debug
+      - MICRO_REGISTRY=etcd
+      - MICRO_REGISTRY_ADDRESS=etcd-srv:2379
+    depends_on:
+      - etcd-srv
+    networks:
+      - unicornbank-network
+  api-srv:
+    command: api # --namespace=go.micro.api # --handler=api --enable_rpc # --address=0.0.0.0:8080
+    image: micro/micro:v2.9.2
+    environment:
+      - MICRO_LOG_LEVEL=debug
+      - MICRO_REGISTRY=etcd
+      - MICRO_REGISTRY_ADDRESS=etcd-srv:2379
+    depends_on:
+      - etcd-srv
     ports:
       - "8080:8080"
-      - "8081:8081"
+    networks:
+      - unicornbank-network
+  web-srv:
+    command: web # --address=0.0.0.0:8082
+    image: micro/micro:v2.9.2
+    environment:
+      - MICRO_LOG_LEVEL=debug
+      - MICRO_REGISTRY=etcd
+      - MICRO_REGISTRY_ADDRESS=etcd-srv:2379
+    depends_on:
+      - etcd-srv
+    ports:
       - "8082:8082"
+    networks:
+      - unicornbank-network
 
+  ### Services ###
   accounts-srv:
     build: srv/accounts
     container_name: accounts-srv
-    command: /root/accounts
-
-  transactions-srv:
-    build: srv/transactions
-    container_name: transactions-srv
-    command: /root/transactions
-
+    environment:
+      - MICRO_LOG_LEVEL=debug
+      - MICRO_BROKER=rabbitmq
+      - MICRO_BROKER_ADDRESS=$RABBITMQ_URL
+      - MICRO_REGISTRY=etcd
+      - MICRO_REGISTRY_ADDRESS=etcd-srv:2379
+      - MONGO_URI=$MONGO_URI
+    depends_on:
+      - etcd-srv
+    networks:
+      - unicornbank-network
   approvals-srv:
     build: srv/approvals
     container_name: approvals-srv
-    command: /root/approvals
+    environment:
+      - MICRO_LOG_LEVEL=debug
+      - MICRO_BROKER=rabbitmq
+      - MICRO_BROKER_ADDRESS=$RABBITMQ_URL
+      - MICRO_REGISTRY=etcd
+      - MICRO_REGISTRY_ADDRESS=etcd-srv:2379
+      - MONGO_URI=$MONGO_URI
+    depends_on:
+      - etcd-srv
+    networks:
+      - unicornbank-network
+  billings-srv:
+    build: srv/billings
+    container_name: billings-srv
+    environment:
+      - MICRO_LOG_LEVEL=debug
+      - MICRO_BROKER=rabbitmq
+      - MICRO_BROKER_ADDRESS=$RABBITMQ_URL
+      - MICRO_REGISTRY=etcd
+      - MICRO_REGISTRY_ADDRESS=etcd-srv:2379
+      - MONGO_URI=$MONGO_URI
+    depends_on:
+      - etcd-srv
+    networks:
+      - unicornbank-network
+  notifications-srv:
+    build: srv/notifications
+    container_name: notifications-srv
+    environment:
+      - MICRO_LOG_LEVEL=debug
+      - MICRO_BROKER=rabbitmq
+      - MICRO_BROKER_ADDRESS=$RABBITMQ_URL
+      - MICRO_REGISTRY=etcd
+      - MICRO_REGISTRY_ADDRESS=etcd-srv:2379
+      - MONGO_URI=$MONGO_URI
+    depends_on:
+      - etcd-srv
+    networks:
+      - unicornbank-network
+  profiles-srv:
+    build: srv/profiles
+    container_name: profiles-srv
+    environment:
+      - MICRO_LOG_LEVEL=debug
+      - MICRO_BROKER=rabbitmq
+      - MICRO_BROKER_ADDRESS=$RABBITMQ_URL
+      - MICRO_REGISTRY=etcd
+      - MICRO_REGISTRY_ADDRESS=etcd-srv:2379
+      - MONGO_URI=$MONGO_URI
+    depends_on:
+      - etcd-srv
+    networks:
+      - unicornbank-network
+  transactions-srv:
+    build: srv/transactions
+    container_name: transactions-srv
+    environment:
+      - MICRO_LOG_LEVEL=debug
+      - MICRO_BROKER=rabbitmq
+      - MICRO_BROKER_ADDRESS=$RABBITMQ_URL
+      - MICRO_REGISTRY=etcd
+      - MICRO_REGISTRY_ADDRESS=etcd-srv:2379
+      - MONGO_URI=$MONGO_URI
+    depends_on:
+      - etcd-srv
+    networks:
+      - unicornbank-network
+  wsproxy-srv:
+    build: srv/wsproxy
+    container_name: wsproxy-srv
+    environment:
+      - MICRO_LOG_LEVEL=debug
+      - MICRO_BROKER=rabbitmq
+      - MICRO_BROKER_ADDRESS=$RABBITMQ_URL
+      - MICRO_REGISTRY=etcd
+      - MICRO_REGISTRY_ADDRESS=etcd-srv:2379
+    depends_on:
+      - etcd-srv
+    networks:
+      - unicornbank-network
+
+networks:
+  unicornbank-network:
+    driver: bridge

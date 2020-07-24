@@ -13,6 +13,9 @@ var (
 	serviceVersion     = "0.0.1"
 	subAccountCreated  = "go.micro.service.account.created"
 	pubAccountApproval = "go.micro.service.account.approval"
+
+	dbName = "approvals"
+	collName = "accounts"
 )
 
 func main() {
@@ -26,12 +29,15 @@ func main() {
 	service.Init()
 
 	// Load .env file
-	if err := godotenv.Load(); err != nil {
-		log.Fatal("Init", err)
+	if err := godotenv.Load("../../.env"); err != nil {
+		log.Info("Skipping .env file")
 	}
 
 	// MongoDB connection
-	coll := mongodb.AccountsCollection()
+	coll, err := mongodb.MongoCollection(dbName, collName)
+	if err != nil {
+		log.Fatal("Cannot connect to MongoDB")
+	}
 
 	// Register Struct as Subscriber
 	s := subscriber.AccountCreated{

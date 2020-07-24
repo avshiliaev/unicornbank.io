@@ -19,9 +19,13 @@ var (
 	// Publish to
 	pubAccountCreated = "go.micro.service.account.created"
 	pubAccountUpdated = "go.micro.service.account.updated"
+
+	dbName = "accounts"
+	collName = "accounts"
 )
 
 func main() {
+
 	// New Service
 	service := micro.NewService(
 		micro.Name(serviceName),
@@ -32,12 +36,15 @@ func main() {
 	service.Init()
 
 	// Load .env file
-	if err := godotenv.Load(); err != nil {
-		log.Fatal("Init", err)
+	if err := godotenv.Load("../../.env"); err != nil {
+		log.Info("Skipping .env file")
 	}
 
 	// MongoDB connection
-	coll := mongodb.AccountsCollection()
+	coll, err := mongodb.MongoCollection(dbName, collName)
+	if err != nil {
+		log.Fatal("Cannot connect to MongoDB")
+	}
 
 	// Register Handler
 	handle := handler.Accounts{
@@ -54,6 +61,7 @@ func main() {
 
 	// Register Subscribers
 	subApproval := subscriber.AccountApproval{
+		Client:               service.Client(),
 		PubAccountUpdated: pubAccountUpdated,
 		Coll:              coll,
 	}
@@ -65,6 +73,7 @@ func main() {
 		log.Fatal(err)
 	}
 	subTransProc := subscriber.TransactionPlaced{
+		Client:               service.Client(),
 		PubAccountUpdated: pubAccountUpdated,
 		Coll:              coll,
 	}

@@ -33,33 +33,33 @@ var _ context.Context
 var _ client.Option
 var _ server.Option
 
-// Api Endpoints for Queries service
+// Api Endpoints for Profiles service
 
-func NewQueriesEndpoints() []*api.Endpoint {
+func NewProfilesEndpoints() []*api.Endpoint {
 	return []*api.Endpoint{}
 }
 
-// Client API for Queries service
+// Client API for Profiles service
 
-type QueriesService interface {
-	AccountsOverview(ctx context.Context, in *StreamRequest, opts ...client.CallOption) (Queries_AccountsOverviewService, error)
-	AccountDetail(ctx context.Context, in *StreamRequest, opts ...client.CallOption) (Queries_AccountDetailService, error)
+type ProfilesService interface {
+	AccountsOverview(ctx context.Context, in *AccountsStreamRequest, opts ...client.CallOption) (Profiles_AccountsOverviewService, error)
+	AccountDetail(ctx context.Context, in *AccountsStreamRequest, opts ...client.CallOption) (Profiles_AccountDetailService, error)
 }
 
-type queriesService struct {
+type profilesService struct {
 	c    client.Client
 	name string
 }
 
-func NewQueriesService(name string, c client.Client) QueriesService {
-	return &queriesService{
+func NewProfilesService(name string, c client.Client) ProfilesService {
+	return &profilesService{
 		c:    c,
 		name: name,
 	}
 }
 
-func (c *queriesService) AccountsOverview(ctx context.Context, in *StreamRequest, opts ...client.CallOption) (Queries_AccountsOverviewService, error) {
-	req := c.c.NewRequest(c.name, "Queries.AccountsOverview", &StreamRequest{})
+func (c *profilesService) AccountsOverview(ctx context.Context, in *AccountsStreamRequest, opts ...client.CallOption) (Profiles_AccountsOverviewService, error) {
+	req := c.c.NewRequest(c.name, "Profiles.AccountsOverview", &AccountsStreamRequest{})
 	stream, err := c.c.Stream(ctx, req, opts...)
 	if err != nil {
 		return nil, err
@@ -67,39 +67,39 @@ func (c *queriesService) AccountsOverview(ctx context.Context, in *StreamRequest
 	if err := stream.Send(in); err != nil {
 		return nil, err
 	}
-	return &queriesServiceAccountsOverview{stream}, nil
+	return &profilesServiceAccountsOverview{stream}, nil
 }
 
-type Queries_AccountsOverviewService interface {
+type Profiles_AccountsOverviewService interface {
 	Context() context.Context
 	SendMsg(interface{}) error
 	RecvMsg(interface{}) error
 	Close() error
-	Recv() (*StreamResponse, error)
+	Recv() (*AccountsStreamResponse, error)
 }
 
-type queriesServiceAccountsOverview struct {
+type profilesServiceAccountsOverview struct {
 	stream client.Stream
 }
 
-func (x *queriesServiceAccountsOverview) Close() error {
+func (x *profilesServiceAccountsOverview) Close() error {
 	return x.stream.Close()
 }
 
-func (x *queriesServiceAccountsOverview) Context() context.Context {
+func (x *profilesServiceAccountsOverview) Context() context.Context {
 	return x.stream.Context()
 }
 
-func (x *queriesServiceAccountsOverview) SendMsg(m interface{}) error {
+func (x *profilesServiceAccountsOverview) SendMsg(m interface{}) error {
 	return x.stream.Send(m)
 }
 
-func (x *queriesServiceAccountsOverview) RecvMsg(m interface{}) error {
+func (x *profilesServiceAccountsOverview) RecvMsg(m interface{}) error {
 	return x.stream.Recv(m)
 }
 
-func (x *queriesServiceAccountsOverview) Recv() (*StreamResponse, error) {
-	m := new(StreamResponse)
+func (x *profilesServiceAccountsOverview) Recv() (*AccountsStreamResponse, error) {
+	m := new(AccountsStreamResponse)
 	err := x.stream.Recv(m)
 	if err != nil {
 		return nil, err
@@ -107,8 +107,8 @@ func (x *queriesServiceAccountsOverview) Recv() (*StreamResponse, error) {
 	return m, nil
 }
 
-func (c *queriesService) AccountDetail(ctx context.Context, in *StreamRequest, opts ...client.CallOption) (Queries_AccountDetailService, error) {
-	req := c.c.NewRequest(c.name, "Queries.AccountDetail", &StreamRequest{})
+func (c *profilesService) AccountDetail(ctx context.Context, in *AccountsStreamRequest, opts ...client.CallOption) (Profiles_AccountDetailService, error) {
+	req := c.c.NewRequest(c.name, "Profiles.AccountDetail", &AccountsStreamRequest{})
 	stream, err := c.c.Stream(ctx, req, opts...)
 	if err != nil {
 		return nil, err
@@ -116,39 +116,39 @@ func (c *queriesService) AccountDetail(ctx context.Context, in *StreamRequest, o
 	if err := stream.Send(in); err != nil {
 		return nil, err
 	}
-	return &queriesServiceAccountDetail{stream}, nil
+	return &profilesServiceAccountDetail{stream}, nil
 }
 
-type Queries_AccountDetailService interface {
+type Profiles_AccountDetailService interface {
 	Context() context.Context
 	SendMsg(interface{}) error
 	RecvMsg(interface{}) error
 	Close() error
-	Recv() (*StreamResponse, error)
+	Recv() (*AccountsStreamResponse, error)
 }
 
-type queriesServiceAccountDetail struct {
+type profilesServiceAccountDetail struct {
 	stream client.Stream
 }
 
-func (x *queriesServiceAccountDetail) Close() error {
+func (x *profilesServiceAccountDetail) Close() error {
 	return x.stream.Close()
 }
 
-func (x *queriesServiceAccountDetail) Context() context.Context {
+func (x *profilesServiceAccountDetail) Context() context.Context {
 	return x.stream.Context()
 }
 
-func (x *queriesServiceAccountDetail) SendMsg(m interface{}) error {
+func (x *profilesServiceAccountDetail) SendMsg(m interface{}) error {
 	return x.stream.Send(m)
 }
 
-func (x *queriesServiceAccountDetail) RecvMsg(m interface{}) error {
+func (x *profilesServiceAccountDetail) RecvMsg(m interface{}) error {
 	return x.stream.Recv(m)
 }
 
-func (x *queriesServiceAccountDetail) Recv() (*StreamResponse, error) {
-	m := new(StreamResponse)
+func (x *profilesServiceAccountDetail) Recv() (*AccountsStreamResponse, error) {
+	m := new(AccountsStreamResponse)
 	err := x.stream.Recv(m)
 	if err != nil {
 		return nil, err
@@ -156,105 +156,239 @@ func (x *queriesServiceAccountDetail) Recv() (*StreamResponse, error) {
 	return m, nil
 }
 
-// Server API for Queries service
+// Server API for Profiles service
 
-type QueriesHandler interface {
-	AccountsOverview(context.Context, *StreamRequest, Queries_AccountsOverviewStream) error
-	AccountDetail(context.Context, *StreamRequest, Queries_AccountDetailStream) error
+type ProfilesHandler interface {
+	AccountsOverview(context.Context, *AccountsStreamRequest, Profiles_AccountsOverviewStream) error
+	AccountDetail(context.Context, *AccountsStreamRequest, Profiles_AccountDetailStream) error
 }
 
-func RegisterQueriesHandler(s server.Server, hdlr QueriesHandler, opts ...server.HandlerOption) error {
-	type queries interface {
+func RegisterProfilesHandler(s server.Server, hdlr ProfilesHandler, opts ...server.HandlerOption) error {
+	type profiles interface {
 		AccountsOverview(ctx context.Context, stream server.Stream) error
 		AccountDetail(ctx context.Context, stream server.Stream) error
 	}
-	type Queries struct {
-		queries
+	type Profiles struct {
+		profiles
 	}
-	h := &queriesHandler{hdlr}
-	return s.Handle(s.NewHandler(&Queries{h}, opts...))
+	h := &profilesHandler{hdlr}
+	return s.Handle(s.NewHandler(&Profiles{h}, opts...))
 }
 
-type queriesHandler struct {
-	QueriesHandler
+type profilesHandler struct {
+	ProfilesHandler
 }
 
-func (h *queriesHandler) AccountsOverview(ctx context.Context, stream server.Stream) error {
-	m := new(StreamRequest)
+func (h *profilesHandler) AccountsOverview(ctx context.Context, stream server.Stream) error {
+	m := new(AccountsStreamRequest)
 	if err := stream.Recv(m); err != nil {
 		return err
 	}
-	return h.QueriesHandler.AccountsOverview(ctx, m, &queriesAccountsOverviewStream{stream})
+	return h.ProfilesHandler.AccountsOverview(ctx, m, &profilesAccountsOverviewStream{stream})
 }
 
-type Queries_AccountsOverviewStream interface {
+type Profiles_AccountsOverviewStream interface {
 	Context() context.Context
 	SendMsg(interface{}) error
 	RecvMsg(interface{}) error
 	Close() error
-	Send(*StreamResponse) error
+	Send(*AccountsStreamResponse) error
 }
 
-type queriesAccountsOverviewStream struct {
+type profilesAccountsOverviewStream struct {
 	stream server.Stream
 }
 
-func (x *queriesAccountsOverviewStream) Close() error {
+func (x *profilesAccountsOverviewStream) Close() error {
 	return x.stream.Close()
 }
 
-func (x *queriesAccountsOverviewStream) Context() context.Context {
+func (x *profilesAccountsOverviewStream) Context() context.Context {
 	return x.stream.Context()
 }
 
-func (x *queriesAccountsOverviewStream) SendMsg(m interface{}) error {
+func (x *profilesAccountsOverviewStream) SendMsg(m interface{}) error {
 	return x.stream.Send(m)
 }
 
-func (x *queriesAccountsOverviewStream) RecvMsg(m interface{}) error {
+func (x *profilesAccountsOverviewStream) RecvMsg(m interface{}) error {
 	return x.stream.Recv(m)
 }
 
-func (x *queriesAccountsOverviewStream) Send(m *StreamResponse) error {
+func (x *profilesAccountsOverviewStream) Send(m *AccountsStreamResponse) error {
 	return x.stream.Send(m)
 }
 
-func (h *queriesHandler) AccountDetail(ctx context.Context, stream server.Stream) error {
-	m := new(StreamRequest)
+func (h *profilesHandler) AccountDetail(ctx context.Context, stream server.Stream) error {
+	m := new(AccountsStreamRequest)
 	if err := stream.Recv(m); err != nil {
 		return err
 	}
-	return h.QueriesHandler.AccountDetail(ctx, m, &queriesAccountDetailStream{stream})
+	return h.ProfilesHandler.AccountDetail(ctx, m, &profilesAccountDetailStream{stream})
 }
 
-type Queries_AccountDetailStream interface {
+type Profiles_AccountDetailStream interface {
 	Context() context.Context
 	SendMsg(interface{}) error
 	RecvMsg(interface{}) error
 	Close() error
-	Send(*StreamResponse) error
+	Send(*AccountsStreamResponse) error
 }
 
-type queriesAccountDetailStream struct {
+type profilesAccountDetailStream struct {
 	stream server.Stream
 }
 
-func (x *queriesAccountDetailStream) Close() error {
+func (x *profilesAccountDetailStream) Close() error {
 	return x.stream.Close()
 }
 
-func (x *queriesAccountDetailStream) Context() context.Context {
+func (x *profilesAccountDetailStream) Context() context.Context {
 	return x.stream.Context()
 }
 
-func (x *queriesAccountDetailStream) SendMsg(m interface{}) error {
+func (x *profilesAccountDetailStream) SendMsg(m interface{}) error {
 	return x.stream.Send(m)
 }
 
-func (x *queriesAccountDetailStream) RecvMsg(m interface{}) error {
+func (x *profilesAccountDetailStream) RecvMsg(m interface{}) error {
 	return x.stream.Recv(m)
 }
 
-func (x *queriesAccountDetailStream) Send(m *StreamResponse) error {
+func (x *profilesAccountDetailStream) Send(m *AccountsStreamResponse) error {
+	return x.stream.Send(m)
+}
+
+// Api Endpoints for Notifications service
+
+func NewNotificationsEndpoints() []*api.Endpoint {
+	return []*api.Endpoint{}
+}
+
+// Client API for Notifications service
+
+type NotificationsService interface {
+	Overview(ctx context.Context, in *NotificationsStreamRequest, opts ...client.CallOption) (Notifications_OverviewService, error)
+}
+
+type notificationsService struct {
+	c    client.Client
+	name string
+}
+
+func NewNotificationsService(name string, c client.Client) NotificationsService {
+	return &notificationsService{
+		c:    c,
+		name: name,
+	}
+}
+
+func (c *notificationsService) Overview(ctx context.Context, in *NotificationsStreamRequest, opts ...client.CallOption) (Notifications_OverviewService, error) {
+	req := c.c.NewRequest(c.name, "Notifications.Overview", &NotificationsStreamRequest{})
+	stream, err := c.c.Stream(ctx, req, opts...)
+	if err != nil {
+		return nil, err
+	}
+	if err := stream.Send(in); err != nil {
+		return nil, err
+	}
+	return &notificationsServiceOverview{stream}, nil
+}
+
+type Notifications_OverviewService interface {
+	Context() context.Context
+	SendMsg(interface{}) error
+	RecvMsg(interface{}) error
+	Close() error
+	Recv() (*NotificationsStreamResponse, error)
+}
+
+type notificationsServiceOverview struct {
+	stream client.Stream
+}
+
+func (x *notificationsServiceOverview) Close() error {
+	return x.stream.Close()
+}
+
+func (x *notificationsServiceOverview) Context() context.Context {
+	return x.stream.Context()
+}
+
+func (x *notificationsServiceOverview) SendMsg(m interface{}) error {
+	return x.stream.Send(m)
+}
+
+func (x *notificationsServiceOverview) RecvMsg(m interface{}) error {
+	return x.stream.Recv(m)
+}
+
+func (x *notificationsServiceOverview) Recv() (*NotificationsStreamResponse, error) {
+	m := new(NotificationsStreamResponse)
+	err := x.stream.Recv(m)
+	if err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+// Server API for Notifications service
+
+type NotificationsHandler interface {
+	Overview(context.Context, *NotificationsStreamRequest, Notifications_OverviewStream) error
+}
+
+func RegisterNotificationsHandler(s server.Server, hdlr NotificationsHandler, opts ...server.HandlerOption) error {
+	type notifications interface {
+		Overview(ctx context.Context, stream server.Stream) error
+	}
+	type Notifications struct {
+		notifications
+	}
+	h := &notificationsHandler{hdlr}
+	return s.Handle(s.NewHandler(&Notifications{h}, opts...))
+}
+
+type notificationsHandler struct {
+	NotificationsHandler
+}
+
+func (h *notificationsHandler) Overview(ctx context.Context, stream server.Stream) error {
+	m := new(NotificationsStreamRequest)
+	if err := stream.Recv(m); err != nil {
+		return err
+	}
+	return h.NotificationsHandler.Overview(ctx, m, &notificationsOverviewStream{stream})
+}
+
+type Notifications_OverviewStream interface {
+	Context() context.Context
+	SendMsg(interface{}) error
+	RecvMsg(interface{}) error
+	Close() error
+	Send(*NotificationsStreamResponse) error
+}
+
+type notificationsOverviewStream struct {
+	stream server.Stream
+}
+
+func (x *notificationsOverviewStream) Close() error {
+	return x.stream.Close()
+}
+
+func (x *notificationsOverviewStream) Context() context.Context {
+	return x.stream.Context()
+}
+
+func (x *notificationsOverviewStream) SendMsg(m interface{}) error {
+	return x.stream.Send(m)
+}
+
+func (x *notificationsOverviewStream) RecvMsg(m interface{}) error {
+	return x.stream.Recv(m)
+}
+
+func (x *notificationsOverviewStream) Send(m *NotificationsStreamResponse) error {
 	return x.stream.Send(m)
 }

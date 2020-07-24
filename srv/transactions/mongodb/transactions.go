@@ -21,18 +21,14 @@ type TransactionsModel struct {
 	Uuid      string             `bson:"uuid,omitempty"`
 }
 
-func TransactionsCollection() *mongo.Collection {
-
+func MongoCollection(dbName string, collName string) (*mongo.Collection, error) {
 	uri := os.Getenv("MONGO_URI")
-	db := os.Getenv("MONGO_DATABASE")
-	coll := os.Getenv("MONGO_COLLECTION")
-
 	client, err := mongo.Connect(context.Background(), options.Client().ApplyURI(uri))
-	if err != nil {
-		log.Print("MongoDB Connected, errors: ", err)
+	var collection *mongo.Collection
+	if client != nil {
+		collection = client.Database(dbName).Collection(collName)
 	}
-	collection := client.Database(db).Collection(coll)
-	return collection
+	return collection, err
 }
 
 func CreateOne(tr *transactions.TransactionEvent, ctx context.Context, coll *mongo.Collection) *mongo.InsertOneResult {

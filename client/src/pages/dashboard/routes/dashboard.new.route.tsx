@@ -19,6 +19,7 @@ const DashboardNewRoute = ({ windowSize, addAccountAsHost, auth, ...rest }) => {
         windowSize={windowSize}
         slotOne={<div>Slot One</div>}
         slotTwo={<div>Slot Two</div>}
+        slotThree={<div>Slot Three</div>}
         mainContent={<AccountsForm onFinish={formOnFinish}/>}
       />
     </Fragment>

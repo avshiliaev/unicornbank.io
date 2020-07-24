@@ -18,6 +18,9 @@ var (
 	// Publish to
 	pubTransactionPlaced  = "go.micro.service.transaction.placed"
 	pubTransactionUpdated = "go.micro.service.transaction.updated"
+
+	dbName = "transactions"
+	collName = "transactions"
 )
 
 func main() {
@@ -31,12 +34,15 @@ func main() {
 	service.Init()
 
 	// Load .env file
-	if err := godotenv.Load(); err != nil {
-		log.Fatal("Init", err)
+	if err := godotenv.Load("../../.env"); err != nil {
+		log.Info("Skipping .env file")
 	}
 
 	// MongoDB connection
-	coll := mongodb.TransactionsCollection()
+	coll, err := mongodb.MongoCollection(dbName, collName)
+	if err != nil {
+		log.Fatal("Cannot connect to MongoDB")
+	}
 
 	// Register Handler
 	h := handler.Transactions{
@@ -50,6 +56,7 @@ func main() {
 
 	// Register Subscriber
 	s := subscriber.TransactionProcessed{
+		Client:               service.Client(),
 		PubTransactionUpdated: pubTransactionUpdated,
 		Coll:                  coll,
 	}

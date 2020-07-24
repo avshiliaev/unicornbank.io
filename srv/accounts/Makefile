@@ -11,7 +11,7 @@ proto:
 .PHONY: build
 build: proto
 
-	go build -o accounts *.go
+	CGO_ENABLED=0 GOOS=linux go build -o accounts-srv .
 
 .PHONY: test
 test:
@@ -19,4 +19,4 @@ test:
 
 .PHONY: docker
 docker:
-	docker build . -t accounts:latest
+	docker build . -t accounts-srv:latest

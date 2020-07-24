@@ -17,7 +17,7 @@ type TransactionProcessed struct {
 }
 
 func (e *TransactionProcessed) Handle(ctx context.Context, msg *transactions.TransactionEvent) error {
-	log.Info("Handler Received message: ", msg.Uuid)
+	log.Info("Handler TransactionProcessed Received message: ", msg.Uuid)
 
 	transactionProcessed := mongodb.GetOne(msg.Uuid, ctx, e.Coll)
 	transactionProcessed.Status = msg.Status
@@ -26,11 +26,11 @@ func (e *TransactionProcessed) Handle(ctx context.Context, msg *transactions.Tra
 
 	topic := e.PubTransactionUpdated
 	p := micro.NewEvent(topic, e.Client)
-	if err := p.Publish(context.TODO(), transactionProcessed); err != nil {
+	if err := p.Publish(ctx, transactionProcessed); err != nil {
+		log.Info(err)
 		return err
 	}
-
-	log.Info("Account: ", transactionProcessed.Uuid, " updated!")
+	log.Info("Transaction: ", transactionProcessed.Uuid, " updated!")
 
 	return nil
 }

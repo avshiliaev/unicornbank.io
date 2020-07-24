@@ -9,9 +9,11 @@ replace google.golang.org/grpc => google.golang.org/grpc v1.26.0
 require (
 	github.com/golang/protobuf v1.4.2
 	github.com/google/uuid v1.1.1
-	github.com/gorilla/websocket v1.4.1
-	github.com/jinzhu/gorm v1.9.12
-	github.com/micro/go-micro/v2 v2.9.0
+	github.com/joho/godotenv v1.3.0
+	github.com/micro/go-micro/v2 v2.9.1
+	github.com/micro/go-plugins/broker/rabbitmq/v2 v2.9.1
+	github.com/micro/go-plugins/registry/etcdv3/v2 v2.9.1
+	github.com/micro/go-plugins/transport/rabbitmq/v2 v2.9.1
 	go.mongodb.org/mongo-driver v1.3.4
 	google.golang.org/protobuf v1.24.0
 )
