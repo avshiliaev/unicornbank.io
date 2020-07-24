@@ -29,21 +29,17 @@ type AccountsModel struct {
 	Uuid    string             `bson:"uuid,omitempty"`
 }
 
-func AccountsCollection() *mongo.Collection {
-
+func MongoCollection(dbName string, collName string) (*mongo.Collection, error) {
 	uri := os.Getenv("MONGO_URI")
-	db := os.Getenv("MONGO_DATABASE")
-	coll := os.Getenv("MONGO_COLLECTION")
-
 	client, err := mongo.Connect(context.Background(), options.Client().ApplyURI(uri))
-	if err != nil {
-		log.Print("MongoDB Connected, errors: ", err)
+	var collection *mongo.Collection
+	if client != nil {
+		collection = client.Database(dbName).Collection(collName)
 	}
-	collection := client.Database(db).Collection(coll)
-	return collection
+	return collection, err
 }
 
-func CreateOne(acc *accounts.AccountType, ctx context.Context, coll *mongo.Collection) *mongo.InsertOneResult {
+func CreateOne(acc *accounts.AccountEvent, ctx context.Context, coll *mongo.Collection) *mongo.InsertOneResult {
 
 	account := AccountsModel{
 		Balance: acc.Balance,
@@ -58,14 +54,14 @@ func CreateOne(acc *accounts.AccountType, ctx context.Context, coll *mongo.Colle
 	return result
 }
 
-func GetOne(uuid string, ctx context.Context, coll *mongo.Collection) *accounts.AccountType {
+func GetOne(uuid string, ctx context.Context, coll *mongo.Collection) *accounts.AccountEvent {
 
 	filter := AccountsModel{Uuid: uuid}
 	var result AccountsModel
 	if err := coll.FindOne(ctx, filter).Decode(&result); err != nil {
 		log.Print(err)
 	}
-	acc := accounts.AccountType{
+	acc := accounts.AccountEvent{
 		Uuid:    result.Uuid,
 		Profile: result.Profile,
 		Status:  result.Status,
@@ -74,7 +70,7 @@ func GetOne(uuid string, ctx context.Context, coll *mongo.Collection) *accounts.
 	return &acc
 }
 
-func UpdateReplaceOne(acc *accounts.AccountType, ctx context.Context, coll *mongo.Collection) *mongo.UpdateResult {
+func UpdateReplaceOne(acc *accounts.AccountEvent, ctx context.Context, coll *mongo.Collection) *mongo.UpdateResult {
 
 	filter := AccountsModel{Uuid: acc.Uuid}
 	account := AccountsModel{

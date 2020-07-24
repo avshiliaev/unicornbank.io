@@ -17,12 +17,12 @@ type AccountCreated struct {
 	Coll               *mongo.Collection
 }
 
-func (e *AccountCreated) Handle(ctx context.Context, accountCreated *approvals.AccountType) error {
-	log.Info("Handler Received message: ", accountCreated.Uuid)
+func (e *AccountCreated) Handle(ctx context.Context, accountCreated *approvals.AccountEvent) error {
+	log.Info("Handler AccountCreated Received message: ", accountCreated.Uuid)
 
 	time.Sleep(2 * time.Second)
 	status := "approved"
-	accountApproved := approvals.AccountType{
+	accountApproved := approvals.AccountEvent{
 		Status: status,
 		Uuid:   accountCreated.Uuid,
 	}
@@ -30,7 +30,8 @@ func (e *AccountCreated) Handle(ctx context.Context, accountCreated *approvals.A
 
 	topic := e.PubAccountApproval
 	p := micro.NewEvent(topic, e.Client)
-	if err := p.Publish(context.TODO(), &accountApproved); err != nil {
+	if err := p.Publish(ctx, &accountApproved); err != nil {
+		log.Info(err)
 		return err
 	}
 

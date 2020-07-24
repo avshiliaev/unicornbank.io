@@ -1,45 +1,21 @@
 import { call, put, take, takeLatest } from 'redux-saga/effects';
-import { eventChannel } from 'redux-saga';
 import { ActionTypes } from '../constants';
 import { AccountAction } from '../interfaces/account.interface';
 import createWebSocketConnection from '../web.socket';
-
-function createSocketChannel(socket) {
-
-  return eventChannel(emit => {
-
-    const openHandler = () => {
-      console.log('connected');
-    };
-    const messageHandler = (event) => {
-      const action = JSON.parse(event.data);
-      emit(action);
-    };
-    const errorHandler = (errorEvent) => {
-      emit(new Error(errorEvent.reason));
-    };
-
-    socket.onopen = openHandler;
-    socket.onmessage = messageHandler;
-    socket.onerror = errorHandler;
-
-    return () => {
-      socket.off('message', messageHandler);
-    };
-  });
-}
+import { AccountsStreamResponse } from '../interfaces/stream.interface';
+import { createSocketChannel } from './api';
 
 function* getAccountDetailSaga(action) {
 
   const { params } = action;
-  const path = `/detail?account=${params}`;
+  const path = `/profiles?account=${params}`;
 
   const socket = yield call(createWebSocketConnection, path);
   const socketChannel = yield call(createSocketChannel, socket);
 
   try {
     while (true) {
-      const action = yield take(socketChannel);
+      const action: AccountsStreamResponse = yield take(socketChannel);
       const data = action.payload;
       const type = action.type === 'init'
         ? ActionTypes.GET_ACCOUNT_DETAIL_SUCCESS
@@ -49,7 +25,7 @@ function* getAccountDetailSaga(action) {
         state: {
           loading: false,
           error: false,
-          data,
+          data: data[0],
         },
       };
       yield put(actionSuccess);

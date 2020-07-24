@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+option go_package = "proto/notifications;go_micro_service_notifications";
+
+// Domain Events
+message TransactionEvent {
+  string account = 1;
+  float amount = 2;
+  string info = 3;
+  string status = 4;
+  int64 timestamp = 5;
+  string uuid = 6;
+}
+message AccountEvent {
+  float balance = 1;
+  string profile = 2;
+  string status = 3;
+  string uuid = 4;
+}
+
+// Stream DTOs
+message NotificationDTO {
+  string description = 1;
+  string profile = 2;
+  string status = 3;
+  string time = 4;
+  string title = 5;
+  string uuid = 6;
+}
+
+service Notifications {
+  rpc Overview(NotificationsStreamRequest) returns (stream NotificationsStreamResponse) {}
+}
+
+message NotificationsStreamRequest {
+  string profile = 1;
+}
+message NotificationsStreamResponse {
+  string type = 1;
+  repeated NotificationDTO payload = 2;
+}

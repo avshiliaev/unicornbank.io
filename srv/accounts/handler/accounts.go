@@ -18,11 +18,11 @@ type Accounts struct {
 }
 
 // Call is a single request handler called via client.Call or the generated client code
-func (e *Accounts) Create(ctx context.Context, req *accounts.AccountType, rsp *accounts.AccountType) error {
+func (e *Accounts) Create(ctx context.Context, req *accounts.AccountEvent, rsp *accounts.AccountEvent) error {
 
 	log.Info("Received Accounts.Create request")
 
-	account := accounts.AccountType{
+	account := accounts.AccountEvent{
 		Balance: float32(0.0),
 		Profile: req.Profile,
 		Status:  "pending",

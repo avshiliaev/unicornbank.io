@@ -2,18 +2,49 @@ syntax = "proto3";
 
 option go_package = "proto/profiles;go_micro_service_profiles";
 
-// Events
-message AccountType {
-  float balance = 1;
-  string profile = 2;
-  string status = 3;
-  string uuid = 4;
-}
-message TransactionType {
+// Domain Events
+message TransactionEvent {
   string account = 1;
   float amount = 2;
   string info = 3;
   string status = 4;
   int64 timestamp = 5;
   string uuid = 6;
+}
+message AccountEvent {
+  float balance = 1;
+  string profile = 2;
+  string status = 3;
+  string uuid = 4;
+}
+
+// Stream DTOs
+message TransactionDTO {
+  string account = 1;
+  float amount = 2;
+  string info = 3;
+  string status = 4;
+  string time = 5;
+  string uuid = 6;
+}
+message AccountDTO {
+  float balance = 1;
+  string profile = 2;
+  string status = 3;
+  repeated TransactionDTO transactions = 4;
+  string uuid = 5;
+}
+
+service Profiles {
+  rpc AccountsOverview(AccountsStreamRequest) returns (stream AccountsStreamResponse) {}
+  rpc AccountDetail(AccountsStreamRequest) returns (stream AccountsStreamResponse) {}
+}
+
+message AccountsStreamRequest {
+  string profile = 1;
+  string uuid = 2;
+}
+message AccountsStreamResponse {
+  string type = 1;
+  repeated AccountDTO payload = 2;
 }

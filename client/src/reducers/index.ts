@@ -6,6 +6,7 @@ import userReducer from './user.reducer';
 import { createResponsiveStateReducer } from 'redux-responsive';
 import { createReduxHistoryContext } from 'redux-first-history';
 import { createBrowserHistory } from 'history';
+import notificationsReducer from './notifications.reducer';
 
 const { routerReducer } = createReduxHistoryContext({
   history: createBrowserHistory(),
@@ -21,6 +22,7 @@ const breakPoints = {
 
 const rootReducer = combineReducers({
   auth: authReducer,
+  notifications: notificationsReducer,
   accountsOverview: accountsOverviewReducer,
   account: accountReducer,
   user: userReducer,

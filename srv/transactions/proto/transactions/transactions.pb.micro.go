@@ -42,7 +42,7 @@ func NewTransactionsEndpoints() []*api.Endpoint {
 // Client API for Transactions service
 
 type TransactionsService interface {
-	Create(ctx context.Context, in *TransactionType, opts ...client.CallOption) (*TransactionType, error)
+	Create(ctx context.Context, in *TransactionEvent, opts ...client.CallOption) (*TransactionEvent, error)
 }
 
 type transactionsService struct {
@@ -57,9 +57,9 @@ func NewTransactionsService(name string, c client.Client) TransactionsService {
 	}
 }
 
-func (c *transactionsService) Create(ctx context.Context, in *TransactionType, opts ...client.CallOption) (*TransactionType, error) {
+func (c *transactionsService) Create(ctx context.Context, in *TransactionEvent, opts ...client.CallOption) (*TransactionEvent, error) {
 	req := c.c.NewRequest(c.name, "Transactions.Create", in)
-	out := new(TransactionType)
+	out := new(TransactionEvent)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -70,12 +70,12 @@ func (c *transactionsService) Create(ctx context.Context, in *TransactionType, o
 // Server API for Transactions service
 
 type TransactionsHandler interface {
-	Create(context.Context, *TransactionType, *TransactionType) error
+	Create(context.Context, *TransactionEvent, *TransactionEvent) error
 }
 
 func RegisterTransactionsHandler(s server.Server, hdlr TransactionsHandler, opts ...server.HandlerOption) error {
 	type transactions interface {
-		Create(ctx context.Context, in *TransactionType, out *TransactionType) error
+		Create(ctx context.Context, in *TransactionEvent, out *TransactionEvent) error
 	}
 	type Transactions struct {
 		transactions
@@ -88,6 +88,6 @@ type transactionsHandler struct {
 	TransactionsHandler
 }
 
-func (h *transactionsHandler) Create(ctx context.Context, in *TransactionType, out *TransactionType) error {
+func (h *transactionsHandler) Create(ctx context.Context, in *TransactionEvent, out *TransactionEvent) error {
 	return h.TransactionsHandler.Create(ctx, in, out)
 }

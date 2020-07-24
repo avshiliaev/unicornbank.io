@@ -16,8 +16,8 @@ type AccountApproval struct {
 	Coll              *mongo.Collection
 }
 
-func (e *AccountApproval) Handle(ctx context.Context, msg *accounts.AccountType) error {
-	log.Info("Handler Received message: ", msg.Uuid)
+func (e *AccountApproval) Handle(ctx context.Context, msg *accounts.AccountEvent) error {
+	log.Info("Handler AccountApproval Received message: ", msg.Uuid)
 
 	accountUpdated := mongodb.GetOne(msg.Uuid, ctx, e.Coll)
 	accountUpdated.Status = msg.Status
@@ -25,9 +25,11 @@ func (e *AccountApproval) Handle(ctx context.Context, msg *accounts.AccountType)
 	mongodb.UpdateReplaceOne(accountUpdated, ctx, e.Coll)
 	topic := e.PubAccountUpdated
 	p := micro.NewEvent(topic, e.Client)
-	if err := p.Publish(context.TODO(), accountUpdated); err != nil {
+	if err := p.Publish(ctx, accountUpdated); err != nil {
+		log.Info(err)
 		return err
 	}
+
 	log.Info("Account: ", accountUpdated.Uuid, " updated!")
 
 	return nil
@@ -41,15 +43,15 @@ type TransactionPlaced struct {
 
 // TODO a good place for the saga pattern:
 // The transaction is deducted RIGHT away, but then can be compensated if not processed by billing
-func (e *TransactionPlaced) Handle(ctx context.Context, transactionPlaced *accounts.TransactionType) error {
-	log.Info("Handler Received message: ", transactionPlaced.Uuid)
+func (e *TransactionPlaced) Handle(ctx context.Context, transactionPlaced *accounts.TransactionEvent) error {
+	log.Info("Handler TransactionPlaced Received message: ", transactionPlaced.Uuid)
 
 	account := mongodb.GetOne(transactionPlaced.Account, ctx, e.Coll)
 	account.Balance = account.Balance + transactionPlaced.Amount
 
 	mongodb.UpdateReplaceOne(account, ctx, e.Coll)
 
-	accountUpdated := accounts.AccountType{
+	accountUpdated := accounts.AccountEvent{
 		Balance: account.Balance,
 		Profile: account.Profile,
 		Status:  account.Status,
@@ -58,7 +60,8 @@ func (e *TransactionPlaced) Handle(ctx context.Context, transactionPlaced *accou
 
 	topic := e.PubAccountUpdated
 	p := micro.NewEvent(topic, e.Client)
-	if err := p.Publish(context.TODO(), &accountUpdated); err != nil {
+	if err := p.Publish(ctx, &accountUpdated); err != nil {
+		log.Info(err)
 		return err
 	}
 

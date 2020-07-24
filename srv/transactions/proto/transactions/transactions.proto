@@ -3,7 +3,7 @@ syntax = "proto3";
 option go_package = "proto/transactions;go_micro_service_transactions";
 
 // Events
-message TransactionType {
+message TransactionEvent {
   string account = 1;
   float amount = 2;
   string info = 3;
@@ -14,5 +14,5 @@ message TransactionType {
 
 // gRPC
 service Transactions {
-  rpc Create(TransactionType) returns (TransactionType) {}
+  rpc Create(TransactionEvent) returns (TransactionEvent) {}
 }

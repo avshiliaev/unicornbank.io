@@ -68,14 +68,14 @@ const RightColContent = ({ slotThree, gutter }) => {
   );
 };
 
-const FlexGridDashboard = ({ windowSize, slotOne, slotTwo, mainContent }) => {
+const FlexGridDashboard = ({ windowSize, slotOne, slotTwo, slotThree, mainContent }) => {
 
   const gutter = { xs: 0, sm: 0, md: 0, lg: 16 };
 
   const upperFlex = {
-    colOne: { xs: 24, sm: 24, md: 24, lg: 8, xl: 6, xxl: 4 },
+    colOne: { xs: 24, sm: 24, md: 24, lg: 8, xl: 6, xxl: 6 },
     colTwo: { xs: 24, sm: 24, md: 24, lg: 16, xl: 18, xxl: 12 },
-    colThree: { xs: 0, sm: 0, md: 0, lg: 0, xl: 0, xxl: 8 },
+    colThree: { xs: 0, sm: 0, md: 0, lg: 0, xl: 0, xxl: 6 },
   };
 
   const leftColFlex = {
@@ -118,7 +118,7 @@ const FlexGridDashboard = ({ windowSize, slotOne, slotTwo, mainContent }) => {
       >
         <RightColContent
           gutter={gutter}
-          slotThree={(<div>Slot three</div>)}
+          slotThree={slotThree}
         />
       </Col>
     </Row>

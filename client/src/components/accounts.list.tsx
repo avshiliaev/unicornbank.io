@@ -1,5 +1,5 @@
 import React from 'react';
-import { Avatar, Badge, List, Space, Statistic } from 'antd';
+import { Avatar, Badge, Descriptions, List, Space, Statistic } from 'antd';
 import { Link } from '@reach/router';
 import { AccountInterface } from '../interfaces/account.interface';
 import { CheckCircleOutlined, SyncOutlined } from '@ant-design/icons';
@@ -43,6 +43,7 @@ const AccountsList = ({ accounts, windowSize, loading }: Props) => {
 
   return (
     <div>
+      <Descriptions title="Accounts"/>
       <List
         loading={loading}
         itemLayout={!windowSize.large ? 'vertical' : 'horizontal'}

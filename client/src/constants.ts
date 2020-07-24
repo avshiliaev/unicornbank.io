@@ -1,5 +1,11 @@
 const ActionTypes = {
 
+  // Query notifications
+  QUERY_NOTIFICATIONS: 'QUERY_NOTIFICATIONS',
+  QUERY_NOTIFICATIONS_INIT: 'QUERY_NOTIFICATIONS_INIT',
+  QUERY_NOTIFICATIONS_UPDATE: 'QUERY_NOTIFICATIONS_UPDATE',
+  QUERY_NOTIFICATIONS_ERROR: 'QUERY_NOTIFICATIONS_ERROR',
+
   // Query multiple accounts
   QUERY_ACCOUNTS: 'QUERY_ACCOUNTS',
   QUERY_ACCOUNTS_INIT: 'QUERY_ACCOUNTS_INIT',
@@ -29,51 +35,4 @@ const ActionTypes = {
 
 };
 
-const ApiEndpoints = {
-  // TODO: Difference between:
-  // QUERY_ACCOUNTS and GET_USER
-  GET_USER: {
-    service: '/profiles',
-    handler: '/query',
-    path: function() {
-      return this.service + this.handler
-    },
-  },
-  QUERY_ACCOUNTS: {
-    service: '/profiles',
-    handler: '/query',
-    path: function() {
-      return this.service + this.handler
-    },
-  },
-  GET_ACCOUNT_DETAIL: {
-    service: '/profiles',
-    handler: '/get',
-    path: function() {
-      return this.service + this.handler
-    },
-  },
-  ADD_ACCOUNT: {
-    service: '/accounts',
-    handler: '/create',
-    path: function() {
-      return this.service + this.handler
-    },
-  },
-  LOG_IN: {
-    service: '/auth',
-    handler: '/login',
-    path: function() {
-      return this.service + this.handler
-    },
-  },
-  LOG_OUT: {
-    service: '/auth',
-    handler: '/logout',
-    path: function() {
-      return this.service + this.handler
-    },
-  },
-};
-
-export { ActionTypes, ApiEndpoints };
+export { ActionTypes };
