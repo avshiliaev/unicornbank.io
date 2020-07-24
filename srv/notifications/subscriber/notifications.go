@@ -14,7 +14,7 @@ type AccountUpdated struct {
 }
 
 func (e *AccountUpdated) Handle(ctx context.Context, accountUpdated *notifications.AccountEvent) error {
-	log.Info("Account: ", accountUpdated.Uuid, ", status: ", accountUpdated.Status)
+	log.Info("AccountUpdated: ", accountUpdated.Uuid, ", status: ", accountUpdated.Status)
 	mongodb.UpdatedAccount(accountUpdated, ctx, e.Coll)
 	return nil
 }
@@ -25,7 +25,7 @@ type TransactionUpdated struct {
 }
 
 func (e *TransactionUpdated) Handle(ctx context.Context, transactionUpdated *notifications.TransactionEvent) error {
-	log.Info("Transaction: ", transactionUpdated.Uuid, ", status: ", transactionUpdated.Status)
+	log.Info("TransactionUpdated: ", transactionUpdated.Uuid, ", status: ", transactionUpdated.Status)
 	mongodb.UpdatedTransaction(transactionUpdated, ctx, e.Coll)
 	return nil
 }

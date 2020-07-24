@@ -14,7 +14,7 @@ type AccountCreated struct {
 }
 
 func (e *AccountCreated) Handle(ctx context.Context, accountCreated *profiles.AccountEvent) error {
-	log.Info("Account: ", accountCreated.Uuid, ", status: ", accountCreated.Status)
+	log.Info("AccountCreated: ", accountCreated.Uuid, ", status: ", accountCreated.Status)
 	mongodb.CreateAccount(accountCreated, ctx, e.Coll)
 	return nil
 }
@@ -24,7 +24,7 @@ type AccountUpdated struct {
 }
 
 func (e *AccountUpdated) Handle(ctx context.Context, accountUpdated *profiles.AccountEvent) error {
-	log.Info("Account: ", accountUpdated.Uuid, ", status: ", accountUpdated.Status)
+	log.Info("AccountUpdated: ", accountUpdated.Uuid, ", status: ", accountUpdated.Status)
 	mongodb.UpdateAccount(accountUpdated, ctx, e.Coll)
 	return nil
 }
@@ -35,7 +35,7 @@ type TransactionPlaced struct {
 }
 
 func (e *TransactionPlaced) Handle(ctx context.Context, transactionPlaced *profiles.TransactionEvent) error {
-	log.Info("Transaction: ", transactionPlaced.Uuid, ", status: ", transactionPlaced.Status)
+	log.Info("TransactionPlaced: ", transactionPlaced.Uuid, ", status: ", transactionPlaced.Status)
 	mongodb.CreateTransaction(transactionPlaced, ctx, e.Coll)
 	return nil
 }
@@ -45,7 +45,7 @@ type TransactionUpdated struct {
 }
 
 func (e *TransactionUpdated) Handle(ctx context.Context, transactionUpdated *profiles.TransactionEvent) error {
-	log.Info("Transaction: ", transactionUpdated.Uuid, ", status: ", transactionUpdated.Status)
+	log.Info("TransactionUpdated: ", transactionUpdated.Uuid, ", status: ", transactionUpdated.Status)
 	mongodb.UpdateTransaction(transactionUpdated, ctx, e.Coll)
 	return nil
 }

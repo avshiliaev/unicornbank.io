@@ -61,6 +61,7 @@ func main() {
 
 	// Register Subscribers
 	subApproval := subscriber.AccountApproval{
+		Client:               service.Client(),
 		PubAccountUpdated: pubAccountUpdated,
 		Coll:              coll,
 	}
@@ -72,6 +73,7 @@ func main() {
 		log.Fatal(err)
 	}
 	subTransProc := subscriber.TransactionPlaced{
+		Client:               service.Client(),
 		PubAccountUpdated: pubAccountUpdated,
 		Coll:              coll,
 	}

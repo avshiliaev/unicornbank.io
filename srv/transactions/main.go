@@ -56,6 +56,7 @@ func main() {
 
 	// Register Subscriber
 	s := subscriber.TransactionProcessed{
+		Client:               service.Client(),
 		PubTransactionUpdated: pubTransactionUpdated,
 		Coll:                  coll,
 	}

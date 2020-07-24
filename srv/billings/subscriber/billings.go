@@ -18,7 +18,7 @@ type TransactionCreated struct {
 }
 
 func (e *TransactionCreated) Handle(ctx context.Context, transactionCreated *billings.TransactionEvent) error {
-	log.Info("Handler Received message: ", transactionCreated.Uuid)
+	log.Info("Handler TransactionCreated Received message: ", transactionCreated.Uuid)
 
 	time.Sleep(2 * time.Second)
 	status := "processed"
@@ -31,7 +31,8 @@ func (e *TransactionCreated) Handle(ctx context.Context, transactionCreated *bil
 
 	topic := e.PubTransactionApproval
 	p := micro.NewEvent(topic, e.Client)
-	if err := p.Publish(context.TODO(), &transactionProcessed); err != nil {
+	if err := p.Publish(ctx, &transactionProcessed); err != nil {
+		log.Info(err)
 		return err
 	}
 
