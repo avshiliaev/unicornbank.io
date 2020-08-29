@@ -13,7 +13,7 @@ import { ViewSettingsState } from '../../interfaces/view.settings.interface';
 
 const { Content } = Layout;
 
-interface Props {
+interface DashboardPageProps {
   windowSize: any
   auth: AuthReducerState
   viewSettings: ViewSettingsState
@@ -24,11 +24,13 @@ interface Props {
   path: any
 }
 
-const DashboardPage = ({ windowSize, auth, viewSettings, initAccounts, initNotifications, children, location, ...rest }: Props) => {
+const DashboardPage = (
+  { windowSize, auth, viewSettings, initAccounts, initNotifications, children, location, ...rest }: DashboardPageProps
+) => {
 
   useEffect(() => {
     initAccounts(auth.userId);
-    initNotifications(auth.userId, viewSettings.data.notificationsCount);
+    initNotifications(auth.userId, viewSettings.notificationsCount);
   }, []);
 
   return (

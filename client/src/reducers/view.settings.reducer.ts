@@ -1,13 +1,13 @@
 import { ActionTypes } from '../constants';
 import { ViewSettings, ViewSettingsAction, ViewSettingsState } from '../interfaces/view.settings.interface';
 
-const updateViewSettingsAction = (data: ViewSettings): ViewSettingsAction => {
+const updateViewSettingsAction = (settings: ViewSettings): ViewSettingsAction => {
   return {
     type: ActionTypes.UPDATE_VIEW_SETTINGS,
     state: {
-      loading: true,
+      loading: false,
       error: false,
-      data,
+      ...settings,
     },
   };
 };
@@ -17,9 +17,7 @@ export { updateViewSettingsAction };
 const viewSettingsInitState: ViewSettingsState = {
   loading: false,
   error: false,
-  data: {
-    notificationsCount: 5,
-  },
+  notificationsCount: 5
 };
 
 const viewSettingsReducer = (

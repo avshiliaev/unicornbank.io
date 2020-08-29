@@ -1,14 +1,12 @@
 // General
-
 export interface ViewSettings {
   notificationsCount: number
 }
 
 // View Reducer State
-export interface ViewSettingsState {
+export interface ViewSettingsState extends ViewSettings {
   loading: boolean
   error: boolean
-  data?: ViewSettings
 }
 
 export interface ViewSettingsAction {

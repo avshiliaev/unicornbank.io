@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import FlexGridDashboard from '../../../components/layout/flex.grid.dashboard';
 import AccountsActions from '../../../components/accounts.actions';
@@ -10,7 +10,7 @@ import { NotificationsReducerState } from '../../../interfaces/notification.inte
 import { updateViewSettingsAction } from '../../../reducers/view.settings.reducer';
 import { ViewSettings } from '../../../interfaces/view.settings.interface';
 
-interface Props {
+interface DashboardOverviewProps {
   auth: any,
   windowSize: any,
   accountsOverview: AccountsOverviewReducerState,
@@ -20,7 +20,7 @@ interface Props {
 }
 
 const DashboardOverviewRoute = (
-  { auth, windowSize, accountsOverview, notifications, updateViewSettingsAction, ...rest }: Props,
+  { auth, windowSize, accountsOverview, notifications, updateViewSettingsAction, ...rest }: DashboardOverviewProps,
 ) => {
 
   const balance = accountsOverview.data.length ? accountsOverview.data
@@ -28,11 +28,9 @@ const DashboardOverviewRoute = (
     .reduce((a, b) => a + b) : 0;
 
   const updateCount = (count: number) => {
-    const data: ViewSettings = {
-      notificationsCount: count
-    }
-    updateViewSettingsAction(data)
-  }
+    const settings: ViewSettings = { notificationsCount: count };
+    updateViewSettingsAction(settings);
+  };
 
   return (
     <Fragment>

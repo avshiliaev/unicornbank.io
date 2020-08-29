@@ -6,14 +6,14 @@ import TransactionsTable from '../../../components/transactions.table';
 import { AccountReducerState } from '../../../interfaces/account.interface';
 import CommonBalance from '../../../components/common.balance';
 
-interface Props {
+interface AccountHomeProps {
   windowSize: any,
   location: any,
   account: AccountReducerState,
   path: any
 }
 
-const AccountHomeRoute = ({ windowSize, location, account, ...rest }: Props) => {
+const AccountHomeRoute = ({ windowSize, location, account, ...rest }: AccountHomeProps) => {
 
   return account.loading === false
     ? (
