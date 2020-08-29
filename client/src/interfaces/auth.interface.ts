@@ -1,13 +1,8 @@
 // General
-export interface AuthViewSettings {
-  notificationsCount: number
-}
-
 export interface AuthInterface {
   isLoggedIn: boolean
   userId?: string
   username?: string
-  viewSettings?: AuthViewSettings
 }
 
 // Authentication Info

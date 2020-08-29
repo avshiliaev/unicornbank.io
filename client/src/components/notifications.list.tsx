@@ -1,7 +1,9 @@
 import React, { Fragment } from 'react';
-import { Descriptions, List } from 'antd';
+import { Button, Descriptions, List } from 'antd';
+import { ViewSettings } from '../interfaces/view.settings.interface';
 
 interface Props {
+  displayMore: any
   notifications: {
     title: string;
     description: string;
@@ -10,7 +12,7 @@ interface Props {
 
 const NotificationsList = (props: Props) => {
 
-  const { notifications } = props;
+  const { notifications, displayMore } = props;
 
   return (
     <Fragment>
@@ -27,6 +29,7 @@ const NotificationsList = (props: Props) => {
           </List.Item>
         )}
       />
+      <Button onClick={() => displayMore(notifications.length + 5)}>Display More</Button>
     </Fragment>
   );
 

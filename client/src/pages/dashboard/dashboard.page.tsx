@@ -9,12 +9,14 @@ import { initAccounts } from '../../reducers/accounts.overview.reducer';
 import HeaderMenu from '../../components/header.menu';
 import { initNotifications } from '../../reducers/notifications.reducer';
 import { AuthReducerState } from '../../interfaces/auth.interface';
+import { ViewSettingsState } from '../../interfaces/view.settings.interface';
 
 const { Content } = Layout;
 
 interface Props {
   windowSize: any
   auth: AuthReducerState
+  viewSettings: ViewSettingsState
   initAccounts: any
   initNotifications: any
   children: any
@@ -22,11 +24,11 @@ interface Props {
   path: any
 }
 
-const DashboardPage = ({ windowSize, auth, initAccounts, initNotifications, children, location, ...rest }: Props) => {
+const DashboardPage = ({ windowSize, auth, viewSettings, initAccounts, initNotifications, children, location, ...rest }: Props) => {
 
   useEffect(() => {
     initAccounts(auth.userId);
-    initNotifications(auth.userId, auth.viewSettings.notificationsCount);
+    initNotifications(auth.userId, viewSettings.data.notificationsCount);
   }, []);
 
   return (
@@ -52,6 +54,7 @@ const DashboardPage = ({ windowSize, auth, initAccounts, initNotifications, chil
 const mapStateToProps = (state) => {
   return {
     windowSize: state.windowSize.greaterThan,
+    viewSettings: state.viewSettings,
     auth: state.auth,
     location: state.router.location,
   };
