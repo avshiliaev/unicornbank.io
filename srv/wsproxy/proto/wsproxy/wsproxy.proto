@@ -63,6 +63,7 @@ service Notifications {
 
 message NotificationsStreamRequest {
 	string profile = 1;
+	int32 count = 2;
 }
 message NotificationsStreamResponse {
 	string type = 1;

@@ -8,14 +8,25 @@ import ProfileIcon from '../../components/profile.icon';
 import { initAccounts } from '../../reducers/accounts.overview.reducer';
 import HeaderMenu from '../../components/header.menu';
 import { initNotifications } from '../../reducers/notifications.reducer';
+import { AuthReducerState } from '../../interfaces/auth.interface';
 
 const { Content } = Layout;
 
-const DashboardPage = ({ windowSize, auth, initAccounts, initNotifications, children, location, ...rest }) => {
+interface Props {
+  windowSize: any
+  auth: AuthReducerState
+  initAccounts: any
+  initNotifications: any
+  children: any
+  location: any
+  path: any
+}
+
+const DashboardPage = ({ windowSize, auth, initAccounts, initNotifications, children, location, ...rest }: Props) => {
 
   useEffect(() => {
     initAccounts(auth.userId);
-    initNotifications(auth.userId);
+    initNotifications(auth.userId, auth.viewSettings.notificationsCount);
   }, []);
 
   return (

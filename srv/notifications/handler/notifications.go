@@ -3,6 +3,7 @@ package handler
 import (
 	"context"
 	log "github.com/micro/go-micro/v2/logger"
+	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"unicornbank.io/srv/notifications/mongodb"
 	notifications "unicornbank.io/srv/notifications/proto/notifications"
@@ -22,11 +23,12 @@ func (e *Notifications) Overview(
 	log.Infof("Received Notifications.Stream OverviewRequest to profile: %d", req.Profile)
 
 	// Prepare mongo pipeline
+	// 		{ "$limit" : limit },
 	pipeline := mongodb.OverviewPipeline(req.Profile)
 
 	// Send the initial state
 	var state []mongodb.NotificationsModel
-	cursor := mongodb.Aggregate(pipeline, e.Coll, ctx)
+	cursor := mongodb.Aggregate(append(pipeline, bson.M{ "$limit" : req.Count }), e.Coll, ctx)
 	_ = cursor.All(ctx, &state)
 	stateNormalized := NormalizeStream(state)
 	_ = stream.Send(&notifications.NotificationsStreamResponse{

@@ -1,5 +1,5 @@
 import { ActionTypes } from '../constants';
-import { AuthAction, AuthReducerState } from '../interfaces/auth.interface';
+import { AuthAction, AuthReducerState, AuthViewSettings } from '../interfaces/auth.interface';
 
 const logInAction = (username: string): AuthAction => {
   return {
@@ -24,6 +24,7 @@ const logOutAction = (): AuthAction => {
   };
 };
 
+
 export { logInAction, logOutAction };
 
 const userInitialState: AuthReducerState = !!localStorage.getItem('username')
@@ -31,6 +32,9 @@ const userInitialState: AuthReducerState = !!localStorage.getItem('username')
     username: localStorage.getItem('username'),
     isLoggedIn: true,
     userId: localStorage.getItem('userId'),
+    viewSettings: {
+      notificationsCount: 5
+    },
     loading: false,
     error: false,
   }
@@ -50,6 +54,8 @@ const authReducer = (
     case ActionTypes.LOG_IN_SUCCESS:
       return action.state;
     case ActionTypes.LOG_IN_ERROR:
+      return action.state;
+    case ActionTypes.UPDATE_VIEW_SETTINGS:
       return action.state;
     default:
       return state;

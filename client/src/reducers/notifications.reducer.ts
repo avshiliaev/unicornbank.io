@@ -1,11 +1,10 @@
-import { AccountsOverviewAction, AccountsOverviewReducerState } from '../interfaces/account.interface';
 import { ActionTypes } from '../constants';
 import { NotificationsAction, NotificationsReducerState } from '../interfaces/notification.interface';
 
-const initNotifications = (userId: string): NotificationsAction => {
+const initNotifications = (userId: string, count: number): NotificationsAction => {
   return {
     type: ActionTypes.QUERY_NOTIFICATIONS,
-    params: userId,
+    params: { userId, count },
     state: {
       loading: true,
       error: false,

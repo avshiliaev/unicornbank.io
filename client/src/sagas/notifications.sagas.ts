@@ -12,7 +12,7 @@ interface StreamResponse {
 function* getNotificationsSaga(action) {
 
   const { params } = action;
-  const path = `/notifications?profile=${params}`;
+  const path = `/notifications?profile=${params.userId}&count=${params.count}`;
 
   const socket = yield call(createWebSocketConnection, path);
   const socketChannel = yield call(createSocketChannel, socket);

@@ -28,6 +28,9 @@ const ActionTypes = {
   // Log out
   LOG_OUT: 'LOG_OUT',
 
+  // User view settings
+  UPDATE_VIEW_SETTINGS: "UPDATE_VIEW_SETTINGS",
+
   // Get one user
   GET_USER: 'GET_USER',
   GET_USER_SUCCESS: 'GET_USER_SUCCESS',
